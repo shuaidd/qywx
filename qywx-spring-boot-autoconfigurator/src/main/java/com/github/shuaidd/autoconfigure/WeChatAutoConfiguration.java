@@ -19,12 +19,9 @@ import java.util.Collections;
  * @date 2019-04-03 15:46
  **/
 @Configuration
-@ComponentScan(basePackages = {"com.travel.qywx.service", "com.travel.qywx.support","com.travel.qywx.aspect"})
+@ComponentScan(basePackages = {"com.github.shuaidd.service", "com.github.shuaidd.support","com.github.shuaidd.aspect"})
 @EnableConfigurationProperties(WeChatConfigurationProperties.class)
 public class WeChatAutoConfiguration {
-
-    @Autowired
-    private WeChatConfigurationProperties weChatConfigurationProperties;
 
     @ConditionalOnMissingBean(CacheManager.class)
     @Bean
