@@ -7,8 +7,8 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-06 20:53
+ * author ddshuai
+ * date 2019-04-06 20:53
  **/
 public class JobResultDetail {
 

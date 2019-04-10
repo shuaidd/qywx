@@ -8,8 +8,8 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-06 22:47
+ * author ddshuai
+ * date 2019-04-06 22:47
  **/
 public class AllowUser {
     @JsonProperty("user")

@@ -7,8 +7,8 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-08 18:08
+ * author ddshuai
+ * date 2019-04-08 18:08
  **/
 public class SendMessageResponse extends AbstractBaseResponse {
 

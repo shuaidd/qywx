@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -19,8 +18,8 @@ import java.util.LinkedList;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-06 17:37
+ * author ddshuai
+ * date 2019-04-06 17:37
  **/
 public class WeChatMediaDecoder implements Decoder {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -28,8 +27,8 @@ public class WeChatMediaDecoder implements Decoder {
 
     @Override
     public Object decode(Response response, Type type) throws FeignException, IOException {
-        if (type instanceof ParameterizedTypeImpl) {
-            if (((ParameterizedTypeImpl) type).getRawType() == ResponseEntity.class) {
+        if (type instanceof sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl) {
+            if (((sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl) type).getRawType() == ResponseEntity.class) {
                 byte[] body = new byte[response.body().length()];
                 int result = response.body().asInputStream().read(body, 0, response.body().length());
                 MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();

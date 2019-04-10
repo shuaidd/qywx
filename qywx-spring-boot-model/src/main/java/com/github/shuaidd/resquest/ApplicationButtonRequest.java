@@ -9,8 +9,8 @@ import java.util.List;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-08 16:17
+ * author ddshuai
+ * date 2019-04-08 16:17
  **/
 public class ApplicationButtonRequest {
 

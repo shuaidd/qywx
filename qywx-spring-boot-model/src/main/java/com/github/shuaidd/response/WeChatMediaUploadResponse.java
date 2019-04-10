@@ -8,8 +8,8 @@ import java.util.StringJoiner;
 /**
  * 描述 新通教育
  *
- * @author ddshuai
- * @date 2018-11-28 17:05
+ * author ddshuai
+ * date 2018-11-28 17:05
  **/
 public class WeChatMediaUploadResponse extends AbstractBaseResponse {
 

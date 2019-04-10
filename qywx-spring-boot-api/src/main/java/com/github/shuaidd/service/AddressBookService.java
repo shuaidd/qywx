@@ -27,8 +27,8 @@ import java.util.Objects;
 /**
  * 企业微信通讯录管理
  *
- * @author ddshuai
- * @date 2019-04-04 14:22
+ * author ddshuai
+ * date 2019-04-04 14:22
  **/
 @Service
 public class AddressBookService extends AbstractBaseService {

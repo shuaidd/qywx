@@ -3,8 +3,8 @@ package com.github.shuaidd.dto;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-08 17:22
+ * author ddshuai
+ * date 2019-04-08 17:22
  **/
 public class MsgTextCard {
 

@@ -19,8 +19,8 @@ import java.util.Objects;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-04 14:24
+ * author ddshuai
+ * date 2019-04-04 14:24
  **/
 public abstract class AbstractBaseService {
     final Logger logger = LoggerFactory.getLogger(this.getClass());

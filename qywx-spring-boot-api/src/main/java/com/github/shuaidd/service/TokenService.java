@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-04 17:28
+ * author ddshuai
+ * date 2019-04-04 17:28
  **/
 @Service
 public class TokenService extends AbstractBaseService {

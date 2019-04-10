@@ -7,8 +7,8 @@ import java.util.List;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-03 15:47
+ * author ddshuai
+ * date 2019-04-03 15:47
  **/
 @ConfigurationProperties(prefix = "qywx")
 public class WeChatConfigurationProperties {

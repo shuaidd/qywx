@@ -7,8 +7,8 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-06 07:30
+ * author ddshuai
+ * date 2019-04-06 07:30
  **/
 public class CreateTagResponse extends AbstractBaseResponse {
 

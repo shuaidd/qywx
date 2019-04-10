@@ -8,8 +8,8 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-06 06:55
+ * author ddshuai
+ * date 2019-04-06 06:55
  **/
 public class DepartmentRequest extends Department {
     @Override

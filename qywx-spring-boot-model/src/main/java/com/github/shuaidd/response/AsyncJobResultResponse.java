@@ -9,8 +9,8 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-06 20:49
+ * author ddshuai
+ * date 2019-04-06 20:49
  **/
 public class AsyncJobResultResponse extends AbstractBaseResponse {
     /**

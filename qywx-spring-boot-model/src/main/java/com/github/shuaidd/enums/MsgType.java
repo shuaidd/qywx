@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-08 17:02
+ * author ddshuai
+ * date 2019-04-08 17:02
  **/
 public enum  MsgType {
     /**

@@ -15,8 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 描述 新通教育
  *
- * @author ddshuai
- * @date 2018-11-28 17:34
+ * author ddshuai
+ * date 2018-11-28 17:34
  **/
 @SuppressWarnings("all")
 @FeignClient(value = "weChatUploadClient", url = "${qywx.url:https://qyapi.weixin.qq.com}", path = "${qywx.public-path:cgi-bin}", configuration = MultipartSupportConfig.class)

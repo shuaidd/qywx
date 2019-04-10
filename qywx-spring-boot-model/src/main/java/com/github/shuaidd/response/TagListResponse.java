@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-06 08:17
+ * author ddshuai
+ * date 2019-04-06 08:17
  **/
 public class TagListResponse extends AbstractBaseResponse{
 

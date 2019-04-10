@@ -15,8 +15,8 @@ import java.util.Collections;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-03 15:46
+ * author ddshuai
+ * date 2019-04-03 15:46
  **/
 @Configuration
 @ComponentScan(basePackages = {"com.github.shuaidd.service", "com.github.shuaidd.support","com.github.shuaidd.aspect"})

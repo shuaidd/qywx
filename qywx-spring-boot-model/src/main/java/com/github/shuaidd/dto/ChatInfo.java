@@ -8,8 +8,8 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-08 19:06
+ * author ddshuai
+ * date 2019-04-08 19:06
  **/
 public class ChatInfo {
 

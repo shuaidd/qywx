@@ -5,8 +5,8 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-06 06:52
+ * author ddshuai
+ * date 2019-04-06 06:52
  **/
 public class CreateDepartmentResponse extends AbstractBaseResponse {
     private Integer id;

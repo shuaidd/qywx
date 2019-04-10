@@ -8,8 +8,8 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-08 19:07
+ * author ddshuai
+ * date 2019-04-08 19:07
  **/
 public class SearchAppChatResponse extends AbstractBaseResponse {
     @JsonProperty("chat_info")

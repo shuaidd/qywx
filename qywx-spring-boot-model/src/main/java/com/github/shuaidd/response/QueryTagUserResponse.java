@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-06 07:50
+ * author ddshuai
+ * date 2019-04-06 07:50
  **/
 public class QueryTagUserResponse extends AbstractBaseResponse {
 

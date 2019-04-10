@@ -9,8 +9,8 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-08 16:15
+ * author ddshuai
+ * date 2019-04-08 16:15
  **/
 public class ApplicationButton {
 

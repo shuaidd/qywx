@@ -9,8 +9,8 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-05 17:18
+ * author ddshuai
+ * date 2019-04-05 17:18
  **/
 public class WeChatUser extends AbstractBaseResponse {
     @JsonProperty("userid")

@@ -8,8 +8,8 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-05 17:21
+ * author ddshuai
+ * date 2019-04-05 17:21
  **/
 public class WeChatUserResponse extends WeChatUser {
 

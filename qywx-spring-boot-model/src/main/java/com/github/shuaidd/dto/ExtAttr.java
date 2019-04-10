@@ -5,8 +5,8 @@ import java.util.Map;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-04 15:31
+ * author ddshuai
+ * date 2019-04-04 15:31
  **/
 public class ExtAttr {
     private Integer type;

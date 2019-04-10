@@ -21,8 +21,8 @@ import java.lang.reflect.Method;
  * 描述 新通教育
  * 统一处理微信授权码无效问题
  *
- * @author yczhu
- * @date 2018-11-19 下午4:39
+ * author yczhu
+ * date 2018-11-19 下午4:39
  **/
 
 @Aspect

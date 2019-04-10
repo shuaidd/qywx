@@ -168,11 +168,13 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
     <scm>
         <url>https://github.com/shuaidd/qywx</url>
         <connection>https://github.com/shuaidd/qywx.git</connection>
         <developerConnection>https://github.com/shuaidd</developerConnection>
     </scm>
+
     <developers>
         <developer>
             <name>shuaidd</name>

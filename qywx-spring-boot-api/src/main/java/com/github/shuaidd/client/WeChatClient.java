@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * 描述 新通教育
  *
- * @author ddshuai
- * @date 2019-04-03 15:50
+ * author ddshuai
+ * date 2019-04-03 15:50
  **/
 @SuppressWarnings("all")
 @FeignClient(name = "wechat", url = "${qywx.url:https://qyapi.weixin.qq.com}", path = "${qywx.public-path:cgi-bin}", configuration = WeChatConfiguration.class)

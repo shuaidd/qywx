@@ -7,8 +7,8 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-05 18:51
+ * author ddshuai
+ * date 2019-04-05 18:51
  **/
 public class ConvertUserIdOpenIdResponse extends AbstractBaseResponse {
 

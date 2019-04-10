@@ -3,8 +3,8 @@ package com.github.shuaidd.dto;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-08 17:57
+ * author ddshuai
+ * date 2019-04-08 17:57
  **/
 public class MsgMarkdown {
     private String content;

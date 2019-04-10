@@ -13,8 +13,8 @@ import java.util.Objects;
 /**
  * 应用管理
  *
- * @author ddshuai
- * @date 2019-04-06 21:53
+ * author ddshuai
+ * date 2019-04-06 21:53
  **/
 @Service
 public class ApplicationService extends AbstractBaseService {

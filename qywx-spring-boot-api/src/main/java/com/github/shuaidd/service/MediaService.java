@@ -21,8 +21,8 @@ import java.util.Objects;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-06 16:18
+ * author ddshuai
+ * date 2019-04-06 16:18
  **/
 @Service
 public class MediaService extends AbstractBaseService {
