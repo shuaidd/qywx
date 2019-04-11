@@ -34,7 +34,7 @@ public abstract class AbstractBaseService {
     @Autowired
     protected WeChatConfigurationProperties properties;
 
-    boolean isSuccess(AbstractBaseResponse baseResponse) {
+    final boolean isSuccess(AbstractBaseResponse baseResponse) {
         if (Objects.nonNull(baseResponse)) {
             if (ErrorCode.ERROR_CODE_0.getErrorCode().equals(baseResponse.getErrCode().toString())) {
                 return true;
@@ -55,7 +55,7 @@ public abstract class AbstractBaseService {
      * @param applicationName
      * @return
      */
-    String getApplicationSecret(String applicationName) {
+    final String getApplicationSecret(String applicationName) {
         String secret = "";
         List<ApplicationProperties> list = properties.getApplicationList();
         if (CollectionUtils.isNotEmpty(list)) {
@@ -71,5 +71,19 @@ public abstract class AbstractBaseService {
         }
 
         return secret;
+    }
+
+    final void checkApplication(String applicationName){
+        Objects.requireNonNull(applicationName,"应用名称不能为空");
+        boolean exsit = false;
+        for (ApplicationProperties applicationProperties : properties.getApplicationList()) {
+            if (applicationName.equals(applicationProperties.getApplicationName())){
+                exsit = true;
+                break;
+            }
+        }
+        if (!exsit){
+            throw new WeChatException("应用"+applicationName+"无效，不在配置列表之内");
+        }
     }
 }

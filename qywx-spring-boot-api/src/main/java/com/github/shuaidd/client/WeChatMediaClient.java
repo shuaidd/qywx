@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
  * date 2018-11-28 17:34
  **/
 @SuppressWarnings("all")
-@FeignClient(value = "weChatUploadClient", url = "${qywx.url:https://qyapi.weixin.qq.com}", path = "${qywx.public-path:cgi-bin}", configuration = MultipartSupportConfig.class)
+@FeignClient(name = "weChatUploadClient", url = "${qywx.url:https://qyapi.weixin.qq.com}", path = "${qywx.public-path:cgi-bin}", configuration = MultipartSupportConfig.class)
 public interface WeChatMediaClient {
 
     /**

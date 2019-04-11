@@ -19,7 +19,8 @@ public class AuthenticationService extends AbstractBaseService {
      * @param applicationName
      * @return
      */
-    public AuthenticationResponse getAuthentication(String code, String applicationName) {
+    public final AuthenticationResponse getAuthentication(String code, String applicationName) {
+        checkApplication(applicationName);
         AuthenticationResponse response = null;
         if (StringUtils.isNotEmpty(code)) {
             response = weChatClient.getAuthentication(code, applicationName);

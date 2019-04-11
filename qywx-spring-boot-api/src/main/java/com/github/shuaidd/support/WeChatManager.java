@@ -21,6 +21,7 @@ public class WeChatManager {
     private final ApplicationService applicationService;
     private final MediaService mediaService;
     private final MessageService messageService;
+    private final OAService oaService;
 
     @Autowired
     public WeChatManager(AddressBookService addressBookService,
@@ -28,7 +29,7 @@ public class WeChatManager {
                          WeChatConfigurationProperties properties,
                          AuthenticationService authenticationService,
                          ApplicationService applicationService,
-                         MediaService mediaService, MessageService messageService) {
+                         MediaService mediaService, MessageService messageService, OAService oaService) {
         this.addressBookService = addressBookService;
         this.tokenService = tokenService;
         this.properties = properties;
@@ -36,6 +37,7 @@ public class WeChatManager {
         this.applicationService = applicationService;
         this.mediaService = mediaService;
         this.messageService = messageService;
+        this.oaService = oaService;
     }
 
     /**
@@ -99,5 +101,13 @@ public class WeChatManager {
      */
     public MessageService messageService() {
         return messageService;
+    }
+
+    /**
+     * OA数据管理
+     * @return
+     */
+    public OAService oaService(){
+        return oaService;
     }
 }

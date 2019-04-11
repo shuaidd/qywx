@@ -78,7 +78,8 @@ public class AddressBookService extends AbstractBaseService {
      *
      * @param request
      */
-    public void createUser(CreateUserRequest request, String applicationName) {
+    public final void createUser(CreateUserRequest request, String applicationName) {
+        checkApplication(applicationName);
         if (Objects.nonNull(request)) {
             BaseResponse baseResponse = weChatClient.createUser(request, applicationName);
             if (isSuccess(baseResponse)) {
@@ -94,7 +95,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用
      * @return WeChatUserResponse
      */
-    public WeChatUserResponse getUser(String userId, String applicationName) {
+    public final WeChatUserResponse getUser(String userId, String applicationName) {
+        checkApplication(applicationName);
         WeChatUserResponse weChatUserResponse = null;
         if (StringUtils.isNotEmpty(userId)) {
             weChatUserResponse = weChatClient.getUser(userId, applicationName);
@@ -114,7 +116,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param request         更新信息
      * @param applicationName 应用
      */
-    public void updateUser(UpdateUserRequest request, String applicationName) {
+    public final void updateUser(UpdateUserRequest request, String applicationName) {
+        checkApplication(applicationName);
         if (Objects.nonNull(request) && StringUtils.isNotEmpty(request.getUserId())) {
             BaseResponse baseResponse = weChatClient.updateUser(request, applicationName);
             if (isSuccess(baseResponse)) {
@@ -131,7 +134,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param userId
      * @param applicationName
      */
-    public void deleteUser(String userId, String applicationName) {
+    public final void deleteUser(String userId, String applicationName) {
+        checkApplication(applicationName);
         if (StringUtils.isNotEmpty(userId)) {
             BaseResponse response = weChatClient.deleteUser(userId, applicationName);
             if (isSuccess(response)) {
@@ -148,7 +152,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param request
      * @param applicationName
      */
-    public void batchDeleteUser(BatchDeleteUserRequest request, String applicationName) {
+    public final void batchDeleteUser(BatchDeleteUserRequest request, String applicationName) {
+        checkApplication(applicationName);
         if (Objects.nonNull(request) && CollectionUtils.isNotEmpty(request.getUserIdList())) {
             BaseResponse response = weChatClient.batchDelete(request, applicationName);
             if (isSuccess(response)) {
@@ -167,7 +172,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用
      * @return
      */
-    public List<WeChatUser> getDepartmentUser(Integer departmentId, boolean fetchChild, String applicationName) {
+    public final List<WeChatUser> getDepartmentUser(Integer departmentId, boolean fetchChild, String applicationName) {
+        checkApplication(applicationName);
         List<WeChatUser> weChatUsers = new ArrayList<>(1);
         if (Objects.nonNull(departmentId)) {
             Integer getChild = fetchChild ? 1 : 0;
@@ -192,7 +198,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用
      * @return
      */
-    public List<WeChatUser> getDepartmentUserDetail(Integer departmentId, boolean fetchChild, String applicationName) {
+    public final List<WeChatUser> getDepartmentUserDetail(Integer departmentId, boolean fetchChild, String applicationName) {
+        checkApplication(applicationName);
         List<WeChatUser> weChatUsers = new ArrayList<>(1);
         if (Objects.nonNull(departmentId)) {
             Integer getChild = fetchChild ? 1 : 0;
@@ -216,7 +223,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName
      * @return
      */
-    public String convertToOpenId(String userId, String applicationName) {
+    public final String convertToOpenId(String userId, String applicationName) {
+        checkApplication(applicationName);
         String openId = null;
         if (StringUtils.isNotEmpty(userId)) {
             ConvertUserIdOpenIdResponse response = weChatClient.convertToOpenId(new ConvertUserIdOpenIdRequest(userId, null), applicationName);
@@ -238,7 +246,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName
      * @return
      */
-    public String convertToUserId(String openId, String applicationName) {
+    public final String convertToUserId(String openId, String applicationName) {
+        checkApplication(applicationName);
         String userId = null;
         if (StringUtils.isNotEmpty(openId)) {
             ConvertUserIdOpenIdResponse response = weChatClient.convertToUserId(new ConvertUserIdOpenIdRequest(null, openId), applicationName);
@@ -259,7 +268,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param userId
      * @param applicationName
      */
-    public void authSuccess(String userId, String applicationName) {
+    public final void authSuccess(String userId, String applicationName) {
+        checkApplication(applicationName);
         if (StringUtils.isNotEmpty(userId)) {
             BaseResponse response = weChatClient.authSucc(userId, applicationName);
             if (isSuccess(response)) {
@@ -276,7 +286,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param request
      * @param applicationName
      */
-    public void invite(InviteUserRequest request, String applicationName) {
+    public final void invite(InviteUserRequest request, String applicationName) {
+        checkApplication(applicationName);
         if (Objects.nonNull(request)) {
             if (CollectionUtils.isEmpty(request.getParty()) && CollectionUtils.isEmpty(request.getTag()) && CollectionUtils.isEmpty(request.getUser())) {
                 return;
@@ -297,7 +308,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName
      * @return
      */
-    public CreateDepartmentResponse createDepartment(DepartmentRequest request, String applicationName) {
+    public final CreateDepartmentResponse createDepartment(DepartmentRequest request, String applicationName) {
+        checkApplication(applicationName);
         CreateDepartmentResponse response = null;
         if (Objects.nonNull(request) && StringUtils.isNotEmpty(request.getName())) {
             response = weChatClient.createDepartment(request, applicationName);
@@ -317,7 +329,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param request
      * @param applicationName
      */
-    public void updateDepartment(DepartmentRequest request, String applicationName) {
+    public final void updateDepartment(DepartmentRequest request, String applicationName) {
+        checkApplication(applicationName);
         if (Objects.nonNull(request) && Objects.nonNull(request.getId())) {
             BaseResponse response = weChatClient.updateDepartment(request, applicationName);
             if (isSuccess(response)) {
@@ -334,7 +347,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param id
      * @param applicationName
      */
-    public void deleteDepartment(Integer id, String applicationName) {
+    public final void deleteDepartment(Integer id, String applicationName) {
+        checkApplication(applicationName);
         if (Objects.nonNull(id)) {
             BaseResponse response = weChatClient.deleteDepartment(id, applicationName);
             if (isSuccess(response)) {
@@ -352,7 +366,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName
      * @return
      */
-    public List<Department> departmentList(Integer id, String applicationName) {
+    public final List<Department> departmentList(Integer id, String applicationName) {
+        checkApplication(applicationName);
         List<Department> departments = new ArrayList<>(1);
         DepartmentListResponse response = weChatClient.departmentList(id, applicationName);
         if (isSuccess(response)) {
@@ -372,7 +387,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName
      * @return
      */
-    public Integer createTag(TagRequest request, String applicationName) {
+    public final Integer createTag(TagRequest request, String applicationName) {
+        checkApplication(applicationName);
         Integer tagId = null;
         if (Objects.nonNull(request) && StringUtils.isNotEmpty(request.getTagName())) {
             CreateTagResponse createTagResponse = weChatClient.createTag(request, applicationName);
@@ -394,7 +410,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param tagName
      * @param applicationName
      */
-    public void updateTagName(Integer tagId, String tagName, String applicationName) {
+    public final void updateTagName(Integer tagId, String tagName, String applicationName) {
+        checkApplication(applicationName);
         if (Objects.nonNull(tagId) && StringUtils.isNotEmpty(tagName)) {
             TagRequest tagRequest = new TagRequest();
             tagRequest.setTagId(tagId);
@@ -414,7 +431,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param tagId
      * @param applicationName
      */
-    public void deleteTag(Integer tagId, String applicationName) {
+    public final void deleteTag(Integer tagId, String applicationName) {
+        checkApplication(applicationName);
         if (Objects.nonNull(tagId)) {
             BaseResponse response = weChatClient.deleteTag(tagId, applicationName);
             if (isSuccess(response)) {
@@ -432,7 +450,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName
      * @return
      */
-    public QueryTagUserResponse getTagUser(Integer tagId, String applicationName) {
+    public final QueryTagUserResponse getTagUser(Integer tagId, String applicationName) {
+        checkApplication(applicationName);
         QueryTagUserResponse response = null;
         if (Objects.nonNull(tagId)) {
             response = weChatClient.getTagUser(tagId, applicationName);
@@ -453,7 +472,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName
      * @return
      */
-    public TagUserResponse addTagUsers(TagUserRequest request, String applicationName) {
+    public final TagUserResponse addTagUsers(TagUserRequest request, String applicationName) {
+        checkApplication(applicationName);
         TagUserResponse response = null;
         if (Objects.nonNull(request) && Objects.nonNull(request.getTagId())) {
             response = weChatClient.addTagUsers(request, applicationName);
@@ -473,7 +493,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName
      * @return
      */
-    public TagUserResponse deleteTagUsers(TagUserRequest request, String applicationName) {
+    public final TagUserResponse deleteTagUsers(TagUserRequest request, String applicationName) {
+        checkApplication(applicationName);
         TagUserResponse response = null;
         if (Objects.nonNull(request) && Objects.nonNull(request.getTagId())) {
             response = weChatClient.deleteTagUsers(request, applicationName);
@@ -492,7 +513,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName
      * @return
      */
-    public List<Tag> getTagList(String applicationName) {
+    public final List<Tag> getTagList(String applicationName) {
+        checkApplication(applicationName);
         List<Tag> tags = new ArrayList<>(1);
         TagListResponse response = weChatClient.getTagList(applicationName);
         if (isSuccess(response)) {
@@ -521,23 +543,24 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName
      * @return AsyncJobResponse
      */
-    public String asyncBatchUpdateUser(List<WeChatUser> weChatUsers, Boolean toInvite, CallbackData callbackData, String applicationName) {
+    public final String asyncBatchUpdateUser(List<WeChatUser> weChatUsers, Boolean toInvite, CallbackData callbackData, String applicationName) {
         return asyncHandleUser(weChatUsers, toInvite, callbackData, applicationName, ASYNC_BATCH_UPDATE_USER);
     }
 
-    public String asyncBatchUpdateUser(List<WeChatUser> weChatUsers, Boolean toInvite, String applicationName) {
+    public final String asyncBatchUpdateUser(List<WeChatUser> weChatUsers, Boolean toInvite, String applicationName) {
         return asyncBatchUpdateUser(weChatUsers, toInvite, null, applicationName);
     }
 
-    public String fullCoverUser(List<WeChatUser> weChatUsers, Boolean toInvite, CallbackData callbackData, String applicationName) {
+    public final String fullCoverUser(List<WeChatUser> weChatUsers, Boolean toInvite, CallbackData callbackData, String applicationName) {
         return asyncHandleUser(weChatUsers, toInvite, callbackData, applicationName, FULL_COVER_USER);
     }
 
-    public String fullCoverUser(List<WeChatUser> weChatUsers, Boolean toInvite, String applicationName) {
+    public final String fullCoverUser(List<WeChatUser> weChatUsers, Boolean toInvite, String applicationName) {
         return asyncHandleUser(weChatUsers, toInvite, null, applicationName, FULL_COVER_USER);
     }
 
     private String asyncHandleUser(List<WeChatUser> weChatUsers, Boolean toInvite, CallbackData callbackData, String applicationName, String type) {
+        checkApplication(applicationName);
         //上传待增量更新的文件
         String fileName = "";
         if (ASYNC_BATCH_UPDATE_USER.equals(type)) {
@@ -629,7 +652,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName
      * @return
      */
-    public String fullCoverDepartment(List<Department> departments, CallbackData callbackData, String applicationName) {
+    public final String fullCoverDepartment(List<Department> departments, CallbackData callbackData, String applicationName) {
+        checkApplication(applicationName);
         DiskFileItem fileItem = (DiskFileItem) new DiskFileItemFactory().createItem("file",
                 MediaType.TEXT_PLAIN.getType(), true, String.format(FULL_COVER_DEPARTMENT_FILE, DateUtil.format(new Date(), "yyyyMMddhhmmss")));
 
@@ -666,7 +690,7 @@ public class AddressBookService extends AbstractBaseService {
         return null;
     }
 
-    public String fullCoverDepartment(List<Department> departments, String applicationName) {
+    public final String fullCoverDepartment(List<Department> departments, String applicationName) {
         return fullCoverDepartment(departments, null, applicationName);
     }
 
@@ -678,7 +702,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName
      * @return
      */
-    public AsyncJobResultResponse jobResult(String jobId, String applicationName) {
+    public final AsyncJobResultResponse jobResult(String jobId, String applicationName) {
+        checkApplication(applicationName);
         AsyncJobResultResponse resultResponse = null;
         if (StringUtils.isNotEmpty(jobId)) {
             resultResponse = weChatClient.jobResult(jobId, applicationName);

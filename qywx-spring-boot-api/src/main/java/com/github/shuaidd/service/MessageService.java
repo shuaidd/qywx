@@ -30,7 +30,8 @@ public class MessageService extends AbstractBaseService {
      * @param applicationName
      * @return
      */
-    public SendMessageResponse sendMessage(SendMessageRequest request, String applicationName) {
+    public final SendMessageResponse sendMessage(SendMessageRequest request, String applicationName) {
+        checkApplication(applicationName);
         SendMessageResponse response = null;
         if (Objects.nonNull(request)) {
             response = weChatClient.sendMessage(request, applicationName);
@@ -48,7 +49,8 @@ public class MessageService extends AbstractBaseService {
      * @param request
      * @param applicationName
      */
-    public void sendAppChatMessage(SendAppChatRequest request, String applicationName) {
+    public final void sendAppChatMessage(SendAppChatRequest request, String applicationName) {
+        checkApplication(applicationName);
         if (Objects.nonNull(request)) {
             BaseResponse response = weChatClient.sendAppChatMessage(request, applicationName);
             if (isSuccess(response)) {
@@ -64,7 +66,8 @@ public class MessageService extends AbstractBaseService {
      * @param applicationName
      * @return
      */
-    public String createAppChat(CreateAppChatRequest request, String applicationName) {
+    public final String createAppChat(CreateAppChatRequest request, String applicationName) {
+        checkApplication(applicationName);
         String chatId = "";
         if (Objects.nonNull(request)) {
             CreateAppChatResponse response = weChatClient.createAppChat(request, applicationName);
@@ -82,7 +85,8 @@ public class MessageService extends AbstractBaseService {
      * @param request
      * @param applicationName
      */
-    public void updateAppChat(UpdateAppChatRequest request, String applicationName) {
+    public final void updateAppChat(UpdateAppChatRequest request, String applicationName) {
+        checkApplication(applicationName);
         if (Objects.nonNull(request)) {
             BaseResponse response = weChatClient.updateAppChat(request, applicationName);
             if (isSuccess(response)) {
@@ -98,7 +102,8 @@ public class MessageService extends AbstractBaseService {
      * @param applicationName
      * @return
      */
-    public ChatInfo searchAppChat(String chatId, String applicationName) {
+    public final ChatInfo searchAppChat(String chatId, String applicationName) {
+        checkApplication(applicationName);
         ChatInfo chatInfo = null;
         if (StringUtils.isNotEmpty(chatId)) {
             SearchAppChatResponse response = weChatClient.searchAppChat(chatId, applicationName);

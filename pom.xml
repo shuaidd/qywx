@@ -7,7 +7,7 @@
     <groupId>com.github.shuaidd</groupId>
     <artifactId>qywx</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <modules>
         <module>qywx-spring-boot-starter</module>
         <module>qywx-spring-boot-autoconfigurator</module>
@@ -16,7 +16,8 @@
     </modules>
 
     <name>qywx</name>
-    <url>http://www.example.com</url>
+    <url>https://github.com/shuaidd</url>
+    <description>企业微信api调用工具包</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,6 +30,13 @@
         <hutool-all>4.5.3</hutool-all>
         <jackson-annotations>2.9.0</jackson-annotations>
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>localRepository</id>
+            <url>file:/Users/shuaidongdong/.m2/repository</url>
+        </repository>
+    </distributionManagement>
 
     <dependencyManagement>
         <dependencies>
@@ -98,89 +106,97 @@
                 <artifactId>qywx-spring-boot-model</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <dependency>
+                <artifactId>qywx</artifactId>
+                <groupId>com.github.shuaidd</groupId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
-    <profiles>
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>2.2.1</version>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>2.9.1</version>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+    <!--<distributionManagement>-->
+        <!---->
+        <!--<snapshotRepository>-->
+            <!--<id>ossrh</id>-->
+            <!--<url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
+        <!--</snapshotRepository>-->
+        <!--<repository>-->
+            <!--<id>ossrh</id>-->
+            <!--<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
+        <!--</repository>-->
+    <!--</distributionManagement>-->
 
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
+    <!--<profiles>-->
+        <!--<profile>-->
+            <!--<id>release</id>-->
+            <!--<build>-->
+                <!--<plugins>-->
+                    <!--<plugin>-->
+                        <!--<groupId>org.apache.maven.plugins</groupId>-->
+                        <!--<artifactId>maven-source-plugin</artifactId>-->
+                        <!--<version>2.2.1</version>-->
+                        <!--<executions>-->
+                            <!--<execution>-->
+                                <!--<id>attach-sources</id>-->
+                                <!--<goals>-->
+                                    <!--<goal>jar-no-fork</goal>-->
+                                <!--</goals>-->
+                            <!--</execution>-->
+                        <!--</executions>-->
+                    <!--</plugin>-->
+                    <!--<plugin>-->
+                        <!--<groupId>org.apache.maven.plugins</groupId>-->
+                        <!--<artifactId>maven-javadoc-plugin</artifactId>-->
+                        <!--<version>2.9.1</version>-->
+                        <!--<executions>-->
+                            <!--<execution>-->
+                                <!--<id>attach-javadocs</id>-->
+                                <!--<goals>-->
+                                    <!--<goal>jar</goal>-->
+                                <!--</goals>-->
+                            <!--</execution>-->
+                        <!--</executions>-->
+                    <!--</plugin>-->
+                    <!--<plugin>-->
+                        <!--<groupId>org.apache.maven.plugins</groupId>-->
+                        <!--<artifactId>maven-gpg-plugin</artifactId>-->
+                        <!--<version>1.5</version>-->
+                        <!--<executions>-->
+                            <!--<execution>-->
+                                <!--<id>sign-artifacts</id>-->
+                                <!--<phase>verify</phase>-->
+                                <!--<goals>-->
+                                    <!--<goal>sign</goal>-->
+                                <!--</goals>-->
+                            <!--</execution>-->
+                        <!--</executions>-->
+                    <!--</plugin>-->
+                <!--</plugins>-->
+            <!--</build>-->
+        <!--</profile>-->
+    <!--</profiles>-->
 
-    <scm>
-        <url>https://github.com/shuaidd/qywx</url>
-        <connection>https://github.com/shuaidd/qywx.git</connection>
-        <developerConnection>https://github.com/shuaidd</developerConnection>
-    </scm>
+    <!--<licenses>-->
+        <!--<license>-->
+            <!--<name>The Apache Software License, Version 2.0</name>-->
+            <!--<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>-->
+            <!--<distribution>repo</distribution>-->
+        <!--</license>-->
+    <!--</licenses>-->
 
-    <developers>
-        <developer>
-            <name>shuaidd</name>
-            <email>shuaidd@139.com</email>
-            <url>https://github.com/shuaidd</url>
-        </developer>
-    </developers>
+    <!--<scm>-->
+        <!--<url>https://github.com/shuaidd/qywx</url>-->
+        <!--<connection>https://github.com/shuaidd/qywx.git</connection>-->
+        <!--<developerConnection>https://github.com/shuaidd</developerConnection>-->
+    <!--</scm>-->
 
+    <!--<developers>-->
+        <!--<developer>-->
+            <!--<name>shuaidd</name>-->
+            <!--<email>shuaidd@139.com</email>-->
+            <!--<url>https://github.com/shuaidd</url>-->
+        <!--</developer>-->
+    <!--</developers>-->
 </project>

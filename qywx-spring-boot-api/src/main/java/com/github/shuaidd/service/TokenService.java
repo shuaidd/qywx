@@ -22,6 +22,7 @@ public class TokenService extends AbstractBaseService {
      */
     @Cacheable(value = "qywx", key = "'qywx_access_token_'+#applicationName")
     public String getAccessToken(String applicationName) {
+        checkApplication(applicationName);
         logger.info("获取AccessToken：{}",applicationName);
         String accessToken = null;
         AccessTokenResponse accessTokenResponse = weChatClient.getAccessToken(properties.getCorpId(), getApplicationSecret(applicationName));

@@ -26,7 +26,8 @@ public class ApplicationService extends AbstractBaseService {
      * @param applicationName
      * @return
      */
-    public WeChatApplicationResponse getApplication(String agentId, String applicationName) {
+    public final WeChatApplicationResponse getApplication(String agentId, String applicationName) {
+        checkApplication(applicationName);
         WeChatApplicationResponse response = null;
         if (StringUtils.isNotEmpty(agentId)) {
             response = weChatClient.getApplication(agentId, applicationName);
@@ -45,7 +46,8 @@ public class ApplicationService extends AbstractBaseService {
      * @param agentId
      * @param applicationName
      */
-    public void createApplicationButton(ApplicationButtonRequest request, String agentId, String applicationName) {
+    public final void createApplicationButton(ApplicationButtonRequest request, String agentId, String applicationName) {
+        checkApplication(applicationName);
         if (Objects.nonNull(request) && CollectionUtils.isNotEmpty(request.getButtonList())) {
             BaseResponse response = weChatClient.createApplicationButton(request, agentId, applicationName);
             if (isSuccess(response)) {
@@ -61,7 +63,8 @@ public class ApplicationService extends AbstractBaseService {
      * @param applicationName
      * @return
      */
-    public ApplicationButtonResponse getApplicationButtons(String agentId, String applicationName) {
+    public final ApplicationButtonResponse getApplicationButtons(String agentId, String applicationName) {
+        checkApplication(applicationName);
         ApplicationButtonResponse response = null;
         if (StringUtils.isNotEmpty(agentId)) {
             response = weChatClient.getApplicationButtons(agentId, applicationName);
@@ -78,7 +81,8 @@ public class ApplicationService extends AbstractBaseService {
      * @param agentId
      * @param applicationName
      */
-    public void deleteApplicationButtons(String agentId, String applicationName) {
+    public final void deleteApplicationButtons(String agentId, String applicationName) {
+        checkApplication(applicationName);
         if (StringUtils.isNotEmpty(agentId)) {
             BaseResponse response = weChatClient.deleteApplicationButtons(agentId, applicationName);
             if (isSuccess(response)) {

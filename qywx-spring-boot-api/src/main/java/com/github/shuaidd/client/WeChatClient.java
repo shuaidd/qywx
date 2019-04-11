@@ -429,4 +429,54 @@ public interface WeChatClient {
      */
     @PostMapping(value = "appchat/send", headers = HEAD)
     BaseResponse sendAppChatMessage(SendAppChatRequest request, @RequestParam(HEAD_KEY) String app);
+
+
+    /**
+     * 获取打卡数据
+     *
+     * 获取记录时间跨度不超过一个月
+     * 用户列表不超过100个。若用户超过100个，请分批获取
+     * 有打卡记录即可获取打卡数据，与当前”打卡应用”是否开启无关
+     *
+     * @param request
+     * @param app
+     * @return
+     */
+    @PostMapping(value = "checkin/getcheckindata", headers = HEAD)
+    CheckInDataResponse getCheckInData(CheckInDataRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取打卡规则
+     *
+     * 用户列表不超过100个，若用户超过100个，请分批获取。
+     * 用户在不同日期的规则不一定相同，请按天获取。
+     * @param request
+     * @param app
+     * @return
+     */
+    @PostMapping(value = "checkin/getcheckinoption", headers = HEAD)
+    CheckInRuleResponse getCheckInOption(CheckInRuleRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取审批数据
+     *
+     * 获取审批记录请求参数endtime需要大于startime， 切起始时间跨度不要超过一个月；
+     * 一次请求返回的审批记录上限是100条，超过100条记录请使用next_spnum进行分页拉取。
+     *
+     * @param request
+     * @param app
+     * @return
+     */
+    @PostMapping(value = "corp/getapprovaldata", headers = HEAD)
+    ApprovalDataResponse getApprovalData(ApprovalDataRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取公费电话拨打记录
+     * @param request
+     * @param app
+     * @return
+     */
+    @PostMapping(value = "dial/get_dial_record", headers = HEAD)
+    DialRecordResponse getDialRecord(DialRecordRequest request,@RequestParam(HEAD_KEY) String app);
+
 }
