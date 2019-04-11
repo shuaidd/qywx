@@ -22,8 +22,8 @@ import java.util.Objects;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-11 10:15
+ * author ddshuai
+ * date 2019-04-11 10:15
  **/
 @Service
 public class OAService extends AbstractBaseService {

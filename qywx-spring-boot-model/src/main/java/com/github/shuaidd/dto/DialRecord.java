@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-11 13:37
+ * author ddshuai
+ * date 2019-04-11 13:37
  **/
 public class DialRecord {
 

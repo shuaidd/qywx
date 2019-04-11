@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-11 12:21
+ * author ddshuai
+ * date 2019-04-11 12:21
  **/
 public class CheckInRule {
 

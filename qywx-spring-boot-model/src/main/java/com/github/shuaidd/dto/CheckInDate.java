@@ -7,8 +7,8 @@ import java.util.List;
 /**
  * 描述
  *
- * @author ddshuai
- * @date 2019-04-11 12:27
+ * author ddshuai
+ * date 2019-04-11 12:27
  **/
 public class CheckInDate {
 

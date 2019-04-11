@@ -63,6 +63,14 @@
     public MessageService messageService() {
         return messageService;
     }
+    
+    /**
+     * OA数据管理
+     * @return
+     */
+    public OAService oaService(){
+            return oaService;
+    }
 ```
 使用示例
 ``` 
