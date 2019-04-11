@@ -1,6 +1,14 @@
 # qywx-spring-boot-starter
 企业微信API封装
 ``` 
+<dependency>
+  <groupId>com.github.shuaidd</groupId>
+  <artifactId>qywx-spring-boot-starter</artifactId>
+  <version>2.0.0</version>
+</dependency>
+
+```
+``` 
 /**
      * 通讯录管理服务
      *
