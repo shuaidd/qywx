@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * 描述 新通教育
+ * 描述 enjoy your life
  *
  * author ddshuai
  * date 2019-04-03 15:50

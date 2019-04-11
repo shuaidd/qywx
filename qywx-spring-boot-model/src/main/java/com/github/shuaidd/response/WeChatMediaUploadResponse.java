@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.StringJoiner;
 
 /**
- * 描述 新通教育
+ * 描述 enjoy your life
  *
  * author ddshuai
  * date 2018-11-28 17:05

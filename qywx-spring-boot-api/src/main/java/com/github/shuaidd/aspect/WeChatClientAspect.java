@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.lang.reflect.Method;
 
 /**
- * 描述 新通教育
+ * 描述 enjoy your life
  * 统一处理微信授权码无效问题
  *
  * author yczhu

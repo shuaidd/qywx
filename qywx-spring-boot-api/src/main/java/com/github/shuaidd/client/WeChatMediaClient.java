@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * 描述 新通教育
+ * 描述 enjoy your life
  *
  * author ddshuai
  * date 2018-11-28 17:34
