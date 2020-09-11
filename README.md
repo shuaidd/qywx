@@ -85,7 +85,7 @@
 配置application.yml
 
 qywx:
-  corp-id: ww36e0a51aab349a7d（企业号）
+  corp-id: xxxx（企业号）
   application-list:
   - secret: Kx4sovYN5C0_MEzPY0cOymwbMhGmqdA9VjMFHrAKjdE
     agentId: 1000003
