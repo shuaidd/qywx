@@ -43,6 +43,8 @@ public class SendMessageRequest {
 
     private MsgMpNews mpnews;
 
+    private MsgMarkdown markdown;
+
     @JsonProperty("miniprogram_notice")
     private MsgMiniprogramNotice miniprogramnotice;
 
@@ -150,6 +152,14 @@ public class SendMessageRequest {
 
     public void setMpnews(MsgMpNews mpnews) {
         this.mpnews = mpnews;
+    }
+
+    public MsgMarkdown getMarkdown() {
+        return markdown;
+    }
+
+    public void setMarkdown(MsgMarkdown markdown) {
+        this.markdown = markdown;
     }
 
     public MsgMiniprogramNotice getMiniprogramnotice() {
