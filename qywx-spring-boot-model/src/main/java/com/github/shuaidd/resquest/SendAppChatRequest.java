@@ -39,6 +39,8 @@ public class SendAppChatRequest {
 
     private MsgMpNews mpnews;
 
+    private MsgMarkdown markdown;
+
     @JsonProperty("miniprogram_notice")
     private MsgMiniprogramNotice miniprogramnotice;
 
@@ -130,6 +132,14 @@ public class SendAppChatRequest {
         this.mpnews = mpnews;
     }
 
+    public MsgMarkdown getMarkdown() {
+        return markdown;
+    }
+
+    public void setMarkdown(MsgMarkdown markdown) {
+        this.markdown = markdown;
+    }
+
     public MsgMiniprogramNotice getMiniprogramnotice() {
         return miniprogramnotice;
     }
@@ -152,6 +162,7 @@ public class SendAppChatRequest {
                 .add("textcard=" + textcard)
                 .add("news=" + news)
                 .add("mpnews=" + mpnews)
+                .add("markdown=" + markdown)
                 .add("miniprogramnotice=" + miniprogramnotice)
                 .toString();
     }
