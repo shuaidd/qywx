@@ -7,7 +7,7 @@ import com.github.shuaidd.enums.MsgType;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-08 17:13
  **/
 public class SendMessageRequest {

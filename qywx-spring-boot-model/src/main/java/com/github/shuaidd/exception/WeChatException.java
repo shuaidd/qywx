@@ -6,7 +6,7 @@ import com.github.shuaidd.enums.ErrorCode;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-04 16:32
  **/
 public class WeChatException extends RuntimeException {

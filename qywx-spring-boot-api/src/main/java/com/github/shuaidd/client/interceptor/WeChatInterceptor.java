@@ -17,7 +17,7 @@ import java.util.Collection;
 /**
  * 处理所有请求的access_token参数
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-04 16:20
  **/
 

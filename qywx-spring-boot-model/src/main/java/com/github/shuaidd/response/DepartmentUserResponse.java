@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-05 18:26
  **/
 public class DepartmentUserResponse extends AbstractBaseResponse {

@@ -1,6 +1,7 @@
 package com.github.shuaidd.client;
 
 import com.github.shuaidd.client.config.WeChatConfiguration;
+import com.github.shuaidd.resquest.GetContactWayRequest;
 import com.github.shuaidd.response.*;
 import com.github.shuaidd.resquest.*;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * 描述 enjoy your life
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-03 15:50
  **/
 @SuppressWarnings("all")
@@ -396,6 +397,7 @@ public interface WeChatClient {
 
     /**
      * 创建群聊会话
+     *
      * @param request
      * @param app
      * @return
@@ -405,6 +407,7 @@ public interface WeChatClient {
 
     /**
      * 修改群聊会话
+     *
      * @param request
      * @param app
      * @return
@@ -414,6 +417,7 @@ public interface WeChatClient {
 
     /**
      * 获取群聊会话
+     *
      * @param chatId
      * @param app
      * @return
@@ -423,6 +427,7 @@ public interface WeChatClient {
 
     /**
      * 发送群消息
+     *
      * @param request
      * @param app
      * @return
@@ -433,7 +438,7 @@ public interface WeChatClient {
 
     /**
      * 获取打卡数据
-     *
+     * <p>
      * 获取记录时间跨度不超过一个月
      * 用户列表不超过100个。若用户超过100个，请分批获取
      * 有打卡记录即可获取打卡数据，与当前”打卡应用”是否开启无关
@@ -447,19 +452,20 @@ public interface WeChatClient {
 
     /**
      * 获取打卡规则
-     *
+     * <p>
      * 用户列表不超过100个，若用户超过100个，请分批获取。
      * 用户在不同日期的规则不一定相同，请按天获取。
+     *
      * @param request
      * @param app
      * @return
      */
     @PostMapping(value = "checkin/getcheckinoption", headers = HEAD)
-    CheckInRuleResponse getCheckInOption(CheckInRuleRequest request,@RequestParam(HEAD_KEY) String app);
+    CheckInRuleResponse getCheckInOption(CheckInRuleRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取审批数据
-     *
+     * <p>
      * 获取审批记录请求参数endtime需要大于startime， 切起始时间跨度不要超过一个月；
      * 一次请求返回的审批记录上限是100条，超过100条记录请使用next_spnum进行分页拉取。
      *
@@ -468,15 +474,99 @@ public interface WeChatClient {
      * @return
      */
     @PostMapping(value = "corp/getapprovaldata", headers = HEAD)
-    ApprovalDataResponse getApprovalData(ApprovalDataRequest request,@RequestParam(HEAD_KEY) String app);
+    ApprovalDataResponse getApprovalData(ApprovalDataRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取公费电话拨打记录
+     *
      * @param request
      * @param app
      * @return
      */
     @PostMapping(value = "dial/get_dial_record", headers = HEAD)
-    DialRecordResponse getDialRecord(DialRecordRequest request,@RequestParam(HEAD_KEY) String app);
+    DialRecordResponse getDialRecord(DialRecordRequest request, @RequestParam(HEAD_KEY) String app);
 
+    /**
+     * 获取配置了客户联系功能的成员列表
+     *
+     * @param app 应用别名
+     * @return FollowUserResponse
+     */
+    @GetMapping(value = "externalcontact/get_follow_user_list", headers = HEAD)
+    FollowUserResponse getFollowUserList(@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 配置客户联系「联系我」方式
+     *
+     * @param request
+     * @param app
+     * @return AddContactWayResponse
+     */
+    @PostMapping(value = "externalcontact/add_contact_way", headers = HEAD)
+    AddContactWayResponse addContactWay(AddContactWayRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取企业已配置的「联系我」方式
+     *
+     * @param request
+     * @param app
+     * @return ContactWayResponse
+     */
+    @PostMapping(value = "externalcontact/get_contact_way", headers = HEAD)
+    ContactWayResponse getContactWay(GetContactWayRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 更新企业已配置的「联系我」方式
+     *
+     * @param request
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/update_contact_way", headers = HEAD)
+    BaseResponse updateContactWay(UpdateContactWayRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除企业已配置的「联系我」方式
+     * @param request
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/del_contact_way", headers = HEAD)
+    BaseResponse deleteContactWay(GetContactWayRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 结束临时会话
+     * @param request
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/close_temp_chat",headers = HEAD)
+    BaseResponse closeTempChat(CloseTempChatRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客户列表
+     * @param request
+     * @param app
+     * @return CustomListResponse
+     */
+    @PostMapping(value = "externalcontact/list",headers = HEAD)
+    CustomListResponse getCustomList(CustomListRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客户详情
+     * @param userid
+     * @param app
+     * @return ExternalContactResponse
+     */
+    @GetMapping(value = "externalcontact/get",headers = HEAD)
+    ExternalContactResponse getExternalContact(@RequestParam("external_userid") String externalUserId,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量获取客户详情
+     * @param request
+     * @param app
+     * @return BatchExternalContactResponse
+     */
+    @PostMapping(value = "externalcontact/batch/get_by_user",headers = HEAD)
+    BatchExternalContactResponse getBatchExternalContact(BatchExternalContactRequest request,@RequestParam(HEAD_KEY) String app);
 }

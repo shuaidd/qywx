@@ -8,7 +8,7 @@ import java.util.StringJoiner;
 /**
  * 描述 enjoy your life
  *
- * author ddshuai
+ * @author ddshuai
  * date 2018-11-28 17:05
  **/
 public class WeChatMediaUploadResponse extends AbstractBaseResponse {

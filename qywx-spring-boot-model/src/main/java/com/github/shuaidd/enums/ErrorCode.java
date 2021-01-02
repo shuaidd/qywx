@@ -4,7 +4,7 @@ package com.github.shuaidd.enums;
 import java.util.Objects;
 
 /**
- * author ddshuai
+ * @author ddshuai
  * 创建日期： 2018/6/13
  * 描述：微信端企业微信所有相关错误码描述
  */

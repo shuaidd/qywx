@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 描述 enjoy your life
  *
- * author ddshuai
+ * @author ddshuai
  * date 2018-11-28 17:34
  **/
 @SuppressWarnings("all")

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-03 20:30
  **/
 public abstract class AbstractBaseResponse {

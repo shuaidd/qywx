@@ -19,7 +19,7 @@ import java.util.Objects;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-04 14:24
  **/
 public abstract class AbstractBaseService {

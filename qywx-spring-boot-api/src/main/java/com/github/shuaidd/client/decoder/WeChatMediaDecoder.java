@@ -18,7 +18,7 @@ import java.util.LinkedList;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-06 17:37
  **/
 public class WeChatMediaDecoder implements Decoder {

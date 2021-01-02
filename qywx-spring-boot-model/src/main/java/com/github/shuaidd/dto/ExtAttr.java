@@ -1,17 +1,20 @@
 package com.github.shuaidd.dto;
 
-import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-04 15:31
  **/
 public class ExtAttr {
     private Integer type;
     private String name;
-    private Map<String,Map<String,String>> attrs;
+    private ExternalTextAttr text;
+    private ExternalWebAttr web;
+    @JsonProperty("miniprogram")
+    private ExternalMiniProgramAttr miniProgram;
 
     public Integer getType() {
         return type;
@@ -29,11 +32,27 @@ public class ExtAttr {
         this.name = name;
     }
 
-    public Map<String, Map<String, String>> getAttrs() {
-        return attrs;
+    public ExternalTextAttr getText() {
+        return text;
     }
 
-    public void setAttrs(Map<String, Map<String, String>> attrs) {
-        this.attrs = attrs;
+    public void setText(ExternalTextAttr text) {
+        this.text = text;
+    }
+
+    public ExternalWebAttr getWeb() {
+        return web;
+    }
+
+    public void setWeb(ExternalWebAttr web) {
+        this.web = web;
+    }
+
+    public ExternalMiniProgramAttr getMiniProgram() {
+        return miniProgram;
+    }
+
+    public void setMiniProgram(ExternalMiniProgramAttr miniProgram) {
+        this.miniProgram = miniProgram;
     }
 }

@@ -27,7 +27,7 @@ import java.util.Objects;
 /**
  * 企业微信通讯录管理
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-04 14:22
  **/
 @Service

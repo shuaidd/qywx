@@ -8,7 +8,7 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-05 18:07
  **/
 public class BatchDeleteUserRequest {
