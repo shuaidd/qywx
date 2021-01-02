@@ -527,46 +527,71 @@ public interface WeChatClient {
 
     /**
      * 删除企业已配置的「联系我」方式
+     *
      * @param request
      * @param app
      * @return BaseResponse
      */
     @PostMapping(value = "externalcontact/del_contact_way", headers = HEAD)
-    BaseResponse deleteContactWay(GetContactWayRequest request,@RequestParam(HEAD_KEY) String app);
+    BaseResponse deleteContactWay(GetContactWayRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 结束临时会话
+     *
      * @param request
      * @param app
      * @return BaseResponse
      */
-    @PostMapping(value = "externalcontact/close_temp_chat",headers = HEAD)
-    BaseResponse closeTempChat(CloseTempChatRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/close_temp_chat", headers = HEAD)
+    BaseResponse closeTempChat(CloseTempChatRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取客户列表
+     *
      * @param request
      * @param app
      * @return CustomListResponse
      */
-    @PostMapping(value = "externalcontact/list",headers = HEAD)
-    CustomListResponse getCustomList(CustomListRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/list", headers = HEAD)
+    CustomListResponse getCustomList(CustomListRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取客户详情
+     *
      * @param userid
      * @param app
      * @return ExternalContactResponse
      */
-    @GetMapping(value = "externalcontact/get",headers = HEAD)
-    ExternalContactResponse getExternalContact(@RequestParam("external_userid") String externalUserId,@RequestParam(HEAD_KEY) String app);
+    @GetMapping(value = "externalcontact/get", headers = HEAD)
+    ExternalContactResponse getExternalContact(@RequestParam("external_userid") String externalUserId, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 批量获取客户详情
+     *
      * @param request
      * @param app
      * @return BatchExternalContactResponse
      */
-    @PostMapping(value = "externalcontact/batch/get_by_user",headers = HEAD)
-    BatchExternalContactResponse getBatchExternalContact(BatchExternalContactRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/batch/get_by_user", headers = HEAD)
+    BatchExternalContactResponse getBatchExternalContact(BatchExternalContactRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改客户备注信息
+     *
+     * @param remarkRequest
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/remark", headers = HEAD)
+    BaseResponse updateCustomRemark(UpdateRemarkRequest remarkRequest, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取手机号随机串
+     *
+     * @param request
+     * @param app
+     * @return MobileHashCodeResponse
+     */
+    @PostMapping(value = "user/get_mobile_hashcode", headers = HEAD)
+    MobileHashCodeResponse getMobileHashcode(MobileHashCodeRequest request, @RequestParam(HEAD_KEY) String app);
 }
