@@ -7,6 +7,7 @@ import com.github.shuaidd.client.config.WeChatConfigurationProperties;
 import com.github.shuaidd.enums.ErrorCode;
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.AbstractBaseResponse;
+import com.github.shuaidd.response.BaseResponse;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -34,6 +35,15 @@ public abstract class AbstractBaseService {
     @Autowired
     protected WeChatConfigurationProperties properties;
 
+    /**
+     * 是否检查结果
+     */
+    private boolean check = true;
+
+    final void setCheck(boolean check){
+        this.check = check;
+    }
+
     final boolean isSuccess(AbstractBaseResponse baseResponse) {
         if (Objects.nonNull(baseResponse)) {
             if (ErrorCode.ERROR_CODE_0.getErrorCode().equals(baseResponse.getErrCode().toString())) {
@@ -47,6 +57,21 @@ public abstract class AbstractBaseService {
             return false;
         }
 
+    }
+
+    /**
+     * 获取企业微信结果
+     * @param response
+     * @param <T>
+     * @return
+     */
+    final <T extends AbstractBaseResponse> T getResponse(T response){
+        if (check){
+            if (isSuccess(response)){
+                return response;
+            }
+        }
+        return response;
     }
 
     /**

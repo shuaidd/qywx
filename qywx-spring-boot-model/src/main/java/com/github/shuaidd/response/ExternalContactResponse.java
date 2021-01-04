@@ -12,7 +12,7 @@ import java.util.List;
  * @author ddshuai
  * @date 2021-01-02 16:32
  **/
-public class ExternalContactResponse {
+public class ExternalContactResponse extends AbstractBaseResponse {
 
     @JsonProperty("external_contact")
     private ExternalContactDetail externalContact;

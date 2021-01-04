@@ -594,4 +594,90 @@ public interface WeChatClient {
      */
     @PostMapping(value = "user/get_mobile_hashcode", headers = HEAD)
     MobileHashCodeResponse getMobileHashcode(MobileHashCodeRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取企业标签库
+     *
+     * @param request
+     * @param app
+     * @return
+     */
+    @PostMapping(value = "externalcontact/get_corp_tag_list", headers = HEAD)
+    TagGroupResponse getCorpTagList(TagGroupRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 添加企业客户标签
+     *
+     * @param request
+     * @param app
+     * @return AddCorpTagResponse
+     */
+    @PostMapping(value = "externalcontact/add_corp_tag", headers = HEAD)
+    AddCorpTagResponse addCorpTag(AddCorpTagRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 编辑企业客户标签
+     *
+     * @param request
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/edit_corp_tag", headers = HEAD)
+    BaseResponse editCorpTag(EditCorpTagRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除企业客户标签
+     *
+     * @param request
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/del_corp_tag", headers = HEAD)
+    BaseResponse delCorpTag(DelCorpTagRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 编辑客户企业标签
+     *
+     * @param request
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/mark_tag", headers = HEAD)
+    BaseResponse markTag(MarkTagRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取离职成员列表
+     * @param request
+     * @param app
+     * @return UnassignedListResponse
+     */
+    @PostMapping(value = "externalcontact/get_unassigned_list",headers = HEAD)
+    UnassignedListResponse unassignedList(PageRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 分配在职或离职成员的客户
+     * @param request
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/transfer",headers = HEAD)
+    BaseResponse transfer(TransferRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 查询客户接替结果
+     * @param resultRequest
+     * @param app
+     * @return TransferResultResponse
+     */
+    @PostMapping(value = "externalcontact/get_transfer_result",headers = HEAD)
+    TransferResultResponse getTransferResult(TransferResultRequest resultRequest,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 分配离职成员的客户群
+     * @param request
+     * @param app
+     * @return
+     */
+    @PostMapping(value = "externalcontact/groupchat/transfer",headers = HEAD)
+    FailedChatResponse groupChatTransfer(GroupChatTransferRequest request,@RequestParam(HEAD_KEY) String app);
 }
