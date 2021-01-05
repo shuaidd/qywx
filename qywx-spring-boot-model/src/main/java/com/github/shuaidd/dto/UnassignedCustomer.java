@@ -17,7 +17,6 @@ public class UnassignedCustomer {
     @JsonProperty("external_userid")
     private String externalUserId;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("dimission_time")
     private Date dimissionTime;
 

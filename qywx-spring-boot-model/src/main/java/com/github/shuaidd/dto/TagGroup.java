@@ -19,7 +19,6 @@ public class TagGroup {
     @JsonProperty("group_name")
     private String groupName;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("create_time")
     private Date createTime;
     private Integer order;

@@ -680,4 +680,49 @@ public interface WeChatClient {
      */
     @PostMapping(value = "externalcontact/groupchat/transfer",headers = HEAD)
     FailedChatResponse groupChatTransfer(GroupChatTransferRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客户群列表
+     * @param request
+     * @param app
+     * @return GroupChatListResponse
+     */
+    @PostMapping(value = "externalcontact/groupchat/list",headers = HEAD)
+    GroupChatListResponse groupChatList(GroupChatListRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客户群详情
+     * @param request
+     * @param app
+     * @return
+     */
+    @PostMapping(value = "externalcontact/groupchat/get",headers = HEAD)
+    GroupChatDetailResponse groupChatDetail(GroupChatDetailRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取企业全部的发表列表
+     * @param request
+     * @param app
+     * @return MomentListResponse
+     */
+    @PostMapping(value = "externalcontact/get_moment_list",headers = HEAD)
+    MomentListResponse getMomentList(MomentListRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客户朋友圈企业发表的列表
+     * @param request
+     * @param app
+     * @return
+     */
+    @PostMapping(value = "externalcontact/get_moment_task",headers = HEAD)
+    MomentTaskResponse getMomentTask(MomentTaskRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客户朋友圈发表时选择的可见范围
+     * @param request
+     * @param app
+     * @return MomentCustomerListResponse
+     */
+    @PostMapping(value = "externalcontact/get_moment_customer_list",headers = HEAD)
+    MomentCustomerListResponse getMomentCustomerList(MomentCustomerListRequest request,@RequestParam(HEAD_KEY) String app);
 }

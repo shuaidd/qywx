@@ -11,6 +11,9 @@ public class MsgText {
         this.content = content;
     }
 
+    public MsgText() {
+    }
+
     private String content;
 
     public String getContent() {

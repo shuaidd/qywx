@@ -14,7 +14,6 @@ import java.util.Date;
 public class CustomTag {
     private String id;
     private String name;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("create_time")
     private Date createTime;
     private Boolean deleted;

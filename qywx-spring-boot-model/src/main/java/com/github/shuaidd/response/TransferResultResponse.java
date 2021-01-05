@@ -20,7 +20,6 @@ public class TransferResultResponse extends AbstractBaseResponse {
     /**
      * 接替客户的时间，如果是等待接替状态，则为未来的自动接替时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("takeover_time")
     private Date takeoverTime;
 

@@ -34,7 +34,6 @@ public class FollowUserDetail {
     private List<FollowUserDetail> tags;
 
     @JsonProperty("createtime")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     private String description;
