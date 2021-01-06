@@ -1,7 +1,6 @@
 package com.github.shuaidd.client;
 
 import com.github.shuaidd.client.config.WeChatConfiguration;
-import com.github.shuaidd.resquest.GetContactWayRequest;
 import com.github.shuaidd.response.*;
 import com.github.shuaidd.resquest.*;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -725,4 +724,112 @@ public interface WeChatClient {
      */
     @PostMapping(value = "externalcontact/get_moment_customer_list",headers = HEAD)
     MomentCustomerListResponse getMomentCustomerList(MomentCustomerListRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客户朋友圈发表后的可见客户列表
+     * @param request
+     * @param app
+     * @return
+     */
+    @PostMapping(value = "externalcontact/get_moment_send_result",headers = HEAD)
+    MomentCustomerListResponse getMomentSendResult(MomentCustomerListRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客户朋友圈的互动数据
+     * @param request
+     * @param app
+     * @return CommentsResponse
+     */
+    @PostMapping(value = "externalcontact/get_moment_comments",headers = HEAD)
+    CommentsResponse getMomentComments(CommentsRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 创建企业群发
+     * @param request
+     * @param app
+     * @return MsgTemplateResponse
+     */
+    @PostMapping(value = "externalcontact/add_msg_template",headers = HEAD)
+    MsgTemplateResponse addMsgTemplate(MsgTemplateRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取群发记录列表
+     * @param request
+     * @param app
+     * @return GroupMsgResponse
+     */
+    @PostMapping(value = "externalcontact/get_groupmsg_list",headers = HEAD)
+    GroupMsgResponse getGroupMsgList(GroupMsgRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取群发成员发送任务列表
+     * @param request
+     * @param app
+     * @return GroupMsgTaskResponse
+     */
+    @PostMapping(value = "externalcontact/get_groupmsg_task",headers = HEAD)
+    GroupMsgTaskResponse getGroupMsgTask(GroupMsgTaskRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取企业群发成员执行结果
+     * @param request
+     * @param app
+     * @return GroupMsgSendResultResponse
+     */
+    @PostMapping(value = "externalcontact/get_groupmsg_send_result",headers = HEAD)
+    GroupMsgSendResultResponse getGroupMsgSendResult(GroupMsgSendRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 发送新客户欢迎语
+     * @param request
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/send_welcome_msg",headers = HEAD)
+    BaseResponse sendWelcomeMsg(WelcomeMsgRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 添加入群欢迎语素材
+     * @param request
+     * @param app
+     * @return AddWelcomeTemplateResponse
+     */
+    @PostMapping(value = "externalcontact/group_welcome_template/add",headers = HEAD)
+    AddWelcomeTemplateResponse addGroupWelcomeTemplate(WelcomeTemplateRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 编辑入群欢迎语素材
+     * @param request
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/group_welcome_template/edit",headers = HEAD)
+    BaseResponse editGroupWelcomeTemplate(WelcomeTemplateRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取入群欢迎语素材
+     * @param request
+     * @param app
+     * @return GetWelcomeTemplateResponse
+     */
+    @PostMapping(value = "externalcontact/group_welcome_template/get",headers = HEAD)
+    GetWelcomeTemplateResponse getGroupWelcomeTemplate(GetWelcomeTemplateRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除入群欢迎语素材
+     * @param request
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/group_welcome_template/del",headers = HEAD)
+    BaseResponse deleteGroupWelcomeTemplate(DeleteWelcomeTemplateResponse request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取「联系客户统计」数据
+     * @param request
+     * @param app
+     * @return BehaviorDataResponse
+     */
+    @PostMapping(value = "externalcontact/get_user_behavior_data",headers = HEAD)
+    BehaviorDataResponse getUserBehaviorData(UserBehaviorRequest request, @RequestParam(HEAD_KEY) String app);
 }
