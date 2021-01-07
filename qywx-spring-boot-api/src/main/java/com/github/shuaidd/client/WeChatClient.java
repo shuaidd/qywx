@@ -832,4 +832,60 @@ public interface WeChatClient {
      */
     @PostMapping(value = "externalcontact/get_user_behavior_data",headers = HEAD)
     BehaviorDataResponse getUserBehaviorData(UserBehaviorRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 按群主聚合的方式
+     * @param request
+     * @param app
+     * @return GroupChatStatisticResponse
+     */
+    @PostMapping(value = "externalcontact/groupchat/statistic",headers = HEAD)
+    GroupChatStatisticResponse getGroupChatStatistic(GroupChatStatisticRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 按自然日聚合的方式
+     * @param request
+     * @param app
+     * @return GroupChatStatisticResponse
+     */
+    @PostMapping(value = "externalcontact/groupchat/statistic_group_by_day",headers = HEAD)
+    GroupChatStatisticResponse getGroupChatStatisticByDay(GroupChatStatisticRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 创建日历
+     * @param request
+     * @param app
+     * @return CalendarResponse
+     */
+    @PostMapping(value = "oa/calendar/add",headers = HEAD)
+    CalendarResponse addCalendar(CalendarRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 更新日历
+     * @param request
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "oa/calendar/update",headers = HEAD)
+    BaseResponse updateCalendar(CalendarRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取日历详情
+     * @param request
+     * @param app
+     * @return
+     */
+    @PostMapping(value = "oa/calendar/get",headers = HEAD)
+    GetCalendarResponse getCalendar(GetCalendarRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除日历
+     * @param request
+     * @param app
+     * @return
+     */
+    @PostMapping(value = "oa/calendar/del",headers = HEAD)
+    BaseResponse delCalendar(DeleteCalendarRequest request, @RequestParam(HEAD_KEY) String app);
+
+
 }

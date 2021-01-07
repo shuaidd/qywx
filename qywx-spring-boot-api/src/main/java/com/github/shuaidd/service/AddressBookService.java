@@ -1,6 +1,5 @@
 package com.github.shuaidd.service;
 
-import cn.hutool.core.date.DateUtil;
 import com.github.shuaidd.dto.CallbackData;
 import com.github.shuaidd.dto.Department;
 import com.github.shuaidd.dto.Tag;
@@ -12,6 +11,7 @@ import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -569,7 +569,7 @@ public class AddressBookService extends AbstractBaseService {
             fileName = FULL_COVER_USER_FILE;
         }
         DiskFileItem fileItem = (DiskFileItem) new DiskFileItemFactory().createItem("file",
-                MediaType.TEXT_PLAIN.getType(), true, String.format(fileName, DateUtil.format(new Date(), "yyyyMMddhhmmss")));
+                MediaType.TEXT_PLAIN.getType(), true, String.format(fileName, DateFormatUtils.format(new Date(), "yyyyMMddhhmmss")));
 
         try (OutputStream os = fileItem.getOutputStream()) {
             if (CollectionUtils.isNotEmpty(weChatUsers)) {
@@ -655,7 +655,7 @@ public class AddressBookService extends AbstractBaseService {
     public final String fullCoverDepartment(List<Department> departments, CallbackData callbackData, String applicationName) {
         checkApplication(applicationName);
         DiskFileItem fileItem = (DiskFileItem) new DiskFileItemFactory().createItem("file",
-                MediaType.TEXT_PLAIN.getType(), true, String.format(FULL_COVER_DEPARTMENT_FILE, DateUtil.format(new Date(), "yyyyMMddhhmmss")));
+                MediaType.TEXT_PLAIN.getType(), true, String.format(FULL_COVER_DEPARTMENT_FILE, DateFormatUtils.format(new Date(), "yyyyMMddhhmmss")));
 
         try (OutputStream os = fileItem.getOutputStream()) {
             if (CollectionUtils.isNotEmpty(departments)) {
