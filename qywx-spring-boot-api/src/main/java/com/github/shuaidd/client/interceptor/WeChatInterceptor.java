@@ -24,7 +24,7 @@ import java.util.Collection;
 public class WeChatInterceptor implements RequestInterceptor {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private ApplicationContext applicationContext;
+    private final ApplicationContext applicationContext;
 
     public WeChatInterceptor(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
