@@ -1013,4 +1013,55 @@ public interface WeChatClient {
      */
     @PostMapping(value = "meeting/get_info", headers = HEAD)
     MeetingDetailResponse getMeetingInfo(GetMeetingDetailRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 创建预约直播
+     *
+     * @param request
+     * @param app
+     * @return CreateLivingResponse
+     */
+    @PostMapping(value = "living/create", headers = HEAD)
+    CreateLivingResponse createLiving(LivingRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改预约直播
+     *
+     * @param request
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "living/modify", headers = HEAD)
+    BaseResponse modifyLiving(LivingRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 取消预约直播
+     *
+     * @param request
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "living/cancel", headers = HEAD)
+    BaseResponse cancelLiving(CancelLivingRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除直播回放
+     *
+     * @param request
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "living/delete_replay_data", headers = HEAD)
+    BaseResponse delLiving(DeleteLivingRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取微信观看直播凭证
+     * @param request
+     * @param app
+     * @return LivingCodeResponse
+     */
+    @PostMapping(value = "living/get_living_code", headers = HEAD)
+    LivingCodeResponse getLivingCode(LivingCodeRequest request, @RequestParam(HEAD_KEY) String app);
+
+
 }
