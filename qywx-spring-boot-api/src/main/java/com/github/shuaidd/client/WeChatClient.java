@@ -1003,9 +1003,5 @@ public interface WeChatClient {
      * @return MeetingDetailResponse
      */
     @PostMapping(value = "meeting/get_info", headers = HEAD)
-    MeetingDetailResponse getUserMeetingId(GetMeetingDetailRequest request, @RequestParam(HEAD_KEY) String app);
-
-
-
-
+    MeetingDetailResponse getMeetingInfo(GetMeetingDetailRequest request, @RequestParam(HEAD_KEY) String app);
 }
