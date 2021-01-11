@@ -10,16 +10,18 @@ import java.util.Date;
  * @author ddshuai
  * @date 2021-01-05 21:19
  **/
-public class MomentListRequest {
+public class MomentListRequest extends CursorPageRequest {
+
     @JsonProperty("start_time")
     private Date startTime;
+
     @JsonProperty("end_time")
     private Date endTime;
+
     private String creator;
+
     @JsonProperty("filter_type")
     private Integer filterType;
-    private String cursor;
-    private Integer limit;
 
     public Date getStartTime() {
         return startTime;
@@ -51,21 +53,5 @@ public class MomentListRequest {
 
     public void setFilterType(Integer filterType) {
         this.filterType = filterType;
-    }
-
-    public String getCursor() {
-        return cursor;
-    }
-
-    public void setCursor(String cursor) {
-        this.cursor = cursor;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
     }
 }

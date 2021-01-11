@@ -23,7 +23,7 @@ import java.util.LinkedList;
  **/
 public class WeChatMediaDecoder implements Decoder {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private Decoder delegate = new JacksonDecoder();
+    private final Decoder delegate = new JacksonDecoder();
 
     @Override
     public Object decode(Response response, Type type) throws FeignException, IOException {

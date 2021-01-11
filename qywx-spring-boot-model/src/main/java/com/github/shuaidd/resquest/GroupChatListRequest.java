@@ -9,31 +9,13 @@ import com.github.shuaidd.dto.OwnerFilter;
  * @author ddshuai
  * @date 2021-01-05 20:52
  **/
-public class GroupChatListRequest {
-    private String cursor;
-    private Integer limit;
+public class GroupChatListRequest extends CursorPageRequest {
 
     @JsonProperty("status_filter")
     private Integer statusFilter;
 
     @JsonProperty("owner_filter")
     private OwnerFilter ownerFilter;
-
-    public String getCursor() {
-        return cursor;
-    }
-
-    public void setCursor(String cursor) {
-        this.cursor = cursor;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
-    }
 
     public Integer getStatusFilter() {
         return statusFilter;

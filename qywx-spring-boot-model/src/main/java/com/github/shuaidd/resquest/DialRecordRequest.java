@@ -10,7 +10,7 @@ import java.util.StringJoiner;
  * @author ddshuai
  * date 2019-04-11 13:42
  **/
-public class DialRecordRequest {
+public class DialRecordRequest extends OffsetPageRequest {
     /**
      * 查询的起始时间戳
      */
@@ -22,9 +22,6 @@ public class DialRecordRequest {
      */
     @JsonProperty("endtime")
     private Long endTime;
-
-    private Integer offset;
-    private Integer limit;
 
     public Long getStartTime() {
         return startTime;
@@ -42,29 +39,11 @@ public class DialRecordRequest {
         this.endTime = endTime;
     }
 
-    public Integer getOffset() {
-        return offset;
-    }
-
-    public void setOffset(Integer offset) {
-        this.offset = offset;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
-    }
-
     @Override
     public String toString() {
         return new StringJoiner(", ", DialRecordRequest.class.getSimpleName() + "[", "]")
                 .add("startTime=" + startTime)
                 .add("endTime=" + endTime)
-                .add("offset=" + offset)
-                .add("limit=" + limit)
                 .toString();
     }
 }

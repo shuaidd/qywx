@@ -16,7 +16,7 @@ import java.util.Date;
  * @author ddshuai
  * @date 2021-01-06 21:57
  **/
-public class GroupMsgRequest {
+public class GroupMsgRequest extends CursorPageRequest {
     @JsonProperty("chat_type")
     private String chatType;
     @JsonProperty("start_time")
@@ -26,8 +26,6 @@ public class GroupMsgRequest {
     private String creator;
     @JsonProperty("filter_type")
     private Integer filterType;
-    private Integer limit;
-    private String cursor;
 
     public String getChatType() {
         return chatType;
@@ -67,21 +65,5 @@ public class GroupMsgRequest {
 
     public void setFilterType(Integer filterType) {
         this.filterType = filterType;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
-    }
-
-    public String getCursor() {
-        return cursor;
-    }
-
-    public void setCursor(String cursor) {
-        this.cursor = cursor;
     }
 }

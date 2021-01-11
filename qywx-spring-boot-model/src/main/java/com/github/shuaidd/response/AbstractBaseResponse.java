@@ -16,6 +16,9 @@ public abstract class AbstractBaseResponse {
     @JsonProperty("errmsg")
     private String errMsg;
 
+    @JsonProperty("next_cursor")
+    private String nextCursor;
+
     public Integer getErrCode() {
         return errCode;
     }
@@ -30,5 +33,13 @@ public abstract class AbstractBaseResponse {
 
     public void setErrMsg(String errMsg) {
         this.errMsg = errMsg;
+    }
+
+    public String getNextCursor() {
+        return nextCursor;
+    }
+
+    public void setNextCursor(String nextCursor) {
+        this.nextCursor = nextCursor;
     }
 }

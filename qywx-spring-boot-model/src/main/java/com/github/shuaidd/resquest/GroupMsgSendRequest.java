@@ -8,13 +8,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author ddshuai
  * @date 2021-01-06 22:16
  **/
-public class GroupMsgSendRequest {
+public class GroupMsgSendRequest extends CursorPageRequest {
     @JsonProperty("userid")
     private String userId;
     @JsonProperty("msgid")
     private String msgId;
-    private Integer limit;
-    private String cursor;
 
     public String getUserId() {
         return userId;
@@ -30,21 +28,5 @@ public class GroupMsgSendRequest {
 
     public void setMsgId(String msgId) {
         this.msgId = msgId;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
-    }
-
-    public String getCursor() {
-        return cursor;
-    }
-
-    public void setCursor(String cursor) {
-        this.cursor = cursor;
     }
 }

@@ -12,7 +12,7 @@ import java.util.Date;
  * @date 2021-01-07 16:06
  **/
 
-public class GroupChatStatisticRequest {
+public class GroupChatStatisticRequest extends OffsetPageRequest {
     @JsonProperty("day_begin_time")
     private Date dayBeginTime;
     @JsonProperty("day_end_time")
@@ -36,8 +36,6 @@ public class GroupChatStatisticRequest {
     @JsonProperty("order_asc")
     private Integer orderAsc;
 
-    private Integer offset;
-    private Integer limit;
     @JsonProperty("owner_filter")
     private OwnerFilter ownerFilter;
 
@@ -71,22 +69,6 @@ public class GroupChatStatisticRequest {
 
     public void setOrderAsc(Integer orderAsc) {
         this.orderAsc = orderAsc;
-    }
-
-    public Integer getOffset() {
-        return offset;
-    }
-
-    public void setOffset(Integer offset) {
-        this.offset = offset;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
     }
 
     public OwnerFilter getOwnerFilter() {

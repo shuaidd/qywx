@@ -13,19 +13,8 @@ import java.util.List;
  **/
 public class MomentTaskResponse extends AbstractBaseResponse {
 
-    @JsonProperty("next_cursor")
-    private String nextCursor;
-
     @JsonProperty("task_list")
     private List<MomentTask> momentTasks;
-
-    public String getNextCursor() {
-        return nextCursor;
-    }
-
-    public void setNextCursor(String nextCursor) {
-        this.nextCursor = nextCursor;
-    }
 
     public List<MomentTask> getMomentTasks() {
         return momentTasks;

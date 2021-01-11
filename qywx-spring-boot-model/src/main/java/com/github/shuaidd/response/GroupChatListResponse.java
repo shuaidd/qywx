@@ -15,22 +15,11 @@ public class GroupChatListResponse extends AbstractBaseResponse {
     @JsonProperty("group_chat_list")
     private List<GroupChat> groupChats;
 
-    @JsonProperty("next_cursor")
-    private String nextCursor;
-
     public List<GroupChat> getGroupChats() {
         return groupChats;
     }
 
     public void setGroupChats(List<GroupChat> groupChats) {
         this.groupChats = groupChats;
-    }
-
-    public String getNextCursor() {
-        return nextCursor;
-    }
-
-    public void setNextCursor(String nextCursor) {
-        this.nextCursor = nextCursor;
     }
 }

@@ -19,9 +19,6 @@ public class UnassignedListResponse extends AbstractBaseResponse {
     @JsonProperty("is_last")
     private Boolean isLast;
 
-    @JsonProperty("next_cursor")
-    private String nextCursor;
-
     public List<UnassignedCustomer> getCustomers() {
         return customers;
     }
@@ -36,13 +33,5 @@ public class UnassignedListResponse extends AbstractBaseResponse {
 
     public void setLast(Boolean last) {
         isLast = last;
-    }
-
-    public String getNextCursor() {
-        return nextCursor;
-    }
-
-    public void setNextCursor(String nextCursor) {
-        this.nextCursor = nextCursor;
     }
 }

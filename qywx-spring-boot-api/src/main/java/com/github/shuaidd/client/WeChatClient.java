@@ -646,246 +646,366 @@ public interface WeChatClient {
 
     /**
      * 获取离职成员列表
+     *
      * @param request
      * @param app
      * @return UnassignedListResponse
      */
-    @PostMapping(value = "externalcontact/get_unassigned_list",headers = HEAD)
-    UnassignedListResponse unassignedList(PageRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/get_unassigned_list", headers = HEAD)
+    UnassignedListResponse unassignedList(PageRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 分配在职或离职成员的客户
+     *
      * @param request
      * @param app
      * @return BaseResponse
      */
-    @PostMapping(value = "externalcontact/transfer",headers = HEAD)
-    BaseResponse transfer(TransferRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/transfer", headers = HEAD)
+    BaseResponse transfer(TransferRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 查询客户接替结果
+     *
      * @param resultRequest
      * @param app
      * @return TransferResultResponse
      */
-    @PostMapping(value = "externalcontact/get_transfer_result",headers = HEAD)
-    TransferResultResponse getTransferResult(TransferResultRequest resultRequest,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/get_transfer_result", headers = HEAD)
+    TransferResultResponse getTransferResult(TransferResultRequest resultRequest, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 分配离职成员的客户群
+     *
      * @param request
      * @param app
      * @return
      */
-    @PostMapping(value = "externalcontact/groupchat/transfer",headers = HEAD)
-    FailedChatResponse groupChatTransfer(GroupChatTransferRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/groupchat/transfer", headers = HEAD)
+    FailedChatResponse groupChatTransfer(GroupChatTransferRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取客户群列表
+     *
      * @param request
      * @param app
      * @return GroupChatListResponse
      */
-    @PostMapping(value = "externalcontact/groupchat/list",headers = HEAD)
-    GroupChatListResponse groupChatList(GroupChatListRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/groupchat/list", headers = HEAD)
+    GroupChatListResponse groupChatList(GroupChatListRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取客户群详情
+     *
      * @param request
      * @param app
      * @return
      */
-    @PostMapping(value = "externalcontact/groupchat/get",headers = HEAD)
-    GroupChatDetailResponse groupChatDetail(GroupChatDetailRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/groupchat/get", headers = HEAD)
+    GroupChatDetailResponse groupChatDetail(GroupChatDetailRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取企业全部的发表列表
+     *
      * @param request
      * @param app
      * @return MomentListResponse
      */
-    @PostMapping(value = "externalcontact/get_moment_list",headers = HEAD)
-    MomentListResponse getMomentList(MomentListRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/get_moment_list", headers = HEAD)
+    MomentListResponse getMomentList(MomentListRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取客户朋友圈企业发表的列表
+     *
      * @param request
      * @param app
      * @return
      */
-    @PostMapping(value = "externalcontact/get_moment_task",headers = HEAD)
-    MomentTaskResponse getMomentTask(MomentTaskRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/get_moment_task", headers = HEAD)
+    MomentTaskResponse getMomentTask(MomentTaskRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取客户朋友圈发表时选择的可见范围
+     *
      * @param request
      * @param app
      * @return MomentCustomerListResponse
      */
-    @PostMapping(value = "externalcontact/get_moment_customer_list",headers = HEAD)
-    MomentCustomerListResponse getMomentCustomerList(MomentCustomerListRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/get_moment_customer_list", headers = HEAD)
+    MomentCustomerListResponse getMomentCustomerList(MomentCustomerListRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取客户朋友圈发表后的可见客户列表
+     *
      * @param request
      * @param app
      * @return
      */
-    @PostMapping(value = "externalcontact/get_moment_send_result",headers = HEAD)
-    MomentCustomerListResponse getMomentSendResult(MomentCustomerListRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/get_moment_send_result", headers = HEAD)
+    MomentCustomerListResponse getMomentSendResult(MomentCustomerListRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取客户朋友圈的互动数据
+     *
      * @param request
      * @param app
      * @return CommentsResponse
      */
-    @PostMapping(value = "externalcontact/get_moment_comments",headers = HEAD)
-    CommentsResponse getMomentComments(CommentsRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/get_moment_comments", headers = HEAD)
+    CommentsResponse getMomentComments(CommentsRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 创建企业群发
+     *
      * @param request
      * @param app
      * @return MsgTemplateResponse
      */
-    @PostMapping(value = "externalcontact/add_msg_template",headers = HEAD)
-    MsgTemplateResponse addMsgTemplate(MsgTemplateRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/add_msg_template", headers = HEAD)
+    MsgTemplateResponse addMsgTemplate(MsgTemplateRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取群发记录列表
+     *
      * @param request
      * @param app
      * @return GroupMsgResponse
      */
-    @PostMapping(value = "externalcontact/get_groupmsg_list",headers = HEAD)
-    GroupMsgResponse getGroupMsgList(GroupMsgRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/get_groupmsg_list", headers = HEAD)
+    GroupMsgResponse getGroupMsgList(GroupMsgRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取群发成员发送任务列表
+     *
      * @param request
      * @param app
      * @return GroupMsgTaskResponse
      */
-    @PostMapping(value = "externalcontact/get_groupmsg_task",headers = HEAD)
-    GroupMsgTaskResponse getGroupMsgTask(GroupMsgTaskRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/get_groupmsg_task", headers = HEAD)
+    GroupMsgTaskResponse getGroupMsgTask(GroupMsgTaskRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取企业群发成员执行结果
+     *
      * @param request
      * @param app
      * @return GroupMsgSendResultResponse
      */
-    @PostMapping(value = "externalcontact/get_groupmsg_send_result",headers = HEAD)
-    GroupMsgSendResultResponse getGroupMsgSendResult(GroupMsgSendRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/get_groupmsg_send_result", headers = HEAD)
+    GroupMsgSendResultResponse getGroupMsgSendResult(GroupMsgSendRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 发送新客户欢迎语
+     *
      * @param request
      * @param app
      * @return BaseResponse
      */
-    @PostMapping(value = "externalcontact/send_welcome_msg",headers = HEAD)
-    BaseResponse sendWelcomeMsg(WelcomeMsgRequest request,@RequestParam(HEAD_KEY) String app);
+    @PostMapping(value = "externalcontact/send_welcome_msg", headers = HEAD)
+    BaseResponse sendWelcomeMsg(WelcomeMsgRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 添加入群欢迎语素材
+     *
      * @param request
      * @param app
      * @return AddWelcomeTemplateResponse
      */
-    @PostMapping(value = "externalcontact/group_welcome_template/add",headers = HEAD)
+    @PostMapping(value = "externalcontact/group_welcome_template/add", headers = HEAD)
     AddWelcomeTemplateResponse addGroupWelcomeTemplate(WelcomeTemplateRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 编辑入群欢迎语素材
+     *
      * @param request
      * @param app
      * @return BaseResponse
      */
-    @PostMapping(value = "externalcontact/group_welcome_template/edit",headers = HEAD)
+    @PostMapping(value = "externalcontact/group_welcome_template/edit", headers = HEAD)
     BaseResponse editGroupWelcomeTemplate(WelcomeTemplateRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取入群欢迎语素材
+     *
      * @param request
      * @param app
      * @return GetWelcomeTemplateResponse
      */
-    @PostMapping(value = "externalcontact/group_welcome_template/get",headers = HEAD)
+    @PostMapping(value = "externalcontact/group_welcome_template/get", headers = HEAD)
     GetWelcomeTemplateResponse getGroupWelcomeTemplate(GetWelcomeTemplateRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 删除入群欢迎语素材
+     *
      * @param request
      * @param app
      * @return BaseResponse
      */
-    @PostMapping(value = "externalcontact/group_welcome_template/del",headers = HEAD)
+    @PostMapping(value = "externalcontact/group_welcome_template/del", headers = HEAD)
     BaseResponse deleteGroupWelcomeTemplate(DeleteWelcomeTemplateResponse request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取「联系客户统计」数据
+     *
      * @param request
      * @param app
      * @return BehaviorDataResponse
      */
-    @PostMapping(value = "externalcontact/get_user_behavior_data",headers = HEAD)
+    @PostMapping(value = "externalcontact/get_user_behavior_data", headers = HEAD)
     BehaviorDataResponse getUserBehaviorData(UserBehaviorRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 按群主聚合的方式
+     *
      * @param request
      * @param app
      * @return GroupChatStatisticResponse
      */
-    @PostMapping(value = "externalcontact/groupchat/statistic",headers = HEAD)
+    @PostMapping(value = "externalcontact/groupchat/statistic", headers = HEAD)
     GroupChatStatisticResponse getGroupChatStatistic(GroupChatStatisticRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 按自然日聚合的方式
+     *
      * @param request
      * @param app
      * @return GroupChatStatisticResponse
      */
-    @PostMapping(value = "externalcontact/groupchat/statistic_group_by_day",headers = HEAD)
+    @PostMapping(value = "externalcontact/groupchat/statistic_group_by_day", headers = HEAD)
     GroupChatStatisticResponse getGroupChatStatisticByDay(GroupChatStatisticRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 创建日历
+     *
      * @param request
      * @param app
      * @return CalendarResponse
      */
-    @PostMapping(value = "oa/calendar/add",headers = HEAD)
+    @PostMapping(value = "oa/calendar/add", headers = HEAD)
     CalendarResponse addCalendar(CalendarRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 更新日历
+     *
      * @param request
      * @param app
      * @return BaseResponse
      */
-    @PostMapping(value = "oa/calendar/update",headers = HEAD)
+    @PostMapping(value = "oa/calendar/update", headers = HEAD)
     BaseResponse updateCalendar(CalendarRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取日历详情
+     *
      * @param request
      * @param app
      * @return
      */
-    @PostMapping(value = "oa/calendar/get",headers = HEAD)
+    @PostMapping(value = "oa/calendar/get", headers = HEAD)
     GetCalendarResponse getCalendar(GetCalendarRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 删除日历
+     *
      * @param request
      * @param app
-     * @return
+     * @return BaseResponse
      */
-    @PostMapping(value = "oa/calendar/del",headers = HEAD)
+    @PostMapping(value = "oa/calendar/del", headers = HEAD)
     BaseResponse delCalendar(DeleteCalendarRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 创建日程
+     *
+     * @param request
+     * @param app
+     * @return AddScheduleResponse
+     */
+    @PostMapping(value = "oa/schedule/add", headers = HEAD)
+    AddScheduleResponse addSchedule(ScheduleRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 更新日程
+     * @param request
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "oa/schedule/update", headers = HEAD)
+    BaseResponse updateSchedule(ScheduleRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取日程详情
+     * @param request
+     * @param app
+     * @return GetScheduleResponse
+     */
+    @PostMapping(value = "oa/schedule/get", headers = HEAD)
+    GetScheduleResponse getSchedules(GetScheduleRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 取消日程
+     * @param request
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "oa/schedule/del", headers = HEAD)
+    BaseResponse delSchedule(CancelScheduleRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取日历下的日程列表
+     * @param request
+     * @param app
+     * @return GetScheduleResponse
+     */
+    @PostMapping(value = "oa/schedule/get_by_calendar", headers = HEAD)
+    GetScheduleResponse getScheduleByCalendar(GetScheduleByCalendarRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 创建预约会议
+     * @param request
+     * @param app
+     * @return CreateMeetingResponse
+     */
+    @PostMapping(value = "meeting/create", headers = HEAD)
+    CreateMeetingResponse createMeeting(MeetingRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改预约会议
+     * @param request
+     * @param app
+     * @return BaseResponse updateMeeting(MeetingRequest request, @RequestParam(HEAD_KEY) String app);
+     */
+    @PostMapping(value = "meeting/update", headers = HEAD)
+    BaseResponse updateMeeting(MeetingRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 取消预约会议
+     * @param request
+     * @param app
+     * @return BaseResponse
+     */
+    @PostMapping(value = "meeting/cancel", headers = HEAD)
+    BaseResponse cancelMeeting(CancelMeetingRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取成员会议ID列表
+     * @param request
+     * @param app
+     * @return GetMeetingForUserResponse
+     */
+    @PostMapping(value = "meeting/get_user_meetingid", headers = HEAD)
+    GetMeetingForUserResponse getUserMeetingId(GetMeetingForUserRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取会议详情
+     * @param request
+     * @param app
+     * @return MeetingDetailResponse
+     */
+    @PostMapping(value = "meeting/get_info", headers = HEAD)
+    MeetingDetailResponse getUserMeetingId(GetMeetingDetailRequest request, @RequestParam(HEAD_KEY) String app);
+
+
 
 
 }

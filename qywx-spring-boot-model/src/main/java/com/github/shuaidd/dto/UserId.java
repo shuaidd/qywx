@@ -6,13 +6,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-07 21:31
+ * @date 2021-01-11 13:43
  **/
-public class CalendarShare {
+public class UserId {
 
     @JsonProperty("userid")
     private String userId;
-    private Integer readonly;
+
+    private Integer status;
 
     public String getUserId() {
         return userId;
@@ -22,11 +23,11 @@ public class CalendarShare {
         this.userId = userId;
     }
 
-    public Integer getReadonly() {
-        return readonly;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setReadonly(Integer readonly) {
-        this.readonly = readonly;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }
