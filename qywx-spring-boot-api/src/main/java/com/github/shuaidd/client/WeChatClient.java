@@ -926,6 +926,7 @@ public interface WeChatClient {
 
     /**
      * 更新日程
+     *
      * @param request
      * @param app
      * @return BaseResponse
@@ -935,6 +936,7 @@ public interface WeChatClient {
 
     /**
      * 获取日程详情
+     *
      * @param request
      * @param app
      * @return GetScheduleResponse
@@ -944,6 +946,7 @@ public interface WeChatClient {
 
     /**
      * 取消日程
+     *
      * @param request
      * @param app
      * @return BaseResponse
@@ -953,6 +956,7 @@ public interface WeChatClient {
 
     /**
      * 获取日历下的日程列表
+     *
      * @param request
      * @param app
      * @return GetScheduleResponse
@@ -962,6 +966,7 @@ public interface WeChatClient {
 
     /**
      * 创建预约会议
+     *
      * @param request
      * @param app
      * @return CreateMeetingResponse
@@ -971,6 +976,7 @@ public interface WeChatClient {
 
     /**
      * 修改预约会议
+     *
      * @param request
      * @param app
      * @return BaseResponse updateMeeting(MeetingRequest request, @RequestParam(HEAD_KEY) String app);
@@ -980,6 +986,7 @@ public interface WeChatClient {
 
     /**
      * 取消预约会议
+     *
      * @param request
      * @param app
      * @return BaseResponse
@@ -989,6 +996,7 @@ public interface WeChatClient {
 
     /**
      * 获取成员会议ID列表
+     *
      * @param request
      * @param app
      * @return GetMeetingForUserResponse
@@ -998,6 +1006,7 @@ public interface WeChatClient {
 
     /**
      * 获取会议详情
+     *
      * @param request
      * @param app
      * @return MeetingDetailResponse

@@ -25,7 +25,7 @@ public class MultipartSupportConfig {
     }
 
     @Bean
-    public Decoder decoder(){
+    public Decoder decoder() {
         return new WeChatMediaDecoder();
     }
 

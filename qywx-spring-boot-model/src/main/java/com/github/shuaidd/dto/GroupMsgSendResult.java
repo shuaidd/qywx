@@ -7,10 +7,11 @@ import java.util.Date;
 /**
  * 描述
  * "external_userid": "wmqfasd1e19278asdasAAAA",
- *             "chat_id":"wrOgQhDgAAMYQiS5ol9G7gK9JVAAAA",
- *             "userid": "zhangsan",
- *             "status": 1,
- *             "send_time": 1552536375
+ * "chat_id":"wrOgQhDgAAMYQiS5ol9G7gK9JVAAAA",
+ * "userid": "zhangsan",
+ * "status": 1,
+ * "send_time": 1552536375
+ *
  * @author ddshuai
  * @date 2021-01-06 22:17
  **/

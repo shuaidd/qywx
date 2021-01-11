@@ -17,10 +17,10 @@ import java.util.Collections;
  *
  * @author ddshuai
  * date 2019-04-03 15:46
- *
- * @author shuaidongdong*/
+ * @author shuaidongdong
+ */
 @Configuration
-@ComponentScan(basePackages = {"com.github.shuaidd.service", "com.github.shuaidd.support","com.github.shuaidd.aspect"})
+@ComponentScan(basePackages = {"com.github.shuaidd.service", "com.github.shuaidd.support", "com.github.shuaidd.aspect"})
 @EnableConfigurationProperties(WeChatConfigurationProperties.class)
 public class WeChatAutoConfiguration {
 

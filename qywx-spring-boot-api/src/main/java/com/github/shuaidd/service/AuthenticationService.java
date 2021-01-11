@@ -15,6 +15,7 @@ public class AuthenticationService extends AbstractBaseService {
 
     /**
      * 获取访问用户身份
+     *
      * @param code
      * @param applicationName
      * @return

@@ -8,10 +8,11 @@ import java.util.List;
 /**
  * 描述
  * "moment_id":"momxxx",
- *             "creator":"xxxx",
- *             "create_time":"xxxx",
- *             "create_type":1,
- *             "visible_type  ":1,
+ * "creator":"xxxx",
+ * "create_time":"xxxx",
+ * "create_type":1,
+ * "visible_type  ":1,
+ *
  * @author ddshuai
  * @date 2021-01-05 21:22
  **/

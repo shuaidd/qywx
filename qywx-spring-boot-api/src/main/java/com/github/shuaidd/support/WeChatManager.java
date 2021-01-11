@@ -105,9 +105,10 @@ public class WeChatManager {
 
     /**
      * OA数据管理
+     *
      * @return
      */
-    public OAService oaService(){
+    public OAService oaService() {
         return oaService;
     }
 }

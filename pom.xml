@@ -149,7 +149,9 @@
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>2.9.1</version>
                         <configuration>
-                            <javadocExecutable>/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/bin/javadoc</javadocExecutable>
+                            <javadocExecutable>
+                                /Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/bin/javadoc
+                            </javadocExecutable>
                         </configuration>
                         <executions>
                             <execution>

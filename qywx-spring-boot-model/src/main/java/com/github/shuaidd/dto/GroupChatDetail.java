@@ -8,10 +8,11 @@ import java.util.List;
 /**
  * 描述
  * "chat_id": "wrOgQhDgAAMYQiS5ol9G7gK9JVAAAA",
- *         "name": "销售客服群",
- *         "owner": "ZhuShengBen",
- *         "create_time": 1572505490,
- *         "notice" : "文明沟通，拒绝脏话",
+ * "name": "销售客服群",
+ * "owner": "ZhuShengBen",
+ * "create_time": 1572505490,
+ * "notice" : "文明沟通，拒绝脏话",
+ *
  * @author ddshuai
  * @date 2021-01-05 21:06
  **/

@@ -11,7 +11,7 @@ import java.util.List;
  * @author ddshuai
  * date 2019-04-06 08:17
  **/
-public class TagListResponse extends AbstractBaseResponse{
+public class TagListResponse extends AbstractBaseResponse {
 
     @JsonProperty("taglist")
     private List<Tag> tagList;

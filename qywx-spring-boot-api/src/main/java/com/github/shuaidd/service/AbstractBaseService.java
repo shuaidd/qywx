@@ -40,7 +40,7 @@ public abstract class AbstractBaseService {
      */
     private boolean check = true;
 
-    final void setCheck(boolean check){
+    final void setCheck(boolean check) {
         this.check = check;
     }
 
@@ -61,13 +61,14 @@ public abstract class AbstractBaseService {
 
     /**
      * 获取企业微信结果
+     *
      * @param response
      * @param <T>
      * @return
      */
-    final <T extends AbstractBaseResponse> T getResponse(T response){
-        if (check){
-            if (isSuccess(response)){
+    final <T extends AbstractBaseResponse> T getResponse(T response) {
+        if (check) {
+            if (isSuccess(response)) {
                 return response;
             }
         }
@@ -98,17 +99,17 @@ public abstract class AbstractBaseService {
         return secret;
     }
 
-    final void checkApplication(String applicationName){
-        Objects.requireNonNull(applicationName,"应用名称不能为空");
+    final void checkApplication(String applicationName) {
+        Objects.requireNonNull(applicationName, "应用名称不能为空");
         boolean exsit = false;
         for (ApplicationProperties applicationProperties : properties.getApplicationList()) {
-            if (applicationName.equals(applicationProperties.getApplicationName())){
+            if (applicationName.equals(applicationProperties.getApplicationName())) {
                 exsit = true;
                 break;
             }
         }
-        if (!exsit){
-            throw new WeChatException("应用"+applicationName+"无效，不在配置列表之内");
+        if (!exsit) {
+            throw new WeChatException("应用" + applicationName + "无效，不在配置列表之内");
         }
     }
 }

@@ -6,13 +6,14 @@ import java.util.Date;
 
 /**
  * 描述
- *"chat_type":"single",
- *    "start_time":1605171726,
- *    "end_time":1605172726,
- *    "creator":"zhangshan",
- *    "filter_type":1,
- *    "limit":50,
- *    "cursor":"CURSOR"
+ * "chat_type":"single",
+ * "start_time":1605171726,
+ * "end_time":1605172726,
+ * "creator":"zhangshan",
+ * "filter_type":1,
+ * "limit":50,
+ * "cursor":"CURSOR"
+ *
  * @author ddshuai
  * @date 2021-01-06 21:57
  **/

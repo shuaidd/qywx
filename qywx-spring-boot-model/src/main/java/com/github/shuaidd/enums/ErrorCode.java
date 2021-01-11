@@ -229,7 +229,7 @@ public enum ErrorCode {
     ERROR_CODE_302006("302006", "批量导入任务的文件中partyid有重复"),
     ERROR_CODE_302007("302007", "批量导入任务的文件中，同一个部门下有两个子部门名字一样"),
     ERROR_CODE_2000002("2000002", "CorpId参数无效"),
-    UNKNOWN("9999999","未知异常");
+    UNKNOWN("9999999", "未知异常");
     private String errorCode;
     private String errorDesc;
 

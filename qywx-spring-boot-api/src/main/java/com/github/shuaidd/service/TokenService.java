@@ -23,7 +23,7 @@ public class TokenService extends AbstractBaseService {
     @Cacheable(value = "qywx", key = "'qywx_access_token_'+#applicationName")
     public String getAccessToken(String applicationName) {
         checkApplication(applicationName);
-        logger.info("获取AccessToken：{}",applicationName);
+        logger.info("获取AccessToken：{}", applicationName);
         String accessToken = null;
         AccessTokenResponse accessTokenResponse = weChatClient.getAccessToken(properties.getCorpId(), getApplicationSecret(applicationName));
         if (isSuccess(accessTokenResponse)) {
@@ -34,10 +34,11 @@ public class TokenService extends AbstractBaseService {
 
     /**
      * 清除应用AccessToken缓存
+     *
      * @param applicationName
      */
     @CacheEvict(value = "qywx", key = "'qywx_access_token_'+#applicationName")
-    public void clearAccessToken(String applicationName){
+    public void clearAccessToken(String applicationName) {
 
     }
 }

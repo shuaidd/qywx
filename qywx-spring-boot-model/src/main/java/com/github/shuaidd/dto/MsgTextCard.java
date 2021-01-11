@@ -11,9 +11,9 @@ public class MsgTextCard {
     private String title;
 
     private String description;
-    
+
     private String btntxt;
-    
+
     private String url;
 
     public String getTitle() {

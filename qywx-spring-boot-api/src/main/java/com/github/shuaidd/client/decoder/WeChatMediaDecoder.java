@@ -35,7 +35,7 @@ public class WeChatMediaDecoder implements Decoder {
                 for (String key : response.headers().keySet()) {
                     headers.put(key, new LinkedList<>(response.headers().get(key)));
                 }
-                logger.info("下载文件大小为:{}",result);
+                logger.info("下载文件大小为:{}", result);
                 return new ResponseEntity<>(body, headers, HttpStatus.OK);
             } else {
                 return delegate.decode(response, type);

@@ -6,9 +6,10 @@ import java.util.Date;
 
 /**
  * 描述
- *"userid": "zhangsan",
- *             "status": 1,
- *             "send_time": 1552536375
+ * "userid": "zhangsan",
+ * "status": 1,
+ * "send_time": 1552536375
+ *
  * @author ddshuai
  * @date 2021-01-06 22:10
  **/

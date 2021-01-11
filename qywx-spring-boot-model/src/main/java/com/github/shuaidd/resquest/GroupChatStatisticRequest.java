@@ -24,7 +24,7 @@ public class GroupChatStatisticRequest extends OffsetPageRequest {
      * 2 - 群总数
      * 3 - 新增群人数
      * 4 - 群总人数
-     *
+     * <p>
      * 默认为1
      */
     @JsonProperty("order_by")
