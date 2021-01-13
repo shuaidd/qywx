@@ -1,6 +1,7 @@
 package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * 描述 配置客户联系「联系我」方式
@@ -36,5 +37,13 @@ public class AddContactWayResponse extends AbstractBaseResponse {
 
     public void setQrCode(String qrCode) {
         this.qrCode = qrCode;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("configId", configId)
+                .append("qrCode", qrCode)
+                .toString();
     }
 }

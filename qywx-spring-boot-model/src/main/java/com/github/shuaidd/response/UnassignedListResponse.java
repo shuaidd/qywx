@@ -2,6 +2,7 @@ package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.shuaidd.dto.UnassignedCustomer;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
@@ -33,5 +34,13 @@ public class UnassignedListResponse extends AbstractBaseResponse {
 
     public void setLast(Boolean last) {
         isLast = last;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("customers", customers)
+                .append("isLast", isLast)
+                .toString();
     }
 }

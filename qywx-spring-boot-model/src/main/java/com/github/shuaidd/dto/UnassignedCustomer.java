@@ -2,6 +2,7 @@ package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Date;
 
@@ -42,5 +43,14 @@ public class UnassignedCustomer {
 
     public void setDimissionTime(Date dimissionTime) {
         this.dimissionTime = dimissionTime;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("handoverUserId", handoverUserId)
+                .append("externalUserId", externalUserId)
+                .append("dimissionTime", dimissionTime)
+                .toString();
     }
 }
