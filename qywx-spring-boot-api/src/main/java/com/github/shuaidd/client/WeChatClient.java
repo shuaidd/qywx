@@ -1063,5 +1063,30 @@ public interface WeChatClient {
     @PostMapping(value = "living/get_living_code", headers = HEAD)
     LivingCodeResponse getLivingCode(LivingCodeRequest request, @RequestParam(HEAD_KEY) String app);
 
+    /**
+     * 获取成员直播ID列表
+     * @param request
+     * @param app
+     * @return GetUserLivingResponse
+     */
+    @PostMapping(value = "living/get_user_all_livingid", headers = HEAD)
+    GetUserLivingResponse getUserAllLivingId(GetUserLivingRequest request, @RequestParam(HEAD_KEY) String app);
 
+    /**
+     * 获取直播详情
+     * @param livingId
+     * @param app
+     * @return LivingInfoResponse
+     */
+    @GetMapping(value = "living/get_living_info",headers = HEAD)
+    LivingInfoResponse getLivingInfo(@RequestParam("livingid") String livingId, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取直播观看明细
+     * @param request
+     * @param app
+     * @return WatchStatInfoResponse
+     */
+    @PostMapping(value = "living/get_watch_stat", headers = HEAD)
+    WatchStatInfoResponse getWatchStat(GetWatchStatRequest request,@RequestParam(HEAD_KEY) String app);
 }
