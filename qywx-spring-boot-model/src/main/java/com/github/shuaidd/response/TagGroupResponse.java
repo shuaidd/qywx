@@ -2,6 +2,7 @@ package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.shuaidd.dto.TagGroup;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
@@ -21,5 +22,12 @@ public class TagGroupResponse extends AbstractBaseResponse {
 
     public void setTagGroups(List<TagGroup> tagGroups) {
         this.tagGroups = tagGroups;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("tagGroups", tagGroups)
+                .toString();
     }
 }

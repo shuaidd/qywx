@@ -2,6 +2,7 @@ package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Date;
 import java.util.List;
@@ -71,5 +72,17 @@ public class TagGroup {
 
     public void setTag(List<CustomTag> tag) {
         this.tag = tag;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("groupId", groupId)
+                .append("groupName", groupName)
+                .append("createTime", createTime)
+                .append("order", order)
+                .append("deleted", deleted)
+                .append("tag", tag)
+                .toString();
     }
 }

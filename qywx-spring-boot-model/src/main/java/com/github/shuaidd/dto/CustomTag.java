@@ -2,6 +2,7 @@ package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Date;
 
@@ -57,5 +58,16 @@ public class CustomTag {
 
     public void setOrder(Integer order) {
         this.order = order;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("name", name)
+                .append("createTime", createTime)
+                .append("deleted", deleted)
+                .append("order", order)
+                .toString();
     }
 }

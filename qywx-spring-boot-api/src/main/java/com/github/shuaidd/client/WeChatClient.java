@@ -551,8 +551,8 @@ public interface WeChatClient {
      * @param app
      * @return CustomListResponse
      */
-    @PostMapping(value = "externalcontact/list", headers = HEAD)
-    CustomListResponse getCustomList(CustomListRequest request, @RequestParam(HEAD_KEY) String app);
+    @GetMapping(value = "externalcontact/list", headers = HEAD)
+    CustomListResponse getCustomList(@RequestParam("userid") String userId, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取客户详情

@@ -1,6 +1,7 @@
 package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * 描述
@@ -41,5 +42,14 @@ public abstract class AbstractBaseResponse {
 
     public void setNextCursor(String nextCursor) {
         this.nextCursor = nextCursor;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("errCode", errCode)
+                .append("errMsg", errMsg)
+                .append("nextCursor", nextCursor)
+                .toString();
     }
 }

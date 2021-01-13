@@ -1,6 +1,7 @@
 package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
@@ -21,5 +22,12 @@ public class CustomListResponse extends AbstractBaseResponse {
 
     public void setExternalUserIds(List<String> externalUserIds) {
         this.externalUserIds = externalUserIds;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("externalUserIds", externalUserIds)
+                .toString();
     }
 }

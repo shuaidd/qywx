@@ -94,7 +94,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return CustomListResponse
      */
     public CustomListResponse getCustomList(CustomListRequest request, String applicationName) {
-        CustomListResponse response = weChatClient.getCustomList(request, applicationName);
+        CustomListResponse response = weChatClient.getCustomList(request.getUserId(), applicationName);
         return getResponse(response);
     }
 
