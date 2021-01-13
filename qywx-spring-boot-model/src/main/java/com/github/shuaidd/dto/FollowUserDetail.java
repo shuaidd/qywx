@@ -1,6 +1,7 @@
 package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,10 @@ public class FollowUserDetail {
     @JsonProperty("remark_corp_name")
     private String remarkCorpName;
 
-    private List<FollowUserDetail> tags;
+    private List<FollowUserTag> tags;
+
+    @JsonProperty("tag_id")
+    private List<String> tagIds;
 
     @JsonProperty("createtime")
     private Date createTime;
@@ -87,11 +91,11 @@ public class FollowUserDetail {
         this.remarkCorpName = remarkCorpName;
     }
 
-    public List<FollowUserDetail> getTags() {
+    public List<FollowUserTag> getTags() {
         return tags;
     }
 
-    public void setTags(List<FollowUserDetail> tags) {
+    public void setTags(List<FollowUserTag> tags) {
         this.tags = tags;
     }
 
@@ -117,5 +121,30 @@ public class FollowUserDetail {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public List<String> getTagIds() {
+        return tagIds;
+    }
+
+    public void setTagIds(List<String> tagIds) {
+        this.tagIds = tagIds;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("userId", userId)
+                .append("state", state)
+                .append("operUserId", operUserId)
+                .append("addWay", addWay)
+                .append("remarkMobiles", remarkMobiles)
+                .append("remarkCorpName", remarkCorpName)
+                .append("tags", tags)
+                .append("tagIds", tagIds)
+                .append("createTime", createTime)
+                .append("description", description)
+                .append("remark", remark)
+                .toString();
     }
 }

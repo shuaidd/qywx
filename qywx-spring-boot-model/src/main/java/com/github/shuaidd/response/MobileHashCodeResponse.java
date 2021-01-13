@@ -1,5 +1,7 @@
 package com.github.shuaidd.response;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * 描述
  *
@@ -15,5 +17,12 @@ public class MobileHashCodeResponse extends AbstractBaseResponse {
 
     public void setHashcode(String hashcode) {
         this.hashcode = hashcode;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("hashcode", hashcode)
+                .toString();
     }
 }

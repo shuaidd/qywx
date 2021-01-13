@@ -1,6 +1,7 @@
 package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * 描述
@@ -104,5 +105,21 @@ public class ExternalContactDetail {
 
     public void setExternalProfile(ExternalProfile externalProfile) {
         this.externalProfile = externalProfile;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("externalUserId", externalUserId)
+                .append("name", name)
+                .append("position", position)
+                .append("avatar", avatar)
+                .append("corpName", corpName)
+                .append("corpFullName", corpFullName)
+                .append("type", type)
+                .append("gender", gender)
+                .append("unionId", unionId)
+                .append("externalProfile", externalProfile)
+                .toString();
     }
 }

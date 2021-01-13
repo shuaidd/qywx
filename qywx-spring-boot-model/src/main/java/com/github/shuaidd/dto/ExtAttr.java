@@ -1,6 +1,7 @@
 package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * 描述
@@ -54,5 +55,16 @@ public class ExtAttr {
 
     public void setMiniProgram(ExternalMiniProgramAttr miniProgram) {
         this.miniProgram = miniProgram;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("type", type)
+                .append("name", name)
+                .append("text", text)
+                .append("web", web)
+                .append("miniProgram", miniProgram)
+                .toString();
     }
 }

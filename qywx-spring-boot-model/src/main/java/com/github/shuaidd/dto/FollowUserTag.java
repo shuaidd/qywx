@@ -1,5 +1,7 @@
 package com.github.shuaidd.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * 描述
  *
@@ -7,8 +9,11 @@ package com.github.shuaidd.dto;
  * @date 2021-01-02 16:26
  **/
 public class FollowUserTag {
+    @JsonProperty("group_name")
     private String groupName;
+    @JsonProperty("tag_name")
     private String tagName;
+    @JsonProperty("tag_id")
     private String tagId;
     private Integer type;
 

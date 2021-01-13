@@ -1,6 +1,7 @@
 package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * 描述
@@ -30,5 +31,13 @@ public class BatchExternalContact {
 
     public void setFollowUser(FollowUserDetail followUser) {
         this.followUser = followUser;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("externalContact", externalContact)
+                .append("followUser", followUser)
+                .toString();
     }
 }

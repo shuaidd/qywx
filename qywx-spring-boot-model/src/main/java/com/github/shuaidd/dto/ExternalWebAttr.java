@@ -1,5 +1,7 @@
 package com.github.shuaidd.dto;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * 描述
  *
@@ -24,5 +26,13 @@ public class ExternalWebAttr {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("url", url)
+                .append("title", title)
+                .toString();
     }
 }

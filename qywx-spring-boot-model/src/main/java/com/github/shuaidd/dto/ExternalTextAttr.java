@@ -1,5 +1,7 @@
 package com.github.shuaidd.dto;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * 描述
  *
@@ -15,5 +17,12 @@ public class ExternalTextAttr {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("value", value)
+                .toString();
     }
 }

@@ -76,6 +76,14 @@ public class CustomContactTest extends AbstractTest {
         weChatManager.customContactService().deleteContactWay(request, appName);
     }
 
+    @Test
+    public void closeTempChat() {
+        CloseTempChatRequest request = new CloseTempChatRequest();
+        request.setExternalUserId("wmCRbQBwAAkqZa5eZQdUNFXgVIFr_DmA");
+        request.setUserId("20170410022717");
+        weChatManager.customContactService().closeTempChat(request, appName);
+    }
+
     /**
      * groupId=etCRbQBwAAii_NXtxqQBMOnEuWV-_aEw
      */
@@ -99,6 +107,21 @@ public class CustomContactTest extends AbstractTest {
     }
 
     @Test
+    public void editCorpTag() {
+        EditCorpTagRequest request = new EditCorpTagRequest();
+        request.setId("etCRbQBwAAl2--7nYobBfKpM9UxPSNeg");
+        request.setName("奇威客户-edit");
+        weChatManager.customContactService().editCorpTag(request, appName);
+    }
+
+    @Test
+    public void delCorpTag() {
+        DelCorpTagRequest request = new DelCorpTagRequest();
+        request.setTagIds(Collections.singletonList("etCRbQBwAAl2--7nYobBfKpM9UxPSNeg"));
+        weChatManager.customContactService().delCorpTag(request, appName);
+    }
+
+    @Test
     public void markTag() {
         MarkTagRequest request = new MarkTagRequest();
         request.setUserId("20170410022717");
@@ -116,8 +139,68 @@ public class CustomContactTest extends AbstractTest {
     }
 
     @Test
-    public void a() {
+    public void transfer() {
+        TransferRequest request = new TransferRequest();
+        request.setHandoverUserId("20170410022717");
+        request.setTakeoverUserId("SiGuangMeng");
+        request.setExternalUserId("wmCRbQBwAAkqZa5eZQdUNFXgVIFr_DmA");
+        request.setTransferSuccessMsg("您好，您的服务已升级，后续将由我的同事李四@腾讯接替我的工作，继续为您服务。");
+        weChatManager.customContactService().transfer(request, appName);
+    }
 
+    @Test
+    public void getTransferResult() {
+        TransferResultRequest request = new TransferResultRequest();
+        request.setHandoverUserId("20170410022717");
+        request.setTakeoverUserId("SiGuangMeng");
+        request.setExternalUserId("wmCRbQBwAAkqZa5eZQdUNFXgVIFr_DmA");
+        TransferResultResponse response = weChatManager.customContactService().getTransferResult(request, appName);
+        logger.info("{}", response);
+    }
+
+    @Test
+    public void getExternalContact() {
+        ExternalContactResponse response = weChatManager.customContactService().getExternalContact("wmCRbQBwAAkqZa5eZQdUNFXgVIFr_DmA", appName);
+        logger.info("{}", response);
+    }
+
+    @Test
+    public void getBatchExternalContact() {
+        BatchExternalContactRequest request = new BatchExternalContactRequest();
+        request.setUserId("20170410022717");
+        BatchExternalContactResponse response = weChatManager.customContactService().getBatchExternalContact(request, appName);
+        logger.info("{}", response);
+    }
+
+    @Test
+    public void updateCustomRemark() {
+        UpdateRemarkRequest remarkRequest = new UpdateRemarkRequest();
+        remarkRequest.setRemark("修改客户备注信息");
+        remarkRequest.setExternalUserId("wmCRbQBwAAkqZa5eZQdUNFXgVIFr_DmA");
+        remarkRequest.setUserId("20170410022717");
+        weChatManager.customContactService().updateCustomRemark(remarkRequest, appName);
+    }
+
+    @Test
+    public void getMobileHashcode() {
+        MobileHashCodeRequest request = new MobileHashCodeRequest();
+        request.setMobile("152xxxxxxxx");
+        MobileHashCodeResponse response = weChatManager.customContactService().getMobileHashcode(request, appName);
+        logger.info("{}", response);
+    }
+
+
+    @Test
+    public void groupChatList() {
+        GroupChatListRequest request = new GroupChatListRequest();
+        request.setLimit(100);
+        GroupChatListResponse response = weChatManager.customContactService().groupChatList(request,appName);
+        logger.info("{}", response);
+    }
+
+ @Test
+    public void a() {
+        weChatManager.customContactService();
     }
 
 
