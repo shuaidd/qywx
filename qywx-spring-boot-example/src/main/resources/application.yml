@@ -2,11 +2,11 @@ server:
   port: 8080
 qywx:
   application-list:
-    - secret: Dqwyy-IFoeH7EP7U2Tb-Gb1A7ksS4IP_cZ5JCu2qbl4
+    - secret: xxxx
       application-name: customer-contact
-    - secret: rrpIreNAFdtJc3cC-zLeURq6J-5xOgohWAiLCwbctSY
+    - secret: xxxx
       agent-id: 3010084
       application-name: schedule
   url: https://qyapi.weixin.qq.com
   public-path: cgi-bin
-  corp-id: ww36e0a51aab349a7d
+  corp-id: xxxx
