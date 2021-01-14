@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 /**
- * author shuaidongdong
+ * @author shuaidongdong
  */
 
 public class MultipartSupportConfig {
@@ -25,7 +25,7 @@ public class MultipartSupportConfig {
     }
 
     @Bean
-    public Decoder decoder(){
+    public Decoder decoder() {
         return new WeChatMediaDecoder();
     }
 

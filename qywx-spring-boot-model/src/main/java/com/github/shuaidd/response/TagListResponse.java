@@ -8,10 +8,10 @@ import java.util.List;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-06 08:17
  **/
-public class TagListResponse extends AbstractBaseResponse{
+public class TagListResponse extends AbstractBaseResponse {
 
     @JsonProperty("taglist")
     private List<Tag> tagList;

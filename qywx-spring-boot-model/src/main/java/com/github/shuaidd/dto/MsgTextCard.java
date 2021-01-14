@@ -3,7 +3,7 @@ package com.github.shuaidd.dto;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-08 17:22
  **/
 public class MsgTextCard {
@@ -11,9 +11,9 @@ public class MsgTextCard {
     private String title;
 
     private String description;
-    
+
     private String btntxt;
-    
+
     private String url;
 
     public String getTitle() {

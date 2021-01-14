@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-04 22:34
  **/
 public class AccessTokenResponse extends AbstractBaseResponse {

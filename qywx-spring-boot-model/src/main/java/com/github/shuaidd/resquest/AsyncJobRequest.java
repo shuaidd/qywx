@@ -6,7 +6,7 @@ import com.github.shuaidd.dto.CallbackData;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-06 20:27
  **/
 public class AsyncJobRequest {

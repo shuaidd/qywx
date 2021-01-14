@@ -7,6 +7,7 @@ import com.github.shuaidd.client.config.WeChatConfigurationProperties;
 import com.github.shuaidd.enums.ErrorCode;
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.AbstractBaseResponse;
+import com.github.shuaidd.response.BaseResponse;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -19,7 +20,7 @@ import java.util.Objects;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-04 14:24
  **/
 public abstract class AbstractBaseService {
@@ -33,6 +34,15 @@ public abstract class AbstractBaseService {
 
     @Autowired
     protected WeChatConfigurationProperties properties;
+
+    /**
+     * 是否检查结果
+     */
+    private boolean check = true;
+
+    final void setCheck(boolean check) {
+        this.check = check;
+    }
 
     final boolean isSuccess(AbstractBaseResponse baseResponse) {
         if (Objects.nonNull(baseResponse)) {
@@ -50,10 +60,25 @@ public abstract class AbstractBaseService {
     }
 
     /**
+     * 获取企业微信结果
+     *
+     * @param response 响应
+     * @return <T extends AbstractBaseResponse>
+     */
+    final <T extends AbstractBaseResponse> T getResponse(T response) {
+        if (check) {
+            if (isSuccess(response)) {
+                return response;
+            }
+        }
+        return response;
+    }
+
+    /**
      * 获取应用密匙
      *
-     * @param applicationName
-     * @return
+     * @param applicationName 应用名称
+     * @return String
      */
     final String getApplicationSecret(String applicationName) {
         String secret = "";
@@ -73,17 +98,17 @@ public abstract class AbstractBaseService {
         return secret;
     }
 
-    final void checkApplication(String applicationName){
-        Objects.requireNonNull(applicationName,"应用名称不能为空");
+    final void checkApplication(String applicationName) {
+        Objects.requireNonNull(applicationName, "应用名称不能为空");
         boolean exsit = false;
         for (ApplicationProperties applicationProperties : properties.getApplicationList()) {
-            if (applicationName.equals(applicationProperties.getApplicationName())){
+            if (applicationName.equals(applicationProperties.getApplicationName())) {
                 exsit = true;
                 break;
             }
         }
-        if (!exsit){
-            throw new WeChatException("应用"+applicationName+"无效，不在配置列表之内");
+        if (!exsit) {
+            throw new WeChatException("应用" + applicationName + "无效，不在配置列表之内");
         }
     }
 }

@@ -17,7 +17,7 @@ import java.util.Objects;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-08 16:51
  **/
 @Service
@@ -26,9 +26,9 @@ public class MessageService extends AbstractBaseService {
     /**
      * 发送消息
      *
-     * @param request
-     * @param applicationName
-     * @return
+     * @param request 请求
+     * @param applicationName 应用名称
+     * @return SendMessageResponse
      */
     public final SendMessageResponse sendMessage(SendMessageRequest request, String applicationName) {
         checkApplication(applicationName);
@@ -46,8 +46,8 @@ public class MessageService extends AbstractBaseService {
     /**
      * 发送群消息
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      */
     public final void sendAppChatMessage(SendAppChatRequest request, String applicationName) {
         checkApplication(applicationName);
@@ -62,9 +62,9 @@ public class MessageService extends AbstractBaseService {
     /**
      * 创建群聊
      *
-     * @param request
-     * @param applicationName
-     * @return
+     * @param request 请求
+     * @param applicationName 应用名称
+     * @return String
      */
     public final String createAppChat(CreateAppChatRequest request, String applicationName) {
         checkApplication(applicationName);
@@ -82,8 +82,8 @@ public class MessageService extends AbstractBaseService {
     /**
      * 修改群聊会话
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      */
     public final void updateAppChat(UpdateAppChatRequest request, String applicationName) {
         checkApplication(applicationName);
@@ -98,9 +98,9 @@ public class MessageService extends AbstractBaseService {
     /**
      * 获取群聊会话
      *
-     * @param chatId
-     * @param applicationName
-     * @return
+     * @param chatId 群聊编号
+     * @param applicationName 应用名称
+     * @return ChatInfo
      */
     public final ChatInfo searchAppChat(String chatId, String applicationName) {
         checkApplication(applicationName);

@@ -22,7 +22,7 @@ import java.util.Objects;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-11 10:15
  **/
 @Service
@@ -32,9 +32,9 @@ public class OAService extends AbstractBaseService {
     /**
      * 获取打卡数据
      *
-     * @param request
-     * @param applicationName
-     * @return
+     * @param request 请求
+     * @param applicationName 应用名称
+     * @return List<CheckInData>
      */
     public final List<CheckInData> getCheckInData(CheckInDataRequest request, String applicationName) {
         checkApplication(applicationName);
@@ -66,9 +66,9 @@ public class OAService extends AbstractBaseService {
     /**
      * 获取打卡规则
      *
-     * @param request
-     * @param applicationName
-     * @return
+     * @param request 请求
+     * @param applicationName 应用名称
+     * @return List<CheckInRule>
      */
     public final List<CheckInRule> getCheckInOption(CheckInRuleRequest request, String applicationName) {
         checkApplication(applicationName);
@@ -90,9 +90,9 @@ public class OAService extends AbstractBaseService {
     /**
      * 获取审批数据
      *
-     * @param request
-     * @param applicationName
-     * @return
+     * @param request 请求
+     * @param applicationName 应用名称
+     * @return ApprovalDataResponse
      */
     public final ApprovalDataResponse getApprovalData(ApprovalDataRequest request, String applicationName) {
         checkApplication(applicationName);
@@ -108,9 +108,10 @@ public class OAService extends AbstractBaseService {
 
     /**
      * 获取公费电话拨打记录
-     * @param request
-     * @param applicationName
-     * @return
+     *
+     * @param request 请求
+     * @param applicationName 应用名称
+     * @return List<DialRecord>
      */
     public final List<DialRecord> getDialRecord(DialRecordRequest request, String applicationName) {
         Objects.requireNonNull(request, "参数为空");

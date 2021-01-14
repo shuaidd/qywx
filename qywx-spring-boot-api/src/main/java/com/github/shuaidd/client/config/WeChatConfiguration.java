@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 /**
  * 描述 企业微信feign客户端配置
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-04 16:18
  **/
 public class WeChatConfiguration {

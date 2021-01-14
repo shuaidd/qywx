@@ -1,9 +1,9 @@
 package com.github.shuaidd.client.config;
 
 /**
- * 描述
+ * 描述 应用授权信息配置
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-03 16:02
  **/
 public class ApplicationProperties {

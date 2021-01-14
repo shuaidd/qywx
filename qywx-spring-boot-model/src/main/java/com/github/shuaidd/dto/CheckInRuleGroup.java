@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-11 12:22
  **/
 public class CheckInRuleGroup {

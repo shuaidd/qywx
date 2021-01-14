@@ -17,14 +17,14 @@ import java.util.Collection;
 /**
  * 处理所有请求的access_token参数
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-04 16:20
  **/
 
 public class WeChatInterceptor implements RequestInterceptor {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private ApplicationContext applicationContext;
+    private final ApplicationContext applicationContext;
 
     public WeChatInterceptor(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;

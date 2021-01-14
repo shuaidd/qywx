@@ -1,0 +1,12 @@
+server:
+  port: 8080
+qywx:
+  application-list:
+    - secret: xxxx
+      application-name: customer-contact
+    - secret: xxxx
+      agent-id: 3010084
+      application-name: schedule
+  url: https://qyapi.weixin.qq.com
+  public-path: cgi-bin
+  corp-id: xxxx

@@ -10,7 +10,7 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-06 22:17
  **/
 public class WeChatApplicationResponse extends AbstractBaseResponse {

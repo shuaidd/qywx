@@ -18,12 +18,12 @@ import java.util.LinkedList;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-06 17:37
  **/
 public class WeChatMediaDecoder implements Decoder {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private Decoder delegate = new JacksonDecoder();
+    private final Decoder delegate = new JacksonDecoder();
 
     @Override
     public Object decode(Response response, Type type) throws FeignException, IOException {
@@ -35,7 +35,7 @@ public class WeChatMediaDecoder implements Decoder {
                 for (String key : response.headers().keySet()) {
                     headers.put(key, new LinkedList<>(response.headers().get(key)));
                 }
-                logger.info("下载文件大小为:{}",result);
+                logger.info("下载文件大小为:{}", result);
                 return new ResponseEntity<>(body, headers, HttpStatus.OK);
             } else {
                 return delegate.decode(response, type);

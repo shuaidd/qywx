@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 /**
  * 身份认证
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-06 21:08
  **/
 @Service
@@ -15,9 +15,10 @@ public class AuthenticationService extends AbstractBaseService {
 
     /**
      * 获取访问用户身份
-     * @param code
-     * @param applicationName
-     * @return
+     *
+     * @param code 授权code
+     * @param applicationName 应用名称
+     * @return AuthenticationResponse
      */
     public final AuthenticationResponse getAuthentication(String code, String applicationName) {
         checkApplication(applicationName);

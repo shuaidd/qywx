@@ -21,7 +21,8 @@ import java.util.Objects;
 /**
  * 描述
  * <p>
- * author ddshuai
+ *
+ * @author ddshuai
  * date 2019-04-06 16:18
  **/
 @Service
@@ -35,26 +36,17 @@ public class MediaService extends AbstractBaseService {
     /**
      * 上传临时素材
      *
-     * @param file
-     * @param mediaType
-     * @param type
-     * @param applicationName
-     * @return
+     * @param file 文件
+     * @param mediaType 媒体类型
+     * @param type 类型
+     * @param applicationName 应用名称
+     * @return String
      */
     public final String uploadMaterial(File file, MediaType mediaType, String type, String applicationName) {
         checkApplication(applicationName);
         String mediaId = null;
         if (Objects.nonNull(file) && Objects.nonNull(mediaType)) {
-            DiskFileItem fileItem = (DiskFileItem) new DiskFileItemFactory().createItem("file",
-                    mediaType.getType(), true, file.getName());
-
-            try (InputStream input = new FileInputStream(file); OutputStream os = fileItem.getOutputStream()) {
-                IOUtils.copy(input, os);
-            } catch (Exception e) {
-                logger.error("拷贝素材异常:{}", applicationName, e);
-                throw new IllegalArgumentException("Invalid file: " + e, e);
-            }
-
+            DiskFileItem fileItem = diskFileItem(file, mediaType, applicationName);
             MultipartFile multi = new CommonsMultipartFile(fileItem);
             mediaId = uploadMaterial(multi, type, applicationName);
         }
@@ -78,25 +70,16 @@ public class MediaService extends AbstractBaseService {
     /**
      * 上传永久图片
      *
-     * @param file
-     * @param mediaType
-     * @param applicationName
-     * @return
+     * @param file 文件
+     * @param mediaType 媒体类型
+     * @param applicationName 应用名称
+     * @return String
      */
     public final String uploadImage(File file, MediaType mediaType, String applicationName) {
         checkApplication(applicationName);
         String url = null;
         if (Objects.nonNull(file) && Objects.nonNull(mediaType)) {
-            DiskFileItem fileItem = (DiskFileItem) new DiskFileItemFactory().createItem("file",
-                    mediaType.getType(), true, file.getName());
-
-            try (InputStream input = new FileInputStream(file); OutputStream os = fileItem.getOutputStream()) {
-                IOUtils.copy(input, os);
-            } catch (Exception e) {
-                logger.error("拷贝素材异常:{}", applicationName, e);
-                throw new IllegalArgumentException("Invalid file: " + e, e);
-            }
-
+            DiskFileItem fileItem = diskFileItem(file, mediaType, applicationName);
             MultipartFile multi = new CommonsMultipartFile(fileItem);
             UploadImageResponse response = weChatMediaClient.uploadImage(multi, applicationName);
             if (isSuccess(response)) {
@@ -105,6 +88,20 @@ public class MediaService extends AbstractBaseService {
         }
 
         return url;
+    }
+
+    private DiskFileItem diskFileItem(File file, MediaType mediaType, String applicationName) {
+        DiskFileItem fileItem = (DiskFileItem) new DiskFileItemFactory().createItem("file",
+                mediaType.getType(), true, file.getName());
+
+        try (InputStream input = new FileInputStream(file); OutputStream os = fileItem.getOutputStream()) {
+            IOUtils.copy(input, os);
+        } catch (Exception e) {
+            logger.error("拷贝素材异常:{}", applicationName, e);
+            throw new IllegalArgumentException("Invalid file: " + e, e);
+        }
+
+        return fileItem;
     }
 
     public final ResponseEntity<byte[]> download(String mediaId, String applicationName) {

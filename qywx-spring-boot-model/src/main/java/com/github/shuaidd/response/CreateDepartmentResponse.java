@@ -5,7 +5,7 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-06 06:52
  **/
 public class CreateDepartmentResponse extends AbstractBaseResponse {

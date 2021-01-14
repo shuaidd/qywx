@@ -9,7 +9,7 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-11 10:22
  **/
 public class CheckInDataResponse extends AbstractBaseResponse {

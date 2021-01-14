@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-05 19:21
  **/
 public class InviteUserRequest {

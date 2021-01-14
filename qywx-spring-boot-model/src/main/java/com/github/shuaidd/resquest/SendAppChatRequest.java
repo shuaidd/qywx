@@ -10,7 +10,7 @@ import java.util.StringJoiner;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-08 19:14
  **/
 public class SendAppChatRequest {

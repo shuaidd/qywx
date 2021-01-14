@@ -20,18 +20,17 @@ import java.lang.reflect.Method;
 /**
  * 描述 enjoy your life
  * 统一处理微信授权码无效问题
- *
- * author yczhu
+ * <p>
  * date 2018-11-19 下午4:39
- **/
-
+ * @author shuaidongdong
+ * */
 @Aspect
 @Component
 public class WeChatClientAspect {
 
-    private WeChatManager weChatManager;
+    private final WeChatManager weChatManager;
 
-    private static Logger log = LoggerFactory.getLogger(WeChatClientAspect.class);
+    private static final Logger log = LoggerFactory.getLogger(WeChatClientAspect.class);
 
     @Autowired
     public WeChatClientAspect(WeChatManager weChatManager) {
@@ -41,9 +40,9 @@ public class WeChatClientAspect {
     /**
      * 统一处理请求AccessToken失效问题
      *
-     * @param joinPoint
-     * @return
-     * @throws Throwable
+     * @param joinPoint 切点信息
+     * @return Object
+     * @throws Throwable 异常
      */
     @Around("execution(* com.github.shuaidd.client.WeChatClient.*(..))")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -80,8 +79,8 @@ public class WeChatClientAspect {
     /**
      * 获取请求的应用
      *
-     * @param joinPoint
-     * @return
+     * @param joinPoint 切点信息
+     * @return String
      */
     private String getApplicationName(ProceedingJoinPoint joinPoint) {
         String applicationName = null;
@@ -122,8 +121,8 @@ public class WeChatClientAspect {
      * 42001[access_token已过期]
      * 则重新获取授权码，重试一次
      *
-     * @param errorCode
-     * @return
+     * @param errorCode 错误码
+     * @return boolean 是否重试
      */
     private boolean needRetry(String errorCode) {
         boolean needRetry = false;

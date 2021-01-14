@@ -3,12 +3,15 @@ package com.github.shuaidd.dto;
 /**
  * 描述
  *
- * author ddshuai
+ * @author ddshuai
  * date 2019-04-08 17:17
  **/
 public class MsgText {
     public MsgText(String content) {
         this.content = content;
+    }
+
+    public MsgText() {
     }
 
     private String content;
