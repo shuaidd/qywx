@@ -1,6 +1,7 @@
 package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * 描述
@@ -18,5 +19,12 @@ public class CalendarResponse extends AbstractBaseResponse {
 
     public void setCalId(String calId) {
         this.calId = calId;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("calId", calId)
+                .toString();
     }
 }

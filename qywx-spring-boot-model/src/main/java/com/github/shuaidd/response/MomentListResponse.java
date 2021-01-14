@@ -2,6 +2,7 @@ package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.shuaidd.dto.MomentDetail;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
@@ -22,5 +23,12 @@ public class MomentListResponse extends AbstractBaseResponse {
 
     public void setMomentDetails(List<MomentDetail> momentDetails) {
         this.momentDetails = momentDetails;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("momentDetails", momentDetails)
+                .toString();
     }
 }

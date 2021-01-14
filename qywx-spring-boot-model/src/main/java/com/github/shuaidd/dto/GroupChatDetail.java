@@ -1,6 +1,7 @@
 package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Date;
 import java.util.List;
@@ -74,5 +75,17 @@ public class GroupChatDetail {
 
     public void setMembers(List<Member> members) {
         this.members = members;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("chatId", chatId)
+                .append("name", name)
+                .append("owner", owner)
+                .append("notice", notice)
+                .append("createTime", createTime)
+                .append("members", members)
+                .toString();
     }
 }

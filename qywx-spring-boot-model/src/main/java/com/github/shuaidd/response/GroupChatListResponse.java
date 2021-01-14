@@ -2,6 +2,7 @@ package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.shuaidd.dto.GroupChat;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @date 2021-01-05 21:00
  **/
 public class GroupChatListResponse extends AbstractBaseResponse {
+
     @JsonProperty("group_chat_list")
     private List<GroupChat> groupChats;
 
@@ -21,5 +23,12 @@ public class GroupChatListResponse extends AbstractBaseResponse {
 
     public void setGroupChats(List<GroupChat> groupChats) {
         this.groupChats = groupChats;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("groupChats", groupChats)
+                .toString();
     }
 }

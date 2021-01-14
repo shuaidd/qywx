@@ -1,6 +1,7 @@
 package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
@@ -84,5 +85,19 @@ public class CalendarData {
 
     public void setShares(List<CalendarShare> shares) {
         this.shares = shares;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("calId", calId)
+                .append("organizer", organizer)
+                .append("readonly", readonly)
+                .append("setAsDefault", setAsDefault)
+                .append("summary", summary)
+                .append("color", color)
+                .append("description", description)
+                .append("shares", shares)
+                .toString();
     }
 }

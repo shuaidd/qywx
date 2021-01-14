@@ -1,6 +1,7 @@
 package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Date;
 
@@ -11,11 +12,15 @@ import java.util.Date;
  * @date 2021-01-05 21:10
  **/
 public class Member {
+
     @JsonProperty("userid")
     private String userId;
+
     private Integer type;
+
     @JsonProperty("unionid")
     private String unionId;
+
     @JsonProperty("join_time")
     private Date joinTime;
 
@@ -66,5 +71,16 @@ public class Member {
 
     public void setJoinScene(Integer joinScene) {
         this.joinScene = joinScene;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("userId", userId)
+                .append("type", type)
+                .append("unionId", unionId)
+                .append("joinTime", joinTime)
+                .append("joinScene", joinScene)
+                .toString();
     }
 }

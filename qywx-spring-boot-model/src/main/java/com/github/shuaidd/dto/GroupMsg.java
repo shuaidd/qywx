@@ -1,6 +1,7 @@
 package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Date;
 
@@ -94,5 +95,20 @@ public class GroupMsg {
 
     public void setVideo(MsgVideo video) {
         this.video = video;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("msgId", msgId)
+                .append("creator", creator)
+                .append("createTime", createTime)
+                .append("createType", createType)
+                .append("text", text)
+                .append("image", image)
+                .append("link", link)
+                .append("miniprogram", miniprogram)
+                .append("video", video)
+                .toString();
     }
 }

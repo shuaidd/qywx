@@ -1,6 +1,8 @@
 package com.github.shuaidd.resquest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.github.shuaidd.json.Date2LongSerializer;
 
 import java.util.Date;
 
@@ -13,9 +15,11 @@ import java.util.Date;
 public class MomentListRequest extends CursorPageRequest {
 
     @JsonProperty("start_time")
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date startTime;
 
     @JsonProperty("end_time")
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date endTime;
 
     private String creator;

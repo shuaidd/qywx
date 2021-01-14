@@ -8,7 +8,7 @@ package com.github.shuaidd.resquest;
  **/
 public class CursorPageRequest {
     private String cursor;
-    private Integer limit;
+    private Integer limit = 100;
 
     public String getCursor() {
         return cursor;

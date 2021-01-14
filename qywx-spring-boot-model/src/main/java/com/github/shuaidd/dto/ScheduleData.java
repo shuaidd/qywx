@@ -1,6 +1,8 @@
 package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.github.shuaidd.json.Date2LongSerializer;
 
 import java.util.Date;
 import java.util.List;
@@ -12,19 +14,28 @@ import java.util.List;
  * @date 2021-01-11 13:36
  **/
 public class ScheduleData {
+
     @JsonProperty("schedule_id")
     private String scheduleId;
+
     private String organizer;
+
     @JsonProperty("start_time")
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date startTime;
+
+    @JsonSerialize(using = Date2LongSerializer.class)
     @JsonProperty("end_time")
     private Date endTime;
+
     private List<UserId> attendees;
     private String summary;
     private String description;
     private String location;
+
     @JsonProperty("cal_id")
     private String calId;
+
     private ReminderData reminders;
     private Integer status;
 

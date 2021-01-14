@@ -1,6 +1,7 @@
 package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Date;
 import java.util.List;
@@ -111,5 +112,21 @@ public class MomentDetail {
 
     public void setLocation(MomentLocation location) {
         this.location = location;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("momentId", momentId)
+                .append("creator", creator)
+                .append("createTime", createTime)
+                .append("createType", createType)
+                .append("visibleType", visibleType)
+                .append("text", text)
+                .append("images", images)
+                .append("video", video)
+                .append("link", link)
+                .append("location", location)
+                .toString();
     }
 }

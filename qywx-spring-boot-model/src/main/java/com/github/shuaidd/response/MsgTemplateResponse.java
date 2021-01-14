@@ -1,6 +1,7 @@
 package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
@@ -30,5 +31,13 @@ public class MsgTemplateResponse extends AbstractBaseResponse {
 
     public void setMsgId(String msgId) {
         this.msgId = msgId;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("failList", failList)
+                .append("msgId", msgId)
+                .toString();
     }
 }

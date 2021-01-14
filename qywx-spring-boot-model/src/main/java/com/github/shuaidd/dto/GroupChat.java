@@ -1,6 +1,7 @@
 package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * 描述
@@ -36,5 +37,13 @@ public class GroupChat {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("chatId", chatId)
+                .append("status", status)
+                .toString();
     }
 }

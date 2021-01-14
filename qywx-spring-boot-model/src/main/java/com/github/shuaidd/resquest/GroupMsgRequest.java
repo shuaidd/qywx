@@ -1,6 +1,8 @@
 package com.github.shuaidd.resquest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.github.shuaidd.json.Date2LongSerializer;
 
 import java.util.Date;
 
@@ -20,10 +22,15 @@ import java.util.Date;
 public class GroupMsgRequest extends CursorPageRequest {
     @JsonProperty("chat_type")
     private String chatType;
+
     @JsonProperty("start_time")
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date startTime;
+
     @JsonProperty("end_time")
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date endTime;
+
     private String creator;
     @JsonProperty("filter_type")
     private Integer filterType;

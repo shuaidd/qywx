@@ -1,10 +1,13 @@
 package com.github.shuaidd;
 
 import com.github.shuaidd.dto.CustomTag;
+import com.github.shuaidd.dto.MsgText;
 import com.github.shuaidd.response.*;
 import com.github.shuaidd.resquest.*;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -190,18 +193,55 @@ public class CustomContactTest extends AbstractTest {
     }
 
 
+    /**
+     * chatId = wrCRbQBwAAoFDTwM9TY8_tZpG8SJvS1Q
+     */
     @Test
     public void groupChatList() {
         GroupChatListRequest request = new GroupChatListRequest();
         request.setLimit(100);
-        GroupChatListResponse response = weChatManager.customContactService().groupChatList(request,appName);
+        GroupChatListResponse response = weChatManager.customContactService().groupChatList(request, appName);
         logger.info("{}", response);
     }
 
- @Test
-    public void a() {
-        weChatManager.customContactService();
+    @Test
+    public void groupChatDetail() {
+        GroupChatDetailRequest request = new GroupChatDetailRequest();
+        request.setChatId("wrCRbQBwAAoFDTwM9TY8_tZpG8SJvS1Q");
+        GroupChatDetailResponse response = weChatManager.customContactService().groupChatDetail(request, appName);
+        logger.info("{}", response);
     }
 
+    @Test
+    public void getMomentList() throws ParseException {
+        MomentListRequest request = new MomentListRequest();
+        request.setStartTime(DateUtils.parseDate("2021-01-13", "yyyy-MM-dd"));
+        request.setEndTime(DateUtils.parseDate("2021-01-15", "yyyy-MM-dd"));
+        MomentListResponse response = weChatManager.customContactService().getMomentList(request, appName);
+        logger.info("{}", response);
+    }
 
+    /**
+     * msgId = msgCRbQBwAAUfGe9nf4saYGTPgAobR8jA
+     */
+    @Test
+    public void addMsgTemplate() {
+        MsgTemplateRequest request = new MsgTemplateRequest();
+        request.setChatType("single");
+        request.setExternalUserId(Collections.singletonList("wmCRbQBwAAkqZa5eZQdUNFXgVIFr_DmA"));
+        MsgText text = new MsgText("测试消息发送");
+        request.setText(text);
+        MsgTemplateResponse response = weChatManager.customContactService().addMsgTemplate(request, appName);
+        logger.info("{}", response);
+    }
+
+    @Test
+    public void getGroupMsgList() throws ParseException {
+        GroupMsgRequest request = new GroupMsgRequest();
+        request.setStartTime(DateUtils.parseDate("2021-01-13", "yyyy-MM-dd"));
+        request.setEndTime(DateUtils.parseDate("2021-01-14", "yyyy-MM-dd"));
+        request.setChatType("single");
+        GroupMsgResponse response = weChatManager.customContactService().getGroupMsgList(request, appName);
+        logger.info("{}", response);
+    }
 }
