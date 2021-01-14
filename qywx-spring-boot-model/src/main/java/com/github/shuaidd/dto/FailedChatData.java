@@ -7,7 +7,7 @@ import com.github.shuaidd.response.AbstractBaseResponse;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-04 22:36
+ * date 2021-01-04 22:36
  **/
 public class FailedChatData extends AbstractBaseResponse {
     @JsonProperty("chat_id")

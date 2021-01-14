@@ -10,7 +10,7 @@ import com.github.shuaidd.dto.MsgText;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-06 22:23
+ * date 2021-01-06 22:23
  **/
 public class WelcomeMsgRequest {
     @JsonProperty("welcome_code")

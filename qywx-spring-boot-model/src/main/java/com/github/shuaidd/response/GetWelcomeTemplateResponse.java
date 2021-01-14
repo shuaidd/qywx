@@ -9,7 +9,7 @@ import com.github.shuaidd.dto.MsgText;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-06 22:35
+ * date 2021-01-06 22:35
  **/
 public class GetWelcomeTemplateResponse extends AbstractBaseResponse {
     private MsgText text;

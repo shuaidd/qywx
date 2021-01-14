@@ -10,7 +10,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-05 21:00
+ * date 2021-01-05 21:00
  **/
 public class GroupChatListResponse extends AbstractBaseResponse {
 

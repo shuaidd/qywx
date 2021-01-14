@@ -8,7 +8,7 @@ import java.util.Date;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-12 13:26
+ * date 2021-01-12 13:26
  **/
 public class LivingInfoData {
     private String theme;

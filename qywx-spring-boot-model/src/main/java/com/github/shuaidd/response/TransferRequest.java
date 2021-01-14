@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-04 22:08
+ * date 2021-01-04 22:08
  **/
 public class TransferRequest {
 

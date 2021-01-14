@@ -9,7 +9,7 @@ import java.util.Date;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-04 22:22
+ * date 2021-01-04 22:22
  **/
 public class TransferResultResponse extends AbstractBaseResponse {
     /**

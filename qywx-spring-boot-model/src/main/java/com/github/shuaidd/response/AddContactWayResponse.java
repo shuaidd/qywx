@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * 描述 配置客户联系「联系我」方式
  *
  * @author ddshuai
- * @date 2021-01-02 10:04
+ * date 2021-01-02 10:04
  **/
 public class AddContactWayResponse extends AbstractBaseResponse {
 

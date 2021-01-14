@@ -10,7 +10,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-11 14:23
+ * date 2021-01-11 14:23
  **/
 public class MeetingRequest {
     @JsonProperty("meetingid")

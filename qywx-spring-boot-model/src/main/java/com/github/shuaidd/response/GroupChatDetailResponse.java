@@ -8,7 +8,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-05 21:06
+ * date 2021-01-05 21:06
  **/
 public class GroupChatDetailResponse extends AbstractBaseResponse {
 

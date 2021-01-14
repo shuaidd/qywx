@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * 描述 客户联系
  *
  * @author ddshuai
- * @date 2021-01-02 09:47
+ * date 2021-01-02 09:47
  **/
 
 @Service
@@ -29,8 +29,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 配置客户联系「联系我」方式
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return AddContactWayResponse
      */
     public AddContactWayResponse addContactWay(AddContactWayRequest request, String applicationName) {
@@ -41,8 +41,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取企业已配置的「联系我」方式
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return ContactWayResponse
      */
     public ContactWayResponse getContactWay(GetContactWayRequest request, String applicationName) {
@@ -53,8 +53,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 更新企业已配置的「联系我」方式
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      */
     public void updateContactWay(UpdateContactWayRequest request, String applicationName) {
         BaseResponse response = weChatClient.updateContactWay(request, applicationName);
@@ -64,8 +64,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 删除企业已配置的「联系我」方式
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      */
     public void deleteContactWay(GetContactWayRequest request, String applicationName) {
         BaseResponse response = weChatClient.deleteContactWay(request, applicationName);
@@ -75,8 +75,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 结束临时会话
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      */
     public void closeTempChat(CloseTempChatRequest request, String applicationName) {
         BaseResponse response = weChatClient.closeTempChat(request, applicationName);
@@ -89,8 +89,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取客户列表
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return CustomListResponse
      */
     public CustomListResponse getCustomList(CustomListRequest request, String applicationName) {
@@ -101,8 +101,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取客户详情
      *
-     * @param externalUserId
-     * @param applicationName
+     * @param externalUserId 外部联系人
+     * @param applicationName 应用名称
      * @return ExternalContactResponse
      */
     public ExternalContactResponse getExternalContact(String externalUserId, String applicationName) {
@@ -113,8 +113,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 批量获取客户详情
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return BatchExternalContactResponse
      */
     public BatchExternalContactResponse getBatchExternalContact(BatchExternalContactRequest request, String applicationName) {
@@ -125,8 +125,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 修改客户备注信息
      *
-     * @param remarkRequest
-     * @param applicationName
+     * @param remarkRequest 请求
+     * @param applicationName 应用名称
      */
     public void updateCustomRemark(UpdateRemarkRequest remarkRequest, String applicationName) {
         BaseResponse response = weChatClient.updateCustomRemark(remarkRequest, applicationName);
@@ -136,8 +136,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取手机号随机串
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return MobileHashCodeResponse
      */
     public MobileHashCodeResponse getMobileHashcode(MobileHashCodeRequest request, String applicationName) {
@@ -151,8 +151,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取企业标签库
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return TagGroupResponse
      */
     public TagGroupResponse getCorpTagList(TagGroupRequest request, String applicationName) {
@@ -163,8 +163,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 添加企业客户标签
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return AddCorpTagResponse
      */
     public AddCorpTagResponse addCorpTag(AddCorpTagRequest request, String applicationName) {
@@ -175,8 +175,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 编辑企业客户标签
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      */
     public void editCorpTag(EditCorpTagRequest request, String applicationName) {
         BaseResponse response = weChatClient.editCorpTag(request, applicationName);
@@ -186,8 +186,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 删除企业客户标签
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      */
     public void delCorpTag(DelCorpTagRequest request, String applicationName) {
         BaseResponse response = weChatClient.delCorpTag(request, applicationName);
@@ -197,8 +197,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 编辑客户企业标签
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      */
     public void markTag(MarkTagRequest request, String applicationName) {
         BaseResponse response = weChatClient.markTag(request, applicationName);
@@ -211,8 +211,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取离职成员列表
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return UnassignedListResponse
      */
     public UnassignedListResponse unassignedList(PageRequest request, String applicationName) {
@@ -223,8 +223,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 分配在职或离职成员的客户
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      */
     public void transfer(TransferRequest request, String applicationName) {
         BaseResponse response = weChatClient.transfer(request, applicationName);
@@ -234,8 +234,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 查询客户接替结果
      *
-     * @param resultRequest
-     * @param applicationName
+     * @param resultRequest 请求
+     * @param applicationName 应用名称
      * @return TransferResultResponse
      */
     public TransferResultResponse getTransferResult(TransferResultRequest resultRequest, String applicationName) {
@@ -246,8 +246,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 分配离职成员的客户群
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return FailedChatResponse
      */
     public FailedChatResponse groupChatTransfer(GroupChatTransferRequest request, String applicationName) {
@@ -261,8 +261,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取客户群列表
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return GroupChatListResponse
      */
     public GroupChatListResponse groupChatList(GroupChatListRequest request, String applicationName) {
@@ -273,8 +273,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取客户群详情
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return GroupChatDetailResponse
      */
     public GroupChatDetailResponse groupChatDetail(GroupChatDetailRequest request, String applicationName) {
@@ -286,8 +286,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取企业全部的发表列表
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return MomentListResponse
      */
     public MomentListResponse getMomentList(MomentListRequest request, String applicationName) {
@@ -298,8 +298,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取客户朋友圈企业发表的列表
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return MomentTaskResponse
      */
     public MomentTaskResponse getMomentTask(MomentTaskRequest request, String applicationName) {
@@ -310,8 +310,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取客户朋友圈发表时选择的可见范围
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return MomentCustomerListResponse
      */
     public MomentCustomerListResponse getMomentCustomerList(MomentCustomerListRequest request, String applicationName) {
@@ -322,8 +322,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取客户朋友圈发表后的可见客户列表
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return MomentCustomerListResponse
      */
     public MomentCustomerListResponse getMomentSendResult(MomentCustomerListRequest request, String applicationName) {
@@ -334,8 +334,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取客户朋友圈的互动数据
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return CommentsResponse
      */
     public CommentsResponse getMomentComments(CommentsRequest request, String applicationName) {
@@ -346,8 +346,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 创建企业群发
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return MsgTemplateResponse
      */
     public MsgTemplateResponse addMsgTemplate(MsgTemplateRequest request, String applicationName) {
@@ -358,8 +358,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取群发记录列表
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return GroupMsgResponse
      */
     public GroupMsgResponse getGroupMsgList(GroupMsgRequest request, String applicationName) {
@@ -370,8 +370,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取群发成员发送任务列表
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return GroupMsgTaskResponse
      */
     public GroupMsgTaskResponse getGroupMsgTask(GroupMsgTaskRequest request, String applicationName) {
@@ -382,8 +382,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取企业群发成员执行结果
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return GroupMsgSendResultResponse
      */
     GroupMsgSendResultResponse getGroupMsgSendResult(GroupMsgSendRequest request, String applicationName) {
@@ -394,8 +394,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 发送新客户欢迎语
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return BaseResponse
      */
     BaseResponse sendWelcomeMsg(WelcomeMsgRequest request, String applicationName) {
@@ -406,8 +406,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 添加入群欢迎语素材
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return AddWelcomeTemplateResponse
      */
     AddWelcomeTemplateResponse addGroupWelcomeTemplate(WelcomeTemplateRequest request, String applicationName) {
@@ -418,8 +418,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 编辑入群欢迎语素材
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return BaseResponse
      */
     BaseResponse editGroupWelcomeTemplate(WelcomeTemplateRequest request, String applicationName) {
@@ -430,8 +430,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取入群欢迎语素材
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return GetWelcomeTemplateResponse
      */
     GetWelcomeTemplateResponse getGroupWelcomeTemplate(GetWelcomeTemplateRequest request, String applicationName) {
@@ -442,8 +442,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 删除入群欢迎语素材
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return BaseResponse
      */
     BaseResponse deleteGroupWelcomeTemplate(DeleteWelcomeTemplateResponse request, String applicationName) {
@@ -454,8 +454,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 获取「联系客户统计」数据
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return BehaviorDataResponse
      */
     BehaviorDataResponse getUserBehaviorData(UserBehaviorRequest request, String applicationName) {
@@ -466,8 +466,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 按群主聚合的方式
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return GroupChatStatisticResponse
      */
     GroupChatStatisticResponse getGroupChatStatistic(GroupChatStatisticRequest request, String applicationName) {
@@ -478,8 +478,8 @@ public class CustomContactService extends AbstractBaseService {
     /**
      * 按自然日聚合的方式
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return GroupChatStatisticResponse
      */
     GroupChatStatisticResponse getGroupChatStatisticByDay(GroupChatStatisticRequest request, String applicationName) {

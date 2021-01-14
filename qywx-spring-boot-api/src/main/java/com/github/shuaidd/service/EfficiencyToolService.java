@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
  * 描述 效率工具
  *
  * @author ddshuai
- * @date 2021-01-07 21:04
+ * date 2021-01-07 21:04
  **/
 @Service
 public class EfficiencyToolService extends AbstractBaseService {
@@ -76,7 +76,6 @@ public class EfficiencyToolService extends AbstractBaseService {
      *
      * @param request
      * @param applicationName
-     * @return BaseResponse
      */
     public void updateSchedule(ScheduleRequest request, String applicationName) {
         BaseResponse response = weChatClient.updateSchedule(request, applicationName);
@@ -100,7 +99,6 @@ public class EfficiencyToolService extends AbstractBaseService {
      *
      * @param request
      * @param applicationName
-     * @return BaseResponse
      */
     public void delSchedule(CancelScheduleRequest request, String applicationName) {
         BaseResponse response = weChatClient.delSchedule(request, applicationName);
@@ -136,7 +134,6 @@ public class EfficiencyToolService extends AbstractBaseService {
      *
      * @param request
      * @param applicationName
-     * @return BaseResponse updateMeeting(MeetingRequest request, String applicationName);
      */
     public void updateMeeting(MeetingRequest request, String applicationName) {
         BaseResponse response = weChatClient.updateMeeting(request, applicationName);
@@ -148,7 +145,6 @@ public class EfficiencyToolService extends AbstractBaseService {
      *
      * @param request
      * @param applicationName
-     * @return BaseResponse
      */
     public void cancelMeeting(CancelMeetingRequest request, String applicationName) {
         BaseResponse response = weChatClient.cancelMeeting(request, applicationName);

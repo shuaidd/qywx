@@ -8,7 +8,7 @@ import java.util.Date;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-07 16:11
+ * date 2021-01-07 16:11
  **/
 public class GroupChatStatistic {
     private String owner;

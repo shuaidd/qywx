@@ -9,7 +9,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-06 21:28
+ * date 2021-01-06 21:28
  **/
 public class CommentsResponse extends AbstractBaseResponse {
     @JsonProperty("comment_list")

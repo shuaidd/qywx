@@ -4,7 +4,7 @@ package com.github.shuaidd.resquest;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-11 14:44
+ * date 2021-01-11 14:44
  **/
 public class CursorPageRequest {
     private String cursor;

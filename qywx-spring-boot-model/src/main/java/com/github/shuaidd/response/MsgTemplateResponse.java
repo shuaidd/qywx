@@ -9,7 +9,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-06 21:41
+ * date 2021-01-06 21:41
  **/
 public class MsgTemplateResponse extends AbstractBaseResponse {
     @JsonProperty("fail_list")

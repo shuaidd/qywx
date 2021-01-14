@@ -8,7 +8,7 @@ import java.util.Date;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-06 22:43
+ * date 2021-01-06 22:43
  **/
 public class BehaviorData {
     @JsonProperty("stat_time")

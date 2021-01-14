@@ -62,9 +62,8 @@ public abstract class AbstractBaseService {
     /**
      * 获取企业微信结果
      *
-     * @param response
-     * @param <T>
-     * @return
+     * @param response 响应
+     * @return <T extends AbstractBaseResponse>
      */
     final <T extends AbstractBaseResponse> T getResponse(T response) {
         if (check) {
@@ -78,8 +77,8 @@ public abstract class AbstractBaseService {
     /**
      * 获取应用密匙
      *
-     * @param applicationName
-     * @return
+     * @param applicationName 应用名称
+     * @return String
      */
     final String getApplicationSecret(String applicationName) {
         String secret = "";

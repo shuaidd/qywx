@@ -10,7 +10,7 @@ import java.util.Date;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-04 21:52
+ * date 2021-01-04 21:52
  **/
 public class UnassignedCustomer {
     @JsonProperty("handover_userid")

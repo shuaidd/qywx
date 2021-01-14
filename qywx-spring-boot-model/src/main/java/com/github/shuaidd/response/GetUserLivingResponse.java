@@ -8,7 +8,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-12 13:23
+ * date 2021-01-12 13:23
  **/
 public class GetUserLivingResponse extends AbstractBaseResponse {
     @JsonProperty("livingid_list")

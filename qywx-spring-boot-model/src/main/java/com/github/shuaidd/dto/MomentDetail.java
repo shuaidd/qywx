@@ -15,7 +15,7 @@ import java.util.List;
  * "visible_type  ":1,
  *
  * @author ddshuai
- * @date 2021-01-05 21:22
+ * date 2021-01-05 21:22
  **/
 public class MomentDetail {
     @JsonProperty("moment_id")

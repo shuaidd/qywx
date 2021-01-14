@@ -9,7 +9,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-11 14:02
+ * date 2021-01-11 14:02
  **/
 public class GetScheduleResponse extends AbstractBaseResponse {
     @JsonProperty("schedule_list")

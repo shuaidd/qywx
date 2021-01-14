@@ -9,7 +9,7 @@ import java.util.Date;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-07 16:06
+ * date 2021-01-07 16:06
  **/
 
 public class GroupChatStatisticRequest extends OffsetPageRequest {

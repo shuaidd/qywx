@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-02 19:32
+ * date 2021-01-02 19:32
  **/
 public class ExternalTextAttr {
     private String value;

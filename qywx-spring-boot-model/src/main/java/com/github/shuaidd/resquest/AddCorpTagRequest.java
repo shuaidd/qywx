@@ -9,7 +9,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-04 21:19
+ * date 2021-01-04 21:19
  **/
 public class AddCorpTagRequest {
     @JsonProperty("group_id")

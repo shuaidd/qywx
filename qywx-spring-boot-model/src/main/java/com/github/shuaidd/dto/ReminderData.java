@@ -9,7 +9,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-11 13:46
+ * date 2021-01-11 13:46
  **/
 public class ReminderData {
     @JsonProperty("is_remind")

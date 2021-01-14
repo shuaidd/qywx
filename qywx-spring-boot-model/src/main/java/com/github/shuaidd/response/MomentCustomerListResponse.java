@@ -9,7 +9,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-05 21:52
+ * date 2021-01-05 21:52
  **/
 public class MomentCustomerListResponse extends AbstractBaseResponse {
 

@@ -4,7 +4,7 @@ package com.github.shuaidd.dto;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-05 21:32
+ * date 2021-01-05 21:32
  **/
 public class MomentLocation {
     private String latitude;

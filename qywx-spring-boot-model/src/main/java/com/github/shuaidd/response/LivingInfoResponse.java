@@ -7,7 +7,7 @@ import com.github.shuaidd.dto.LivingInfoData;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-12 13:31
+ * date 2021-01-12 13:31
  **/
 public class LivingInfoResponse extends AbstractBaseResponse {
 

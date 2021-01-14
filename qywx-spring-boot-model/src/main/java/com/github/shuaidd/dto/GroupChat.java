@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-05 20:58
+ * date 2021-01-05 20:58
  **/
 public class GroupChat {
 

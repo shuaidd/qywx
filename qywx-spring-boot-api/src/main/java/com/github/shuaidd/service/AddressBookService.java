@@ -76,7 +76,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 创建用户
      *
-     * @param request
+     * @param request 请求
      */
     public final void createUser(CreateUserRequest request, String applicationName) {
         checkApplication(applicationName);
@@ -131,8 +131,8 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 删除成员
      *
-     * @param userId
-     * @param applicationName
+     * @param userId 用户编号
+     * @param applicationName 应用名称
      */
     public final void deleteUser(String userId, String applicationName) {
         checkApplication(applicationName);
@@ -149,8 +149,8 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 批量删除成员
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      */
     public final void batchDeleteUser(BatchDeleteUserRequest request, String applicationName) {
         checkApplication(applicationName);
@@ -170,7 +170,7 @@ public class AddressBookService extends AbstractBaseService {
      * @param departmentId    企业微信端部门编号
      * @param fetchChild      是否获取子部门人员
      * @param applicationName 应用
-     * @return
+     * @return List<WeChatUser>
      */
     public final List<WeChatUser> getDepartmentUser(Integer departmentId, boolean fetchChild, String applicationName) {
         checkApplication(applicationName);
@@ -196,7 +196,7 @@ public class AddressBookService extends AbstractBaseService {
      * @param departmentId    企业微信端部门编号
      * @param fetchChild      是否获取子部门人员
      * @param applicationName 应用
-     * @return
+     * @return List<WeChatUser>
      */
     public final List<WeChatUser> getDepartmentUserDetail(Integer departmentId, boolean fetchChild, String applicationName) {
         checkApplication(applicationName);
@@ -219,9 +219,9 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * userid转openid
      *
-     * @param userId
-     * @param applicationName
-     * @return
+     * @param userId 用户编号
+     * @param applicationName 应用名称
+     * @return String
      */
     public final String convertToOpenId(String userId, String applicationName) {
         checkApplication(applicationName);
@@ -242,9 +242,9 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * openid转userid
      *
-     * @param openId
-     * @param applicationName
-     * @return
+     * @param openId 用户编号
+     * @param applicationName 应用名称
+     * @return String
      */
     public final String convertToUserId(String openId, String applicationName) {
         checkApplication(applicationName);
@@ -265,8 +265,8 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 二次验证
      *
-     * @param userId
-     * @param applicationName
+     * @param userId 用户编号
+     * @param applicationName 应用名称
      */
     public final void authSuccess(String userId, String applicationName) {
         checkApplication(applicationName);
@@ -283,8 +283,8 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 邀请成员
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      */
     public final void invite(InviteUserRequest request, String applicationName) {
         checkApplication(applicationName);
@@ -304,8 +304,8 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 创建部门
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      * @return
      */
     public final CreateDepartmentResponse createDepartment(DepartmentRequest request, String applicationName) {
@@ -326,8 +326,8 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 更新部门信息
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求
+     * @param applicationName 应用名称
      */
     public final void updateDepartment(DepartmentRequest request, String applicationName) {
         checkApplication(applicationName);
@@ -344,8 +344,8 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 删除部门
      *
-     * @param id
-     * @param applicationName
+     * @param id 部门id
+     * @param applicationName 应用名称
      */
     public final void deleteDepartment(Integer id, String applicationName) {
         checkApplication(applicationName);
@@ -362,8 +362,8 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 拉取部门列表
      *
-     * @param id
-     * @param applicationName
+     * @param id 部门id
+     * @param applicationName 应用名称
      * @return
      */
     public final List<Department> departmentList(Integer id, String applicationName) {
@@ -383,9 +383,9 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 创建标签
      *
-     * @param request
-     * @param applicationName
-     * @return
+     * @param request 请求
+     * @param applicationName 应用名称
+     * @return Integer
      */
     public final Integer createTag(TagRequest request, String applicationName) {
         checkApplication(applicationName);
@@ -406,9 +406,9 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 更新标签名字
      *
-     * @param tagId
-     * @param tagName
-     * @param applicationName
+     * @param tagId 标签ID
+     * @param tagName 标签名称
+     * @param applicationName 应用名称
      */
     public final void updateTagName(Integer tagId, String tagName, String applicationName) {
         checkApplication(applicationName);
@@ -428,8 +428,8 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 删除标签
      *
-     * @param tagId
-     * @param applicationName
+     * @param tagId 标签ID
+     * @param applicationName 应用名称
      */
     public final void deleteTag(Integer tagId, String applicationName) {
         checkApplication(applicationName);
@@ -446,9 +446,9 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 获取标签成员
      *
-     * @param tagId
-     * @param applicationName
-     * @return
+     * @param tagId 标签ID
+     * @param applicationName 应用名称
+     * @return QueryTagUserResponse
      */
     public final QueryTagUserResponse getTagUser(Integer tagId, String applicationName) {
         checkApplication(applicationName);
@@ -468,9 +468,9 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 增加标签成员
      *
-     * @param request
-     * @param applicationName
-     * @return
+     * @param request 请求
+     * @param applicationName 应用名称
+     * @return TagUserResponse
      */
     public final TagUserResponse addTagUsers(TagUserRequest request, String applicationName) {
         checkApplication(applicationName);
@@ -489,9 +489,9 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 删除标签成员
      *
-     * @param request
-     * @param applicationName
-     * @return
+     * @param request 请求
+     * @param applicationName 应用名称
+     * @return TagUserResponse
      */
     public final TagUserResponse deleteTagUsers(TagUserRequest request, String applicationName) {
         checkApplication(applicationName);
@@ -510,8 +510,8 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 获取标签列表
      *
-     * @param applicationName
-     * @return
+     * @param applicationName  应用名称
+     * @return List<Tag>
      */
     public final List<Tag> getTagList(String applicationName) {
         checkApplication(applicationName);
@@ -539,8 +539,8 @@ public class AddressBookService extends AbstractBaseService {
      * <p>
      * 增量更新成员
      *
-     * @param weChatUsers
-     * @param applicationName
+     * @param weChatUsers  用户
+     * @param applicationName 应用名称
      * @return AsyncJobResponse
      */
     public final String asyncBatchUpdateUser(List<WeChatUser> weChatUsers, Boolean toInvite, CallbackData callbackData, String applicationName) {
@@ -647,10 +647,10 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 全量覆盖部门
      *
-     * @param departments
-     * @param callbackData
-     * @param applicationName
-     * @return
+     * @param departments departments
+     * @param callbackData  callbackData
+     * @param applicationName 应用名称
+     * @return String
      */
     public final String fullCoverDepartment(List<Department> departments, CallbackData callbackData, String applicationName) {
         checkApplication(applicationName);
@@ -698,9 +698,9 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 获取job执行结果
      *
-     * @param jobId
-     * @param applicationName
-     * @return
+     * @param jobId jobId
+     * @param applicationName 应用名称
+     * @return AsyncJobResultResponse
      */
     public final AsyncJobResultResponse jobResult(String jobId, String applicationName) {
         checkApplication(applicationName);

@@ -11,7 +11,7 @@ import java.util.Date;
  * "send_time": 1552536375
  *
  * @author ddshuai
- * @date 2021-01-06 22:10
+ * date 2021-01-06 22:10
  **/
 public class GroupMsgTask {
     @JsonProperty("userid")

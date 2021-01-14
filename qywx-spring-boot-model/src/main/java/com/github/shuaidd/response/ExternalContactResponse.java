@@ -10,7 +10,7 @@ import java.util.List;
  * 描述 客户详情
  *
  * @author ddshuai
- * @date 2021-01-02 16:32
+ * date 2021-01-02 16:32
  **/
 public class ExternalContactResponse extends AbstractBaseResponse {
 

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-07 21:45
+ * date 2021-01-07 21:45
  **/
 public class DeleteCalendarRequest {
     @JsonProperty("cal_id")

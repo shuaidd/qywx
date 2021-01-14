@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-07 21:37
+ * date 2021-01-07 21:37
  **/
 public class CalendarResponse extends AbstractBaseResponse {
     @JsonProperty("cal_id")

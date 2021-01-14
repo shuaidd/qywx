@@ -7,7 +7,7 @@ import com.github.shuaidd.dto.ScheduleData;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-11 13:51
+ * date 2021-01-11 13:51
  **/
 public class ScheduleRequest {
     private ScheduleData schedule;

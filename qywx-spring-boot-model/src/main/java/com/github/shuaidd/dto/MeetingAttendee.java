@@ -8,7 +8,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-11 14:27
+ * date 2021-01-11 14:27
  **/
 public class MeetingAttendee {
 

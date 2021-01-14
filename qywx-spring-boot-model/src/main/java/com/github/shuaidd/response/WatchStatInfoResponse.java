@@ -7,7 +7,7 @@ import com.github.shuaidd.dto.WatchStatInfo;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-12 16:52
+ * date 2021-01-12 16:52
  **/
 public class WatchStatInfoResponse extends AbstractBaseResponse {
     private Integer ending;

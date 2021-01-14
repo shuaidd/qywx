@@ -22,7 +22,7 @@ import java.util.Collections;
  * 描述 效率工具
  *
  * @author ddshuai
- * @date 2021-01-14 10:10
+ * date 2021-01-14 10:10
  **/
 public class EfficiencyToolTest extends AbstractTest {
     private EfficiencyToolService toolService;

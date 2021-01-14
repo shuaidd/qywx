@@ -10,7 +10,7 @@ import com.github.shuaidd.dto.MsgText;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-06 22:26
+ * date 2021-01-06 22:26
  **/
 public class WelcomeTemplateRequest {
     @JsonProperty("agentid")

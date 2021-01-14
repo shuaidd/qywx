@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-02 16:26
+ * date 2021-01-02 16:26
  **/
 public class FollowUserTag {
     @JsonProperty("group_name")

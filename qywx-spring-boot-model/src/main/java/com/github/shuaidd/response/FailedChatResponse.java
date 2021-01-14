@@ -9,7 +9,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-04 22:37
+ * date 2021-01-04 22:37
  **/
 public class FailedChatResponse extends AbstractBaseResponse {
 

@@ -17,7 +17,7 @@ public class TokenService extends AbstractBaseService {
     /**
      * 获取企业微信应用的access token
      *
-     * @param applicationName
+     * @param applicationName 应用名称
      * @return String
      */
     @Cacheable(value = "qywx", key = "'qywx_access_token_'+#applicationName")
@@ -35,7 +35,7 @@ public class TokenService extends AbstractBaseService {
     /**
      * 清除应用AccessToken缓存
      *
-     * @param applicationName
+     * @param applicationName 应用名称
      */
     @CacheEvict(value = "qywx", key = "'qywx_access_token_'+#applicationName")
     public void clearAccessToken(String applicationName) {

@@ -8,7 +8,7 @@ import java.util.Date;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-11 14:42
+ * date 2021-01-11 14:42
  **/
 public class GetMeetingForUserRequest extends CursorPageRequest {
 

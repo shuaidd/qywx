@@ -16,9 +16,9 @@ public class AuthenticationService extends AbstractBaseService {
     /**
      * 获取访问用户身份
      *
-     * @param code
-     * @param applicationName
-     * @return
+     * @param code 授权code
+     * @param applicationName 应用名称
+     * @return AuthenticationResponse
      */
     public final AuthenticationResponse getAuthentication(String code, String applicationName) {
         checkApplication(applicationName);

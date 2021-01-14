@@ -7,7 +7,7 @@ import com.github.shuaidd.dto.OwnerFilter;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-05 20:52
+ * date 2021-01-05 20:52
  **/
 public class GroupChatListRequest extends CursorPageRequest {
 

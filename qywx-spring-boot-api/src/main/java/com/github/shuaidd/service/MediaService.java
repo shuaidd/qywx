@@ -36,11 +36,11 @@ public class MediaService extends AbstractBaseService {
     /**
      * 上传临时素材
      *
-     * @param file
-     * @param mediaType
-     * @param type
-     * @param applicationName
-     * @return
+     * @param file 文件
+     * @param mediaType 媒体类型
+     * @param type 类型
+     * @param applicationName 应用名称
+     * @return String
      */
     public final String uploadMaterial(File file, MediaType mediaType, String type, String applicationName) {
         checkApplication(applicationName);
@@ -70,10 +70,10 @@ public class MediaService extends AbstractBaseService {
     /**
      * 上传永久图片
      *
-     * @param file
-     * @param mediaType
-     * @param applicationName
-     * @return
+     * @param file 文件
+     * @param mediaType 媒体类型
+     * @param applicationName 应用名称
+     * @return String
      */
     public final String uploadImage(File file, MediaType mediaType, String applicationName) {
         checkApplication(applicationName);

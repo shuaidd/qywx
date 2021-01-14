@@ -8,7 +8,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-11 14:00
+ * date 2021-01-11 14:00
  **/
 public class GetScheduleRequest {
     @JsonProperty("schedule_id_list")

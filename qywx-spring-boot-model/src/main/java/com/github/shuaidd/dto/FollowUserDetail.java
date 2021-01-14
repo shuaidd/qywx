@@ -10,7 +10,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-02 16:21
+ * date 2021-01-02 16:21
  **/
 public class FollowUserDetail {
 

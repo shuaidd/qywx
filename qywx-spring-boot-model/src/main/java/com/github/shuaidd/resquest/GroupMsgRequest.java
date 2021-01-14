@@ -17,7 +17,7 @@ import java.util.Date;
  * "cursor":"CURSOR"
  *
  * @author ddshuai
- * @date 2021-01-06 21:57
+ * date 2021-01-06 21:57
  **/
 public class GroupMsgRequest extends CursorPageRequest {
     @JsonProperty("chat_type")

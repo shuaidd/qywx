@@ -10,7 +10,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-07 21:42
+ * date 2021-01-07 21:42
  **/
 public class GetCalendarResponse extends AbstractBaseResponse {
     @JsonProperty("calendar_list")

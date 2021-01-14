@@ -8,7 +8,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-07 21:41
+ * date 2021-01-07 21:41
  **/
 public class GetCalendarRequest {
     @JsonProperty("cal_id_list")

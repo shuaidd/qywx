@@ -4,7 +4,7 @@ package com.github.shuaidd.resquest;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-02 21:34
+ * date 2021-01-02 21:34
  **/
 public class MobileHashCodeRequest {
     private String mobile;

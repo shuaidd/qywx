@@ -8,7 +8,7 @@ import java.util.Date;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-06 21:26
+ * date 2021-01-06 21:26
  **/
 public class Comment {
     @JsonProperty("external_userid")

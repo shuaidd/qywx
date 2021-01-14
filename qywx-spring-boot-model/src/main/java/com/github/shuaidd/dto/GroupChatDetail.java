@@ -15,7 +15,7 @@ import java.util.List;
  * "notice" : "文明沟通，拒绝脏话",
  *
  * @author ddshuai
- * @date 2021-01-05 21:06
+ * date 2021-01-05 21:06
  **/
 public class GroupChatDetail {
 

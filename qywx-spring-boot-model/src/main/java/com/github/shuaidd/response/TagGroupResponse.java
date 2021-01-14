@@ -10,7 +10,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-01-04 21:12
+ * date 2021-01-04 21:12
  **/
 public class TagGroupResponse extends AbstractBaseResponse {
     @JsonProperty("tag_group")

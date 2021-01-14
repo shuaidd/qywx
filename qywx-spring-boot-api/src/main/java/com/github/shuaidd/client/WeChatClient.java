@@ -547,7 +547,7 @@ public interface WeChatClient {
     /**
      * 获取客户列表
      *
-     * @param request
+     * @param userId
      * @param app
      * @return CustomListResponse
      */
@@ -557,7 +557,7 @@ public interface WeChatClient {
     /**
      * 获取客户详情
      *
-     * @param userid
+     * @param externalUserId
      * @param app
      * @return ExternalContactResponse
      */
