@@ -6,7 +6,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
- * 描述
+ * 描述 访问令牌管理
  *
  * @author ddshuai
  * date 2019-04-04 17:28
