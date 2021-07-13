@@ -13,6 +13,7 @@ import java.util.StringJoiner;
  * date 2019-04-05 17:18
  **/
 public class WeChatUser extends AbstractBaseResponse {
+
     @JsonProperty("userid")
     private String userId;
 
@@ -28,6 +29,9 @@ public class WeChatUser extends AbstractBaseResponse {
 
     private String position;
 
+    /**
+     * 性别。1表示男性，2表示女性
+     */
     private String gender;
 
     private String email;

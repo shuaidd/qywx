@@ -231,7 +231,7 @@ public class AddressBookService extends AbstractBaseService {
             if (isSuccess(response)) {
                 openId = response.getOpenId();
                 if (logger.isInfoEnabled()) {
-                    logger.info("获取openId成功：openid-{}applicationName-{}", openId, applicationName);
+                    logger.info("获取openId成功：openid-{}----applicationName-{}", openId, applicationName);
                 }
             }
         }
@@ -254,7 +254,7 @@ public class AddressBookService extends AbstractBaseService {
             if (isSuccess(response)) {
                 userId = response.getUserId();
                 if (logger.isInfoEnabled()) {
-                    logger.info("获取用户ID成功：userId-{},applicationName-{}", userId, applicationName);
+                    logger.info("获取用户ID成功：userId-{}, applicationName-{}", userId, applicationName);
                 }
             }
         }
@@ -373,7 +373,7 @@ public class AddressBookService extends AbstractBaseService {
         if (isSuccess(response)) {
             departments = response.getDepartments();
             if (logger.isInfoEnabled()) {
-                logger.info("拉取部门列表成功：部门数量-{},applicationName-{}", departments.size(), applicationName);
+                logger.info("拉取部门列表成功：部门数量-{},applicationName-{}，departments--{}", departments.size(), applicationName,departments);
             }
         }
 
@@ -457,7 +457,7 @@ public class AddressBookService extends AbstractBaseService {
             response = weChatClient.getTagUser(tagId, applicationName);
             if (isSuccess(response)) {
                 if (logger.isInfoEnabled()) {
-                    logger.info("获取标签成员成功：标签编号[{}],applicationName-{}", tagId, applicationName);
+                    logger.info("获取标签成员成功：标签编号[{}],applicationName-{}--成员--{}", tagId, applicationName,response.getUserList());
                 }
             }
         }
@@ -520,7 +520,7 @@ public class AddressBookService extends AbstractBaseService {
         if (isSuccess(response)) {
             tags = response.getTagList();
             if (logger.isInfoEnabled()) {
-                logger.info("获取标签列表成功：applicationName-{}", applicationName);
+                logger.info("获取标签列表成功：applicationName-{}--tags--{}", applicationName,tags);
             }
         }
 

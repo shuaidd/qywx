@@ -7,8 +7,12 @@ qywx:
     - secret: xxxx
       agent-id: 3010084
       application-name: schedule
-    - secret: AfjvAed_ulqhK0OqTprDQ6xOSnqaT34ll2LsRe0D2NA
+    - secret: xxx
       application-name: address-book
   url: https://qyapi.weixin.qq.com
   public-path: cgi-bin
-  corp-id: ww36e0a51aab349a7d
+  corp-id: xxx
+logging:
+  level:
+    root: warn
+    com.github.shuaidd: info
