@@ -13,7 +13,13 @@ public enum  ChangeType {
      */
     CREATE_USER(EventType.CHANGE_CONTACT,"create_user","新增成员事件"),
     UPDATE_USER(EventType.CHANGE_CONTACT,"update_user","更新成员事件"),
-    DELETE_USER(EventType.CHANGE_CONTACT,"delete_user","删除成员事件");
+    DELETE_USER(EventType.CHANGE_CONTACT,"delete_user","删除成员事件"),
+    CREATE_PARTY(EventType.CHANGE_CONTACT,"create_party","新增部门事件"),
+    UPDATE_PARTY(EventType.CHANGE_CONTACT,"update_party","更新部门事件"),
+    DELETE_PARTY(EventType.CHANGE_CONTACT,"delete_party","删除部门事件"),
+    UPDATE_TAG(EventType.CHANGE_CONTACT,"update_tag","标签变更通知"),
+    ADD_EXTERNAL_CONTACT(EventType.CHANGE_EXTERNAL_CONTACT,"add_external_contact","添加企业客户事件")
+    ;
 
     private final EventType eventType;
     private final String changeType;
