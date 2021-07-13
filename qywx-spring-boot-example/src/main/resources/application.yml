@@ -7,6 +7,8 @@ qywx:
     - secret: xxxx
       agent-id: 3010084
       application-name: schedule
+    - secret: AfjvAed_ulqhK0OqTprDQ6xOSnqaT34ll2LsRe0D2NA
+      application-name: address-book
   url: https://qyapi.weixin.qq.com
   public-path: cgi-bin
-  corp-id: xxxx
+  corp-id: ww36e0a51aab349a7d

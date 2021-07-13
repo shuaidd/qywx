@@ -182,7 +182,7 @@ public class AddressBookService extends AbstractBaseService {
                 weChatUsers = departmentUserResponse.getWeChatUserList();
 
                 if (logger.isInfoEnabled()) {
-                    logger.info("获取部门成员成功：applicationName-{}", applicationName);
+                    logger.info("获取部门成员成功：applicationName-{}--weChatUsers--{}", applicationName,weChatUsers);
                 }
             }
         }
@@ -208,7 +208,7 @@ public class AddressBookService extends AbstractBaseService {
                 weChatUsers = departmentUserResponse.getWeChatUserList();
 
                 if (logger.isInfoEnabled()) {
-                    logger.info("获取部门成员成功：applicationName-{}", applicationName);
+                    logger.info("获取部门成员详情成功：applicationName-{}--weChatUsers--{}", applicationName,weChatUsers);
                 }
             }
         }
