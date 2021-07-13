@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * date 2019-04-08 17:02
  **/
 public enum MsgType {
+
     /**
      * 消息类型
      */
@@ -22,10 +23,12 @@ public enum MsgType {
     MPNEWS("mpnews", "图文消息"),
     MARKDOWN("markdown", "markdown消息"),
     MINIPROGRAM_NOTICE("miniprogram_notice", "小程序通知消息"),
+    INTERACTIVE_TASK_CARD("interactive_taskcard","任务卡片消息")
     ;
+
     @JsonValue
-    private String type;
-    private String description;
+    private final String type;
+    private final String description;
 
     MsgType(String type, String description) {
         this.type = type;
