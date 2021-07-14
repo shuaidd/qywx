@@ -28,8 +28,17 @@ public abstract class BaseEventData {
     @XmlElement(name = "Event")
     private String event;
 
+    @XmlElement(name = "EventKey")
+    private String eventKey;
+
     @XmlElement(name = "ChangeType")
     private String changeType;
+
+    @XmlElement(name = "MsgId")
+    private Long msgId;
+
+    @XmlElement(name = "AgentID")
+    private Integer agentId;
 
     public String getToUserName() {
         return toUserName;
@@ -77,5 +86,29 @@ public abstract class BaseEventData {
 
     public void setChangeType(String changeType) {
         this.changeType = changeType;
+    }
+
+    public Long getMsgId() {
+        return msgId;
+    }
+
+    public void setMsgId(Long msgId) {
+        this.msgId = msgId;
+    }
+
+    public Integer getAgentId() {
+        return agentId;
+    }
+
+    public void setAgentId(Integer agentId) {
+        this.agentId = agentId;
+    }
+
+    public String getEventKey() {
+        return eventKey;
+    }
+
+    public void setEventKey(String eventKey) {
+        this.eventKey = eventKey;
     }
 }
