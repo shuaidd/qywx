@@ -3,6 +3,7 @@ package com.github.shuaidd.service;
 import com.github.shuaidd.response.*;
 import com.github.shuaidd.resquest.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 描述 效率工具
@@ -172,6 +173,98 @@ public class EfficiencyToolService extends AbstractBaseService {
      */
     public MeetingDetailResponse getUserMeetingInfo(GetMeetingDetailRequest request, String applicationName) {
         MeetingDetailResponse response = weChatClient.getMeetingInfo(request, applicationName);
+        return getResponse(response);
+    }
+
+    /**
+     * 创建预约直播
+     * @param request 请求体
+     * @param applicationName 应用名
+     * @return CreateLivingResponse
+     */
+    public CreateLivingResponse createLiving(LivingRequest request,String applicationName) {
+        CreateLivingResponse response = weChatClient.createLiving(request,applicationName);
+        return getResponse(response);
+    }
+
+    /**
+     * 创建预约直播
+     * @param request 请求体
+     * @param applicationName 应用名
+     */
+    public void modifyLiving(LivingRequest request, String applicationName) {
+        BaseResponse baseResponse = weChatClient.modifyLiving(request,applicationName);
+        getResponse(baseResponse);
+    }
+
+    /**
+     * 取消预约直播
+     * @param request 请求体
+     * @param applicationName 应用名
+     */
+    public void cancelLiving(CancelLivingRequest request, String applicationName) {
+        BaseResponse baseResponse = weChatClient.cancelLiving(request,applicationName);
+        getResponse(baseResponse);
+    }
+
+    /**
+     * 删除直播回放
+     * @param request 请求体
+     * @param applicationName 应用名
+     */
+    public void delLiving(DeleteLivingRequest request, String applicationName) {
+        BaseResponse baseResponse = weChatClient.delLiving(request,applicationName);
+        getResponse(baseResponse);
+    }
+
+    /**
+     * 获取微信观看直播凭证
+     * @param request 请求体
+     * @param applicationName 应用名
+     */
+    public LivingCodeResponse getLivingCode(LivingCodeRequest request, String applicationName){
+        LivingCodeResponse response = weChatClient.getLivingCode(request,applicationName);
+        return getResponse(response);
+    }
+
+    /**
+     * 获取成员直播ID列表
+     * @param request 请求体
+     * @param applicationName 应用名
+     */
+    public GetUserLivingResponse getUserAllLivingId(GetUserLivingRequest request, String applicationName){
+        GetUserLivingResponse response = weChatClient.getUserAllLivingId(request,applicationName);
+        return getResponse(response);
+    }
+
+    /**
+     * 获取直播详情
+     * @param livingId 直播编号
+     * @param applicationName 应用名
+     * @return LivingInfoResponse
+     */
+    public LivingInfoResponse getLivingInfo(String livingId, String applicationName){
+        LivingInfoResponse livingInfoResponse = weChatClient.getLivingInfo(livingId,applicationName);
+        return getResponse(livingInfoResponse);
+    }
+
+    /**
+     * 获取成员直播ID列表
+     * @param request 请求体
+     * @param applicationName 应用名
+     */
+    public WatchStatInfoResponse getWatchStat(GetWatchStatRequest request, String applicationName) {
+        WatchStatInfoResponse response = weChatClient.getWatchStat(request,applicationName);
+        return getResponse(response);
+    }
+
+    /**
+     * 获取跳转小程序商城的直播观众信息
+     * @param request 请求体
+     * @param applicationName 应用名
+     */
+    public LivingShareResponse getLivingShareInfo(LivingShareRequest request, String applicationName){
+        LivingShareResponse response = weChatClient.getLivingShareInfo(request,applicationName);
         return getResponse(response);
     }
 }

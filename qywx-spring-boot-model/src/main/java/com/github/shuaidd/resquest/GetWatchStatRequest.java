@@ -9,8 +9,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * date 2021-01-12 13:45
  **/
 public class GetWatchStatRequest {
+
     @JsonProperty("livingid")
     private String livingId;
+
     @JsonProperty("next_key")
     private String nextKey;
 

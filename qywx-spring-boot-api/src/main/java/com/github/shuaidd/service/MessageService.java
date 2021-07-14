@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 /**
- * 描述
+ * 描述 消息管理
  *
  * @author ddshuai
  * date 2019-04-08 16:51

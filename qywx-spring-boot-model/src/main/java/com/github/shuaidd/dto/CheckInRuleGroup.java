@@ -53,6 +53,46 @@ public class CheckInRuleGroup {
     @JsonProperty("loc_infos")
     private List<CheckInLocation> locations;
 
+    private CheckInRuleGroupRange range;
+
+    @JsonProperty("create_time")
+    private Long createTime;
+
+    @JsonProperty("white_users")
+    private List<String> whiteUsers;
+
+    private Integer type;
+
+    @JsonProperty("reporterinfo")
+    private ReporterInfo reporterInfo;
+
+    @JsonProperty("ot_info")
+    private OverTimeInfo overTimeInfo;
+
+    @JsonProperty("allow_apply_bk_cnt")
+    private Integer allowApplyBkCnt;
+
+    @JsonProperty("option_out_range")
+    private Integer optionOutRange;
+
+    @JsonProperty("create_userid")
+    private String createUserId;
+
+    @JsonProperty("allow_apply_bk_day_limit")
+    private Integer allowApplyBkDayLimit;
+
+    @JsonProperty("use_face_detect")
+    private Boolean useFaceDetect;
+
+    @JsonProperty("update_userid")
+    private String updateUserId;
+
+    @JsonProperty("offwork_interval_time")
+    private Integer offWorkIntervalTime;
+
+    @JsonProperty("schedulelist")
+    private List<ScheduleItem> scheduleList;
+
     public Integer getGroupType() {
         return groupType;
     }
@@ -155,5 +195,117 @@ public class CheckInRuleGroup {
 
     public void setLocations(List<CheckInLocation> locations) {
         this.locations = locations;
+    }
+
+    public CheckInRuleGroupRange getRange() {
+        return range;
+    }
+
+    public void setRange(CheckInRuleGroupRange range) {
+        this.range = range;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
+
+    public List<String> getWhiteUsers() {
+        return whiteUsers;
+    }
+
+    public void setWhiteUsers(List<String> whiteUsers) {
+        this.whiteUsers = whiteUsers;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public ReporterInfo getReporterInfo() {
+        return reporterInfo;
+    }
+
+    public void setReporterInfo(ReporterInfo reporterInfo) {
+        this.reporterInfo = reporterInfo;
+    }
+
+    public OverTimeInfo getOverTimeInfo() {
+        return overTimeInfo;
+    }
+
+    public void setOverTimeInfo(OverTimeInfo overTimeInfo) {
+        this.overTimeInfo = overTimeInfo;
+    }
+
+    public Integer getAllowApplyBkCnt() {
+        return allowApplyBkCnt;
+    }
+
+    public void setAllowApplyBkCnt(Integer allowApplyBkCnt) {
+        this.allowApplyBkCnt = allowApplyBkCnt;
+    }
+
+    public Integer getOptionOutRange() {
+        return optionOutRange;
+    }
+
+    public void setOptionOutRange(Integer optionOutRange) {
+        this.optionOutRange = optionOutRange;
+    }
+
+    public String getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(String createUserId) {
+        this.createUserId = createUserId;
+    }
+
+    public Integer getAllowApplyBkDayLimit() {
+        return allowApplyBkDayLimit;
+    }
+
+    public void setAllowApplyBkDayLimit(Integer allowApplyBkDayLimit) {
+        this.allowApplyBkDayLimit = allowApplyBkDayLimit;
+    }
+
+    public Boolean getUseFaceDetect() {
+        return useFaceDetect;
+    }
+
+    public void setUseFaceDetect(Boolean useFaceDetect) {
+        this.useFaceDetect = useFaceDetect;
+    }
+
+    public String getUpdateUserId() {
+        return updateUserId;
+    }
+
+    public void setUpdateUserId(String updateUserId) {
+        this.updateUserId = updateUserId;
+    }
+
+    public Integer getOffWorkIntervalTime() {
+        return offWorkIntervalTime;
+    }
+
+    public void setOffWorkIntervalTime(Integer offWorkIntervalTime) {
+        this.offWorkIntervalTime = offWorkIntervalTime;
+    }
+
+    public List<ScheduleItem> getScheduleList() {
+        return scheduleList;
+    }
+
+    public void setScheduleList(List<ScheduleItem> scheduleList) {
+        this.scheduleList = scheduleList;
     }
 }

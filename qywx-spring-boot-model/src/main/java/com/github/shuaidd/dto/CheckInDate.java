@@ -26,6 +26,12 @@ public class CheckInDate {
     @JsonProperty("checkintime")
     private List<CheckInTime> checkInTimes;
 
+    @JsonProperty("flex_on_duty_time")
+    private Long flexOnDutyTime;
+
+    @JsonProperty("flex_off_duty_time")
+    private Long flexOffDutyTime;
+
     public Long getFlexTime() {
         return flexTime;
     }
@@ -64,5 +70,21 @@ public class CheckInDate {
 
     public void setCheckInTimes(List<CheckInTime> checkInTimes) {
         this.checkInTimes = checkInTimes;
+    }
+
+    public Long getFlexOnDutyTime() {
+        return flexOnDutyTime;
+    }
+
+    public void setFlexOnDutyTime(Long flexOnDutyTime) {
+        this.flexOnDutyTime = flexOnDutyTime;
+    }
+
+    public Long getFlexOffDutyTime() {
+        return flexOffDutyTime;
+    }
+
+    public void setFlexOffDutyTime(Long flexOffDutyTime) {
+        this.flexOffDutyTime = flexOffDutyTime;
     }
 }

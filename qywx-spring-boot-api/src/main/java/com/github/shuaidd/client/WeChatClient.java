@@ -1056,6 +1056,7 @@ public interface WeChatClient {
 
     /**
      * 获取微信观看直播凭证
+     *
      * @param request
      * @param app
      * @return LivingCodeResponse
@@ -1065,6 +1066,7 @@ public interface WeChatClient {
 
     /**
      * 获取成员直播ID列表
+     *
      * @param request
      * @param app
      * @return GetUserLivingResponse
@@ -1074,19 +1076,40 @@ public interface WeChatClient {
 
     /**
      * 获取直播详情
+     *
      * @param livingId
      * @param app
      * @return LivingInfoResponse
      */
-    @GetMapping(value = "living/get_living_info",headers = HEAD)
+    @GetMapping(value = "living/get_living_info", headers = HEAD)
     LivingInfoResponse getLivingInfo(@RequestParam("livingid") String livingId, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取直播观看明细
+     *
      * @param request
      * @param app
      * @return WatchStatInfoResponse
      */
     @PostMapping(value = "living/get_watch_stat", headers = HEAD)
-    WatchStatInfoResponse getWatchStat(GetWatchStatRequest request,@RequestParam(HEAD_KEY) String app);
+    WatchStatInfoResponse getWatchStat(GetWatchStatRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取跳转小程序商城的直播观众信息
+     *
+     * @param request
+     * @param app
+     * @return LivingShareResponse
+     */
+    @PostMapping(value = "living/get_living_share_info", headers = HEAD)
+    LivingShareResponse getLivingShareInfo(LivingShareRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取企业所有打卡规则
+     *
+     * @param app 应用名
+     * @return CheckInOptionResponse
+     */
+    @PostMapping(value = "checkin/getcorpcheckinoption", headers = HEAD)
+    CheckInOptionResponse getCorpCheckInOption(@RequestParam(HEAD_KEY) String app);
 }

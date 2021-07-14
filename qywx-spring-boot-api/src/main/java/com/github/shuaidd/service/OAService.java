@@ -4,23 +4,21 @@ import com.github.shuaidd.dto.CheckInData;
 import com.github.shuaidd.dto.CheckInRule;
 import com.github.shuaidd.dto.DialRecord;
 import com.github.shuaidd.exception.WeChatException;
-import com.github.shuaidd.response.ApprovalDataResponse;
-import com.github.shuaidd.response.CheckInDataResponse;
-import com.github.shuaidd.response.CheckInRuleResponse;
-import com.github.shuaidd.response.DialRecordResponse;
+import com.github.shuaidd.response.*;
 import com.github.shuaidd.resquest.ApprovalDataRequest;
 import com.github.shuaidd.resquest.CheckInDataRequest;
 import com.github.shuaidd.resquest.CheckInRuleRequest;
 import com.github.shuaidd.resquest.DialRecordRequest;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * 描述
+ * 描述 OA
  *
  * @author ddshuai
  * date 2019-04-11 10:15
@@ -32,7 +30,7 @@ public class OAService extends AbstractBaseService {
     /**
      * 获取打卡数据
      *
-     * @param request 请求
+     * @param request         请求
      * @param applicationName 应用名称
      * @return List<CheckInData>
      */
@@ -66,7 +64,7 @@ public class OAService extends AbstractBaseService {
     /**
      * 获取打卡规则
      *
-     * @param request 请求
+     * @param request         请求
      * @param applicationName 应用名称
      * @return List<CheckInRule>
      */
@@ -90,7 +88,7 @@ public class OAService extends AbstractBaseService {
     /**
      * 获取审批数据
      *
-     * @param request 请求
+     * @param request         请求
      * @param applicationName 应用名称
      * @return ApprovalDataResponse
      */
@@ -109,7 +107,7 @@ public class OAService extends AbstractBaseService {
     /**
      * 获取公费电话拨打记录
      *
-     * @param request 请求
+     * @param request         请求
      * @param applicationName 应用名称
      * @return List<DialRecord>
      */
@@ -121,5 +119,15 @@ public class OAService extends AbstractBaseService {
             records = response.getRecords();
         }
         return records;
+    }
+
+    /**
+     * 获取企业所有打卡规则
+     * @param applicationName 应用名称
+     * @return CheckInOptionResponse
+     */
+    public CheckInOptionResponse getCorpCheckInOption(String applicationName) {
+        CheckInOptionResponse response = weChatClient.getCorpCheckInOption(applicationName);
+        return getResponse(response);
     }
 }

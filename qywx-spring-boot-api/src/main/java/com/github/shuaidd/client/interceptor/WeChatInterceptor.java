@@ -48,6 +48,10 @@ public class WeChatInterceptor implements RequestInterceptor {
                 }
             }
 
+            if (StringUtils.isEmpty(app)) {
+                throw new RuntimeException("请求未传递应用名，无法调起接口");
+            }
+
             WeChatManager weChatManager = applicationContext.getBean(WeChatManager.class);
             String accessToken = weChatManager.tokenService().getAccessToken(app);
             template.query(WeChatClient.ACCESS_TOKEN, accessToken);

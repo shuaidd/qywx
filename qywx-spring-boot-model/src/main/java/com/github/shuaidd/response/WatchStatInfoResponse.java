@@ -10,9 +10,12 @@ import com.github.shuaidd.dto.WatchStatInfo;
  * date 2021-01-12 16:52
  **/
 public class WatchStatInfoResponse extends AbstractBaseResponse {
+
     private Integer ending;
+
     @JsonProperty("next_key")
     private String nextKey;
+
     @JsonProperty("stat_info")
     private WatchStatInfo watchStatInfo;
 
