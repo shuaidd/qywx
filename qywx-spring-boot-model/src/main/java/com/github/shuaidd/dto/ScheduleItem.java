@@ -2,11 +2,13 @@ package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 /**
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-14 16:39
+ * date 2021-07-14 16:39
  **/
 public class ScheduleItem {
 
@@ -41,7 +43,7 @@ public class ScheduleItem {
     private Integer maxAllowArriveLate;
 
     @JsonProperty("time_section")
-    private TimeSection timeSection;
+    private List<TimeSection> timeSections;
 
     @JsonProperty("late_rule")
     private LateRule lateRule;
@@ -126,12 +128,12 @@ public class ScheduleItem {
         this.maxAllowArriveLate = maxAllowArriveLate;
     }
 
-    public TimeSection getTimeSection() {
-        return timeSection;
+    public List<TimeSection> getTimeSections() {
+        return timeSections;
     }
 
-    public void setTimeSection(TimeSection timeSection) {
-        this.timeSection = timeSection;
+    public void setTimeSections(List<TimeSection> timeSections) {
+        this.timeSections = timeSections;
     }
 
     public LateRule getLateRule() {

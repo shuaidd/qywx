@@ -33,6 +33,7 @@ public enum EventType {
     ADD_SCHEDULE("add_schedule","添加日程事件"),
     MODIFY_SCHEDULE("modify_schedule","修改日程事件"),
     DELETE_SCHEDULE("delete_schedule","删除日程事件"),
+    LIVING_STATUS_CHANGE("living_status_change","直播回调事件"),
     BATCH_JOB_RESULT("batch_job_result","异步任务完成通知");
     private final String event;
     private final String eventName;

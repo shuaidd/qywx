@@ -8,7 +8,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-13 13:19
+ * date 2021-07-13 13:19
  **/
 public class InteractiveTaskCard {
     private String title;

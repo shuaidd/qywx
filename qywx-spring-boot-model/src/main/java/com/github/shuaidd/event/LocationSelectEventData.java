@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-14 11:33
+ * date 2021-07-14 11:33
  **/
 @XmlRootElement(name = "xml")
 public class LocationSelectEventData extends BaseEventData {

@@ -12,7 +12,7 @@ import java.util.Objects;
  * 描述 企业微信 事件回调数据管理
  *
  * @author ddshuai
- * @date 2021-07-13 16:41
+ * date 2021-07-13 16:41
  **/
 public class EventDataManager {
 
@@ -69,6 +69,8 @@ public class EventDataManager {
         DATA_TYPE_MAP.put(ChangeType.ADD_SCHEDULE, ScheduleEventData.class);
         DATA_TYPE_MAP.put(ChangeType.MODIFY_SCHEDULE, ScheduleEventData.class);
         DATA_TYPE_MAP.put(ChangeType.DELETE_SCHEDULE, ScheduleEventData.class);
+
+        DATA_TYPE_MAP.put(ChangeType.LIVING_STATUS_CHANGE, LivingStatusChangeEventData.class);
     }
 
     public static <T extends BaseEventData> T getXmlData(String xml, Class<T> tClass) {

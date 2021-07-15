@@ -1,6 +1,7 @@
 package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
@@ -307,5 +308,38 @@ public class CheckInRuleGroup {
 
     public void setScheduleList(List<ScheduleItem> scheduleList) {
         this.scheduleList = scheduleList;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("groupType", groupType)
+                .append("groupId", groupId)
+                .append("syncHolidays", syncHolidays)
+                .append("groupName", groupName)
+                .append("needPhoto", needPhoto)
+                .append("noteCanUseLocalPic", noteCanUseLocalPic)
+                .append("allowCheckinOffWorkDay", allowCheckinOffWorkDay)
+                .append("allowApplyOffWorkDay", allowApplyOffWorkDay)
+                .append("checkInDates", checkInDates)
+                .append("speWorkDays", speWorkDays)
+                .append("speOffDays", speOffDays)
+                .append("wifiMacInfos", wifiMacInfos)
+                .append("locations", locations)
+                .append("range", range)
+                .append("createTime", createTime)
+                .append("whiteUsers", whiteUsers)
+                .append("type", type)
+                .append("reporterInfo", reporterInfo)
+                .append("overTimeInfo", overTimeInfo)
+                .append("allowApplyBkCnt", allowApplyBkCnt)
+                .append("optionOutRange", optionOutRange)
+                .append("createUserId", createUserId)
+                .append("allowApplyBkDayLimit", allowApplyBkDayLimit)
+                .append("useFaceDetect", useFaceDetect)
+                .append("updateUserId", updateUserId)
+                .append("offWorkIntervalTime", offWorkIntervalTime)
+                .append("scheduleList", scheduleList)
+                .toString();
     }
 }

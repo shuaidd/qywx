@@ -4,7 +4,7 @@ package com.github.shuaidd.enums;
  * 描述 企业微信 事件变更类型
  *
  * @author ddshuai
- * @date 2021-07-13 16:25
+ * date 2021-07-13 16:25
  **/
 public enum  ChangeType {
 
@@ -68,6 +68,7 @@ public enum  ChangeType {
     ADD_SCHEDULE(EventType.ADD_SCHEDULE,"","添加日程事件"),
     MODIFY_SCHEDULE(EventType.MODIFY_SCHEDULE,"","修改日程事件"),
     DELETE_SCHEDULE(EventType.DELETE_SCHEDULE,"","删除日程事件"),
+    LIVING_STATUS_CHANGE(EventType.LIVING_STATUS_CHANGE,"","直播回调事件"),
     ;
 
     private final EventType eventType;

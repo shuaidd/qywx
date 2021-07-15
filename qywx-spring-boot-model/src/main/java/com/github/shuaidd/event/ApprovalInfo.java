@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 /**
  * 描述
  * @author ddshuai
- * @date 2021-07-14 13:18
+ * date 2021-07-14 13:18
  **/
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ApprovalInfo {

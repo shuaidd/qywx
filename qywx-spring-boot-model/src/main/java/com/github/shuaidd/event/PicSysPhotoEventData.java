@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-14 11:21
+ * date 2021-07-14 11:21
  **/
 @XmlRootElement(name = "xml")
 public class PicSysPhotoEventData extends BaseEventData {

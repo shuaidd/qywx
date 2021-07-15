@@ -9,7 +9,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-13 15:56
+ * date 2021-07-13 15:56
  **/
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ExtAttrData {

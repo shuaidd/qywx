@@ -6,9 +6,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-14 16:41
+ * date 2021-07-14 16:41
  **/
 public class TimeSection {
+
+    private Integer id;
 
     @JsonProperty("time_id")
     private Integer timeId;
@@ -96,5 +98,13 @@ public class TimeSection {
 
     public void setAllowRest(Boolean allowRest) {
         this.allowRest = allowRest;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

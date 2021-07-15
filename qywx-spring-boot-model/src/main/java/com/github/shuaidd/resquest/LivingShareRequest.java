@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-14 15:07
+ * date 2021-07-14 15:07
  **/
 public class LivingShareRequest {
 

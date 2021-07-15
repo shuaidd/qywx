@@ -5,10 +5,7 @@ import com.github.shuaidd.dto.CheckInRule;
 import com.github.shuaidd.dto.DialRecord;
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.*;
-import com.github.shuaidd.resquest.ApprovalDataRequest;
-import com.github.shuaidd.resquest.CheckInDataRequest;
-import com.github.shuaidd.resquest.CheckInRuleRequest;
-import com.github.shuaidd.resquest.DialRecordRequest;
+import com.github.shuaidd.resquest.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,11 +25,11 @@ public class OAService extends AbstractBaseService {
     private static final int LIMIT_USER_COUNT = 100;
 
     /**
-     * 获取打卡数据
+     * 获取打卡记录数据
      *
      * @param request         请求
      * @param applicationName 应用名称
-     * @return List<CheckInData>
+     * @return CheckInData
      */
     public final List<CheckInData> getCheckInData(CheckInDataRequest request, String applicationName) {
         checkApplication(applicationName);
@@ -62,11 +59,11 @@ public class OAService extends AbstractBaseService {
     }
 
     /**
-     * 获取打卡规则
+     * 获取员工打卡规则
      *
      * @param request         请求
      * @param applicationName 应用名称
-     * @return List<CheckInRule>
+     * @return CheckInRule
      */
     public final List<CheckInRule> getCheckInOption(CheckInRuleRequest request, String applicationName) {
         checkApplication(applicationName);
@@ -109,7 +106,7 @@ public class OAService extends AbstractBaseService {
      *
      * @param request         请求
      * @param applicationName 应用名称
-     * @return List<DialRecord>
+     * @return DialRecord
      */
     public final List<DialRecord> getDialRecord(DialRecordRequest request, String applicationName) {
         Objects.requireNonNull(request, "参数为空");
@@ -129,5 +126,58 @@ public class OAService extends AbstractBaseService {
     public CheckInOptionResponse getCorpCheckInOption(String applicationName) {
         CheckInOptionResponse response = weChatClient.getCorpCheckInOption(applicationName);
         return getResponse(response);
+    }
+
+    /**
+     * 获取打卡日报数据
+     * @param request 请求
+     * @param applicationName 应用名称
+     * @return CheckInDayReportResponse
+     */
+    public CheckInDayReportResponse getCheckInDayData(CommonOaRequest request, String applicationName){
+        CheckInDayReportResponse reportResponse = weChatClient.getCheckInDayData(request,applicationName);
+        return getResponse(reportResponse);
+    }
+
+    /**
+     * 获取打卡月报数据
+     * @param request 请求
+     * @param applicationName 应用名称
+     * @return CheckInDayReportResponse
+     */
+    public CheckInDayReportResponse getCheckInMonthData(CommonOaRequest request, String applicationName){
+        CheckInDayReportResponse reportResponse = weChatClient.getCheckInMonthData(request,applicationName);
+        return getResponse(reportResponse);
+    }
+
+    /**
+     * 获取打卡人员排班信息
+     * @param request 请求
+     * @param applicationName 应用名称
+     * @return CheckInDayReportResponse
+     */
+    public CheckInScheduleResponse getCheckInScheduleList(CommonOaRequest request, String applicationName){
+        CheckInScheduleResponse reportResponse = weChatClient.getCheckInScheduList(request,applicationName);
+        return getResponse(reportResponse);
+    }
+
+    /**
+     * 为打卡人员排班
+     * @param request 请求
+     * @param applicationName 应用名称
+     */
+    public void setCheckInScheduleList(SetCheckInScheduleRequest request,String applicationName){
+        BaseResponse response = weChatClient.setCheckInScheduleList(request,applicationName);
+        getResponse(response);
+    }
+
+    /**
+     * 录入打卡人员人脸信息
+     * @param request 请求
+     * @param applicationName 应用名称
+     */
+    public void addCheckInUserFace(AddCheckInUserFaceRequest request,String applicationName){
+        BaseResponse response = weChatClient.addCheckInUserFace(request,applicationName);
+        getResponse(response);
     }
 }

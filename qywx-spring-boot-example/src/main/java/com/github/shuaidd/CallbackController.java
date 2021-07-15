@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * aeskey QJqvdlS4M4FTPUNqSQrMg3VwNRyBCqTqtNStREy3Ahd
  *
  * @author ddshuai
- * @date 2021-07-13 13:33
+ * date 2021-07-13 13:33
  **/
 @RestController
 @RequestMapping("/")

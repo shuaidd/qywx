@@ -1,4 +1,4 @@
-package com.github.shuaidd.response;
+package com.github.shuaidd.resquest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

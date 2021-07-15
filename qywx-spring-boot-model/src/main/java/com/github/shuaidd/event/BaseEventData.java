@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
  * 描述 消息通知基类
  *
  * @author ddshuai
- * @date 2021-07-13 15:41
+ * date 2021-07-13 15:41
  **/
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class BaseEventData {

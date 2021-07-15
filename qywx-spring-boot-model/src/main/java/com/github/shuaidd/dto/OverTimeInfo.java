@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 描述 加班信息
  *
  * @author ddshuai
- * @date 2021-07-14 16:03
+ * date 2021-07-14 16:03
  **/
 public class OverTimeInfo {
 

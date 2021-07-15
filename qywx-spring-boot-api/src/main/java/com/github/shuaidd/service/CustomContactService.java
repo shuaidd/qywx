@@ -3,8 +3,6 @@ package com.github.shuaidd.service;
 import com.github.shuaidd.response.*;
 import com.github.shuaidd.resquest.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 描述 客户联系
@@ -20,6 +18,8 @@ public class CustomContactService extends AbstractBaseService {
 
     /**
      * 获取配置了客户联系功能的成员列表
+     * @param applicationName 应用名称
+     * @return FollowUserResponse
      */
     public FollowUserResponse getFollowUserList(String applicationName) {
         FollowUserResponse response = weChatClient.getFollowUserList(applicationName);

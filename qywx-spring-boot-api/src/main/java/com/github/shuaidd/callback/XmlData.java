@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-13 15:04
+ * date 2021-07-13 15:04
  **/
 @XmlRootElement
 public class XmlData {

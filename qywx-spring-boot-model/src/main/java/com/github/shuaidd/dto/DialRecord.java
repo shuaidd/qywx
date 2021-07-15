@@ -1,6 +1,9 @@
 package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import java.util.List;
 
 /**
  * 描述
@@ -12,12 +15,16 @@ public class DialRecord {
 
     @JsonProperty("call_time")
     private Long callTime;
+
     @JsonProperty("total_duration")
     private Long totalDuration;
+
     @JsonProperty("call_type")
     private Integer callType;
+
     private Caller caller;
-    private Callee callee;
+
+    private List<Callee> callee;
 
     public Long getCallTime() {
         return callTime;
@@ -51,11 +58,22 @@ public class DialRecord {
         this.caller = caller;
     }
 
-    public Callee getCallee() {
+    public List<Callee> getCallee() {
         return callee;
     }
 
-    public void setCallee(Callee callee) {
+    public void setCallee(List<Callee> callee) {
         this.callee = callee;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("callTime", callTime)
+                .append("totalDuration", totalDuration)
+                .append("callType", callType)
+                .append("caller", caller)
+                .append("callee", callee)
+                .toString();
     }
 }

@@ -6,19 +6,28 @@ package com.github.shuaidd.client.config;
  * @author ddshuai
  * date 2019-04-03 16:02
  **/
+
 public class ApplicationProperties {
+
     /**
      * 应用密匙
      */
     private String secret;
+
     /**
      * 应用的编号
      */
     private String agentId;
+
     /**
      * 应用别名
      */
     private String applicationName;
+
+    /**
+     * 应用描述
+     */
+    private String applicationDesc;
 
     public String getSecret() {
         return secret;
@@ -42,5 +51,13 @@ public class ApplicationProperties {
 
     public void setApplicationName(String applicationName) {
         this.applicationName = applicationName;
+    }
+
+    public String getApplicationDesc() {
+        return applicationDesc;
+    }
+
+    public void setApplicationDesc(String applicationDesc) {
+        this.applicationDesc = applicationDesc;
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-14 13:28
+ * date 2021-07-14 13:28
  **/
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ApprovalNodeItems {

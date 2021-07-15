@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * 描述 语音消息
  *
  * @author ddshuai
- * @date 2021-07-14 10:33
+ * date 2021-07-14 10:33
  **/
 @XmlRootElement(name = "xml")
 public class VoiceMsgEventData extends BaseEventData {

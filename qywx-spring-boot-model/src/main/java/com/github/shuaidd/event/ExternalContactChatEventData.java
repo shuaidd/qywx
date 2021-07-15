@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * 描述 客户群事件
  *
  * @author ddshuai
- * @date 2021-07-14 09:44
+ * date 2021-07-14 09:44
  **/
 @XmlRootElement(name = "xml")
 public class ExternalContactChatEventData extends BaseEventData {

@@ -46,6 +46,7 @@ public interface WeChatClient {
     /**
      * 读取成员信息
      *
+     * @param app    应用名
      * @param userId 成员编号
      */
     @GetMapping(value = "user/get", headers = HEAD)
@@ -54,6 +55,7 @@ public interface WeChatClient {
     /**
      * 更新成员信息【根据userID更新，必传】
      *
+     * @param app     应用名
      * @param request 更新请求参数
      * @return BaseResponse
      */
@@ -83,6 +85,7 @@ public interface WeChatClient {
     /**
      * 获取部门成员[应用须拥有指定部门的查看权限。]
      *
+     * @param app          应用名
      * @param departmentId 获取的部门id
      * @param fetchChild   1/0：是否递归获取子部门下面的成员
      * @return
@@ -93,6 +96,7 @@ public interface WeChatClient {
     /**
      * 获取部门成员详情[应用须拥有指定部门的查看权限。]
      *
+     * @param app          应用名
      * @param departmentId 获取的部门id
      * @param fetchChild   1/0：是否递归获取子部门下面的成员
      * @return
@@ -103,9 +107,9 @@ public interface WeChatClient {
     /**
      * userid转openid
      *
-     * @param request
-     * @param app
-     * @return
+     * @param request 请求体
+     * @param app     应用名
+     * @return ConvertUserIdOpenIdResponse
      */
     @PostMapping(value = "user/convert_to_openid", headers = HEAD)
     ConvertUserIdOpenIdResponse convertToOpenId(ConvertUserIdOpenIdRequest request, @RequestParam(HEAD_KEY) String app);
@@ -113,8 +117,8 @@ public interface WeChatClient {
     /**
      * openid转userid
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "user/convert_to_userid", headers = HEAD)
@@ -124,7 +128,7 @@ public interface WeChatClient {
      * 二次验证
      *
      * @param userId
-     * @param app
+     * @param app    应用名
      * @return
      */
     @GetMapping(value = "user/authsucc", headers = HEAD)
@@ -133,8 +137,8 @@ public interface WeChatClient {
     /**
      * 邀请成员
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "batch/invite", headers = HEAD)
@@ -143,7 +147,7 @@ public interface WeChatClient {
     /**
      * 创建部门
      *
-     * @param request
+     * @param request 请求体
      * @return CreateDepartmentResponse
      */
     @PostMapping(value = "department/create", headers = HEAD)
@@ -152,8 +156,8 @@ public interface WeChatClient {
     /**
      * 更新部门
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "department/update", headers = HEAD)
@@ -163,7 +167,7 @@ public interface WeChatClient {
      * 删除部门【注：不能删除根部门；不能删除含有子部门、成员的部门】
      *
      * @param id  企业微信部门id
-     * @param app
+     * @param app 应用名
      * @return
      */
     @GetMapping(value = "department/delete", headers = HEAD)
@@ -176,7 +180,7 @@ public interface WeChatClient {
      * 获取部门列表【获取指定部门及其下的子部门。 如果不填，默认获取全量组织架构】
      *
      * @param id  部门id
-     * @param app
+     * @param app 应用名
      * @return
      */
     @GetMapping(value = "department/list", headers = HEAD)
@@ -186,8 +190,8 @@ public interface WeChatClient {
      * 创建标签【创建的标签属于该应用，只有该应用才可以增删成员】
      * 注意，标签总数不能超过3000个。
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "tag/create", headers = HEAD)
@@ -199,8 +203,8 @@ public interface WeChatClient {
      * <p>
      * 更新标签名字【长度限制为32个字（汉字或英文字母），标签不可与其他标签重名】
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "tag/update", headers = HEAD)
@@ -210,7 +214,7 @@ public interface WeChatClient {
      * 删除标签
      *
      * @param id  标签ID
-     * @param app
+     * @param app 应用名
      * @return
      */
     @GetMapping(value = "tag/delete", headers = HEAD)
@@ -220,7 +224,7 @@ public interface WeChatClient {
      * 获取标签成员
      *
      * @param id
-     * @param app
+     * @param app 应用名
      * @return
      */
     @GetMapping(value = "tag/get", headers = HEAD)
@@ -229,8 +233,8 @@ public interface WeChatClient {
     /**
      * 增加标签成员
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "tag/addtagusers", headers = HEAD)
@@ -239,8 +243,8 @@ public interface WeChatClient {
     /**
      * 删除标签成员
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "tag/deltagusers", headers = HEAD)
@@ -249,7 +253,7 @@ public interface WeChatClient {
     /**
      * 获取标签列表
      *
-     * @param app
+     * @param app 应用名
      * @return
      */
     @GetMapping(value = "tag/list", headers = HEAD)
@@ -267,8 +271,8 @@ public interface WeChatClient {
      * <p>
      * 增量更新成员
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return AsyncJobResponse
      */
     @PostMapping(value = "batch/syncuser", headers = HEAD)
@@ -288,8 +292,8 @@ public interface WeChatClient {
      * <p>
      * 全量覆盖成员
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return AsyncJobResponse
      */
     @PostMapping(value = "batch/replaceuser", headers = HEAD)
@@ -306,8 +310,8 @@ public interface WeChatClient {
      * <p>
      * 全量覆盖部门
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "batch/replaceparty", headers = HEAD)
@@ -317,7 +321,7 @@ public interface WeChatClient {
      * 获取异步任务结果
      *
      * @param jobId
-     * @param app
+     * @param app   应用名
      * @return
      */
     @GetMapping(value = "batch/getresult", headers = HEAD)
@@ -327,7 +331,7 @@ public interface WeChatClient {
      * 获取访问用户身份
      *
      * @param code
-     * @param app
+     * @param app  应用名
      * @return
      */
     @GetMapping(value = "user/getuserinfo", headers = HEAD)
@@ -337,7 +341,7 @@ public interface WeChatClient {
      * 获取应用
      *
      * @param agentId
-     * @param app
+     * @param app     应用名
      * @return
      */
     @GetMapping(value = "agent/get", headers = HEAD)
@@ -347,7 +351,7 @@ public interface WeChatClient {
      * 设置应用
      *
      * @param reuqest
-     * @param app
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "agent/set", headers = HEAD)
@@ -356,9 +360,9 @@ public interface WeChatClient {
     /**
      * 创建菜单
      *
-     * @param request
+     * @param request 请求体
      * @param agentid
-     * @param app
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "menu/create", headers = HEAD)
@@ -368,7 +372,7 @@ public interface WeChatClient {
      * 获取菜单
      *
      * @param agentid
-     * @param app
+     * @param app     应用名
      * @return
      */
     @GetMapping(value = "menu/get", headers = HEAD)
@@ -378,7 +382,7 @@ public interface WeChatClient {
      * 删除菜单
      *
      * @param agentid
-     * @param app
+     * @param app     应用名
      * @return
      */
     @GetMapping(value = "menu/delete", headers = HEAD)
@@ -387,8 +391,8 @@ public interface WeChatClient {
     /**
      * 发送消息
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "message/send", headers = HEAD)
@@ -397,8 +401,8 @@ public interface WeChatClient {
     /**
      * 创建群聊会话
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "appchat/create", headers = HEAD)
@@ -407,8 +411,8 @@ public interface WeChatClient {
     /**
      * 修改群聊会话
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "appchat/update", headers = HEAD)
@@ -418,7 +422,7 @@ public interface WeChatClient {
      * 获取群聊会话
      *
      * @param chatId
-     * @param app
+     * @param app    应用名
      * @return
      */
     @GetMapping(value = "appchat/get", headers = HEAD)
@@ -427,8 +431,8 @@ public interface WeChatClient {
     /**
      * 发送群消息
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "appchat/send", headers = HEAD)
@@ -442,8 +446,8 @@ public interface WeChatClient {
      * 用户列表不超过100个。若用户超过100个，请分批获取
      * 有打卡记录即可获取打卡数据，与当前”打卡应用”是否开启无关
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "checkin/getcheckindata", headers = HEAD)
@@ -455,8 +459,8 @@ public interface WeChatClient {
      * 用户列表不超过100个，若用户超过100个，请分批获取。
      * 用户在不同日期的规则不一定相同，请按天获取。
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "checkin/getcheckinoption", headers = HEAD)
@@ -468,8 +472,8 @@ public interface WeChatClient {
      * 获取审批记录请求参数endtime需要大于startime， 切起始时间跨度不要超过一个月；
      * 一次请求返回的审批记录上限是100条，超过100条记录请使用next_spnum进行分页拉取。
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "corp/getapprovaldata", headers = HEAD)
@@ -478,8 +482,8 @@ public interface WeChatClient {
     /**
      * 获取公费电话拨打记录
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "dial/get_dial_record", headers = HEAD)
@@ -488,7 +492,7 @@ public interface WeChatClient {
     /**
      * 获取配置了客户联系功能的成员列表
      *
-     * @param app 应用别名
+     * @param app 应用名
      * @return FollowUserResponse
      */
     @GetMapping(value = "externalcontact/get_follow_user_list", headers = HEAD)
@@ -497,8 +501,8 @@ public interface WeChatClient {
     /**
      * 配置客户联系「联系我」方式
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return AddContactWayResponse
      */
     @PostMapping(value = "externalcontact/add_contact_way", headers = HEAD)
@@ -507,8 +511,8 @@ public interface WeChatClient {
     /**
      * 获取企业已配置的「联系我」方式
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return ContactWayResponse
      */
     @PostMapping(value = "externalcontact/get_contact_way", headers = HEAD)
@@ -517,8 +521,8 @@ public interface WeChatClient {
     /**
      * 更新企业已配置的「联系我」方式
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "externalcontact/update_contact_way", headers = HEAD)
@@ -527,8 +531,8 @@ public interface WeChatClient {
     /**
      * 删除企业已配置的「联系我」方式
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "externalcontact/del_contact_way", headers = HEAD)
@@ -537,8 +541,8 @@ public interface WeChatClient {
     /**
      * 结束临时会话
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "externalcontact/close_temp_chat", headers = HEAD)
@@ -548,7 +552,7 @@ public interface WeChatClient {
      * 获取客户列表
      *
      * @param userId
-     * @param app
+     * @param app    应用名
      * @return CustomListResponse
      */
     @GetMapping(value = "externalcontact/list", headers = HEAD)
@@ -558,7 +562,7 @@ public interface WeChatClient {
      * 获取客户详情
      *
      * @param externalUserId
-     * @param app
+     * @param app            应用名
      * @return ExternalContactResponse
      */
     @GetMapping(value = "externalcontact/get", headers = HEAD)
@@ -567,8 +571,8 @@ public interface WeChatClient {
     /**
      * 批量获取客户详情
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BatchExternalContactResponse
      */
     @PostMapping(value = "externalcontact/batch/get_by_user", headers = HEAD)
@@ -578,7 +582,7 @@ public interface WeChatClient {
      * 修改客户备注信息
      *
      * @param remarkRequest
-     * @param app
+     * @param app           应用名
      * @return BaseResponse
      */
     @PostMapping(value = "externalcontact/remark", headers = HEAD)
@@ -587,8 +591,8 @@ public interface WeChatClient {
     /**
      * 获取手机号随机串
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return MobileHashCodeResponse
      */
     @PostMapping(value = "user/get_mobile_hashcode", headers = HEAD)
@@ -597,8 +601,8 @@ public interface WeChatClient {
     /**
      * 获取企业标签库
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "externalcontact/get_corp_tag_list", headers = HEAD)
@@ -607,8 +611,8 @@ public interface WeChatClient {
     /**
      * 添加企业客户标签
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return AddCorpTagResponse
      */
     @PostMapping(value = "externalcontact/add_corp_tag", headers = HEAD)
@@ -617,8 +621,8 @@ public interface WeChatClient {
     /**
      * 编辑企业客户标签
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "externalcontact/edit_corp_tag", headers = HEAD)
@@ -627,8 +631,8 @@ public interface WeChatClient {
     /**
      * 删除企业客户标签
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "externalcontact/del_corp_tag", headers = HEAD)
@@ -637,8 +641,8 @@ public interface WeChatClient {
     /**
      * 编辑客户企业标签
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "externalcontact/mark_tag", headers = HEAD)
@@ -647,8 +651,8 @@ public interface WeChatClient {
     /**
      * 获取离职成员列表
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return UnassignedListResponse
      */
     @PostMapping(value = "externalcontact/get_unassigned_list", headers = HEAD)
@@ -657,8 +661,8 @@ public interface WeChatClient {
     /**
      * 分配在职或离职成员的客户
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "externalcontact/transfer", headers = HEAD)
@@ -668,7 +672,7 @@ public interface WeChatClient {
      * 查询客户接替结果
      *
      * @param resultRequest
-     * @param app
+     * @param app           应用名
      * @return TransferResultResponse
      */
     @PostMapping(value = "externalcontact/get_transfer_result", headers = HEAD)
@@ -677,8 +681,8 @@ public interface WeChatClient {
     /**
      * 分配离职成员的客户群
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "externalcontact/groupchat/transfer", headers = HEAD)
@@ -687,8 +691,8 @@ public interface WeChatClient {
     /**
      * 获取客户群列表
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return GroupChatListResponse
      */
     @PostMapping(value = "externalcontact/groupchat/list", headers = HEAD)
@@ -697,8 +701,8 @@ public interface WeChatClient {
     /**
      * 获取客户群详情
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "externalcontact/groupchat/get", headers = HEAD)
@@ -707,8 +711,8 @@ public interface WeChatClient {
     /**
      * 获取企业全部的发表列表
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return MomentListResponse
      */
     @PostMapping(value = "externalcontact/get_moment_list", headers = HEAD)
@@ -717,8 +721,8 @@ public interface WeChatClient {
     /**
      * 获取客户朋友圈企业发表的列表
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "externalcontact/get_moment_task", headers = HEAD)
@@ -727,8 +731,8 @@ public interface WeChatClient {
     /**
      * 获取客户朋友圈发表时选择的可见范围
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return MomentCustomerListResponse
      */
     @PostMapping(value = "externalcontact/get_moment_customer_list", headers = HEAD)
@@ -737,8 +741,8 @@ public interface WeChatClient {
     /**
      * 获取客户朋友圈发表后的可见客户列表
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "externalcontact/get_moment_send_result", headers = HEAD)
@@ -747,8 +751,8 @@ public interface WeChatClient {
     /**
      * 获取客户朋友圈的互动数据
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return CommentsResponse
      */
     @PostMapping(value = "externalcontact/get_moment_comments", headers = HEAD)
@@ -757,8 +761,8 @@ public interface WeChatClient {
     /**
      * 创建企业群发
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return MsgTemplateResponse
      */
     @PostMapping(value = "externalcontact/add_msg_template", headers = HEAD)
@@ -767,8 +771,8 @@ public interface WeChatClient {
     /**
      * 获取群发记录列表
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return GroupMsgResponse
      */
     @PostMapping(value = "externalcontact/get_groupmsg_list", headers = HEAD)
@@ -777,8 +781,8 @@ public interface WeChatClient {
     /**
      * 获取群发成员发送任务列表
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return GroupMsgTaskResponse
      */
     @PostMapping(value = "externalcontact/get_groupmsg_task", headers = HEAD)
@@ -787,8 +791,8 @@ public interface WeChatClient {
     /**
      * 获取企业群发成员执行结果
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return GroupMsgSendResultResponse
      */
     @PostMapping(value = "externalcontact/get_groupmsg_send_result", headers = HEAD)
@@ -797,8 +801,8 @@ public interface WeChatClient {
     /**
      * 发送新客户欢迎语
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "externalcontact/send_welcome_msg", headers = HEAD)
@@ -807,8 +811,8 @@ public interface WeChatClient {
     /**
      * 添加入群欢迎语素材
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return AddWelcomeTemplateResponse
      */
     @PostMapping(value = "externalcontact/group_welcome_template/add", headers = HEAD)
@@ -817,8 +821,8 @@ public interface WeChatClient {
     /**
      * 编辑入群欢迎语素材
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "externalcontact/group_welcome_template/edit", headers = HEAD)
@@ -827,8 +831,8 @@ public interface WeChatClient {
     /**
      * 获取入群欢迎语素材
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return GetWelcomeTemplateResponse
      */
     @PostMapping(value = "externalcontact/group_welcome_template/get", headers = HEAD)
@@ -837,8 +841,8 @@ public interface WeChatClient {
     /**
      * 删除入群欢迎语素材
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "externalcontact/group_welcome_template/del", headers = HEAD)
@@ -847,8 +851,8 @@ public interface WeChatClient {
     /**
      * 获取「联系客户统计」数据
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BehaviorDataResponse
      */
     @PostMapping(value = "externalcontact/get_user_behavior_data", headers = HEAD)
@@ -857,8 +861,8 @@ public interface WeChatClient {
     /**
      * 按群主聚合的方式
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return GroupChatStatisticResponse
      */
     @PostMapping(value = "externalcontact/groupchat/statistic", headers = HEAD)
@@ -867,8 +871,8 @@ public interface WeChatClient {
     /**
      * 按自然日聚合的方式
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return GroupChatStatisticResponse
      */
     @PostMapping(value = "externalcontact/groupchat/statistic_group_by_day", headers = HEAD)
@@ -877,8 +881,8 @@ public interface WeChatClient {
     /**
      * 创建日历
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return CalendarResponse
      */
     @PostMapping(value = "oa/calendar/add", headers = HEAD)
@@ -887,8 +891,8 @@ public interface WeChatClient {
     /**
      * 更新日历
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "oa/calendar/update", headers = HEAD)
@@ -897,8 +901,8 @@ public interface WeChatClient {
     /**
      * 获取日历详情
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return
      */
     @PostMapping(value = "oa/calendar/get", headers = HEAD)
@@ -907,8 +911,8 @@ public interface WeChatClient {
     /**
      * 删除日历
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "oa/calendar/del", headers = HEAD)
@@ -917,8 +921,8 @@ public interface WeChatClient {
     /**
      * 创建日程
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return AddScheduleResponse
      */
     @PostMapping(value = "oa/schedule/add", headers = HEAD)
@@ -927,8 +931,8 @@ public interface WeChatClient {
     /**
      * 更新日程
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "oa/schedule/update", headers = HEAD)
@@ -937,8 +941,8 @@ public interface WeChatClient {
     /**
      * 获取日程详情
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return GetScheduleResponse
      */
     @PostMapping(value = "oa/schedule/get", headers = HEAD)
@@ -947,8 +951,8 @@ public interface WeChatClient {
     /**
      * 取消日程
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "oa/schedule/del", headers = HEAD)
@@ -957,8 +961,8 @@ public interface WeChatClient {
     /**
      * 获取日历下的日程列表
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return GetScheduleResponse
      */
     @PostMapping(value = "oa/schedule/get_by_calendar", headers = HEAD)
@@ -967,8 +971,8 @@ public interface WeChatClient {
     /**
      * 创建预约会议
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return CreateMeetingResponse
      */
     @PostMapping(value = "meeting/create", headers = HEAD)
@@ -977,8 +981,8 @@ public interface WeChatClient {
     /**
      * 修改预约会议
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse updateMeeting(MeetingRequest request, @RequestParam(HEAD_KEY) String app);
      */
     @PostMapping(value = "meeting/update", headers = HEAD)
@@ -987,8 +991,8 @@ public interface WeChatClient {
     /**
      * 取消预约会议
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "meeting/cancel", headers = HEAD)
@@ -997,8 +1001,8 @@ public interface WeChatClient {
     /**
      * 获取成员会议ID列表
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return GetMeetingForUserResponse
      */
     @PostMapping(value = "meeting/get_user_meetingid", headers = HEAD)
@@ -1007,8 +1011,8 @@ public interface WeChatClient {
     /**
      * 获取会议详情
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return MeetingDetailResponse
      */
     @PostMapping(value = "meeting/get_info", headers = HEAD)
@@ -1017,8 +1021,8 @@ public interface WeChatClient {
     /**
      * 创建预约直播
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return CreateLivingResponse
      */
     @PostMapping(value = "living/create", headers = HEAD)
@@ -1027,8 +1031,8 @@ public interface WeChatClient {
     /**
      * 修改预约直播
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "living/modify", headers = HEAD)
@@ -1037,8 +1041,8 @@ public interface WeChatClient {
     /**
      * 取消预约直播
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "living/cancel", headers = HEAD)
@@ -1047,8 +1051,8 @@ public interface WeChatClient {
     /**
      * 删除直播回放
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return BaseResponse
      */
     @PostMapping(value = "living/delete_replay_data", headers = HEAD)
@@ -1057,8 +1061,8 @@ public interface WeChatClient {
     /**
      * 获取微信观看直播凭证
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return LivingCodeResponse
      */
     @PostMapping(value = "living/get_living_code", headers = HEAD)
@@ -1067,8 +1071,8 @@ public interface WeChatClient {
     /**
      * 获取成员直播ID列表
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return GetUserLivingResponse
      */
     @PostMapping(value = "living/get_user_all_livingid", headers = HEAD)
@@ -1078,7 +1082,7 @@ public interface WeChatClient {
      * 获取直播详情
      *
      * @param livingId
-     * @param app
+     * @param app      应用名
      * @return LivingInfoResponse
      */
     @GetMapping(value = "living/get_living_info", headers = HEAD)
@@ -1087,8 +1091,8 @@ public interface WeChatClient {
     /**
      * 获取直播观看明细
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return WatchStatInfoResponse
      */
     @PostMapping(value = "living/get_watch_stat", headers = HEAD)
@@ -1097,8 +1101,8 @@ public interface WeChatClient {
     /**
      * 获取跳转小程序商城的直播观众信息
      *
-     * @param request
-     * @param app
+     * @param request 请求体
+     * @param app     应用名
      * @return LivingShareResponse
      */
     @PostMapping(value = "living/get_living_share_info", headers = HEAD)
@@ -1112,4 +1116,70 @@ public interface WeChatClient {
      */
     @PostMapping(value = "checkin/getcorpcheckinoption", headers = HEAD)
     CheckInOptionResponse getCorpCheckInOption(@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取打卡日报数据
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CheckInDayReportResponse
+     */
+    @PostMapping(value = "checkin/getcheckin_daydata", headers = HEAD)
+    CheckInDayReportResponse getCheckInDayData(CommonOaRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取打卡月报数据
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CheckInDayReportResponse
+     */
+    @PostMapping(value = "checkin/getcheckin_monthdata", headers = HEAD)
+    CheckInDayReportResponse getCheckInMonthData(CommonOaRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取打卡人员排班信息
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CheckInScheduleResponse
+     */
+    @PostMapping(value = "checkin/getcheckinschedulist", headers = HEAD)
+    CheckInScheduleResponse getCheckInScheduList(CommonOaRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 为打卡人员排班
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "checkin/setcheckinschedulist", headers = HEAD)
+    BaseResponse setCheckInScheduleList(SetCheckInScheduleRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 录入打卡人员人脸信息
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "checkin/addcheckinuserface", headers = HEAD)
+    BaseResponse addCheckInUserFace(AddCheckInUserFaceRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取企业微信API域名IP段
+     * @param app 应用名
+     * @return ApiDomainIpResponse
+     */
+    @GetMapping(value = "get_api_domain_ip", headers = HEAD)
+    ApiDomainIpResponse apiDomainIp(@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取企业微信服务器回调的ip段
+     * @param app 应用名
+     * @return ApiDomainIpResponse
+     */
+    @GetMapping(value = "getcallbackip", headers = HEAD)
+    ApiDomainIpResponse callBackIp(@RequestParam(HEAD_KEY) String app);
 }

@@ -6,11 +6,8 @@ import javax.xml.bind.annotation.XmlElement;
 
 /**
  * 描述
- * <NodeStatus>1</NodeStatus>
- *         <NodeAttr>1</NodeAttr>
- *         <NodeType>1</NodeType>
  * @author ddshuai
- * @date 2021-07-14 13:24
+ * date 2021-07-14 13:24
  **/
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ApprovalNode {

@@ -1,6 +1,7 @@
 package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * 描述
@@ -29,5 +30,13 @@ public class CheckInRule {
 
     public void setGroup(CheckInRuleGroup group) {
         this.group = group;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("userId", userId)
+                .append("group", group)
+                .toString();
     }
 }

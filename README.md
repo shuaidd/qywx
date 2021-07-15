@@ -42,3 +42,8 @@ public class WeChatTest extends BaseTest {
 
 实例 可以查看 qywx-spring-boot-example 模块
 ```
+### 更新记录
+``` 
+2021-07-15  补充OA模块新增的接口
+2021-07-14  处理企业微信回调数据统一解析处理
+```

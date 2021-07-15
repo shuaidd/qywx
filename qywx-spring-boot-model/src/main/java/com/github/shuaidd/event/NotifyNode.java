@@ -6,11 +6,8 @@ import javax.xml.bind.annotation.XmlElement;
 
 /**
  * 描述
- * <ItemName><![CDATA[xiaogang]]></ItemName>
- *         <ItemUserId><![CDATA[3]]></ItemUserId>
- *         <ItemImage><![CDATA[http://www.qq.com/xxx.png]]></ItemImage>
  * @author ddshuai
- * @date 2021-07-14 13:41
+ * date 2021-07-14 13:41
  **/
 @XmlAccessorType(XmlAccessType.FIELD)
 public class NotifyNode {

@@ -17,8 +17,8 @@ public class EfficiencyToolService extends AbstractBaseService {
     /**
      * 创建日历
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求体
+     * @param applicationName 应用名称
      * @return CalendarResponse
      */
     public CalendarResponse addCalendar(CalendarRequest request, String applicationName) {
@@ -29,8 +29,8 @@ public class EfficiencyToolService extends AbstractBaseService {
     /**
      * 更新日历
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求体
+     * @param applicationName 应用名称
      */
     public void updateCalendar(CalendarRequest request, String applicationName) {
         BaseResponse response = weChatClient.updateCalendar(request, applicationName);
@@ -40,8 +40,8 @@ public class EfficiencyToolService extends AbstractBaseService {
     /**
      * 获取日历详情
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求体
+     * @param applicationName 应用名称
      * @return GetCalendarResponse
      */
     public GetCalendarResponse getCalendar(GetCalendarRequest request, String applicationName) {
@@ -52,8 +52,8 @@ public class EfficiencyToolService extends AbstractBaseService {
     /**
      * 删除日历
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求体
+     * @param applicationName 应用名称
      */
     public void delCalendar(DeleteCalendarRequest request, String applicationName) {
         BaseResponse response = weChatClient.delCalendar(request, applicationName);
@@ -63,8 +63,8 @@ public class EfficiencyToolService extends AbstractBaseService {
     /**
      * 创建日程
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求体
+     * @param applicationName 应用名称
      * @return AddScheduleResponse
      */
     public AddScheduleResponse addSchedule(ScheduleRequest request, String applicationName) {
@@ -75,8 +75,8 @@ public class EfficiencyToolService extends AbstractBaseService {
     /**
      * 更新日程
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求体
+     * @param applicationName 应用名称
      */
     public void updateSchedule(ScheduleRequest request, String applicationName) {
         BaseResponse response = weChatClient.updateSchedule(request, applicationName);
@@ -86,8 +86,8 @@ public class EfficiencyToolService extends AbstractBaseService {
     /**
      * 获取日程详情
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求体
+     * @param applicationName 应用名称
      * @return GetScheduleResponse
      */
     public GetScheduleResponse getSchedules(GetScheduleRequest request, String applicationName) {
@@ -98,8 +98,8 @@ public class EfficiencyToolService extends AbstractBaseService {
     /**
      * 取消日程
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求体
+     * @param applicationName 应用名称
      */
     public void delSchedule(CancelScheduleRequest request, String applicationName) {
         BaseResponse response = weChatClient.delSchedule(request, applicationName);
@@ -109,8 +109,8 @@ public class EfficiencyToolService extends AbstractBaseService {
     /**
      * 获取日历下的日程列表
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求体
+     * @param applicationName 应用名称
      * @return GetScheduleResponse
      */
     public GetScheduleResponse getScheduleByCalendar(GetScheduleByCalendarRequest request, String applicationName) {
@@ -121,8 +121,8 @@ public class EfficiencyToolService extends AbstractBaseService {
     /**
      * 创建预约会议
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求体
+     * @param applicationName 应用名称
      * @return CreateMeetingResponse
      */
     CreateMeetingResponse createMeeting(MeetingRequest request, String applicationName) {
@@ -133,8 +133,8 @@ public class EfficiencyToolService extends AbstractBaseService {
     /**
      * 修改预约会议
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求体
+     * @param applicationName 应用名称
      */
     public void updateMeeting(MeetingRequest request, String applicationName) {
         BaseResponse response = weChatClient.updateMeeting(request, applicationName);
@@ -144,8 +144,8 @@ public class EfficiencyToolService extends AbstractBaseService {
     /**
      * 取消预约会议
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求体
+     * @param applicationName 应用名称
      */
     public void cancelMeeting(CancelMeetingRequest request, String applicationName) {
         BaseResponse response = weChatClient.cancelMeeting(request, applicationName);
@@ -155,8 +155,8 @@ public class EfficiencyToolService extends AbstractBaseService {
     /**
      * 获取成员会议ID列表
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求体
+     * @param applicationName 应用名称
      * @return GetMeetingForUserResponse
      */
     public GetMeetingForUserResponse getUserMeetingId(GetMeetingForUserRequest request, String applicationName) {
@@ -167,8 +167,8 @@ public class EfficiencyToolService extends AbstractBaseService {
     /**
      * 获取会议详情
      *
-     * @param request
-     * @param applicationName
+     * @param request 请求体
+     * @param applicationName 应用名称
      * @return MeetingDetailResponse
      */
     public MeetingDetailResponse getUserMeetingInfo(GetMeetingDetailRequest request, String applicationName) {
@@ -179,7 +179,7 @@ public class EfficiencyToolService extends AbstractBaseService {
     /**
      * 创建预约直播
      * @param request 请求体
-     * @param applicationName 应用名
+     * @param applicationName 应用名称
      * @return CreateLivingResponse
      */
     public CreateLivingResponse createLiving(LivingRequest request,String applicationName) {
@@ -221,6 +221,7 @@ public class EfficiencyToolService extends AbstractBaseService {
      * 获取微信观看直播凭证
      * @param request 请求体
      * @param applicationName 应用名
+     * @return LivingCodeResponse
      */
     public LivingCodeResponse getLivingCode(LivingCodeRequest request, String applicationName){
         LivingCodeResponse response = weChatClient.getLivingCode(request,applicationName);
@@ -231,6 +232,7 @@ public class EfficiencyToolService extends AbstractBaseService {
      * 获取成员直播ID列表
      * @param request 请求体
      * @param applicationName 应用名
+     * @return GetUserLivingResponse
      */
     public GetUserLivingResponse getUserAllLivingId(GetUserLivingRequest request, String applicationName){
         GetUserLivingResponse response = weChatClient.getUserAllLivingId(request,applicationName);
@@ -252,6 +254,7 @@ public class EfficiencyToolService extends AbstractBaseService {
      * 获取成员直播ID列表
      * @param request 请求体
      * @param applicationName 应用名
+     * @return WatchStatInfoResponse
      */
     public WatchStatInfoResponse getWatchStat(GetWatchStatRequest request, String applicationName) {
         WatchStatInfoResponse response = weChatClient.getWatchStat(request,applicationName);
@@ -262,6 +265,7 @@ public class EfficiencyToolService extends AbstractBaseService {
      * 获取跳转小程序商城的直播观众信息
      * @param request 请求体
      * @param applicationName 应用名
+     * @return LivingShareResponse
      */
     public LivingShareResponse getLivingShareInfo(LivingShareRequest request, String applicationName){
         LivingShareResponse response = weChatClient.getLivingShareInfo(request,applicationName);

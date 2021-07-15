@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-14 14:10
+ * date 2021-07-14 14:10
  **/
 @XmlRootElement(name = "xml")
 public class CalendarEventData extends BaseEventData {

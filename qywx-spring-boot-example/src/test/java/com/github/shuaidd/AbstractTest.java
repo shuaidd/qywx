@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest(classes = Application.class)
 public class AbstractTest {
     public final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     WeChatManager weChatManager;
 }

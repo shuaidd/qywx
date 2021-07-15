@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-14 16:17
+ * date 2021-07-14 16:17
  **/
 public class OtWorkingDayRestInfo {
     private Integer type;
