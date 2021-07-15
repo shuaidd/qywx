@@ -1,7 +1,7 @@
 package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.FailedChatData;
+import com.github.shuaidd.dto.externalcontact.FailedChatData;
 
 import java.util.List;
 

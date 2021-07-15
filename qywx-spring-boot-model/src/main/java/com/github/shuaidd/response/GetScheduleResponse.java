@@ -1,7 +1,7 @@
 package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.ScheduleData;
+import com.github.shuaidd.dto.checkin.ScheduleData;
 
 import java.util.List;
 

@@ -1,0 +1,60 @@
+{
+  "errcode": 0,
+  "errmsg": "ok",
+  "template_names": [
+    {
+      "text": "全字段",
+      "lang": "zh_CN"
+    }
+  ],
+  "template_content": {
+    "controls": [
+      {
+        "property": {
+          "control": "Selector",
+          "id": "Selector-15111111111",
+          "title": [
+            {
+              "text": "单选控件",
+              "lang": "zh_CN"
+            }
+          ],
+          "placeholder": [
+            {
+              "text": "这是单选控件的说明",
+              "lang": "zh_CN"
+            }
+          ],
+          "require": 0,
+          "un_print": 0
+        },
+        "config": {
+          "selector": {
+            "type": "single",
+            "exp_type": 0,
+            "options": [
+              {
+                "key": "option-15111111111",
+                "value": [
+                  {
+                    "text": "选项1",
+                    "lang": "zh_CN"
+                  }
+                ]
+              },
+              {
+                "key": "option-15222222222",
+                "value": [
+                  {
+                    "text": "选项2",
+                    "lang": "zh_CN"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

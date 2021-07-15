@@ -1,6 +1,6 @@
 package com.github.shuaidd.response;
 
-import com.github.shuaidd.dto.DayReportItem;
+import com.github.shuaidd.dto.checkin.DayReportItem;
 
 import java.util.List;
 

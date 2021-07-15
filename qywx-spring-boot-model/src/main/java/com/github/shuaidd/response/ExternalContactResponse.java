@@ -1,7 +1,7 @@
 package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.ExternalContactDetail;
+import com.github.shuaidd.dto.externalcontact.ExternalContactDetail;
 import com.github.shuaidd.dto.FollowUserDetail;
 
 import java.util.List;

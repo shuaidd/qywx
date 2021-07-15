@@ -1,14 +1,13 @@
 package com.github.shuaidd.service;
 
-import com.github.shuaidd.dto.CheckInData;
-import com.github.shuaidd.dto.CheckInRule;
+import com.github.shuaidd.dto.checkin.CheckInData;
+import com.github.shuaidd.dto.checkin.CheckInRule;
 import com.github.shuaidd.dto.DialRecord;
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.*;
 import com.github.shuaidd.resquest.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.CheckInRule;
+import com.github.shuaidd.dto.checkin.CheckInRule;
 
 import java.util.List;
 import java.util.StringJoiner;

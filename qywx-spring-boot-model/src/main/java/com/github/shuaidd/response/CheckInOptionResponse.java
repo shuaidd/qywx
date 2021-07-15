@@ -1,7 +1,7 @@
 package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.CheckInRuleGroup;
+import com.github.shuaidd.dto.checkin.CheckInRuleGroup;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;

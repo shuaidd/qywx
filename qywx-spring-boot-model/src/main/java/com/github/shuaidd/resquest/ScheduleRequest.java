@@ -1,7 +1,7 @@
 package com.github.shuaidd.resquest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.ScheduleData;
+import com.github.shuaidd.dto.checkin.ScheduleData;
 
 /**
  * 描述

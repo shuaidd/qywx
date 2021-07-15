@@ -1,7 +1,7 @@
 package com.github.shuaidd;
 
-import com.github.shuaidd.dto.CheckInData;
-import com.github.shuaidd.dto.CheckInRule;
+import com.github.shuaidd.dto.checkin.CheckInData;
+import com.github.shuaidd.dto.checkin.CheckInRule;
 import com.github.shuaidd.dto.DialRecord;
 import com.github.shuaidd.response.CheckInDayReportResponse;
 import com.github.shuaidd.response.CheckInOptionResponse;

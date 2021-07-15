@@ -1,7 +1,7 @@
 package com.github.shuaidd;
 
 import com.github.shuaidd.dto.CustomTag;
-import com.github.shuaidd.dto.MsgText;
+import com.github.shuaidd.dto.message.MsgText;
 import com.github.shuaidd.response.*;
 import com.github.shuaidd.resquest.*;
 import org.apache.commons.lang3.time.DateUtils;

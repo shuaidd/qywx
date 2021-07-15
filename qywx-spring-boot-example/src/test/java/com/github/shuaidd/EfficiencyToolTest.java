@@ -2,7 +2,7 @@ package com.github.shuaidd;
 
 import com.github.shuaidd.dto.CalendarData;
 import com.github.shuaidd.dto.ReminderData;
-import com.github.shuaidd.dto.ScheduleData;
+import com.github.shuaidd.dto.checkin.ScheduleData;
 import com.github.shuaidd.dto.UserId;
 import com.github.shuaidd.response.AddScheduleResponse;
 import com.github.shuaidd.response.CalendarResponse;

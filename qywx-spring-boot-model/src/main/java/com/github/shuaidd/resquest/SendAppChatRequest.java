@@ -1,7 +1,7 @@
 package com.github.shuaidd.resquest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.*;
+import com.github.shuaidd.dto.message.*;
 import com.github.shuaidd.enums.MsgType;
 
 

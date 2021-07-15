@@ -1,6 +1,9 @@
 package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.shuaidd.dto.externalcontact.ExternalMiniProgramAttr;
+import com.github.shuaidd.dto.externalcontact.ExternalTextAttr;
+import com.github.shuaidd.dto.externalcontact.ExternalWebAttr;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**

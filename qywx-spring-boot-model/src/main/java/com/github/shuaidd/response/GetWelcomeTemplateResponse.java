@@ -1,9 +1,9 @@
 package com.github.shuaidd.response;
 
 import com.github.shuaidd.dto.MiniProgram;
-import com.github.shuaidd.dto.MsgImage;
-import com.github.shuaidd.dto.MsgLink;
-import com.github.shuaidd.dto.MsgText;
+import com.github.shuaidd.dto.message.MsgImage;
+import com.github.shuaidd.dto.message.MsgLink;
+import com.github.shuaidd.dto.message.MsgText;
 
 /**
  * 描述

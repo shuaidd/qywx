@@ -1,6 +1,9 @@
 package com.github.shuaidd.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.shuaidd.dto.message.MsgImage;
+import com.github.shuaidd.dto.message.MsgLink;
+import com.github.shuaidd.dto.message.MsgText;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Date;

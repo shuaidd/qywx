@@ -1,7 +1,7 @@
 package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.GroupChatDetail;
+import com.github.shuaidd.dto.externalcontact.GroupChatDetail;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**

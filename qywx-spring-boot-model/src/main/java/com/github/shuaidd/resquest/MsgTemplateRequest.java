@@ -2,6 +2,9 @@ package com.github.shuaidd.resquest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.shuaidd.dto.*;
+import com.github.shuaidd.dto.message.MsgImage;
+import com.github.shuaidd.dto.message.MsgLink;
+import com.github.shuaidd.dto.message.MsgText;
 
 import java.util.List;
 

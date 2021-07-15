@@ -1,7 +1,7 @@
 package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.GroupMsgSendResult;
+import com.github.shuaidd.dto.externalcontact.GroupMsgSendResult;
 
 import java.util.List;
 

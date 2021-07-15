@@ -1,7 +1,7 @@
 package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.GroupChat;
+import com.github.shuaidd.dto.externalcontact.GroupChat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
