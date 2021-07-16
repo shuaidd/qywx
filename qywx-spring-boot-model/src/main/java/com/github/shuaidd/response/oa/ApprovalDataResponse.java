@@ -1,7 +1,7 @@
 package com.github.shuaidd.response.oa;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.tool.ApprovalData;
+import com.github.shuaidd.dto.oa.ApprovalData;
 import com.github.shuaidd.response.AbstractBaseResponse;
 
 import java.util.List;

@@ -18,6 +18,9 @@ qywx:
     - secret: YOtNFA1HvMkGMj1QdokVSjXVBq7KCEcppHmtfkkfT0I
       application-name: public-telephone
       application-desc: 公费电话
+    - secret: Pdc49tNGMYx_oACDIEtxCssxyFk_eSj7t9GtclS7fdg
+      application-name: approve
+      application-desc: 审批
   url: https://qyapi.weixin.qq.com
   public-path: cgi-bin
   corp-id: ww36e0a51aab349a7d

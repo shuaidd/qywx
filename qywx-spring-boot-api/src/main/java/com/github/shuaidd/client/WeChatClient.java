@@ -1212,4 +1212,14 @@ public interface WeChatClient {
      */
     @PostMapping(value = "oa/gettemplatedetail", headers = HEAD)
     ApproveTemplateResponse getTemplateDetail(TemplateRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 提交审批申请
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return ApplyEventResponse
+     */
+    @PostMapping(value = "oa/applyevent", headers = HEAD)
+    ApplyEventResponse applyEvent(ApplyEventRequest request,@RequestParam(HEAD_KEY) String app);
 }

@@ -35,15 +35,6 @@ public abstract class AbstractBaseService {
     @Autowired
     protected WeChatConfigurationProperties properties;
 
-    /**
-     * 是否检查结果
-     */
-    private boolean check = true;
-
-    final void setCheck(boolean check) {
-        this.check = check;
-    }
-
     final boolean isSuccess(AbstractBaseResponse baseResponse) {
         if (Objects.nonNull(baseResponse)) {
             if (ErrorCode.ERROR_CODE_0.getErrorCode().equals(baseResponse.getErrCode())) {

@@ -1,6 +1,8 @@
-package com.github.shuaidd.dto.tool;
+package com.github.shuaidd.dto.oa;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.shuaidd.dto.tool.Comm;
+import com.github.shuaidd.dto.tool.Expense;
 
 import java.util.List;
 import java.util.StringJoiner;

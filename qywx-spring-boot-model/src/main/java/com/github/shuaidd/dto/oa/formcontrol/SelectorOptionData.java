@@ -1,4 +1,6 @@
-package com.github.shuaidd.dto.template;
+package com.github.shuaidd.dto.oa.formcontrol;
+
+import com.github.shuaidd.dto.template.TemplateText;
 
 import java.util.List;
 import java.util.StringJoiner;
@@ -7,9 +9,9 @@ import java.util.StringJoiner;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-15 15:47
+ * @date 2021-07-16 17:17
  **/
-public class TemplateOption {
+public class SelectorOptionData {
     private String key;
     private List<TemplateText> value;
 
@@ -31,9 +33,8 @@ public class TemplateOption {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", TemplateOption.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", SelectorOptionData.class.getSimpleName() + "[", "]")
                 .add("key='" + key + "'")
-                .add("value=" + value)
                 .toString();
     }
 }

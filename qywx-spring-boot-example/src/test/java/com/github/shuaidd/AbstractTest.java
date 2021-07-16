@@ -1,5 +1,6 @@
 package com.github.shuaidd;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.shuaidd.support.WeChatManager;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -22,4 +23,6 @@ public class AbstractTest {
 
     @Autowired
     WeChatManager weChatManager;
+
+    protected final ObjectMapper objectMapper = new ObjectMapper();
 }

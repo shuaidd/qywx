@@ -1,0 +1,190 @@
+{
+  "errcode": 0,
+  "errmsg": "ok",
+  "template_names": [
+    {
+      "text": "请假流程",
+      "lang": "zh_CN"
+    },
+    {
+      "text": "Leave",
+      "lang": "en"
+    }
+  ],
+  "template_content": {
+    "controls": [
+      {
+        "property": {
+          "control": "Vacation",
+          "id": "vacation-1563793073898",
+          "title": [
+            {
+              "text": "请假类型",
+              "lang": "zh_CN"
+            },
+            {
+              "text": "Leave Type",
+              "lang": "en"
+            }
+          ],
+          "placeholder": [
+            {
+              "text": "",
+              "lang": "zh_CN"
+            }
+          ],
+          "require": 1,
+          "un_print": 0
+        }
+      },
+      {
+        "property": {
+          "control": "Textarea",
+          "id": "item-1497581399901",
+          "title": [
+            {
+              "text": "请假事由",
+              "lang": "zh_CN"
+            },
+            {
+              "text": "Leave Reason",
+              "lang": "en"
+            }
+          ],
+          "placeholder": [
+            {
+              "text": "请输入请假事由",
+              "lang": "zh_CN"
+            },
+            {
+              "text": "Enter a reason",
+              "lang": "en"
+            }
+          ],
+          "require": 0,
+          "un_print": 0
+        }
+      },
+      {
+        "property": {
+          "control": "File",
+          "id": "item-1497581426169",
+          "title": [
+            {
+              "text": "说明附件",
+              "lang": "zh_CN"
+            },
+            {
+              "text": "Attachment",
+              "lang": "en"
+            }
+          ],
+          "placeholder": [
+            {
+              "text": "",
+              "lang": "zh_CN"
+            }
+          ],
+          "require": 0,
+          "un_print": 1
+        }
+      },
+      {
+        "property": {
+          "control": "Money",
+          "id": "Money-1626412408973",
+          "title": [
+            {
+              "text": "扣罚",
+              "lang": "zh_CN"
+            }
+          ],
+          "placeholder": [
+            {
+              "text": "",
+              "lang": "zh_CN"
+            }
+          ],
+          "require": 0,
+          "un_print": 0
+        }
+      }
+    ]
+  },
+  "vacation_list": {
+    "item": [
+      {
+        "id": 1,
+        "name": [
+          {
+            "text": "年假",
+            "lang": "zh_CN"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": [
+          {
+            "text": "事假",
+            "lang": "zh_CN"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": [
+          {
+            "text": "病假",
+            "lang": "zh_CN"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": [
+          {
+            "text": "调休假",
+            "lang": "zh_CN"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": [
+          {
+            "text": "婚假",
+            "lang": "zh_CN"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": [
+          {
+            "text": "产假",
+            "lang": "zh_CN"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name": [
+          {
+            "text": "陪产假",
+            "lang": "zh_CN"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "name": [
+          {
+            "text": "其他",
+            "lang": "zh_CN"
+          }
+        ]
+      }
+    ]
+  }
+}

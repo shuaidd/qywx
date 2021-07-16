@@ -3,6 +3,7 @@ package com.github.shuaidd.dto.template;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * 描述
@@ -65,5 +66,17 @@ public class TemplateProperty {
 
     public void setUnPrint(Integer unPrint) {
         this.unPrint = unPrint;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", TemplateProperty.class.getSimpleName() + "[", "]")
+                .add("control='" + control + "'")
+                .add("id='" + id + "'")
+                .add("title=" + title)
+                .add("placeholder=" + placeholder)
+                .add("require=" + require)
+                .add("unPrint=" + unPrint)
+                .toString();
     }
 }

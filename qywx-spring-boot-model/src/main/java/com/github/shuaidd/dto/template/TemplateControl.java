@@ -1,5 +1,7 @@
 package com.github.shuaidd.dto.template;
 
+import java.util.StringJoiner;
+
 /**
  * 描述
  *
@@ -24,5 +26,13 @@ public class TemplateControl {
 
     public void setConfig(TemplateConfig config) {
         this.config = config;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", TemplateControl.class.getSimpleName() + "[", "]")
+                .add("property=" + property)
+                .add("config=" + config)
+                .toString();
     }
 }

@@ -1,6 +1,7 @@
 package com.github.shuaidd.dto.template;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * 描述
@@ -18,5 +19,12 @@ public class TemplateContent {
 
     public void setControls(List<TemplateControl> controls) {
         this.controls = controls;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", TemplateContent.class.getSimpleName() + "[", "]")
+                .add("controls=" + controls)
+                .toString();
     }
 }

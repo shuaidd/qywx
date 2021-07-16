@@ -3,6 +3,7 @@ package com.github.shuaidd.dto.template;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * 描述
@@ -41,5 +42,14 @@ public class TemplateSelector {
 
     public void setOptions(List<TemplateOption> options) {
         this.options = options;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", TemplateSelector.class.getSimpleName() + "[", "]")
+                .add("type='" + type + "'")
+                .add("expType=" + expType)
+                .add("options=" + options)
+                .toString();
     }
 }

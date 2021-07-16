@@ -11,6 +11,7 @@ import com.github.shuaidd.resquest.oa.*;
 import com.github.shuaidd.resquest.tool.DialRecordRequest;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -176,5 +177,15 @@ public class OAService extends AbstractBaseService {
      */
     public ApproveTemplateResponse getTemplateDetail(TemplateRequest request, String applicationName) {
         return weChatClient.getTemplateDetail(request, applicationName);
+    }
+
+    /**
+     * 提交审批申请
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public ApplyEventResponse applyEvent(ApplyEventRequest request, String applicationName) {
+        return weChatClient.applyEvent(request,applicationName);
     }
 }
