@@ -3,6 +3,7 @@ package com.github.shuaidd.dto.checkin;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * 描述
@@ -43,5 +44,14 @@ public class CheckInOverTimeInfo {
 
     public void setExceptionDuration(List<Integer> exceptionDuration) {
         this.exceptionDuration = exceptionDuration;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", CheckInOverTimeInfo.class.getSimpleName() + "[", "]")
+                .add("otStatus=" + otStatus)
+                .add("otDuration=" + otDuration)
+                .add("exceptionDuration=" + exceptionDuration)
+                .toString();
     }
 }

@@ -1,5 +1,7 @@
 package com.github.shuaidd.dto.checkin;
 
+import java.util.StringJoiner;
+
 /**
  * 描述
  *
@@ -33,5 +35,14 @@ public class CheckInException {
 
     public void setException(Integer exception) {
         this.exception = exception;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", CheckInException.class.getSimpleName() + "[", "]")
+                .add("count=" + count)
+                .add("duration=" + duration)
+                .add("exception=" + exception)
+                .toString();
     }
 }

@@ -2,6 +2,8 @@ package com.github.shuaidd.dto.checkin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.StringJoiner;
+
 /**
  * 描述
  *
@@ -18,5 +20,14 @@ public class DayReportHolidayInfo {
 
     @JsonProperty("sp_title")
     private SpTitle spTitle;
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", DayReportHolidayInfo.class.getSimpleName() + "[", "]")
+                .add("spNumber='" + spNumber + "'")
+                .add("spDescription=" + spDescription)
+                .add("spTitle=" + spTitle)
+                .toString();
+    }
 }
 

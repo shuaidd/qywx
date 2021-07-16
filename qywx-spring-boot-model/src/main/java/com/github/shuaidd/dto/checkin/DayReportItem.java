@@ -3,6 +3,7 @@ package com.github.shuaidd.dto.checkin;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * 描述
@@ -87,5 +88,18 @@ public class DayReportItem {
 
     public void setOverWorkInfo(OverWorkInfo overWorkInfo) {
         this.overWorkInfo = overWorkInfo;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", DayReportItem.class.getSimpleName() + "[", "]")
+                .add("baseInfo=" + baseInfo)
+                .add("summaryInfo=" + summaryInfo)
+                .add("holidayInfos=" + holidayInfos)
+                .add("exceptions=" + exceptions)
+                .add("overTimeInfo=" + overTimeInfo)
+                .add("spItems=" + spItems)
+                .add("overWorkInfo=" + overWorkInfo)
+                .toString();
     }
 }

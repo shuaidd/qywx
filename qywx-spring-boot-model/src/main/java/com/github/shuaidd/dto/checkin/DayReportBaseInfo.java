@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.github.shuaidd.json.Date2LongSerializer;
 
 import java.util.Date;
+import java.util.StringJoiner;
 
 /**
  * 描述
@@ -99,5 +100,19 @@ public class DayReportBaseInfo {
 
     public void setReportRuleInfo(DayReportRuleInfo reportRuleInfo) {
         this.reportRuleInfo = reportRuleInfo;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", DayReportBaseInfo.class.getSimpleName() + "[", "]")
+                .add("date=" + date)
+                .add("recordType=" + recordType)
+                .add("name='" + name + "'")
+                .add("nameEx='" + nameEx + "'")
+                .add("departsName='" + departsName + "'")
+                .add("userId='" + userId + "'")
+                .add("dayType=" + dayType)
+                .add("reportRuleInfo=" + reportRuleInfo)
+                .toString();
     }
 }

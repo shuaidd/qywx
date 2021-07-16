@@ -2,6 +2,8 @@ package com.github.shuaidd.dto.checkin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.StringJoiner;
+
 /**
  * 描述
  *
@@ -85,5 +87,18 @@ public class DayReportSummaryInfo {
 
     public void setWorkDays(Integer workDays) {
         this.workDays = workDays;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", DayReportSummaryInfo.class.getSimpleName() + "[", "]")
+                .add("checkinCount=" + checkinCount)
+                .add("regularWorkSec=" + regularWorkSec)
+                .add("standardWorkSec=" + standardWorkSec)
+                .add("earliestTime=" + earliestTime)
+                .add("lastTime=" + lastTime)
+                .add("exceptDays=" + exceptDays)
+                .add("workDays=" + workDays)
+                .toString();
     }
 }

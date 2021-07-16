@@ -18,6 +18,7 @@ public class WeChatException extends RuntimeException {
 
 
     public WeChatException(ErrorCode errorCode) {
+        super(errorCode.getErrorDesc());
         this.errorCode = errorCode;
     }
 

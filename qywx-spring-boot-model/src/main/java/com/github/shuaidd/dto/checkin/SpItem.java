@@ -2,6 +2,8 @@ package com.github.shuaidd.dto.checkin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.StringJoiner;
+
 /**
  * 描述
  *
@@ -70,5 +72,17 @@ public class SpItem {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", SpItem.class.getSimpleName() + "[", "]")
+                .add("count=" + count)
+                .add("duration=" + duration)
+                .add("timeType=" + timeType)
+                .add("type=" + type)
+                .add("vacationId=" + vacationId)
+                .add("name='" + name + "'")
+                .toString();
     }
 }

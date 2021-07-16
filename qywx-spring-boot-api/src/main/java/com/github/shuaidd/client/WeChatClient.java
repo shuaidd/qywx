@@ -1202,4 +1202,14 @@ public interface WeChatClient {
      */
     @GetMapping(value = "getcallbackip", headers = HEAD)
     ApiDomainIpResponse callBackIp(@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取审批模板详情
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return ApproveTemplateResponse
+     */
+    @PostMapping(value = "oa/gettemplatedetail", headers = HEAD)
+    ApproveTemplateResponse getTemplateDetail(TemplateRequest request,@RequestParam(HEAD_KEY) String app);
 }

@@ -12,7 +12,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public abstract class AbstractBaseResponse {
 
     @JsonProperty("errcode")
-    private Integer errCode;
+    private String errCode;
 
     @JsonProperty("errmsg")
     private String errMsg;
@@ -20,11 +20,11 @@ public abstract class AbstractBaseResponse {
     @JsonProperty("next_cursor")
     private String nextCursor;
 
-    public Integer getErrCode() {
+    public String getErrCode() {
         return errCode;
     }
 
-    public void setErrCode(Integer errCode) {
+    public void setErrCode(String errCode) {
         this.errCode = errCode;
     }
 

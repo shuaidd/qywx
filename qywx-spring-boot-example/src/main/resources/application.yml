@@ -24,4 +24,4 @@ qywx:
 logging:
   level:
     root: warn
-    com.github.shuaidd: info
+    com.github.shuaidd: debug

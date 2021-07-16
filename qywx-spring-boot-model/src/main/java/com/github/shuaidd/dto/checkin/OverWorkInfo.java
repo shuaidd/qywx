@@ -2,6 +2,8 @@ package com.github.shuaidd.dto.checkin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.StringJoiner;
+
 /**
  * 描述
  *
@@ -41,5 +43,14 @@ public class OverWorkInfo {
 
     public void setRestDaysOverSec(Integer restDaysOverSec) {
         this.restDaysOverSec = restDaysOverSec;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", OverWorkInfo.class.getSimpleName() + "[", "]")
+                .add("workdayOverSec=" + workdayOverSec)
+                .add("holidaysOverSec=" + holidaysOverSec)
+                .add("restDaysOverSec=" + restDaysOverSec)
+                .toString();
     }
 }

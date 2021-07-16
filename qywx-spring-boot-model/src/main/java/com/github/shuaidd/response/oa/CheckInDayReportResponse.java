@@ -2,6 +2,7 @@ package com.github.shuaidd.response.oa;
 
 import com.github.shuaidd.dto.checkin.DayReportItem;
 import com.github.shuaidd.response.AbstractBaseResponse;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
@@ -20,5 +21,12 @@ public class CheckInDayReportResponse extends AbstractBaseResponse {
 
     public void setDatas(List<DayReportItem> datas) {
         this.datas = datas;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("datas", datas)
+                .toString();
     }
 }

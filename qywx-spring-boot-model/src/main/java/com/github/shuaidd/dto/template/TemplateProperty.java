@@ -17,7 +17,7 @@ public class TemplateProperty {
     private List<TemplateText> placeholder;
     private Integer require;
     @JsonProperty("un_print")
-    private Integer un_print;
+    private Integer unPrint;
 
     public String getControl() {
         return control;
@@ -59,11 +59,11 @@ public class TemplateProperty {
         this.require = require;
     }
 
-    public Integer getUn_print() {
-        return un_print;
+    public Integer getUnPrint() {
+        return unPrint;
     }
 
-    public void setUn_print(Integer un_print) {
-        this.un_print = un_print;
+    public void setUnPrint(Integer unPrint) {
+        this.unPrint = unPrint;
     }
 }

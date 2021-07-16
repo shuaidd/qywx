@@ -43,7 +43,6 @@ public class AuthenticationService extends AbstractBaseService {
      */
     public List<String> apiDomainIp(String applicationName){
         ApiDomainIpResponse apiDomainIpResponse = weChatClient.apiDomainIp(applicationName);
-        getResponse(apiDomainIpResponse);
         return apiDomainIpResponse.getIpList();
     }
 
@@ -54,7 +53,6 @@ public class AuthenticationService extends AbstractBaseService {
      */
     public List<String> callBackIp(String applicationName){
         ApiDomainIpResponse apiDomainIpResponse = weChatClient.callBackIp(applicationName);
-        getResponse(apiDomainIpResponse);
         return apiDomainIpResponse.getIpList();
     }
 }

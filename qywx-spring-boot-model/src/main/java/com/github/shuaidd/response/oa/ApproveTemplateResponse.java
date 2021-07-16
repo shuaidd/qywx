@@ -1,6 +1,9 @@
-package com.github.shuaidd.dto.template;
+package com.github.shuaidd.response.oa;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.shuaidd.dto.template.TemplateContent;
+import com.github.shuaidd.dto.template.TemplateText;
+import com.github.shuaidd.response.AbstractBaseResponse;
 
 import java.util.List;
 
@@ -10,7 +13,7 @@ import java.util.List;
  * @author ddshuai
  * @date 2021-07-15 15:37
  **/
-public class ApproveTemplate {
+public class ApproveTemplateResponse extends AbstractBaseResponse {
 
     @JsonProperty("template_names")
     private List<TemplateText> templateNames;

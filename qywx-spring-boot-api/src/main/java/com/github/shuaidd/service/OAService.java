@@ -36,13 +36,7 @@ public class OAService extends AbstractBaseService {
     public final List<CheckInData> getCheckInData(CheckInDataRequest request, String applicationName) {
         checkApplication(applicationName);
         checkRequest(request);
-        List<CheckInData> checkInData = new ArrayList<>(1);
-        CheckInDataResponse response = weChatClient.getCheckInData(request, applicationName);
-        if (isSuccess(response)) {
-            checkInData = response.getCheckInDataList();
-        }
-
-        return checkInData;
+        return weChatClient.getCheckInData(request, applicationName).getCheckInDataList();
     }
 
     private void checkRequest(CheckInDataRequest request) {
@@ -72,10 +66,7 @@ public class OAService extends AbstractBaseService {
         List<CheckInRule> checkInRules = new ArrayList<>(1);
         if (Objects.nonNull(request) && Objects.nonNull(request.getDateTime()) && CollectionUtils.isNotEmpty(request.getUserIdList())) {
             if (request.getUserIdList().size() <= LIMIT_USER_COUNT) {
-                CheckInRuleResponse response = weChatClient.getCheckInOption(request, applicationName);
-                if (isSuccess(response)) {
-                    checkInRules = response.getCheckInRules();
-                }
+                return weChatClient.getCheckInOption(request, applicationName).getCheckInRules();
             } else {
                 throw new WeChatException("一次查询人数不能超过100，请分批获取");
             }
@@ -97,9 +88,7 @@ public class OAService extends AbstractBaseService {
         Objects.requireNonNull(request.getEndTime());
         Objects.requireNonNull(request.getStartTime());
         ApprovalDataResponse response = weChatClient.getApprovalData(request, applicationName);
-        if (isSuccess(response)) {
-            logger.info("获取审批数据成功：total:{},count:{},next:{}", response.getTotal(), response.getCount(), response.getNextSpNum());
-        }
+        logger.info("获取审批数据成功：total:{},count:{},next:{}", response.getTotal(), response.getCount(), response.getNextSpNum());
         return response;
     }
 
@@ -113,73 +102,79 @@ public class OAService extends AbstractBaseService {
     public final List<DialRecord> getDialRecord(DialRecordRequest request, String applicationName) {
         Objects.requireNonNull(request, "参数为空");
         List<DialRecord> records = new ArrayList<>(1);
-        DialRecordResponse response = weChatClient.getDialRecord(request, applicationName);
-        if (isSuccess(response)) {
-            records = response.getRecords();
-        }
-        return records;
+        return weChatClient.getDialRecord(request, applicationName).getRecords();
     }
 
     /**
      * 获取企业所有打卡规则
+     *
      * @param applicationName 应用名称
      * @return CheckInOptionResponse
      */
     public CheckInOptionResponse getCorpCheckInOption(String applicationName) {
-        CheckInOptionResponse response = weChatClient.getCorpCheckInOption(applicationName);
-        return getResponse(response);
+        return weChatClient.getCorpCheckInOption(applicationName);
     }
 
     /**
      * 获取打卡日报数据
-     * @param request 请求
+     *
+     * @param request         请求
      * @param applicationName 应用名称
      * @return CheckInDayReportResponse
      */
-    public CheckInDayReportResponse getCheckInDayData(CommonOaRequest request, String applicationName){
-        CheckInDayReportResponse reportResponse = weChatClient.getCheckInDayData(request,applicationName);
-        return getResponse(reportResponse);
+    public CheckInDayReportResponse getCheckInDayData(CommonOaRequest request, String applicationName) {
+        return weChatClient.getCheckInDayData(request, applicationName);
     }
 
     /**
      * 获取打卡月报数据
-     * @param request 请求
+     *
+     * @param request         请求
      * @param applicationName 应用名称
      * @return CheckInDayReportResponse
      */
-    public CheckInDayReportResponse getCheckInMonthData(CommonOaRequest request, String applicationName){
-        CheckInDayReportResponse reportResponse = weChatClient.getCheckInMonthData(request,applicationName);
-        return getResponse(reportResponse);
+    public CheckInDayReportResponse getCheckInMonthData(CommonOaRequest request, String applicationName) {
+        return weChatClient.getCheckInMonthData(request, applicationName);
     }
 
     /**
      * 获取打卡人员排班信息
-     * @param request 请求
+     *
+     * @param request         请求
      * @param applicationName 应用名称
      * @return CheckInDayReportResponse
      */
-    public CheckInScheduleResponse getCheckInScheduleList(CommonOaRequest request, String applicationName){
-        CheckInScheduleResponse reportResponse = weChatClient.getCheckInScheduList(request,applicationName);
-        return getResponse(reportResponse);
+    public CheckInScheduleResponse getCheckInScheduleList(CommonOaRequest request, String applicationName) {
+        return weChatClient.getCheckInScheduList(request, applicationName);
     }
 
     /**
      * 为打卡人员排班
-     * @param request 请求
+     *
+     * @param request         请求
      * @param applicationName 应用名称
      */
-    public void setCheckInScheduleList(SetCheckInScheduleRequest request,String applicationName){
-        BaseResponse response = weChatClient.setCheckInScheduleList(request,applicationName);
-        getResponse(response);
+    public void setCheckInScheduleList(SetCheckInScheduleRequest request, String applicationName) {
+        weChatClient.setCheckInScheduleList(request, applicationName);
     }
 
     /**
      * 录入打卡人员人脸信息
-     * @param request 请求
+     *
+     * @param request         请求
      * @param applicationName 应用名称
      */
-    public void addCheckInUserFace(AddCheckInUserFaceRequest request, String applicationName){
-        BaseResponse response = weChatClient.addCheckInUserFace(request,applicationName);
-        getResponse(response);
+    public void addCheckInUserFace(AddCheckInUserFaceRequest request, String applicationName) {
+        weChatClient.addCheckInUserFace(request, applicationName);
+    }
+
+    /**
+     * 获取审批模板详情
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public ApproveTemplateResponse getTemplateDetail(TemplateRequest request, String applicationName) {
+        return weChatClient.getTemplateDetail(request, applicationName);
     }
 }

@@ -1,5 +1,6 @@
 package com.github.shuaidd.client.config;
 
+import com.github.shuaidd.client.decoder.CustomJacksonDecoder;
 import com.github.shuaidd.client.interceptor.WeChatInterceptor;
 import feign.Feign;
 import feign.codec.Decoder;
@@ -23,7 +24,7 @@ public class WeChatConfiguration {
 
     @Bean
     public Decoder decoder() {
-        return new JacksonDecoder();
+        return new CustomJacksonDecoder();
     }
 
     @Bean
