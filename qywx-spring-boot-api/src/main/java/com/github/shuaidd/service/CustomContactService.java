@@ -1,7 +1,12 @@
 package com.github.shuaidd.service;
 
 import com.github.shuaidd.response.*;
+import com.github.shuaidd.response.addressbook.MobileHashCodeResponse;
+import com.github.shuaidd.response.externalcontact.*;
 import com.github.shuaidd.resquest.*;
+import com.github.shuaidd.resquest.addressbook.MobileHashCodeRequest;
+import com.github.shuaidd.resquest.addressbook.TagGroupRequest;
+import com.github.shuaidd.resquest.externalcontact.*;
 import org.springframework.stereotype.Service;
 
 /**

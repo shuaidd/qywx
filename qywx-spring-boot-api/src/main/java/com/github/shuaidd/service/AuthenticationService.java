@@ -1,7 +1,7 @@
 package com.github.shuaidd.service;
 
-import com.github.shuaidd.response.ApiDomainIpResponse;
-import com.github.shuaidd.response.AuthenticationResponse;
+import com.github.shuaidd.response.tool.ApiDomainIpResponse;
+import com.github.shuaidd.response.auth.AuthenticationResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.github.shuaidd;
 
-import com.github.shuaidd.resquest.*;
+import com.github.shuaidd.resquest.addressbook.*;
 import org.junit.Test;
 
 import java.util.Collections;

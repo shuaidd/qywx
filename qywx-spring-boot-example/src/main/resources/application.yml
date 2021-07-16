@@ -11,6 +11,13 @@ qywx:
       application-name: schedule
     - secret: AfjvAed_ulqhK0OqTprDQ6xOSnqaT34ll2LsRe0D2NA
       application-name: address-book
+      application-desc: 通讯录
+    - secret: hAoTUpLro0bV3q9w1rUiOsMaRnnxlom1tk6zZ9qMIY0
+      application-name: check-in
+      application-desc: 打卡
+    - secret: YOtNFA1HvMkGMj1QdokVSjXVBq7KCEcppHmtfkkfT0I
+      application-name: public-telephone
+      application-desc: 公费电话
   url: https://qyapi.weixin.qq.com
   public-path: cgi-bin
   corp-id: ww36e0a51aab349a7d

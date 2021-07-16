@@ -2,8 +2,8 @@ package com.github.shuaidd.dto.checkin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.github.shuaidd.dto.ReminderData;
-import com.github.shuaidd.dto.UserId;
+import com.github.shuaidd.dto.tool.ReminderData;
+import com.github.shuaidd.dto.addressbook.UserId;
 import com.github.shuaidd.json.Date2LongSerializer;
 
 import java.util.Date;

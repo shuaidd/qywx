@@ -1,8 +1,6 @@
 package com.github.shuaidd.dto.checkin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.CalOtTimeRule;
-import com.github.shuaidd.dto.FixTimeRule;
 
 /**
  * 描述

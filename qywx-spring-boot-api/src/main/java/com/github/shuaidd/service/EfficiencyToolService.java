@@ -1,9 +1,10 @@
 package com.github.shuaidd.service;
 
 import com.github.shuaidd.response.*;
-import com.github.shuaidd.resquest.*;
+import com.github.shuaidd.response.tool.*;
+import com.github.shuaidd.resquest.oa.CalendarRequest;
+import com.github.shuaidd.resquest.tool.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 描述 效率工具
@@ -182,7 +183,7 @@ public class EfficiencyToolService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return CreateLivingResponse
      */
-    public CreateLivingResponse createLiving(LivingRequest request,String applicationName) {
+    public CreateLivingResponse createLiving(LivingRequest request, String applicationName) {
         CreateLivingResponse response = weChatClient.createLiving(request,applicationName);
         return getResponse(response);
     }

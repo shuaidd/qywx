@@ -1,7 +1,5 @@
 package com.github.shuaidd.dto.message;
 
-import com.github.shuaidd.dto.MpNewsArticle;
-
 import java.util.List;
 
 /**

@@ -2,10 +2,13 @@ package com.github.shuaidd.service;
 
 import com.github.shuaidd.dto.checkin.CheckInData;
 import com.github.shuaidd.dto.checkin.CheckInRule;
-import com.github.shuaidd.dto.DialRecord;
+import com.github.shuaidd.dto.tool.DialRecord;
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.*;
-import com.github.shuaidd.resquest.*;
+import com.github.shuaidd.response.oa.*;
+import com.github.shuaidd.response.tool.DialRecordResponse;
+import com.github.shuaidd.resquest.oa.*;
+import com.github.shuaidd.resquest.tool.DialRecordRequest;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
@@ -175,7 +178,7 @@ public class OAService extends AbstractBaseService {
      * @param request 请求
      * @param applicationName 应用名称
      */
-    public void addCheckInUserFace(AddCheckInUserFaceRequest request,String applicationName){
+    public void addCheckInUserFace(AddCheckInUserFaceRequest request, String applicationName){
         BaseResponse response = weChatClient.addCheckInUserFace(request,applicationName);
         getResponse(response);
     }

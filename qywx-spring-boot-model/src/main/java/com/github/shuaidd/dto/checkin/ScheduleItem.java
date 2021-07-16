@@ -1,8 +1,6 @@
 package com.github.shuaidd.dto.checkin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.LateRule;
-import com.github.shuaidd.dto.TimeSection;
 
 import java.util.List;
 

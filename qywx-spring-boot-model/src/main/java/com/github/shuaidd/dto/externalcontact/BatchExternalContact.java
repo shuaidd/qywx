@@ -1,7 +1,6 @@
 package com.github.shuaidd.dto.externalcontact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.FollowUserDetail;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**

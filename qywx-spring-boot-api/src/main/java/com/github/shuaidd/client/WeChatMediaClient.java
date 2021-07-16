@@ -1,8 +1,8 @@
 package com.github.shuaidd.client;
 
 import com.github.shuaidd.client.config.MultipartSupportConfig;
-import com.github.shuaidd.response.UploadImageResponse;
-import com.github.shuaidd.response.WeChatMediaUploadResponse;
+import com.github.shuaidd.response.material.UploadImageResponse;
+import com.github.shuaidd.response.material.WeChatMediaUploadResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 package com.github.shuaidd.dto.externalcontact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.ExtAttr;
+import com.github.shuaidd.dto.addressbook.ExtAttr;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;

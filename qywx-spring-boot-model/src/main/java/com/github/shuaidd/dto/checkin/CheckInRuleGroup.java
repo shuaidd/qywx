@@ -1,7 +1,6 @@
 package com.github.shuaidd.dto.checkin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;

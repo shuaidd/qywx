@@ -1,7 +1,7 @@
 package com.github.shuaidd.service;
 
-import com.github.shuaidd.response.UploadImageResponse;
-import com.github.shuaidd.response.WeChatMediaUploadResponse;
+import com.github.shuaidd.response.material.UploadImageResponse;
+import com.github.shuaidd.response.material.WeChatMediaUploadResponse;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.io.IOUtils;

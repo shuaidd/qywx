@@ -2,13 +2,13 @@ package com.github.shuaidd;
 
 import com.github.shuaidd.dto.checkin.CheckInData;
 import com.github.shuaidd.dto.checkin.CheckInRule;
-import com.github.shuaidd.dto.DialRecord;
-import com.github.shuaidd.response.CheckInDayReportResponse;
-import com.github.shuaidd.response.CheckInOptionResponse;
-import com.github.shuaidd.resquest.CheckInDataRequest;
-import com.github.shuaidd.resquest.CheckInRuleRequest;
-import com.github.shuaidd.resquest.CommonOaRequest;
-import com.github.shuaidd.resquest.DialRecordRequest;
+import com.github.shuaidd.dto.tool.DialRecord;
+import com.github.shuaidd.response.oa.CheckInDayReportResponse;
+import com.github.shuaidd.response.oa.CheckInOptionResponse;
+import com.github.shuaidd.resquest.oa.CheckInDataRequest;
+import com.github.shuaidd.resquest.oa.CheckInRuleRequest;
+import com.github.shuaidd.resquest.oa.CommonOaRequest;
+import com.github.shuaidd.resquest.tool.DialRecordRequest;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 

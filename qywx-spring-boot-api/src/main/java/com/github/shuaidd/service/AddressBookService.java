@@ -1,11 +1,12 @@
 package com.github.shuaidd.service;
 
-import com.github.shuaidd.dto.CallbackData;
-import com.github.shuaidd.dto.Department;
-import com.github.shuaidd.dto.Tag;
-import com.github.shuaidd.dto.WeChatUser;
+import com.github.shuaidd.dto.tool.CallbackData;
+import com.github.shuaidd.dto.addressbook.Department;
+import com.github.shuaidd.dto.addressbook.Tag;
+import com.github.shuaidd.dto.addressbook.WeChatUser;
 import com.github.shuaidd.response.*;
-import com.github.shuaidd.resquest.*;
+import com.github.shuaidd.response.addressbook.*;
+import com.github.shuaidd.resquest.addressbook.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;

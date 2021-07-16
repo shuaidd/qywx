@@ -1,15 +1,15 @@
 package com.github.shuaidd;
 
-import com.github.shuaidd.dto.CalendarData;
-import com.github.shuaidd.dto.ReminderData;
+import com.github.shuaidd.dto.tool.CalendarData;
+import com.github.shuaidd.dto.tool.ReminderData;
 import com.github.shuaidd.dto.checkin.ScheduleData;
-import com.github.shuaidd.dto.UserId;
-import com.github.shuaidd.response.AddScheduleResponse;
-import com.github.shuaidd.response.CalendarResponse;
-import com.github.shuaidd.response.GetCalendarResponse;
-import com.github.shuaidd.resquest.CalendarRequest;
-import com.github.shuaidd.resquest.GetCalendarRequest;
-import com.github.shuaidd.resquest.ScheduleRequest;
+import com.github.shuaidd.dto.addressbook.UserId;
+import com.github.shuaidd.response.tool.AddScheduleResponse;
+import com.github.shuaidd.response.tool.CalendarResponse;
+import com.github.shuaidd.response.tool.GetCalendarResponse;
+import com.github.shuaidd.resquest.oa.CalendarRequest;
+import com.github.shuaidd.resquest.tool.GetCalendarRequest;
+import com.github.shuaidd.resquest.tool.ScheduleRequest;
 import com.github.shuaidd.service.EfficiencyToolService;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Before;

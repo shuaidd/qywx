@@ -1,6 +1,5 @@
 package com.github.shuaidd;
 
-import com.github.shuaidd.response.AuthenticationResponse;
 import org.junit.Test;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.github.shuaidd.service;
 
-import com.github.shuaidd.response.AccessTokenResponse;
+import com.github.shuaidd.response.tool.AccessTokenResponse;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
