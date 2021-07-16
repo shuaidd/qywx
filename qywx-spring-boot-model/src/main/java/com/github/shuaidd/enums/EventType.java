@@ -26,6 +26,7 @@ public enum EventType {
     PIC_WEI_XIN("pic_weixin","弹出拍照或者相册发图的事件推送"),
     LOCATION_SELECT("location_select","弹出地理位置选择器的事件推送"),
     OPEN_APPROVAL_CHANGE("open_approval_change","审批状态通知事件"),
+    SYS_APPROVAL_CHANGE("sys_approval_change","审批申请状态变化回调通知"),
     TASK_CARD_CLICK("taskcard_click","任务卡片事件推送"),
     SHARE_AGENT_CHANGE("share_agent_change","共享应用事件回调"),
     MODIFY_CALENDAR("modify_calendar","修改日历事件"),

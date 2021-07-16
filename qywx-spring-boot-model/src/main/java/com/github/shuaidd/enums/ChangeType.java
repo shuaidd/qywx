@@ -60,6 +60,7 @@ public enum  ChangeType {
     PIC_WEI_XIN(EventType.PIC_WEI_XIN,"","弹出拍照或者相册发图的事件推送"),
     LOCATION_SELECT(EventType.LOCATION_SELECT,"","弹出地理位置选择器的事件推送"),
     OPEN_APPROVAL_CHANGE(EventType.OPEN_APPROVAL_CHANGE,"","审批状态通知事件"),
+    SYS_APPROVAL_CHANGE(EventType.SYS_APPROVAL_CHANGE,"","审批申请状态变化回调通知"),
     TASK_CARD_CLICK(EventType.TASK_CARD_CLICK,"","任务卡片事件推送"),
     SHARE_AGENT_CHANGE(EventType.SHARE_AGENT_CHANGE,"","共享应用事件回调"),
 
