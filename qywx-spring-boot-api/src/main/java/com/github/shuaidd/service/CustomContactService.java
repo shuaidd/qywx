@@ -371,7 +371,6 @@ public class CustomContactService extends AbstractBaseService {
      *
      * @param request         请求
      * @param applicationName 应用名称
-     * @return BaseResponse
      */
     public void sendWelcomeMsg(WelcomeMsgRequest request, String applicationName) {
         weChatClient.sendWelcomeMsg(request, applicationName);
@@ -393,7 +392,6 @@ public class CustomContactService extends AbstractBaseService {
      *
      * @param request         请求
      * @param applicationName 应用名称
-     * @return BaseResponse
      */
     public void editGroupWelcomeTemplate(WelcomeTemplateRequest request, String applicationName) {
         weChatClient.editGroupWelcomeTemplate(request, applicationName);
@@ -415,7 +413,6 @@ public class CustomContactService extends AbstractBaseService {
      *
      * @param request         请求
      * @param applicationName 应用名称
-     * @return BaseResponse
      */
     public void deleteGroupWelcomeTemplate(DeleteWelcomeTemplateResponse request, String applicationName) {
         weChatClient.deleteGroupWelcomeTemplate(request, applicationName);

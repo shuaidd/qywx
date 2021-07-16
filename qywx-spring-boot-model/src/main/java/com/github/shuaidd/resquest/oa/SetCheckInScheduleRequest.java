@@ -9,7 +9,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-15 14:40
+ * date 2021-07-15 14:40
  **/
 public class SetCheckInScheduleRequest {
 

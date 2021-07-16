@@ -8,7 +8,7 @@ import java.util.StringJoiner;
  * 描述 时长组件
  *
  * @author ddshuai
- * @date 2021-07-16 18:01
+ * date 2021-07-16 18:01
  **/
 public class DateRangeFormControl implements ApplyFormControl {
 

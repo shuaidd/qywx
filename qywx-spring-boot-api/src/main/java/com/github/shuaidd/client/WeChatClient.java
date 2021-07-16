@@ -68,6 +68,7 @@ public interface WeChatClient {
      *
      * @param app    应用名
      * @param userId 成员编号
+     * @return WeChatUserResponse
      */
     @GetMapping(value = "user/get", headers = HEAD)
     WeChatUserResponse getUser(@RequestParam("userid") String userId, @RequestParam(HEAD_KEY) String app);
@@ -95,7 +96,7 @@ public interface WeChatClient {
     /**
      * 批量删除成员
      *
-     * @param request
+     * @param request 请求体
      * @param app     应用
      * @return BaseResponse
      */
@@ -108,7 +109,7 @@ public interface WeChatClient {
      * @param app          应用名
      * @param departmentId 获取的部门id
      * @param fetchChild   1/0：是否递归获取子部门下面的成员
-     * @return
+     * @return DepartmentUserResponse
      */
     @GetMapping(value = "user/simplelist", headers = HEAD)
     DepartmentUserResponse getDepartmentUser(@RequestParam("department_id") Integer departmentId, @RequestParam("fetch_child") Integer fetchChild, @RequestParam(HEAD_KEY) String app);
@@ -119,7 +120,7 @@ public interface WeChatClient {
      * @param app          应用名
      * @param departmentId 获取的部门id
      * @param fetchChild   1/0：是否递归获取子部门下面的成员
-     * @return
+     * @return DepartmentUserResponse
      */
     @GetMapping(value = "user/list", headers = HEAD)
     DepartmentUserResponse getDepartmentUserDetail(@RequestParam("department_id") Integer departmentId, @RequestParam("fetch_child") Integer fetchChild, @RequestParam(HEAD_KEY) String app);
@@ -139,7 +140,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return ConvertUserIdOpenIdResponse
      */
     @PostMapping(value = "user/convert_to_userid", headers = HEAD)
     ConvertUserIdOpenIdResponse convertToUserId(ConvertUserIdOpenIdRequest request, @RequestParam(HEAD_KEY) String app);
@@ -149,7 +150,7 @@ public interface WeChatClient {
      *
      * @param userId
      * @param app    应用名
-     * @return
+     * @return BaseResponse
      */
     @GetMapping(value = "user/authsucc", headers = HEAD)
     BaseResponse authSucc(@RequestParam("userid") String userId, @RequestParam(HEAD_KEY) String app);
@@ -159,7 +160,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return BaseResponse
      */
     @PostMapping(value = "batch/invite", headers = HEAD)
     BaseResponse invite(InviteUserRequest request, @RequestParam(HEAD_KEY) String app);
@@ -178,7 +179,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return BaseResponse
      */
     @PostMapping(value = "department/update", headers = HEAD)
     BaseResponse updateDepartment(DepartmentRequest request, @RequestParam(HEAD_KEY) String app);
@@ -188,7 +189,7 @@ public interface WeChatClient {
      *
      * @param id  企业微信部门id
      * @param app 应用名
-     * @return
+     * @return BaseResponse
      */
     @GetMapping(value = "department/delete", headers = HEAD)
     BaseResponse deleteDepartment(@RequestParam(value = "id", required = false) Integer id, @RequestParam(HEAD_KEY) String app);
@@ -201,7 +202,7 @@ public interface WeChatClient {
      *
      * @param id  部门id
      * @param app 应用名
-     * @return
+     * @return DepartmentListResponse
      */
     @GetMapping(value = "department/list", headers = HEAD)
     DepartmentListResponse departmentList(@RequestParam(value = "id", required = false) Integer id, @RequestParam(HEAD_KEY) String app);
@@ -212,7 +213,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return CreateTagResponse
      */
     @PostMapping(value = "tag/create", headers = HEAD)
     CreateTagResponse createTag(TagRequest request, @RequestParam(HEAD_KEY) String app);
@@ -225,7 +226,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return BaseResponse
      */
     @PostMapping(value = "tag/update", headers = HEAD)
     BaseResponse updateTag(TagRequest request, @RequestParam(HEAD_KEY) String app);
@@ -235,7 +236,7 @@ public interface WeChatClient {
      *
      * @param id  标签ID
      * @param app 应用名
-     * @return
+     * @return BaseResponse
      */
     @GetMapping(value = "tag/delete", headers = HEAD)
     BaseResponse deleteTag(@RequestParam("tagid") Integer id, @RequestParam(HEAD_KEY) String app);
@@ -245,7 +246,7 @@ public interface WeChatClient {
      *
      * @param id
      * @param app 应用名
-     * @return
+     * @return QueryTagUserResponse
      */
     @GetMapping(value = "tag/get", headers = HEAD)
     QueryTagUserResponse getTagUser(@RequestParam("tagid") Integer id, @RequestParam(HEAD_KEY) String app);
@@ -265,7 +266,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return TagUserResponse
      */
     @PostMapping(value = "tag/deltagusers", headers = HEAD)
     TagUserResponse deleteTagUsers(TagUserRequest request, @RequestParam(HEAD_KEY) String app);
@@ -274,7 +275,7 @@ public interface WeChatClient {
      * 获取标签列表
      *
      * @param app 应用名
-     * @return
+     * @return TagListResponse
      */
     @GetMapping(value = "tag/list", headers = HEAD)
     TagListResponse getTagList(@RequestParam(HEAD_KEY) String app);
@@ -332,7 +333,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return AsyncJobResponse
      */
     @PostMapping(value = "batch/replaceparty", headers = HEAD)
     AsyncJobResponse fullCoverDepartment(AsyncJobRequest request, @RequestParam(HEAD_KEY) String app);
@@ -342,7 +343,7 @@ public interface WeChatClient {
      *
      * @param jobId
      * @param app   应用名
-     * @return
+     * @return AsyncJobResultResponse
      */
     @GetMapping(value = "batch/getresult", headers = HEAD)
     AsyncJobResultResponse jobResult(@RequestParam("jobid") String jobId, @RequestParam(HEAD_KEY) String app);
@@ -352,7 +353,7 @@ public interface WeChatClient {
      *
      * @param code
      * @param app  应用名
-     * @return
+     * @return AuthenticationResponse
      */
     @GetMapping(value = "user/getuserinfo", headers = HEAD)
     AuthenticationResponse getAuthentication(@RequestParam("code") String code, @RequestParam(HEAD_KEY) String app);
@@ -362,7 +363,7 @@ public interface WeChatClient {
      *
      * @param agentId
      * @param app     应用名
-     * @return
+     * @return WeChatApplicationResponse
      */
     @GetMapping(value = "agent/get", headers = HEAD)
     WeChatApplicationResponse getApplication(@RequestParam("agentid") String agentId, @RequestParam(HEAD_KEY) String app);
@@ -372,7 +373,7 @@ public interface WeChatClient {
      *
      * @param reuqest
      * @param app     应用名
-     * @return
+     * @return BaseResponse
      */
     @PostMapping(value = "agent/set", headers = HEAD)
     BaseResponse applicationSetting(ApplicationSettingReuqest reuqest, @RequestParam(HEAD_KEY) String app);
@@ -383,7 +384,7 @@ public interface WeChatClient {
      * @param request 请求体
      * @param agentid
      * @param app     应用名
-     * @return
+     * @return BaseResponse
      */
     @PostMapping(value = "menu/create", headers = HEAD)
     BaseResponse createApplicationButton(ApplicationButtonRequest request, @RequestParam("agentid") String agentid, @RequestParam(HEAD_KEY) String app);
@@ -393,7 +394,7 @@ public interface WeChatClient {
      *
      * @param agentid
      * @param app     应用名
-     * @return
+     * @return ApplicationButtonResponse
      */
     @GetMapping(value = "menu/get", headers = HEAD)
     ApplicationButtonResponse getApplicationButtons(@RequestParam("agentid") String agentid, @RequestParam(HEAD_KEY) String app);
@@ -403,7 +404,7 @@ public interface WeChatClient {
      *
      * @param agentid
      * @param app     应用名
-     * @return
+     * @return BaseResponse
      */
     @GetMapping(value = "menu/delete", headers = HEAD)
     BaseResponse deleteApplicationButtons(@RequestParam("agentid") String agentid, @RequestParam(HEAD_KEY) String app);
@@ -413,7 +414,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return SendMessageResponse
      */
     @PostMapping(value = "message/send", headers = HEAD)
     SendMessageResponse sendMessage(SendMessageRequest request, @RequestParam(HEAD_KEY) String app);
@@ -423,7 +424,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return CreateAppChatResponse
      */
     @PostMapping(value = "appchat/create", headers = HEAD)
     CreateAppChatResponse createAppChat(CreateAppChatRequest request, @RequestParam(HEAD_KEY) String app);
@@ -433,7 +434,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return BaseResponse
      */
     @PostMapping(value = "appchat/update", headers = HEAD)
     BaseResponse updateAppChat(UpdateAppChatRequest request, @RequestParam(HEAD_KEY) String app);
@@ -443,7 +444,7 @@ public interface WeChatClient {
      *
      * @param chatId
      * @param app    应用名
-     * @return
+     * @return SearchAppChatResponse
      */
     @GetMapping(value = "appchat/get", headers = HEAD)
     SearchAppChatResponse searchAppChat(@RequestParam("chatid") String chatId, @RequestParam(HEAD_KEY) String app);
@@ -453,7 +454,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return BaseResponse
      */
     @PostMapping(value = "appchat/send", headers = HEAD)
     BaseResponse sendAppChatMessage(SendAppChatRequest request, @RequestParam(HEAD_KEY) String app);
@@ -468,7 +469,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return CheckInDataResponse
      */
     @PostMapping(value = "checkin/getcheckindata", headers = HEAD)
     CheckInDataResponse getCheckInData(CheckInDataRequest request, @RequestParam(HEAD_KEY) String app);
@@ -481,7 +482,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return CheckInRuleResponse
      */
     @PostMapping(value = "checkin/getcheckinoption", headers = HEAD)
     CheckInRuleResponse getCheckInOption(CheckInRuleRequest request, @RequestParam(HEAD_KEY) String app);
@@ -494,7 +495,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return ApprovalDataResponse
      */
     @PostMapping(value = "corp/getapprovaldata", headers = HEAD)
     ApprovalDataResponse getApprovalData(ApprovalDataRequest request, @RequestParam(HEAD_KEY) String app);
@@ -504,7 +505,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return DialRecordResponse
      */
     @PostMapping(value = "dial/get_dial_record", headers = HEAD)
     DialRecordResponse getDialRecord(DialRecordRequest request, @RequestParam(HEAD_KEY) String app);
@@ -623,7 +624,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return TagGroupResponse
      */
     @PostMapping(value = "externalcontact/get_corp_tag_list", headers = HEAD)
     TagGroupResponse getCorpTagList(TagGroupRequest request, @RequestParam(HEAD_KEY) String app);
@@ -703,7 +704,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return FailedChatResponse
      */
     @PostMapping(value = "externalcontact/groupchat/transfer", headers = HEAD)
     FailedChatResponse groupChatTransfer(GroupChatTransferRequest request, @RequestParam(HEAD_KEY) String app);
@@ -723,7 +724,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return GroupChatDetailResponse
      */
     @PostMapping(value = "externalcontact/groupchat/get", headers = HEAD)
     GroupChatDetailResponse groupChatDetail(GroupChatDetailRequest request, @RequestParam(HEAD_KEY) String app);
@@ -743,7 +744,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return MomentTaskResponse
      */
     @PostMapping(value = "externalcontact/get_moment_task", headers = HEAD)
     MomentTaskResponse getMomentTask(MomentTaskRequest request, @RequestParam(HEAD_KEY) String app);
@@ -763,7 +764,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return MomentCustomerListResponse
      */
     @PostMapping(value = "externalcontact/get_moment_send_result", headers = HEAD)
     MomentCustomerListResponse getMomentSendResult(MomentCustomerListRequest request, @RequestParam(HEAD_KEY) String app);
@@ -923,7 +924,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return GetCalendarResponse
      */
     @PostMapping(value = "oa/calendar/get", headers = HEAD)
     GetCalendarResponse getCalendar(GetCalendarRequest request, @RequestParam(HEAD_KEY) String app);

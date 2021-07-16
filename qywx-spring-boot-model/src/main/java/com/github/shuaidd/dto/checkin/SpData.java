@@ -4,7 +4,7 @@ package com.github.shuaidd.dto.checkin;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-15 13:14
+ * date 2021-07-15 13:14
  **/
 public class SpData {
     private String lang;

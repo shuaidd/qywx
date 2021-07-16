@@ -6,7 +6,7 @@ import java.util.StringJoiner;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-15 15:36
+ * date 2021-07-15 15:36
  **/
 public class TemplateText {
     private String text;

@@ -15,7 +15,7 @@ import java.lang.reflect.Type;
  * 描述 处理token失效的问题
  *
  * @author ddshuai
- * @date 2021-07-16 12:30
+ * date 2021-07-16 12:30
  **/
 public class CustomJacksonDecoder extends JacksonDecoder {
 

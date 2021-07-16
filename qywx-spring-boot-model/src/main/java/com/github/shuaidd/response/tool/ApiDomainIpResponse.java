@@ -10,7 +10,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-15 14:53
+ * date 2021-07-15 14:53
  **/
 public class ApiDomainIpResponse extends AbstractBaseResponse {
 

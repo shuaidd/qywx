@@ -7,7 +7,7 @@ import java.util.StringJoiner;
  * 描述 明细控件
  *
  * @author ddshuai
- * @date 2021-07-16 14:25
+ * date 2021-07-16 14:25
  **/
 public class TableFormControl implements ApplyFormControl {
 

@@ -4,7 +4,7 @@ package com.github.shuaidd.dto.template;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-16 18:28
+ * date 2021-07-16 18:28
  **/
 public class TemplateContact {
     private String type;

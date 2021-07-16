@@ -11,7 +11,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-16 13:32
+ * date 2021-07-16 13:32
  **/
 public class ApplyEventRequest {
 

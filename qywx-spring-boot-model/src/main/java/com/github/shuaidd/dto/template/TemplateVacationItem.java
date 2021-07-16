@@ -6,7 +6,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-16 18:24
+ * date 2021-07-16 18:24
  **/
 public class TemplateVacationItem {
     private String id;

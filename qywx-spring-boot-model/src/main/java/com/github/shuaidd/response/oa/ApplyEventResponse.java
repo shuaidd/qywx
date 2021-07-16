@@ -7,7 +7,7 @@ import com.github.shuaidd.response.AbstractBaseResponse;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-16 13:47
+ * date 2021-07-16 13:47
  **/
 public class ApplyEventResponse extends AbstractBaseResponse {
 

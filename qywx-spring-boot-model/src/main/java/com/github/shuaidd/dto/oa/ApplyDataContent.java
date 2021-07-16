@@ -6,7 +6,7 @@ import com.github.shuaidd.dto.oa.formcontrol.ApplyFormControl;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-16 13:40
+ * date 2021-07-16 13:40
  **/
 public class ApplyDataContent {
     private String control;

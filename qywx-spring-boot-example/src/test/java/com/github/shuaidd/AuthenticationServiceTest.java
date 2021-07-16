@@ -8,7 +8,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-15 15:00
+ * date 2021-07-15 15:00
  **/
 public class AuthenticationServiceTest extends AbstractTest {
 

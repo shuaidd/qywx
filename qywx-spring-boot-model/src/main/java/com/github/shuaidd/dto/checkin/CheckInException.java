@@ -6,7 +6,7 @@ import java.util.StringJoiner;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-15 13:22
+ * date 2021-07-15 13:22
  **/
 public class CheckInException {
     private Integer count;

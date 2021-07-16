@@ -6,7 +6,7 @@ import java.util.StringJoiner;
  * 描述 位置控件
  *
  * @author ddshuai
- * @date 2021-07-16 17:50
+ * date 2021-07-16 17:50
  **/
 public class LocationFormControl implements ApplyFormControl {
 

@@ -6,7 +6,7 @@ import java.util.StringJoiner;
  * 描述 日期/日期+时间控件
  *
  * @author ddshuai
- * @date 2021-07-16 14:25
+ * date 2021-07-16 14:25
  **/
 public class DateFormControl implements ApplyFormControl {
 

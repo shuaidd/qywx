@@ -174,6 +174,7 @@ public class OAService extends AbstractBaseService {
      *
      * @param request         请求
      * @param applicationName 应用名称
+     * @return  ApproveTemplateResponse
      */
     public ApproveTemplateResponse getTemplateDetail(TemplateRequest request, String applicationName) {
         return weChatClient.getTemplateDetail(request, applicationName);
@@ -184,6 +185,7 @@ public class OAService extends AbstractBaseService {
      *
      * @param request         请求
      * @param applicationName 应用名称
+     * @return ApplyEventResponse
      */
     public ApplyEventResponse applyEvent(ApplyEventRequest request, String applicationName) {
         return weChatClient.applyEvent(request,applicationName);

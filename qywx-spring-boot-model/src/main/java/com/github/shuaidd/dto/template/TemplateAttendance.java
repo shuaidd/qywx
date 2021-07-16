@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-16 18:36
+ * date 2021-07-16 18:36
  **/
 public class TemplateAttendance {
     private Integer type;

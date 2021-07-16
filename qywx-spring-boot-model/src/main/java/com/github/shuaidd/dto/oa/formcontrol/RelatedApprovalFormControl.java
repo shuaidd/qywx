@@ -9,7 +9,7 @@ import java.util.StringJoiner;
  * 描述 关联审批单控件
  *
  * @author ddshuai
- * @date 2021-07-16 17:52
+ * date 2021-07-16 17:52
  **/
 public class RelatedApprovalFormControl implements ApplyFormControl {
 
