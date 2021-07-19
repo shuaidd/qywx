@@ -1223,4 +1223,24 @@ public interface WeChatClient {
      */
     @PostMapping(value = "oa/applyevent", headers = HEAD)
     ApplyEventResponse applyEvent(ApplyEventRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量获取审批单号
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return SpNoResponse
+     */
+    @PostMapping(value = "oa/getapprovalinfo", headers = HEAD)
+    SpNoResponse getApprovalInfo(GetApprovalNoRequest request,@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取审批申请详情
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return ApprovalDetailResponse
+     */
+    @PostMapping(value = "oa/getapprovaldetail", headers = HEAD)
+    ApprovalDetailResponse getApprovalDetail(ApprovalDetailRequest request,@RequestParam(HEAD_KEY) String app);
 }

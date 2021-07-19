@@ -1,5 +1,8 @@
 package com.github.shuaidd.dto.oa.formcontrol;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.github.shuaidd.json.TableFormControlDeserializer;
+
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -11,6 +14,7 @@ import java.util.StringJoiner;
  **/
 public class TableChildren {
 
+    @JsonDeserialize(using = TableFormControlDeserializer.class)
     private List<TableChildrenDetail> list;
 
     public List<TableChildrenDetail> getList() {

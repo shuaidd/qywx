@@ -13,10 +13,12 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * date 2019-04-04 15:31
  **/
 public class ExtAttr {
+
     private Integer type;
     private String name;
     private ExternalTextAttr text;
     private ExternalWebAttr web;
+
     @JsonProperty("miniprogram")
     private ExternalMiniProgramAttr miniProgram;
 

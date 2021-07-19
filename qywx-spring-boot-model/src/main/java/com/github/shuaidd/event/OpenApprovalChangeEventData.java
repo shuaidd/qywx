@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  **/
 
 @XmlRootElement(name = "xml")
-public class ApprovalChangeEventData extends BaseEventData {
+public class OpenApprovalChangeEventData extends BaseEventData {
 
     @XmlElement(name = "ApprovalInfo")
     private ApprovalInfo approvalInfo;

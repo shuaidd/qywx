@@ -1,5 +1,7 @@
 package com.github.shuaidd.dto.oa.formcontrol;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,7 @@ import java.io.Serializable;
  * @author ddshuai
  * date 2021-07-16 14:25
  **/
+@JsonIgnoreProperties(ignoreUnknown = true)
 public interface ApplyFormControl extends Serializable {
 
     /**

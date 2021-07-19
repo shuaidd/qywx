@@ -12,8 +12,10 @@ import java.util.Date;
  * date 2021-01-04 21:52
  **/
 public class UnassignedCustomer {
+
     @JsonProperty("handover_userid")
     private String handoverUserId;
+
     @JsonProperty("external_userid")
     private String externalUserId;
 

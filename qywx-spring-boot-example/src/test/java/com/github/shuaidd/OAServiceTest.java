@@ -12,16 +12,20 @@ import com.github.shuaidd.dto.oa.SummaryInfo;
 import com.github.shuaidd.dto.oa.formcontrol.*;
 import com.github.shuaidd.dto.template.TemplateText;
 import com.github.shuaidd.dto.tool.DialRecord;
-import com.github.shuaidd.response.oa.ApproveTemplateResponse;
-import com.github.shuaidd.response.oa.CheckInDayReportResponse;
-import com.github.shuaidd.response.oa.CheckInOptionResponse;
-import com.github.shuaidd.response.oa.CheckInScheduleResponse;
+import com.github.shuaidd.response.oa.*;
+import com.github.shuaidd.resquest.RequestFilter;
 import com.github.shuaidd.resquest.oa.*;
 import com.github.shuaidd.resquest.tool.DialRecordRequest;
 import com.google.common.collect.Lists;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
+import org.springframework.util.ResourceUtils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Collections;
 import java.util.List;
@@ -144,6 +148,7 @@ public class OAServiceTest extends AbstractTest {
 
     /**
      * 202107160001
+     *
      * @throws JsonProcessingException
      */
     @Test
@@ -204,9 +209,40 @@ public class OAServiceTest extends AbstractTest {
         summaryInfo.setSummaryInfo(Collections.singletonList(templateText));
         request.setSummaryInfos(Collections.singletonList(summaryInfo));
 
-       String rqStr = objectMapper.writeValueAsString(request);
-       logger.info("请求的json串---{}",rqStr);
-       weChatManager.oaService().applyEvent(request, APPROVE);
+        String rqStr = objectMapper.writeValueAsString(request);
+        logger.info("请求的json串---{}", rqStr);
+        ApplyEventResponse response = weChatManager.oaService().applyEvent(request, APPROVE);
+        logger.info("发起审批的结果--{}", response);
+    }
+
+    @Test
+    public void getApprovalInfo() {
+        GetApprovalNoRequest request = new GetApprovalNoRequest();
+        request.setSize(100);
+        request.setStartTime(getUnixTime("2021-07-15 00:00:00"));
+        request.setEndTime(getUnixTime("2021-07-17 00:00:00"));
+
+        RequestFilter requestFilter = new RequestFilter("sp_status", "2");
+        request.setFilters(Collections.singletonList(requestFilter));
+        SpNoResponse response = weChatManager.oaService().getApprovalInfo(request, APPROVE);
+        logger.info("批量获取审批单号的结果--{}", response);
+    }
+
+    @Test
+    public void jsonDecodeTest() throws IOException {
+        File file = ResourceUtils.getFile("classpath:json/getapprovaldetail.json");
+        String result = IOUtils.toString(new FileInputStream(file));
+        logger.info("读取到的json内容--{}", result);
+        ApprovalDetailResponse approvalDetailResponse = objectMapper.readValue(result, ApprovalDetailResponse.class);
+        logger.info("转换后的ApprovalDetailResponse--{}", approvalDetailResponse);
+    }
+
+    @Test
+    public void getApprovalDetail() {
+        ApprovalDetailRequest request = new ApprovalDetailRequest();
+        request.setSpNo("202107160001");
+        ApprovalDetailResponse response = weChatManager.oaService().getApprovalDetail(request, APPROVE);
+        logger.info("获取审批申请详情--{}", response);
     }
 
     private Long getUnixTime(String date) {

@@ -15,13 +15,16 @@ import java.util.List;
  **/
 
 public class TagGroup {
+
     @JsonProperty("group_id")
     private String groupId;
+
     @JsonProperty("group_name")
     private String groupName;
 
     @JsonProperty("create_time")
     private Date createTime;
+
     private Integer order;
     private Boolean deleted;
     private List<CustomTag> tag;

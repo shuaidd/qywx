@@ -59,7 +59,8 @@ public class EventDataManager {
         DATA_TYPE_MAP.put(ChangeType.PIC_PHOTO_OR_ALBUM, PicSysPhotoEventData.class);
         DATA_TYPE_MAP.put(ChangeType.PIC_WEI_XIN, PicSysPhotoEventData.class);
         DATA_TYPE_MAP.put(ChangeType.LOCATION_SELECT, LocationSelectEventData.class);
-        DATA_TYPE_MAP.put(ChangeType.OPEN_APPROVAL_CHANGE, ApprovalChangeEventData.class);
+        DATA_TYPE_MAP.put(ChangeType.OPEN_APPROVAL_CHANGE, OpenApprovalChangeEventData.class);
+        DATA_TYPE_MAP.put(ChangeType.SYS_APPROVAL_CHANGE, SysApprovalChangeEventData.class);
         DATA_TYPE_MAP.put(ChangeType.TASK_CARD_CLICK, TaskCardEventData.class);
         DATA_TYPE_MAP.put(ChangeType.SHARE_AGENT_CHANGE, CommonEventData.class);
 

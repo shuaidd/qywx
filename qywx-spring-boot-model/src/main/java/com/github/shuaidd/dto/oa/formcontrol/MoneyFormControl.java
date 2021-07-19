@@ -27,6 +27,9 @@ public class MoneyFormControl implements ApplyFormControl {
         this.money = money;
     }
 
+    public MoneyFormControl() {
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", MoneyFormControl.class.getSimpleName() + "[", "]")

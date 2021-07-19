@@ -190,4 +190,24 @@ public class OAService extends AbstractBaseService {
     public ApplyEventResponse applyEvent(ApplyEventRequest request, String applicationName) {
         return weChatClient.applyEvent(request,applicationName);
     }
+
+    /**
+     * 批量获取审批单号
+     * @param request 请求
+     * @param applicationName 应用名称
+     * @return SpNoResponse
+     */
+    public SpNoResponse getApprovalInfo(GetApprovalNoRequest request, String applicationName) {
+        return weChatClient.getApprovalInfo(request,applicationName);
+    }
+
+    /**
+     * 获取审批申请详情
+     * @param request 请求
+     * @param applicationName 应用名称
+     * @return ApprovalDetailResponse
+     */
+    public ApprovalDetailResponse getApprovalDetail(ApprovalDetailRequest request, String applicationName){
+        return weChatClient.getApprovalDetail(request,applicationName);
+    }
 }
