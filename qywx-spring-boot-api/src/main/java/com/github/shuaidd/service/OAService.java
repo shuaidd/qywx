@@ -174,7 +174,7 @@ public class OAService extends AbstractBaseService {
      *
      * @param request         请求
      * @param applicationName 应用名称
-     * @return  ApproveTemplateResponse
+     * @return ApproveTemplateResponse
      */
     public ApproveTemplateResponse getTemplateDetail(TemplateRequest request, String applicationName) {
         return weChatClient.getTemplateDetail(request, applicationName);
@@ -188,26 +188,58 @@ public class OAService extends AbstractBaseService {
      * @return ApplyEventResponse
      */
     public ApplyEventResponse applyEvent(ApplyEventRequest request, String applicationName) {
-        return weChatClient.applyEvent(request,applicationName);
+        return weChatClient.applyEvent(request, applicationName);
     }
 
     /**
      * 批量获取审批单号
-     * @param request 请求
+     *
+     * @param request         请求
      * @param applicationName 应用名称
      * @return SpNoResponse
      */
     public SpNoResponse getApprovalInfo(GetApprovalNoRequest request, String applicationName) {
-        return weChatClient.getApprovalInfo(request,applicationName);
+        return weChatClient.getApprovalInfo(request, applicationName);
     }
 
     /**
      * 获取审批申请详情
-     * @param request 请求
+     *
+     * @param request         请求
      * @param applicationName 应用名称
      * @return ApprovalDetailResponse
      */
-    public ApprovalDetailResponse getApprovalDetail(ApprovalDetailRequest request, String applicationName){
-        return weChatClient.getApprovalDetail(request,applicationName);
+    public ApprovalDetailResponse getApprovalDetail(ApprovalDetailRequest request, String applicationName) {
+        return weChatClient.getApprovalDetail(request, applicationName);
+    }
+
+    /**
+     * 获取企业假期管理配置
+     * @param applicationName 应用名称
+     * @return VacationConfigResponse
+     */
+    public VacationConfigResponse getCorpConf(String applicationName) {
+        return weChatClient.getCorpConf(applicationName);
+    }
+
+    /**
+     * 获取成员假期余额
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return UserVacationQuotaResponse
+     */
+    public UserVacationQuotaResponse getUserVacationQuota(UserIdRequest request, String applicationName){
+        return weChatClient.getUserVacationQuota(request,applicationName);
+    }
+
+    /**
+     * 修改成员假期余额
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void setOneUserQuota(UpdateUserQuotaRequest request,String applicationName) {
+        weChatClient.setOneUserQuota(request,applicationName);
     }
 }

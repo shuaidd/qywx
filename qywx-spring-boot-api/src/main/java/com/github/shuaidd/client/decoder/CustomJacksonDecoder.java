@@ -35,7 +35,7 @@ public class CustomJacksonDecoder extends JacksonDecoder {
                 logger.info("获取到的返回结果状态--{}--{}", abstractBaseResponse.getErrCode(), abstractBaseResponse.getErrMsg());
             }
 
-            throw new WeChatException(ErrorCode.errorCode(abstractBaseResponse.getErrCode()));
+            throw new WeChatException(abstractBaseResponse.getErrMsg(),ErrorCode.errorCode(abstractBaseResponse.getErrCode()));
         }
         return result;
     }

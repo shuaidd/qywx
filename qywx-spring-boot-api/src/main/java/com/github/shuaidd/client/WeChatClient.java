@@ -1190,6 +1190,7 @@ public interface WeChatClient {
 
     /**
      * 获取企业微信API域名IP段
+     *
      * @param app 应用名
      * @return ApiDomainIpResponse
      */
@@ -1198,6 +1199,7 @@ public interface WeChatClient {
 
     /**
      * 获取企业微信服务器回调的ip段
+     *
      * @param app 应用名
      * @return ApiDomainIpResponse
      */
@@ -1212,7 +1214,7 @@ public interface WeChatClient {
      * @return ApproveTemplateResponse
      */
     @PostMapping(value = "oa/gettemplatedetail", headers = HEAD)
-    ApproveTemplateResponse getTemplateDetail(TemplateRequest request,@RequestParam(HEAD_KEY) String app);
+    ApproveTemplateResponse getTemplateDetail(TemplateRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 提交审批申请
@@ -1222,7 +1224,7 @@ public interface WeChatClient {
      * @return ApplyEventResponse
      */
     @PostMapping(value = "oa/applyevent", headers = HEAD)
-    ApplyEventResponse applyEvent(ApplyEventRequest request,@RequestParam(HEAD_KEY) String app);
+    ApplyEventResponse applyEvent(ApplyEventRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 批量获取审批单号
@@ -1232,7 +1234,7 @@ public interface WeChatClient {
      * @return SpNoResponse
      */
     @PostMapping(value = "oa/getapprovalinfo", headers = HEAD)
-    SpNoResponse getApprovalInfo(GetApprovalNoRequest request,@RequestParam(HEAD_KEY) String app);
+    SpNoResponse getApprovalInfo(GetApprovalNoRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取审批申请详情
@@ -1242,5 +1244,34 @@ public interface WeChatClient {
      * @return ApprovalDetailResponse
      */
     @PostMapping(value = "oa/getapprovaldetail", headers = HEAD)
-    ApprovalDetailResponse getApprovalDetail(ApprovalDetailRequest request,@RequestParam(HEAD_KEY) String app);
+    ApprovalDetailResponse getApprovalDetail(ApprovalDetailRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取企业假期管理配置
+     *
+     * @param app 应用名
+     * @return VacationConfigResponse
+     */
+    @GetMapping(value = "oa/vacation/getcorpconf", headers = HEAD)
+    VacationConfigResponse getCorpConf(@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取成员假期余额
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return UserVacationQuotaResponse
+     */
+    @PostMapping(value = "oa/vacation/getuservacationquota", headers = HEAD)
+    UserVacationQuotaResponse getUserVacationQuota(UserIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改成员假期余额
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "oa/vacation/setoneuserquota", headers = HEAD)
+    BaseResponse setOneUserQuota(UpdateUserQuotaRequest request, @RequestParam(HEAD_KEY) String app);
 }

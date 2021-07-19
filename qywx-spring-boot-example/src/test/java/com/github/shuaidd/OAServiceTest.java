@@ -245,6 +245,33 @@ public class OAServiceTest extends AbstractTest {
         logger.info("获取审批申请详情--{}", response);
     }
 
+    @Test
+    public void getCorpConf() {
+        VacationConfigResponse response = weChatManager.oaService().getCorpConf(APPROVE);
+        logger.info("获取企业假期管理配置--{}", response);
+    }
+
+    @Test
+    public void getUserVacationQuota() {
+        UserIdRequest request = new UserIdRequest();
+        request.setUserId("20170410022717");
+        UserVacationQuotaResponse response = weChatManager.oaService().getUserVacationQuota(request, APPROVE);
+        logger.info("获取成员假期余额--{}", response);
+    }
+
+    @Test
+    public void setOneUserQuota() {
+        UpdateUserQuotaRequest request = new UpdateUserQuotaRequest();
+        request.setUserId("20170410022717");
+        request.setVacationId(1);
+        request.setLeftDuration(8640);
+        request.setTimeAttr(1);
+        request.setRemarks("ye ye  simida");
+        weChatManager.oaService().setOneUserQuota(request, APPROVE);
+        logger.info("修改成员假期余额--成功");
+    }
+
+
     private Long getUnixTime(String date) {
         try {
             return DateUtils.parseDate(date, "yyyy-MM-dd HH:mm:ss").getTime() / 1000;
