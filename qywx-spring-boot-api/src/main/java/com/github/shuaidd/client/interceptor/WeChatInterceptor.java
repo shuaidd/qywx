@@ -33,7 +33,7 @@ public class WeChatInterceptor implements RequestInterceptor {
     /**
      * 统一处理AccessToken
      *
-     * @param template
+     * @param template 请求模板
      */
     @Override
     public void apply(RequestTemplate template) {

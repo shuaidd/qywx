@@ -9,7 +9,7 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-20 11:13
+ *date 2021-07-20 11:13
  **/
 public class MeetingRoomRequest {
 

@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-19 09:25
+ *date 2021-07-19 09:25
  **/
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Applyer {

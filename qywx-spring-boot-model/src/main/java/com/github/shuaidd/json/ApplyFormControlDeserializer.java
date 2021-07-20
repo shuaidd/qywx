@@ -17,7 +17,7 @@ import java.util.*;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-19 11:26
+ *date 2021-07-19 11:26
  **/
 public class ApplyFormControlDeserializer extends AbstractApplyFormControlDeserializer<List<ApplyDataContent>> {
 

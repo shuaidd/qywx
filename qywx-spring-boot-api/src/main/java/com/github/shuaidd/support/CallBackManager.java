@@ -16,7 +16,7 @@ import java.util.Objects;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-20 15:57
+ *date 2021-07-20 15:57
  **/
 public final class CallBackManager {
 

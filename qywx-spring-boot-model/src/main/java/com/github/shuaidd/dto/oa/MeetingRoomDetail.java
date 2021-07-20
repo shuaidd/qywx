@@ -10,7 +10,7 @@ import java.util.StringJoiner;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-20 13:03
+ *date 2021-07-20 13:03
  **/
 public class MeetingRoomDetail {
 

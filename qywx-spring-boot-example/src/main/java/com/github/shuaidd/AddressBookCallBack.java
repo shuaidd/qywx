@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * 描述 处理通讯录回调
  *
  * @author ddshuai
- * @date 2021-07-20 16:10
+ *date 2021-07-20 16:10
  **/
 
 @Component

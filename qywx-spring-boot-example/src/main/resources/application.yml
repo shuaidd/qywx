@@ -6,43 +6,43 @@ qywx:
   application-list:
     - secret: xxxx
       application-name: customer-contact
-    - secret: rrpIreNAFdtJc3cC-zLeURq6J-5xOgohWAiLCwbctSY
+    - secret: xxxx
       agent-id: 3010084
       application-name: schedule
-    - secret: AfjvAed_ulqhK0OqTprDQ6xOSnqaT34ll2LsRe0D2NA
+    - secret: xxx
       application-name: address-book
       application-desc: 通讯录
-    - secret: hAoTUpLro0bV3q9w1rUiOsMaRnnxlom1tk6zZ9qMIY0
+    - secret: xxx
       application-name: check-in
       application-desc: 打卡
-    - secret: YOtNFA1HvMkGMj1QdokVSjXVBq7KCEcppHmtfkkfT0I
+    - secret: xxx
       application-name: public-telephone
       application-desc: 公费电话
-    - secret: Pdc49tNGMYx_oACDIEtxCssxyFk_eSj7t9GtclS7fdg
+    - secret: xxx
       application-name: approve
       application-desc: 审批
-    - secret: 8MP9pzAWN8XvVO-u96eAwAP5PAab49km2BU5Kctbkzs
+    - secret: xxx
       application-name: report
       application-desc: 汇报
-    - secret: fchDVYqJ-2A7n3O7MMZSogwwoJyGdtOHgTvffwx0EhY
+    - secret: xxx
       application-name: meeting-room
       application-desc: 会议室
-    - secret: XuZ_VHKE8ZBClGxMrA47bCG887wU_wBzItbz9SB1Jjg
+    - secret: xxxxx
       application-name: oy
       application-desc: 欧亚-冬冬
       agent-id: 1000010
   url: https://qyapi.weixin.qq.com
   public-path: cgi-bin
-  corp-id: ww36e0a51aab349a7d
+  corp-id: xxxx
   callback-list:
     - application-name: address-book
-      token: 4pd5Q2GAVKAapyTD0IGLMD7Lngiyx
-      encoding-aes-key: QJqvdlS4M4FTPUNqSQrMg3VwNRyBCqTqtNStREy3Ahd
-      receive-id: ww36e0a51aab349a7d
+      token: xxx
+      encoding-aes-key: xxx
+      receive-id: xxx
     - application-name: schedule
       token: CdEcnaCCdcic
-      encoding-aes-key: QJqvdlS4M4FTPUNqSQrMg3VwNRyBCqTqtNStREy3Ahd
-      receive-id: ww36e0a51aab349a7d
+      encoding-aes-key: xxx
+      receive-id: xxx
 logging:
   level:
     root: warn

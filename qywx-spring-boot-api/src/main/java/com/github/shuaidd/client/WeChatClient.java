@@ -148,7 +148,7 @@ public interface WeChatClient {
     /**
      * 二次验证
      *
-     * @param userId
+     * @param userId 用户编号
      * @param app    应用名
      * @return BaseResponse
      */
@@ -168,6 +168,7 @@ public interface WeChatClient {
     /**
      * 创建部门
      *
+     * @param app 应用
      * @param request 请求体
      * @return CreateDepartmentResponse
      */
@@ -244,7 +245,7 @@ public interface WeChatClient {
     /**
      * 获取标签成员
      *
-     * @param id
+     * @param id 标签id
      * @param app 应用名
      * @return QueryTagUserResponse
      */
@@ -256,7 +257,7 @@ public interface WeChatClient {
      *
      * @param request 请求体
      * @param app     应用名
-     * @return
+     * @return TagUserResponse
      */
     @PostMapping(value = "tag/addtagusers", headers = HEAD)
     TagUserResponse addTagUsers(TagUserRequest request, @RequestParam(HEAD_KEY) String app);
@@ -289,7 +290,7 @@ public interface WeChatClient {
      * 通讯录中存在、文件中不存在的成员，保持不变
      * 成员字段更新规则：可自行添加扩展字段。文件中有指定的字段，以指定的字段值为准；文件中没指定的字段，不更新
      * <p>
-     * <p>
+     *
      * 增量更新成员
      *
      * @param request 请求体
@@ -309,7 +310,6 @@ public interface WeChatClient {
      * 需要删除的成员多于50人，且多于现有人数的20%以上
      * 需要删除的成员少于50人，且多于现有人数的80%以上
      * 成员字段更新规则：可自行添加扩展字段。文件中有指定的字段，以指定的字段值为准；文件中没指定的字段，不更新
-     * <p>
      * <p>
      * 全量覆盖成员
      *
@@ -341,7 +341,7 @@ public interface WeChatClient {
     /**
      * 获取异步任务结果
      *
-     * @param jobId
+     * @param jobId 任务id
      * @param app   应用名
      * @return AsyncJobResultResponse
      */
@@ -351,7 +351,7 @@ public interface WeChatClient {
     /**
      * 获取访问用户身份
      *
-     * @param code
+     * @param code 授权码
      * @param app  应用名
      * @return AuthenticationResponse
      */
@@ -361,7 +361,7 @@ public interface WeChatClient {
     /**
      * 获取应用
      *
-     * @param agentId
+     * @param agentId 应用编号
      * @param app     应用名
      * @return WeChatApplicationResponse
      */
@@ -371,7 +371,7 @@ public interface WeChatClient {
     /**
      * 设置应用
      *
-     * @param reuqest
+     * @param reuqest 请求
      * @param app     应用名
      * @return BaseResponse
      */
@@ -382,7 +382,7 @@ public interface WeChatClient {
      * 创建菜单
      *
      * @param request 请求体
-     * @param agentid
+     * @param agentid  应用编号
      * @param app     应用名
      * @return BaseResponse
      */
@@ -392,7 +392,7 @@ public interface WeChatClient {
     /**
      * 获取菜单
      *
-     * @param agentid
+     * @param agentid 应用编号
      * @param app     应用名
      * @return ApplicationButtonResponse
      */
@@ -402,7 +402,7 @@ public interface WeChatClient {
     /**
      * 删除菜单
      *
-     * @param agentid
+     * @param agentid 应用编号
      * @param app     应用名
      * @return BaseResponse
      */
@@ -442,7 +442,7 @@ public interface WeChatClient {
     /**
      * 获取群聊会话
      *
-     * @param chatId
+     * @param chatId 群聊编号
      * @param app    应用名
      * @return SearchAppChatResponse
      */
@@ -572,7 +572,7 @@ public interface WeChatClient {
     /**
      * 获取客户列表
      *
-     * @param userId
+     * @param userId 用户编号
      * @param app    应用名
      * @return CustomListResponse
      */
@@ -582,7 +582,7 @@ public interface WeChatClient {
     /**
      * 获取客户详情
      *
-     * @param externalUserId
+     * @param externalUserId 客户编号
      * @param app            应用名
      * @return ExternalContactResponse
      */
@@ -602,7 +602,7 @@ public interface WeChatClient {
     /**
      * 修改客户备注信息
      *
-     * @param remarkRequest
+     * @param remarkRequest 请求
      * @param app           应用名
      * @return BaseResponse
      */
@@ -692,7 +692,7 @@ public interface WeChatClient {
     /**
      * 查询客户接替结果
      *
-     * @param resultRequest
+     * @param resultRequest 请求
      * @param app           应用名
      * @return TransferResultResponse
      */
@@ -1102,7 +1102,7 @@ public interface WeChatClient {
     /**
      * 获取直播详情
      *
-     * @param livingId
+     * @param livingId 直播编号
      * @param app      应用名
      * @return LivingInfoResponse
      */
@@ -1283,7 +1283,7 @@ public interface WeChatClient {
      * @return JournalRecordResponse
      */
     @PostMapping(value = "oa/journal/get_record_list", headers = HEAD)
-    JournalRecordResponse getJournalRecordList(JournalRecordRequest recordRequest, @RequestParam(HEAD_KEY) String app);
+    JournalRecordResponse getJournalRecordList(JournalRecordRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取汇报记录详情

@@ -7,7 +7,7 @@ import java.util.List;
  * 描述 审批详情
  *
  * @author ddshuai
- * @date 2021-07-19 09:08
+ *date 2021-07-19 09:08
  **/
 public class ApprovalChangeInfo {
 

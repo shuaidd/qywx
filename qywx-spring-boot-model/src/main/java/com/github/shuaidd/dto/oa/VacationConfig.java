@@ -8,7 +8,7 @@ import java.util.StringJoiner;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-19 17:11
+ *date 2021-07-19 17:11
  **/
 public class VacationConfig {
     private Integer id;

@@ -14,7 +14,7 @@ import java.util.*;
  * 描述
  *
  * @author ddshuai
- * @date 2021-07-19 15:07
+ *date 2021-07-19 15:07
  **/
 public abstract class AbstractApplyFormControlDeserializer<T> extends JsonDeserializer<T> {
     protected final static Map<String,Class<? extends ApplyFormControl>> APPLY_FORM_CONTROL_MAP = new HashMap<>();

@@ -10,7 +10,7 @@ import java.util.List;
  * 2 请求的参数endtime需要大于startime， 起始时间跨度不能超过31天；
  *
  * @author ddshuai
- * @date 2021-07-19 09:36
+ *date 2021-07-19 09:36
  **/
 public class GetApprovalNoRequest {
 
