@@ -21,6 +21,9 @@ qywx:
     - secret: Pdc49tNGMYx_oACDIEtxCssxyFk_eSj7t9GtclS7fdg
       application-name: approve
       application-desc: 审批
+    - secret: 8MP9pzAWN8XvVO-u96eAwAP5PAab49km2BU5Kctbkzs
+      application-name: report
+      application-desc: 汇报
   url: https://qyapi.weixin.qq.com
   public-path: cgi-bin
   corp-id: ww36e0a51aab349a7d

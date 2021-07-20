@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.github.shuaidd.dto.oa.ApplyDataContent;
 import com.github.shuaidd.dto.oa.formcontrol.*;
 import com.github.shuaidd.dto.template.TemplateText;
 
@@ -21,6 +20,7 @@ public abstract class AbstractApplyFormControlDeserializer<T> extends JsonDeseri
     protected final static Map<String,Class<? extends ApplyFormControl>> APPLY_FORM_CONTROL_MAP = new HashMap<>();
     static {
         APPLY_FORM_CONTROL_MAP.put("Text", TextFormControl.class);
+        APPLY_FORM_CONTROL_MAP.put("Textarea", TextFormControl.class);
         APPLY_FORM_CONTROL_MAP.put("Attendance", AttendanceFormControl.class);
         APPLY_FORM_CONTROL_MAP.put("Contact", ContactFormControl.class);
         APPLY_FORM_CONTROL_MAP.put("Date", DateFormControl.class);

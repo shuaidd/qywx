@@ -2,6 +2,8 @@ package com.github.shuaidd.dto.addressbook;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.StringJoiner;
+
 /**
  * 描述
  *
@@ -29,5 +31,13 @@ public class UserId {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", UserId.class.getSimpleName() + "[", "]")
+                .add("userId='" + userId + "'")
+                .add("status=" + status)
+                .toString();
     }
 }

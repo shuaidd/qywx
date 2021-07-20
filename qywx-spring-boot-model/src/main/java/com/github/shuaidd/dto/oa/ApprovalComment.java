@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.shuaidd.dto.addressbook.UserId;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * 描述
@@ -65,5 +66,16 @@ public class ApprovalComment {
 
     public void setMediaIds(List<String> mediaIds) {
         this.mediaIds = mediaIds;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", ApprovalComment.class.getSimpleName() + "[", "]")
+                .add("commentUserInfo=" + commentUserInfo)
+                .add("commentTime=" + commentTime)
+                .add("commentContent='" + commentContent + "'")
+                .add("commentId='" + commentId + "'")
+                .add("mediaIds=" + mediaIds)
+                .toString();
     }
 }

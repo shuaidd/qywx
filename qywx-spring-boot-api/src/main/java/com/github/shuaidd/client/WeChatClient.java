@@ -1274,4 +1274,34 @@ public interface WeChatClient {
      */
     @PostMapping(value = "oa/vacation/setoneuserquota", headers = HEAD)
     BaseResponse setOneUserQuota(UpdateUserQuotaRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量获取汇报记录单号
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return JournalRecordResponse
+     */
+    @PostMapping(value = "oa/journal/get_record_list", headers = HEAD)
+    JournalRecordResponse getJournalRecordList(JournalRecordRequest recordRequest, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取汇报记录详情
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return JournalRecordResponse
+     */
+    @PostMapping(value = "oa/journal/get_record_detail", headers = HEAD)
+    JournalReportDetailResponse getJournalRecordDetail(JournalReportDetailRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取汇报统计数据
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return JournalReportStatResponse
+     */
+    @PostMapping(value = "oa/journal/get_stat_list", headers = HEAD)
+    JournalReportStatResponse getJournalStatList(JournalReportStatRequest request, @RequestParam(HEAD_KEY) String app);
 }

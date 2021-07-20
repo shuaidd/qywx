@@ -7,6 +7,7 @@ import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.*;
 import com.github.shuaidd.response.oa.*;
 import com.github.shuaidd.response.tool.DialRecordResponse;
+import com.github.shuaidd.resquest.JournalReportStatRequest;
 import com.github.shuaidd.resquest.oa.*;
 import com.github.shuaidd.resquest.tool.DialRecordRequest;
 import org.apache.commons.collections4.CollectionUtils;
@@ -215,6 +216,7 @@ public class OAService extends AbstractBaseService {
 
     /**
      * 获取企业假期管理配置
+     *
      * @param applicationName 应用名称
      * @return VacationConfigResponse
      */
@@ -229,8 +231,8 @@ public class OAService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return UserVacationQuotaResponse
      */
-    public UserVacationQuotaResponse getUserVacationQuota(UserIdRequest request, String applicationName){
-        return weChatClient.getUserVacationQuota(request,applicationName);
+    public UserVacationQuotaResponse getUserVacationQuota(UserIdRequest request, String applicationName) {
+        return weChatClient.getUserVacationQuota(request, applicationName);
     }
 
     /**
@@ -239,7 +241,40 @@ public class OAService extends AbstractBaseService {
      * @param request         请求
      * @param applicationName 应用名称
      */
-    public void setOneUserQuota(UpdateUserQuotaRequest request,String applicationName) {
-        weChatClient.setOneUserQuota(request,applicationName);
+    public void setOneUserQuota(UpdateUserQuotaRequest request, String applicationName) {
+        weChatClient.setOneUserQuota(request, applicationName);
+    }
+
+    /**
+     * 批量获取汇报记录单号
+     *
+     * @param recordRequest   请求
+     * @param applicationName 应用名称
+     * @return UserVacationQuotaResponse
+     */
+    public JournalRecordResponse getJournalRecordList(JournalRecordRequest recordRequest, String applicationName) {
+        return weChatClient.getJournalRecordList(recordRequest, applicationName);
+    }
+
+    /**
+     * 获取汇报记录详情
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return UserVacationQuotaResponse
+     */
+    public JournalReportDetailResponse getJournalRecordDetail(JournalReportDetailRequest request, String applicationName) {
+        return weChatClient.getJournalRecordDetail(request, applicationName);
+    }
+
+    /**
+     * 获取汇报统计数据
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return UserVacationQuotaResponse
+     */
+    public JournalReportStatResponse getJournalStatList(JournalReportStatRequest request, String applicationName) {
+        return weChatClient.getJournalStatList(request, applicationName);
     }
 }

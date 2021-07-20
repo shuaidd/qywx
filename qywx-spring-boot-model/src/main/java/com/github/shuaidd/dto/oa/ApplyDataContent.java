@@ -1,9 +1,7 @@
 package com.github.shuaidd.dto.oa;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.github.shuaidd.dto.oa.formcontrol.ApplyFormControl;
 import com.github.shuaidd.dto.template.TemplateText;
-import com.github.shuaidd.json.ApplyFormControlDeserializer;
 
 import java.util.List;
 import java.util.StringJoiner;

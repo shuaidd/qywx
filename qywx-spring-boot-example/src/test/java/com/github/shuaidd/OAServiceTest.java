@@ -13,6 +13,7 @@ import com.github.shuaidd.dto.oa.formcontrol.*;
 import com.github.shuaidd.dto.template.TemplateText;
 import com.github.shuaidd.dto.tool.DialRecord;
 import com.github.shuaidd.response.oa.*;
+import com.github.shuaidd.resquest.JournalReportStatRequest;
 import com.github.shuaidd.resquest.RequestFilter;
 import com.github.shuaidd.resquest.oa.*;
 import com.github.shuaidd.resquest.tool.DialRecordRequest;
@@ -44,8 +45,11 @@ public class OAServiceTest extends AbstractTest {
     /*公费电话应用*/
     public static final String PUBLIC_TELEPHONE = "public-telephone";
 
-    /*公费电话应用*/
+    /*审批应用*/
     public static final String APPROVE = "approve";
+
+    /*汇报应用*/
+    public static final String REPORT = "report";
 
     @Test
     public void getCorpCheckInOption() {
@@ -264,13 +268,39 @@ public class OAServiceTest extends AbstractTest {
         UpdateUserQuotaRequest request = new UpdateUserQuotaRequest();
         request.setUserId("20170410022717");
         request.setVacationId(1);
-        request.setLeftDuration(8640);
+        request.setLeftDuration(3600);
         request.setTimeAttr(1);
         request.setRemarks("ye ye  simida");
         weChatManager.oaService().setOneUserQuota(request, APPROVE);
         logger.info("修改成员假期余额--成功");
     }
 
+    @Test
+    public void getJournalRecordList() {
+        JournalRecordRequest recordRequest = new JournalRecordRequest();
+        recordRequest.setStartTime(getUnixTime("2021-07-14 00:00:00"));
+        recordRequest.setEndTime(getUnixTime("2021-07-21 00:00:00"));
+        JournalRecordResponse response = weChatManager.oaService().getJournalRecordList(recordRequest, REPORT);
+        logger.info("批量获取汇报记录单号--{}", response);
+    }
+
+    @Test
+    public void getJournalRecordDetail() {
+        JournalReportDetailRequest recordRequest = new JournalReportDetailRequest();
+        recordRequest.setJournalId("9ZeLBvVm9DJtwdDhkcSThnGtUUrtgzt1eqjffeWNw4uCduzmG2DneWhrisgiKTnLUd");
+        JournalReportDetailResponse response = weChatManager.oaService().getJournalRecordDetail(recordRequest, REPORT);
+        logger.info("获取汇报记录详情--{}", response);
+    }
+
+    @Test
+    public void getJournalStatList() {
+        JournalReportStatRequest recordRequest = new JournalReportStatRequest();
+        recordRequest.setTemplateId("Bs2gafGvr9GhZKa7KiJMU3PGAS2hx5xvK3g6V3Aqd");
+        recordRequest.setStartTime(getUnixTime("2021-07-14 00:00:00"));
+        recordRequest.setEndTime(getUnixTime("2021-07-21 00:00:00"));
+        JournalReportStatResponse response = weChatManager.oaService().getJournalStatList(recordRequest, REPORT);
+        logger.info("获取汇报统计数据--{}", response);
+    }
 
     private Long getUnixTime(String date) {
         try {
