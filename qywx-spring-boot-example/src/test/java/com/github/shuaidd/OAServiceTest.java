@@ -51,6 +51,9 @@ public class OAServiceTest extends AbstractTest {
     /*汇报应用*/
     public static final String REPORT = "report";
 
+    /*会议室应用*/
+    public static final String MEETING_ROOM = "meeting-room";
+
     @Test
     public void getCorpCheckInOption() {
         CheckInOptionResponse checkInOptionResponse = weChatManager.oaService().getCorpCheckInOption(CHECK_IN);
@@ -300,6 +303,74 @@ public class OAServiceTest extends AbstractTest {
         recordRequest.setEndTime(getUnixTime("2021-07-21 00:00:00"));
         JournalReportStatResponse response = weChatManager.oaService().getJournalStatList(recordRequest, REPORT);
         logger.info("获取汇报统计数据--{}", response);
+    }
+
+    @Test
+    public void addMeetingRoom() {
+        MeetingRoomRequest request = new MeetingRoomRequest();
+        request.setBuilding("聚龙大厦");
+        request.setCapacity(10);
+        request.setCity("杭州");
+        request.setEquipment(Collections.singletonList(1));
+        request.setFloor("11F");
+        request.setName("西溪路11楼大会议室");
+        AddMeetingRoomResponse response = weChatManager.oaService().addMeetingRoom(request, MEETING_ROOM);
+        logger.info("添加会议室--{}", response);
+    }
+
+    @Test
+    public void updateMeetingRoom() {
+        MeetingRoomRequest request = new MeetingRoomRequest();
+        request.setBuilding("银都大厦");
+        request.setCapacity(10);
+        request.setCity("杭州");
+        request.setEquipment(Collections.singletonList(1));
+        request.setFloor("11F");
+        request.setName("西溪路11楼大会议室");
+        request.setMeetingRoomId("1");
+        weChatManager.oaService().updateMeetingRoom(request, MEETING_ROOM);
+        logger.info("更新会议室--成功");
+    }
+
+    @Test
+    public void searchMeetingRoom() {
+        MeetingRoomRequest request = new MeetingRoomRequest();
+        MeetingRoomListResponse response = weChatManager.oaService().searchMeetingRoom(request, MEETING_ROOM);
+        logger.info("查询会议室--{}", response);
+    }
+
+    /**
+     * schedule e83328773e32d0d0fc15b5ffd11c709b
+     * meeting-id mtWbKKTiLiDmghAIYJhGO8KmCeXQ-W3TAF1N5KGsv2S_8
+     */
+    @Test
+    public void bookMeetingRoom() {
+        BookMeetingRoomRequest request = new BookMeetingRoomRequest();
+        request.setMeetingRoomId("1");
+        request.setBooker("20170410022717");
+        request.setAttendees(Collections.singletonList("20200914034599"));
+        request.setSubject("讨论JTYY-1273需求");
+        request.setStartTime(getUnixTime("2021-07-21 08:00:00"));
+        request.setEndTime(getUnixTime("2021-07-21 11:00:00"));
+        BookMeetingRoomResponse response = weChatManager.oaService().bookMeetingRoom(request, MEETING_ROOM);
+        logger.info("预定会议室--{}", response);
+    }
+
+    @Test
+    public void cancelBookMeetingRoom() {
+        CancelBookRequest request = new CancelBookRequest();
+        request.setKeepSchedule(0);
+        request.setMeetingId("mtWbKKTiLiDmghAIYJhGO8KmCeXQ-W3TAF1N5KGsv2S_8");
+        weChatManager.oaService().cancelBookMeetingRoom(request, MEETING_ROOM);
+        logger.info("取消预定会议室--成功");
+    }
+
+    @Test
+    public void delMeetingRoom() {
+        MeetingRoomRequest request = new MeetingRoomRequest();
+        request.setMeetingRoomId("1");
+        weChatManager.oaService().delMeetingRoom(request, MEETING_ROOM);
+        logger.info("删除会议室--成功");
     }
 
     private Long getUnixTime(String date) {

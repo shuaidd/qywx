@@ -1304,4 +1304,94 @@ public interface WeChatClient {
      */
     @PostMapping(value = "oa/journal/get_stat_list", headers = HEAD)
     JournalReportStatResponse getJournalStatList(JournalReportStatRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 添加会议室
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return JournalReportStatResponse
+     */
+    @PostMapping(value = "oa/meetingroom/add", headers = HEAD)
+    AddMeetingRoomResponse addMeetingRoom(MeetingRoomRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 查询会议室
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return MeetingRoomListResponse
+     */
+    @PostMapping(value = "oa/meetingroom/list", headers = HEAD)
+    MeetingRoomListResponse searchMeetingRoom(MeetingRoomRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 编辑会议室
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return MeetingRoomListResponse
+     */
+    @PostMapping(value = "oa/meetingroom/edit", headers = HEAD)
+    BaseResponse updateMeetingRoom(MeetingRoomRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除会议室
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return MeetingRoomListResponse
+     */
+    @PostMapping(value = "oa/meetingroom/del", headers = HEAD)
+    BaseResponse delMeetingRoom(MeetingRoomRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 查询会议室的预定信息
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BookingInfoResponse
+     */
+    @PostMapping(value = "oa/meetingroom/get_booking_info", headers = HEAD)
+    BookingInfoResponse getBookingInfo(GetBookingInfoRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 预定会议室
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BookMeetingRoomResponse
+     */
+    @PostMapping(value = "oa/meetingroom/book", headers = HEAD)
+    BookMeetingRoomResponse bookMeetingRoom(BookMeetingRoomRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 取消预定会议室
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BookMeetingRoomResponse
+     */
+    @PostMapping(value = "oa/meetingroom/cancel_book", headers = HEAD)
+    BaseResponse cancelBookMeetingRoom(CancelBookRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 发起语音电话
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return EmergencyCallResponse
+     */
+    @PostMapping(value = "pstncc/call", headers = HEAD)
+    EmergencyCallResponse pstnccCall(EmergencyCallRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取接听状态
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return EmergencyCallResponse
+     */
+    @PostMapping(value = "pstncc/getstates", headers = HEAD)
+    GetCallStateResponse pstnccCallState(GetCallStateRequest request, @RequestParam(HEAD_KEY) String app);
 }

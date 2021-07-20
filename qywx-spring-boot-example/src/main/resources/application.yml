@@ -9,24 +9,27 @@ qywx:
     - secret: xxxx
       agent-id: 3010084
       application-name: schedule
-    - secret: AfjvAed_ulqhK0OqTprDQ6xOSnqaT34ll2LsRe0D2NA
+    - secret: xxx
       application-name: address-book
       application-desc: 通讯录
-    - secret: hAoTUpLro0bV3q9w1rUiOsMaRnnxlom1tk6zZ9qMIY0
+    - secret: xxxx
       application-name: check-in
       application-desc: 打卡
-    - secret: YOtNFA1HvMkGMj1QdokVSjXVBq7KCEcppHmtfkkfT0I
+    - secret: xxx
       application-name: public-telephone
       application-desc: 公费电话
-    - secret: Pdc49tNGMYx_oACDIEtxCssxyFk_eSj7t9GtclS7fdg
+    - secret: xxx
       application-name: approve
       application-desc: 审批
-    - secret: 8MP9pzAWN8XvVO-u96eAwAP5PAab49km2BU5Kctbkzs
+    - secret: xxx
       application-name: report
       application-desc: 汇报
+    - secret: xxxx
+      application-name: meeting-room
+      application-desc: 会议室
   url: https://qyapi.weixin.qq.com
   public-path: cgi-bin
-  corp-id: ww36e0a51aab349a7d
+  corp-id: xxx
 logging:
   level:
     root: warn

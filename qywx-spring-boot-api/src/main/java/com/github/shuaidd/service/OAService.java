@@ -277,4 +277,100 @@ public class OAService extends AbstractBaseService {
     public JournalReportStatResponse getJournalStatList(JournalReportStatRequest request, String applicationName) {
         return weChatClient.getJournalStatList(request, applicationName);
     }
+
+    /**
+     * 添加会议室
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return AddMeetingRoomResponse
+     */
+    public AddMeetingRoomResponse addMeetingRoom(MeetingRoomRequest request, String applicationName) {
+        return weChatClient.addMeetingRoom(request, applicationName);
+    }
+
+    /**
+     * 编辑会议室
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void updateMeetingRoom(MeetingRoomRequest request, String applicationName) {
+        weChatClient.updateMeetingRoom(request, applicationName);
+    }
+
+    /**
+     * 删除会议室
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void delMeetingRoom(MeetingRoomRequest request, String applicationName) {
+        weChatClient.delMeetingRoom(request, applicationName);
+    }
+
+    /**
+     * 查询会议室
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return MeetingRoomListResponse
+     */
+    public MeetingRoomListResponse searchMeetingRoom(MeetingRoomRequest request, String applicationName) {
+        return weChatClient.searchMeetingRoom(request, applicationName);
+    }
+
+    /**
+     * 查询会议室的预定信息
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return BookingInfoResponse
+     */
+    public BookingInfoResponse getBookingInfo(GetBookingInfoRequest request, String applicationName) {
+        return weChatClient.getBookingInfo(request, applicationName);
+    }
+
+    /**
+     * 预定会议室
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return BookMeetingRoomResponse
+     */
+    public BookMeetingRoomResponse bookMeetingRoom(BookMeetingRoomRequest request, String applicationName) {
+        return weChatClient.bookMeetingRoom(request, applicationName);
+    }
+
+    /**
+     * 取消预定会议室
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void cancelBookMeetingRoom(CancelBookRequest request, String applicationName) {
+        weChatClient.cancelBookMeetingRoom(request, applicationName);
+    }
+
+    /**
+     * 发起语音电话
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return EmergencyCallResponse
+     */
+    public EmergencyCallResponse pstnccCall(EmergencyCallRequest request, String applicationName) {
+        return weChatClient.pstnccCall(request, applicationName);
+    }
+
+    /**
+     * 获取接听状态
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return GetCallStateResponse
+     */
+    public GetCallStateResponse pstnccCallState(GetCallStateRequest request, String applicationName) {
+        return weChatClient.pstnccCallState(request, applicationName);
+    }
 }

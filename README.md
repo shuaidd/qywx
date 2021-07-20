@@ -4,7 +4,7 @@
 <dependency>
   <groupId>com.github.shuaidd</groupId>
   <artifactId>qywx-spring-boot-starter</artifactId>
-  <version>2.1.0</version>
+  <version>3.0.0</version>
 </dependency>
 
 ```
@@ -44,6 +44,7 @@ public class WeChatTest extends BaseTest {
 ```
 ### 更新记录
 ``` 
+2021-07-20  已实现模块 通讯录管理，客户联系，身份认证，应用管理，消息推送，素材管理，OA【除自建审批流外】，效率工具
 2021-07-15  补充OA模块新增的接口
 2021-07-14  处理企业微信回调数据统一解析处理
 ```
