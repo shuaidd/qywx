@@ -1,5 +1,7 @@
 server:
-  port: 8080
+  port: 28986
+  servlet:
+    context-path: /work-chat
 qywx:
   application-list:
     - secret: xxxx
@@ -7,6 +9,41 @@ qywx:
     - secret: xxxx
       agent-id: 3010084
       application-name: schedule
+    - secret: xxx
+      application-name: address-book
+      application-desc: 通讯录
+    - secret: xxx
+      application-name: check-in
+      application-desc: 打卡
+    - secret: xxx
+      application-name: public-telephone
+      application-desc: 公费电话
+    - secret: xxx
+      application-name: approve
+      application-desc: 审批
+    - secret: xxx
+      application-name: report
+      application-desc: 汇报
+    - secret: xxx
+      application-name: meeting-room
+      application-desc: 会议室
+    - secret: xxxxx
+      application-name: oy
+      application-desc: 欧亚-冬冬
+      agent-id: 1000010
   url: https://qyapi.weixin.qq.com
   public-path: cgi-bin
   corp-id: xxxx
+  callback-list:
+    - application-name: address-book
+      token: xxx
+      encoding-aes-key: xxx
+      receive-id: xxx
+    - application-name: schedule
+      token: CdEcnaCCdcic
+      encoding-aes-key: xxx
+      receive-id: xxx
+logging:
+  level:
+    root: warn
+    com.github.shuaidd: debug

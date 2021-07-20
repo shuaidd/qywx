@@ -1,5 +1,6 @@
 package com.github.shuaidd;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.shuaidd.support.WeChatManager;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -19,6 +20,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest(classes = Application.class)
 public class AbstractTest {
     public final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     WeChatManager weChatManager;
+
+    protected final ObjectMapper objectMapper = new ObjectMapper();
 }

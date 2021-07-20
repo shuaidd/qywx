@@ -35,18 +35,9 @@ public abstract class AbstractBaseService {
     @Autowired
     protected WeChatConfigurationProperties properties;
 
-    /**
-     * 是否检查结果
-     */
-    private boolean check = true;
-
-    final void setCheck(boolean check) {
-        this.check = check;
-    }
-
     final boolean isSuccess(AbstractBaseResponse baseResponse) {
         if (Objects.nonNull(baseResponse)) {
-            if (ErrorCode.ERROR_CODE_0.getErrorCode().equals(baseResponse.getErrCode().toString())) {
+            if (ErrorCode.ERROR_CODE_0.getErrorCode().equals(baseResponse.getErrCode())) {
                 return true;
             } else {
                 ErrorCode errorCode = ErrorCode.errorCode(baseResponse.getErrCode());
@@ -57,21 +48,6 @@ public abstract class AbstractBaseService {
             return false;
         }
 
-    }
-
-    /**
-     * 获取企业微信结果
-     *
-     * @param response 响应
-     * @return <T extends AbstractBaseResponse>
-     */
-    final <T extends AbstractBaseResponse> T getResponse(T response) {
-        if (check) {
-            if (isSuccess(response)) {
-                return response;
-            }
-        }
-        return response;
     }
 
     /**

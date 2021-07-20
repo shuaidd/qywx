@@ -1,7 +1,7 @@
 package com.github.shuaidd.service;
 
-import com.github.shuaidd.response.UploadImageResponse;
-import com.github.shuaidd.response.WeChatMediaUploadResponse;
+import com.github.shuaidd.response.material.UploadImageResponse;
+import com.github.shuaidd.response.material.WeChatMediaUploadResponse;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.io.IOUtils;
@@ -19,8 +19,7 @@ import java.io.OutputStream;
 import java.util.Objects;
 
 /**
- * 描述
- * <p>
+ * 描述 素材管理
  *
  * @author ddshuai
  * date 2019-04-06 16:18

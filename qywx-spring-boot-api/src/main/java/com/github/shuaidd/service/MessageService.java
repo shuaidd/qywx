@@ -1,21 +1,21 @@
 package com.github.shuaidd.service;
 
-import com.github.shuaidd.dto.ChatInfo;
+import com.github.shuaidd.dto.message.ChatInfo;
 import com.github.shuaidd.response.BaseResponse;
-import com.github.shuaidd.response.CreateAppChatResponse;
-import com.github.shuaidd.response.SearchAppChatResponse;
-import com.github.shuaidd.response.SendMessageResponse;
-import com.github.shuaidd.resquest.CreateAppChatRequest;
-import com.github.shuaidd.resquest.SendAppChatRequest;
-import com.github.shuaidd.resquest.SendMessageRequest;
-import com.github.shuaidd.resquest.UpdateAppChatRequest;
+import com.github.shuaidd.response.message.CreateAppChatResponse;
+import com.github.shuaidd.response.message.SearchAppChatResponse;
+import com.github.shuaidd.response.message.SendMessageResponse;
+import com.github.shuaidd.resquest.message.CreateAppChatRequest;
+import com.github.shuaidd.resquest.message.SendAppChatRequest;
+import com.github.shuaidd.resquest.message.SendMessageRequest;
+import com.github.shuaidd.resquest.message.UpdateAppChatRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
 /**
- * 描述
+ * 描述 消息管理
  *
  * @author ddshuai
  * date 2019-04-08 16:51

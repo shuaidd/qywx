@@ -1,0 +1,27 @@
+{
+  "table": {
+    "children": [
+      {
+        "property": {
+          "control": "Text",
+          "id": "Text-15111111111",
+          "title": [
+            {
+              "text": "明细内文本控件",
+              "lang": "zh_CN"
+            }
+          ],
+          "placeholder": [
+            {
+              "text": "这是明细内文本控件的说明",
+              "lang": "zh_CN"
+            }
+          ],
+          "require": 0,
+          "un_print": 0
+        }
+      }
+    ],
+    "stat_field": []
+  }
+}

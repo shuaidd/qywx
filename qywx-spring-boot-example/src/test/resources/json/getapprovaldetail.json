@@ -1,0 +1,126 @@
+{
+  "errcode": 0,
+  "errmsg": "ok",
+  "info": {
+    "sp_no": "202107160001",
+    "sp_name": "请假流程",
+    "sp_status": 2,
+    "template_id": "BsAd7RkLz1aRGJ53jbpnypWcBoHkmsMgqjKVjnSJn",
+    "apply_time": 1626433487,
+    "applyer": {
+      "userid": "20200914034599",
+      "partyid": "1"
+    },
+    "sp_record": [
+      {
+        "sp_status": 2,
+        "approverattr": 1,
+        "details": [
+          {
+            "approver": {
+              "userid": "20170410022717"
+            },
+            "speech": "",
+            "sp_status": 2,
+            "sptime": 1626434054,
+            "media_id": []
+          }
+        ]
+      }
+    ],
+    "notifyer": [],
+    "apply_data": {
+      "contents": [
+        {
+          "control": "Money",
+          "id": "Money-1626412408973",
+          "title": [
+            {
+              "text": "扣罚",
+              "lang": "zh_CN"
+            }
+          ],
+          "value": {
+            "tips": [],
+            "members": [],
+            "departments": [],
+            "files": [],
+            "children": [],
+            "stat_field": [],
+            "new_money": "12",
+            "sum_field": [],
+            "related_approval": [],
+            "students": [],
+            "classes": []
+          }
+        },
+        {
+          "control": "Vacation",
+          "id": "vacation-1563793073898",
+          "title": [
+            {
+              "text": "请假类型",
+              "lang": "zh_CN"
+            },
+            {
+              "text": "Leave Type",
+              "lang": "en"
+            }
+          ],
+          "value": {
+            "tips": [],
+            "members": [],
+            "departments": [],
+            "files": [],
+            "children": [],
+            "stat_field": [],
+            "vacation": {
+              "selector": {
+                "type": "single",
+                "options": [
+                  {
+                    "key": "4",
+                    "value": [
+                      {
+                        "text": "调休假",
+                        "lang": "zh_CN"
+                      },
+                      {
+                        "text": "调休假",
+                        "lang": "zh_CN"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "attendance": {
+                "date_range": {
+                  "type": "hour",
+                  "new_begin": 1626656400,
+                  "new_end": 1626688800,
+                  "new_duration": 291600
+                },
+                "type": 1
+              }
+            },
+            "sum_field": [],
+            "related_approval": [],
+            "students": [],
+            "classes": []
+          }
+        }
+      ]
+    },
+    "comments": [
+      {
+        "commentUserInfo": {
+          "userid": "20170410022717"
+        },
+        "commenttime": 1626434042,
+        "commentcontent": "你说呢，明知你不在还是会问",
+        "commentid": "6985481021329288356",
+        "media_id": []
+      }
+    ]
+  }
+}

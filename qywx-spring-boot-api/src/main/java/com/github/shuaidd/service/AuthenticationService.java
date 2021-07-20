@@ -1,8 +1,11 @@
 package com.github.shuaidd.service;
 
-import com.github.shuaidd.response.AuthenticationResponse;
+import com.github.shuaidd.response.tool.ApiDomainIpResponse;
+import com.github.shuaidd.response.auth.AuthenticationResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 身份认证
@@ -31,5 +34,25 @@ public class AuthenticationService extends AbstractBaseService {
         }
 
         return response;
+    }
+
+    /**
+     * 获取企业微信API域名IP段
+     * @param applicationName 应用名称
+     * @return ip 列表
+     */
+    public List<String> apiDomainIp(String applicationName){
+        ApiDomainIpResponse apiDomainIpResponse = weChatClient.apiDomainIp(applicationName);
+        return apiDomainIpResponse.getIpList();
+    }
+
+    /**
+     * 获取企业微信服务器回调的ip段
+     * @param applicationName 应用名称
+     * @return ip 列表
+     */
+    public List<String> callBackIp(String applicationName){
+        ApiDomainIpResponse apiDomainIpResponse = weChatClient.callBackIp(applicationName);
+        return apiDomainIpResponse.getIpList();
     }
 }

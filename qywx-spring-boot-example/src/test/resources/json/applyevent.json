@@ -1,0 +1,49 @@
+{
+  "creator_userid": "WangXiaoMing",
+  "template_id": "3Tka1eD6v6JfzhDMqPd3aMkFdxqtJMc2ZRioeFXkaaa",
+  "use_template_approver":0,
+  "choose_department":2,
+  "approver": [
+    {
+      "attr": 2,
+      "userid": ["WuJunJie","WangXiaoMing"]
+    },
+    {
+      "attr": 1,
+      "userid": ["LiuXiaoGang"]
+    }
+  ],
+  "notifyer":[ "WuJunJie","WangXiaoMing" ],
+  "notify_type" : 1,
+  "apply_data": {
+    "contents": [
+      {
+        "control": "Text",
+        "id": "Text-15111111111",
+        "value": {
+          "text": "文本填写的内容"
+        }
+      }
+    ]
+  },
+  "summary_list": [
+    {
+      "summary_info": [{
+        "text": "摘要第1行",
+        "lang": "zh_CN"
+      }]
+    },
+    {
+      "summary_info": [{
+        "text": "摘要第2行",
+        "lang": "zh_CN"
+      }]
+    },
+    {
+      "summary_info": [{
+        "text": "摘要第3行",
+        "lang": "zh_CN"
+      }]
+    }
+  ]
+}

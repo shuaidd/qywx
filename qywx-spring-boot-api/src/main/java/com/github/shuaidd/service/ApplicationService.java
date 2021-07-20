@@ -1,9 +1,9 @@
 package com.github.shuaidd.service;
 
-import com.github.shuaidd.response.ApplicationButtonResponse;
+import com.github.shuaidd.response.application.ApplicationButtonResponse;
 import com.github.shuaidd.response.BaseResponse;
-import com.github.shuaidd.response.WeChatApplicationResponse;
-import com.github.shuaidd.resquest.ApplicationButtonRequest;
+import com.github.shuaidd.response.application.WeChatApplicationResponse;
+import com.github.shuaidd.resquest.application.ApplicationButtonRequest;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -40,7 +40,7 @@ public class ApplicationService extends AbstractBaseService {
     }
 
     /**
-     * 创建应用
+     * 创建应用菜单
      *
      * @param request 请求
      * @param agentId 应用ID

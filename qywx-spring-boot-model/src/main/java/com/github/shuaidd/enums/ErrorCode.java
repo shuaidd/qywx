@@ -230,8 +230,8 @@ public enum ErrorCode {
     ERROR_CODE_302007("302007", "批量导入任务的文件中，同一个部门下有两个子部门名字一样"),
     ERROR_CODE_2000002("2000002", "CorpId参数无效"),
     UNKNOWN("9999999", "未知异常");
-    private String errorCode;
-    private String errorDesc;
+    private final String errorCode;
+    private final String errorDesc;
 
     ErrorCode(String errorCode, String errorDesc) {
         this.errorCode = errorCode;
@@ -251,10 +251,10 @@ public enum ErrorCode {
         return errorCode;
     }
 
-    public static ErrorCode errorCode(Integer code) {
+    public static ErrorCode errorCode(String code) {
         for (ErrorCode value : values()) {
             if (Objects.nonNull(code)) {
-                if (value.getErrorCode().equals(code.toString())) {
+                if (value.getErrorCode().equals(code)) {
                     return value;
                 }
             }

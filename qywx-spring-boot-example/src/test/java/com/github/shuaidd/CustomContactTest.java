@@ -1,9 +1,13 @@
 package com.github.shuaidd;
 
-import com.github.shuaidd.dto.CustomTag;
-import com.github.shuaidd.dto.MsgText;
-import com.github.shuaidd.response.*;
+import com.github.shuaidd.dto.externalcontact.CustomTag;
+import com.github.shuaidd.dto.message.MsgText;
+import com.github.shuaidd.response.addressbook.MobileHashCodeResponse;
+import com.github.shuaidd.response.externalcontact.*;
 import com.github.shuaidd.resquest.*;
+import com.github.shuaidd.resquest.addressbook.MobileHashCodeRequest;
+import com.github.shuaidd.resquest.addressbook.TagGroupRequest;
+import com.github.shuaidd.resquest.externalcontact.*;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 

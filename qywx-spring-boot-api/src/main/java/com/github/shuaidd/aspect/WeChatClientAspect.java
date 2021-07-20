@@ -52,7 +52,7 @@ public class WeChatClientAspect {
         } catch (Throwable throwable) {
             if (throwable instanceof WeChatException || throwable.getCause() instanceof WeChatException) {
                 WeChatException w = throwable instanceof WeChatException ? (WeChatException) throwable : (WeChatException) throwable.getCause();
-                if (needRetry(w.getErrorCode().getErrorCode())) {
+                if (w.getErrorCode() != null && needRetry(w.getErrorCode().getErrorCode())) {
 
                     if (log.isDebugEnabled()) {
                         log.debug("重试一次微信调用：{}", w.getErrorCode().getErrorCode());
