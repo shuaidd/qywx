@@ -1,6 +1,7 @@
 package com.github.shuaidd.autoconfigure;
 
 import com.github.shuaidd.client.config.WeChatConfigurationProperties;
+import com.github.shuaidd.support.CallBackManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -31,5 +32,11 @@ public class WeChatAutoConfiguration {
         concurrentMapCacheManager.setAllowNullValues(true);
         concurrentMapCacheManager.setCacheNames(Collections.singletonList("qywx"));
         return concurrentMapCacheManager;
+    }
+
+    @Bean
+    public CallBackManager callBackManager(WeChatConfigurationProperties properties) {
+        CallBackManager.properties(properties.getCallbackList());
+        return new CallBackManager();
     }
 }

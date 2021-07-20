@@ -2,6 +2,7 @@ package com.github.shuaidd.event;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.StringJoiner;
 
 /**
  * 描述 用户信息基础类
@@ -175,5 +176,26 @@ public class UserEventData extends BaseEventData {
 
     public void setExtAttrData(ExtAttrData extAttrData) {
         this.extAttrData = extAttrData;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", UserEventData.class.getSimpleName() + "[", "]")
+                .add("userId='" + userId + "'")
+                .add("name='" + name + "'")
+                .add("department='" + department + "'")
+                .add("mainDepartment='" + mainDepartment + "'")
+                .add("isLeaderInDept='" + isLeaderInDept + "'")
+                .add("position='" + position + "'")
+                .add("mobile='" + mobile + "'")
+                .add("gender='" + gender + "'")
+                .add("email='" + email + "'")
+                .add("status='" + status + "'")
+                .add("avatar='" + avatar + "'")
+                .add("alias='" + alias + "'")
+                .add("telephone='" + telephone + "'")
+                .add("address='" + address + "'")
+                .add("extAttrData=" + extAttrData)
+                .toString();
     }
 }

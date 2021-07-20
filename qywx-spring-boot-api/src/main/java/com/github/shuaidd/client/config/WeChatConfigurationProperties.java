@@ -34,6 +34,8 @@ public class WeChatConfigurationProperties {
      */
     private List<ApplicationProperties> applicationList;
 
+    private List<CallbackProperties> callbackList;
+
     public String getCorpId() {
         return corpId;
     }
@@ -64,5 +66,13 @@ public class WeChatConfigurationProperties {
 
     public void setPublicPath(String publicPath) {
         this.publicPath = publicPath;
+    }
+
+    public List<CallbackProperties> getCallbackList() {
+        return callbackList;
+    }
+
+    public void setCallbackList(List<CallbackProperties> callbackList) {
+        this.callbackList = callbackList;
     }
 }

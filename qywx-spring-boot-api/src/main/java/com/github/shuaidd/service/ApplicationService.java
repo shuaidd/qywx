@@ -40,7 +40,7 @@ public class ApplicationService extends AbstractBaseService {
     }
 
     /**
-     * 创建应用
+     * 创建应用菜单
      *
      * @param request 请求
      * @param agentId 应用ID
