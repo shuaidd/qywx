@@ -42,6 +42,10 @@ public class WeChatTest extends BaseTest {
 
 实例 可以查看 qywx-spring-boot-example 模块
 ```
+
+### 回调配置
+![回调配置](/etc/274121626855291_.pic.jpg)
+
 ### 更新记录
 ``` 
 2021-07-20  统一回调处理 例子见example模块

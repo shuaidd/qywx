@@ -6,3 +6,4 @@
 *.iml
 target/
 *.yml
+application.yml
