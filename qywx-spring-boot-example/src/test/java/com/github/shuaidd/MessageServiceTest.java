@@ -153,6 +153,9 @@ public class MessageServiceTest extends AbstractTest {
         weChatManager.messageService().sendMessage(request, OY);
     }
 
+    /**
+     * 应用必须要配置事件回调地址，才可以发送此类消息
+     */
     @Test
     public void sendInteractiveTaskCardMsg() {
 
