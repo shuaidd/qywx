@@ -22,6 +22,10 @@ public class MediaServiceTest extends AbstractTest {
 
     public static final String ADDRESS_BOOK = "address-book";
 
+    /**
+     * 获取的结果 --- https://wework.qpic.cn/wwpic/495538_5AazgN0JRoCFypk_1626843955/0
+     * @throws FileNotFoundException 404
+     */
     @Test
     public void upload() throws FileNotFoundException {
         File file = ResourceUtils.getFile("classpath:image/20659972.png");
@@ -36,8 +40,8 @@ public class MediaServiceTest extends AbstractTest {
      */
     @Test
     public void uploadMaterial() throws FileNotFoundException {
-        File file = ResourceUtils.getFile("classpath:json/applyevent.json");
-        String mediaId = weChatManager.mediaService().uploadMaterial(file, MediaType.TEXT_PLAIN, MediaService.FILE, ADDRESS_BOOK);
+        File file = ResourceUtils.getFile("classpath:video/1626849301272424.mp4");
+        String mediaId = weChatManager.mediaService().uploadMaterial(file, MediaType.APPLICATION_OCTET_STREAM, MediaService.VIDEO, ADDRESS_BOOK);
         logger.info("上传的临时素材 media id--{}", mediaId);
     }
 

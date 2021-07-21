@@ -53,6 +53,20 @@ public class CallbackController {
         if (StringUtils.isNotEmpty(xml)) {
             BaseEventData eventData = CallBackManager.handle(app,xml,msgSignature,timestamp,nonce);
             logger.info("获取到的数据---{}",eventData);
+            if ("taskcard_click".equals(eventData.getEvent())) {
+                logger.info("任务卡片回调---回调带返回值的情况");
+                String returnData = "<xml>\n" +
+                        "   <ToUserName><![CDATA[20170410022717]]></ToUserName>\n" +
+                        "   <FromUserName><![CDATA[ww36e0a51aab349a7d]]></FromUserName>\n" +
+                        "   <CreateTime>1626852240</CreateTime>\n" +
+                        "   <MsgType><![CDATA[update_taskcard]]></MsgType>\n" +
+                        "   <TaskCard>\n" +
+                        "       <ReplaceName><![CDATA[已批准]]></ReplaceName>\n" +
+                        "   </TaskCard>\n" +
+                        "</xml>";
+
+                return CallBackManager.msgEncrypt(app,returnData);
+            }
             return "";
         }
 

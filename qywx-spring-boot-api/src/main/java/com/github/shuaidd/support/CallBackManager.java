@@ -5,6 +5,7 @@ import com.github.shuaidd.callback.AesException;
 import com.github.shuaidd.callback.WXBizMsgXmlCrypt;
 import com.github.shuaidd.client.config.CallbackProperties;
 import com.github.shuaidd.event.BaseEventData;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -146,5 +147,17 @@ public final class CallBackManager {
         }
 
         return null;
+    }
+
+    public static String msgEncrypt(String applicationName,String text) throws AesException {
+        CallbackProperties properties = getCallbackProperty(applicationName);
+        if (Objects.isNull(properties)) {
+            logger.error("应用-{}-未配置密钥信息，无法处理", applicationName);
+           throw new RuntimeException("未配置密钥信息");
+        }
+
+        WXBizMsgXmlCrypt crypt = new WXBizMsgXmlCrypt(properties.getToken(), properties.getEncodingAesKey(), properties.getReceiveId());
+
+        return crypt.EncryptMsg(text,System.currentTimeMillis()+"", RandomStringUtils.random(10,true,true));
     }
 }

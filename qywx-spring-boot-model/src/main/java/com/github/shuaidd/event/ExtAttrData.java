@@ -13,6 +13,7 @@ import java.util.List;
  **/
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ExtAttrData {
+
     @XmlElement(name = "Item")
     private List<ExtAttrItemData> itemData;
 
