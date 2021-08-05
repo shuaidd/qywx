@@ -44,7 +44,7 @@ public class WeChatTest extends BaseTest {
 ```
 
 ### 回调配置
-![回调配置](/etc/274121626855291_.pic.jpg)
+![回调配置](etc/274121626855291_.pic.jpg)
 
 ### 更新记录
 ``` 
