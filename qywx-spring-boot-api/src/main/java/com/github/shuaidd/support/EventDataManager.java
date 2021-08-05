@@ -93,9 +93,6 @@ public class EventDataManager {
         }
 
         CommonEventData commonEventData = XMLUtil.convertXmlStrToObject(CommonEventData.class, xml);
-        if (StringUtils.isEmpty(commonEventData.getEvent())) {
-            return null;
-        }
 
         Class<? extends BaseEventData> cls = null;
         if (MsgType.TEXT.getType().equals(commonEventData.getMsgType())) {
