@@ -4,9 +4,11 @@ import com.github.shuaidd.dto.tool.CallbackData;
 import com.github.shuaidd.dto.addressbook.Department;
 import com.github.shuaidd.dto.addressbook.Tag;
 import com.github.shuaidd.dto.addressbook.WeChatUser;
+import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.*;
 import com.github.shuaidd.response.addressbook.*;
 import com.github.shuaidd.resquest.addressbook.*;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -15,15 +17,18 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 企业微信通讯录管理
@@ -76,8 +81,9 @@ public class AddressBookService extends AbstractBaseService {
 
     /**
      * 创建用户
+     *
      * @param applicationName 应用名
-     * @param request 请求
+     * @param request         请求
      */
     public final void createUser(CreateUserRequest request, String applicationName) {
         checkApplication(applicationName);
@@ -132,7 +138,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 删除成员
      *
-     * @param userId 用户编号
+     * @param userId          用户编号
      * @param applicationName 应用名称
      */
     public final void deleteUser(String userId, String applicationName) {
@@ -150,7 +156,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 批量删除成员
      *
-     * @param request 请求
+     * @param request         请求
      * @param applicationName 应用名称
      */
     public final void batchDeleteUser(BatchDeleteUserRequest request, String applicationName) {
@@ -183,7 +189,7 @@ public class AddressBookService extends AbstractBaseService {
                 weChatUsers = departmentUserResponse.getWeChatUserList();
 
                 if (logger.isInfoEnabled()) {
-                    logger.info("获取部门成员成功：applicationName-{}--weChatUsers--{}", applicationName,weChatUsers);
+                    logger.info("获取部门成员成功：applicationName-{}--weChatUsers--{}", applicationName, weChatUsers);
                 }
             }
         }
@@ -209,7 +215,7 @@ public class AddressBookService extends AbstractBaseService {
                 weChatUsers = departmentUserResponse.getWeChatUserList();
 
                 if (logger.isInfoEnabled()) {
-                    logger.info("获取部门成员详情成功：applicationName-{}--weChatUsers--{}", applicationName,weChatUsers);
+                    logger.info("获取部门成员详情成功：applicationName-{}--weChatUsers--{}", applicationName, weChatUsers);
                 }
             }
         }
@@ -220,7 +226,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * userid转openid
      *
-     * @param userId 用户编号
+     * @param userId          用户编号
      * @param applicationName 应用名称
      * @return String
      */
@@ -243,7 +249,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * openid转userid
      *
-     * @param openId 用户编号
+     * @param openId          用户编号
      * @param applicationName 应用名称
      * @return String
      */
@@ -266,7 +272,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 二次验证
      *
-     * @param userId 用户编号
+     * @param userId          用户编号
      * @param applicationName 应用名称
      */
     public final void authSuccess(String userId, String applicationName) {
@@ -284,7 +290,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 邀请成员
      *
-     * @param request 请求
+     * @param request         请求
      * @param applicationName 应用名称
      */
     public final void invite(InviteUserRequest request, String applicationName) {
@@ -305,7 +311,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 创建部门
      *
-     * @param request 请求
+     * @param request         请求
      * @param applicationName 应用名称
      * @return CreateDepartmentResponse
      */
@@ -327,7 +333,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 更新部门信息
      *
-     * @param request 请求
+     * @param request         请求
      * @param applicationName 应用名称
      */
     public final void updateDepartment(DepartmentRequest request, String applicationName) {
@@ -345,7 +351,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 删除部门
      *
-     * @param id 部门id
+     * @param id              部门id
      * @param applicationName 应用名称
      */
     public final void deleteDepartment(Integer id, String applicationName) {
@@ -363,7 +369,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 拉取部门列表
      *
-     * @param id 部门id
+     * @param id              部门id
      * @param applicationName 应用名称
      * @return Department
      */
@@ -374,7 +380,7 @@ public class AddressBookService extends AbstractBaseService {
         if (isSuccess(response)) {
             departments = response.getDepartments();
             if (logger.isInfoEnabled()) {
-                logger.info("拉取部门列表成功：部门数量-{},applicationName-{}，departments--{}", departments.size(), applicationName,departments);
+                logger.info("拉取部门列表成功：部门数量-{},applicationName-{}，departments--{}", departments.size(), applicationName, departments);
             }
         }
 
@@ -384,7 +390,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 创建标签
      *
-     * @param request 请求
+     * @param request         请求
      * @param applicationName 应用名称
      * @return Integer
      */
@@ -407,8 +413,8 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 更新标签名字
      *
-     * @param tagId 标签ID
-     * @param tagName 标签名称
+     * @param tagId           标签ID
+     * @param tagName         标签名称
      * @param applicationName 应用名称
      */
     public final void updateTagName(Integer tagId, String tagName, String applicationName) {
@@ -429,7 +435,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 删除标签
      *
-     * @param tagId 标签ID
+     * @param tagId           标签ID
      * @param applicationName 应用名称
      */
     public final void deleteTag(Integer tagId, String applicationName) {
@@ -447,7 +453,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 获取标签成员
      *
-     * @param tagId 标签ID
+     * @param tagId           标签ID
      * @param applicationName 应用名称
      * @return QueryTagUserResponse
      */
@@ -458,7 +464,7 @@ public class AddressBookService extends AbstractBaseService {
             response = weChatClient.getTagUser(tagId, applicationName);
             if (isSuccess(response)) {
                 if (logger.isInfoEnabled()) {
-                    logger.info("获取标签成员成功：标签编号[{}],applicationName-{}--成员--{}", tagId, applicationName,response.getUserList());
+                    logger.info("获取标签成员成功：标签编号[{}],applicationName-{}--成员--{}", tagId, applicationName, response.getUserList());
                 }
             }
         }
@@ -469,7 +475,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 增加标签成员
      *
-     * @param request 请求
+     * @param request         请求
      * @param applicationName 应用名称
      * @return TagUserResponse
      */
@@ -490,7 +496,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 删除标签成员
      *
-     * @param request 请求
+     * @param request         请求
      * @param applicationName 应用名称
      * @return TagUserResponse
      */
@@ -511,7 +517,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 获取标签列表
      *
-     * @param applicationName  应用名称
+     * @param applicationName 应用名称
      * @return Tag
      */
     public final List<Tag> getTagList(String applicationName) {
@@ -521,7 +527,7 @@ public class AddressBookService extends AbstractBaseService {
         if (isSuccess(response)) {
             tags = response.getTagList();
             if (logger.isInfoEnabled()) {
-                logger.info("获取标签列表成功：applicationName-{}--tags--{}", applicationName,tags);
+                logger.info("获取标签列表成功：applicationName-{}--tags--{}", applicationName, tags);
             }
         }
 
@@ -538,10 +544,11 @@ public class AddressBookService extends AbstractBaseService {
      * 成员字段更新规则：可自行添加扩展字段。文件中有指定的字段，以指定的字段值为准；文件中没指定的字段，不更新
      * <p>
      * 增量更新成员
-     * @param toInvite 是否邀请新建的成员使用企业微信（将通过微信服务通知或短信或邮件下发邀请，每天自动下发一次，最多持续3个工作日），默认值为true。
-     * @param weChatUsers  用户
+     *
+     * @param toInvite        是否邀请新建的成员使用企业微信（将通过微信服务通知或短信或邮件下发邀请，每天自动下发一次，最多持续3个工作日），默认值为true。
+     * @param weChatUsers     用户
      * @param applicationName 应用名称
-     * @param callbackData 回调信息。如填写该项则任务完成后，通过callback推送事件给企业。具体请参考应用回调模式中的相应选项
+     * @param callbackData    回调信息。如填写该项则任务完成后，通过callback推送事件给企业。具体请参考应用回调模式中的相应选项
      * @return 任务编号
      */
     public final String asyncBatchUpdateUser(List<WeChatUser> weChatUsers, Boolean toInvite, CallbackData callbackData, String applicationName) {
@@ -550,8 +557,9 @@ public class AddressBookService extends AbstractBaseService {
 
     /**
      * 增量更新成员
-     * @param weChatUsers 用户
-     * @param toInvite 是否邀请新建的成员使用企业微信（将通过微信服务通知或短信或邮件下发邀请，每天自动下发一次，最多持续3个工作日），默认值为true。
+     *
+     * @param weChatUsers     用户
+     * @param toInvite        是否邀请新建的成员使用企业微信（将通过微信服务通知或短信或邮件下发邀请，每天自动下发一次，最多持续3个工作日），默认值为true。
      * @param applicationName 应用名称
      * @return 任务编号
      */
@@ -561,9 +569,10 @@ public class AddressBookService extends AbstractBaseService {
 
     /**
      * 全量覆盖成员
-     * @param weChatUsers 用户
-     * @param toInvite 是否邀请新建的成员使用企业微信（将通过微信服务通知或短信或邮件下发邀请，每天自动下发一次，最多持续3个工作日），默认值为true。
-     * @param callbackData 回调信息
+     *
+     * @param weChatUsers     用户
+     * @param toInvite        是否邀请新建的成员使用企业微信（将通过微信服务通知或短信或邮件下发邀请，每天自动下发一次，最多持续3个工作日），默认值为true。
+     * @param callbackData    回调信息
      * @param applicationName 应用名称
      * @return 任务编号
      */
@@ -573,8 +582,9 @@ public class AddressBookService extends AbstractBaseService {
 
     /**
      * 全量覆盖成员
-     * @param weChatUsers 用户
-     * @param toInvite 是否邀请新建的成员使用企业微信（将通过微信服务通知或短信或邮件下发邀请，每天自动下发一次，最多持续3个工作日），默认值为true。
+     *
+     * @param weChatUsers     用户
+     * @param toInvite        是否邀请新建的成员使用企业微信（将通过微信服务通知或短信或邮件下发邀请，每天自动下发一次，最多持续3个工作日），默认值为true。
      * @param applicationName 应用名称
      * @return 任务编号
      */
@@ -670,8 +680,8 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 全量覆盖部门
      *
-     * @param departments departments
-     * @param callbackData  callbackData
+     * @param departments     departments
+     * @param callbackData    callbackData
      * @param applicationName 应用名称
      * @return String
      */
@@ -715,7 +725,8 @@ public class AddressBookService extends AbstractBaseService {
 
     /**
      * 全量覆盖部门
-     * @param departments 部门信息
+     *
+     * @param departments     部门信息
      * @param applicationName 应用名称
      * @return 任务编号
      */
@@ -727,7 +738,7 @@ public class AddressBookService extends AbstractBaseService {
     /**
      * 获取job执行结果
      *
-     * @param jobId jobId
+     * @param jobId           jobId
      * @param applicationName 应用名称
      * @return AsyncJobResultResponse
      */
@@ -742,5 +753,164 @@ public class AddressBookService extends AbstractBaseService {
         }
 
         return resultResponse;
+    }
+
+    /**
+     * 获取加入企业二维码
+     *
+     * @param sizeType        qrcode尺寸类型，1: 171 x 171; 2: 399 x 399; 3: 741 x 741; 4: 2052 x 2052
+     * @param applicationName 应用名称
+     * @return 二维码URL
+     */
+    public final String getCorpQrCode(Integer sizeType, String applicationName) {
+        checkApplication(applicationName);
+        JoinQrCodeResponse response = weChatClient.getJoinQrCode(sizeType, applicationName);
+        if (isSuccess(response)) {
+            return response.getJoinQrCode();
+        }
+
+        logger.error("获取不到二维码信息-{}", response);
+        throw new WeChatException("获取不到二维码信息");
+    }
+
+    /**
+     * 获取企业活跃成员数
+     *
+     * @param date            日期
+     * @param applicationName 应用名称
+     * @return 活跃成员数
+     */
+    public final Integer getActiveStat(Date date, String applicationName) {
+        if (date == null) {
+            return 0;
+        }
+        checkApplication(applicationName);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String formatDate = format.format(date);
+        ActiveStatRequest request = new ActiveStatRequest();
+        request.setDate(formatDate);
+
+        ActiveStatResponse response = weChatClient.getActiveStat(request, applicationName);
+        if (isSuccess(response)) {
+            return response.getActiveCnt();
+        }
+
+        logger.error("获取不到企业活跃成员数-{}", response);
+        throw new WeChatException("获取不到企业活跃成员数");
+    }
+
+    /**
+     * 导出成员
+     *
+     * @param request         请求体
+     * @param applicationName 应用名称
+     * @return 异步任务编号
+     */
+    public final String exportUser(AddressBookExportRequest request, String applicationName) {
+        checkApplication(applicationName);
+        AsyncJobResponse response = weChatClient.exportUser(request, applicationName);
+        if (isSuccess(response)) {
+            return response.getJobId();
+        }
+
+        logger.error("导出成员失败-{}", response);
+        throw new WeChatException("导出成员失败");
+    }
+
+    /**
+     * 导出成员详情
+     *
+     * @param request         请求体
+     * @param applicationName 应用名称
+     * @return 异步任务编号
+     */
+    public final String exportUserDetail(AddressBookExportRequest request, String applicationName) {
+        checkApplication(applicationName);
+        AsyncJobResponse response = weChatClient.exportUserDetail(request, applicationName);
+        if (isSuccess(response)) {
+            return response.getJobId();
+        }
+
+        logger.error("导出成员详情失败-{}", response);
+        throw new WeChatException("导出成员详情失败");
+    }
+
+    /**
+     * 导出部门
+     *
+     * @param request         请求体
+     * @param applicationName 应用名称
+     * @return 异步任务编号
+     */
+    public final String exportDepartment(AddressBookExportRequest request, String applicationName) {
+        checkApplication(applicationName);
+        AsyncJobResponse response = weChatClient.exportDepartment(request, applicationName);
+        if (isSuccess(response)) {
+            return response.getJobId();
+        }
+
+        logger.error("导出部门失败-{}", response);
+        throw new WeChatException("导出部门失败");
+    }
+
+    /**
+     * 导出标签成员
+     *
+     * @param request         请求体
+     * @param applicationName 应用名称
+     * @return 异步任务编号
+     */
+    public final String exportTagUser(AddressBookExportRequest request, String applicationName) {
+        checkApplication(applicationName);
+        AsyncJobResponse response = weChatClient.exportTagUser(request, applicationName);
+        if (isSuccess(response)) {
+            return response.getJobId();
+        }
+
+        logger.error("导出标签成员失败-{}", response);
+        throw new WeChatException("导出标签成员失败");
+    }
+
+    public final ExportResultResponse getExportResult(String jobId, String applicationName) {
+        checkApplication(applicationName);
+        ExportResultResponse resultResponse = weChatClient.getExportResult(jobId, applicationName);
+        if (isSuccess(resultResponse)) {
+            return resultResponse;
+        }
+
+        logger.error("获取导出结果失败-{}", resultResponse);
+        throw new WeChatException("获取导出结果失败");
+    }
+
+    /**
+     * 获取导出结果的解密数据
+     *
+     * @param aesKey 导出时传递的加密密钥
+     * @param url    结果下载地址
+     * @return 解密后的json串
+     */
+    public final String getDecryptExportData(String aesKey, String url) {
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<byte[]> responseEntity = restTemplate.getForEntity(url, byte[].class);
+        if (responseEntity.getBody() == null) {
+            return null;
+        }
+
+        byte[] key = Base64.decodeBase64(aesKey + "=");
+        byte[] original = null;
+        try {
+            // 设置解密模式为AES的CBC模式
+            Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
+            SecretKeySpec keySpec = new SecretKeySpec(key, "AES");
+            IvParameterSpec iv = new IvParameterSpec(Arrays.copyOfRange(key, 0, 16));
+            cipher.init(Cipher.DECRYPT_MODE, keySpec, iv);
+            original = cipher.doFinal(responseEntity.getBody());
+        } catch (Exception e) {
+            logger.error("", e);
+        }
+
+        assert original != null;
+        logger.info("数据解密--{}", new String(original));
+        return new String(original);
     }
 }

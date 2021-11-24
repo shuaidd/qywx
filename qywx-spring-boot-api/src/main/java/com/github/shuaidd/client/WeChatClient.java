@@ -7,6 +7,9 @@ import com.github.shuaidd.response.application.ApplicationButtonResponse;
 import com.github.shuaidd.response.application.WeChatApplicationResponse;
 import com.github.shuaidd.response.auth.AuthenticationResponse;
 import com.github.shuaidd.response.externalcontact.*;
+import com.github.shuaidd.response.kf.AddKfAccountResponse;
+import com.github.shuaidd.response.kf.KfAccountListResponse;
+import com.github.shuaidd.response.kf.KfAddContactWayResponse;
 import com.github.shuaidd.response.message.CreateAppChatResponse;
 import com.github.shuaidd.response.message.SearchAppChatResponse;
 import com.github.shuaidd.response.message.SendMessageResponse;
@@ -17,6 +20,9 @@ import com.github.shuaidd.resquest.addressbook.*;
 import com.github.shuaidd.resquest.application.ApplicationButtonRequest;
 import com.github.shuaidd.resquest.application.ApplicationSettingReuqest;
 import com.github.shuaidd.resquest.externalcontact.*;
+import com.github.shuaidd.resquest.kf.KfAccountRequest;
+import com.github.shuaidd.resquest.kf.DelKfAccountRequest;
+import com.github.shuaidd.resquest.kf.KfAddContactWayRequest;
 import com.github.shuaidd.resquest.message.CreateAppChatRequest;
 import com.github.shuaidd.resquest.message.SendAppChatRequest;
 import com.github.shuaidd.resquest.message.SendMessageRequest;
@@ -168,7 +174,7 @@ public interface WeChatClient {
     /**
      * 创建部门
      *
-     * @param app 应用
+     * @param app     应用
      * @param request 请求体
      * @return CreateDepartmentResponse
      */
@@ -245,7 +251,7 @@ public interface WeChatClient {
     /**
      * 获取标签成员
      *
-     * @param id 标签id
+     * @param id  标签id
      * @param app 应用名
      * @return QueryTagUserResponse
      */
@@ -290,7 +296,7 @@ public interface WeChatClient {
      * 通讯录中存在、文件中不存在的成员，保持不变
      * 成员字段更新规则：可自行添加扩展字段。文件中有指定的字段，以指定的字段值为准；文件中没指定的字段，不更新
      * <p>
-     *
+     * <p>
      * 增量更新成员
      *
      * @param request 请求体
@@ -382,7 +388,7 @@ public interface WeChatClient {
      * 创建菜单
      *
      * @param request 请求体
-     * @param agentid  应用编号
+     * @param agentid 应用编号
      * @param app     应用名
      * @return BaseResponse
      */
@@ -1394,4 +1400,122 @@ public interface WeChatClient {
      */
     @PostMapping(value = "pstncc/getstates", headers = HEAD)
     GetCallStateResponse pstnccCallState(GetCallStateRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取加入企业二维码
+     *
+     * @param sizeType qrcode尺寸类型
+     * @param app      应用名
+     * @return 二维码地址
+     */
+    @GetMapping(value = "corp/get_join_qrcode", headers = HEAD)
+    JoinQrCodeResponse getJoinQrCode(@RequestParam("size_type") Integer sizeType, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取企业活跃成员数
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 企业活跃成员数
+     */
+    @PostMapping(value = "user/get_active_stat", headers = HEAD)
+    ActiveStatResponse getActiveStat(ActiveStatRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 导出成员
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 异步任务编号
+     */
+    @PostMapping(value = "export/simple_user", headers = HEAD)
+    AsyncJobResponse exportUser(AddressBookExportRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取导出结果
+     *
+     * @param jobId 任务编号
+     * @param app   应用名
+     * @return 结果
+     */
+    @GetMapping(value = "export/get_result", headers = HEAD)
+    ExportResultResponse getExportResult(@RequestParam("jobid") String jobId, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 导出成员详情
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 异步任务编号
+     */
+    @PostMapping(value = "export/user", headers = HEAD)
+    AsyncJobResponse exportUserDetail(AddressBookExportRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 导出部门
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 异步任务编号
+     */
+    @PostMapping(value = "export/department", headers = HEAD)
+    AsyncJobResponse exportDepartment(AddressBookExportRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 导出标签成员
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 异步任务编号
+     */
+    @PostMapping(value = "export/taguser", headers = HEAD)
+    AsyncJobResponse exportTagUser(AddressBookExportRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 添加客服帐号
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 新创建的客服帐号ID
+     */
+    @PostMapping(value = "kf/account/add", headers = HEAD)
+    AddKfAccountResponse addKfAccount(KfAccountRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除客服帐号
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 无
+     */
+    @PostMapping(value = "kf/account/del", headers = HEAD)
+    BaseResponse delKfAccount(DelKfAccountRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改客服帐号
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 无
+     */
+    @PostMapping(value = "kf/account/update", headers = HEAD)
+    BaseResponse updateKfAccount(KfAccountRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客服帐号列表
+     *
+     * @param app 应用名称
+     * @return 账户列表
+     */
+    @GetMapping(value = "kf/account/list", headers = HEAD)
+    KfAccountListResponse kfAccountLIst(@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客服帐号链接
+     * @param request 请求
+     * @param app 应用名称
+     * @return 客服帐号链接
+     */
+    @PostMapping(value = "kf/add_contact_way", headers = HEAD)
+    KfAddContactWayResponse kfContactWay(KfAddContactWayRequest request, @RequestParam(HEAD_KEY) String app);
 }

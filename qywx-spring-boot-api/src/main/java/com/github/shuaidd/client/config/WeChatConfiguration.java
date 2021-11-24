@@ -5,9 +5,7 @@ import com.github.shuaidd.client.interceptor.WeChatInterceptor;
 import feign.Feign;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
-import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
@@ -18,9 +16,6 @@ import org.springframework.context.annotation.Bean;
  * date 2019-04-04 16:18
  **/
 public class WeChatConfiguration {
-
-    @Autowired
-    private ApplicationContext applicationContext;
 
     @Bean
     public Decoder decoder() {
@@ -33,7 +28,7 @@ public class WeChatConfiguration {
     }
 
     @Bean
-    public Feign.Builder builder() {
+    public Feign.Builder builder(ApplicationContext applicationContext) {
         return new Feign.Builder().requestInterceptor(new WeChatInterceptor(applicationContext));
     }
 }

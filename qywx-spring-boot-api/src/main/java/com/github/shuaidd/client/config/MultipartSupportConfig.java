@@ -6,7 +6,6 @@ import feign.Feign;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
 import feign.form.spring.SpringFormEncoder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
@@ -15,9 +14,6 @@ import org.springframework.context.annotation.Bean;
  */
 
 public class MultipartSupportConfig {
-
-    @Autowired
-    private ApplicationContext applicationContext;
 
     @Bean
     public Encoder feignFormEncoder() {
@@ -30,7 +26,7 @@ public class MultipartSupportConfig {
     }
 
     @Bean
-    public Feign.Builder builder() {
+    public Feign.Builder builder(ApplicationContext applicationContext) {
         return new Feign.Builder().requestInterceptor(new WeChatInterceptor(applicationContext));
     }
 }

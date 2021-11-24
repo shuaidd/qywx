@@ -3,6 +3,7 @@ package com.github.shuaidd.event;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import java.util.StringJoiner;
 
 /**
  * 描述
@@ -55,5 +56,15 @@ public class BatchJobData {
 
     public void setErrMsg(String errMsg) {
         this.errMsg = errMsg;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", BatchJobData.class.getSimpleName() + "[", "]")
+                .add("jobId='" + jobId + "'")
+                .add("jobType='" + jobType + "'")
+                .add("errCode='" + errCode + "'")
+                .add("errMsg='" + errMsg + "'")
+                .toString();
     }
 }

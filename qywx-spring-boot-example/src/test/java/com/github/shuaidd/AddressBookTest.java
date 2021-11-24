@@ -1,9 +1,11 @@
 package com.github.shuaidd;
 
+import com.github.shuaidd.response.addressbook.ExportResultResponse;
 import com.github.shuaidd.resquest.addressbook.*;
 import org.junit.Test;
 
 import java.util.Collections;
+import java.util.Date;
 
 /**
  * 描述 通讯录单元测试
@@ -170,7 +172,7 @@ public class AddressBookTest extends AbstractTest {
     public void createTag() {
         TagRequest request = new TagRequest();
         request.setTagName("企业微信探索");
-        weChatManager.addressBookService().createTag(request,appName);
+        weChatManager.addressBookService().createTag(request, appName);
     }
 
     /**
@@ -178,7 +180,7 @@ public class AddressBookTest extends AbstractTest {
      */
     @Test
     public void updateTagName() {
-        weChatManager.addressBookService().updateTagName(3,"企微信探索",appName);
+        weChatManager.addressBookService().updateTagName(3, "企微信探索", appName);
     }
 
     /**
@@ -186,7 +188,7 @@ public class AddressBookTest extends AbstractTest {
      */
     @Test
     public void deleteTag() {
-        weChatManager.addressBookService().deleteTag(2,appName);
+        weChatManager.addressBookService().deleteTag(2, appName);
     }
 
     /**
@@ -197,7 +199,7 @@ public class AddressBookTest extends AbstractTest {
         TagUserRequest request = new TagUserRequest();
         request.setTagId(1);
         request.setUserList(Collections.singletonList("sigm"));
-        weChatManager.addressBookService().deleteTagUsers(request,appName);
+        weChatManager.addressBookService().deleteTagUsers(request, appName);
     }
 
     /**
@@ -208,7 +210,7 @@ public class AddressBookTest extends AbstractTest {
         TagUserRequest request = new TagUserRequest();
         request.setTagId(3);
         request.setUserList(Collections.singletonList("20170410022717"));
-        weChatManager.addressBookService().addTagUsers(request,appName);
+        weChatManager.addressBookService().addTagUsers(request, appName);
     }
 
     /**
@@ -225,5 +227,130 @@ public class AddressBookTest extends AbstractTest {
     @Test
     public void getTagUser() {
         weChatManager.addressBookService().getTagUser(1, appName);
+    }
+
+    /**
+     * 获取企业二维码地址
+     */
+    @Test
+    public void getCorpQrCode() {
+        String url = weChatManager.addressBookService().getCorpQrCode(4, appName);
+        logger.info("企业二维码地址--{}", url);
+    }
+
+    /**
+     * 获取企业活跃用户数
+     */
+    @Test
+    public void getActiveStat() {
+        Integer sum = weChatManager.addressBookService().getActiveStat(new Date(), appName);
+        logger.info("获取企业活跃成员数--{}", sum);
+    }
+
+    /**
+     * 导出用户
+     */
+    @Test
+    public void exportUser() {
+        AddressBookExportRequest request = new AddressBookExportRequest();
+        request.setBlockSize(10000);
+        request.setEncodingAesKey("QJqvdlS4M4FTPUNqSQrMg3VwNRyBCqTqtNStREy3Ahd");
+        String jobId = weChatManager.addressBookService().exportUser(request, appName);
+        logger.info("jobId--{}", jobId);
+    }
+
+    /**
+     * 获取异步任务执行结果
+     */
+    @Test
+    public void jobResult() {
+        ExportResultResponse resultResponse = weChatManager.addressBookService().getExportResult("jobid_xNWq-TbeJrPiKG1YEW_44NlB2W1ILctq2CALviy8U_A", appName);
+        logger.info("异步任务执行结果--{}", resultResponse);
+    }
+
+    /**
+     * 获取解密数据
+     */
+    @Test
+    public void getDecryptExportData() {
+        String aesKey = "QJqvdlS4M4FTPUNqSQrMg3VwNRyBCqTqtNStREy3Ahd";
+        String data = weChatManager.addressBookService().getDecryptExportData(aesKey, "https://szfront.wxwork.qq.com/downloadobject?fileid=080112043133303122093133313037373634312a0131322465623131363134632d656163652d346130302d623233302d30666165313862396566373538c00d4214def7096ba4682d9a80a18f75ea5a66be7de8cde748015802600768b8177207333030303030309001f7c7f78c069a0100a001c3c703&weixinnum=1773811417&authkey=7008001007186022604001a8b81eaa803920f9bbcb6a2cc2e37f1304b023c6c31f0eeb5ba6dc8715976d25ce9fb59829e3b824c9e4d1f65c01410fe150ad7f3bbc2e6b6e0708610615111cc7ce9db1020c50cf696624173772160d1bfe87cd45f284f9c15ef67dfe23&filename=data_0.json");
+        logger.info("异步任务执行结果的解密后数据--{}", data);
+    }
+
+    /**
+     * 导出用户详情
+     */
+    @Test
+    public void exportUserDetail() {
+        String aesKey = "QJqvdlS4M4FTPUNqSQrMg3VwNRyBCqTqtNStREy3Ahd";
+        AddressBookExportRequest request = new AddressBookExportRequest();
+        request.setBlockSize(10000);
+        request.setEncodingAesKey(aesKey);
+        String jobId = weChatManager.addressBookService().exportUserDetail(request, appName);
+        logger.info("jobId--{}", jobId);
+        try {
+            //等待异步任务执行结束 实际使用可以根据 任务完成的回调通知来获取执行结果，这里是 测试数据模拟，几秒就跑完了
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ExportResultResponse resultResponse = weChatManager.addressBookService().getExportResult(jobId, appName);
+        logger.info("异步任务执行结果--{}", resultResponse);
+
+        for (ExportResultResponse.ExportResultData exportResultData : resultResponse.getDataList()) {
+            weChatManager.addressBookService().getDecryptExportData(aesKey, exportResultData.getUrl());
+        }
+    }
+
+    /**
+     * 导出部门
+     */
+    @Test
+    public void exportDepartment() {
+        String aesKey = "QJqvdlS4M4FTPUNqSQrMg3VwNRyBCqTqtNStREy3Ahd";
+        AddressBookExportRequest request = new AddressBookExportRequest();
+        request.setBlockSize(10000);
+        request.setEncodingAesKey(aesKey);
+        String jobId = weChatManager.addressBookService().exportDepartment(request, appName);
+        logger.info("jobId--{}", jobId);
+        try {
+            //等待异步任务执行结束 实际使用可以根据 任务完成的回调通知来获取执行结果，这里是 测试数据模拟，几秒就跑完了
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ExportResultResponse resultResponse = weChatManager.addressBookService().getExportResult(jobId, appName);
+        logger.info("异步任务执行结果--{}", resultResponse);
+
+        for (ExportResultResponse.ExportResultData exportResultData : resultResponse.getDataList()) {
+            weChatManager.addressBookService().getDecryptExportData(aesKey, exportResultData.getUrl());
+        }
+    }
+
+    /**
+     * 导出标签成员
+     */
+    @Test
+    public void exportTagUser() {
+        String aesKey = "QJqvdlS4M4FTPUNqSQrMg3VwNRyBCqTqtNStREy3Ahd";
+        AddressBookExportRequest request = new AddressBookExportRequest();
+        request.setBlockSize(10000);
+        request.setTagId(1L);
+        request.setEncodingAesKey(aesKey);
+        String jobId = weChatManager.addressBookService().exportTagUser(request, appName);
+        logger.info("jobId--{}", jobId);
+        try {
+            //等待异步任务执行结束 实际使用可以根据 任务完成的回调通知来获取执行结果，这里是 测试数据模拟，几秒就跑完了
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ExportResultResponse resultResponse = weChatManager.addressBookService().getExportResult(jobId, appName);
+        logger.info("异步任务执行结果--{}", resultResponse);
+
+        for (ExportResultResponse.ExportResultData exportResultData : resultResponse.getDataList()) {
+            weChatManager.addressBookService().getDecryptExportData(aesKey, exportResultData.getUrl());
+        }
     }
 }

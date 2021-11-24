@@ -2,6 +2,7 @@ package com.github.shuaidd.event;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.StringJoiner;
 
 /**
  * 描述
@@ -14,4 +15,19 @@ public class BatchJobResultEventData extends BaseEventData {
 
     @XmlElement(name = "BatchJob")
     private BatchJobData batchJob;
+
+    public BatchJobData getBatchJob() {
+        return batchJob;
+    }
+
+    public void setBatchJob(BatchJobData batchJob) {
+        this.batchJob = batchJob;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", BatchJobResultEventData.class.getSimpleName() + "[", "]")
+                .add("batchJob=" + batchJob)
+                .toString();
+    }
 }

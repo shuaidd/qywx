@@ -14,6 +14,7 @@
 package com.github.shuaidd.callback;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -39,7 +40,7 @@ import org.apache.commons.codec.binary.Base64;
  * </ol>
  */
 public class WXBizJsonMsgCrypt {
-	static Charset CHARSET = Charset.forName("utf-8");
+	static Charset CHARSET = StandardCharsets.UTF_8;
 	Base64 base64 = new Base64();
 	byte[] aesKey;
 	String token;
@@ -149,7 +150,7 @@ public class WXBizJsonMsgCrypt {
 	 * @return 解密得到的明文
 	 * @throws AesException aes解密失败
 	 */
-	String decrypt(String text) throws AesException {
+	public String decrypt(String text) throws AesException {
 		byte[] original;
 		try {
 			// 设置解密模式为AES的CBC模式

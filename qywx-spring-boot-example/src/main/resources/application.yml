@@ -31,6 +31,10 @@ qywx:
       application-name: oy
       application-desc: 欧亚-冬冬
       agent-id: 1000010
+    - secret: cWcNoZVagtV69mCufbiv3pcaBc-WpYvbOuxwwKVraDI
+      application-name: wx-kf
+      application-desc: 微信客服
+
   url: https://qyapi.weixin.qq.com
   public-path: cgi-bin
   corp-id: xxxx
