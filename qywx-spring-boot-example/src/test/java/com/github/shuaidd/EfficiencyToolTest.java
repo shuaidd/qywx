@@ -78,6 +78,7 @@ public class EfficiencyToolTest extends AbstractTest {
 
     /**
      * 40d6a94c5d907efeeaae19fce3b450d5
+     *
      * @throws ParseException
      */
     @Test
@@ -102,7 +103,7 @@ public class EfficiencyToolTest extends AbstractTest {
         scheduleData.setAttendees(Collections.singletonList(userId));
 
         request.setSchedule(scheduleData);
-        AddScheduleResponse scheduleResponse = toolService.addSchedule(request,APP_NAME);
+        AddScheduleResponse scheduleResponse = toolService.addSchedule(request, APP_NAME);
         logger.info("{}", scheduleResponse);
     }
 }

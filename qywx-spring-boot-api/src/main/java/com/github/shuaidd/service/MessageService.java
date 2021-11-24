@@ -26,7 +26,7 @@ public class MessageService extends AbstractBaseService {
     /**
      * 发送消息
      *
-     * @param request 请求
+     * @param request         请求
      * @param applicationName 应用名称
      * @return SendMessageResponse
      */
@@ -46,7 +46,7 @@ public class MessageService extends AbstractBaseService {
     /**
      * 发送群消息
      *
-     * @param request 请求
+     * @param request         请求
      * @param applicationName 应用名称
      */
     public final void sendAppChatMessage(SendAppChatRequest request, String applicationName) {
@@ -62,7 +62,7 @@ public class MessageService extends AbstractBaseService {
     /**
      * 创建群聊
      *
-     * @param request 请求
+     * @param request         请求
      * @param applicationName 应用名称
      * @return String
      */
@@ -82,7 +82,7 @@ public class MessageService extends AbstractBaseService {
     /**
      * 修改群聊会话
      *
-     * @param request 请求
+     * @param request         请求
      * @param applicationName 应用名称
      */
     public final void updateAppChat(UpdateAppChatRequest request, String applicationName) {
@@ -98,7 +98,7 @@ public class MessageService extends AbstractBaseService {
     /**
      * 获取群聊会话
      *
-     * @param chatId 群聊编号
+     * @param chatId          群聊编号
      * @param applicationName 应用名称
      * @return ChatInfo
      */

@@ -18,10 +18,10 @@ public class LinkMsgEventData extends BaseEventData {
     @XmlElement(name = "Description")
     private String description;
 
-     @XmlElement(name = "Url")
+    @XmlElement(name = "Url")
     private String url;
 
-     @XmlElement(name = "PicUrl")
+    @XmlElement(name = "PicUrl")
     private String picUrl;
 
     public String getTitle() {

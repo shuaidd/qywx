@@ -180,7 +180,7 @@ public class MessageServiceTest extends AbstractTest {
         TaskCardBtn disbtn = new TaskCardBtn();
         disbtn.setKey("key1112");
         disbtn.setName("驳回");
-        taskCard.setBtn(Lists.newArrayList(btn,disbtn));
+        taskCard.setBtn(Lists.newArrayList(btn, disbtn));
 
         request.setInteractiveTaskCard(taskCard);
 

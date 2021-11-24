@@ -1512,8 +1512,9 @@ public interface WeChatClient {
 
     /**
      * 获取客服帐号链接
+     *
      * @param request 请求
-     * @param app 应用名称
+     * @param app     应用名称
      * @return 客服帐号链接
      */
     @PostMapping(value = "kf/add_contact_way", headers = HEAD)

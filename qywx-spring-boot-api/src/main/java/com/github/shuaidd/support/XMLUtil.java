@@ -50,7 +50,7 @@ public class XMLUtil {
 
     @SuppressWarnings("unchecked")
 
-    public static <T> T  convertXmlStrToObject(Class<T> clazz, String xmlStr) {
+    public static <T> T convertXmlStrToObject(Class<T> clazz, String xmlStr) {
         Object xmlObject = null;
         try {
             JAXBContext context = JAXBContext.newInstance(clazz);
@@ -61,7 +61,7 @@ public class XMLUtil {
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-        return (T)xmlObject;
+        return (T) xmlObject;
     }
 
     @SuppressWarnings("unchecked")

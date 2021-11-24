@@ -39,8 +39,7 @@ public class ExportResultResponse extends AbstractBaseResponse {
     }
 
 
-
-   public static class ExportResultData {
+    public static class ExportResultData {
 
         /**
          * 数据下载链接,支持指定Range头部分段下载。有效期2个小时

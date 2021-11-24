@@ -16,10 +16,9 @@ import java.util.List;
  * 描述
  *
  * @author ddshuai
- *date 2021-07-19 11:26
+ * date 2021-07-19 11:26
  **/
 public class TableFormControlDeserializer extends AbstractApplyFormControlDeserializer<List<TableChildrenDetail>> {
-
 
 
     @Override
@@ -40,7 +39,7 @@ public class TableFormControlDeserializer extends AbstractApplyFormControlDeseri
             tableChildrenDetail.setTitle(getTitle(titleNode));
 
             JsonNode valueNode = jsonNode.get("value");
-            tableChildrenDetail.setValue(getApplyFormControl(control,valueNode,mapper));
+            tableChildrenDetail.setValue(getApplyFormControl(control, valueNode, mapper));
 
 
             tableChildrenDetails.add(tableChildrenDetail);

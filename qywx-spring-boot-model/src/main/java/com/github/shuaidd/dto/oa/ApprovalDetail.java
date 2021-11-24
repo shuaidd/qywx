@@ -10,7 +10,7 @@ import java.util.StringJoiner;
  * 描述
  *
  * @author ddshuai
- *date 2021-07-19 10:02
+ * date 2021-07-19 10:02
  **/
 public class ApprovalDetail {
 
@@ -24,7 +24,7 @@ public class ApprovalDetail {
     private String templateId;
 
     @JsonProperty("sp_status")
-    private Integer spStatus ;
+    private Integer spStatus;
 
     @JsonProperty("apply_time")
     private Long applyTime;

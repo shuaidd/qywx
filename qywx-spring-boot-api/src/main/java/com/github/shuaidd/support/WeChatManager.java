@@ -122,25 +122,28 @@ public class WeChatManager {
 
     /**
      * 客户联系
+     *
      * @return CustomContactService
      */
-    public CustomContactService customContactService(){
+    public CustomContactService customContactService() {
         return customContactService;
     }
 
     /**
      * 效率工具
+     *
      * @return EfficiencyToolService
      */
-    public EfficiencyToolService efficiencyTool(){
+    public EfficiencyToolService efficiencyTool() {
         return efficiencyToolService;
     }
 
     /**
      * 微信客服
+     *
      * @return WeChatCallCenterService
      */
-    public WeChatCallCenterService callCenterService(){
+    public WeChatCallCenterService callCenterService() {
         return callCenterService;
     }
 }

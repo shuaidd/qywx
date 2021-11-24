@@ -10,7 +10,7 @@ import java.util.List;
  * 2 请求的参数endtime需要大于startime， 起始时间跨度不能超过31天；
  *
  * @author ddshuai
- *date 2021-07-19 09:36
+ * date 2021-07-19 09:36
  **/
 public class GetApprovalNoRequest {
 
@@ -31,12 +31,12 @@ public class GetApprovalNoRequest {
      * department - 审批单提单者所在部门；
      * sp_status - 审批状态;
      * record_type - 审批单类型属性，1-请假；2-打卡补卡；3-出差；4-外出；5-加班； 6- 调班；7-会议室预定；8-退款审批；9-红包报销审批
-     *
+     * <p>
      * 注意:
      * 1、仅“部门”支持同时配置多个筛选条件。
      * 2、不同类型的筛选条件之间为“与”的关系，同类型筛选条件之间为“或”的关系
      * 3、record_type筛选类型仅支持2021/05/31以后新提交的审批单，历史单不支持表单类型属性过滤
-     *
+     * <p>
      * value筛选值，
      * 对应为：template_id-模板id；
      * creator-申请人userid ；

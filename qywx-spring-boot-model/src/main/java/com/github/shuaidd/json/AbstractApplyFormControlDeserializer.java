@@ -14,10 +14,11 @@ import java.util.*;
  * 描述
  *
  * @author ddshuai
- *date 2021-07-19 15:07
+ * date 2021-07-19 15:07
  **/
 public abstract class AbstractApplyFormControlDeserializer<T> extends JsonDeserializer<T> {
-    protected final static Map<String,Class<? extends ApplyFormControl>> APPLY_FORM_CONTROL_MAP = new HashMap<>();
+    protected final static Map<String, Class<? extends ApplyFormControl>> APPLY_FORM_CONTROL_MAP = new HashMap<>();
+
     static {
         APPLY_FORM_CONTROL_MAP.put("Text", TextFormControl.class);
         APPLY_FORM_CONTROL_MAP.put("Textarea", TextFormControl.class);
@@ -43,7 +44,7 @@ public abstract class AbstractApplyFormControlDeserializer<T> extends JsonDeseri
             for (JsonNode node : arrayNode) {
                 String text = node.get("text").textValue();
                 String lang = node.get("lang").textValue();
-                TemplateText templateText = new TemplateText(text,lang);
+                TemplateText templateText = new TemplateText(text, lang);
                 title.add(templateText);
             }
             return title;
@@ -58,7 +59,7 @@ public abstract class AbstractApplyFormControlDeserializer<T> extends JsonDeseri
             if (Objects.isNull(cls)) {
                 return null;
             }
-            return mapper.readValue(valueNode.toString(),cls);
+            return mapper.readValue(valueNode.toString(), cls);
         }
 
         return null;

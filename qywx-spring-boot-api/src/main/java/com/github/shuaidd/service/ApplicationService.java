@@ -22,7 +22,7 @@ public class ApplicationService extends AbstractBaseService {
     /**
      * 获取应用
      *
-     * @param agentId 应用ID
+     * @param agentId         应用ID
      * @param applicationName 应用名称
      * @return WeChatApplicationResponse
      */
@@ -42,8 +42,8 @@ public class ApplicationService extends AbstractBaseService {
     /**
      * 创建应用菜单
      *
-     * @param request 请求
-     * @param agentId 应用ID
+     * @param request         请求
+     * @param agentId         应用ID
      * @param applicationName 应用名称
      */
     public final void createApplicationButton(ApplicationButtonRequest request, String agentId, String applicationName) {
@@ -59,7 +59,7 @@ public class ApplicationService extends AbstractBaseService {
     /**
      * 获取菜单
      *
-     * @param agentId 应用ID
+     * @param agentId         应用ID
      * @param applicationName 应用名称
      * @return ApplicationButtonResponse
      */
@@ -78,7 +78,7 @@ public class ApplicationService extends AbstractBaseService {
     /**
      * 删除菜单
      *
-     * @param agentId 应用ID
+     * @param agentId         应用ID
      * @param applicationName 应用名称
      */
     public final void deleteApplicationButtons(String agentId, String applicationName) {

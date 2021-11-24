@@ -24,6 +24,7 @@ public class MediaServiceTest extends AbstractTest {
 
     /**
      * 获取的结果 --- https://wework.qpic.cn/wwpic/495538_5AazgN0JRoCFypk_1626843955/0
+     *
      * @throws FileNotFoundException 404
      */
     @Test
@@ -47,7 +48,7 @@ public class MediaServiceTest extends AbstractTest {
 
     @Test
     public void download() throws IOException {
-        ResponseEntity<byte[]> responseEntity = weChatManager.mediaService().download("39sypZn0YTWqSK9DFU4aqbQgHnm6y645mWIX4yjjKGgQ",ADDRESS_BOOK);
-        IOUtils.write(responseEntity.getBody(),new FileOutputStream(new File("qywx-applyevent.json")));
+        ResponseEntity<byte[]> responseEntity = weChatManager.mediaService().download("39sypZn0YTWqSK9DFU4aqbQgHnm6y645mWIX4yjjKGgQ", ADDRESS_BOOK);
+        IOUtils.write(responseEntity.getBody(), new FileOutputStream(new File("qywx-applyevent.json")));
     }
 }

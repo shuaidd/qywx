@@ -27,9 +27,10 @@ public interface WeChatMediaClient {
      * media_id在同一企业内应用之间可以共享
      * <p>
      * 上传临时素材
+     *
      * @param media 素材
-     * @param type 类型
-     * @param app 应用名
+     * @param type  类型
+     * @param app   应用名
      * @return WeChatMediaUploadResponse
      */
     @PostMapping(value = "media/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, headers = WeChatClient.HEAD)
@@ -39,7 +40,7 @@ public interface WeChatMediaClient {
      * 上传图片
      *
      * @param media 素材
-     * @param app 应用名
+     * @param app   应用名
      * @return UploadImageResponse
      */
     @PostMapping(value = "media/uploadimg", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, headers = WeChatClient.HEAD)
@@ -49,7 +50,7 @@ public interface WeChatMediaClient {
      * 获取临时素材
      *
      * @param mediaId 素材编号
-     * @param app 应用名
+     * @param app     应用名
      * @return ResponseEntity
      */
     @GetMapping(value = "media/get", headers = WeChatClient.HEAD)
@@ -59,7 +60,7 @@ public interface WeChatMediaClient {
      * 获取高清语音素材
      *
      * @param mediaId 通过JSSDK的uploadVoice接口上传的语音文件id
-     * @param app 应用名
+     * @param app     应用名
      * @return ResponseEntity
      */
     @GetMapping(value = "media/get/jssdk", headers = WeChatClient.HEAD)

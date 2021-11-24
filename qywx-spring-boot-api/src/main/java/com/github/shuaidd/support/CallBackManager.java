@@ -17,7 +17,7 @@ import java.util.Objects;
  * 描述
  *
  * @author ddshuai
- *date 2021-07-20 15:57
+ * date 2021-07-20 15:57
  **/
 public final class CallBackManager {
 
@@ -149,15 +149,15 @@ public final class CallBackManager {
         return null;
     }
 
-    public static String msgEncrypt(String applicationName,String text) throws AesException {
+    public static String msgEncrypt(String applicationName, String text) throws AesException {
         CallbackProperties properties = getCallbackProperty(applicationName);
         if (Objects.isNull(properties)) {
             logger.error("应用-{}-未配置密钥信息，无法处理", applicationName);
-           throw new RuntimeException("未配置密钥信息");
+            throw new RuntimeException("未配置密钥信息");
         }
 
         WXBizMsgXmlCrypt crypt = new WXBizMsgXmlCrypt(properties.getToken(), properties.getEncodingAesKey(), properties.getReceiveId());
 
-        return crypt.EncryptMsg(text,System.currentTimeMillis()+"", RandomStringUtils.random(10,true,true));
+        return crypt.EncryptMsg(text, System.currentTimeMillis() + "", RandomStringUtils.random(10, true, true));
     }
 }

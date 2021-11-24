@@ -10,7 +10,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  */
 public class ContactWayResponse extends AbstractBaseResponse {
     @JsonProperty("contact_way")
-   private ContactWayDetail contactWayDetail;
+    private ContactWayDetail contactWayDetail;
 
     public ContactWayDetail getContactWayDetail() {
         return contactWayDetail;

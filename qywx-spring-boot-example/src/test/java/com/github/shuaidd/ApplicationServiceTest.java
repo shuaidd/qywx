@@ -13,7 +13,7 @@ import java.util.Collections;
  * 描述
  *
  * @author ddshuai
- *date 2021-07-20 15:27
+ * date 2021-07-20 15:27
  **/
 public class ApplicationServiceTest extends AbstractTest {
 
@@ -42,7 +42,7 @@ public class ApplicationServiceTest extends AbstractTest {
         button.setUrl("https://www.baidu.com");
 
         request.setButtonList(Collections.singletonList(button));
-        weChatManager.applicationService().createApplicationButton(request,"1000010", OY);
+        weChatManager.applicationService().createApplicationButton(request, "1000010", OY);
         logger.info("创建应用菜单--成功");
     }
 

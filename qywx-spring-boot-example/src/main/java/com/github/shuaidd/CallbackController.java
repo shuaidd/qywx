@@ -47,12 +47,12 @@ public class CallbackController {
     ) throws AesException {
         logger.info("密文--{}--timestamp--{}--nonce---{},echostr--{}", msgSignature, timestamp, nonce, echoStr);
         if (StringUtils.isNotEmpty(echoStr)) {
-            return CallBackManager.verifyUrl(app,msgSignature,timestamp,nonce,echoStr);
+            return CallBackManager.verifyUrl(app, msgSignature, timestamp, nonce, echoStr);
         }
 
         if (StringUtils.isNotEmpty(xml)) {
-            BaseEventData eventData = CallBackManager.handle(app,xml,msgSignature,timestamp,nonce);
-            logger.info("获取到的数据---{}",eventData);
+            BaseEventData eventData = CallBackManager.handle(app, xml, msgSignature, timestamp, nonce);
+            logger.info("获取到的数据---{}", eventData);
             assert eventData != null;
             if ("taskcard_click".equals(eventData.getEvent())) {
                 logger.info("任务卡片回调---回调带返回值的情况");
@@ -66,7 +66,7 @@ public class CallbackController {
                         "   </TaskCard>\n" +
                         "</xml>";
 
-                return CallBackManager.msgEncrypt(app,returnData);
+                return CallBackManager.msgEncrypt(app, returnData);
             }
             return "";
         }

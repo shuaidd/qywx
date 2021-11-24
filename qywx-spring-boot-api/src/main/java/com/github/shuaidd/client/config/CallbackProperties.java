@@ -4,7 +4,7 @@ package com.github.shuaidd.client.config;
  * 描述
  *
  * @author ddshuai
- *date 2021-07-20 16:22
+ * date 2021-07-20 16:22
  **/
 public class CallbackProperties {
 

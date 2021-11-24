@@ -8,11 +8,12 @@ import java.util.StringJoiner;
 /**
  * 描述
  * "istalked":1,
- *     "calltime":1557306531,
- *     "talktime":2,
- *     "reason":0
+ * "calltime":1557306531,
+ * "talktime":2,
+ * "reason":0
+ *
  * @author ddshuai
- *date 2021-07-20 13:39
+ * date 2021-07-20 13:39
  **/
 public class GetCallStateResponse extends AbstractBaseResponse {
 

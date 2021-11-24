@@ -23,11 +23,10 @@ public enum MsgType {
     MPNEWS("mpnews", "图文消息"),
     MARKDOWN("markdown", "markdown消息"),
     MINIPROGRAM_NOTICE("miniprogram_notice", "小程序通知消息"),
-    INTERACTIVE_TASK_CARD("interactive_taskcard","任务卡片消息"),
+    INTERACTIVE_TASK_CARD("interactive_taskcard", "任务卡片消息"),
     EVENT("event", "事件消息"),
     LOCATION("location", "位置消息"),
-    LINK("link", "链接消息")
-    ;
+    LINK("link", "链接消息");
 
     @JsonValue
     private final String type;

@@ -14,49 +14,49 @@
         },
         "acctid": "ZhangSan"
       },
-      "summary_info":{
-        "except_days":3,
-        "regular_work_sec":31,
-        "standard_work_sec":29040,
-        "work_days":3
+      "summary_info": {
+        "except_days": 3,
+        "regular_work_sec": 31,
+        "standard_work_sec": 29040,
+        "work_days": 3
       },
-      "exception_infos":[
+      "exception_infos": [
         {
-          "count":2,
-          "duration":28920,
-          "exception":4
+          "count": 2,
+          "duration": 28920,
+          "exception": 4
         },
         {
-          "count":1,
-          "duration":60,
-          "exception":1
+          "count": 1,
+          "duration": 60,
+          "exception": 1
         },
         {
-          "count":1,
-          "duration":60,
-          "exception":2
+          "count": 1,
+          "duration": 60,
+          "exception": 2
         }
       ],
-      "sp_items":[
+      "sp_items": [
         {
-          "count":0,
-          "duration":0,
-          "time_type":0,
-          "type":100,
-          "vacation_id":0,
+          "count": 0,
+          "duration": 0,
+          "time_type": 0,
+          "type": 100,
+          "vacation_id": 0,
           "name": "外勤次数"
         },
         {
-          "count":1,
-          "duration":0,
-          "time_type":0,
-          "type":1,
-          "vacation_id":2,
+          "count": 1,
+          "duration": 0,
+          "time_type": 0,
+          "type": 1,
+          "vacation_id": 2,
           "name": "年假"
         }
       ],
-      "overwork_info":{
-        "workday_over_sec":10800
+      "overwork_info": {
+        "workday_over_sec": 10800
       }
     }
   ]

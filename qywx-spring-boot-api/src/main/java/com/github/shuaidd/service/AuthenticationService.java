@@ -19,7 +19,7 @@ public class AuthenticationService extends AbstractBaseService {
     /**
      * 获取访问用户身份
      *
-     * @param code 授权code
+     * @param code            授权code
      * @param applicationName 应用名称
      * @return AuthenticationResponse
      */
@@ -38,20 +38,22 @@ public class AuthenticationService extends AbstractBaseService {
 
     /**
      * 获取企业微信API域名IP段
+     *
      * @param applicationName 应用名称
      * @return ip 列表
      */
-    public List<String> apiDomainIp(String applicationName){
+    public List<String> apiDomainIp(String applicationName) {
         ApiDomainIpResponse apiDomainIpResponse = weChatClient.apiDomainIp(applicationName);
         return apiDomainIpResponse.getIpList();
     }
 
     /**
      * 获取企业微信服务器回调的ip段
+     *
      * @param applicationName 应用名称
      * @return ip 列表
      */
-    public List<String> callBackIp(String applicationName){
+    public List<String> callBackIp(String applicationName) {
         ApiDomainIpResponse apiDomainIpResponse = weChatClient.callBackIp(applicationName);
         return apiDomainIpResponse.getIpList();
     }

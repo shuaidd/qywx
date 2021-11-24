@@ -41,8 +41,8 @@ public class WeChatCallCenterServiceTest extends AbstractTest {
     }
 
     @Test
-    public void delKf(){
-        weChatManager.callCenterService().delKfAccount("wkCRbQBwAAV_N3R2vqsNweyBbIHuJaRg",appName);
+    public void delKf() {
+        weChatManager.callCenterService().delKfAccount("wkCRbQBwAAV_N3R2vqsNweyBbIHuJaRg", appName);
         logger.info("删除客服信息成功");
     }
 

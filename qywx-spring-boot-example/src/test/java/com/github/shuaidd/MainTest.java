@@ -18,9 +18,9 @@ import java.util.Date;
  **/
 public class MainTest {
     public static void main(String[] args) throws ParseException {
-        System.out.println(DateUtils.parseDate("2020-01-14 8:00:00","yyyy-MM-dd HH:mm:ss").getTime());
-        System.out.println(DateUtils.parseDate("2020-01-14 10:00:00","yyyy-MM-dd HH:mm:ss").getTime());
-        System.out.println(DateFormatUtils.format(new Date(1571274600),"yyyy-MM-dd HH:mm:ss"));
+        System.out.println(DateUtils.parseDate("2020-01-14 8:00:00", "yyyy-MM-dd HH:mm:ss").getTime());
+        System.out.println(DateUtils.parseDate("2020-01-14 10:00:00", "yyyy-MM-dd HH:mm:ss").getTime());
+        System.out.println(DateFormatUtils.format(new Date(1571274600), "yyyy-MM-dd HH:mm:ss"));
 
         UserEventData eventData = new UserEventData();
         eventData.setAddress("111");
@@ -39,13 +39,13 @@ public class MainTest {
         extAttrItemTextData1.setValue("sdsds");
         extAttrItemData1.setTextData(extAttrItemTextData);
 
-        extAttrData.setItemData(Lists.newArrayList(extAttrItemData,extAttrItemData1));
+        extAttrData.setItemData(Lists.newArrayList(extAttrItemData, extAttrItemData1));
         eventData.setExtAttrData(extAttrData);
 
         String xml = XMLUtil.convertToXml(eventData);
         System.out.println(xml);
 
-        CommonEventData eventData1 = XMLUtil.convertXmlStrToObject(CommonEventData.class,"<xml>\n" +
+        CommonEventData eventData1 = XMLUtil.convertXmlStrToObject(CommonEventData.class, "<xml>\n" +
                 "    <ToUserName><![CDATA[toUser]]></ToUserName>\n" +
                 "    <FromUserName><![CDATA[sys]]></FromUserName> \n" +
                 "    <CreateTime>1403610513</CreateTime>\n" +

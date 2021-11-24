@@ -35,9 +35,9 @@ public class MediaService extends AbstractBaseService {
     /**
      * 上传临时素材
      *
-     * @param file 文件
-     * @param mediaType 媒体类型
-     * @param type 类型
+     * @param file            文件
+     * @param mediaType       媒体类型
+     * @param type            类型
      * @param applicationName 应用名称
      * @return String
      */
@@ -69,8 +69,8 @@ public class MediaService extends AbstractBaseService {
     /**
      * 上传永久图片
      *
-     * @param file 文件
-     * @param mediaType 媒体类型
+     * @param file            文件
+     * @param mediaType       媒体类型
      * @param applicationName 应用名称
      * @return String
      */
