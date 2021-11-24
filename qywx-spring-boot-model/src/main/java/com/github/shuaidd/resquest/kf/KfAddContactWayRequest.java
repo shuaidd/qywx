@@ -10,6 +10,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  **/
 public class KfAddContactWayRequest {
 
+    /**
+     * 场景值，字符串类型，由开发者自定义。
+     * 不多于32字节
+     * 字符串取值范围(正则表达式)：[0-9a-zA-Z_-]*
+     */
     private String scene;
 
     @JsonProperty("open_kfid")

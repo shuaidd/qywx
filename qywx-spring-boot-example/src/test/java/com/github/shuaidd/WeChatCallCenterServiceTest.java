@@ -1,6 +1,7 @@
 package com.github.shuaidd;
 
 import com.github.shuaidd.response.kf.KfAccountListResponse;
+import com.github.shuaidd.resquest.kf.KfAccountRequest;
 import com.github.shuaidd.service.MediaService;
 import org.junit.Test;
 import org.springframework.http.MediaType;
@@ -28,6 +29,21 @@ public class WeChatCallCenterServiceTest extends AbstractTest {
         String mediaId = weChatManager.mediaService().uploadMaterial(file, MediaType.APPLICATION_OCTET_STREAM, MediaService.IMAGE, appName);
         String kfId = weChatManager.callCenterService().addKfAccount("小二客服", mediaId, appName);
         logger.info("创建的客服编号-{}", kfId);
+    }
+
+    @Test
+    public void updateKf() {
+        KfAccountRequest request = new KfAccountRequest();
+        request.setOpenKfId("wkCRbQBwAAV_N3R2vqsNweyBbIHuJaRg");
+        request.setName("小六客服");
+        weChatManager.callCenterService().updateKfAccount(request, appName);
+        logger.info("更新客服信息成功");
+    }
+
+    @Test
+    public void delKf(){
+        weChatManager.callCenterService().delKfAccount("wkCRbQBwAAV_N3R2vqsNweyBbIHuJaRg",appName);
+        logger.info("删除客服信息成功");
     }
 
     @Test
