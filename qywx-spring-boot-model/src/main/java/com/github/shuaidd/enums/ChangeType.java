@@ -70,6 +70,7 @@ public enum ChangeType {
     MODIFY_SCHEDULE(EventType.MODIFY_SCHEDULE, "", "修改日程事件"),
     DELETE_SCHEDULE(EventType.DELETE_SCHEDULE, "", "删除日程事件"),
     LIVING_STATUS_CHANGE(EventType.LIVING_STATUS_CHANGE, "", "直播回调事件"),
+    KF_MSG_OR_EVENT(EventType.KF_MSG_OR_EVENT, "", "微信客服消息事件"),
     ;
 
     private final EventType eventType;

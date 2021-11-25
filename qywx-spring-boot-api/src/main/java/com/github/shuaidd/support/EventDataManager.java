@@ -3,7 +3,10 @@ package com.github.shuaidd.support;
 import com.github.shuaidd.enums.ChangeType;
 import com.github.shuaidd.enums.MsgType;
 import com.github.shuaidd.event.*;
+import com.github.shuaidd.exception.WeChatException;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -16,6 +19,7 @@ import java.util.Objects;
  **/
 public class EventDataManager {
 
+    private static final Logger logger = LoggerFactory.getLogger(EventDataManager.class);
     private static final HashMap<ChangeType, Class<? extends BaseEventData>> DATA_TYPE_MAP = new HashMap<>();
 
     static {
@@ -72,6 +76,8 @@ public class EventDataManager {
         DATA_TYPE_MAP.put(ChangeType.DELETE_SCHEDULE, ScheduleEventData.class);
 
         DATA_TYPE_MAP.put(ChangeType.LIVING_STATUS_CHANGE, LivingStatusChangeEventData.class);
+
+        DATA_TYPE_MAP.put(ChangeType.KF_MSG_OR_EVENT,KfMsgOrEventData.class);
     }
 
     public static <T extends BaseEventData> T getXmlData(String xml, Class<T> tClass) {
@@ -139,7 +145,10 @@ public class EventDataManager {
             }
         }
 
-        Objects.requireNonNull(cls);
+        if (cls == null) {
+            logger.error("--------无法获取转换对象-------");
+            throw new WeChatException("无法获取转换对象");
+        }
         return XMLUtil.convertXmlStrToObject(cls, xml);
     }
 }

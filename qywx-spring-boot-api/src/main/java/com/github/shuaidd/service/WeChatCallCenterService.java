@@ -2,14 +2,12 @@ package com.github.shuaidd.service;
 
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.BaseResponse;
-import com.github.shuaidd.response.kf.AddKfAccountResponse;
-import com.github.shuaidd.response.kf.KfAccountListResponse;
-import com.github.shuaidd.response.kf.KfAddContactWayResponse;
-import com.github.shuaidd.resquest.kf.DelKfAccountRequest;
-import com.github.shuaidd.resquest.kf.KfAccountRequest;
-import com.github.shuaidd.resquest.kf.KfAddContactWayRequest;
+import com.github.shuaidd.response.kf.*;
+import com.github.shuaidd.resquest.kf.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 微信客服中心
@@ -113,5 +111,131 @@ public class WeChatCallCenterService extends AbstractBaseService {
         KfAddContactWayResponse response = weChatClient.kfContactWay(request, applicationName);
         isSuccess(response);
         return response.getUrl();
+    }
+
+    /**
+     * 添加接待人员
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     * @return 结果
+     */
+    public List<ServicerResponse.ResultDetail> addServicer(ServicerRequest request, String applicationName) {
+        checkApplication(applicationName);
+        ServicerResponse response = weChatClient.addServicer(request, applicationName);
+        isSuccess(response);
+        return response.getResultList();
+    }
+
+    /**
+     * 删除接待人员
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     * @return 结果
+     */
+    public List<ServicerResponse.ResultDetail> delServicer(ServicerRequest request, String applicationName) {
+        checkApplication(applicationName);
+        ServicerResponse response = weChatClient.delServicer(request, applicationName);
+        isSuccess(response);
+        return response.getResultList();
+    }
+
+    /**
+     * 获取接待人员列表
+     *
+     * @param openKfId        客服编号
+     * @param applicationName 应用
+     * @return 接待人员列表
+     */
+    public List<ServicerListResponse.Servicer> getServicerList(String openKfId, String applicationName) {
+        checkApplication(applicationName);
+        ServicerListResponse response = weChatClient.getServicerList(openKfId, applicationName);
+        isSuccess(response);
+        return response.getServicerList();
+    }
+
+    /**
+     * 获取会话状态
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     * @return 会话状态
+     */
+    public ServiceStateResponse getServiceState(ServiceStateRequest request, String applicationName) {
+        checkApplication(applicationName);
+        ServiceStateResponse response = weChatClient.getServiceState(request, applicationName);
+        isSuccess(response);
+        return response;
+    }
+
+    /**
+     * 变更会话状态
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     * @return msgCode
+     */
+    public String changeServiceState(ChangeServiceStateRequest request, String applicationName) {
+        checkApplication(applicationName);
+        ChangeServiceStateResponse response = weChatClient.changeServiceState(request, applicationName);
+        isSuccess(response);
+        return response.getMsgCode();
+    }
+
+    /**
+     * 读取消息
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     * @return 消息
+     */
+    public SyncMsgResponse syncMsg(SyncMsgRequest request, String applicationName) {
+        checkApplication(applicationName);
+        SyncMsgResponse response = weChatClient.syncMsg(request, applicationName);
+        isSuccess(response);
+        return response;
+    }
+
+    /**
+     * 发送消息
+     *
+     * @param msg             消息
+     * @param applicationName 应用
+     * @return msgId
+     */
+    public String sendMsg(SendMsgRequest msg, String applicationName) {
+        checkApplication(applicationName);
+        SendMsgResponse response = weChatClient.sendMsg(msg, applicationName);
+        isSuccess(response);
+        return response.getMsgId();
+    }
+
+    /**
+     * 发送事件响应消息
+     *
+     * @param msg             消息
+     * @param applicationName 应用
+     * @return msgId
+     */
+    public String sendMsgOnEvent(SendMsgOnEventRequest msg, String applicationName) {
+        checkApplication(applicationName);
+        SendMsgResponse response = weChatClient.sendMsgOnEvent(msg, applicationName);
+        isSuccess(response);
+        return response.getMsgId();
+    }
+
+    /**
+     * 获取客户基础信息
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     * @return 客户基础信息
+     */
+    public GetCustomerResponse getCustomer(GetCustomerRequest request, String applicationName) {
+        checkApplication(applicationName);
+        GetCustomerResponse response = weChatClient.getCustomer(request, applicationName);
+        isSuccess(response);
+        return response;
     }
 }

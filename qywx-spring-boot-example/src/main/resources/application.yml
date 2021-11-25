@@ -4,7 +4,7 @@ server:
     context-path: /work-chat
 qywx:
   application-list:
-    - secret: xxxx
+    - secret: Dqwyy-IFoeH7EP7U2Tb-Gb1A7ksS4IP_cZ5JCu2qbl4
       application-name: customer-contact
     - secret: xxxx
       agent-id: 3010084
