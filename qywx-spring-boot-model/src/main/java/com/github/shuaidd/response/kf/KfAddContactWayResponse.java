@@ -6,7 +6,7 @@ import com.github.shuaidd.response.AbstractBaseResponse;
  * 描述
  *
  * @author ddshuai
- * @date 2021-11-24 17:29
+ * date 2021-11-24 17:29
  **/
 public class KfAddContactWayResponse extends AbstractBaseResponse {
     private String url;

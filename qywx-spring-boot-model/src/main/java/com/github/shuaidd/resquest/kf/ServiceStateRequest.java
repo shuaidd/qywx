@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 描述
  *
  * @author ddshuai
- * @date 2021-11-25 09:42
+ * date 2021-11-25 09:42
  **/
 public class ServiceStateRequest {
 

@@ -10,7 +10,7 @@ import java.util.StringJoiner;
  * 获取导出结果
  *
  * @author ddshuai
- * @date 2021-11-24 13:51
+ * date 2021-11-24 13:51
  **/
 public class ExportResultResponse extends AbstractBaseResponse {
 

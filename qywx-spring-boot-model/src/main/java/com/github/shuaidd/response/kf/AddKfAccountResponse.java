@@ -9,7 +9,7 @@ import java.util.StringJoiner;
  * 添加客服账号
  *
  * @author ddshuai
- * @date 2021-11-24 16:14
+ * date 2021-11-24 16:14
  **/
 public class AddKfAccountResponse extends AbstractBaseResponse {
 

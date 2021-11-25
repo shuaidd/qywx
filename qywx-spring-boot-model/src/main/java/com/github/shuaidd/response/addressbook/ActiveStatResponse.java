@@ -9,7 +9,7 @@ import java.util.StringJoiner;
  * 获取企业活跃成员数
  *
  * @author ddshuai
- * @date 2021-11-24 13:10
+ * date 2021-11-24 13:10
  **/
 public class ActiveStatResponse extends AbstractBaseResponse {
 

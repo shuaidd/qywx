@@ -9,7 +9,7 @@ import java.util.StringJoiner;
 /**
  * 描述
  * @author ddshuai
- * @date 2021-11-25 11:43
+ * date 2021-11-25 11:43
  **/
 public class GetCustomerResponse extends AbstractBaseResponse {
 

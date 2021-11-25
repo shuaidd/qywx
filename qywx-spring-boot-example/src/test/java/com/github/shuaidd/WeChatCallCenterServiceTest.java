@@ -19,7 +19,7 @@ import java.util.Map;
  * 描述 客服中心
  *
  * @author ddshuai
- * @date 2021-11-24 16:30
+ * date 2021-11-24 16:30
  **/
 public class WeChatCallCenterServiceTest extends AbstractTest {
 

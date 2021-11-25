@@ -9,7 +9,7 @@ import java.util.StringJoiner;
  * 获取加入企业二维码
  *
  * @author ddshuai
- * @date 2021-11-24 12:59
+ * date 2021-11-24 12:59
  **/
 
 public class JoinQrCodeResponse extends AbstractBaseResponse {

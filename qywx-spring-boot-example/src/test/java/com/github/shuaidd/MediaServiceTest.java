@@ -16,7 +16,7 @@ import java.io.IOException;
  * 描述 素材管理测试
  *
  * @author ddshuai
- * @date 2021-07-21 10:48
+ * date 2021-07-21 10:48
  **/
 public class MediaServiceTest extends AbstractTest {
 

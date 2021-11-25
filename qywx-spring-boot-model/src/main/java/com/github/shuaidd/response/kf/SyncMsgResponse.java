@@ -10,7 +10,7 @@ import java.util.StringJoiner;
 /**
  * 描述
  * @author ddshuai
- * @date 2021-11-25 11:23
+ * date 2021-11-25 11:23
  **/
 public class SyncMsgResponse extends AbstractBaseResponse {
 

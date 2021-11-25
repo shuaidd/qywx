@@ -9,7 +9,7 @@ import java.util.StringJoiner;
  * 描述
  *
  * @author ddshuai
- * @date 2021-11-25 13:05
+ * date 2021-11-25 13:05
  **/
 public class SendMsgRequest {
     @JsonProperty("touser")

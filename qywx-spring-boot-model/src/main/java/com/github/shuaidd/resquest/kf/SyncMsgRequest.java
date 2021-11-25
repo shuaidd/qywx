@@ -4,7 +4,7 @@ package com.github.shuaidd.resquest.kf;
  * 描述
  *
  * @author ddshuai
- * @date 2021-11-25 11:21
+ * date 2021-11-25 11:21
  **/
 public class SyncMsgRequest {
 

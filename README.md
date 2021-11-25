@@ -4,7 +4,7 @@
 <dependency>
   <groupId>com.github.shuaidd</groupId>
   <artifactId>qywx-spring-boot-starter</artifactId>
-  <version>3.0.2</version>
+  <version>3.1.0</version>
 </dependency>
 
 ```
