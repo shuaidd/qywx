@@ -94,7 +94,6 @@ public class CallbackController {
             String msg = crypt.decrypt(commonEventData.getEncrypt());
             System.out.println(msg);
 
-            logger.info("eventData--{}",commonEventData);
         }
 
         return "success";
