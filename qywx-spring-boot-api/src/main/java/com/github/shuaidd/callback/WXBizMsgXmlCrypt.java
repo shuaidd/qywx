@@ -154,7 +154,10 @@ public class WXBizMsgXmlCrypt {
      * @return 解密得到的明文
      * @throws AesException aes解密失败
      */
-    String decrypt(String text) throws AesException {
+    public String decrypt(String text) throws AesException {
+        if ("".equals(text) || text == null){
+            return text;
+        }
         byte[] original;
         try {
             // 设置解密模式为AES的CBC模式
@@ -261,8 +264,7 @@ public class WXBizMsgXmlCrypt {
         }
 
         // 解密
-        String result = decrypt(encrypt[1].toString());
-        return result;
+        return decrypt(encrypt[1].toString());
     }
 
     /**
@@ -283,8 +285,7 @@ public class WXBizMsgXmlCrypt {
             throw new AesException(AesException.VALIDATE_SIGNATURE_ERROR);
         }
 
-        String result = decrypt(echoStr);
-        return result;
+        return decrypt(echoStr);
     }
 
 }

@@ -4,8 +4,9 @@ import com.github.shuaidd.callback.AesException;
 import com.github.shuaidd.callback.WXBizJsonMsgCrypt;
 import com.github.shuaidd.callback.WXBizMsgXmlCrypt;
 import com.github.shuaidd.event.BaseEventData;
+import com.github.shuaidd.event.CommonEventData;
 import com.github.shuaidd.support.CallBackManager;
-import com.github.shuaidd.support.EventDataManager;
+import com.github.shuaidd.support.XMLUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,6 +73,31 @@ public class CallbackController {
         }
 
         return null;
+    }
+
+    @RequestMapping("/callback/mini/msg")
+    public String miniKf(@RequestParam(value = "signature", required = false) String signature,
+                         @RequestParam(value = "nonce", required = false) String nonce,
+                         @RequestParam(value = "echostr", required = false) String echoStr,
+                         @RequestParam(value = "timestamp", required = false) String timestamp,
+                         @RequestBody(required = false) String xml) throws AesException {
+        logger.info("签名--{}--时间戳--{}--随机数---{},echostr--{}", signature, timestamp, nonce, echoStr);
+        if (StringUtils.isNotEmpty(echoStr)) {
+            CallBackManager.verifyUrl("mini-kf", signature, timestamp, nonce, "");
+            return echoStr;
+        }
+
+        if (StringUtils.isNotEmpty(xml)) {
+            logger.info("数据--{}",xml);
+            CommonEventData commonEventData = XMLUtil.convertXmlStrToObject(CommonEventData.class, xml);
+            WXBizMsgXmlCrypt crypt = new WXBizMsgXmlCrypt("8a0abb7ed0a1be90ab88bb75b40f4e30","wjzyQdT5KTIqyuOLynElsQcYHkpssLeedOIR94POHOA","wxc9245849a884c30a");
+            String msg = crypt.decrypt(commonEventData.getEncrypt());
+            System.out.println(msg);
+
+            logger.info("eventData--{}",commonEventData);
+        }
+
+        return "success";
     }
 
     @RequestMapping("/json/callback")
