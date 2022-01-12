@@ -2,6 +2,7 @@ package com.github.shuaidd.client.interceptor;
 
 
 import com.github.shuaidd.client.WeChatClient;
+import com.github.shuaidd.support.WeChatContextHolder;
 import com.github.shuaidd.support.WeChatManager;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -9,6 +10,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
@@ -24,11 +26,7 @@ import java.util.Collection;
 public class WeChatInterceptor implements RequestInterceptor {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final ApplicationContext applicationContext;
 
-    public WeChatInterceptor(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
 
     /**
      * 统一处理AccessToken
@@ -52,7 +50,7 @@ public class WeChatInterceptor implements RequestInterceptor {
                 throw new RuntimeException("请求未传递应用名，无法调起接口");
             }
 
-            WeChatManager weChatManager = applicationContext.getBean(WeChatManager.class);
+            WeChatManager weChatManager = WeChatContextHolder.getWeChatManager();
             String accessToken = weChatManager.tokenService().getAccessToken(app);
             template.query(WeChatClient.ACCESS_TOKEN, accessToken);
         }

@@ -28,7 +28,7 @@ public class WeChatConfiguration {
     }
 
     @Bean
-    public Feign.Builder builder(ApplicationContext applicationContext) {
-        return new Feign.Builder().requestInterceptor(new WeChatInterceptor(applicationContext));
+    public WeChatInterceptor weChatInterceptor() {
+        return new WeChatInterceptor();
     }
 }
