@@ -82,6 +82,7 @@ public final class CallBackManager {
      * @param timestamp       时间戳
      * @param nonce           随机数
      * @throws AesException 解密异常
+     * @return 消息内容
      */
     public static BaseEventData handle(String applicationName, String xml, String msgSignature, String timestamp, String nonce) throws AesException {
 
