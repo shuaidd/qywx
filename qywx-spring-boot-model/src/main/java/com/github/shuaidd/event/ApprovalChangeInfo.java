@@ -1,5 +1,7 @@
 package com.github.shuaidd.event;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import java.util.List;
  * @author ddshuai
  * date 2021-07-19 09:08
  **/
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ApprovalChangeInfo {
 
     @XmlElement(name = "SpNo")
