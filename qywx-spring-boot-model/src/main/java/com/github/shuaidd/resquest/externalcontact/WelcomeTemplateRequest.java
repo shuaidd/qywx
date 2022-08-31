@@ -13,14 +13,25 @@ import com.github.shuaidd.dto.message.MsgText;
  * date 2021-01-06 22:26
  **/
 public class WelcomeTemplateRequest {
+
     @JsonProperty("agentid")
     private Integer agentId;
+
     private MsgText text;
+
     private MsgLink link;
+
     private MsgImage image;
+
     private MiniProgram miniprogram;
+
     @JsonProperty("template_id")
     private String templateId;
+
+    /**
+     * 是否通知成员将这条入群欢迎语应用到客户群中，0-不通知，1-通知， 不填则通知
+     */
+    private Integer notify;
 
     public Integer getAgentId() {
         return agentId;
@@ -68,5 +79,13 @@ public class WelcomeTemplateRequest {
 
     public void setTemplateId(String templateId) {
         this.templateId = templateId;
+    }
+
+    public Integer getNotify() {
+        return notify;
+    }
+
+    public void setNotify(Integer notify) {
+        this.notify = notify;
     }
 }

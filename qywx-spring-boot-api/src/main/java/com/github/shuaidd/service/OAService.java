@@ -178,7 +178,7 @@ public class OAService extends AbstractBaseService {
      * @return ApproveTemplateResponse
      */
     public ApproveTemplateResponse getTemplateDetail(TemplateRequest request, String applicationName) {
-        return weChatClient.getTemplateDetail(request, applicationName);
+        return workOaClient.getTemplateDetail(request, applicationName);
     }
 
     /**
@@ -189,7 +189,7 @@ public class OAService extends AbstractBaseService {
      * @return ApplyEventResponse
      */
     public ApplyEventResponse applyEvent(ApplyEventRequest request, String applicationName) {
-        return weChatClient.applyEvent(request, applicationName);
+        return workOaClient.applyEvent(request, applicationName);
     }
 
     /**
@@ -200,7 +200,7 @@ public class OAService extends AbstractBaseService {
      * @return SpNoResponse
      */
     public SpNoResponse getApprovalInfo(GetApprovalNoRequest request, String applicationName) {
-        return weChatClient.getApprovalInfo(request, applicationName);
+        return workOaClient.getApprovalInfo(request, applicationName);
     }
 
     /**
@@ -211,7 +211,7 @@ public class OAService extends AbstractBaseService {
      * @return ApprovalDetailResponse
      */
     public ApprovalDetailResponse getApprovalDetail(ApprovalDetailRequest request, String applicationName) {
-        return weChatClient.getApprovalDetail(request, applicationName);
+        return workOaClient.getApprovalDetail(request, applicationName);
     }
 
     /**
@@ -221,7 +221,7 @@ public class OAService extends AbstractBaseService {
      * @return VacationConfigResponse
      */
     public VacationConfigResponse getCorpConf(String applicationName) {
-        return weChatClient.getCorpConf(applicationName);
+        return workOaClient.getCorpConf(applicationName);
     }
 
     /**
@@ -232,7 +232,7 @@ public class OAService extends AbstractBaseService {
      * @return UserVacationQuotaResponse
      */
     public UserVacationQuotaResponse getUserVacationQuota(UserIdRequest request, String applicationName) {
-        return weChatClient.getUserVacationQuota(request, applicationName);
+        return workOaClient.getUserVacationQuota(request, applicationName);
     }
 
     /**
@@ -242,7 +242,7 @@ public class OAService extends AbstractBaseService {
      * @param applicationName 应用名称
      */
     public void setOneUserQuota(UpdateUserQuotaRequest request, String applicationName) {
-        weChatClient.setOneUserQuota(request, applicationName);
+        workOaClient.setOneUserQuota(request, applicationName);
     }
 
     /**
@@ -253,7 +253,7 @@ public class OAService extends AbstractBaseService {
      * @return UserVacationQuotaResponse
      */
     public JournalRecordResponse getJournalRecordList(JournalRecordRequest recordRequest, String applicationName) {
-        return weChatClient.getJournalRecordList(recordRequest, applicationName);
+        return workOaClient.getJournalRecordList(recordRequest, applicationName);
     }
 
     /**
@@ -264,7 +264,7 @@ public class OAService extends AbstractBaseService {
      * @return UserVacationQuotaResponse
      */
     public JournalReportDetailResponse getJournalRecordDetail(JournalReportDetailRequest request, String applicationName) {
-        return weChatClient.getJournalRecordDetail(request, applicationName);
+        return workOaClient.getJournalRecordDetail(request, applicationName);
     }
 
     /**
@@ -275,7 +275,7 @@ public class OAService extends AbstractBaseService {
      * @return UserVacationQuotaResponse
      */
     public JournalReportStatResponse getJournalStatList(JournalReportStatRequest request, String applicationName) {
-        return weChatClient.getJournalStatList(request, applicationName);
+        return workOaClient.getJournalStatList(request, applicationName);
     }
 
     /**
@@ -286,7 +286,7 @@ public class OAService extends AbstractBaseService {
      * @return AddMeetingRoomResponse
      */
     public AddMeetingRoomResponse addMeetingRoom(MeetingRoomRequest request, String applicationName) {
-        return weChatClient.addMeetingRoom(request, applicationName);
+        return workOaClient.addMeetingRoom(request, applicationName);
     }
 
     /**
@@ -296,7 +296,7 @@ public class OAService extends AbstractBaseService {
      * @param applicationName 应用名称
      */
     public void updateMeetingRoom(MeetingRoomRequest request, String applicationName) {
-        weChatClient.updateMeetingRoom(request, applicationName);
+        workOaClient.updateMeetingRoom(request, applicationName);
     }
 
     /**
@@ -306,7 +306,7 @@ public class OAService extends AbstractBaseService {
      * @param applicationName 应用名称
      */
     public void delMeetingRoom(MeetingRoomRequest request, String applicationName) {
-        weChatClient.delMeetingRoom(request, applicationName);
+        workOaClient.delMeetingRoom(request, applicationName);
     }
 
     /**
@@ -317,7 +317,7 @@ public class OAService extends AbstractBaseService {
      * @return MeetingRoomListResponse
      */
     public MeetingRoomListResponse searchMeetingRoom(MeetingRoomRequest request, String applicationName) {
-        return weChatClient.searchMeetingRoom(request, applicationName);
+        return workOaClient.searchMeetingRoom(request, applicationName);
     }
 
     /**
@@ -328,7 +328,7 @@ public class OAService extends AbstractBaseService {
      * @return BookingInfoResponse
      */
     public BookingInfoResponse getBookingInfo(GetBookingInfoRequest request, String applicationName) {
-        return weChatClient.getBookingInfo(request, applicationName);
+        return workOaClient.getBookingInfo(request, applicationName);
     }
 
     /**
@@ -339,7 +339,7 @@ public class OAService extends AbstractBaseService {
      * @return BookMeetingRoomResponse
      */
     public BookMeetingRoomResponse bookMeetingRoom(BookMeetingRoomRequest request, String applicationName) {
-        return weChatClient.bookMeetingRoom(request, applicationName);
+        return workOaClient.bookMeetingRoom(request, applicationName);
     }
 
     /**
@@ -349,7 +349,7 @@ public class OAService extends AbstractBaseService {
      * @param applicationName 应用名称
      */
     public void cancelBookMeetingRoom(CancelBookRequest request, String applicationName) {
-        weChatClient.cancelBookMeetingRoom(request, applicationName);
+        workOaClient.cancelBookMeetingRoom(request, applicationName);
     }
 
     /**

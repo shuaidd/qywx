@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * date 2021-01-06 22:34
  **/
 public class GetWelcomeTemplateRequest {
+
     @JsonProperty("template_id")
     private String templateId;
 

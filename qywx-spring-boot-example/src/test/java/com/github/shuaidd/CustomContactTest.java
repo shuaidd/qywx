@@ -2,6 +2,7 @@ package com.github.shuaidd;
 
 import com.github.shuaidd.dto.externalcontact.CustomTag;
 import com.github.shuaidd.dto.externalcontact.GroupMsgTask;
+import com.github.shuaidd.dto.externalcontact.OwnerFilter;
 import com.github.shuaidd.dto.externalcontact.V2GroupMsg;
 import com.github.shuaidd.dto.message.MsgLink;
 import com.github.shuaidd.dto.message.MsgText;
@@ -15,6 +16,7 @@ import com.github.shuaidd.service.CustomContactService;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,6 +33,13 @@ import java.util.Collections;
  **/
 public class CustomContactTest extends AbstractTest {
 
+    private CustomContactService customContactService;
+
+    @Before
+    public void init() {
+        this.customContactService = weChatManager.customContactService();
+    }
+
     /**
      * 客户联系功能编码 与配置文件内定义的别名【application-name】一致
      */
@@ -42,13 +51,13 @@ public class CustomContactTest extends AbstractTest {
     @Test
     public void unassignedList() {
         PageRequest request = new PageRequest();
-        UnassignedListResponse response = weChatManager.customContactService().unassignedList(request, appName);
+        UnassignedListResponse response = customContactService.unassignedList(request, appName);
         logger.info("{}", response);
     }
 
     @Test
     public void getFollowUserList() {
-        FollowUserResponse followUserResponse = weChatManager.customContactService().getFollowUserList(appName);
+        FollowUserResponse followUserResponse = customContactService.getFollowUserList(appName);
         logger.info("{}", followUserResponse);
     }
 
@@ -64,7 +73,7 @@ public class CustomContactTest extends AbstractTest {
         request.setRemark("渠道客户");
         request.setState("channel-code");
         request.setUsers(Arrays.asList("CaoMuJiangDeXiaoLu", "20170410022717"));
-        AddContactWayResponse response = weChatManager.customContactService().addContactWay(request, appName);
+        AddContactWayResponse response = customContactService.addContactWay(request, appName);
         logger.info("{}", response);
     }
 
@@ -72,7 +81,7 @@ public class CustomContactTest extends AbstractTest {
     public void getContactWay() {
         GetContactWayRequest request = new GetContactWayRequest();
         request.setConfigId("8378a992fb470b9d6a4654e50a66580e");
-        ContactWayResponse response = weChatManager.customContactService().getContactWay(request, appName);
+        ContactWayResponse response = customContactService.getContactWay(request, appName);
         logger.info("{}", response);
     }
 
@@ -81,14 +90,14 @@ public class CustomContactTest extends AbstractTest {
         UpdateContactWayRequest request = new UpdateContactWayRequest();
         request.setConfigId("8378a992fb470b9d6a4654e50a66580e");
         request.setRemark("更新一下备注信息");
-        weChatManager.customContactService().updateContactWay(request, appName);
+        customContactService.updateContactWay(request, appName);
     }
 
     @Test
     public void deleteContactWay() {
         GetContactWayRequest request = new GetContactWayRequest();
         request.setConfigId("8378a992fb470b9d6a4654e50a66580e");
-        weChatManager.customContactService().deleteContactWay(request, appName);
+        customContactService.deleteContactWay(request, appName);
     }
 
     @Test
@@ -96,7 +105,7 @@ public class CustomContactTest extends AbstractTest {
         CloseTempChatRequest request = new CloseTempChatRequest();
         request.setExternalUserId("wmCRbQBwAAkqZa5eZQdUNFXgVIFr_DmA");
         request.setUserId("20170410022717");
-        weChatManager.customContactService().closeTempChat(request, appName);
+        customContactService.closeTempChat(request, appName);
     }
 
     /**
@@ -110,14 +119,14 @@ public class CustomContactTest extends AbstractTest {
         CustomTag customTag = new CustomTag();
         customTag.setName("奇威客户");
         request.setTags(Collections.singletonList(customTag));
-        AddCorpTagResponse response = weChatManager.customContactService().addCorpTag(request, appName);
+        AddCorpTagResponse response = customContactService.addCorpTag(request, appName);
         logger.info("{}", response);
     }
 
     @Test
     public void getCorpTagList() {
         TagGroupRequest request = new TagGroupRequest();
-        TagGroupResponse response = weChatManager.customContactService().getCorpTagList(request, appName);
+        TagGroupResponse response = customContactService.getCorpTagList(request, appName);
         logger.info("{}", response);
     }
 
@@ -126,14 +135,14 @@ public class CustomContactTest extends AbstractTest {
         EditCorpTagRequest request = new EditCorpTagRequest();
         request.setId("etCRbQBwAAl2--7nYobBfKpM9UxPSNeg");
         request.setName("奇威客户-edit");
-        weChatManager.customContactService().editCorpTag(request, appName);
+        customContactService.editCorpTag(request, appName);
     }
 
     @Test
     public void delCorpTag() {
         DelCorpTagRequest request = new DelCorpTagRequest();
         request.setTagIds(Collections.singletonList("etCRbQBwAAl2--7nYobBfKpM9UxPSNeg"));
-        weChatManager.customContactService().delCorpTag(request, appName);
+        customContactService.delCorpTag(request, appName);
     }
 
     @Test
@@ -142,14 +151,14 @@ public class CustomContactTest extends AbstractTest {
         request.setUserId("20170410022717");
         request.setAddTags(Collections.singletonList("etCRbQBwAAoLAm885Ob1ODeCPwi0Mtug"));
         request.setExternalUserId("wmCRbQBwAAkqZa5eZQdUNFXgVIFr_DmA");
-        weChatManager.customContactService().markTag(request, appName);
+        customContactService.markTag(request, appName);
     }
 
     @Test
     public void getCustomList() {
         CustomListRequest request = new CustomListRequest();
         request.setUserId("20170410022717");
-        CustomListResponse response = weChatManager.customContactService().getCustomList(request, appName);
+        CustomListResponse response = customContactService.getCustomList(request, appName);
         logger.info("{}", response);
     }
 
@@ -160,7 +169,7 @@ public class CustomContactTest extends AbstractTest {
         request.setTakeoverUserId("SiGuangMeng");
         request.setExternalUserId("wmCRbQBwAAkqZa5eZQdUNFXgVIFr_DmA");
         request.setTransferSuccessMsg("您好，您的服务已升级，后续将由我的同事李四@腾讯接替我的工作，继续为您服务。");
-        weChatManager.customContactService().transfer(request, appName);
+        customContactService.transfer(request, appName);
     }
 
     @Test
@@ -169,7 +178,7 @@ public class CustomContactTest extends AbstractTest {
         request.setHandoverUserId("20170410022717");
         request.setTakeoverUserId("SiGuangMeng");
         request.setExternalUserId("wmCRbQBwAAkqZa5eZQdUNFXgVIFr_DmA");
-        TransferResultResponse response = weChatManager.customContactService().getTransferResult(request, appName);
+        TransferResultResponse response = customContactService.getTransferResult(request, appName);
         logger.info("{}", response);
     }
 
@@ -178,20 +187,20 @@ public class CustomContactTest extends AbstractTest {
      */
     @Test
     public void getExternalContact() {
-        ExternalContactResponse response = weChatManager.customContactService().getExternalContact("wmCRbQBwAAkqZa5eZQdUNFXgVIFr_DmA", appName);
+        ExternalContactResponse response = customContactService.getExternalContact("wmCRbQBwAAkqZa5eZQdUNFXgVIFr_DmA", appName);
         logger.info("{}", response);
 
-        response = weChatManager.customContactService().getExternalContact("woCRbQBwAAqNfflCX9uvtAnmQ9YpNJZQ", appName);
+        response = customContactService.getExternalContact("woCRbQBwAAqNfflCX9uvtAnmQ9YpNJZQ", appName);
         logger.info("{}", response);
 
-        response = weChatManager.customContactService().getExternalContact("wmCRbQBwAA2XZEynsl_hDoWnL_Ptb04Q", appName);
+        response = customContactService.getExternalContact("wmCRbQBwAA2XZEynsl_hDoWnL_Ptb04Q", appName);
         logger.info("{}", response);
 
 
         /*
          * logan
          * */
-        response = weChatManager.customContactService().getExternalContact("wmCRbQBwAAB_NAGsw3oltcZdRvcWyRbg", appName);
+        response = customContactService.getExternalContact("wmCRbQBwAAB_NAGsw3oltcZdRvcWyRbg", appName);
         logger.info("{}", response);
     }
 
@@ -199,7 +208,7 @@ public class CustomContactTest extends AbstractTest {
     public void getBatchExternalContact() {
         BatchExternalContactRequest request = new BatchExternalContactRequest();
         request.setUserId("20170410022717");
-        BatchExternalContactResponse response = weChatManager.customContactService().getBatchExternalContact(request, appName);
+        BatchExternalContactResponse response = customContactService.getBatchExternalContact(request, appName);
         logger.info("{}", response);
     }
 
@@ -209,14 +218,14 @@ public class CustomContactTest extends AbstractTest {
         remarkRequest.setRemark("修改客户备注信息");
         remarkRequest.setExternalUserId("wmCRbQBwAAkqZa5eZQdUNFXgVIFr_DmA");
         remarkRequest.setUserId("20170410022717");
-        weChatManager.customContactService().updateCustomRemark(remarkRequest, appName);
+        customContactService.updateCustomRemark(remarkRequest, appName);
     }
 
     @Test
     public void getMobileHashcode() {
         MobileHashCodeRequest request = new MobileHashCodeRequest();
         request.setMobile("152xxxxxxxx");
-        MobileHashCodeResponse response = weChatManager.customContactService().getMobileHashcode(request, appName);
+        MobileHashCodeResponse response = customContactService.getMobileHashcode(request, appName);
         logger.info("{}", response);
     }
 
@@ -228,7 +237,7 @@ public class CustomContactTest extends AbstractTest {
     public void groupChatList() {
         GroupChatListRequest request = new GroupChatListRequest();
         request.setLimit(100);
-        GroupChatListResponse response = weChatManager.customContactService().groupChatList(request, appName);
+        GroupChatListResponse response = customContactService.groupChatList(request, appName);
         logger.info("{}", response);
     }
 
@@ -236,7 +245,7 @@ public class CustomContactTest extends AbstractTest {
     public void groupChatDetail() {
         GroupChatDetailRequest request = new GroupChatDetailRequest();
         request.setChatId("wrCRbQBwAAoFDTwM9TY8_tZpG8SJvS1Q");
-        GroupChatDetailResponse response = weChatManager.customContactService().groupChatDetail(request, appName);
+        GroupChatDetailResponse response = customContactService.groupChatDetail(request, appName);
         logger.info("{}", response);
     }
 
@@ -245,7 +254,7 @@ public class CustomContactTest extends AbstractTest {
         MomentListRequest request = new MomentListRequest();
         request.setStartTime(DateUtils.parseDate("2021-01-13", "yyyy-MM-dd"));
         request.setEndTime(DateUtils.parseDate("2021-01-15", "yyyy-MM-dd"));
-        MomentListResponse response = weChatManager.customContactService().getMomentList(request, appName);
+        MomentListResponse response = customContactService.getMomentList(request, appName);
         logger.info("{}", response);
     }
 
@@ -271,7 +280,7 @@ public class CustomContactTest extends AbstractTest {
         groupMsg.setLink(link);
         request.setAttachments(Lists.newArrayList(groupMsg));
 
-        MsgTemplateResponse response = weChatManager.customContactService().addMsgTemplate(request, appName);
+        MsgTemplateResponse response = customContactService.addMsgTemplate(request, appName);
         logger.info("{}", response);
     }
 
@@ -281,8 +290,8 @@ public class CustomContactTest extends AbstractTest {
         request.setStartTime(DateUtils.parseDate("2021-01-13", "yyyy-MM-dd"));
         request.setEndTime(DateUtils.parseDate("2021-01-14", "yyyy-MM-dd"));
         request.setChatType("single");
-        GroupMsgResponse response = weChatManager.customContactService().getGroupMsgList(request, appName);
-        V2GroupMsgResponse v2GroupMsgResponse = weChatManager.customContactService().getGroupMsgListV2(request, appName);
+        GroupMsgResponse response = customContactService.getGroupMsgList(request, appName);
+        V2GroupMsgResponse v2GroupMsgResponse = customContactService.getGroupMsgListV2(request, appName);
         logger.info("{}", response);
         logger.info("{}", v2GroupMsgResponse);
     }
@@ -291,7 +300,7 @@ public class CustomContactTest extends AbstractTest {
     public void getGroupMsgTask() {
         GroupMsgTaskRequest request = new GroupMsgTaskRequest();
         request.setMsgId("msgCRbQBwAAEozan6cBGz_NZ0WSfoAANQ");
-        GroupMsgTaskResponse response = weChatManager.customContactService().getGroupMsgTask(request, appName);
+        GroupMsgTaskResponse response = customContactService.getGroupMsgTask(request, appName);
         logger.info("{}", response);
         for (GroupMsgTask groupMsgTask : response.getGroupMsgTasks()) {
             logger.info("{}", DateFormatUtils.format(groupMsgTask.getSendTime(), "yyyy-MM-dd HH:mm:ss"));
@@ -303,7 +312,7 @@ public class CustomContactTest extends AbstractTest {
         GroupMsgSendRequest request = new GroupMsgSendRequest();
         request.setMsgId("msgCRbQBwAAEozan6cBGz_NZ0WSfoAANQ");
         request.setUserId("20170410022717");
-        GroupMsgSendResultResponse response = weChatManager.customContactService().getGroupMsgSendResult(request, appName);
+        GroupMsgSendResultResponse response = customContactService.getGroupMsgSendResult(request, appName);
         logger.info("{}", response);
     }
 
@@ -312,6 +321,74 @@ public class CustomContactTest extends AbstractTest {
         WelcomeMsgRequest request = new WelcomeMsgRequest();
         request.setText(new MsgText("hello world"));
         request.setWelcomeCode("CALLBACK_CODE");
-        weChatManager.customContactService().sendWelcomeMsg(request, appName);
+        customContactService.sendWelcomeMsg(request, appName);
+    }
+
+    @Test
+    public void addGroupWelcomeTemplate() {
+        WelcomeTemplateRequest request = new WelcomeTemplateRequest();
+        request.setText(new MsgText("亲爱的%NICKNAME%用户，你好"));
+        AddWelcomeTemplateResponse response = customContactService.addGroupWelcomeTemplate(request, appName);
+        logger.info("{}", response);
+    }
+
+    @Test
+    public void editGroupWelcomeTemplate() {
+        WelcomeTemplateRequest request = new WelcomeTemplateRequest();
+        request.setText(new MsgText("亲爱的%NICKNAME%用户，你好呀"));
+        request.setTemplateId("msgCRbQBwAAgPq5FoC5GjIJAJsvW_GPJA");
+        customContactService.editGroupWelcomeTemplate(request, appName);
+    }
+
+    @Test
+    public void getGroupWelcomeTemplate() {
+        GetWelcomeTemplateRequest request = new GetWelcomeTemplateRequest();
+        request.setTemplateId("msgCRbQBwAAgPq5FoC5GjIJAJsvW_GPJA");
+        GetWelcomeTemplateResponse response = customContactService.getGroupWelcomeTemplate(request, appName);
+        logger.info("{}", response);
+    }
+
+    @Test
+    public void deleteGroupWelcomeTemplate() {
+        DeleteWelcomeTemplateRequest request = new DeleteWelcomeTemplateRequest();
+        request.setTemplateId("msgCRbQBwAAgPq5FoC5GjIJAJsvW_GPJA");
+        customContactService.deleteGroupWelcomeTemplate(request, appName);
+    }
+
+    @Test
+    public void getUserBehaviorData() throws ParseException {
+        UserBehaviorRequest request = new UserBehaviorRequest();
+        request.setUserIds(Lists.newArrayList("20170410022717"));
+        request.setStartTime(DateUtils.parseDate("2022-08-31", "yyyy-MM-dd"));
+        request.setEndTime(DateUtils.parseDate("2022-08-31", "yyyy-MM-dd"));
+        BehaviorDataResponse response = customContactService.getUserBehaviorData(request, appName);
+        logger.info("{}", response);
+    }
+
+    @Test
+    public void getGroupChatStatistic() throws ParseException {
+        GroupChatStatisticRequest request = new GroupChatStatisticRequest();
+        request.setDayBeginTime(DateUtils.parseDate("2022-08-22", "yyyy-MM-dd"));
+        request.setDayBeginTime(DateUtils.parseDate("2022-08-23", "yyyy-MM-dd"));
+
+        OwnerFilter filter = new OwnerFilter();
+        filter.setUserIdList(Lists.newArrayList("20170410022717"));
+        request.setOwnerFilter(filter);
+
+        GroupChatStatisticResponse response = customContactService.getGroupChatStatistic(request, appName);
+        logger.info("{}", response);
+    }
+
+    @Test
+    public void getGroupChatStatisticByDay() throws ParseException {
+        GroupChatStatisticRequest request = new GroupChatStatisticRequest();
+        request.setDayBeginTime(DateUtils.parseDate("2022-08-22", "yyyy-MM-dd"));
+        request.setDayBeginTime(DateUtils.parseDate("2022-08-23", "yyyy-MM-dd"));
+
+        OwnerFilter filter = new OwnerFilter();
+        filter.setUserIdList(Lists.newArrayList("20170410022717"));
+        request.setOwnerFilter(filter);
+        GroupChatStatisticResponse response = customContactService.getGroupChatStatisticByDay(request, appName);
+        logger.info("{}", response);
     }
 }

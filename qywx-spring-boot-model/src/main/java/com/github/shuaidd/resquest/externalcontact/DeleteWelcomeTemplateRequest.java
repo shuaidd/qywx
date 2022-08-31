@@ -1,4 +1,4 @@
-package com.github.shuaidd.response.externalcontact;
+package com.github.shuaidd.resquest.externalcontact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -8,9 +8,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author ddshuai
  * date 2021-01-06 22:38
  **/
-public class DeleteWelcomeTemplateResponse {
+public class DeleteWelcomeTemplateRequest {
+
     @JsonProperty("template_id")
     private String templateId;
+
     @JsonProperty("agentid")
     private String agentId;
 

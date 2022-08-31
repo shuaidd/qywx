@@ -6,7 +6,6 @@ import com.github.shuaidd.response.kf.*;
 import com.github.shuaidd.resquest.kf.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
         request.setMediaId(mediaId);
         request.setName(name);
 
-        AddKfAccountResponse response = weChatClient.addKfAccount(request, applicationName);
+        AddKfAccountResponse response = callCenterClient.addKfAccount(request, applicationName);
         isSuccess(response);
 
         return response.getOpenKfId();
@@ -58,7 +57,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
             throw new WeChatException("客服名称或头像不能同时为空");
         }
         checkApplication(applicationName);
-        BaseResponse response = weChatClient.updateKfAccount(request, applicationName);
+        BaseResponse response = callCenterClient.updateKfAccount(request, applicationName);
         isSuccess(response);
     }
 
@@ -76,7 +75,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
         DelKfAccountRequest request = new DelKfAccountRequest();
         request.setOpenKfId(kfId);
 
-        BaseResponse response = weChatClient.delKfAccount(request, applicationName);
+        BaseResponse response = callCenterClient.delKfAccount(request, applicationName);
         isSuccess(response);
     }
 
@@ -88,7 +87,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      */
     public KfAccountListResponse getAccountList(String applicationName) {
         checkApplication(applicationName);
-        KfAccountListResponse response = weChatClient.kfAccountLIst(applicationName);
+        KfAccountListResponse response = callCenterClient.kfAccountLIst(applicationName);
         isSuccess(response);
         return response;
     }
@@ -109,7 +108,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
         KfAddContactWayRequest request = new KfAddContactWayRequest();
         request.setOpenKfId(kfId);
         request.setScene(scene);
-        KfAddContactWayResponse response = weChatClient.kfContactWay(request, applicationName);
+        KfAddContactWayResponse response = callCenterClient.kfContactWay(request, applicationName);
         isSuccess(response);
         return response.getUrl();
     }
@@ -123,7 +122,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      */
     public List<ServicerResponse.ResultDetail> addServicer(ServicerRequest request, String applicationName) {
         checkApplication(applicationName);
-        ServicerResponse response = weChatClient.addServicer(request, applicationName);
+        ServicerResponse response = callCenterClient.addServicer(request, applicationName);
         isSuccess(response);
         return response.getResultList();
     }
@@ -137,7 +136,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      */
     public List<ServicerResponse.ResultDetail> delServicer(ServicerRequest request, String applicationName) {
         checkApplication(applicationName);
-        ServicerResponse response = weChatClient.delServicer(request, applicationName);
+        ServicerResponse response = callCenterClient.delServicer(request, applicationName);
         isSuccess(response);
         return response.getResultList();
     }
@@ -151,7 +150,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      */
     public List<ServicerListResponse.Servicer> getServicerList(String openKfId, String applicationName) {
         checkApplication(applicationName);
-        ServicerListResponse response = weChatClient.getServicerList(openKfId, applicationName);
+        ServicerListResponse response = callCenterClient.getServicerList(openKfId, applicationName);
         isSuccess(response);
         return response.getServicerList();
     }
@@ -165,7 +164,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      */
     public ServiceStateResponse getServiceState(ServiceStateRequest request, String applicationName) {
         checkApplication(applicationName);
-        ServiceStateResponse response = weChatClient.getServiceState(request, applicationName);
+        ServiceStateResponse response = callCenterClient.getServiceState(request, applicationName);
         isSuccess(response);
         return response;
     }
@@ -179,7 +178,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      */
     public String changeServiceState(ChangeServiceStateRequest request, String applicationName) {
         checkApplication(applicationName);
-        ChangeServiceStateResponse response = weChatClient.changeServiceState(request, applicationName);
+        ChangeServiceStateResponse response = callCenterClient.changeServiceState(request, applicationName);
         isSuccess(response);
         return response.getMsgCode();
     }
@@ -193,7 +192,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      */
     public SyncMsgResponse syncMsg(SyncMsgRequest request, String applicationName) {
         checkApplication(applicationName);
-        SyncMsgResponse response = weChatClient.syncMsg(request, applicationName);
+        SyncMsgResponse response = callCenterClient.syncMsg(request, applicationName);
         isSuccess(response);
         return response;
     }
@@ -207,7 +206,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      */
     public String sendMsg(SendMsgRequest msg, String applicationName) {
         checkApplication(applicationName);
-        SendMsgResponse response = weChatClient.sendMsg(msg, applicationName);
+        SendMsgResponse response = callCenterClient.sendMsg(msg, applicationName);
         isSuccess(response);
         return response.getMsgId();
     }
@@ -221,7 +220,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      */
     public String sendMsgOnEvent(SendMsgOnEventRequest msg, String applicationName) {
         checkApplication(applicationName);
-        SendMsgResponse response = weChatClient.sendMsgOnEvent(msg, applicationName);
+        SendMsgResponse response = callCenterClient.sendMsgOnEvent(msg, applicationName);
         isSuccess(response);
         return response.getMsgId();
     }
@@ -235,7 +234,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      */
     public GetCustomerResponse getCustomer(GetCustomerRequest request, String applicationName) {
         checkApplication(applicationName);
-        GetCustomerResponse response = weChatClient.getCustomer(request, applicationName);
+        GetCustomerResponse response = callCenterClient.getCustomer(request, applicationName);
         isSuccess(response);
         return response;
     }
@@ -248,7 +247,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      */
     public UpgradeServiceConfigResponse getUpgradeServiceConfig(String applicationName) {
         checkApplication(applicationName);
-        UpgradeServiceConfigResponse response = weChatClient.getUpgradeServiceConfig(applicationName);
+        UpgradeServiceConfigResponse response = callCenterClient.getUpgradeServiceConfig(applicationName);
         isSuccess(response);
         return response;
     }
@@ -261,7 +260,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      */
     public void upgradeService(UpgradeServiceRequest request, String applicationName) {
         checkApplication(applicationName);
-        BaseResponse baseResponse = weChatClient.upgradeService(request, applicationName);
+        BaseResponse baseResponse = callCenterClient.upgradeService(request, applicationName);
         isSuccess(baseResponse);
     }
 
@@ -273,7 +272,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      */
     public void cancelUpgradeService(CancelUpgradeServiceRequest request, String applicationName) {
         checkApplication(applicationName);
-        BaseResponse baseResponse = weChatClient.cancelUpgradeService(request, applicationName);
+        BaseResponse baseResponse = callCenterClient.cancelUpgradeService(request, applicationName);
         isSuccess(baseResponse);
     }
 }

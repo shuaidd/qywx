@@ -10,6 +10,7 @@ import com.github.shuaidd.response.AbstractBaseResponse;
  * date 2021-01-06 22:29
  **/
 public class AddWelcomeTemplateResponse extends AbstractBaseResponse {
+
     @JsonProperty("template_id")
     private String templateId;
 

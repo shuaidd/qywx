@@ -45,7 +45,7 @@ public class WeChatClientAspect {
      * @return Object
      * @throws Throwable 异常
      */
-    @Around("execution(* com.github.shuaidd.client.WeChatClient.*(..))")
+    @Around("execution(* com.github.shuaidd.client.*Client.*(..))")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         Object result;
         try {

@@ -1,13 +1,11 @@
 package com.github.shuaidd.service;
 
-import com.github.shuaidd.client.WeChatClient;
-import com.github.shuaidd.client.WeChatMediaClient;
+import com.github.shuaidd.client.*;
 import com.github.shuaidd.client.config.ApplicationProperties;
 import com.github.shuaidd.client.config.WeChatConfigurationProperties;
 import com.github.shuaidd.enums.ErrorCode;
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.AbstractBaseResponse;
-import com.github.shuaidd.response.BaseResponse;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -28,6 +26,15 @@ public abstract class AbstractBaseService {
 
     @Autowired
     protected WeChatClient weChatClient;
+
+    @Autowired
+    protected ExternalContactClient externalContactClient;
+
+    @Autowired
+    protected WorkOaClient workOaClient;
+
+    @Autowired
+    protected WeChatCallCenterClient callCenterClient;
 
     @Autowired
     protected WeChatMediaClient weChatMediaClient;
