@@ -1,6 +1,9 @@
 package com.github.shuaidd;
 
 import com.github.shuaidd.dto.externalcontact.CustomTag;
+import com.github.shuaidd.dto.externalcontact.GroupMsgTask;
+import com.github.shuaidd.dto.externalcontact.V2GroupMsg;
+import com.github.shuaidd.dto.message.MsgLink;
 import com.github.shuaidd.dto.message.MsgText;
 import com.github.shuaidd.response.addressbook.MobileHashCodeResponse;
 import com.github.shuaidd.response.externalcontact.*;
@@ -8,8 +11,13 @@ import com.github.shuaidd.resquest.*;
 import com.github.shuaidd.resquest.addressbook.MobileHashCodeRequest;
 import com.github.shuaidd.resquest.addressbook.TagGroupRequest;
 import com.github.shuaidd.resquest.externalcontact.*;
+import com.github.shuaidd.service.CustomContactService;
+import com.google.common.collect.Lists;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.text.ParseException;
 import java.util.Arrays;
@@ -165,9 +173,25 @@ public class CustomContactTest extends AbstractTest {
         logger.info("{}", response);
     }
 
+    /**
+     * woCRbQBwAAqNfflCX9uvtAnmQ9YpNJZQ, wmCRbQBwAA2XZEynsl_hDoWnL_Ptb04Q, wmCRbQBwAAB_NAGsw3oltcZdRvcWyRbg
+     */
     @Test
     public void getExternalContact() {
         ExternalContactResponse response = weChatManager.customContactService().getExternalContact("wmCRbQBwAAkqZa5eZQdUNFXgVIFr_DmA", appName);
+        logger.info("{}", response);
+
+        response = weChatManager.customContactService().getExternalContact("woCRbQBwAAqNfflCX9uvtAnmQ9YpNJZQ", appName);
+        logger.info("{}", response);
+
+        response = weChatManager.customContactService().getExternalContact("wmCRbQBwAA2XZEynsl_hDoWnL_Ptb04Q", appName);
+        logger.info("{}", response);
+
+
+        /*
+         * logan
+         * */
+        response = weChatManager.customContactService().getExternalContact("wmCRbQBwAAB_NAGsw3oltcZdRvcWyRbg", appName);
         logger.info("{}", response);
     }
 
@@ -232,9 +256,21 @@ public class CustomContactTest extends AbstractTest {
     public void addMsgTemplate() {
         MsgTemplateRequest request = new MsgTemplateRequest();
         request.setChatType("single");
-        request.setExternalUserId(Collections.singletonList("wmCRbQBwAAkqZa5eZQdUNFXgVIFr_DmA"));
+        request.setExternalUserId(Collections.singletonList("wmCRbQBwAAB_NAGsw3oltcZdRvcWyRbg"));
+        request.setSender("20170410022717");
         MsgText text = new MsgText("测试消息发送");
         request.setText(text);
+        V2GroupMsg groupMsg = new V2GroupMsg();
+        groupMsg.setMsgType("link");
+
+        MsgLink link = new MsgLink();
+        link.setTitle("您好");
+        link.setDesc("明天会更好");
+        link.setPicUrl("https://wwcdn.weixin.qq.com/node/wework/images/kf_head_image_url_4.png");
+        link.setUrl("https://shuaidd.github.io/");
+        groupMsg.setLink(link);
+        request.setAttachments(Lists.newArrayList(groupMsg));
+
         MsgTemplateResponse response = weChatManager.customContactService().addMsgTemplate(request, appName);
         logger.info("{}", response);
     }
@@ -246,6 +282,36 @@ public class CustomContactTest extends AbstractTest {
         request.setEndTime(DateUtils.parseDate("2021-01-14", "yyyy-MM-dd"));
         request.setChatType("single");
         GroupMsgResponse response = weChatManager.customContactService().getGroupMsgList(request, appName);
+        V2GroupMsgResponse v2GroupMsgResponse = weChatManager.customContactService().getGroupMsgListV2(request, appName);
         logger.info("{}", response);
+        logger.info("{}", v2GroupMsgResponse);
+    }
+
+    @Test
+    public void getGroupMsgTask() {
+        GroupMsgTaskRequest request = new GroupMsgTaskRequest();
+        request.setMsgId("msgCRbQBwAAEozan6cBGz_NZ0WSfoAANQ");
+        GroupMsgTaskResponse response = weChatManager.customContactService().getGroupMsgTask(request, appName);
+        logger.info("{}", response);
+        for (GroupMsgTask groupMsgTask : response.getGroupMsgTasks()) {
+            logger.info("{}", DateFormatUtils.format(groupMsgTask.getSendTime(), "yyyy-MM-dd HH:mm:ss"));
+        }
+    }
+
+    @Test
+    public void getGroupMsgSendResult() {
+        GroupMsgSendRequest request = new GroupMsgSendRequest();
+        request.setMsgId("msgCRbQBwAAEozan6cBGz_NZ0WSfoAANQ");
+        request.setUserId("20170410022717");
+        GroupMsgSendResultResponse response = weChatManager.customContactService().getGroupMsgSendResult(request, appName);
+        logger.info("{}", response);
+    }
+
+    @Test
+    public void sendWelcomeMsg() {
+        WelcomeMsgRequest request = new WelcomeMsgRequest();
+        request.setText(new MsgText("hello world"));
+        request.setWelcomeCode("CALLBACK_CODE");
+        weChatManager.customContactService().sendWelcomeMsg(request, appName);
     }
 }

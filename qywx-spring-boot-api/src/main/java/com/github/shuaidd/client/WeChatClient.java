@@ -129,8 +129,9 @@ public interface WeChatClient {
 
     /**
      * 获取成员ID列表
+     *
      * @param request 请求
-     * @param app 应用名
+     * @param app     应用名
      * @return SimpleDeptUserResponse
      */
     @PostMapping(value = "user/list_id", headers = HEAD)
@@ -221,12 +222,13 @@ public interface WeChatClient {
 
     /**
      * 获取子部门ID列表
-     * @param id 部门id
+     *
+     * @param id  部门id
      * @param app 应用名
      * @return SimpleDepartmentListResponse
      */
     @GetMapping(value = "department/simplelist", headers = HEAD)
-    SimpleDepartmentListResponse  departmentSimpleList(@RequestParam(value = "id", required = false) Integer id, @RequestParam(HEAD_KEY) String app);
+    SimpleDepartmentListResponse departmentSimpleList(@RequestParam(value = "id", required = false) Integer id, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 创建标签【创建的标签属于该应用，只有该应用才可以增删成员】
@@ -310,7 +312,7 @@ public interface WeChatClient {
      * 通讯录中存在、文件中不存在的成员，保持不变
      * 成员字段更新规则：可自行添加扩展字段。文件中有指定的字段，以指定的字段值为准；文件中没指定的字段，不更新
      * <p>
-     *
+     * <p>
      * 增量更新成员
      *
      * @param request 请求体
@@ -818,6 +820,16 @@ public interface WeChatClient {
      */
     @PostMapping(value = "externalcontact/get_groupmsg_list", headers = HEAD)
     GroupMsgResponse getGroupMsgList(GroupMsgRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取群发记录列表
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return GroupMsgResponse
+     */
+    @PostMapping(value = "externalcontact/get_groupmsg_list_v2", headers = HEAD)
+    V2GroupMsgResponse getGroupMsgListV2(GroupMsgRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 获取群发成员发送任务列表
@@ -1623,4 +1635,32 @@ public interface WeChatClient {
      */
     @PostMapping(value = "kf/customer/batchget", headers = HEAD)
     GetCustomerResponse getCustomer(GetCustomerRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取配置的专员与客户群
+     *
+     * @param app 应用
+     * @return 配置信息
+     */
+    @GetMapping(value = "kf/customer/get_upgrade_service_config", headers = HEAD)
+    UpgradeServiceConfigResponse getUpgradeServiceConfig(@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 为客户升级为专员或客户群服务
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 操作结果
+     */
+    @PostMapping(value = "kf/customer/upgrade_service", headers = HEAD)
+    BaseResponse upgradeService(UpgradeServiceRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 为客户取消推荐
+     * @param request 请求
+     * @param app 应用
+     * @return 操作结果
+     */
+    @PostMapping(value = "kf/customer/cancel_upgrade_service", headers = HEAD)
+    BaseResponse cancelUpgradeService(CancelUpgradeServiceRequest request,  @RequestParam(HEAD_KEY) String app);
 }

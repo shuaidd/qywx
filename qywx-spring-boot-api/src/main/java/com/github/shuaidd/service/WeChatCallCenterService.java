@@ -6,6 +6,7 @@ import com.github.shuaidd.response.kf.*;
 import com.github.shuaidd.resquest.kf.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -237,5 +238,42 @@ public class WeChatCallCenterService extends AbstractBaseService {
         GetCustomerResponse response = weChatClient.getCustomer(request, applicationName);
         isSuccess(response);
         return response;
+    }
+
+    /**
+     * 获取配置的专员与客户群
+     *
+     * @param applicationName 应用
+     * @return 配置信息
+     */
+    public UpgradeServiceConfigResponse getUpgradeServiceConfig(String applicationName) {
+        checkApplication(applicationName);
+        UpgradeServiceConfigResponse response = weChatClient.getUpgradeServiceConfig(applicationName);
+        isSuccess(response);
+        return response;
+    }
+
+    /**
+     * 为客户升级为专员或客户群服务
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     */
+    public void upgradeService(UpgradeServiceRequest request, String applicationName) {
+        checkApplication(applicationName);
+        BaseResponse baseResponse = weChatClient.upgradeService(request, applicationName);
+        isSuccess(baseResponse);
+    }
+
+    /**
+     * 为客户取消推荐
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     */
+    public void cancelUpgradeService(CancelUpgradeServiceRequest request, String applicationName) {
+        checkApplication(applicationName);
+        BaseResponse baseResponse = weChatClient.cancelUpgradeService(request, applicationName);
+        isSuccess(baseResponse);
     }
 }

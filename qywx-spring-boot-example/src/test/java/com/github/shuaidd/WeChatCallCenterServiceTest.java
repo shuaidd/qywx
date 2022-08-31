@@ -111,7 +111,7 @@ public class WeChatCallCenterServiceTest extends AbstractTest {
     @Test
     public void syncMsg() {
         SyncMsgRequest request = new SyncMsgRequest();
-        request.setToken("ENCAAMsiGJSfe9m7BYCS4YdsRWsWkgZWHwz458tcy5Yk95h");
+        request.setToken("ENCHvQAn794mxmFqTTrJHoZCnkqPYgUCRpLBYbvoEk4bw3j");
         request.setLimit(100);
         SyncMsgResponse response = weChatManager.callCenterService().syncMsg(request, appName);
         logger.info("读取到了消息--{}", response);
@@ -142,5 +142,32 @@ public class WeChatCallCenterServiceTest extends AbstractTest {
         request.setExternalUserIdList(Collections.singletonList("wmCRbQBwAAL_1TiinJjjTBnIaemb4yeg"));
         GetCustomerResponse response = weChatManager.callCenterService().getCustomer(request, appName);
         logger.info("获取到的客户信息--{}", response);
+    }
+
+    @Test
+    public void getUpgradeServiceConfig() {
+        UpgradeServiceConfigResponse response = weChatManager.callCenterService().getUpgradeServiceConfig(appName);
+        logger.info("获取到的配置信息--{}", response);
+    }
+
+    @Test
+    public void upgradeService() {
+        UpgradeServiceRequest request = new UpgradeServiceRequest();
+        request.setExternalUserId("wmCRbQBwAAL_1TiinJjjTBnIaemb4yeg");
+        request.setOpenKfId(kfId);
+        request.setType(1);
+        UpgradeServiceRequest.Member member = new UpgradeServiceRequest.Member();
+        member.setUserId("20170410022717");
+        member.setWording("欢迎光临");
+        request.setMember(member);
+        weChatManager.callCenterService().upgradeService(request, appName);
+    }
+
+    @Test
+    public void cancelUpgradeService() {
+        CancelUpgradeServiceRequest request = new CancelUpgradeServiceRequest();
+        request.setExternalUserId("wmCRbQBwAAL_1TiinJjjTBnIaemb4yeg");
+        request.setOpenKfId(kfId);
+        weChatManager.callCenterService().cancelUpgradeService(request, appName);
     }
 }

@@ -67,7 +67,7 @@ public class WeChatClientAspect {
                     //如果还未成功，会有日志记录，查看日志再看具体原因
                     result = joinPoint.proceed();
                 } else {
-                    throw throwable;
+                    throw throwable.getCause();
                 }
             } else {
                 throw throwable;

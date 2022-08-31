@@ -51,3 +51,15 @@ logging:
   level:
     root: warn
     com.github.shuaidd: debug
+spring:
+  profiles:
+    active: dev
+  redis:
+    database: 0
+    host: 10.178.178.147
+    port: 9722
+    password: 43t54y65343454gh45343f34gf
+  cache:
+    type: redis
+  application:
+    name: qywx-example

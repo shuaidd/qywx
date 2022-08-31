@@ -345,6 +345,17 @@ public class CustomContactService extends AbstractBaseService {
     }
 
     /**
+     * 获取群发记录列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return GroupMsgResponse
+     */
+    public V2GroupMsgResponse getGroupMsgListV2(GroupMsgRequest request, String applicationName) {
+        return weChatClient.getGroupMsgListV2(request, applicationName);
+    }
+
+    /**
      * 获取群发成员发送任务列表
      *
      * @param request         请求
