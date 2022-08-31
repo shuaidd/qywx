@@ -7,14 +7,14 @@ import com.github.shuaidd.response.AbstractBaseResponse;
 import java.util.List;
 
 /**
- * 描述 部门详细信息[含部门名称]
+ * 部门简要信息[无部门名称]
  *
  * @author ddshuai
  * date 2019-04-06 07:18
  **/
-public class DepartmentListResponse extends AbstractBaseResponse {
+public class SimpleDepartmentListResponse extends AbstractBaseResponse {
 
-    @JsonProperty("department")
+    @JsonProperty("department_id")
     private List<Department> departments;
 
     public List<Department> getDepartments() {

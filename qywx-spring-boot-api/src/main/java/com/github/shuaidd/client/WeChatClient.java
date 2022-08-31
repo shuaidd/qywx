@@ -128,6 +128,15 @@ public interface WeChatClient {
     DepartmentUserResponse getDepartmentUserDetail(@RequestParam("department_id") Integer departmentId, @RequestParam("fetch_child") Integer fetchChild, @RequestParam(HEAD_KEY) String app);
 
     /**
+     * 获取成员ID列表
+     * @param request 请求
+     * @param app 应用名
+     * @return SimpleDeptUserResponse
+     */
+    @PostMapping(value = "user/list_id", headers = HEAD)
+    SimpleDeptUserResponse getUserIds(CursorPageRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
      * userid转openid
      *
      * @param request 请求体
@@ -209,6 +218,15 @@ public interface WeChatClient {
      */
     @GetMapping(value = "department/list", headers = HEAD)
     DepartmentListResponse departmentList(@RequestParam(value = "id", required = false) Integer id, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取子部门ID列表
+     * @param id 部门id
+     * @param app 应用名
+     * @return SimpleDepartmentListResponse
+     */
+    @GetMapping(value = "department/simplelist", headers = HEAD)
+    SimpleDepartmentListResponse  departmentSimpleList(@RequestParam(value = "id", required = false) Integer id, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 创建标签【创建的标签属于该应用，只有该应用才可以增删成员】

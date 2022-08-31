@@ -40,6 +40,11 @@ public abstract class BaseEventData {
     @XmlElement(name = "AgentID")
     private Integer agentId;
 
+    /**
+     * 解密后的明文信息
+     */
+    private String decryptMsg;
+
     public String getToUserName() {
         return toUserName;
     }
@@ -110,5 +115,13 @@ public abstract class BaseEventData {
 
     public void setEventKey(String eventKey) {
         this.eventKey = eventKey;
+    }
+
+    public String getDecryptMsg() {
+        return decryptMsg;
+    }
+
+    public void setDecryptMsg(String decryptMsg) {
+        this.decryptMsg = decryptMsg;
     }
 }

@@ -147,8 +147,12 @@ public class EventDataManager {
 
         if (cls == null) {
             logger.error("--------无法获取转换对象-------");
-            throw new WeChatException("无法获取转换对象");
+            commonEventData.setDecryptMsg(xml);
+            return commonEventData;
         }
-        return XMLUtil.convertXmlStrToObject(cls, xml);
+
+        BaseEventData eventData = XMLUtil.convertXmlStrToObject(cls, xml);
+        eventData.setDecryptMsg(xml);
+        return eventData;
     }
 }

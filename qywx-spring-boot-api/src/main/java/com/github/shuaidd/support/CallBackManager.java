@@ -5,6 +5,7 @@ import com.github.shuaidd.callback.AesException;
 import com.github.shuaidd.callback.WXBizMsgXmlCrypt;
 import com.github.shuaidd.client.config.CallbackProperties;
 import com.github.shuaidd.event.BaseEventData;
+import com.github.shuaidd.exception.WeChatException;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -81,15 +82,15 @@ public final class CallBackManager {
      * @param msgSignature    签名信息
      * @param timestamp       时间戳
      * @param nonce           随机数
-     * @throws AesException 解密异常
      * @return 消息内容
+     * @throws AesException 解密异常
      */
     public static BaseEventData handle(String applicationName, String xml, String msgSignature, String timestamp, String nonce) throws AesException {
 
         CallbackProperties properties = getCallbackProperty(applicationName);
         if (Objects.isNull(properties)) {
             logger.error("应用-{}-未配置密钥信息，无法处理", applicationName);
-            return null;
+            throw new WeChatException("应用-" + applicationName + "-未配置密钥信息，无法处理");
         }
 
         WXBizMsgXmlCrypt crypt = new WXBizMsgXmlCrypt(properties.getToken(), properties.getEncodingAesKey(), properties.getReceiveId());
@@ -114,7 +115,7 @@ public final class CallBackManager {
             return eventData;
         }
 
-        return null;
+        throw new WeChatException("消息体信息为空");
     }
 
     /**

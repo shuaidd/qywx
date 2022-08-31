@@ -52,8 +52,8 @@ public class CallbackController {
 
         if (StringUtils.isNotEmpty(xml)) {
             BaseEventData eventData = CallBackManager.handle(app, xml, msgSignature, timestamp, nonce);
+            logger.info("明文信息为：{}",eventData.getDecryptMsg());
             logger.info("获取到的数据---{}", eventData);
-            assert eventData != null;
             if ("taskcard_click".equals(eventData.getEvent())) {
                 logger.info("任务卡片回调---回调带返回值的情况");
                 String returnData = "<xml>\n" +

@@ -1,5 +1,6 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.dto.addressbook.DeptUser;
 import com.github.shuaidd.dto.tool.CallbackData;
 import com.github.shuaidd.dto.addressbook.Department;
 import com.github.shuaidd.dto.addressbook.Tag;
@@ -7,6 +8,7 @@ import com.github.shuaidd.dto.addressbook.WeChatUser;
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.*;
 import com.github.shuaidd.response.addressbook.*;
+import com.github.shuaidd.resquest.CursorPageRequest;
 import com.github.shuaidd.resquest.addressbook.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.collections4.CollectionUtils;
@@ -377,6 +379,27 @@ public class AddressBookService extends AbstractBaseService {
         checkApplication(applicationName);
         List<Department> departments = new ArrayList<>(1);
         DepartmentListResponse response = weChatClient.departmentList(id, applicationName);
+        if (isSuccess(response)) {
+            departments = response.getDepartments();
+            if (logger.isInfoEnabled()) {
+                logger.info("拉取部门列表成功：部门数量-{},applicationName-{}，departments--{}", departments.size(), applicationName, departments);
+            }
+        }
+
+        return departments;
+    }
+
+    /**
+     * 拉取部门列表
+     *
+     * @param id              部门id
+     * @param applicationName 应用名称
+     * @return Department
+     */
+    public final List<Department> simpleDepartmentList(Integer id, String applicationName) {
+        checkApplication(applicationName);
+        List<Department> departments = new ArrayList<>(1);
+        SimpleDepartmentListResponse response = weChatClient.departmentSimpleList(id, applicationName);
         if (isSuccess(response)) {
             departments = response.getDepartments();
             if (logger.isInfoEnabled()) {
@@ -912,5 +935,21 @@ public class AddressBookService extends AbstractBaseService {
         assert original != null;
         logger.info("数据解密--{}", new String(original));
         return new String(original);
+    }
+
+    /**
+     * 获取成员ID列表
+     * @param request 分页请求
+     * @param applicationName 应用名称
+     * @return SimpleDeptUserResponse
+     */
+    public final List<DeptUser> getUserIds(CursorPageRequest request, String applicationName) {
+        checkApplication(applicationName);
+        SimpleDeptUserResponse response = weChatClient.getUserIds(request,applicationName);
+        if (isSuccess(response)) {
+            return response.getDeptUsers();
+        }
+
+        return Collections.emptyList();
     }
 }
