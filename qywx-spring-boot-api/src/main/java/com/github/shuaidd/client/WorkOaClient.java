@@ -8,6 +8,7 @@ import com.github.shuaidd.response.tool.CalendarResponse;
 import com.github.shuaidd.response.tool.GetCalendarResponse;
 import com.github.shuaidd.response.tool.GetScheduleResponse;
 import com.github.shuaidd.resquest.JournalReportStatRequest;
+import com.github.shuaidd.resquest.kf.PunchCorrectionRequest;
 import com.github.shuaidd.resquest.oa.*;
 import com.github.shuaidd.resquest.tool.*;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -400,4 +401,14 @@ public interface WorkOaClient extends CommonClient {
      */
     @PostMapping(value = "pstncc/getstates", headers = HEAD)
     GetCallStateResponse pstnccCallState(GetCallStateRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 为打卡人员补卡
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 操作接活
+     */
+    @PostMapping(value = "checkin/punch_correction", headers = HEAD)
+    BaseResponse punchCorrection(PunchCorrectionRequest request, @RequestParam(HEAD_KEY) String app);
 }

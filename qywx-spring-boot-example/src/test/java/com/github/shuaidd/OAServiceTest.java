@@ -15,6 +15,7 @@ import com.github.shuaidd.dto.tool.DialRecord;
 import com.github.shuaidd.response.oa.*;
 import com.github.shuaidd.resquest.JournalReportStatRequest;
 import com.github.shuaidd.resquest.RequestFilter;
+import com.github.shuaidd.resquest.kf.PunchCorrectionRequest;
 import com.github.shuaidd.resquest.oa.*;
 import com.github.shuaidd.resquest.tool.DialRecordRequest;
 import com.google.common.collect.Lists;
@@ -372,5 +373,15 @@ public class OAServiceTest extends AbstractTest {
         }
 
         return null;
+    }
+
+    @Test
+    public void punchCorrection() throws ParseException {
+        PunchCorrectionRequest request = new PunchCorrectionRequest();
+        request.setUserId("20170410022717");
+        request.setScheduleDateTime(DateUtils.parseDate("2022-08-01 09:00","yyyy-MM-dd HH:mm"));
+        request.setCheckinTime(DateUtils.parseDate("2022-09-01 09:00","yyyy-MM-dd HH:mm"));
+        request.setScheduleCheckinTime(32400);
+        weChatManager.oaService().punchCorrection(request, CHECK_IN);
     }
 }

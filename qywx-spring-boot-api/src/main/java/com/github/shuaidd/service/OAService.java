@@ -5,6 +5,7 @@ import com.github.shuaidd.dto.checkin.CheckInRule;
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.oa.*;
 import com.github.shuaidd.resquest.JournalReportStatRequest;
+import com.github.shuaidd.resquest.kf.PunchCorrectionRequest;
 import com.github.shuaidd.resquest.oa.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
@@ -351,5 +352,15 @@ public class OAService extends AbstractBaseService {
      */
     public GetCallStateResponse pstnccCallState(GetCallStateRequest request, String applicationName) {
         return workOaClient.pstnccCallState(request, applicationName);
+    }
+
+    /**
+     * 为打卡人员补卡
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void punchCorrection(PunchCorrectionRequest request, String applicationName) {
+        workOaClient.punchCorrection(request, applicationName);
     }
 }
