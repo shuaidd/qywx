@@ -28,6 +28,7 @@ import java.util.List;
  * date 2021-01-14 10:10
  **/
 public class EfficiencyToolTest extends AbstractTest {
+
     private EfficiencyToolService toolService;
 
     /**

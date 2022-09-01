@@ -41,8 +41,7 @@ public class MediaService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return String
      */
-    public final String uploadMaterial(File file, MediaType mediaType, String type, String applicationName) {
-        checkApplication(applicationName);
+    public String uploadMaterial(File file, MediaType mediaType, String type, String applicationName) {
         String mediaId = null;
         if (Objects.nonNull(file) && Objects.nonNull(mediaType)) {
             DiskFileItem fileItem = diskFileItem(file, mediaType, applicationName);
@@ -53,17 +52,13 @@ public class MediaService extends AbstractBaseService {
         return mediaId;
     }
 
-    public final String uploadMaterial(MultipartFile file, String type, String applicationName) {
-        checkApplication(applicationName);
-        String mediaId = null;
+    public String uploadMaterial(MultipartFile file, String type, String applicationName) {
         if (Objects.nonNull(file) && Objects.nonNull(type)) {
             WeChatMediaUploadResponse response = weChatMediaClient.uploadMaterial(file, type, applicationName);
-            if (isSuccess(response)) {
-                mediaId = response.getMediaId();
-            }
+            return response.getMediaId();
         }
 
-        return mediaId;
+        return null;
     }
 
     /**
@@ -74,19 +69,15 @@ public class MediaService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return String
      */
-    public final String uploadImage(File file, MediaType mediaType, String applicationName) {
-        checkApplication(applicationName);
-        String url = null;
+    public String uploadImage(File file, MediaType mediaType, String applicationName) {
         if (Objects.nonNull(file) && Objects.nonNull(mediaType)) {
             DiskFileItem fileItem = diskFileItem(file, mediaType, applicationName);
             MultipartFile multi = new CommonsMultipartFile(fileItem);
             UploadImageResponse response = weChatMediaClient.uploadImage(multi, applicationName);
-            if (isSuccess(response)) {
-                url = response.getUrl();
-            }
+            return response.getUrl();
         }
 
-        return url;
+        return null;
     }
 
     private DiskFileItem diskFileItem(File file, MediaType mediaType, String applicationName) {
@@ -103,7 +94,7 @@ public class MediaService extends AbstractBaseService {
         return fileItem;
     }
 
-    public final ResponseEntity<byte[]> download(String mediaId, String applicationName) {
+    public ResponseEntity<byte[]> download(String mediaId, String applicationName) {
         ResponseEntity<byte[]> responseEntity = null;
         if (StringUtils.isNotEmpty(mediaId)) {
             responseEntity = weChatMediaClient.download(mediaId, applicationName);

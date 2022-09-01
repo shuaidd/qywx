@@ -2,12 +2,10 @@ package com.github.shuaidd.service;
 
 import com.github.shuaidd.dto.checkin.CheckInData;
 import com.github.shuaidd.dto.checkin.CheckInRule;
-import com.github.shuaidd.dto.tool.DialRecord;
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.oa.*;
 import com.github.shuaidd.resquest.JournalReportStatRequest;
 import com.github.shuaidd.resquest.oa.*;
-import com.github.shuaidd.resquest.tool.DialRecordRequest;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +30,7 @@ public class OAService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return CheckInData
      */
-    public final List<CheckInData> getCheckInData(CheckInDataRequest request, String applicationName) {
-        checkApplication(applicationName);
+    public List<CheckInData> getCheckInData(CheckInDataRequest request, String applicationName) {
         checkRequest(request);
         return workOaClient.getCheckInData(request, applicationName).getCheckInDataList();
     }
@@ -60,8 +57,7 @@ public class OAService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return CheckInRule
      */
-    public final List<CheckInRule> getCheckInOption(CheckInRuleRequest request, String applicationName) {
-        checkApplication(applicationName);
+    public List<CheckInRule> getCheckInOption(CheckInRuleRequest request, String applicationName) {
         List<CheckInRule> checkInRules = new ArrayList<>(1);
         if (Objects.nonNull(request) && Objects.nonNull(request.getDateTime()) && CollectionUtils.isNotEmpty(request.getUserIdList())) {
             if (request.getUserIdList().size() <= LIMIT_USER_COUNT) {
@@ -81,8 +77,7 @@ public class OAService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return ApprovalDataResponse
      */
-    public final ApprovalDataResponse getApprovalData(ApprovalDataRequest request, String applicationName) {
-        checkApplication(applicationName);
+    public ApprovalDataResponse getApprovalData(ApprovalDataRequest request, String applicationName) {
         Objects.requireNonNull(request);
         Objects.requireNonNull(request.getEndTime());
         Objects.requireNonNull(request.getStartTime());

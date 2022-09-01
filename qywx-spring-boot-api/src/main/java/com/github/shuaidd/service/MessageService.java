@@ -1,6 +1,7 @@
 package com.github.shuaidd.service;
 
 import com.github.shuaidd.dto.message.ChatInfo;
+import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.message.CreateAppChatResponse;
 import com.github.shuaidd.response.message.SearchAppChatResponse;
@@ -30,17 +31,13 @@ public class MessageService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return SendMessageResponse
      */
-    public final SendMessageResponse sendMessage(SendMessageRequest request, String applicationName) {
-        checkApplication(applicationName);
-        SendMessageResponse response = null;
+    public SendMessageResponse sendMessage(SendMessageRequest request, String applicationName) {
+
         if (Objects.nonNull(request)) {
-            response = messageClient.sendMessage(request, applicationName);
-            if (isSuccess(response)) {
-                logger.info("消息发送成功");
-            }
+            return messageClient.sendMessage(request, applicationName);
         }
 
-        return response;
+        throw new ParamCheckException("请求 不能为空，请检查！！！");
     }
 
     /**
@@ -49,13 +46,9 @@ public class MessageService extends AbstractBaseService {
      * @param request         请求
      * @param applicationName 应用名称
      */
-    public final void sendAppChatMessage(SendAppChatRequest request, String applicationName) {
-        checkApplication(applicationName);
+    public void sendAppChatMessage(SendAppChatRequest request, String applicationName) {
         if (Objects.nonNull(request)) {
-            BaseResponse response = messageClient.sendAppChatMessage(request, applicationName);
-            if (isSuccess(response)) {
-                logger.info("消息发送成功");
-            }
+            messageClient.sendAppChatMessage(request, applicationName);
         }
     }
 
@@ -66,17 +59,13 @@ public class MessageService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return String
      */
-    public final String createAppChat(CreateAppChatRequest request, String applicationName) {
-        checkApplication(applicationName);
-        String chatId = "";
+    public String createAppChat(CreateAppChatRequest request, String applicationName) {
         if (Objects.nonNull(request)) {
             CreateAppChatResponse response = messageClient.createAppChat(request, applicationName);
-            if (isSuccess(response)) {
-                chatId = response.getChatId();
-            }
+            return response.getChatId();
+        } else {
+            throw new ParamCheckException("请求 不能为空，请检查！！！");
         }
-
-        return chatId;
     }
 
     /**
@@ -85,11 +74,10 @@ public class MessageService extends AbstractBaseService {
      * @param request         请求
      * @param applicationName 应用名称
      */
-    public final void updateAppChat(UpdateAppChatRequest request, String applicationName) {
-        checkApplication(applicationName);
+    public void updateAppChat(UpdateAppChatRequest request, String applicationName) {
         if (Objects.nonNull(request)) {
-            BaseResponse response = messageClient.updateAppChat(request, applicationName);
-            if (isSuccess(response)) {
+            messageClient.updateAppChat(request, applicationName);
+            if (logger.isInfoEnabled()) {
                 logger.info("更新群聊成功");
             }
         }
@@ -102,13 +90,13 @@ public class MessageService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return ChatInfo
      */
-    public final ChatInfo searchAppChat(String chatId, String applicationName) {
-        checkApplication(applicationName);
+    public ChatInfo searchAppChat(String chatId, String applicationName) {
+
         ChatInfo chatInfo = null;
         if (StringUtils.isNotEmpty(chatId)) {
             SearchAppChatResponse response = messageClient.searchAppChat(chatId, applicationName);
-            if (isSuccess(response)) {
-                chatInfo = response.getChatInfo();
+            chatInfo = response.getChatInfo();
+            if (logger.isInfoEnabled()) {
                 logger.info("查询到的群聊信息：{}", chatInfo);
             }
         }

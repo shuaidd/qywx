@@ -4,6 +4,7 @@ import com.github.shuaidd.client.*;
 import com.github.shuaidd.client.config.ApplicationProperties;
 import com.github.shuaidd.client.config.WeChatConfigurationProperties;
 import com.github.shuaidd.enums.ErrorCode;
+import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.AbstractBaseResponse;
 import org.apache.commons.collections4.CollectionUtils;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 /**
  * 描述
@@ -54,13 +57,13 @@ public abstract class AbstractBaseService {
     @Autowired
     protected WeChatConfigurationProperties properties;
 
-    final boolean isSuccess(AbstractBaseResponse baseResponse) {
+    boolean isSuccess(AbstractBaseResponse baseResponse) {
         if (Objects.nonNull(baseResponse)) {
             if (ErrorCode.ERROR_CODE_0.getErrorCode().equals(baseResponse.getErrCode())) {
                 return true;
             } else {
                 ErrorCode errorCode = ErrorCode.errorCode(baseResponse.getErrCode());
-                logger.error("企业微信调用异常：errorCode[{}],msg:[{}],response:{}", errorCode.getErrorCode(), errorCode.getErrorDesc(), baseResponse.getErrMsg());
+                logger.error("企业微信调用异常：errorCode[{}],msg:[{}],response:{}", baseResponse.getErrCode(), errorCode.getErrorDesc(), baseResponse.getErrMsg());
                 throw new WeChatException(errorCode.getErrorDesc(), errorCode);
             }
         } else {
@@ -75,7 +78,7 @@ public abstract class AbstractBaseService {
      * @param applicationName 应用名称
      * @return String
      */
-    final String getApplicationSecret(String applicationName) {
+    String getApplicationSecret(String applicationName) {
         String secret = "";
         List<ApplicationProperties> list = properties.getApplicationList();
         if (CollectionUtils.isNotEmpty(list)) {
@@ -87,23 +90,28 @@ public abstract class AbstractBaseService {
         }
         if (StringUtils.isEmpty(secret)) {
             //不存在的应用 则抛出异常
-            throw new WeChatException(applicationName + "应用不存在密匙");
+            throw new ParamCheckException(applicationName + "应用不存在密匙");
         }
 
         return secret;
     }
 
-    final void checkApplication(String applicationName) {
-        Objects.requireNonNull(applicationName, "应用名称不能为空");
-        boolean exsit = false;
+   public void checkApplication(String appName) {
+        if (StringUtils.isEmpty(appName)) {
+            throw new ParamCheckException("调用接口的应用名称不能为空");
+        }
+
+        boolean exist = false;
         for (ApplicationProperties applicationProperties : properties.getApplicationList()) {
-            if (applicationName.equals(applicationProperties.getApplicationName())) {
-                exsit = true;
+            if (appName.equals(applicationProperties.getApplicationName())) {
+                exist = true;
                 break;
             }
         }
-        if (!exsit) {
-            throw new WeChatException("应用" + applicationName + "无效，不在配置列表之内");
+
+        List<String> validAppNames = properties.getApplicationList().stream().map(ApplicationProperties::getApplicationName).collect(Collectors.toList());
+        if (!exist) {
+            throw new ParamCheckException("应用名称【" + appName + "】无效，不在有效配置列表之内-->"+ validAppNames);
         }
     }
 }

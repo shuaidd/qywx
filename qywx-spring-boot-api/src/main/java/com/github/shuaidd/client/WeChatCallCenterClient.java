@@ -183,4 +183,22 @@ public interface WeChatCallCenterClient extends CommonClient {
      */
     @PostMapping(value = "kf/customer/cancel_upgrade_service", headers = HEAD)
     BaseResponse cancelUpgradeService(CancelUpgradeServiceRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 可通过此接口创建新的知识库分组
+     * @param request 请求
+     * @param app 应用
+     * @return 分组编号
+     */
+    @PostMapping(value = "kf/knowledge/add_group", headers = HEAD)
+    AddKnowledgeGroupResponse addKnowledgeGroup(AddKnowledgeGroupRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 可通过此接口删除已有的知识库分组，但不能删除系统创建的默认分组
+     * @param request 请求
+     * @param app 应用
+     * @return 分组编号
+     */
+    @PostMapping(value = "kf/knowledge/del_group", headers = HEAD)
+    BaseResponse delKnowledgeGroup(DelKnowledgeGroupRequest request, @RequestParam(HEAD_KEY) String app);
 }

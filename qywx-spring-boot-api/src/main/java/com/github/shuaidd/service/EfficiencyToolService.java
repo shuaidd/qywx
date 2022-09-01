@@ -6,7 +6,6 @@ import com.github.shuaidd.resquest.oa.CalendarRequest;
 import com.github.shuaidd.resquest.tool.*;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -270,7 +269,7 @@ public class EfficiencyToolService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return DialRecord
      */
-    public final List<DialRecord> getDialRecord(DialRecordRequest request, String applicationName) {
+    public List<DialRecord> getDialRecord(DialRecordRequest request, String applicationName) {
         Objects.requireNonNull(request, "参数为空");
         return efficiencyToolClient.getDialRecord(request, applicationName).getRecords();
     }
