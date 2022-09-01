@@ -1,5 +1,6 @@
 package com.github.shuaidd;
 
+import com.github.shuaidd.autoconfigure.WeChatAutoConfiguration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -18,10 +19,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 描述
+ * 此配置会覆盖掉默认的缓存配置 使用redis管理 access_token
+ * @see WeChatAutoConfiguration
  *
  * @author ddshuai
- * @date 2021-12-23 15:10
+ * @date 2022-09-01 15:10
  **/
 @Configuration
 @RequiredArgsConstructor
