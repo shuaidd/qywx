@@ -9,10 +9,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * date 2021-01-02 15:24
  **/
 public class MiniProgram {
+
     @JsonProperty("appid")
     private String appId;
+
     private String page;
+
+    @JsonProperty("pagepath")
+    private String pagePath;
+
     private String title;
+
     @JsonProperty("pic_media_id")
     private String picMediaId;
 
@@ -46,5 +53,13 @@ public class MiniProgram {
 
     public void setPicMediaId(String picMediaId) {
         this.picMediaId = picMediaId;
+    }
+
+    public String getPagePath() {
+        return pagePath;
+    }
+
+    public void setPagePath(String pagePath) {
+        this.pagePath = pagePath;
     }
 }

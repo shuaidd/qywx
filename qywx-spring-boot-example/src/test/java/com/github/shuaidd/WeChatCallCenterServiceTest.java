@@ -1,5 +1,8 @@
 package com.github.shuaidd;
 
+import com.github.shuaidd.dto.kf.IntentAnswer;
+import com.github.shuaidd.dto.kf.IntentQuestion;
+import com.github.shuaidd.dto.message.MsgText;
 import com.github.shuaidd.enums.MsgType;
 import com.github.shuaidd.response.kf.*;
 import com.github.shuaidd.resquest.kf.*;
@@ -169,5 +172,75 @@ public class WeChatCallCenterServiceTest extends AbstractTest {
         request.setExternalUserId("wmCRbQBwAAL_1TiinJjjTBnIaemb4yeg");
         request.setOpenKfId(kfId);
         weChatManager.callCenterService().cancelUpgradeService(request, appName);
+    }
+
+    @Test
+    public void addKnowledgeGroup() {
+        String groupId = weChatManager.callCenterService().addKnowledgeGroup("日常支持", appName);
+        logger.info("分组编号--{}", groupId);
+    }
+
+    @Test
+    public void modKnowledgeGroup() {
+        KnowledgeGroupRequest request = new KnowledgeGroupRequest();
+        request.setGroupId("asCRbQBwAAIiwfqIVbTsEiGHimf8g4DA");
+        request.setName("test");
+        weChatManager.callCenterService().modKnowledgeGroup(request, appName);
+    }
+
+    @Test
+    public void delKnowledgeGroup() {
+        weChatManager.callCenterService().delKnowledgeGroup("asCRbQBwAAsPP0zSE3gvCHw3KfDX0rgQ", appName);
+    }
+
+    @Test
+    public void queryKnowledgeGroup() {
+        QueryKnowledgeGroupRequest request = new QueryKnowledgeGroupRequest();
+        KnowledgeGroupResponse response = weChatManager.callCenterService().queryKnowledgeGroup(request, appName);
+        logger.info("分组列表--{}", response);
+    }
+
+    /**
+     * intentId: aiCRbQBwAAxjgaQGYVB-dSpaS9GxYo6w
+     */
+    @Test
+    public void addKnowledgeIntent() {
+        KnowledgeIntentRequest request = new KnowledgeIntentRequest();
+        request.setGroupId("asCRbQBwAAIiwfqIVbTsEiGHimf8g4DA");
+
+        IntentQuestion question = new IntentQuestion();
+        question.setText(new MsgText("十万个为什么"));
+        request.setQuestion(question);
+
+        IntentAnswer answer = new IntentAnswer();
+        answer.setText(new MsgText("阿尔法效应"));
+        request.setAnswers(Collections.singletonList(answer));
+
+       String intentId = weChatManager.callCenterService().addKnowledgeIntent(request, appName);
+       logger.info("问答编号--{}", intentId);
+    }
+
+    @Test
+    public void modKnowledgeIntent() {
+        KnowledgeIntentRequest request = new KnowledgeIntentRequest();
+        request.setGroupId("asCRbQBwAAIiwfqIVbTsEiGHimf8g4DA");
+        request.setIntentId("aiCRbQBwAAxjgaQGYVB-dSpaS9GxYo6w");
+
+        IntentQuestion question = new IntentQuestion();
+        question.setText(new MsgText("十万个为什么-1"));
+        request.setQuestion(question);
+        weChatManager.callCenterService().modKnowledgeIntent(request, appName);
+    }
+
+    @Test
+    public void delKnowledgeIntent() {
+        weChatManager.callCenterService().delKnowledgeIntent("aiCRbQBwAAxjgaQGYVB-dSpaS9GxYo6w", appName);
+    }
+
+    @Test
+    public void queryKnowledgeIntent() {
+        QueryKnowledgeIntentRequest request = new QueryKnowledgeIntentRequest();
+        KnowledgeIntentResponse response = weChatManager.callCenterService().queryKnowledgeIntent(request, appName);
+        logger.info("问答列表--{}", response);
     }
 }

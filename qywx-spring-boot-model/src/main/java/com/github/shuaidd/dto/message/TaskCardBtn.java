@@ -2,6 +2,8 @@ package com.github.shuaidd.dto.message;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.StringJoiner;
+
 /**
  * 描述
  *
@@ -45,5 +47,15 @@ public class TaskCardBtn {
 
     public void setBold(Boolean bold) {
         isBold = bold;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", TaskCardBtn.class.getSimpleName() + "[", "]")
+                .add("key='" + key + "'")
+                .add("name='" + name + "'")
+                .add("color='" + color + "'")
+                .add("isBold=" + isBold)
+                .toString();
     }
 }

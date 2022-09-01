@@ -3,6 +3,8 @@ package com.github.shuaidd.dto.externalcontact;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.shuaidd.dto.message.*;
 
+import java.util.StringJoiner;
+
 /**
  * @author ddshuai
  * date 2022-08-31 15:18
@@ -63,5 +65,17 @@ public class V2GroupMsg {
 
     public void setFile(MsgFile file) {
         this.file = file;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", V2GroupMsg.class.getSimpleName() + "[", "]")
+                .add("msgType='" + msgType + "'")
+                .add("image=" + image)
+                .add("link=" + link)
+                .add("miniprogram=" + miniprogram)
+                .add("video=" + video)
+                .add("file=" + file)
+                .toString();
     }
 }

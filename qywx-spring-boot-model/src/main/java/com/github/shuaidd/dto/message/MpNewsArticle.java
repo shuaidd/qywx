@@ -2,6 +2,8 @@ package com.github.shuaidd.dto.message;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.StringJoiner;
+
 /**
  * 描述
  *
@@ -65,5 +67,17 @@ public class MpNewsArticle {
 
     public void setDigest(String digest) {
         this.digest = digest;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", MpNewsArticle.class.getSimpleName() + "[", "]")
+                .add("title='" + title + "'")
+                .add("thumbMediaId='" + thumbMediaId + "'")
+                .add("author='" + author + "'")
+                .add("contentSourceUrl='" + contentSourceUrl + "'")
+                .add("content='" + content + "'")
+                .add("digest='" + digest + "'")
+                .toString();
     }
 }

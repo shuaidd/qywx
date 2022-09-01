@@ -21,7 +21,6 @@ import java.io.File;
  * @author ddshuai
  * date 2018-11-28 17:34
  **/
-@SuppressWarnings("all")
 @FeignClient(name = "weChatUploadClient", url = "${qywx.url:https://qyapi.weixin.qq.com}", path = "${qywx.public-path:cgi-bin}", configuration = MultipartSupportConfig.class)
 public interface WeChatMediaClient extends CommonClient {
 
@@ -82,7 +81,7 @@ public interface WeChatMediaClient extends CommonClient {
     /**
      * 获取临时素材 下载到本地文件
      * @param mediaId 素材编号
-     * @param filePath 下载的文件名
+     * @param downloadFilePath 下载的文件名
      * @param app 应用名
      * @return 下载的文件
      */

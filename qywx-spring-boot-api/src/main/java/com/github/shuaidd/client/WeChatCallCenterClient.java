@@ -177,8 +177,9 @@ public interface WeChatCallCenterClient extends CommonClient {
 
     /**
      * 为客户取消推荐
+     *
      * @param request 请求
-     * @param app 应用
+     * @param app     应用
      * @return 操作结果
      */
     @PostMapping(value = "kf/customer/cancel_upgrade_service", headers = HEAD)
@@ -186,19 +187,81 @@ public interface WeChatCallCenterClient extends CommonClient {
 
     /**
      * 可通过此接口创建新的知识库分组
+     *
      * @param request 请求
-     * @param app 应用
+     * @param app     应用
      * @return 分组编号
      */
     @PostMapping(value = "kf/knowledge/add_group", headers = HEAD)
-    AddKnowledgeGroupResponse addKnowledgeGroup(AddKnowledgeGroupRequest request, @RequestParam(HEAD_KEY) String app);
+    AddKnowledgeGroupResponse addKnowledgeGroup(KnowledgeGroupRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改分组
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 操作结果
+     */
+    @PostMapping(value = "kf/knowledge/mod_group", headers = HEAD)
+    BaseResponse modKnowledgeGroup(KnowledgeGroupRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 可通过此接口删除已有的知识库分组，但不能删除系统创建的默认分组
+     *
      * @param request 请求
-     * @param app 应用
+     * @param app     应用
      * @return 分组编号
      */
     @PostMapping(value = "kf/knowledge/del_group", headers = HEAD)
     BaseResponse delKnowledgeGroup(DelKnowledgeGroupRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取分组列表
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 结果列表
+     */
+    @PostMapping(value = "kf/knowledge/list_group", headers = HEAD)
+    KnowledgeGroupResponse queryKnowledgeGroup(QueryKnowledgeGroupRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 添加问答
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 问答编号
+     */
+    @PostMapping(value = "kf/knowledge/add_intent", headers = HEAD)
+    AddIntentResponse addKnowledgeIntent(KnowledgeIntentRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改问答
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 操作结果
+     */
+    @PostMapping(value = "kf/knowledge/mod_intent", headers = HEAD)
+    BaseResponse modKnowledgeIntent(KnowledgeIntentRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除问答
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 操作结果
+     */
+    @PostMapping(value = "kf/knowledge/del_intent", headers = HEAD)
+    BaseResponse delKnowledgeIntent(DelKnowledgeIntentRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取问答列表
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 问答列表
+     */
+    @PostMapping(value = "kf/knowledge/list_intent", headers = HEAD)
+    KnowledgeIntentResponse queryKnowledgeIntent(QueryKnowledgeIntentRequest request, @RequestParam(HEAD_KEY) String app);
 }

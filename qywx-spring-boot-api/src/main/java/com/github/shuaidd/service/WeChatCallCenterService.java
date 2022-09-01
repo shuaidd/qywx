@@ -2,7 +2,6 @@ package com.github.shuaidd.service;
 
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.exception.WeChatException;
-import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.kf.*;
 import com.github.shuaidd.resquest.kf.*;
 import org.apache.commons.lang3.StringUtils;
@@ -239,15 +238,108 @@ public class WeChatCallCenterService extends AbstractBaseService {
         callCenterClient.cancelUpgradeService(request, applicationName);
     }
 
+    /**
+     * 添加分组
+     *
+     * @param name            分组名称
+     * @param applicationName 应用
+     * @return 分组编号
+     */
     public String addKnowledgeGroup(String name, String applicationName) {
 
         if (StringUtils.isEmpty(name)) {
             throw new ParamCheckException("分组名称不能为空");
         }
 
-        AddKnowledgeGroupRequest request = new AddKnowledgeGroupRequest();
+        KnowledgeGroupRequest request = new KnowledgeGroupRequest();
         request.setName(name);
         AddKnowledgeGroupResponse response = callCenterClient.addKnowledgeGroup(request, applicationName);
         return response.getGroupId();
+    }
+
+    /**
+     * 修改分组
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     */
+    public void modKnowledgeGroup(KnowledgeGroupRequest request, String applicationName) {
+        callCenterClient.modKnowledgeGroup(request, applicationName);
+    }
+
+    /**
+     * 删除分组
+     *
+     * @param groupId         分组编号
+     * @param applicationName 应用
+     */
+    public void delKnowledgeGroup(String groupId, String applicationName) {
+        if (StringUtils.isEmpty(groupId)) {
+            throw new ParamCheckException("分组编号不能为空");
+        }
+
+        DelKnowledgeGroupRequest request = new DelKnowledgeGroupRequest();
+        request.setGroupId(groupId);
+
+        callCenterClient.delKnowledgeGroup(request, applicationName);
+    }
+
+    /**
+     * 查询分组列表
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     * @return 分组列表
+     */
+    public KnowledgeGroupResponse queryKnowledgeGroup(QueryKnowledgeGroupRequest request, String applicationName) {
+        return callCenterClient.queryKnowledgeGroup(request, applicationName);
+    }
+
+    /**
+     * 添加问答
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     * @return 问答编号
+     */
+    public String addKnowledgeIntent(KnowledgeIntentRequest request, String applicationName) {
+        return callCenterClient.addKnowledgeIntent(request, applicationName).getIntentId();
+    }
+
+    /**
+     * 修改问答
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     */
+    public void modKnowledgeIntent(KnowledgeIntentRequest request, String applicationName) {
+        callCenterClient.modKnowledgeIntent(request, applicationName);
+    }
+
+    /**
+     * 删除问答
+     *
+     * @param intentId        问答编号
+     * @param applicationName 应用
+     */
+    public void delKnowledgeIntent(String intentId, String applicationName) {
+        if (StringUtils.isEmpty(intentId)) {
+            throw new ParamCheckException("问答编号不能为空");
+        }
+
+        DelKnowledgeIntentRequest request = new DelKnowledgeIntentRequest();
+        request.setIntentId(intentId);
+        callCenterClient.delKnowledgeIntent(request, applicationName);
+    }
+
+    /**
+     * 获取问答列表
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     * @return 问答列表
+     */
+    public KnowledgeIntentResponse queryKnowledgeIntent(QueryKnowledgeIntentRequest request, String applicationName) {
+        return callCenterClient.queryKnowledgeIntent(request, applicationName);
     }
 }

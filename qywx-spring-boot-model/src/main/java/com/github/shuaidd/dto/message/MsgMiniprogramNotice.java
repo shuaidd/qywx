@@ -3,6 +3,7 @@ package com.github.shuaidd.dto.message;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * 描述
@@ -68,5 +69,17 @@ public class MsgMiniprogramNotice {
 
     public void setContentItems(List<ContentItem> contentItems) {
         this.contentItems = contentItems;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", MsgMiniprogramNotice.class.getSimpleName() + "[", "]")
+                .add("appId='" + appId + "'")
+                .add("page='" + page + "'")
+                .add("title='" + title + "'")
+                .add("description='" + description + "'")
+                .add("emphasisFirstItem=" + emphasisFirstItem)
+                .add("contentItems=" + contentItems)
+                .toString();
     }
 }

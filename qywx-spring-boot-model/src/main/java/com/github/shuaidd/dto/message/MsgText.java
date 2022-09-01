@@ -1,5 +1,7 @@
 package com.github.shuaidd.dto.message;
 
+import java.util.StringJoiner;
+
 /**
  * 描述
  *
@@ -22,5 +24,12 @@ public class MsgText {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", MsgText.class.getSimpleName() + "[", "]")
+                .add("content='" + content + "'")
+                .toString();
     }
 }

@@ -20,6 +20,9 @@ public abstract class AbstractBaseResponse {
     @JsonProperty("next_cursor")
     private String nextCursor;
 
+    @JsonProperty("has_more")
+    private Integer hasMore;
+
     public String getErrCode() {
         return errCode;
     }
@@ -42,6 +45,14 @@ public abstract class AbstractBaseResponse {
 
     public void setNextCursor(String nextCursor) {
         this.nextCursor = nextCursor;
+    }
+
+    public Integer getHasMore() {
+        return hasMore;
+    }
+
+    public void setHasMore(Integer hasMore) {
+        this.hasMore = hasMore;
     }
 
     @Override
