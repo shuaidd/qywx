@@ -4,15 +4,12 @@ import com.github.shuaidd.dto.checkin.CheckInData;
 import com.github.shuaidd.dto.checkin.CheckInRule;
 import com.github.shuaidd.dto.tool.DialRecord;
 import com.github.shuaidd.exception.WeChatException;
-import com.github.shuaidd.response.*;
 import com.github.shuaidd.response.oa.*;
-import com.github.shuaidd.response.tool.DialRecordResponse;
 import com.github.shuaidd.resquest.JournalReportStatRequest;
 import com.github.shuaidd.resquest.oa.*;
 import com.github.shuaidd.resquest.tool.DialRecordRequest;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +35,7 @@ public class OAService extends AbstractBaseService {
     public final List<CheckInData> getCheckInData(CheckInDataRequest request, String applicationName) {
         checkApplication(applicationName);
         checkRequest(request);
-        return weChatClient.getCheckInData(request, applicationName).getCheckInDataList();
+        return workOaClient.getCheckInData(request, applicationName).getCheckInDataList();
     }
 
     private void checkRequest(CheckInDataRequest request) {
@@ -68,7 +65,7 @@ public class OAService extends AbstractBaseService {
         List<CheckInRule> checkInRules = new ArrayList<>(1);
         if (Objects.nonNull(request) && Objects.nonNull(request.getDateTime()) && CollectionUtils.isNotEmpty(request.getUserIdList())) {
             if (request.getUserIdList().size() <= LIMIT_USER_COUNT) {
-                return weChatClient.getCheckInOption(request, applicationName).getCheckInRules();
+                return workOaClient.getCheckInOption(request, applicationName).getCheckInRules();
             } else {
                 throw new WeChatException("一次查询人数不能超过100，请分批获取");
             }
@@ -89,22 +86,9 @@ public class OAService extends AbstractBaseService {
         Objects.requireNonNull(request);
         Objects.requireNonNull(request.getEndTime());
         Objects.requireNonNull(request.getStartTime());
-        ApprovalDataResponse response = weChatClient.getApprovalData(request, applicationName);
+        ApprovalDataResponse response = workOaClient.getApprovalData(request, applicationName);
         logger.info("获取审批数据成功：total:{},count:{},next:{}", response.getTotal(), response.getCount(), response.getNextSpNum());
         return response;
-    }
-
-    /**
-     * 获取公费电话拨打记录
-     *
-     * @param request         请求
-     * @param applicationName 应用名称
-     * @return DialRecord
-     */
-    public final List<DialRecord> getDialRecord(DialRecordRequest request, String applicationName) {
-        Objects.requireNonNull(request, "参数为空");
-        List<DialRecord> records = new ArrayList<>(1);
-        return weChatClient.getDialRecord(request, applicationName).getRecords();
     }
 
     /**
@@ -114,7 +98,7 @@ public class OAService extends AbstractBaseService {
      * @return CheckInOptionResponse
      */
     public CheckInOptionResponse getCorpCheckInOption(String applicationName) {
-        return weChatClient.getCorpCheckInOption(applicationName);
+        return workOaClient.getCorpCheckInOption(applicationName);
     }
 
     /**
@@ -125,7 +109,7 @@ public class OAService extends AbstractBaseService {
      * @return CheckInDayReportResponse
      */
     public CheckInDayReportResponse getCheckInDayData(CommonOaRequest request, String applicationName) {
-        return weChatClient.getCheckInDayData(request, applicationName);
+        return workOaClient.getCheckInDayData(request, applicationName);
     }
 
     /**
@@ -136,7 +120,7 @@ public class OAService extends AbstractBaseService {
      * @return CheckInDayReportResponse
      */
     public CheckInDayReportResponse getCheckInMonthData(CommonOaRequest request, String applicationName) {
-        return weChatClient.getCheckInMonthData(request, applicationName);
+        return workOaClient.getCheckInMonthData(request, applicationName);
     }
 
     /**
@@ -147,7 +131,7 @@ public class OAService extends AbstractBaseService {
      * @return CheckInDayReportResponse
      */
     public CheckInScheduleResponse getCheckInScheduleList(CommonOaRequest request, String applicationName) {
-        return weChatClient.getCheckInScheduList(request, applicationName);
+        return workOaClient.getCheckInScheduList(request, applicationName);
     }
 
     /**
@@ -157,7 +141,7 @@ public class OAService extends AbstractBaseService {
      * @param applicationName 应用名称
      */
     public void setCheckInScheduleList(SetCheckInScheduleRequest request, String applicationName) {
-        weChatClient.setCheckInScheduleList(request, applicationName);
+        workOaClient.setCheckInScheduleList(request, applicationName);
     }
 
     /**
@@ -167,7 +151,7 @@ public class OAService extends AbstractBaseService {
      * @param applicationName 应用名称
      */
     public void addCheckInUserFace(AddCheckInUserFaceRequest request, String applicationName) {
-        weChatClient.addCheckInUserFace(request, applicationName);
+        workOaClient.addCheckInUserFace(request, applicationName);
     }
 
     /**
@@ -360,7 +344,7 @@ public class OAService extends AbstractBaseService {
      * @return EmergencyCallResponse
      */
     public EmergencyCallResponse pstnccCall(EmergencyCallRequest request, String applicationName) {
-        return weChatClient.pstnccCall(request, applicationName);
+        return workOaClient.pstnccCall(request, applicationName);
     }
 
     /**
@@ -371,6 +355,6 @@ public class OAService extends AbstractBaseService {
      * @return GetCallStateResponse
      */
     public GetCallStateResponse pstnccCallState(GetCallStateRequest request, String applicationName) {
-        return weChatClient.pstnccCallState(request, applicationName);
+        return workOaClient.pstnccCallState(request, applicationName);
     }
 }

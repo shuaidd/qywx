@@ -27,7 +27,7 @@ public class AuthenticationService extends AbstractBaseService {
         checkApplication(applicationName);
         AuthenticationResponse response = null;
         if (StringUtils.isNotEmpty(code)) {
-            response = weChatClient.getAuthentication(code, applicationName);
+            response = addressBookClient.getAuthentication(code, applicationName);
             if (isSuccess(response)) {
                 logger.info("应用: {},根据code:{},获取到用户身份：{}", applicationName, code, response);
             }

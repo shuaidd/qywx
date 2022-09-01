@@ -1,6 +1,7 @@
 package com.github.shuaidd;
 
 import com.github.shuaidd.dto.tool.CalendarData;
+import com.github.shuaidd.dto.tool.DialRecord;
 import com.github.shuaidd.dto.tool.ReminderData;
 import com.github.shuaidd.dto.checkin.ScheduleData;
 import com.github.shuaidd.dto.addressbook.UserId;
@@ -8,6 +9,7 @@ import com.github.shuaidd.response.tool.AddScheduleResponse;
 import com.github.shuaidd.response.tool.CalendarResponse;
 import com.github.shuaidd.response.tool.GetCalendarResponse;
 import com.github.shuaidd.resquest.oa.CalendarRequest;
+import com.github.shuaidd.resquest.tool.DialRecordRequest;
 import com.github.shuaidd.resquest.tool.GetCalendarRequest;
 import com.github.shuaidd.resquest.tool.ScheduleRequest;
 import com.github.shuaidd.service.EfficiencyToolService;
@@ -17,6 +19,7 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * 描述 效率工具
@@ -31,6 +34,9 @@ public class EfficiencyToolTest extends AbstractTest {
      * 日程 应用别名
      */
     public static final String APP_NAME = "schedule";
+
+    /*公费电话应用*/
+    public static final String PUBLIC_TELEPHONE = "public-telephone";
 
     @Before
     public void init() {
@@ -105,5 +111,12 @@ public class EfficiencyToolTest extends AbstractTest {
         request.setSchedule(scheduleData);
         AddScheduleResponse scheduleResponse = toolService.addSchedule(request, APP_NAME);
         logger.info("{}", scheduleResponse);
+    }
+
+    @Test
+    public void getDialRecord() {
+        DialRecordRequest recordRequest = new DialRecordRequest();
+        List<DialRecord> dialRecords = weChatManager.efficiencyTool().getDialRecord(recordRequest, PUBLIC_TELEPHONE);
+        logger.info("获取到的公费电话拨打记录数据--{}", dialRecords);
     }
 }

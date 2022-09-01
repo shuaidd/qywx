@@ -281,4 +281,123 @@ public interface WorkOaClient extends CommonClient {
      */
     @PostMapping(value = "oa/meetingroom/cancel_book", headers = HEAD)
     BaseResponse cancelBookMeetingRoom(CancelBookRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取打卡数据
+     * <p>
+     * 获取记录时间跨度不超过一个月
+     * 用户列表不超过100个。若用户超过100个，请分批获取
+     * 有打卡记录即可获取打卡数据，与当前”打卡应用”是否开启无关
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CheckInDataResponse
+     */
+    @PostMapping(value = "checkin/getcheckindata", headers = HEAD)
+    CheckInDataResponse getCheckInData(CheckInDataRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取打卡规则
+     * <p>
+     * 用户列表不超过100个，若用户超过100个，请分批获取。
+     * 用户在不同日期的规则不一定相同，请按天获取。
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CheckInRuleResponse
+     */
+    @PostMapping(value = "checkin/getcheckinoption", headers = HEAD)
+    CheckInRuleResponse getCheckInOption(CheckInRuleRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取审批数据
+     * <p>
+     * 获取审批记录请求参数endtime需要大于startime， 切起始时间跨度不要超过一个月；
+     * 一次请求返回的审批记录上限是100条，超过100条记录请使用next_spnum进行分页拉取。
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return ApprovalDataResponse
+     */
+    @PostMapping(value = "corp/getapprovaldata", headers = HEAD)
+    ApprovalDataResponse getApprovalData(ApprovalDataRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取企业所有打卡规则
+     *
+     * @param app 应用名
+     * @return CheckInOptionResponse
+     */
+    @PostMapping(value = "checkin/getcorpcheckinoption", headers = HEAD)
+    CheckInOptionResponse getCorpCheckInOption(@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取打卡日报数据
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CheckInDayReportResponse
+     */
+    @PostMapping(value = "checkin/getcheckin_daydata", headers = HEAD)
+    CheckInDayReportResponse getCheckInDayData(CommonOaRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取打卡月报数据
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CheckInDayReportResponse
+     */
+    @PostMapping(value = "checkin/getcheckin_monthdata", headers = HEAD)
+    CheckInDayReportResponse getCheckInMonthData(CommonOaRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取打卡人员排班信息
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CheckInScheduleResponse
+     */
+    @PostMapping(value = "checkin/getcheckinschedulist", headers = HEAD)
+    CheckInScheduleResponse getCheckInScheduList(CommonOaRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 为打卡人员排班
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "checkin/setcheckinschedulist", headers = HEAD)
+    BaseResponse setCheckInScheduleList(SetCheckInScheduleRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 录入打卡人员人脸信息
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "checkin/addcheckinuserface", headers = HEAD)
+    BaseResponse addCheckInUserFace(AddCheckInUserFaceRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 发起语音电话
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return EmergencyCallResponse
+     */
+    @PostMapping(value = "pstncc/call", headers = HEAD)
+    EmergencyCallResponse pstnccCall(EmergencyCallRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取接听状态
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return EmergencyCallResponse
+     */
+    @PostMapping(value = "pstncc/getstates", headers = HEAD)
+    GetCallStateResponse pstnccCallState(GetCallStateRequest request, @RequestParam(HEAD_KEY) String app);
 }

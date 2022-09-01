@@ -30,7 +30,7 @@ public class ApplicationService extends AbstractBaseService {
         checkApplication(applicationName);
         WeChatApplicationResponse response = null;
         if (StringUtils.isNotEmpty(agentId)) {
-            response = weChatClient.getApplication(agentId, applicationName);
+            response = applicationClient.getApplication(agentId, applicationName);
             if (isSuccess(response)) {
                 logger.info("应用获取成功");
             }
@@ -49,7 +49,7 @@ public class ApplicationService extends AbstractBaseService {
     public final void createApplicationButton(ApplicationButtonRequest request, String agentId, String applicationName) {
         checkApplication(applicationName);
         if (Objects.nonNull(request) && CollectionUtils.isNotEmpty(request.getButtonList())) {
-            BaseResponse response = weChatClient.createApplicationButton(request, agentId, applicationName);
+            BaseResponse response = applicationClient.createApplicationButton(request, agentId, applicationName);
             if (isSuccess(response)) {
                 logger.info("应用菜单创建成功:{},{}", agentId, applicationName);
             }
@@ -67,7 +67,7 @@ public class ApplicationService extends AbstractBaseService {
         checkApplication(applicationName);
         ApplicationButtonResponse response = null;
         if (StringUtils.isNotEmpty(agentId)) {
-            response = weChatClient.getApplicationButtons(agentId, applicationName);
+            response = applicationClient.getApplicationButtons(agentId, applicationName);
             if (isSuccess(response)) {
                 logger.info("应用菜单获取成功:{},{}", agentId, applicationName);
             }
@@ -84,7 +84,7 @@ public class ApplicationService extends AbstractBaseService {
     public final void deleteApplicationButtons(String agentId, String applicationName) {
         checkApplication(applicationName);
         if (StringUtils.isNotEmpty(agentId)) {
-            BaseResponse response = weChatClient.deleteApplicationButtons(agentId, applicationName);
+            BaseResponse response = applicationClient.deleteApplicationButtons(agentId, applicationName);
             if (isSuccess(response)) {
                 logger.info("应用菜单删除成功:{},{}", agentId, applicationName);
             }

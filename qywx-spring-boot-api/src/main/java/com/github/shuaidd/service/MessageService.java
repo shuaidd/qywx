@@ -34,7 +34,7 @@ public class MessageService extends AbstractBaseService {
         checkApplication(applicationName);
         SendMessageResponse response = null;
         if (Objects.nonNull(request)) {
-            response = weChatClient.sendMessage(request, applicationName);
+            response = messageClient.sendMessage(request, applicationName);
             if (isSuccess(response)) {
                 logger.info("消息发送成功");
             }
@@ -52,7 +52,7 @@ public class MessageService extends AbstractBaseService {
     public final void sendAppChatMessage(SendAppChatRequest request, String applicationName) {
         checkApplication(applicationName);
         if (Objects.nonNull(request)) {
-            BaseResponse response = weChatClient.sendAppChatMessage(request, applicationName);
+            BaseResponse response = messageClient.sendAppChatMessage(request, applicationName);
             if (isSuccess(response)) {
                 logger.info("消息发送成功");
             }
@@ -70,7 +70,7 @@ public class MessageService extends AbstractBaseService {
         checkApplication(applicationName);
         String chatId = "";
         if (Objects.nonNull(request)) {
-            CreateAppChatResponse response = weChatClient.createAppChat(request, applicationName);
+            CreateAppChatResponse response = messageClient.createAppChat(request, applicationName);
             if (isSuccess(response)) {
                 chatId = response.getChatId();
             }
@@ -88,7 +88,7 @@ public class MessageService extends AbstractBaseService {
     public final void updateAppChat(UpdateAppChatRequest request, String applicationName) {
         checkApplication(applicationName);
         if (Objects.nonNull(request)) {
-            BaseResponse response = weChatClient.updateAppChat(request, applicationName);
+            BaseResponse response = messageClient.updateAppChat(request, applicationName);
             if (isSuccess(response)) {
                 logger.info("更新群聊成功");
             }
@@ -106,7 +106,7 @@ public class MessageService extends AbstractBaseService {
         checkApplication(applicationName);
         ChatInfo chatInfo = null;
         if (StringUtils.isNotEmpty(chatId)) {
-            SearchAppChatResponse response = weChatClient.searchAppChat(chatId, applicationName);
+            SearchAppChatResponse response = messageClient.searchAppChat(chatId, applicationName);
             if (isSuccess(response)) {
                 chatInfo = response.getChatInfo();
                 logger.info("查询到的群聊信息：{}", chatInfo);

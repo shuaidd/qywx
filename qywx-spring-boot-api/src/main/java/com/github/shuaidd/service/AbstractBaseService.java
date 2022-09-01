@@ -37,7 +37,19 @@ public abstract class AbstractBaseService {
     protected WeChatCallCenterClient callCenterClient;
 
     @Autowired
+    protected AddressBookClient addressBookClient;
+
+    @Autowired
     protected WeChatMediaClient weChatMediaClient;
+
+    @Autowired
+    protected WorkApplicationClient applicationClient;
+
+    @Autowired
+    protected MessageClient messageClient;
+
+    @Autowired
+    protected EfficiencyToolClient efficiencyToolClient;
 
     @Autowired
     protected WeChatConfigurationProperties properties;

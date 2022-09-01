@@ -1,8 +1,11 @@
 package com.github.shuaidd.resquest.tool;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.github.shuaidd.json.Date2LongSerializer;
 import com.github.shuaidd.resquest.OffsetPageRequest;
 
+import java.util.Date;
 import java.util.StringJoiner;
 
 /**
@@ -16,27 +19,29 @@ public class DialRecordRequest extends OffsetPageRequest {
      * 查询的起始时间戳
      */
     @JsonProperty("starttime")
-    private Long startTime;
+    @JsonSerialize(using = Date2LongSerializer.class)
+    private Date startTime;
 
     /**
      * 查询的结束时间戳
      */
     @JsonProperty("endtime")
-    private Long endTime;
+    @JsonSerialize(using = Date2LongSerializer.class)
+    private Date endTime;
 
-    public Long getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Long startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public Long getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Long endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 

@@ -42,9 +42,6 @@ public class OAServiceTest extends AbstractTest {
     /*打卡应用*/
     public static final String CHECK_IN = "check-in";
 
-    /*公费电话应用*/
-    public static final String PUBLIC_TELEPHONE = "public-telephone";
-
     /*审批应用*/
     public static final String APPROVE = "approve";
 
@@ -60,12 +57,6 @@ public class OAServiceTest extends AbstractTest {
         logger.info("获取到的打卡数据--{}", checkInOptionResponse);
     }
 
-    @Test
-    public void getDialRecord() {
-        DialRecordRequest recordRequest = new DialRecordRequest();
-        List<DialRecord> dialRecords = weChatManager.oaService().getDialRecord(recordRequest, PUBLIC_TELEPHONE);
-        logger.info("获取到的公费电话拨打记录数据--{}", dialRecords);
-    }
 
     @Test
     public void getCheckInData() {

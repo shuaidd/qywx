@@ -90,7 +90,7 @@ public class AddressBookService extends AbstractBaseService {
     public final void createUser(CreateUserRequest request, String applicationName) {
         checkApplication(applicationName);
         if (Objects.nonNull(request)) {
-            BaseResponse baseResponse = weChatClient.createUser(request, applicationName);
+            BaseResponse baseResponse = addressBookClient.createUser(request, applicationName);
             if (isSuccess(baseResponse)) {
                 logger.info("用户创建成功:{}", request);
             }
@@ -108,7 +108,7 @@ public class AddressBookService extends AbstractBaseService {
         checkApplication(applicationName);
         WeChatUserResponse weChatUserResponse = null;
         if (StringUtils.isNotEmpty(userId)) {
-            weChatUserResponse = weChatClient.getUser(userId, applicationName);
+            weChatUserResponse = addressBookClient.getUser(userId, applicationName);
             if (isSuccess(weChatUserResponse)) {
                 if (logger.isInfoEnabled()) {
                     logger.info("读取到成员信息：{}", weChatUserResponse);
@@ -128,7 +128,7 @@ public class AddressBookService extends AbstractBaseService {
     public final void updateUser(UpdateUserRequest request, String applicationName) {
         checkApplication(applicationName);
         if (Objects.nonNull(request) && StringUtils.isNotEmpty(request.getUserId())) {
-            BaseResponse baseResponse = weChatClient.updateUser(request, applicationName);
+            BaseResponse baseResponse = addressBookClient.updateUser(request, applicationName);
             if (isSuccess(baseResponse)) {
                 if (logger.isInfoEnabled()) {
                     logger.info("更新成员信息成功：userId-{},applicationName-{}", request.getUserId(), applicationName);
@@ -146,7 +146,7 @@ public class AddressBookService extends AbstractBaseService {
     public final void deleteUser(String userId, String applicationName) {
         checkApplication(applicationName);
         if (StringUtils.isNotEmpty(userId)) {
-            BaseResponse response = weChatClient.deleteUser(userId, applicationName);
+            BaseResponse response = addressBookClient.deleteUser(userId, applicationName);
             if (isSuccess(response)) {
                 if (logger.isInfoEnabled()) {
                     logger.info("删除成员成功：userId-{},applicationName-{}", userId, applicationName);
@@ -164,7 +164,7 @@ public class AddressBookService extends AbstractBaseService {
     public final void batchDeleteUser(BatchDeleteUserRequest request, String applicationName) {
         checkApplication(applicationName);
         if (Objects.nonNull(request) && CollectionUtils.isNotEmpty(request.getUserIdList())) {
-            BaseResponse response = weChatClient.batchDelete(request, applicationName);
+            BaseResponse response = addressBookClient.batchDelete(request, applicationName);
             if (isSuccess(response)) {
                 if (logger.isInfoEnabled()) {
                     logger.info("批量删除成员成功：{},applicationName-{}", request, applicationName);
@@ -186,7 +186,7 @@ public class AddressBookService extends AbstractBaseService {
         List<WeChatUser> weChatUsers = new ArrayList<>(1);
         if (Objects.nonNull(departmentId)) {
             Integer getChild = fetchChild ? 1 : 0;
-            DepartmentUserResponse departmentUserResponse = weChatClient.getDepartmentUser(departmentId, getChild, applicationName);
+            DepartmentUserResponse departmentUserResponse = addressBookClient.getDepartmentUser(departmentId, getChild, applicationName);
             if (isSuccess(departmentUserResponse)) {
                 weChatUsers = departmentUserResponse.getWeChatUserList();
 
@@ -212,7 +212,7 @@ public class AddressBookService extends AbstractBaseService {
         List<WeChatUser> weChatUsers = new ArrayList<>(1);
         if (Objects.nonNull(departmentId)) {
             Integer getChild = fetchChild ? 1 : 0;
-            DepartmentUserResponse departmentUserResponse = weChatClient.getDepartmentUserDetail(departmentId, getChild, applicationName);
+            DepartmentUserResponse departmentUserResponse = addressBookClient.getDepartmentUserDetail(departmentId, getChild, applicationName);
             if (isSuccess(departmentUserResponse)) {
                 weChatUsers = departmentUserResponse.getWeChatUserList();
 
@@ -236,7 +236,7 @@ public class AddressBookService extends AbstractBaseService {
         checkApplication(applicationName);
         String openId = null;
         if (StringUtils.isNotEmpty(userId)) {
-            ConvertUserIdOpenIdResponse response = weChatClient.convertToOpenId(new ConvertUserIdOpenIdRequest(userId, null), applicationName);
+            ConvertUserIdOpenIdResponse response = addressBookClient.convertToOpenId(new ConvertUserIdOpenIdRequest(userId, null), applicationName);
             if (isSuccess(response)) {
                 openId = response.getOpenId();
                 if (logger.isInfoEnabled()) {
@@ -259,7 +259,7 @@ public class AddressBookService extends AbstractBaseService {
         checkApplication(applicationName);
         String userId = null;
         if (StringUtils.isNotEmpty(openId)) {
-            ConvertUserIdOpenIdResponse response = weChatClient.convertToUserId(new ConvertUserIdOpenIdRequest(null, openId), applicationName);
+            ConvertUserIdOpenIdResponse response = addressBookClient.convertToUserId(new ConvertUserIdOpenIdRequest(null, openId), applicationName);
             if (isSuccess(response)) {
                 userId = response.getUserId();
                 if (logger.isInfoEnabled()) {
@@ -280,7 +280,7 @@ public class AddressBookService extends AbstractBaseService {
     public final void authSuccess(String userId, String applicationName) {
         checkApplication(applicationName);
         if (StringUtils.isNotEmpty(userId)) {
-            BaseResponse response = weChatClient.authSucc(userId, applicationName);
+            BaseResponse response = addressBookClient.authSucc(userId, applicationName);
             if (isSuccess(response)) {
                 if (logger.isInfoEnabled()) {
                     logger.info("二次验证成功：userId-{},applicationName-{}", userId, applicationName);
@@ -301,7 +301,7 @@ public class AddressBookService extends AbstractBaseService {
             if (CollectionUtils.isEmpty(request.getParty()) && CollectionUtils.isEmpty(request.getTag()) && CollectionUtils.isEmpty(request.getUser())) {
                 return;
             }
-            BaseResponse baseResponse = weChatClient.invite(request, applicationName);
+            BaseResponse baseResponse = addressBookClient.invite(request, applicationName);
             if (isSuccess(baseResponse)) {
                 if (logger.isInfoEnabled()) {
                     logger.info("邀请成功：applicationName-{}", applicationName);
@@ -321,7 +321,7 @@ public class AddressBookService extends AbstractBaseService {
         checkApplication(applicationName);
         CreateDepartmentResponse response = null;
         if (Objects.nonNull(request) && StringUtils.isNotEmpty(request.getName())) {
-            response = weChatClient.createDepartment(request, applicationName);
+            response = addressBookClient.createDepartment(request, applicationName);
             if (isSuccess(response)) {
                 if (logger.isInfoEnabled()) {
                     logger.info("创建部门成功：部门编号-{},applicationName-{}", response.getId(), applicationName);
@@ -341,7 +341,7 @@ public class AddressBookService extends AbstractBaseService {
     public final void updateDepartment(DepartmentRequest request, String applicationName) {
         checkApplication(applicationName);
         if (Objects.nonNull(request) && Objects.nonNull(request.getId())) {
-            BaseResponse response = weChatClient.updateDepartment(request, applicationName);
+            BaseResponse response = addressBookClient.updateDepartment(request, applicationName);
             if (isSuccess(response)) {
                 if (logger.isInfoEnabled()) {
                     logger.info("更新部门成功：更新信息-{},applicationName-{}", request, applicationName);
@@ -359,7 +359,7 @@ public class AddressBookService extends AbstractBaseService {
     public final void deleteDepartment(Integer id, String applicationName) {
         checkApplication(applicationName);
         if (Objects.nonNull(id)) {
-            BaseResponse response = weChatClient.deleteDepartment(id, applicationName);
+            BaseResponse response = addressBookClient.deleteDepartment(id, applicationName);
             if (isSuccess(response)) {
                 if (logger.isInfoEnabled()) {
                     logger.info("删除部门成功：部门编号-{},applicationName-{}", id, applicationName);
@@ -378,7 +378,7 @@ public class AddressBookService extends AbstractBaseService {
     public final List<Department> departmentList(Integer id, String applicationName) {
         checkApplication(applicationName);
         List<Department> departments = new ArrayList<>(1);
-        DepartmentListResponse response = weChatClient.departmentList(id, applicationName);
+        DepartmentListResponse response = addressBookClient.departmentList(id, applicationName);
         if (isSuccess(response)) {
             departments = response.getDepartments();
             if (logger.isInfoEnabled()) {
@@ -399,7 +399,7 @@ public class AddressBookService extends AbstractBaseService {
     public final List<Department> simpleDepartmentList(Integer id, String applicationName) {
         checkApplication(applicationName);
         List<Department> departments = new ArrayList<>(1);
-        SimpleDepartmentListResponse response = weChatClient.departmentSimpleList(id, applicationName);
+        SimpleDepartmentListResponse response = addressBookClient.departmentSimpleList(id, applicationName);
         if (isSuccess(response)) {
             departments = response.getDepartments();
             if (logger.isInfoEnabled()) {
@@ -421,7 +421,7 @@ public class AddressBookService extends AbstractBaseService {
         checkApplication(applicationName);
         Integer tagId = null;
         if (Objects.nonNull(request) && StringUtils.isNotEmpty(request.getTagName())) {
-            CreateTagResponse createTagResponse = weChatClient.createTag(request, applicationName);
+            CreateTagResponse createTagResponse = addressBookClient.createTag(request, applicationName);
             if (isSuccess(createTagResponse)) {
                 tagId = createTagResponse.getTagId();
                 if (logger.isInfoEnabled()) {
@@ -446,7 +446,7 @@ public class AddressBookService extends AbstractBaseService {
             TagRequest tagRequest = new TagRequest();
             tagRequest.setTagId(tagId);
             tagRequest.setTagName(tagName);
-            BaseResponse response = weChatClient.updateTag(tagRequest, applicationName);
+            BaseResponse response = addressBookClient.updateTag(tagRequest, applicationName);
             if (isSuccess(response)) {
                 if (logger.isInfoEnabled()) {
                     logger.info("更新标签名字成功：标签编号[{}],标签名称[{}],applicationName-{}", tagId, tagName, applicationName);
@@ -464,7 +464,7 @@ public class AddressBookService extends AbstractBaseService {
     public final void deleteTag(Integer tagId, String applicationName) {
         checkApplication(applicationName);
         if (Objects.nonNull(tagId)) {
-            BaseResponse response = weChatClient.deleteTag(tagId, applicationName);
+            BaseResponse response = addressBookClient.deleteTag(tagId, applicationName);
             if (isSuccess(response)) {
                 if (logger.isInfoEnabled()) {
                     logger.info("删除标签成功：标签编号[{}],applicationName-{}", tagId, applicationName);
@@ -484,7 +484,7 @@ public class AddressBookService extends AbstractBaseService {
         checkApplication(applicationName);
         QueryTagUserResponse response = null;
         if (Objects.nonNull(tagId)) {
-            response = weChatClient.getTagUser(tagId, applicationName);
+            response = addressBookClient.getTagUser(tagId, applicationName);
             if (isSuccess(response)) {
                 if (logger.isInfoEnabled()) {
                     logger.info("获取标签成员成功：标签编号[{}],applicationName-{}--成员--{}", tagId, applicationName, response.getUserList());
@@ -506,7 +506,7 @@ public class AddressBookService extends AbstractBaseService {
         checkApplication(applicationName);
         TagUserResponse response = null;
         if (Objects.nonNull(request) && Objects.nonNull(request.getTagId())) {
-            response = weChatClient.addTagUsers(request, applicationName);
+            response = addressBookClient.addTagUsers(request, applicationName);
             if (isSuccess(response)) {
                 if (logger.isInfoEnabled()) {
                     logger.info("增加标签成员成功：标签编号[{}],applicationName-{}", request.getTagId(), applicationName);
@@ -527,7 +527,7 @@ public class AddressBookService extends AbstractBaseService {
         checkApplication(applicationName);
         TagUserResponse response = null;
         if (Objects.nonNull(request) && Objects.nonNull(request.getTagId())) {
-            response = weChatClient.deleteTagUsers(request, applicationName);
+            response = addressBookClient.deleteTagUsers(request, applicationName);
             if (isSuccess(response)) {
                 if (logger.isInfoEnabled()) {
                     logger.info("删除标签成员成功：标签编号[{}],applicationName-{}", request.getTagId(), applicationName);
@@ -546,7 +546,7 @@ public class AddressBookService extends AbstractBaseService {
     public final List<Tag> getTagList(String applicationName) {
         checkApplication(applicationName);
         List<Tag> tags = new ArrayList<>(1);
-        TagListResponse response = weChatClient.getTagList(applicationName);
+        TagListResponse response = addressBookClient.getTagList(applicationName);
         if (isSuccess(response)) {
             tags = response.getTagList();
             if (logger.isInfoEnabled()) {
@@ -646,9 +646,9 @@ public class AddressBookService extends AbstractBaseService {
             AsyncJobRequest request = buildAsyncJobRequest(mediaId, toInvite, callbackData);
             AsyncJobResponse response = null;
             if (ASYNC_BATCH_UPDATE_USER.equals(type)) {
-                response = weChatClient.asyncBatchUpdateUser(request, applicationName);
+                response = addressBookClient.asyncBatchUpdateUser(request, applicationName);
             } else if (FULL_COVER_USER.equals(type)) {
-                response = weChatClient.fullCoverUser(request, applicationName);
+                response = addressBookClient.fullCoverUser(request, applicationName);
             }
             if (isSuccess(response)) {
                 return Objects.nonNull(response) ? response.getJobId() : "";
@@ -734,7 +734,7 @@ public class AddressBookService extends AbstractBaseService {
             MultipartFile multi = new CommonsMultipartFile(fileItem);
             String mediaId = mediaService.uploadMaterial(multi, MediaService.FILE, applicationName);
             AsyncJobRequest request = buildAsyncJobRequest(mediaId, null, callbackData);
-            AsyncJobResponse response = weChatClient.fullCoverDepartment(request, applicationName);
+            AsyncJobResponse response = addressBookClient.fullCoverDepartment(request, applicationName);
 
             if (isSuccess(response)) {
                 return Objects.nonNull(response) ? response.getJobId() : "";
@@ -769,7 +769,7 @@ public class AddressBookService extends AbstractBaseService {
         checkApplication(applicationName);
         AsyncJobResultResponse resultResponse = null;
         if (StringUtils.isNotEmpty(jobId)) {
-            resultResponse = weChatClient.jobResult(jobId, applicationName);
+            resultResponse = addressBookClient.jobResult(jobId, applicationName);
             if (isSuccess(resultResponse)) {
                 logger.info("获取任务执行结果成功：{}", resultResponse);
             }
@@ -787,7 +787,7 @@ public class AddressBookService extends AbstractBaseService {
      */
     public final String getCorpQrCode(Integer sizeType, String applicationName) {
         checkApplication(applicationName);
-        JoinQrCodeResponse response = weChatClient.getJoinQrCode(sizeType, applicationName);
+        JoinQrCodeResponse response = addressBookClient.getJoinQrCode(sizeType, applicationName);
         if (isSuccess(response)) {
             return response.getJoinQrCode();
         }
@@ -813,7 +813,7 @@ public class AddressBookService extends AbstractBaseService {
         ActiveStatRequest request = new ActiveStatRequest();
         request.setDate(formatDate);
 
-        ActiveStatResponse response = weChatClient.getActiveStat(request, applicationName);
+        ActiveStatResponse response = addressBookClient.getActiveStat(request, applicationName);
         if (isSuccess(response)) {
             return response.getActiveCnt();
         }
@@ -831,7 +831,7 @@ public class AddressBookService extends AbstractBaseService {
      */
     public final String exportUser(AddressBookExportRequest request, String applicationName) {
         checkApplication(applicationName);
-        AsyncJobResponse response = weChatClient.exportUser(request, applicationName);
+        AsyncJobResponse response = addressBookClient.exportUser(request, applicationName);
         if (isSuccess(response)) {
             return response.getJobId();
         }
@@ -849,7 +849,7 @@ public class AddressBookService extends AbstractBaseService {
      */
     public final String exportUserDetail(AddressBookExportRequest request, String applicationName) {
         checkApplication(applicationName);
-        AsyncJobResponse response = weChatClient.exportUserDetail(request, applicationName);
+        AsyncJobResponse response = addressBookClient.exportUserDetail(request, applicationName);
         if (isSuccess(response)) {
             return response.getJobId();
         }
@@ -867,7 +867,7 @@ public class AddressBookService extends AbstractBaseService {
      */
     public final String exportDepartment(AddressBookExportRequest request, String applicationName) {
         checkApplication(applicationName);
-        AsyncJobResponse response = weChatClient.exportDepartment(request, applicationName);
+        AsyncJobResponse response = addressBookClient.exportDepartment(request, applicationName);
         if (isSuccess(response)) {
             return response.getJobId();
         }
@@ -885,7 +885,7 @@ public class AddressBookService extends AbstractBaseService {
      */
     public final String exportTagUser(AddressBookExportRequest request, String applicationName) {
         checkApplication(applicationName);
-        AsyncJobResponse response = weChatClient.exportTagUser(request, applicationName);
+        AsyncJobResponse response = addressBookClient.exportTagUser(request, applicationName);
         if (isSuccess(response)) {
             return response.getJobId();
         }
@@ -945,7 +945,7 @@ public class AddressBookService extends AbstractBaseService {
      */
     public final List<DeptUser> getUserIds(CursorPageRequest request, String applicationName) {
         checkApplication(applicationName);
-        SimpleDeptUserResponse response = weChatClient.getUserIds(request,applicationName);
+        SimpleDeptUserResponse response = addressBookClient.getUserIds(request,applicationName);
         if (isSuccess(response)) {
             return response.getDeptUsers();
         }
