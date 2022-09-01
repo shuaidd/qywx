@@ -3,7 +3,13 @@ package com.github.shuaidd.client;
 import com.github.shuaidd.client.config.WeChatConfiguration;
 import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.tool.*;
+import com.github.shuaidd.response.wedrive.CreateSpaceResponse;
+import com.github.shuaidd.response.wedrive.SpaceInfoResponse;
 import com.github.shuaidd.resquest.tool.*;
+import com.github.shuaidd.resquest.wedrive.CreateSpaceRequest;
+import com.github.shuaidd.resquest.wedrive.DismissSpaceRequest;
+import com.github.shuaidd.resquest.wedrive.RenameSpaceRequest;
+import com.github.shuaidd.resquest.wedrive.SpaceInfoRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -167,4 +173,46 @@ public interface EfficiencyToolClient extends CommonClient {
      */
     @PostMapping(value = "dial/get_dial_record", headers = HEAD)
     DialRecordResponse getDialRecord(DialRecordRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /* *************************************** 微盘 *************************************** */
+
+    /**
+     * 新建空间
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 空间编号
+     */
+    @PostMapping(value = "wedrive/space_create", headers = HEAD)
+    CreateSpaceResponse createSpace(CreateSpaceRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 该接口用于重命名已有空间，接收userid参数，以空间管理员身份来重命名
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 操作结果
+     */
+    @PostMapping(value = "wedrive/space_rename", headers = HEAD)
+    BaseResponse renameSpace(RenameSpaceRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 该接口用于解散已有空间，需要以空间管理员身份来解散。
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 操作结果
+     */
+    @PostMapping(value = "wedrive/space_dismiss", headers = HEAD)
+    BaseResponse dismissSpace(DismissSpaceRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取空间/相册信息
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 空间信息
+     */
+    @PostMapping(value = "wedrive/space_info", headers = HEAD)
+    SpaceInfoResponse spaceInfo(SpaceInfoRequest request, @RequestParam(HEAD_KEY) String app);
 }

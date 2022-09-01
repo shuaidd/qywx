@@ -5,6 +5,7 @@ import com.github.shuaidd.dto.tool.DialRecord;
 import com.github.shuaidd.dto.tool.ReminderData;
 import com.github.shuaidd.dto.checkin.ScheduleData;
 import com.github.shuaidd.dto.addressbook.UserId;
+import com.github.shuaidd.dto.wedrive.SpaceInfo;
 import com.github.shuaidd.response.tool.AddScheduleResponse;
 import com.github.shuaidd.response.tool.CalendarResponse;
 import com.github.shuaidd.response.tool.GetCalendarResponse;
@@ -12,6 +13,10 @@ import com.github.shuaidd.resquest.oa.CalendarRequest;
 import com.github.shuaidd.resquest.tool.DialRecordRequest;
 import com.github.shuaidd.resquest.tool.GetCalendarRequest;
 import com.github.shuaidd.resquest.tool.ScheduleRequest;
+import com.github.shuaidd.resquest.wedrive.CreateSpaceRequest;
+import com.github.shuaidd.resquest.wedrive.DismissSpaceRequest;
+import com.github.shuaidd.resquest.wedrive.RenameSpaceRequest;
+import com.github.shuaidd.resquest.wedrive.SpaceInfoRequest;
 import com.github.shuaidd.service.EfficiencyToolService;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Before;
@@ -38,6 +43,8 @@ public class EfficiencyToolTest extends AbstractTest {
 
     /*公费电话应用*/
     public static final String PUBLIC_TELEPHONE = "public-telephone";
+
+    public static final String MICRO_DISK = "micro-disk";
 
     @Before
     public void init() {
@@ -119,5 +126,44 @@ public class EfficiencyToolTest extends AbstractTest {
         DialRecordRequest recordRequest = new DialRecordRequest();
         List<DialRecord> dialRecords = weChatManager.efficiencyTool().getDialRecord(recordRequest, PUBLIC_TELEPHONE);
         logger.info("获取到的公费电话拨打记录数据--{}", dialRecords);
+    }
+
+    /**
+     * s.ww36e0a51aab349a7d.6620425469yR
+     */
+    @Test
+    public void createSpace() {
+        CreateSpaceRequest request = new CreateSpaceRequest();
+        request.setUserId("20170410022717");
+        request.setSpaceSubType(0);
+        request.setSpaceName("日常支持");
+        String spaceId = weChatManager.efficiencyTool().createSpace(request, MICRO_DISK);
+        logger.info("创建的空间编号--{}", spaceId);
+    }
+
+    @Test
+    public void renameSpace() {
+        RenameSpaceRequest request = new RenameSpaceRequest();
+        request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
+        request.setSpaceName("产品文档");
+        request.setUserId("20170410022717");
+        weChatManager.efficiencyTool().renameSpace(request, MICRO_DISK);
+    }
+
+    @Test
+    public void dismissSpace() {
+        DismissSpaceRequest request = new DismissSpaceRequest();
+        request.setSpaceId("");
+        request.setUserId("20170410022717");
+        weChatManager.efficiencyTool().dismissSpace(request, MICRO_DISK);
+    }
+
+    @Test
+    public void spaceInfo() {
+        SpaceInfoRequest request = new SpaceInfoRequest();
+        request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
+        request.setUserId("20170410022717");
+        SpaceInfo spaceInfo = weChatManager.efficiencyTool().spaceInfo(request, MICRO_DISK);
+        logger.info("空间信息--{}", spaceInfo);
     }
 }

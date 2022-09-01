@@ -1,9 +1,14 @@
 package com.github.shuaidd.service;
 
 import com.github.shuaidd.dto.tool.DialRecord;
+import com.github.shuaidd.dto.wedrive.SpaceInfo;
 import com.github.shuaidd.response.tool.*;
 import com.github.shuaidd.resquest.oa.CalendarRequest;
 import com.github.shuaidd.resquest.tool.*;
+import com.github.shuaidd.resquest.wedrive.CreateSpaceRequest;
+import com.github.shuaidd.resquest.wedrive.DismissSpaceRequest;
+import com.github.shuaidd.resquest.wedrive.RenameSpaceRequest;
+import com.github.shuaidd.resquest.wedrive.SpaceInfoRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -272,5 +277,46 @@ public class EfficiencyToolService extends AbstractBaseService {
     public List<DialRecord> getDialRecord(DialRecordRequest request, String applicationName) {
         Objects.requireNonNull(request, "参数为空");
         return efficiencyToolClient.getDialRecord(request, applicationName).getRecords();
+    }
+
+    /**
+     * 创建空间
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 空间编号
+     */
+    public String createSpace(CreateSpaceRequest request, String applicationName) {
+        return efficiencyToolClient.createSpace(request, applicationName).getSpaceId();
+    }
+
+    /**
+     * 重命名空间
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void renameSpace(RenameSpaceRequest request, String applicationName) {
+        efficiencyToolClient.renameSpace(request, applicationName);
+    }
+
+    /**
+     * 解散空间
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void dismissSpace(DismissSpaceRequest request, String applicationName) {
+        efficiencyToolClient.dismissSpace(request, applicationName);
+    }
+
+    /**
+     * 获取空间/相册信息
+     * @param request 请求
+     * @param applicationName 应用名称
+     * @return 空间信息
+     */
+    public SpaceInfo spaceInfo(SpaceInfoRequest request, String applicationName) {
+        return efficiencyToolClient.spaceInfo(request, applicationName).getSpaceInfo();
     }
 }
