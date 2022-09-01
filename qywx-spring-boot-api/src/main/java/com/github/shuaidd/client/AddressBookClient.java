@@ -277,7 +277,6 @@ public interface AddressBookClient extends CommonClient {
      * 通讯录中存在、文件中不存在的成员，保持不变
      * 成员字段更新规则：可自行添加扩展字段。文件中有指定的字段，以指定的字段值为准；文件中没指定的字段，不更新
      * <p>
-     * <p>
      * 增量更新成员
      *
      * @param request 请求体

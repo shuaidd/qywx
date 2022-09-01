@@ -11,4 +11,5 @@ public interface CommonClient {
     String HEAD = HEAD_KEY + "={app}";
     String ACCESS_TOKEN = "access_token";
     String GET_TOKEN = "/gettoken";
+    String DOWNLOAD_FILE_PATH = "downloadFilePath";
 }
