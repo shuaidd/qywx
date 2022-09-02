@@ -8,8 +8,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  **/
 public class SpaceAuthItem {
 
+    /**
+     * 成员类型 1:个人 2:部门
+     */
     private Integer type;
 
+    /**
+     * 1:仅下载 2:可编辑 4:可预览 5:可上传下载6:管理员
+     * 200:自定义权限 (可上传下载+仅预览权限，都是旧付费企业仅专业版企业可设置，
+     * 新付费企业仅userid为专业帐号时才可设置；自定义权限都是仅userid为专业帐号时才可设置)
+     */
     private Integer auth;
 
     @JsonProperty(value = "userid")
@@ -18,6 +26,9 @@ public class SpaceAuthItem {
     @JsonProperty(value = "departmentid")
     private Integer departmentId;
 
+    /**
+     * 代表权限自定义组合。当auth=200时候填写
+     */
     @JsonProperty(value = "customize_auth")
     private CustomizeAuth customizeAuth;
 

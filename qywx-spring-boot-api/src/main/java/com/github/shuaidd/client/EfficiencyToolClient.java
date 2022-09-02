@@ -3,13 +3,9 @@ package com.github.shuaidd.client;
 import com.github.shuaidd.client.config.WeChatConfiguration;
 import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.tool.*;
-import com.github.shuaidd.response.wedrive.CreateSpaceResponse;
-import com.github.shuaidd.response.wedrive.SpaceInfoResponse;
+import com.github.shuaidd.response.wedrive.*;
 import com.github.shuaidd.resquest.tool.*;
-import com.github.shuaidd.resquest.wedrive.CreateSpaceRequest;
-import com.github.shuaidd.resquest.wedrive.DismissSpaceRequest;
-import com.github.shuaidd.resquest.wedrive.RenameSpaceRequest;
-import com.github.shuaidd.resquest.wedrive.SpaceInfoRequest;
+import com.github.shuaidd.resquest.wedrive.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -215,4 +211,84 @@ public interface EfficiencyToolClient extends CommonClient {
      */
     @PostMapping(value = "wedrive/space_info", headers = HEAD)
     SpaceInfoResponse spaceInfo(SpaceInfoRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 添加成员/部门
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 操作结果
+     */
+    @PostMapping(value = "wedrive/space_acl_add", headers = HEAD)
+    BaseResponse addSpaceAcl(SpaceAclRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 移除成员/部门
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 操作结果
+     */
+    @PostMapping(value = "wedrive/space_acl_del", headers = HEAD)
+    BaseResponse delSpaceAcl(SpaceAclRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 安全设置
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 操作结果
+     */
+    @PostMapping(value = "wedrive/space_setting", headers = HEAD)
+    BaseResponse spaceSetting(SpaceSettingRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取邀请链接
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 操作结果
+     */
+    @PostMapping(value = "wedrive/space_share", headers = HEAD)
+    SpaceShareResponse spaceShare(CommonSpaceRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取文件列表
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 文件列表
+     */
+    @PostMapping(value = "wedrive/file_list", headers = HEAD)
+    SpaceFileResponse listFile(QueryFileRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取文件列表
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 文件编号 地址
+     */
+    @PostMapping(value = "wedrive/file_create", headers = HEAD)
+    CreateFileResponse createFile(CreateFileRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 上传文件
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 文件编号 地址
+     */
+    @PostMapping(value = "wedrive/file_upload", headers = HEAD)
+    CreateFileResponse uploadFile(UploadFileRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 下载文件
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 文件地址
+     */
+    @PostMapping(value = "wedrive/file_download", headers = HEAD)
+    DownloadFileResponse downloadFile(DownloadFileRequest request, @RequestParam(HEAD_KEY) String app);
 }

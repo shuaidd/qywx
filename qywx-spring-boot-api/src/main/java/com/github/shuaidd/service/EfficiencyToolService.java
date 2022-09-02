@@ -3,12 +3,12 @@ package com.github.shuaidd.service;
 import com.github.shuaidd.dto.tool.DialRecord;
 import com.github.shuaidd.dto.wedrive.SpaceInfo;
 import com.github.shuaidd.response.tool.*;
+import com.github.shuaidd.response.wedrive.CreateFileResponse;
+import com.github.shuaidd.response.wedrive.DownloadFileResponse;
+import com.github.shuaidd.response.wedrive.SpaceFileResponse;
 import com.github.shuaidd.resquest.oa.CalendarRequest;
 import com.github.shuaidd.resquest.tool.*;
-import com.github.shuaidd.resquest.wedrive.CreateSpaceRequest;
-import com.github.shuaidd.resquest.wedrive.DismissSpaceRequest;
-import com.github.shuaidd.resquest.wedrive.RenameSpaceRequest;
-import com.github.shuaidd.resquest.wedrive.SpaceInfoRequest;
+import com.github.shuaidd.resquest.wedrive.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -312,11 +312,97 @@ public class EfficiencyToolService extends AbstractBaseService {
 
     /**
      * 获取空间/相册信息
-     * @param request 请求
+     *
+     * @param request         请求
      * @param applicationName 应用名称
      * @return 空间信息
      */
     public SpaceInfo spaceInfo(SpaceInfoRequest request, String applicationName) {
         return efficiencyToolClient.spaceInfo(request, applicationName).getSpaceInfo();
+    }
+
+    /**
+     * 添加成员/部门
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void addSpaceAcl(SpaceAclRequest request, String applicationName) {
+        efficiencyToolClient.addSpaceAcl(request, applicationName);
+    }
+
+    /**
+     * 移除成员/部门
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void delSpaceAcl(SpaceAclRequest request, String applicationName) {
+        efficiencyToolClient.delSpaceAcl(request, applicationName);
+    }
+
+    /**
+     * 安全设置
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void spaceSetting(SpaceSettingRequest request, String applicationName) {
+        efficiencyToolClient.spaceSetting(request, applicationName);
+    }
+
+    /**
+     * 获取邀请链接
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 分享连接
+     */
+    public String spaceShare(CommonSpaceRequest request, String applicationName) {
+        return efficiencyToolClient.spaceShare(request, applicationName).getSpaceShareUrl();
+    }
+
+    /**
+     * 获取文件列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 文件列表
+     */
+    public SpaceFileResponse listFile(QueryFileRequest request, String applicationName) {
+        return efficiencyToolClient.listFile(request, applicationName);
+    }
+
+    /**
+     * 新建文件/文档
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 文件编号
+     */
+    public CreateFileResponse createFile(CreateFileRequest request, String applicationName) {
+        return efficiencyToolClient.createFile(request, applicationName);
+    }
+
+    /**
+     * 上传文件
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 文件编号
+     */
+    public CreateFileResponse uploadFile(UploadFileRequest request, String applicationName) {
+        return efficiencyToolClient.uploadFile(request, applicationName);
+    }
+
+    /**
+     * 下载文件
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 文件编号
+     */
+    public DownloadFileResponse downloadFile(DownloadFileRequest request, String applicationName) {
+        return efficiencyToolClient.downloadFile(request, applicationName);
     }
 }
