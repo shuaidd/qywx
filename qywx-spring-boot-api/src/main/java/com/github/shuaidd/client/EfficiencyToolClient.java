@@ -291,4 +291,84 @@ public interface EfficiencyToolClient extends CommonClient {
      */
     @PostMapping(value = "wedrive/file_download", headers = HEAD)
     DownloadFileResponse downloadFile(DownloadFileRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 重命名文件
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 文件信息
+     */
+    @PostMapping(value = "wedrive/file_rename", headers = HEAD)
+    RenameFileResponse renameFile(RenameFileRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 移动文件
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 文件信息
+     */
+    @PostMapping(value = "wedrive/file_move", headers = HEAD)
+    MoveFileResponse moveFile(MoveFileRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除文件
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 操作结果
+     */
+    @PostMapping(value = "wedrive/file_delete", headers = HEAD)
+    BaseResponse deleteFile(DeleteFileRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 文件信息
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 操作结果
+     */
+    @PostMapping(value = "wedrive/file_info", headers = HEAD)
+    FileInfoResponse fileInfo(FileInfoRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 文件权限 新增成员
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 操作结果
+     */
+    @PostMapping(value = "wedrive/file_acl_add", headers = HEAD)
+    BaseResponse addFileAcl(FileAclRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 文件权限 删除成员
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 操作结果
+     */
+    @PostMapping(value = "wedrive/file_acl_del", headers = HEAD)
+    BaseResponse delFileAcl(FileAclRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 文件权限 分享设置
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 操作结果
+     */
+    @PostMapping(value = "wedrive/file_setting", headers = HEAD)
+    BaseResponse fileSetting(FileSettingRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 文件权限 获取分享链接
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 操作结果
+     */
+    @PostMapping(value = "wedrive/file_share", headers = HEAD)
+    FileShareResponse getFileShare(FileInfoRequest request, @RequestParam(HEAD_KEY) String app);
 }

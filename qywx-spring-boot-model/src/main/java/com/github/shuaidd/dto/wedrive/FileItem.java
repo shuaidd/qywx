@@ -1,7 +1,12 @@
-package com.github.shuaidd.response.wedrive;
+package com.github.shuaidd.dto.wedrive;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.github.shuaidd.json.Long2DateDeserializer;
+
+import java.util.Date;
+import java.util.StringJoiner;
 
 /**
  * @author ddshuai
@@ -25,9 +30,11 @@ public class FileItem {
     @JsonProperty("file_size")
     private int fileSize;
 
-    private String ctime;
+    @JsonDeserialize(using = Long2DateDeserializer.class)
+    private Date ctime;
 
-    private String mtime;
+    @JsonDeserialize(using = Long2DateDeserializer.class)
+    private Date mtime;
 
     @JsonProperty("file_type")
     private int fileType;
@@ -88,19 +95,19 @@ public class FileItem {
         this.fileSize = fileSize;
     }
 
-    public String getCtime() {
+    public Date getCtime() {
         return ctime;
     }
 
-    public void setCtime(String ctime) {
+    public void setCtime(Date ctime) {
         this.ctime = ctime;
     }
 
-    public String getMtime() {
+    public Date getMtime() {
         return mtime;
     }
 
-    public void setMtime(String mtime) {
+    public void setMtime(Date mtime) {
         this.mtime = mtime;
     }
 
@@ -158,5 +165,25 @@ public class FileItem {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", FileItem.class.getSimpleName() + "[", "]")
+                .add("fileId='" + fileId + "'")
+                .add("fileName='" + fileName + "'")
+                .add("spaceId='" + spaceId + "'")
+                .add("fatherId='" + fatherId + "'")
+                .add("fileSize=" + fileSize)
+                .add("ctime='" + ctime + "'")
+                .add("mtime='" + mtime + "'")
+                .add("fileType=" + fileType)
+                .add("fileStatus=" + fileStatus)
+                .add("createUserId='" + createUserId + "'")
+                .add("updateUserId='" + updateUserId + "'")
+                .add("sha='" + sha + "'")
+                .add("md5='" + md5 + "'")
+                .add("url='" + url + "'")
+                .toString();
     }
 }

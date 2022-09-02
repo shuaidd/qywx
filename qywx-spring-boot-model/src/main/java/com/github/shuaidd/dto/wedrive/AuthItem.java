@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author ddshuai
  * date 2022-09-01 22:08
  **/
-public class SpaceAuthItem {
+public class AuthItem {
 
     /**
      * 成员类型 1:个人 2:部门

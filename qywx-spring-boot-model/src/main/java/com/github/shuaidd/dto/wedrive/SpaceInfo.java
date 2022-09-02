@@ -28,7 +28,7 @@ public class SpaceInfo {
 
     public static class AuthList {
         @JsonProperty(value = "auth_info")
-        private List<SpaceAuthItem> authInfo;
+        private List<AuthItem> authInfo;
 
         /**
          * 空间无权限成员userid (成员在一个有权限的部门中, 自己退出空间或者被移除权限)
@@ -36,11 +36,11 @@ public class SpaceInfo {
         @JsonProperty("quit_userid")
         private List<String> quitUserId;
 
-        public List<SpaceAuthItem> getAuthInfo() {
+        public List<AuthItem> getAuthInfo() {
             return authInfo;
         }
 
-        public void setAuthInfo(List<SpaceAuthItem> authInfo) {
+        public void setAuthInfo(List<AuthItem> authInfo) {
             this.authInfo = authInfo;
         }
 

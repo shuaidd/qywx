@@ -1,7 +1,7 @@
 package com.github.shuaidd.resquest.wedrive;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.wedrive.SpaceAuthItem;
+import com.github.shuaidd.dto.wedrive.AuthItem;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class SpaceAclRequest {
     private String spaceId;
 
     @JsonProperty(value = "auth_info")
-    private List<SpaceAuthItem> authInfo;
+    private List<AuthItem> authInfo;
 
     public String getUserId() {
         return userId;
@@ -36,11 +36,11 @@ public class SpaceAclRequest {
         this.spaceId = spaceId;
     }
 
-    public List<SpaceAuthItem> getAuthInfo() {
+    public List<AuthItem> getAuthInfo() {
         return authInfo;
     }
 
-    public void setAuthInfo(List<SpaceAuthItem> authInfo) {
+    public void setAuthInfo(List<AuthItem> authInfo) {
         this.authInfo = authInfo;
     }
 }

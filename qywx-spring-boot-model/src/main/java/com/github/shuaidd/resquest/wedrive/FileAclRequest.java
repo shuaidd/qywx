@@ -7,21 +7,15 @@ import java.util.List;
 
 /**
  * @author ddshuai
- * date 2022-09-01 22:04
+ * date 2022-09-03 06:12
  **/
-public class CreateSpaceRequest {
+public class FileAclRequest {
 
     @JsonProperty(value = "userid")
     private String userId;
 
-    @JsonProperty(value = "space_name")
-    private String spaceName;
-
-    /**
-     * 区分创建空间类型, 0:普通 1:相册
-     */
-    @JsonProperty(value = "space_sub_type")
-    private Integer spaceSubType;
+    @JsonProperty(value = "fileid")
+    private String fileId;
 
     @JsonProperty(value = "auth_info")
     private List<AuthItem> authInfo;
@@ -34,20 +28,12 @@ public class CreateSpaceRequest {
         this.userId = userId;
     }
 
-    public String getSpaceName() {
-        return spaceName;
+    public String getFileId() {
+        return fileId;
     }
 
-    public void setSpaceName(String spaceName) {
-        this.spaceName = spaceName;
-    }
-
-    public Integer getSpaceSubType() {
-        return spaceSubType;
-    }
-
-    public void setSpaceSubType(Integer spaceSubType) {
-        this.spaceSubType = spaceSubType;
+    public void setFileId(String fileId) {
+        this.fileId = fileId;
     }
 
     public List<AuthItem> getAuthInfo() {

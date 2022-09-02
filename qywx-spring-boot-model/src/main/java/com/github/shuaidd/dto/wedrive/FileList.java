@@ -1,8 +1,9 @@
-package com.github.shuaidd.response.wedrive;
+package com.github.shuaidd.dto.wedrive;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * @author ddshuai
@@ -10,6 +11,7 @@ import java.util.List;
  **/
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FileList {
+
     private List<FileItem> item;
 
     public List<FileItem> getItem() {
@@ -18,5 +20,12 @@ public class FileList {
 
     public void setItem(List<FileItem> item) {
         this.item = item;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", FileList.class.getSimpleName() + "[", "]")
+                .add("item=" + item)
+                .toString();
     }
 }

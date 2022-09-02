@@ -3,9 +3,7 @@ package com.github.shuaidd.service;
 import com.github.shuaidd.dto.tool.DialRecord;
 import com.github.shuaidd.dto.wedrive.SpaceInfo;
 import com.github.shuaidd.response.tool.*;
-import com.github.shuaidd.response.wedrive.CreateFileResponse;
-import com.github.shuaidd.response.wedrive.DownloadFileResponse;
-import com.github.shuaidd.response.wedrive.SpaceFileResponse;
+import com.github.shuaidd.response.wedrive.*;
 import com.github.shuaidd.resquest.oa.CalendarRequest;
 import com.github.shuaidd.resquest.tool.*;
 import com.github.shuaidd.resquest.wedrive.*;
@@ -404,5 +402,89 @@ public class EfficiencyToolService extends AbstractBaseService {
      */
     public DownloadFileResponse downloadFile(DownloadFileRequest request, String applicationName) {
         return efficiencyToolClient.downloadFile(request, applicationName);
+    }
+
+    /**
+     * 重命名文件
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 文件信息
+     */
+    public RenameFileResponse renameFile(RenameFileRequest request, String applicationName) {
+        return efficiencyToolClient.renameFile(request, applicationName);
+    }
+
+    /**
+     * 移动文件
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 文件信息
+     */
+    public MoveFileResponse moveFile(MoveFileRequest request, String applicationName) {
+        return efficiencyToolClient.moveFile(request, applicationName);
+    }
+
+    /**
+     * 删除文件
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void deleteFile(DeleteFileRequest request, String applicationName) {
+        efficiencyToolClient.deleteFile(request, applicationName);
+    }
+
+    /**
+     * 文件信息
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 文件信息
+     */
+    public FileInfoResponse fileInfo(FileInfoRequest request, String applicationName) {
+        return efficiencyToolClient.fileInfo(request, applicationName);
+    }
+
+    /**
+     * 文件权限 新增成员
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void addFileAcl(FileAclRequest request, String applicationName) {
+        efficiencyToolClient.addFileAcl(request, applicationName);
+    }
+
+    /**
+     * 文件权限 删除成员
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void delFileAcl(FileAclRequest request, String applicationName) {
+        efficiencyToolClient.delFileAcl(request, applicationName);
+    }
+
+    /**
+     * 文件权限 文件设置
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void fileSetting(FileSettingRequest request, String applicationName) {
+        efficiencyToolClient.fileSetting(request, applicationName);
+    }
+
+    /**
+     * 文件权限 获取分享链接
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 文件信息
+     */
+    public FileShareResponse getFileShare(FileInfoRequest request, String applicationName) {
+        return efficiencyToolClient.getFileShare(request, applicationName);
     }
 }

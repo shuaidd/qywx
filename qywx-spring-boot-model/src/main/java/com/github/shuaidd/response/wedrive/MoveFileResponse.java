@@ -1,30 +1,19 @@
 package com.github.shuaidd.response.wedrive;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.shuaidd.dto.wedrive.FileList;
 import com.github.shuaidd.response.AbstractBaseResponse;
 
+import java.util.StringJoiner;
+
 /**
  * @author ddshuai
- * date 2022-09-02 16:08
+ * date 2022-09-02 22:16
  **/
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class SpaceFileResponse extends AbstractBaseResponse {
-
-    @JsonProperty("next_start")
-    private Integer nextStart;
+public class MoveFileResponse extends AbstractBaseResponse {
 
     @JsonProperty("file_list")
     private FileList fileList;
-
-    public Integer getNextStart() {
-        return nextStart;
-    }
-
-    public void setNextStart(Integer nextStart) {
-        this.nextStart = nextStart;
-    }
 
     public FileList getFileList() {
         return fileList;
@@ -32,5 +21,12 @@ public class SpaceFileResponse extends AbstractBaseResponse {
 
     public void setFileList(FileList fileList) {
         this.fileList = fileList;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", MoveFileResponse.class.getSimpleName() + "[", "]")
+                .add("fileList=" + fileList)
+                .toString();
     }
 }
