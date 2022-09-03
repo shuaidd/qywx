@@ -1,27 +1,8 @@
 {
   "errcode": 0,
   "errmsg": "ok",
-  "has_more": true,
-  "next_start": 1,
-  "file_list": {
-    "item": [{
-      "fileid": "FILEID1",
-      "file_name": "FILE_NAME1",
-      "spaceid": "SPACEID",
-      "fatherid": "FATHERID",
-      "file_size": 1,
-      "ctime": "2022-09-01",
-      "mtime": "2022-09-01",
-      "file_type": 1,
-      "file_status": 1,
-      "create_userid": "CREATE_USERID",
-      "update_userid": "UPDATE_USERID",
-      "sha": "SHA",
-      "md5": "MD5",
-      "url": "URL"
-    }, {
-      "fileid": "FILEID2",
-      "file_name": "FILE_NAME2"
-    }]
-  }
+  "total_capacity_for_all": 22666689904640,
+  "total_capacity_for_vip": 22300038149020,
+  "rest_capacity_for_all": 0,
+  "rest_capacity_for_vip": 0
 }

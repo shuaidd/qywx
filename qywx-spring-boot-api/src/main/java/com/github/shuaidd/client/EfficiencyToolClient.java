@@ -371,4 +371,54 @@ public interface EfficiencyToolClient extends CommonClient {
      */
     @PostMapping(value = "wedrive/file_share", headers = HEAD)
     FileShareResponse getFileShare(FileInfoRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取盘专业版信息
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 操作结果
+     */
+    @PostMapping(value = "wedrive/mng_pro_info", headers = HEAD)
+    ProInfoResponse proInfo(ProInfoRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取盘容量信息
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 容量信息
+     */
+    @PostMapping(value = "wedrive/mng_capacity", headers = HEAD)
+    CapacityResponse capacity(ProInfoRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 分块上传初始化
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 初始化信息
+     */
+    @PostMapping(value = "wedrive/file_upload_init", headers = HEAD)
+    InitUploadFileResponse initUploadFile(InitUploadFileRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 分块上传文件
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 操作结果
+     */
+    @PostMapping(value = "wedrive/file_upload_part", headers = HEAD)
+    BaseResponse fileUploadPart(FileUploadPartRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 分块上传完成
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 操作结果
+     */
+    @PostMapping(value = "wedrive/file_upload_finish", headers = HEAD)
+    FileUploadFinishResponse fileUploadFinish(FileUploadFinishRequest request, @RequestParam(HEAD_KEY) String app);
 }

@@ -487,4 +487,58 @@ public class EfficiencyToolService extends AbstractBaseService {
     public FileShareResponse getFileShare(FileInfoRequest request, String applicationName) {
         return efficiencyToolClient.getFileShare(request, applicationName);
     }
+
+    /**
+     * 获取盘专业版信息
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 文件信息
+     */
+    public ProInfoResponse proInfo(ProInfoRequest request, String applicationName) {
+        return efficiencyToolClient.proInfo(request, applicationName);
+    }
+
+    /**
+     * 获取盘专业版信息
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 文件信息
+     */
+    public CapacityResponse capacity(ProInfoRequest request, String applicationName) {
+        return efficiencyToolClient.capacity(request, applicationName);
+    }
+
+    /**
+     * 分块上传初始化
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 初始化信息
+     */
+    public InitUploadFileResponse initUploadFile(InitUploadFileRequest request, String applicationName) {
+        return efficiencyToolClient.initUploadFile(request, applicationName);
+    }
+
+    /**
+     * 分块上传
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void fileUploadPart(FileUploadPartRequest request, String applicationName) {
+        efficiencyToolClient.fileUploadPart(request, applicationName);
+    }
+
+    /**
+     * 分块上传完成
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 文件编号
+     */
+    public FileUploadFinishResponse fileUploadFinish(FileUploadFinishRequest request, String applicationName) {
+        return efficiencyToolClient.fileUploadFinish(request, applicationName);
+    }
 }

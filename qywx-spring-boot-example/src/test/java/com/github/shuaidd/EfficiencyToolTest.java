@@ -29,9 +29,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.*;
+import java.nio.ByteBuffer;
 import java.text.ParseException;
 import java.util.Collections;
 import java.util.List;
@@ -378,5 +377,62 @@ public class EfficiencyToolTest extends AbstractTest {
         request.setFileId("s.ww36e0a51aab349a7d.6620425469yR_f.662157955op7B");
         FileShareResponse response = toolService.getFileShare(request, MICRO_DISK);
         logger.info("操作成功--{}", response);
+    }
+
+    @Test
+    public void proInfo() {
+        ProInfoRequest request = new ProInfoRequest();
+        request.setUserId("20170410022717");
+        ProInfoResponse response = toolService.proInfo(request, MICRO_DISK);
+        logger.info("操作成功--{}", response);
+    }
+
+    @Test
+    public void capacity() {
+        ProInfoRequest request = new ProInfoRequest();
+        request.setUserId("20170410022717");
+        CapacityResponse response = toolService.capacity(request, MICRO_DISK);
+        logger.info("操作成功--{}", response);
+    }
+
+    @Test
+    public void initUploadFile() throws Exception {
+        File file = ResourceUtils.getFile("classpath:image/IMG_20190919_131404.jpg");
+        File tempDir = ResourceUtils.getFile("classpath:upload");
+        try (FileInputStream inputStream = new FileInputStream(file);) {
+            byte[] bytes = new byte[2097152];//2M
+            int loopCount = 0;
+            while (inputStream.read(bytes) != -1) {
+                loopCount++;
+                IOUtils.write(bytes, new FileOutputStream(new File(tempDir.toString() + "/temp" + loopCount)));
+            }
+
+            //todo 待测试分块上传
+            InitUploadFileRequest request = new InitUploadFileRequest();
+            toolService.initUploadFile(request, MICRO_DISK);
+        }
+    }
+
+    @Test
+    public void mergeFile() throws Exception {
+        File file = ResourceUtils.getFile("classpath:upload/temp1");
+        File file1 = ResourceUtils.getFile("classpath:upload/temp2");
+        File out = new File(file1.getParent() + "/IMG_20190919_131404.jpg");
+        try (FileInputStream inputStream = new FileInputStream(file); FileInputStream inputStream1 = new FileInputStream(file1); FileOutputStream outputStream = new FileOutputStream(out)) {
+            IOUtils.copy(inputStream, outputStream);
+            IOUtils.copy(inputStream1, outputStream);
+        }
+    }
+
+    @Test
+    public void fileUploadPart() {
+        FileUploadPartRequest request = new FileUploadPartRequest();
+        toolService.fileUploadPart(request, MICRO_DISK);
+    }
+
+    @Test
+    public void fileUploadFinish() {
+        FileUploadFinishRequest request = new FileUploadFinishRequest();
+        toolService.fileUploadFinish(request, MICRO_DISK);
     }
 }

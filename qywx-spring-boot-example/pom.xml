@@ -63,6 +63,13 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-crypto</artifactId>
+            <version>5.8.5</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
