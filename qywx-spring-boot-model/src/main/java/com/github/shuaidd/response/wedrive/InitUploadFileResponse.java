@@ -3,6 +3,8 @@ package com.github.shuaidd.response.wedrive;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.StringJoiner;
+
 /**
  * @author ddshuai
  * date 2022-09-03 07:30
@@ -41,5 +43,14 @@ public class InitUploadFileResponse {
 
     public void setFileId(String fileId) {
         this.fileId = fileId;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", InitUploadFileResponse.class.getSimpleName() + "[", "]")
+                .add("hitExist=" + hitExist)
+                .add("uploadKey='" + uploadKey + "'")
+                .add("fileId='" + fileId + "'")
+                .toString();
     }
 }

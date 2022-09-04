@@ -53,6 +53,9 @@ public class WeChatInterceptor implements RequestInterceptor {
             WeChatManager weChatManager = WeChatContextHolder.getWeChatManager();
             String accessToken = weChatManager.tokenService().getAccessToken(app);
             template.query(WeChatClient.ACCESS_TOKEN, accessToken);
+            if (weChatManager.properties().getDebugMode()) {
+                template.query(WeChatClient.DEBUG, "1");
+            }
         }
 
         if (logger.isInfoEnabled()) {

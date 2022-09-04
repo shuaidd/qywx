@@ -27,7 +27,7 @@ public class InitUploadFileRequest {
     @JsonProperty("file_name")
     private String fileName;
 
-    private int size;
+    private Long size;
 
     @JsonProperty("skip_push_card")
     private Boolean skipPushCard;
@@ -75,11 +75,11 @@ public class InitUploadFileRequest {
         this.fileName = fileName;
     }
 
-    public int getSize() {
+    public Long getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(Long size) {
         this.size = size;
     }
 

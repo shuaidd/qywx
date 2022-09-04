@@ -1,5 +1,7 @@
 package com.github.shuaidd;
 
+import cn.hutool.crypto.digest.DigestAlgorithm;
+import cn.hutool.crypto.digest.Digester;
 import com.github.shuaidd.dto.tool.CalendarData;
 import com.github.shuaidd.dto.tool.DialRecord;
 import com.github.shuaidd.dto.tool.ReminderData;
@@ -17,6 +19,7 @@ import com.github.shuaidd.resquest.tool.GetCalendarRequest;
 import com.github.shuaidd.resquest.tool.ScheduleRequest;
 import com.github.shuaidd.resquest.wedrive.*;
 import com.github.shuaidd.service.EfficiencyToolService;
+import com.google.common.collect.Lists;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -56,6 +59,8 @@ public class EfficiencyToolTest extends AbstractTest {
     /*微盘*/
     public static final String MICRO_DISK = "micro-disk";
 
+    public static final String USER_ID = "20170410022717";
+
     @Before
     public void init() {
         toolService = weChatManager.efficiencyTool();
@@ -70,7 +75,7 @@ public class EfficiencyToolTest extends AbstractTest {
         CalendarData calendarData = new CalendarData();
         calendarData.setDescription("测试日程");
         calendarData.setReadonly(1);
-        calendarData.setOrganizer("20170410022717");
+        calendarData.setOrganizer(USER_ID);
         calendarData.setSummary("明天开会");
         calendarData.setColor("#0000FF");
         request.setCalendar(calendarData);
@@ -85,7 +90,7 @@ public class EfficiencyToolTest extends AbstractTest {
         calendarData.setCalId("wcCRbQBwAA3tCVTMpnmDlbKWS-I2nRVQ");
         calendarData.setDescription("测试日程-1");
         calendarData.setReadonly(1);
-        calendarData.setOrganizer("20170410022717");
+        calendarData.setOrganizer(USER_ID);
         calendarData.setSummary("明天开会咯");
         calendarData.setColor("#0000FF");
         request.setCalendar(calendarData);
@@ -110,7 +115,7 @@ public class EfficiencyToolTest extends AbstractTest {
         ScheduleRequest request = new ScheduleRequest();
 
         ScheduleData scheduleData = new ScheduleData();
-        scheduleData.setOrganizer("20170410022717");
+        scheduleData.setOrganizer(USER_ID);
         scheduleData.setCalId("wcCRbQBwAA3tCVTMpnmDlbKWS-I2nRVQ");
         scheduleData.setStartTime(DateUtils.parseDate("2021-01-15 12:00:00", "yyyy-MM-dd HH:mm:ss"));
         scheduleData.setEndTime(DateUtils.parseDate("2021-01-15 14:00:00", "yyyy-MM-dd HH:mm:ss"));
@@ -144,7 +149,7 @@ public class EfficiencyToolTest extends AbstractTest {
     @Test
     public void createSpace() {
         CreateSpaceRequest request = new CreateSpaceRequest();
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         request.setSpaceSubType(0);
         request.setSpaceName("日常支持");
         String spaceId = toolService.createSpace(request, MICRO_DISK);
@@ -156,7 +161,7 @@ public class EfficiencyToolTest extends AbstractTest {
         RenameSpaceRequest request = new RenameSpaceRequest();
         request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
         request.setSpaceName("产品文档");
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         toolService.renameSpace(request, MICRO_DISK);
     }
 
@@ -164,7 +169,7 @@ public class EfficiencyToolTest extends AbstractTest {
     public void dismissSpace() {
         DismissSpaceRequest request = new DismissSpaceRequest();
         request.setSpaceId("");
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         toolService.dismissSpace(request, MICRO_DISK);
     }
 
@@ -172,7 +177,7 @@ public class EfficiencyToolTest extends AbstractTest {
     public void spaceInfo() {
         SpaceInfoRequest request = new SpaceInfoRequest();
         request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         SpaceInfo spaceInfo = toolService.spaceInfo(request, MICRO_DISK);
         logger.info("空间信息--{}", spaceInfo);
     }
@@ -181,7 +186,7 @@ public class EfficiencyToolTest extends AbstractTest {
     public void addSpaceAcl() {
         SpaceAclRequest request = new SpaceAclRequest();
         request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
 
         AuthItem spaceAuthItem = new AuthItem();
         spaceAuthItem.setAuth(1);
@@ -196,7 +201,7 @@ public class EfficiencyToolTest extends AbstractTest {
     public void delSpaceAcl() {
         SpaceAclRequest request = new SpaceAclRequest();
         request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         AuthItem spaceAuthItem = new AuthItem();
         spaceAuthItem.setType(1);
         spaceAuthItem.setUserId("20170516024090");
@@ -207,7 +212,7 @@ public class EfficiencyToolTest extends AbstractTest {
     public void spaceSetting() {
         SpaceSettingRequest request = new SpaceSettingRequest();
         request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         request.setEnableWatermark(false);
         toolService.spaceSetting(request, MICRO_DISK);
     }
@@ -216,7 +221,7 @@ public class EfficiencyToolTest extends AbstractTest {
     public void spaceShare() {
         CommonSpaceRequest request = new CommonSpaceRequest();
         request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         String url = toolService.spaceShare(request, MICRO_DISK);
         logger.info("分享链接--{}", url);
     }
@@ -229,7 +234,7 @@ public class EfficiencyToolTest extends AbstractTest {
         QueryFileRequest request = new QueryFileRequest();
         request.setFatherId("s.ww36e0a51aab349a7d.6620425469yR");
         request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         request.setSortType(1);
         request.setLimit(100);
         request.setStart(0);
@@ -248,7 +253,7 @@ public class EfficiencyToolTest extends AbstractTest {
         request.setFileType(1);
         request.setFatherId("s.ww36e0a51aab349a7d.6620425469yR");
         request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         CreateFileResponse response = toolService.createFile(request, MICRO_DISK);
         logger.info("创建成功--{}", response);
     }
@@ -266,7 +271,7 @@ public class EfficiencyToolTest extends AbstractTest {
         request.setFileName("20659972.png");
         request.setFatherId("s.ww36e0a51aab349a7d.6620425469yR_d.6621109333Btp");
         request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         request.setFileBase64Content(fileContent);
         CreateFileResponse response = toolService.uploadFile(request, MICRO_DISK);
         logger.info("创建成功--{}", response);
@@ -276,7 +281,7 @@ public class EfficiencyToolTest extends AbstractTest {
     public void downloadFile() throws Exception {
         DownloadFileRequest request = new DownloadFileRequest();
         request.setFileId("s.ww36e0a51aab349a7d.6620425469yR_f.662112027qfyY");
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         DownloadFileResponse response = toolService.downloadFile(request, MICRO_DISK);
         logger.info("下载成功--{}", response);
 
@@ -293,7 +298,7 @@ public class EfficiencyToolTest extends AbstractTest {
     @Test
     public void renameFile() {
         RenameFileRequest request = new RenameFileRequest();
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         request.setFileId("s.ww36e0a51aab349a7d.6620425469yR_f.662112027qfyY");
         request.setNewName("头像.png");
 
@@ -304,7 +309,7 @@ public class EfficiencyToolTest extends AbstractTest {
     @Test
     public void moveFile() {
         MoveFileRequest request = new MoveFileRequest();
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         request.setFileId(Collections.singletonList("s.ww36e0a51aab349a7d.6620425469yR_f.662112027qfyY"));
         request.setFatherId("s.ww36e0a51aab349a7d.6620425469yR");
         request.setReplace(false);
@@ -315,7 +320,7 @@ public class EfficiencyToolTest extends AbstractTest {
     @Test
     public void deleteFile() {
         DeleteFileRequest request = new DeleteFileRequest();
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         request.setFileId(Collections.singletonList("s.ww36e0a51aab349a7d.6620425469yR_f.662112027qfyY"));
         toolService.deleteFile(request, MICRO_DISK);
         logger.info("操作成功");
@@ -324,7 +329,7 @@ public class EfficiencyToolTest extends AbstractTest {
     @Test
     public void fileInfo() {
         FileInfoRequest request = new FileInfoRequest();
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         request.setFileId("s.ww36e0a51aab349a7d.6620425469yR_f.662112027qfyY");
         FileInfoResponse response = toolService.fileInfo(request, MICRO_DISK);
         logger.info("操作成功: {}", response.getFileInfo());
@@ -333,7 +338,7 @@ public class EfficiencyToolTest extends AbstractTest {
     @Test
     public void addFileAcl() {
         FileAclRequest request = new FileAclRequest();
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         request.setFileId("s.ww36e0a51aab349a7d.6620425469yR_f.662157955op7B");
 
         AuthItem authItem = new AuthItem();
@@ -349,7 +354,7 @@ public class EfficiencyToolTest extends AbstractTest {
     @Test
     public void delFileAcl() {
         FileAclRequest request = new FileAclRequest();
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         request.setFileId("s.ww36e0a51aab349a7d.6620425469yR_f.662157955op7B");
 
         AuthItem authItem = new AuthItem();
@@ -362,7 +367,7 @@ public class EfficiencyToolTest extends AbstractTest {
     @Test
     public void fileSetting() {
         FileSettingRequest request = new FileSettingRequest();
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         request.setFileId("s.ww36e0a51aab349a7d.6620425469yR_f.662157955op7B");
         request.setAuthScope(2);
         request.setAuth(1);
@@ -373,7 +378,7 @@ public class EfficiencyToolTest extends AbstractTest {
     @Test
     public void getFileShare() {
         FileInfoRequest request = new FileInfoRequest();
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         request.setFileId("s.ww36e0a51aab349a7d.6620425469yR_f.662157955op7B");
         FileShareResponse response = toolService.getFileShare(request, MICRO_DISK);
         logger.info("操作成功--{}", response);
@@ -382,7 +387,7 @@ public class EfficiencyToolTest extends AbstractTest {
     @Test
     public void proInfo() {
         ProInfoRequest request = new ProInfoRequest();
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         ProInfoResponse response = toolService.proInfo(request, MICRO_DISK);
         logger.info("操作成功--{}", response);
     }
@@ -390,7 +395,7 @@ public class EfficiencyToolTest extends AbstractTest {
     @Test
     public void capacity() {
         ProInfoRequest request = new ProInfoRequest();
-        request.setUserId("20170410022717");
+        request.setUserId(USER_ID);
         CapacityResponse response = toolService.capacity(request, MICRO_DISK);
         logger.info("操作成功--{}", response);
     }
@@ -399,17 +404,51 @@ public class EfficiencyToolTest extends AbstractTest {
     public void initUploadFile() throws Exception {
         File file = ResourceUtils.getFile("classpath:image/IMG_20190919_131404.jpg");
         File tempDir = ResourceUtils.getFile("classpath:upload");
+        List<String> blockSha = Lists.newArrayList();
+        List<String> base64List = Lists.newArrayList();
+        Digester sha1 = new Digester(DigestAlgorithm.SHA1);
+
         try (FileInputStream inputStream = new FileInputStream(file);) {
             byte[] bytes = new byte[2097152];//2M
             int loopCount = 0;
             while (inputStream.read(bytes) != -1) {
                 loopCount++;
-                IOUtils.write(bytes, new FileOutputStream(new File(tempDir.toString() + "/temp" + loopCount)));
+
+                String digestHex = sha1.digestHex(bytes);
+                blockSha.add(digestHex);
+                //IOUtils.write(bytes, new FileOutputStream(new File(tempDir.toString() + "/temp" + loopCount)));
+                base64List.add(Base64.encodeBase64String(bytes));
             }
 
             //todo 待测试分块上传
             InitUploadFileRequest request = new InitUploadFileRequest();
-            toolService.initUploadFile(request, MICRO_DISK);
+            request.setBlockSha(blockSha);
+            request.setFatherId("s.ww36e0a51aab349a7d.6620425469yR");
+            request.setUserId(USER_ID);
+            request.setFileName("IMG_20190919_131404.jpg");
+            request.setSize(inputStream.getChannel().size());
+            request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
+            request.setSkipPushCard(false);
+            InitUploadFileResponse response = toolService.initUploadFile(request, MICRO_DISK);
+            logger.info("获取到的上传初始化参数---{}",response);
+            int i = 1;
+            for (String content : base64List) {
+                FileUploadPartRequest uploadPartRequest = new FileUploadPartRequest();
+                uploadPartRequest.setFileBase64Content(content);
+                uploadPartRequest.setIndex(i);
+                uploadPartRequest.setUploadKey(response.getUploadKey());
+                uploadPartRequest.setUserId(USER_ID);
+
+                //企业微信返回  unknow error  ！！！！！
+                toolService.fileUploadPart(uploadPartRequest,MICRO_DISK);
+                i++;
+            }
+
+            FileUploadFinishRequest finishRequest = new FileUploadFinishRequest();
+            finishRequest.setUploadKey(response.getUploadKey());
+            finishRequest.setUserId(USER_ID);
+            FileUploadFinishResponse finishResponse = toolService.fileUploadFinish(finishRequest,MICRO_DISK);
+            logger.info("分块上传完成--{}",finishResponse);
         }
     }
 
