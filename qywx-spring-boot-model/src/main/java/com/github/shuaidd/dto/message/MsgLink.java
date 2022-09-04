@@ -2,6 +2,8 @@ package com.github.shuaidd.dto.message;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.StringJoiner;
+
 /**
  * 描述
  *
@@ -46,5 +48,15 @@ public class MsgLink {
 
     public void setPicUrl(String picUrl) {
         this.picUrl = picUrl;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", MsgLink.class.getSimpleName() + "[", "]")
+                .add("title='" + title + "'")
+                .add("desc='" + desc + "'")
+                .add("url='" + url + "'")
+                .add("picUrl='" + picUrl + "'")
+                .toString();
     }
 }

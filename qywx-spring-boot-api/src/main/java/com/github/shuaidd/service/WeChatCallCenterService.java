@@ -1,7 +1,7 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.exception.WeChatException;
-import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.kf.*;
 import com.github.shuaidd.resquest.kf.*;
 import org.apache.commons.lang3.StringUtils;
@@ -31,14 +31,11 @@ public class WeChatCallCenterService extends AbstractBaseService {
             throw new WeChatException("客服名称或头像不能为空");
         }
 
-        checkApplication(applicationName);
-
         KfAccountRequest request = new KfAccountRequest();
         request.setMediaId(mediaId);
         request.setName(name);
 
-        AddKfAccountResponse response = weChatClient.addKfAccount(request, applicationName);
-        isSuccess(response);
+        AddKfAccountResponse response = callCenterClient.addKfAccount(request, applicationName);
 
         return response.getOpenKfId();
     }
@@ -56,9 +53,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
         if (StringUtils.isEmpty(request.getMediaId()) && StringUtils.isEmpty(request.getName())) {
             throw new WeChatException("客服名称或头像不能同时为空");
         }
-        checkApplication(applicationName);
-        BaseResponse response = weChatClient.updateKfAccount(request, applicationName);
-        isSuccess(response);
+        callCenterClient.updateKfAccount(request, applicationName);
     }
 
     /**
@@ -71,12 +66,11 @@ public class WeChatCallCenterService extends AbstractBaseService {
         if (StringUtils.isEmpty(kfId)) {
             throw new WeChatException("客服编号不能为空");
         }
-        checkApplication(applicationName);
+
         DelKfAccountRequest request = new DelKfAccountRequest();
         request.setOpenKfId(kfId);
 
-        BaseResponse response = weChatClient.delKfAccount(request, applicationName);
-        isSuccess(response);
+        callCenterClient.delKfAccount(request, applicationName);
     }
 
     /**
@@ -86,10 +80,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      * @return 客户账号列表
      */
     public KfAccountListResponse getAccountList(String applicationName) {
-        checkApplication(applicationName);
-        KfAccountListResponse response = weChatClient.kfAccountLIst(applicationName);
-        isSuccess(response);
-        return response;
+        return callCenterClient.kfAccountLIst(applicationName);
     }
 
     /**
@@ -104,12 +95,11 @@ public class WeChatCallCenterService extends AbstractBaseService {
         if (StringUtils.isEmpty(kfId)) {
             throw new WeChatException("客服编号不能为空");
         }
-        checkApplication(applicationName);
+
         KfAddContactWayRequest request = new KfAddContactWayRequest();
         request.setOpenKfId(kfId);
         request.setScene(scene);
-        KfAddContactWayResponse response = weChatClient.kfContactWay(request, applicationName);
-        isSuccess(response);
+        KfAddContactWayResponse response = callCenterClient.kfContactWay(request, applicationName);
         return response.getUrl();
     }
 
@@ -121,9 +111,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      * @return 结果
      */
     public List<ServicerResponse.ResultDetail> addServicer(ServicerRequest request, String applicationName) {
-        checkApplication(applicationName);
-        ServicerResponse response = weChatClient.addServicer(request, applicationName);
-        isSuccess(response);
+        ServicerResponse response = callCenterClient.addServicer(request, applicationName);
         return response.getResultList();
     }
 
@@ -135,9 +123,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      * @return 结果
      */
     public List<ServicerResponse.ResultDetail> delServicer(ServicerRequest request, String applicationName) {
-        checkApplication(applicationName);
-        ServicerResponse response = weChatClient.delServicer(request, applicationName);
-        isSuccess(response);
+        ServicerResponse response = callCenterClient.delServicer(request, applicationName);
         return response.getResultList();
     }
 
@@ -149,9 +135,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      * @return 接待人员列表
      */
     public List<ServicerListResponse.Servicer> getServicerList(String openKfId, String applicationName) {
-        checkApplication(applicationName);
-        ServicerListResponse response = weChatClient.getServicerList(openKfId, applicationName);
-        isSuccess(response);
+        ServicerListResponse response = callCenterClient.getServicerList(openKfId, applicationName);
         return response.getServicerList();
     }
 
@@ -163,10 +147,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      * @return 会话状态
      */
     public ServiceStateResponse getServiceState(ServiceStateRequest request, String applicationName) {
-        checkApplication(applicationName);
-        ServiceStateResponse response = weChatClient.getServiceState(request, applicationName);
-        isSuccess(response);
-        return response;
+        return callCenterClient.getServiceState(request, applicationName);
     }
 
     /**
@@ -177,9 +158,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      * @return msgCode
      */
     public String changeServiceState(ChangeServiceStateRequest request, String applicationName) {
-        checkApplication(applicationName);
-        ChangeServiceStateResponse response = weChatClient.changeServiceState(request, applicationName);
-        isSuccess(response);
+        ChangeServiceStateResponse response = callCenterClient.changeServiceState(request, applicationName);
         return response.getMsgCode();
     }
 
@@ -191,10 +170,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      * @return 消息
      */
     public SyncMsgResponse syncMsg(SyncMsgRequest request, String applicationName) {
-        checkApplication(applicationName);
-        SyncMsgResponse response = weChatClient.syncMsg(request, applicationName);
-        isSuccess(response);
-        return response;
+        return callCenterClient.syncMsg(request, applicationName);
     }
 
     /**
@@ -205,9 +181,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      * @return msgId
      */
     public String sendMsg(SendMsgRequest msg, String applicationName) {
-        checkApplication(applicationName);
-        SendMsgResponse response = weChatClient.sendMsg(msg, applicationName);
-        isSuccess(response);
+        SendMsgResponse response = callCenterClient.sendMsg(msg, applicationName);
         return response.getMsgId();
     }
 
@@ -219,9 +193,7 @@ public class WeChatCallCenterService extends AbstractBaseService {
      * @return msgId
      */
     public String sendMsgOnEvent(SendMsgOnEventRequest msg, String applicationName) {
-        checkApplication(applicationName);
-        SendMsgResponse response = weChatClient.sendMsgOnEvent(msg, applicationName);
-        isSuccess(response);
+        SendMsgResponse response = callCenterClient.sendMsgOnEvent(msg, applicationName);
         return response.getMsgId();
     }
 
@@ -233,9 +205,141 @@ public class WeChatCallCenterService extends AbstractBaseService {
      * @return 客户基础信息
      */
     public GetCustomerResponse getCustomer(GetCustomerRequest request, String applicationName) {
-        checkApplication(applicationName);
-        GetCustomerResponse response = weChatClient.getCustomer(request, applicationName);
-        isSuccess(response);
-        return response;
+        return callCenterClient.getCustomer(request, applicationName);
+    }
+
+    /**
+     * 获取配置的专员与客户群
+     *
+     * @param applicationName 应用
+     * @return 配置信息
+     */
+    public UpgradeServiceConfigResponse getUpgradeServiceConfig(String applicationName) {
+        return callCenterClient.getUpgradeServiceConfig(applicationName);
+    }
+
+    /**
+     * 为客户升级为专员或客户群服务
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     */
+    public void upgradeService(UpgradeServiceRequest request, String applicationName) {
+        callCenterClient.upgradeService(request, applicationName);
+    }
+
+    /**
+     * 为客户取消推荐
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     */
+    public void cancelUpgradeService(CancelUpgradeServiceRequest request, String applicationName) {
+        callCenterClient.cancelUpgradeService(request, applicationName);
+    }
+
+    /**
+     * 添加分组
+     *
+     * @param name            分组名称
+     * @param applicationName 应用
+     * @return 分组编号
+     */
+    public String addKnowledgeGroup(String name, String applicationName) {
+
+        if (StringUtils.isEmpty(name)) {
+            throw new ParamCheckException("分组名称不能为空");
+        }
+
+        KnowledgeGroupRequest request = new KnowledgeGroupRequest();
+        request.setName(name);
+        AddKnowledgeGroupResponse response = callCenterClient.addKnowledgeGroup(request, applicationName);
+        return response.getGroupId();
+    }
+
+    /**
+     * 修改分组
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     */
+    public void modKnowledgeGroup(KnowledgeGroupRequest request, String applicationName) {
+        callCenterClient.modKnowledgeGroup(request, applicationName);
+    }
+
+    /**
+     * 删除分组
+     *
+     * @param groupId         分组编号
+     * @param applicationName 应用
+     */
+    public void delKnowledgeGroup(String groupId, String applicationName) {
+        if (StringUtils.isEmpty(groupId)) {
+            throw new ParamCheckException("分组编号不能为空");
+        }
+
+        DelKnowledgeGroupRequest request = new DelKnowledgeGroupRequest();
+        request.setGroupId(groupId);
+
+        callCenterClient.delKnowledgeGroup(request, applicationName);
+    }
+
+    /**
+     * 查询分组列表
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     * @return 分组列表
+     */
+    public KnowledgeGroupResponse queryKnowledgeGroup(QueryKnowledgeGroupRequest request, String applicationName) {
+        return callCenterClient.queryKnowledgeGroup(request, applicationName);
+    }
+
+    /**
+     * 添加问答
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     * @return 问答编号
+     */
+    public String addKnowledgeIntent(KnowledgeIntentRequest request, String applicationName) {
+        return callCenterClient.addKnowledgeIntent(request, applicationName).getIntentId();
+    }
+
+    /**
+     * 修改问答
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     */
+    public void modKnowledgeIntent(KnowledgeIntentRequest request, String applicationName) {
+        callCenterClient.modKnowledgeIntent(request, applicationName);
+    }
+
+    /**
+     * 删除问答
+     *
+     * @param intentId        问答编号
+     * @param applicationName 应用
+     */
+    public void delKnowledgeIntent(String intentId, String applicationName) {
+        if (StringUtils.isEmpty(intentId)) {
+            throw new ParamCheckException("问答编号不能为空");
+        }
+
+        DelKnowledgeIntentRequest request = new DelKnowledgeIntentRequest();
+        request.setIntentId(intentId);
+        callCenterClient.delKnowledgeIntent(request, applicationName);
+    }
+
+    /**
+     * 获取问答列表
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     * @return 问答列表
+     */
+    public KnowledgeIntentResponse queryKnowledgeIntent(QueryKnowledgeIntentRequest request, String applicationName) {
+        return callCenterClient.queryKnowledgeIntent(request, applicationName);
     }
 }

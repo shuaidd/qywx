@@ -13,9 +13,12 @@ import java.util.List;
  * date 2021-01-07 16:15
  **/
 public class GroupChatStatisticResponse extends AbstractBaseResponse {
+
     private Integer total;
+
     @JsonProperty("next_offset")
     private Integer nextOffset;
+
     private List<GroupChatStatistic> items;
 
     public Integer getTotal() {

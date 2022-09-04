@@ -1,5 +1,7 @@
 package com.github.shuaidd.dto.message;
 
+import java.util.StringJoiner;
+
 /**
  * 描述
  *
@@ -46,5 +48,15 @@ public class MsgTextCard {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", MsgTextCard.class.getSimpleName() + "[", "]")
+                .add("title='" + title + "'")
+                .add("description='" + description + "'")
+                .add("btntxt='" + btntxt + "'")
+                .add("url='" + url + "'")
+                .toString();
     }
 }

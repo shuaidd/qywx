@@ -1,11 +1,15 @@
 package com.github.shuaidd;
 
+import com.github.shuaidd.dto.addressbook.DeptUser;
 import com.github.shuaidd.response.addressbook.ExportResultResponse;
+import com.github.shuaidd.response.addressbook.SimpleDeptUserResponse;
+import com.github.shuaidd.resquest.CursorPageRequest;
 import com.github.shuaidd.resquest.addressbook.*;
 import org.junit.Test;
 
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 描述 通讯录单元测试
@@ -146,7 +150,14 @@ public class AddressBookTest extends AbstractTest {
      */
     @Test
     public void departmentList() {
-        weChatManager.addressBookService().departmentList(1499, appName);
+       List<?> list = weChatManager.addressBookService().departmentList(1499, appName);
+       logger.info("{}",list);
+    }
+
+    @Test
+    public void simpleDepartmentList() {
+       List<?> list = weChatManager.addressBookService().simpleDepartmentList(1499, appName);
+       logger.info("{}",list);
     }
 
     /**
@@ -352,5 +363,12 @@ public class AddressBookTest extends AbstractTest {
         for (ExportResultResponse.ExportResultData exportResultData : resultResponse.getDataList()) {
             weChatManager.addressBookService().getDecryptExportData(aesKey, exportResultData.getUrl());
         }
+    }
+
+    @Test
+    public void getUserIds() {
+        CursorPageRequest request = new CursorPageRequest();
+        List<DeptUser> response = weChatManager.addressBookService().getUserIds(request, appName);
+        logger.info("{}",response);
     }
 }

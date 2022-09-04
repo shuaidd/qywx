@@ -22,23 +22,20 @@ public class TokenService extends AbstractBaseService {
      */
     @Cacheable(value = "qywx", key = "'qywx_access_token_'+#applicationName")
     public String getAccessToken(String applicationName) {
-        checkApplication(applicationName);
-        logger.info("获取AccessToken：{}", applicationName);
-        String accessToken = null;
-        AccessTokenResponse accessTokenResponse = weChatClient.getAccessToken(properties.getCorpId(), getApplicationSecret(applicationName));
-        if (isSuccess(accessTokenResponse)) {
-            accessToken = accessTokenResponse.getAccessToken();
+        if (logger.isInfoEnabled()) {
+            logger.info("调用接口获取AccessToken：应用名称-{}", applicationName);
         }
-        return accessToken;
+        AccessTokenResponse accessTokenResponse = weChatClient.getAccessToken(properties.getCorpId(), getApplicationSecret(applicationName));
+        return accessTokenResponse.getAccessToken();
     }
 
     /**
      * 清除应用AccessToken缓存
      *
-     * @param applicationName 应用名称
+     * @param cacheApplicationName 应用名称
      */
-    @CacheEvict(value = "qywx", key = "'qywx_access_token_'+#applicationName")
-    public void clearAccessToken(String applicationName) {
+    @CacheEvict(value = "qywx", key = "'qywx_access_token_'+#cacheApplicationName")
+    public void clearAccessToken(String cacheApplicationName) {
 
     }
 }

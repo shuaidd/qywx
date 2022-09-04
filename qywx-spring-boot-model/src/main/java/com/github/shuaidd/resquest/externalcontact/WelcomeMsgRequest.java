@@ -1,10 +1,13 @@
 package com.github.shuaidd.resquest.externalcontact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.shuaidd.dto.externalcontact.V2GroupMsg;
 import com.github.shuaidd.dto.message.MiniProgram;
 import com.github.shuaidd.dto.message.MsgImage;
 import com.github.shuaidd.dto.message.MsgLink;
 import com.github.shuaidd.dto.message.MsgText;
+
+import java.util.List;
 
 /**
  * 描述
@@ -13,12 +16,13 @@ import com.github.shuaidd.dto.message.MsgText;
  * date 2021-01-06 22:23
  **/
 public class WelcomeMsgRequest {
+
     @JsonProperty("welcome_code")
     private String welcomeCode;
+
     private MsgText text;
-    private MsgLink link;
-    private MsgImage image;
-    private MiniProgram miniprogram;
+
+    private List<V2GroupMsg> attachments;
 
     public String getWelcomeCode() {
         return welcomeCode;
@@ -36,27 +40,11 @@ public class WelcomeMsgRequest {
         this.text = text;
     }
 
-    public MsgLink getLink() {
-        return link;
+    public List<V2GroupMsg> getAttachments() {
+        return attachments;
     }
 
-    public void setLink(MsgLink link) {
-        this.link = link;
-    }
-
-    public MsgImage getImage() {
-        return image;
-    }
-
-    public void setImage(MsgImage image) {
-        this.image = image;
-    }
-
-    public MiniProgram getMiniprogram() {
-        return miniprogram;
-    }
-
-    public void setMiniprogram(MiniProgram miniprogram) {
-        this.miniprogram = miniprogram;
+    public void setAttachments(List<V2GroupMsg> attachments) {
+        this.attachments = attachments;
     }
 }

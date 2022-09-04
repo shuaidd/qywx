@@ -1,7 +1,7 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.application.ApplicationButtonResponse;
-import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.application.WeChatApplicationResponse;
 import com.github.shuaidd.resquest.application.ApplicationButtonRequest;
 import org.apache.commons.collections4.CollectionUtils;
@@ -26,17 +26,12 @@ public class ApplicationService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return WeChatApplicationResponse
      */
-    public final WeChatApplicationResponse getApplication(String agentId, String applicationName) {
-        checkApplication(applicationName);
-        WeChatApplicationResponse response = null;
+    public WeChatApplicationResponse getApplication(String agentId, String applicationName) {
         if (StringUtils.isNotEmpty(agentId)) {
-            response = weChatClient.getApplication(agentId, applicationName);
-            if (isSuccess(response)) {
-                logger.info("应用获取成功");
-            }
+            return applicationClient.getApplication(agentId, applicationName);
         }
 
-        return response;
+        throw new ParamCheckException("agentId 不能为空，请检查！！！");
     }
 
     /**
@@ -46,11 +41,10 @@ public class ApplicationService extends AbstractBaseService {
      * @param agentId         应用ID
      * @param applicationName 应用名称
      */
-    public final void createApplicationButton(ApplicationButtonRequest request, String agentId, String applicationName) {
-        checkApplication(applicationName);
+    public void createApplicationButton(ApplicationButtonRequest request, String agentId, String applicationName) {
         if (Objects.nonNull(request) && CollectionUtils.isNotEmpty(request.getButtonList())) {
-            BaseResponse response = weChatClient.createApplicationButton(request, agentId, applicationName);
-            if (isSuccess(response)) {
+            applicationClient.createApplicationButton(request, agentId, applicationName);
+            if (logger.isInfoEnabled()) {
                 logger.info("应用菜单创建成功:{},{}", agentId, applicationName);
             }
         }
@@ -63,12 +57,12 @@ public class ApplicationService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return ApplicationButtonResponse
      */
-    public final ApplicationButtonResponse getApplicationButtons(String agentId, String applicationName) {
-        checkApplication(applicationName);
+    public ApplicationButtonResponse getApplicationButtons(String agentId, String applicationName) {
+
         ApplicationButtonResponse response = null;
         if (StringUtils.isNotEmpty(agentId)) {
-            response = weChatClient.getApplicationButtons(agentId, applicationName);
-            if (isSuccess(response)) {
+            response = applicationClient.getApplicationButtons(agentId, applicationName);
+            if (logger.isInfoEnabled()) {
                 logger.info("应用菜单获取成功:{},{}", agentId, applicationName);
             }
         }
@@ -81,13 +75,14 @@ public class ApplicationService extends AbstractBaseService {
      * @param agentId         应用ID
      * @param applicationName 应用名称
      */
-    public final void deleteApplicationButtons(String agentId, String applicationName) {
-        checkApplication(applicationName);
+    public void deleteApplicationButtons(String agentId, String applicationName) {
         if (StringUtils.isNotEmpty(agentId)) {
-            BaseResponse response = weChatClient.deleteApplicationButtons(agentId, applicationName);
-            if (isSuccess(response)) {
+            applicationClient.deleteApplicationButtons(agentId, applicationName);
+            if (logger.isInfoEnabled()) {
                 logger.info("应用菜单删除成功:{},{}", agentId, applicationName);
             }
+        } else {
+            throw new ParamCheckException("agentId 不能为空，请检查！！！");
         }
     }
 }

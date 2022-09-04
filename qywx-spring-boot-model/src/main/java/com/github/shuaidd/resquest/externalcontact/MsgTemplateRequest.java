@@ -1,6 +1,7 @@
 package com.github.shuaidd.resquest.externalcontact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.shuaidd.dto.externalcontact.V2GroupMsg;
 import com.github.shuaidd.dto.message.MiniProgram;
 import com.github.shuaidd.dto.message.MsgImage;
 import com.github.shuaidd.dto.message.MsgLink;
@@ -21,9 +22,7 @@ public class MsgTemplateRequest {
     private List<String> externalUserId;
     private String sender;
     private MsgText text;
-    private MsgImage image;
-    private MsgLink link;
-    private MiniProgram miniprogram;
+    private List<V2GroupMsg> attachments;
 
     public String getChatType() {
         return chatType;
@@ -57,27 +56,11 @@ public class MsgTemplateRequest {
         this.text = text;
     }
 
-    public MsgImage getImage() {
-        return image;
+    public List<V2GroupMsg> getAttachments() {
+        return attachments;
     }
 
-    public void setImage(MsgImage image) {
-        this.image = image;
-    }
-
-    public MsgLink getLink() {
-        return link;
-    }
-
-    public void setLink(MsgLink link) {
-        this.link = link;
-    }
-
-    public MiniProgram getMiniprogram() {
-        return miniprogram;
-    }
-
-    public void setMiniprogram(MiniProgram miniprogram) {
-        this.miniprogram = miniprogram;
+    public void setAttachments(List<V2GroupMsg> attachments) {
+        this.attachments = attachments;
     }
 }

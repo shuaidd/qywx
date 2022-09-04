@@ -1,12 +1,13 @@
 package com.github.shuaidd;
 
+import com.github.shuaidd.response.auth.AuthenticationResponse;
 import org.junit.Test;
 
 import java.util.List;
 
 /**
  * 描述
- *
+ * LRzH8nvfUdQDOrOCXqfD43EQD8_z8Xk5KPBYtn5XqEJloLBlSHIniRlor5A4OxJmIgOdiuLWMWZEbEK212Rd6Oricxlzcy6-KbeRy4bnyw-cAkWcmgZqnuzVkJGIheUWcL8qA2s-zc-ohPIR48wRY0JNdqiiBUcUePqft0lzNz-UO65FF2eh8w-N6uScVILy6d3180avnPT9MtofROzwqA
  * @author ddshuai
  * date 2021-07-15 15:00
  **/
@@ -40,6 +41,7 @@ public class AuthenticationServiceTest extends AbstractTest {
 
     @Test
     public void getAuthentication() {
-        weChatManager.authenticationService().getAuthentication("sdwwwdssds", appName);
+        AuthenticationResponse response = weChatManager.authenticationService().getAuthentication("sdwwwdssds", appName);
+        logger.info("{}", response);
     }
 }

@@ -14,8 +14,10 @@ import java.util.List;
  * date 2021-01-06 22:41
  **/
 public class UserBehaviorRequest {
+
     @JsonProperty("userid")
     private List<String> userIds;
+
     @JsonProperty("partyid")
     private List<Integer> partyIds;
 

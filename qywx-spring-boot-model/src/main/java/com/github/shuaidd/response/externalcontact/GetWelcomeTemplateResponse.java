@@ -1,9 +1,6 @@
 package com.github.shuaidd.response.externalcontact;
 
-import com.github.shuaidd.dto.message.MiniProgram;
-import com.github.shuaidd.dto.message.MsgImage;
-import com.github.shuaidd.dto.message.MsgLink;
-import com.github.shuaidd.dto.message.MsgText;
+import com.github.shuaidd.dto.message.*;
 import com.github.shuaidd.response.AbstractBaseResponse;
 
 /**
@@ -17,6 +14,8 @@ public class GetWelcomeTemplateResponse extends AbstractBaseResponse {
     private MsgImage image;
     private MsgLink link;
     private MiniProgram miniprogram;
+    private MsgVideo video;
+    private MsgFile file;
 
     public MsgText getText() {
         return text;
@@ -48,5 +47,21 @@ public class GetWelcomeTemplateResponse extends AbstractBaseResponse {
 
     public void setMiniprogram(MiniProgram miniprogram) {
         this.miniprogram = miniprogram;
+    }
+
+    public MsgVideo getVideo() {
+        return video;
+    }
+
+    public void setVideo(MsgVideo video) {
+        this.video = video;
+    }
+
+    public MsgFile getFile() {
+        return file;
+    }
+
+    public void setFile(MsgFile file) {
+        this.file = file;
     }
 }

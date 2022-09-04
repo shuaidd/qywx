@@ -15,6 +15,7 @@ import com.github.shuaidd.dto.tool.DialRecord;
 import com.github.shuaidd.response.oa.*;
 import com.github.shuaidd.resquest.JournalReportStatRequest;
 import com.github.shuaidd.resquest.RequestFilter;
+import com.github.shuaidd.resquest.kf.PunchCorrectionRequest;
 import com.github.shuaidd.resquest.oa.*;
 import com.github.shuaidd.resquest.tool.DialRecordRequest;
 import com.google.common.collect.Lists;
@@ -42,9 +43,6 @@ public class OAServiceTest extends AbstractTest {
     /*打卡应用*/
     public static final String CHECK_IN = "check-in";
 
-    /*公费电话应用*/
-    public static final String PUBLIC_TELEPHONE = "public-telephone";
-
     /*审批应用*/
     public static final String APPROVE = "approve";
 
@@ -60,12 +58,6 @@ public class OAServiceTest extends AbstractTest {
         logger.info("获取到的打卡数据--{}", checkInOptionResponse);
     }
 
-    @Test
-    public void getDialRecord() {
-        DialRecordRequest recordRequest = new DialRecordRequest();
-        List<DialRecord> dialRecords = weChatManager.oaService().getDialRecord(recordRequest, PUBLIC_TELEPHONE);
-        logger.info("获取到的公费电话拨打记录数据--{}", dialRecords);
-    }
 
     @Test
     public void getCheckInData() {
@@ -381,5 +373,15 @@ public class OAServiceTest extends AbstractTest {
         }
 
         return null;
+    }
+
+    @Test
+    public void punchCorrection() throws ParseException {
+        PunchCorrectionRequest request = new PunchCorrectionRequest();
+        request.setUserId("20170410022717");
+        request.setScheduleDateTime(DateUtils.parseDate("2022-08-01 09:00","yyyy-MM-dd HH:mm"));
+        request.setCheckinTime(DateUtils.parseDate("2022-09-01 09:00","yyyy-MM-dd HH:mm"));
+        request.setScheduleCheckinTime(32400);
+        weChatManager.oaService().punchCorrection(request, CHECK_IN);
     }
 }

@@ -39,10 +39,9 @@ public class MediaService extends AbstractBaseService {
      * @param mediaType       媒体类型
      * @param type            类型
      * @param applicationName 应用名称
-     * @return String
+     * @return media_id
      */
-    public final String uploadMaterial(File file, MediaType mediaType, String type, String applicationName) {
-        checkApplication(applicationName);
+    public String uploadMaterial(File file, MediaType mediaType, String type, String applicationName) {
         String mediaId = null;
         if (Objects.nonNull(file) && Objects.nonNull(mediaType)) {
             DiskFileItem fileItem = diskFileItem(file, mediaType, applicationName);
@@ -53,17 +52,20 @@ public class MediaService extends AbstractBaseService {
         return mediaId;
     }
 
-    public final String uploadMaterial(MultipartFile file, String type, String applicationName) {
-        checkApplication(applicationName);
-        String mediaId = null;
+    /**
+     * 上传临时素材
+     * @param file 文件
+     * @param type 媒体类型
+     * @param applicationName 应用名称
+     * @return media_id
+     */
+    public String uploadMaterial(MultipartFile file, String type, String applicationName) {
         if (Objects.nonNull(file) && Objects.nonNull(type)) {
             WeChatMediaUploadResponse response = weChatMediaClient.uploadMaterial(file, type, applicationName);
-            if (isSuccess(response)) {
-                mediaId = response.getMediaId();
-            }
+            return response.getMediaId();
         }
 
-        return mediaId;
+        return null;
     }
 
     /**
@@ -72,21 +74,17 @@ public class MediaService extends AbstractBaseService {
      * @param file            文件
      * @param mediaType       媒体类型
      * @param applicationName 应用名称
-     * @return String
+     * @return media_id
      */
-    public final String uploadImage(File file, MediaType mediaType, String applicationName) {
-        checkApplication(applicationName);
-        String url = null;
+    public String uploadImage(File file, MediaType mediaType, String applicationName) {
         if (Objects.nonNull(file) && Objects.nonNull(mediaType)) {
             DiskFileItem fileItem = diskFileItem(file, mediaType, applicationName);
             MultipartFile multi = new CommonsMultipartFile(fileItem);
             UploadImageResponse response = weChatMediaClient.uploadImage(multi, applicationName);
-            if (isSuccess(response)) {
-                url = response.getUrl();
-            }
+            return response.getUrl();
         }
 
-        return url;
+        return null;
     }
 
     private DiskFileItem diskFileItem(File file, MediaType mediaType, String applicationName) {
@@ -103,12 +101,51 @@ public class MediaService extends AbstractBaseService {
         return fileItem;
     }
 
-    public final ResponseEntity<byte[]> download(String mediaId, String applicationName) {
+    /**
+     * 素材下载
+     * @param mediaId 素材编号
+     * @param applicationName 应用名称
+     * @return ResponseEntity
+     */
+    public ResponseEntity<byte[]> download(String mediaId, String applicationName) {
         ResponseEntity<byte[]> responseEntity = null;
         if (StringUtils.isNotEmpty(mediaId)) {
             responseEntity = weChatMediaClient.download(mediaId, applicationName);
         }
 
         return responseEntity;
+    }
+
+    /**
+     *
+     * @param mediaId 素材编号
+     * @param applicationName 应用名称
+     * @return ResponseEntity
+     */
+    public ResponseEntity<byte[]> downloadJsMedia(String mediaId, String applicationName) {
+        return weChatMediaClient.downloadJsMedia(mediaId, applicationName);
+    }
+
+    /**
+     *
+     * @param mediaId 素材编号
+     * @param downloadFilePath 下载路径
+     * @param applicationName 应用名称
+     * @return 下载的文件
+     */
+    public File downloadJsMediaFile(String mediaId, String downloadFilePath, String applicationName) {
+        return weChatMediaClient.downloadJsMediaFile(mediaId, downloadFilePath, applicationName);
+    }
+
+    /**
+     * 文件下载
+     *
+     * @param mediaId          素材编号
+     * @param downloadFilePath 下载路径
+     * @param applicationName  应用名称
+     * @return 下载的文件
+     */
+    public File downloadFile(String mediaId, String downloadFilePath, String applicationName) {
+        return weChatMediaClient.downloadFile(mediaId, downloadFilePath, applicationName);
     }
 }

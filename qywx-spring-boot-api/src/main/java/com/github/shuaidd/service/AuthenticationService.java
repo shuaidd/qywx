@@ -1,5 +1,6 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.tool.ApiDomainIpResponse;
 import com.github.shuaidd.response.auth.AuthenticationResponse;
 import org.apache.commons.lang3.StringUtils;
@@ -23,14 +24,15 @@ public class AuthenticationService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return AuthenticationResponse
      */
-    public final AuthenticationResponse getAuthentication(String code, String applicationName) {
-        checkApplication(applicationName);
-        AuthenticationResponse response = null;
+    public AuthenticationResponse getAuthentication(String code, String applicationName) {
+        AuthenticationResponse response;
         if (StringUtils.isNotEmpty(code)) {
-            response = weChatClient.getAuthentication(code, applicationName);
-            if (isSuccess(response)) {
-                logger.info("应用: {},根据code:{},获取到用户身份：{}", applicationName, code, response);
-            }
+            response = addressBookClient.getAuthentication(code, applicationName);
+           if (logger.isInfoEnabled()) {
+               logger.info("应用: {},根据code:{},获取到用户身份：{}", applicationName, code, response);
+           }
+        } else {
+            throw new ParamCheckException("code 不能为空，请检查！！！");
         }
 
         return response;

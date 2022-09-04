@@ -1,5 +1,6 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.dto.addressbook.DeptUser;
 import com.github.shuaidd.dto.tool.CallbackData;
 import com.github.shuaidd.dto.addressbook.Department;
 import com.github.shuaidd.dto.addressbook.Tag;
@@ -7,6 +8,7 @@ import com.github.shuaidd.dto.addressbook.WeChatUser;
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.*;
 import com.github.shuaidd.response.addressbook.*;
+import com.github.shuaidd.resquest.CursorPageRequest;
 import com.github.shuaidd.resquest.addressbook.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.collections4.CollectionUtils;
@@ -85,11 +87,10 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名
      * @param request         请求
      */
-    public final void createUser(CreateUserRequest request, String applicationName) {
-        checkApplication(applicationName);
+    public void createUser(CreateUserRequest request, String applicationName) {
         if (Objects.nonNull(request)) {
-            BaseResponse baseResponse = weChatClient.createUser(request, applicationName);
-            if (isSuccess(baseResponse)) {
+            addressBookClient.createUser(request, applicationName);
+            if (logger.isInfoEnabled()) {
                 logger.info("用户创建成功:{}", request);
             }
         }
@@ -102,15 +103,12 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用
      * @return WeChatUserResponse
      */
-    public final WeChatUserResponse getUser(String userId, String applicationName) {
-        checkApplication(applicationName);
+    public WeChatUserResponse getUser(String userId, String applicationName) {
         WeChatUserResponse weChatUserResponse = null;
         if (StringUtils.isNotEmpty(userId)) {
-            weChatUserResponse = weChatClient.getUser(userId, applicationName);
-            if (isSuccess(weChatUserResponse)) {
-                if (logger.isInfoEnabled()) {
-                    logger.info("读取到成员信息：{}", weChatUserResponse);
-                }
+            weChatUserResponse = addressBookClient.getUser(userId, applicationName);
+            if (logger.isInfoEnabled()) {
+                logger.info("读取到成员信息：{}", weChatUserResponse);
             }
         }
 
@@ -123,14 +121,11 @@ public class AddressBookService extends AbstractBaseService {
      * @param request         更新信息
      * @param applicationName 应用
      */
-    public final void updateUser(UpdateUserRequest request, String applicationName) {
-        checkApplication(applicationName);
+    public void updateUser(UpdateUserRequest request, String applicationName) {
         if (Objects.nonNull(request) && StringUtils.isNotEmpty(request.getUserId())) {
-            BaseResponse baseResponse = weChatClient.updateUser(request, applicationName);
-            if (isSuccess(baseResponse)) {
-                if (logger.isInfoEnabled()) {
-                    logger.info("更新成员信息成功：userId-{},applicationName-{}", request.getUserId(), applicationName);
-                }
+            addressBookClient.updateUser(request, applicationName);
+            if (logger.isInfoEnabled()) {
+                logger.info("更新成员信息成功：userId-{},applicationName-{}", request.getUserId(), applicationName);
             }
         }
     }
@@ -141,14 +136,11 @@ public class AddressBookService extends AbstractBaseService {
      * @param userId          用户编号
      * @param applicationName 应用名称
      */
-    public final void deleteUser(String userId, String applicationName) {
-        checkApplication(applicationName);
+    public void deleteUser(String userId, String applicationName) {
         if (StringUtils.isNotEmpty(userId)) {
-            BaseResponse response = weChatClient.deleteUser(userId, applicationName);
-            if (isSuccess(response)) {
-                if (logger.isInfoEnabled()) {
-                    logger.info("删除成员成功：userId-{},applicationName-{}", userId, applicationName);
-                }
+            addressBookClient.deleteUser(userId, applicationName);
+            if (logger.isInfoEnabled()) {
+                logger.info("删除成员成功：userId-{},applicationName-{}", userId, applicationName);
             }
         }
     }
@@ -159,14 +151,11 @@ public class AddressBookService extends AbstractBaseService {
      * @param request         请求
      * @param applicationName 应用名称
      */
-    public final void batchDeleteUser(BatchDeleteUserRequest request, String applicationName) {
-        checkApplication(applicationName);
+    public void batchDeleteUser(BatchDeleteUserRequest request, String applicationName) {
         if (Objects.nonNull(request) && CollectionUtils.isNotEmpty(request.getUserIdList())) {
-            BaseResponse response = weChatClient.batchDelete(request, applicationName);
-            if (isSuccess(response)) {
-                if (logger.isInfoEnabled()) {
-                    logger.info("批量删除成员成功：{},applicationName-{}", request, applicationName);
-                }
+            addressBookClient.batchDelete(request, applicationName);
+            if (logger.isInfoEnabled()) {
+                logger.info("批量删除成员成功：{},applicationName-{}", request, applicationName);
             }
         }
     }
@@ -179,18 +168,16 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用
      * @return WeChatUser
      */
-    public final List<WeChatUser> getDepartmentUser(Integer departmentId, boolean fetchChild, String applicationName) {
-        checkApplication(applicationName);
+    public List<WeChatUser> getDepartmentUser(Integer departmentId, boolean fetchChild, String applicationName) {
+
         List<WeChatUser> weChatUsers = new ArrayList<>(1);
         if (Objects.nonNull(departmentId)) {
             Integer getChild = fetchChild ? 1 : 0;
-            DepartmentUserResponse departmentUserResponse = weChatClient.getDepartmentUser(departmentId, getChild, applicationName);
-            if (isSuccess(departmentUserResponse)) {
-                weChatUsers = departmentUserResponse.getWeChatUserList();
+            DepartmentUserResponse departmentUserResponse = addressBookClient.getDepartmentUser(departmentId, getChild, applicationName);
+            weChatUsers = departmentUserResponse.getWeChatUserList();
 
-                if (logger.isInfoEnabled()) {
-                    logger.info("获取部门成员成功：applicationName-{}--weChatUsers--{}", applicationName, weChatUsers);
-                }
+            if (logger.isInfoEnabled()) {
+                logger.info("获取部门成员成功：applicationName-{}--weChatUsers--{}", applicationName, weChatUsers);
             }
         }
 
@@ -205,18 +192,16 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用
      * @return WeChatUser
      */
-    public final List<WeChatUser> getDepartmentUserDetail(Integer departmentId, boolean fetchChild, String applicationName) {
-        checkApplication(applicationName);
+    public List<WeChatUser> getDepartmentUserDetail(Integer departmentId, boolean fetchChild, String applicationName) {
+
         List<WeChatUser> weChatUsers = new ArrayList<>(1);
         if (Objects.nonNull(departmentId)) {
             Integer getChild = fetchChild ? 1 : 0;
-            DepartmentUserResponse departmentUserResponse = weChatClient.getDepartmentUserDetail(departmentId, getChild, applicationName);
-            if (isSuccess(departmentUserResponse)) {
-                weChatUsers = departmentUserResponse.getWeChatUserList();
+            DepartmentUserResponse departmentUserResponse = addressBookClient.getDepartmentUserDetail(departmentId, getChild, applicationName);
+            weChatUsers = departmentUserResponse.getWeChatUserList();
 
-                if (logger.isInfoEnabled()) {
-                    logger.info("获取部门成员详情成功：applicationName-{}--weChatUsers--{}", applicationName, weChatUsers);
-                }
+            if (logger.isInfoEnabled()) {
+                logger.info("获取部门成员详情成功：applicationName-{}--weChatUsers--{}", applicationName, weChatUsers);
             }
         }
 
@@ -230,16 +215,14 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return String
      */
-    public final String convertToOpenId(String userId, String applicationName) {
-        checkApplication(applicationName);
+    public String convertToOpenId(String userId, String applicationName) {
+
         String openId = null;
         if (StringUtils.isNotEmpty(userId)) {
-            ConvertUserIdOpenIdResponse response = weChatClient.convertToOpenId(new ConvertUserIdOpenIdRequest(userId, null), applicationName);
-            if (isSuccess(response)) {
-                openId = response.getOpenId();
-                if (logger.isInfoEnabled()) {
-                    logger.info("获取openId成功：openid-{}----applicationName-{}", openId, applicationName);
-                }
+            ConvertUserIdOpenIdResponse response = addressBookClient.convertToOpenId(new ConvertUserIdOpenIdRequest(userId, null), applicationName);
+            openId = response.getOpenId();
+            if (logger.isInfoEnabled()) {
+                logger.info("获取openId成功：openid-{}----applicationName-{}", openId, applicationName);
             }
         }
 
@@ -253,16 +236,14 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return String
      */
-    public final String convertToUserId(String openId, String applicationName) {
-        checkApplication(applicationName);
+    public String convertToUserId(String openId, String applicationName) {
+
         String userId = null;
         if (StringUtils.isNotEmpty(openId)) {
-            ConvertUserIdOpenIdResponse response = weChatClient.convertToUserId(new ConvertUserIdOpenIdRequest(null, openId), applicationName);
-            if (isSuccess(response)) {
-                userId = response.getUserId();
-                if (logger.isInfoEnabled()) {
-                    logger.info("获取用户ID成功：userId-{}, applicationName-{}", userId, applicationName);
-                }
+            ConvertUserIdOpenIdResponse response = addressBookClient.convertToUserId(new ConvertUserIdOpenIdRequest(null, openId), applicationName);
+            userId = response.getUserId();
+            if (logger.isInfoEnabled()) {
+                logger.info("获取用户ID成功：userId-{}, applicationName-{}", userId, applicationName);
             }
         }
 
@@ -275,14 +256,12 @@ public class AddressBookService extends AbstractBaseService {
      * @param userId          用户编号
      * @param applicationName 应用名称
      */
-    public final void authSuccess(String userId, String applicationName) {
-        checkApplication(applicationName);
+    public void authSuccess(String userId, String applicationName) {
+
         if (StringUtils.isNotEmpty(userId)) {
-            BaseResponse response = weChatClient.authSucc(userId, applicationName);
-            if (isSuccess(response)) {
-                if (logger.isInfoEnabled()) {
-                    logger.info("二次验证成功：userId-{},applicationName-{}", userId, applicationName);
-                }
+            BaseResponse response = addressBookClient.authSucc(userId, applicationName);
+            if (logger.isInfoEnabled()) {
+                logger.info("二次验证成功：userId-{},applicationName-{}", userId, applicationName);
             }
         }
     }
@@ -293,17 +272,15 @@ public class AddressBookService extends AbstractBaseService {
      * @param request         请求
      * @param applicationName 应用名称
      */
-    public final void invite(InviteUserRequest request, String applicationName) {
-        checkApplication(applicationName);
+    public void invite(InviteUserRequest request, String applicationName) {
+
         if (Objects.nonNull(request)) {
             if (CollectionUtils.isEmpty(request.getParty()) && CollectionUtils.isEmpty(request.getTag()) && CollectionUtils.isEmpty(request.getUser())) {
                 return;
             }
-            BaseResponse baseResponse = weChatClient.invite(request, applicationName);
-            if (isSuccess(baseResponse)) {
-                if (logger.isInfoEnabled()) {
-                    logger.info("邀请成功：applicationName-{}", applicationName);
-                }
+            BaseResponse baseResponse = addressBookClient.invite(request, applicationName);
+            if (logger.isInfoEnabled()) {
+                logger.info("邀请成功：applicationName-{}", applicationName);
             }
         }
     }
@@ -315,15 +292,12 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return CreateDepartmentResponse
      */
-    public final CreateDepartmentResponse createDepartment(DepartmentRequest request, String applicationName) {
-        checkApplication(applicationName);
+    public CreateDepartmentResponse createDepartment(DepartmentRequest request, String applicationName) {
         CreateDepartmentResponse response = null;
         if (Objects.nonNull(request) && StringUtils.isNotEmpty(request.getName())) {
-            response = weChatClient.createDepartment(request, applicationName);
-            if (isSuccess(response)) {
-                if (logger.isInfoEnabled()) {
-                    logger.info("创建部门成功：部门编号-{},applicationName-{}", response.getId(), applicationName);
-                }
+            response = addressBookClient.createDepartment(request, applicationName);
+            if (logger.isInfoEnabled()) {
+                logger.info("创建部门成功：部门编号-{},applicationName-{}", response.getId(), applicationName);
             }
         }
 
@@ -336,14 +310,11 @@ public class AddressBookService extends AbstractBaseService {
      * @param request         请求
      * @param applicationName 应用名称
      */
-    public final void updateDepartment(DepartmentRequest request, String applicationName) {
-        checkApplication(applicationName);
+    public void updateDepartment(DepartmentRequest request, String applicationName) {
         if (Objects.nonNull(request) && Objects.nonNull(request.getId())) {
-            BaseResponse response = weChatClient.updateDepartment(request, applicationName);
-            if (isSuccess(response)) {
-                if (logger.isInfoEnabled()) {
-                    logger.info("更新部门成功：更新信息-{},applicationName-{}", request, applicationName);
-                }
+            addressBookClient.updateDepartment(request, applicationName);
+            if (logger.isInfoEnabled()) {
+                logger.info("更新部门成功：更新信息-{},applicationName-{}", request, applicationName);
             }
         }
     }
@@ -354,14 +325,12 @@ public class AddressBookService extends AbstractBaseService {
      * @param id              部门id
      * @param applicationName 应用名称
      */
-    public final void deleteDepartment(Integer id, String applicationName) {
-        checkApplication(applicationName);
+    public void deleteDepartment(Integer id, String applicationName) {
+
         if (Objects.nonNull(id)) {
-            BaseResponse response = weChatClient.deleteDepartment(id, applicationName);
-            if (isSuccess(response)) {
-                if (logger.isInfoEnabled()) {
-                    logger.info("删除部门成功：部门编号-{},applicationName-{}", id, applicationName);
-                }
+            addressBookClient.deleteDepartment(id, applicationName);
+            if (logger.isInfoEnabled()) {
+                logger.info("删除部门成功：部门编号-{},applicationName-{}", id, applicationName);
             }
         }
     }
@@ -373,15 +342,28 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return Department
      */
-    public final List<Department> departmentList(Integer id, String applicationName) {
-        checkApplication(applicationName);
-        List<Department> departments = new ArrayList<>(1);
-        DepartmentListResponse response = weChatClient.departmentList(id, applicationName);
-        if (isSuccess(response)) {
-            departments = response.getDepartments();
-            if (logger.isInfoEnabled()) {
-                logger.info("拉取部门列表成功：部门数量-{},applicationName-{}，departments--{}", departments.size(), applicationName, departments);
-            }
+    public List<Department> departmentList(Integer id, String applicationName) {
+        DepartmentListResponse response = addressBookClient.departmentList(id, applicationName);
+        List<Department> departments = response.getDepartments();
+        if (logger.isInfoEnabled()) {
+            logger.info("拉取部门列表成功：部门数量-{},applicationName-{}，departments--{}", departments.size(), applicationName, departments);
+        }
+
+        return departments;
+    }
+
+    /**
+     * 拉取部门列表
+     *
+     * @param id              部门id
+     * @param applicationName 应用名称
+     * @return Department
+     */
+    public List<Department> simpleDepartmentList(Integer id, String applicationName) {
+        SimpleDepartmentListResponse response = addressBookClient.departmentSimpleList(id, applicationName);
+        List<Department> departments = response.getDepartments();
+        if (logger.isInfoEnabled()) {
+            logger.info("拉取部门列表成功：部门数量-{},applicationName-{}，departments--{}", departments.size(), applicationName, departments);
         }
 
         return departments;
@@ -394,16 +376,14 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return Integer
      */
-    public final Integer createTag(TagRequest request, String applicationName) {
-        checkApplication(applicationName);
+    public Integer createTag(TagRequest request, String applicationName) {
+
         Integer tagId = null;
         if (Objects.nonNull(request) && StringUtils.isNotEmpty(request.getTagName())) {
-            CreateTagResponse createTagResponse = weChatClient.createTag(request, applicationName);
-            if (isSuccess(createTagResponse)) {
-                tagId = createTagResponse.getTagId();
-                if (logger.isInfoEnabled()) {
-                    logger.info("创建标签成功：标签编号-{},applicationName-{}", tagId, applicationName);
-                }
+            CreateTagResponse createTagResponse = addressBookClient.createTag(request, applicationName);
+            tagId = createTagResponse.getTagId();
+            if (logger.isInfoEnabled()) {
+                logger.info("创建标签成功：标签编号-{},applicationName-{}", tagId, applicationName);
             }
         }
 
@@ -417,17 +397,14 @@ public class AddressBookService extends AbstractBaseService {
      * @param tagName         标签名称
      * @param applicationName 应用名称
      */
-    public final void updateTagName(Integer tagId, String tagName, String applicationName) {
-        checkApplication(applicationName);
+    public void updateTagName(Integer tagId, String tagName, String applicationName) {
         if (Objects.nonNull(tagId) && StringUtils.isNotEmpty(tagName)) {
             TagRequest tagRequest = new TagRequest();
             tagRequest.setTagId(tagId);
             tagRequest.setTagName(tagName);
-            BaseResponse response = weChatClient.updateTag(tagRequest, applicationName);
-            if (isSuccess(response)) {
-                if (logger.isInfoEnabled()) {
-                    logger.info("更新标签名字成功：标签编号[{}],标签名称[{}],applicationName-{}", tagId, tagName, applicationName);
-                }
+            addressBookClient.updateTag(tagRequest, applicationName);
+            if (logger.isInfoEnabled()) {
+                logger.info("更新标签名字成功：标签编号[{}],标签名称[{}],applicationName-{}", tagId, tagName, applicationName);
             }
         }
     }
@@ -438,14 +415,11 @@ public class AddressBookService extends AbstractBaseService {
      * @param tagId           标签ID
      * @param applicationName 应用名称
      */
-    public final void deleteTag(Integer tagId, String applicationName) {
-        checkApplication(applicationName);
+    public void deleteTag(Integer tagId, String applicationName) {
         if (Objects.nonNull(tagId)) {
-            BaseResponse response = weChatClient.deleteTag(tagId, applicationName);
-            if (isSuccess(response)) {
-                if (logger.isInfoEnabled()) {
-                    logger.info("删除标签成功：标签编号[{}],applicationName-{}", tagId, applicationName);
-                }
+            addressBookClient.deleteTag(tagId, applicationName);
+            if (logger.isInfoEnabled()) {
+                logger.info("删除标签成功：标签编号[{}],applicationName-{}", tagId, applicationName);
             }
         }
     }
@@ -457,15 +431,12 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return QueryTagUserResponse
      */
-    public final QueryTagUserResponse getTagUser(Integer tagId, String applicationName) {
-        checkApplication(applicationName);
+    public QueryTagUserResponse getTagUser(Integer tagId, String applicationName) {
         QueryTagUserResponse response = null;
         if (Objects.nonNull(tagId)) {
-            response = weChatClient.getTagUser(tagId, applicationName);
-            if (isSuccess(response)) {
-                if (logger.isInfoEnabled()) {
-                    logger.info("获取标签成员成功：标签编号[{}],applicationName-{}--成员--{}", tagId, applicationName, response.getUserList());
-                }
+            response = addressBookClient.getTagUser(tagId, applicationName);
+            if (logger.isInfoEnabled()) {
+                logger.info("获取标签成员成功：标签编号[{}],applicationName-{}--成员--{}", tagId, applicationName, response.getUserList());
             }
         }
 
@@ -479,15 +450,12 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return TagUserResponse
      */
-    public final TagUserResponse addTagUsers(TagUserRequest request, String applicationName) {
-        checkApplication(applicationName);
+    public TagUserResponse addTagUsers(TagUserRequest request, String applicationName) {
         TagUserResponse response = null;
         if (Objects.nonNull(request) && Objects.nonNull(request.getTagId())) {
-            response = weChatClient.addTagUsers(request, applicationName);
-            if (isSuccess(response)) {
-                if (logger.isInfoEnabled()) {
-                    logger.info("增加标签成员成功：标签编号[{}],applicationName-{}", request.getTagId(), applicationName);
-                }
+            response = addressBookClient.addTagUsers(request, applicationName);
+            if (logger.isInfoEnabled()) {
+                logger.info("增加标签成员成功：标签编号[{}],applicationName-{}", request.getTagId(), applicationName);
             }
         }
         return response;
@@ -500,15 +468,12 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return TagUserResponse
      */
-    public final TagUserResponse deleteTagUsers(TagUserRequest request, String applicationName) {
-        checkApplication(applicationName);
+    public TagUserResponse deleteTagUsers(TagUserRequest request, String applicationName) {
         TagUserResponse response = null;
         if (Objects.nonNull(request) && Objects.nonNull(request.getTagId())) {
-            response = weChatClient.deleteTagUsers(request, applicationName);
-            if (isSuccess(response)) {
-                if (logger.isInfoEnabled()) {
-                    logger.info("删除标签成员成功：标签编号[{}],applicationName-{}", request.getTagId(), applicationName);
-                }
+            response = addressBookClient.deleteTagUsers(request, applicationName);
+            if (logger.isInfoEnabled()) {
+                logger.info("删除标签成员成功：标签编号[{}],applicationName-{}", request.getTagId(), applicationName);
             }
         }
         return response;
@@ -520,15 +485,11 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return Tag
      */
-    public final List<Tag> getTagList(String applicationName) {
-        checkApplication(applicationName);
-        List<Tag> tags = new ArrayList<>(1);
-        TagListResponse response = weChatClient.getTagList(applicationName);
-        if (isSuccess(response)) {
-            tags = response.getTagList();
-            if (logger.isInfoEnabled()) {
-                logger.info("获取标签列表成功：applicationName-{}--tags--{}", applicationName, tags);
-            }
+    public List<Tag> getTagList(String applicationName) {
+        TagListResponse response = addressBookClient.getTagList(applicationName);
+        List<Tag> tags = response.getTagList();
+        if (logger.isInfoEnabled()) {
+            logger.info("获取标签列表成功：applicationName-{}--tags--{}", applicationName, tags);
         }
 
         return tags;
@@ -551,7 +512,7 @@ public class AddressBookService extends AbstractBaseService {
      * @param callbackData    回调信息。如填写该项则任务完成后，通过callback推送事件给企业。具体请参考应用回调模式中的相应选项
      * @return 任务编号
      */
-    public final String asyncBatchUpdateUser(List<WeChatUser> weChatUsers, Boolean toInvite, CallbackData callbackData, String applicationName) {
+    public String asyncBatchUpdateUser(List<WeChatUser> weChatUsers, Boolean toInvite, CallbackData callbackData, String applicationName) {
         return asyncHandleUser(weChatUsers, toInvite, callbackData, applicationName, ASYNC_BATCH_UPDATE_USER);
     }
 
@@ -563,7 +524,7 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return 任务编号
      */
-    public final String asyncBatchUpdateUser(List<WeChatUser> weChatUsers, Boolean toInvite, String applicationName) {
+    public String asyncBatchUpdateUser(List<WeChatUser> weChatUsers, Boolean toInvite, String applicationName) {
         return asyncBatchUpdateUser(weChatUsers, toInvite, null, applicationName);
     }
 
@@ -576,7 +537,7 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return 任务编号
      */
-    public final String fullCoverUser(List<WeChatUser> weChatUsers, Boolean toInvite, CallbackData callbackData, String applicationName) {
+    public String fullCoverUser(List<WeChatUser> weChatUsers, Boolean toInvite, CallbackData callbackData, String applicationName) {
         return asyncHandleUser(weChatUsers, toInvite, callbackData, applicationName, FULL_COVER_USER);
     }
 
@@ -588,12 +549,12 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return 任务编号
      */
-    public final String fullCoverUser(List<WeChatUser> weChatUsers, Boolean toInvite, String applicationName) {
+    public String fullCoverUser(List<WeChatUser> weChatUsers, Boolean toInvite, String applicationName) {
         return asyncHandleUser(weChatUsers, toInvite, null, applicationName, FULL_COVER_USER);
     }
 
     private String asyncHandleUser(List<WeChatUser> weChatUsers, Boolean toInvite, CallbackData callbackData, String applicationName, String type) {
-        checkApplication(applicationName);
+
         //上传待增量更新的文件
         String fileName = "";
         if (ASYNC_BATCH_UPDATE_USER.equals(type)) {
@@ -623,13 +584,11 @@ public class AddressBookService extends AbstractBaseService {
             AsyncJobRequest request = buildAsyncJobRequest(mediaId, toInvite, callbackData);
             AsyncJobResponse response = null;
             if (ASYNC_BATCH_UPDATE_USER.equals(type)) {
-                response = weChatClient.asyncBatchUpdateUser(request, applicationName);
+                response = addressBookClient.asyncBatchUpdateUser(request, applicationName);
             } else if (FULL_COVER_USER.equals(type)) {
-                response = weChatClient.fullCoverUser(request, applicationName);
+                response = addressBookClient.fullCoverUser(request, applicationName);
             }
-            if (isSuccess(response)) {
-                return Objects.nonNull(response) ? response.getJobId() : "";
-            }
+            return Objects.nonNull(response) ? response.getJobId() : "";
         } catch (Exception e) {
             logger.error("异步更新用户信息异常:{}，type: {}", applicationName, type, e);
         }
@@ -685,8 +644,8 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return String
      */
-    public final String fullCoverDepartment(List<Department> departments, CallbackData callbackData, String applicationName) {
-        checkApplication(applicationName);
+    public String fullCoverDepartment(List<Department> departments, CallbackData callbackData, String applicationName) {
+
         DiskFileItem fileItem = (DiskFileItem) new DiskFileItemFactory().createItem("file",
                 MediaType.TEXT_PLAIN.getType(), true, String.format(FULL_COVER_DEPARTMENT_FILE, DateFormatUtils.format(new Date(), "yyyyMMddhhmmss")));
 
@@ -711,11 +670,8 @@ public class AddressBookService extends AbstractBaseService {
             MultipartFile multi = new CommonsMultipartFile(fileItem);
             String mediaId = mediaService.uploadMaterial(multi, MediaService.FILE, applicationName);
             AsyncJobRequest request = buildAsyncJobRequest(mediaId, null, callbackData);
-            AsyncJobResponse response = weChatClient.fullCoverDepartment(request, applicationName);
-
-            if (isSuccess(response)) {
-                return Objects.nonNull(response) ? response.getJobId() : "";
-            }
+            AsyncJobResponse response = addressBookClient.fullCoverDepartment(request, applicationName);
+            return Objects.nonNull(response) ? response.getJobId() : "";
         } catch (Exception e) {
             logger.error("全量覆盖部门异常:{}", applicationName, e);
         }
@@ -730,7 +686,7 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return 任务编号
      */
-    public final String fullCoverDepartment(List<Department> departments, String applicationName) {
+    public String fullCoverDepartment(List<Department> departments, String applicationName) {
         return fullCoverDepartment(departments, null, applicationName);
     }
 
@@ -742,12 +698,11 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return AsyncJobResultResponse
      */
-    public final AsyncJobResultResponse jobResult(String jobId, String applicationName) {
-        checkApplication(applicationName);
+    public AsyncJobResultResponse jobResult(String jobId, String applicationName) {
         AsyncJobResultResponse resultResponse = null;
         if (StringUtils.isNotEmpty(jobId)) {
-            resultResponse = weChatClient.jobResult(jobId, applicationName);
-            if (isSuccess(resultResponse)) {
+            resultResponse = addressBookClient.jobResult(jobId, applicationName);
+            if (logger.isInfoEnabled()) {
                 logger.info("获取任务执行结果成功：{}", resultResponse);
             }
         }
@@ -762,15 +717,9 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return 二维码URL
      */
-    public final String getCorpQrCode(Integer sizeType, String applicationName) {
-        checkApplication(applicationName);
-        JoinQrCodeResponse response = weChatClient.getJoinQrCode(sizeType, applicationName);
-        if (isSuccess(response)) {
-            return response.getJoinQrCode();
-        }
-
-        logger.error("获取不到二维码信息-{}", response);
-        throw new WeChatException("获取不到二维码信息");
+    public String getCorpQrCode(Integer sizeType, String applicationName) {
+        JoinQrCodeResponse response = addressBookClient.getJoinQrCode(sizeType, applicationName);
+        return response.getJoinQrCode();
     }
 
     /**
@@ -780,23 +729,18 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return 活跃成员数
      */
-    public final Integer getActiveStat(Date date, String applicationName) {
+    public Integer getActiveStat(Date date, String applicationName) {
         if (date == null) {
             return 0;
         }
-        checkApplication(applicationName);
+
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String formatDate = format.format(date);
         ActiveStatRequest request = new ActiveStatRequest();
         request.setDate(formatDate);
 
-        ActiveStatResponse response = weChatClient.getActiveStat(request, applicationName);
-        if (isSuccess(response)) {
-            return response.getActiveCnt();
-        }
-
-        logger.error("获取不到企业活跃成员数-{}", response);
-        throw new WeChatException("获取不到企业活跃成员数");
+        ActiveStatResponse response = addressBookClient.getActiveStat(request, applicationName);
+        return response.getActiveCnt();
     }
 
     /**
@@ -806,15 +750,9 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return 异步任务编号
      */
-    public final String exportUser(AddressBookExportRequest request, String applicationName) {
-        checkApplication(applicationName);
-        AsyncJobResponse response = weChatClient.exportUser(request, applicationName);
-        if (isSuccess(response)) {
-            return response.getJobId();
-        }
-
-        logger.error("导出成员失败-{}", response);
-        throw new WeChatException("导出成员失败");
+    public String exportUser(AddressBookExportRequest request, String applicationName) {
+        AsyncJobResponse response = addressBookClient.exportUser(request, applicationName);
+        return response.getJobId();
     }
 
     /**
@@ -824,15 +762,9 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return 异步任务编号
      */
-    public final String exportUserDetail(AddressBookExportRequest request, String applicationName) {
-        checkApplication(applicationName);
-        AsyncJobResponse response = weChatClient.exportUserDetail(request, applicationName);
-        if (isSuccess(response)) {
-            return response.getJobId();
-        }
-
-        logger.error("导出成员详情失败-{}", response);
-        throw new WeChatException("导出成员详情失败");
+    public String exportUserDetail(AddressBookExportRequest request, String applicationName) {
+        AsyncJobResponse response = addressBookClient.exportUserDetail(request, applicationName);
+        return response.getJobId();
     }
 
     /**
@@ -842,15 +774,9 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return 异步任务编号
      */
-    public final String exportDepartment(AddressBookExportRequest request, String applicationName) {
-        checkApplication(applicationName);
-        AsyncJobResponse response = weChatClient.exportDepartment(request, applicationName);
-        if (isSuccess(response)) {
-            return response.getJobId();
-        }
-
-        logger.error("导出部门失败-{}", response);
-        throw new WeChatException("导出部门失败");
+    public String exportDepartment(AddressBookExportRequest request, String applicationName) {
+        AsyncJobResponse response = addressBookClient.exportDepartment(request, applicationName);
+        return response.getJobId();
     }
 
     /**
@@ -860,26 +786,13 @@ public class AddressBookService extends AbstractBaseService {
      * @param applicationName 应用名称
      * @return 异步任务编号
      */
-    public final String exportTagUser(AddressBookExportRequest request, String applicationName) {
-        checkApplication(applicationName);
-        AsyncJobResponse response = weChatClient.exportTagUser(request, applicationName);
-        if (isSuccess(response)) {
-            return response.getJobId();
-        }
-
-        logger.error("导出标签成员失败-{}", response);
-        throw new WeChatException("导出标签成员失败");
+    public String exportTagUser(AddressBookExportRequest request, String applicationName) {
+        AsyncJobResponse response = addressBookClient.exportTagUser(request, applicationName);
+        return response.getJobId();
     }
 
-    public final ExportResultResponse getExportResult(String jobId, String applicationName) {
-        checkApplication(applicationName);
-        ExportResultResponse resultResponse = weChatClient.getExportResult(jobId, applicationName);
-        if (isSuccess(resultResponse)) {
-            return resultResponse;
-        }
-
-        logger.error("获取导出结果失败-{}", resultResponse);
-        throw new WeChatException("获取导出结果失败");
+    public ExportResultResponse getExportResult(String jobId, String applicationName) {
+        return weChatClient.getExportResult(jobId, applicationName);
     }
 
     /**
@@ -889,7 +802,7 @@ public class AddressBookService extends AbstractBaseService {
      * @param url    结果下载地址
      * @return 解密后的json串
      */
-    public final String getDecryptExportData(String aesKey, String url) {
+    public String getDecryptExportData(String aesKey, String url) {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<byte[]> responseEntity = restTemplate.getForEntity(url, byte[].class);
         if (responseEntity.getBody() == null) {
@@ -912,5 +825,16 @@ public class AddressBookService extends AbstractBaseService {
         assert original != null;
         logger.info("数据解密--{}", new String(original));
         return new String(original);
+    }
+
+    /**
+     * 获取成员ID列表
+     * @param request 分页请求
+     * @param applicationName 应用名称
+     * @return SimpleDeptUserResponse
+     */
+    public List<DeptUser> getUserIds(CursorPageRequest request, String applicationName) {
+        SimpleDeptUserResponse response = addressBookClient.getUserIds(request,applicationName);
+        return response.getDeptUsers();
     }
 }

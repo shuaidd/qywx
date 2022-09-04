@@ -16,6 +16,8 @@ public class MsgImage {
     @JsonProperty("pic_url")
     private String picUrl;
 
+    private String name;
+
     public String getMediaId() {
         return mediaId;
     }
@@ -30,5 +32,13 @@ public class MsgImage {
 
     public void setPicUrl(String picUrl) {
         this.picUrl = picUrl;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

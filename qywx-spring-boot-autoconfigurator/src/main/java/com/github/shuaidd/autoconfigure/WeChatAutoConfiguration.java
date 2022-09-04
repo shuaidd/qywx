@@ -4,6 +4,7 @@ import com.github.shuaidd.client.config.WeChatConfigurationProperties;
 import com.github.shuaidd.support.CallBackManager;
 import com.github.shuaidd.support.WeChatContextHolder;
 import com.github.shuaidd.support.WeChatManager;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -25,7 +26,15 @@ import java.util.Collections;
 @Configuration
 @ComponentScan(basePackages = {"com.github.shuaidd.service", "com.github.shuaidd.support", "com.github.shuaidd.aspect"})
 @EnableConfigurationProperties(WeChatConfigurationProperties.class)
-public class WeChatAutoConfiguration {
+public class WeChatAutoConfiguration implements InitializingBean {
+
+    private final WeChatConfigurationProperties properties;
+    private final WeChatManager weChatManager;
+
+    public WeChatAutoConfiguration(WeChatConfigurationProperties properties, WeChatManager weChatManager) {
+        this.properties = properties;
+        this.weChatManager = weChatManager;
+    }
 
     @ConditionalOnMissingBean(CacheManager.class)
     @Bean
@@ -36,15 +45,9 @@ public class WeChatAutoConfiguration {
         return concurrentMapCacheManager;
     }
 
-    @Bean
-    public CallBackManager callBackManager(WeChatConfigurationProperties properties) {
+    @Override
+    public void afterPropertiesSet() {
         CallBackManager.properties(properties.getCallbackList());
-        return new CallBackManager();
-    }
-
-    @Bean
-    public WeChatContextHolder weChatContextHolder(WeChatManager weChatManager) {
         WeChatContextHolder.setWeChatManager(weChatManager);
-        return new WeChatContextHolder();
     }
 }

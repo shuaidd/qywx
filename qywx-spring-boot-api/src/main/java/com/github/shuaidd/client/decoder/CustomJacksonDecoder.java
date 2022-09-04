@@ -5,6 +5,7 @@ import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.AbstractBaseResponse;
 import feign.Response;
 import feign.jackson.JacksonDecoder;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

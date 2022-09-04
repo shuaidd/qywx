@@ -48,7 +48,25 @@ public class MediaServiceTest extends AbstractTest {
 
     @Test
     public void download() throws IOException {
-        ResponseEntity<byte[]> responseEntity = weChatManager.mediaService().download("39sypZn0YTWqSK9DFU4aqbQgHnm6y645mWIX4yjjKGgQ", ADDRESS_BOOK);
-        IOUtils.write(responseEntity.getBody(), new FileOutputStream(new File("qywx-applyevent.json")));
+        ResponseEntity<byte[]> responseEntity = weChatManager.mediaService().download("3S9f1Bg1H8D_dG4xuPWgaStwbec3AskA1eqBLWKb5GXysrq3Ik2LkuvL55-I41cdB", ADDRESS_BOOK);
+        IOUtils.write(responseEntity.getBody(), new FileOutputStream(new File("download.mp4")));
+    }
+
+    @Test
+    public void downloadFile() throws IOException {
+        File downloadDir = ResourceUtils.getFile("classpath:download");
+        File file = weChatManager.mediaService().downloadFile("3S9f1Bg1H8D_dG4xuPWgaStwbec3AskA1eqBLWKb5GXysrq3Ik2LkuvL55-I41cdB",downloadDir.getAbsolutePath()+"/test.mp4", ADDRESS_BOOK);
+        logger.info("下载的文件路径--> {}",file.getAbsolutePath());
+    }
+
+    @Test
+    public void downloadJsMedia() {
+        weChatManager.mediaService().downloadJsMedia("3S9f1Bg1H8D_dG4xuPWgaStwbec3AskA1eqBLWKb5GXysrq3Ik2LkuvL55-I41cdB", ADDRESS_BOOK);
+    }
+
+    @Test
+    public void downloadJsMediaFile() {
+        /*downloadFilePath 不填时 下载到临时文件夹*/
+        weChatManager.mediaService().downloadJsMediaFile("3S9f1Bg1H8D_dG4xuPWgaStwbec3AskA1eqBLWKb5GXysrq3Ik2LkuvL55-I41cdB",null, ADDRESS_BOOK);
     }
 }

@@ -27,7 +27,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return FollowUserResponse
      */
     public FollowUserResponse getFollowUserList(String applicationName) {
-        return weChatClient.getFollowUserList(applicationName);
+        return externalContactClient.getFollowUserList(applicationName);
     }
 
     /**
@@ -38,7 +38,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return AddContactWayResponse
      */
     public AddContactWayResponse addContactWay(AddContactWayRequest request, String applicationName) {
-        return weChatClient.addContactWay(request, applicationName);
+        return externalContactClient.addContactWay(request, applicationName);
     }
 
     /**
@@ -49,7 +49,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return ContactWayResponse
      */
     public ContactWayResponse getContactWay(GetContactWayRequest request, String applicationName) {
-        return weChatClient.getContactWay(request, applicationName);
+        return externalContactClient.getContactWay(request, applicationName);
     }
 
     /**
@@ -59,7 +59,7 @@ public class CustomContactService extends AbstractBaseService {
      * @param applicationName 应用名称
      */
     public void updateContactWay(UpdateContactWayRequest request, String applicationName) {
-        weChatClient.updateContactWay(request, applicationName);
+        externalContactClient.updateContactWay(request, applicationName);
     }
 
     /**
@@ -69,7 +69,7 @@ public class CustomContactService extends AbstractBaseService {
      * @param applicationName 应用名称
      */
     public void deleteContactWay(GetContactWayRequest request, String applicationName) {
-        weChatClient.deleteContactWay(request, applicationName);
+        externalContactClient.deleteContactWay(request, applicationName);
     }
 
     /**
@@ -79,7 +79,7 @@ public class CustomContactService extends AbstractBaseService {
      * @param applicationName 应用名称
      */
     public void closeTempChat(CloseTempChatRequest request, String applicationName) {
-        weChatClient.closeTempChat(request, applicationName);
+        externalContactClient.closeTempChat(request, applicationName);
     }
 
     /* ---------企业服务人员管理---------- end */
@@ -94,7 +94,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return CustomListResponse
      */
     public CustomListResponse getCustomList(CustomListRequest request, String applicationName) {
-        return weChatClient.getCustomList(request.getUserId(), applicationName);
+        return externalContactClient.getCustomList(request.getUserId(), applicationName);
     }
 
     /**
@@ -105,7 +105,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return ExternalContactResponse
      */
     public ExternalContactResponse getExternalContact(String externalUserId, String applicationName) {
-        return weChatClient.getExternalContact(externalUserId, applicationName);
+        return externalContactClient.getExternalContact(externalUserId, applicationName);
     }
 
     /**
@@ -116,7 +116,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return BatchExternalContactResponse
      */
     public BatchExternalContactResponse getBatchExternalContact(BatchExternalContactRequest request, String applicationName) {
-        return weChatClient.getBatchExternalContact(request, applicationName);
+        return externalContactClient.getBatchExternalContact(request, applicationName);
     }
 
     /**
@@ -126,7 +126,7 @@ public class CustomContactService extends AbstractBaseService {
      * @param applicationName 应用名称
      */
     public void updateCustomRemark(UpdateRemarkRequest remarkRequest, String applicationName) {
-        weChatClient.updateCustomRemark(remarkRequest, applicationName);
+        externalContactClient.updateCustomRemark(remarkRequest, applicationName);
     }
 
     /**
@@ -151,7 +151,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return TagGroupResponse
      */
     public TagGroupResponse getCorpTagList(TagGroupRequest request, String applicationName) {
-        return weChatClient.getCorpTagList(request, applicationName);
+        return externalContactClient.getCorpTagList(request, applicationName);
     }
 
     /**
@@ -162,7 +162,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return AddCorpTagResponse
      */
     public AddCorpTagResponse addCorpTag(AddCorpTagRequest request, String applicationName) {
-        return weChatClient.addCorpTag(request, applicationName);
+        return externalContactClient.addCorpTag(request, applicationName);
     }
 
     /**
@@ -172,7 +172,7 @@ public class CustomContactService extends AbstractBaseService {
      * @param applicationName 应用名称
      */
     public void editCorpTag(EditCorpTagRequest request, String applicationName) {
-        weChatClient.editCorpTag(request, applicationName);
+        externalContactClient.editCorpTag(request, applicationName);
     }
 
     /**
@@ -182,7 +182,7 @@ public class CustomContactService extends AbstractBaseService {
      * @param applicationName 应用名称
      */
     public void delCorpTag(DelCorpTagRequest request, String applicationName) {
-        weChatClient.delCorpTag(request, applicationName);
+        externalContactClient.delCorpTag(request, applicationName);
     }
 
     /**
@@ -192,7 +192,7 @@ public class CustomContactService extends AbstractBaseService {
      * @param applicationName 应用名称
      */
     public void markTag(MarkTagRequest request, String applicationName) {
-        weChatClient.markTag(request, applicationName);
+        externalContactClient.markTag(request, applicationName);
     }
     /* ---------客户标签管理---------- end */
 
@@ -206,7 +206,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return UnassignedListResponse
      */
     public UnassignedListResponse unassignedList(PageRequest request, String applicationName) {
-        return weChatClient.unassignedList(request, applicationName);
+        return externalContactClient.unassignedList(request, applicationName);
     }
 
     /**
@@ -216,7 +216,7 @@ public class CustomContactService extends AbstractBaseService {
      * @param applicationName 应用名称
      */
     public void transfer(TransferRequest request, String applicationName) {
-        weChatClient.transfer(request, applicationName);
+        externalContactClient.transfer(request, applicationName);
     }
 
     /**
@@ -227,7 +227,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return TransferResultResponse
      */
     public TransferResultResponse getTransferResult(TransferResultRequest resultRequest, String applicationName) {
-        return weChatClient.getTransferResult(resultRequest, applicationName);
+        return externalContactClient.getTransferResult(resultRequest, applicationName);
     }
 
     /**
@@ -238,7 +238,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return FailedChatResponse
      */
     public FailedChatResponse groupChatTransfer(GroupChatTransferRequest request, String applicationName) {
-        return weChatClient.groupChatTransfer(request, applicationName);
+        return externalContactClient.groupChatTransfer(request, applicationName);
     }
     /* ---------客户分配---------- end */
 
@@ -252,7 +252,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return GroupChatListResponse
      */
     public GroupChatListResponse groupChatList(GroupChatListRequest request, String applicationName) {
-        return weChatClient.groupChatList(request, applicationName);
+        return externalContactClient.groupChatList(request, applicationName);
     }
 
     /**
@@ -263,7 +263,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return GroupChatDetailResponse
      */
     public GroupChatDetailResponse groupChatDetail(GroupChatDetailRequest request, String applicationName) {
-        return weChatClient.groupChatDetail(request, applicationName);
+        return externalContactClient.groupChatDetail(request, applicationName);
     }
     /* ---------客户群管理---------- end */
 
@@ -275,7 +275,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return MomentListResponse
      */
     public MomentListResponse getMomentList(MomentListRequest request, String applicationName) {
-        return weChatClient.getMomentList(request, applicationName);
+        return externalContactClient.getMomentList(request, applicationName);
     }
 
     /**
@@ -286,7 +286,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return MomentTaskResponse
      */
     public MomentTaskResponse getMomentTask(MomentTaskRequest request, String applicationName) {
-        return weChatClient.getMomentTask(request, applicationName);
+        return externalContactClient.getMomentTask(request, applicationName);
     }
 
     /**
@@ -297,7 +297,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return MomentCustomerListResponse
      */
     public MomentCustomerListResponse getMomentCustomerList(MomentCustomerListRequest request, String applicationName) {
-        return weChatClient.getMomentCustomerList(request, applicationName);
+        return externalContactClient.getMomentCustomerList(request, applicationName);
     }
 
     /**
@@ -308,7 +308,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return MomentCustomerListResponse
      */
     public MomentCustomerListResponse getMomentSendResult(MomentCustomerListRequest request, String applicationName) {
-        return weChatClient.getMomentSendResult(request, applicationName);
+        return externalContactClient.getMomentSendResult(request, applicationName);
     }
 
     /**
@@ -319,7 +319,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return CommentsResponse
      */
     public CommentsResponse getMomentComments(CommentsRequest request, String applicationName) {
-        return weChatClient.getMomentComments(request, applicationName);
+        return externalContactClient.getMomentComments(request, applicationName);
     }
 
     /**
@@ -330,7 +330,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return MsgTemplateResponse
      */
     public MsgTemplateResponse addMsgTemplate(MsgTemplateRequest request, String applicationName) {
-        return weChatClient.addMsgTemplate(request, applicationName);
+        return externalContactClient.addMsgTemplate(request, applicationName);
     }
 
     /**
@@ -341,7 +341,18 @@ public class CustomContactService extends AbstractBaseService {
      * @return GroupMsgResponse
      */
     public GroupMsgResponse getGroupMsgList(GroupMsgRequest request, String applicationName) {
-        return weChatClient.getGroupMsgList(request, applicationName);
+        return externalContactClient.getGroupMsgList(request, applicationName);
+    }
+
+    /**
+     * 获取群发记录列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return GroupMsgResponse
+     */
+    public V2GroupMsgResponse getGroupMsgListV2(GroupMsgRequest request, String applicationName) {
+        return externalContactClient.getGroupMsgListV2(request, applicationName);
     }
 
     /**
@@ -352,7 +363,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return GroupMsgTaskResponse
      */
     public GroupMsgTaskResponse getGroupMsgTask(GroupMsgTaskRequest request, String applicationName) {
-        return weChatClient.getGroupMsgTask(request, applicationName);
+        return externalContactClient.getGroupMsgTask(request, applicationName);
     }
 
     /**
@@ -363,7 +374,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return GroupMsgSendResultResponse
      */
     public GroupMsgSendResultResponse getGroupMsgSendResult(GroupMsgSendRequest request, String applicationName) {
-        return weChatClient.getGroupMsgSendResult(request, applicationName);
+        return externalContactClient.getGroupMsgSendResult(request, applicationName);
     }
 
     /**
@@ -373,7 +384,7 @@ public class CustomContactService extends AbstractBaseService {
      * @param applicationName 应用名称
      */
     public void sendWelcomeMsg(WelcomeMsgRequest request, String applicationName) {
-        weChatClient.sendWelcomeMsg(request, applicationName);
+        externalContactClient.sendWelcomeMsg(request, applicationName);
     }
 
     /**
@@ -384,7 +395,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return AddWelcomeTemplateResponse
      */
     public AddWelcomeTemplateResponse addGroupWelcomeTemplate(WelcomeTemplateRequest request, String applicationName) {
-        return weChatClient.addGroupWelcomeTemplate(request, applicationName);
+        return externalContactClient.addGroupWelcomeTemplate(request, applicationName);
     }
 
     /**
@@ -394,7 +405,7 @@ public class CustomContactService extends AbstractBaseService {
      * @param applicationName 应用名称
      */
     public void editGroupWelcomeTemplate(WelcomeTemplateRequest request, String applicationName) {
-        weChatClient.editGroupWelcomeTemplate(request, applicationName);
+        externalContactClient.editGroupWelcomeTemplate(request, applicationName);
     }
 
     /**
@@ -405,7 +416,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return GetWelcomeTemplateResponse
      */
     public GetWelcomeTemplateResponse getGroupWelcomeTemplate(GetWelcomeTemplateRequest request, String applicationName) {
-        return weChatClient.getGroupWelcomeTemplate(request, applicationName);
+        return externalContactClient.getGroupWelcomeTemplate(request, applicationName);
     }
 
     /**
@@ -414,8 +425,8 @@ public class CustomContactService extends AbstractBaseService {
      * @param request         请求
      * @param applicationName 应用名称
      */
-    public void deleteGroupWelcomeTemplate(DeleteWelcomeTemplateResponse request, String applicationName) {
-        weChatClient.deleteGroupWelcomeTemplate(request, applicationName);
+    public void deleteGroupWelcomeTemplate(DeleteWelcomeTemplateRequest request, String applicationName) {
+        externalContactClient.deleteGroupWelcomeTemplate(request, applicationName);
     }
 
     /**
@@ -426,7 +437,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return BehaviorDataResponse
      */
     public BehaviorDataResponse getUserBehaviorData(UserBehaviorRequest request, String applicationName) {
-        return weChatClient.getUserBehaviorData(request, applicationName);
+        return externalContactClient.getUserBehaviorData(request, applicationName);
     }
 
     /**
@@ -437,7 +448,7 @@ public class CustomContactService extends AbstractBaseService {
      * @return GroupChatStatisticResponse
      */
     public GroupChatStatisticResponse getGroupChatStatistic(GroupChatStatisticRequest request, String applicationName) {
-        return weChatClient.getGroupChatStatistic(request, applicationName);
+        return externalContactClient.getGroupChatStatistic(request, applicationName);
     }
 
     /**
@@ -448,6 +459,6 @@ public class CustomContactService extends AbstractBaseService {
      * @return GroupChatStatisticResponse
      */
     public GroupChatStatisticResponse getGroupChatStatisticByDay(GroupChatStatisticRequest request, String applicationName) {
-        return weChatClient.getGroupChatStatisticByDay(request, applicationName);
+        return externalContactClient.getGroupChatStatisticByDay(request, applicationName);
     }
 }

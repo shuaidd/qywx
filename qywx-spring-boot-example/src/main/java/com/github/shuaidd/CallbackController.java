@@ -2,10 +2,8 @@ package com.github.shuaidd;
 
 import com.github.shuaidd.callback.AesException;
 import com.github.shuaidd.callback.WXBizJsonMsgCrypt;
-import com.github.shuaidd.callback.WXBizMsgXmlCrypt;
 import com.github.shuaidd.event.BaseEventData;
 import com.github.shuaidd.support.CallBackManager;
-import com.github.shuaidd.support.EventDataManager;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,8 +50,8 @@ public class CallbackController {
 
         if (StringUtils.isNotEmpty(xml)) {
             BaseEventData eventData = CallBackManager.handle(app, xml, msgSignature, timestamp, nonce);
+            logger.info("明文信息为：{}",eventData.getDecryptMsg());
             logger.info("获取到的数据---{}", eventData);
-            assert eventData != null;
             if ("taskcard_click".equals(eventData.getEvent())) {
                 logger.info("任务卡片回调---回调带返回值的情况");
                 String returnData = "<xml>\n" +

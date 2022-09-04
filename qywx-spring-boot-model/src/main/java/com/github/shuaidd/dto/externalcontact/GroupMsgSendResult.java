@@ -1,28 +1,32 @@
 package com.github.shuaidd.dto.externalcontact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.github.shuaidd.json.Long2DateDeserializer;
 
 import java.util.Date;
 
 /**
- * 描述
- * "external_userid": "wmqfasd1e19278asdasAAAA",
- * "chat_id":"wrOgQhDgAAMYQiS5ol9G7gK9JVAAAA",
- * "userid": "zhangsan",
- * "status": 1,
- * "send_time": 1552536375
- *
  * @author ddshuai
  * date 2021-01-06 22:17
  **/
 public class GroupMsgSendResult {
+
     @JsonProperty("external_userid")
     private String externalUserId;
+
     @JsonProperty("chat_id")
     private String chatId;
+
     @JsonProperty("userid")
     private String userId;
+
+    /**
+     * 发送状态：0-未发送 1-已发送 2-因客户不是好友导致发送失败 3-因客户已经收到其他群发消息导致发送失败
+     */
     private Integer status;
+
+    @JsonDeserialize(using = Long2DateDeserializer.class)
     @JsonProperty("send_time")
     private Date sendTime;
 

@@ -1,6 +1,8 @@
 package com.github.shuaidd.dto.externalcontact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.github.shuaidd.json.Long2DateDeserializer;
 
 import java.util.Date;
 
@@ -11,7 +13,9 @@ import java.util.Date;
  * date 2021-01-06 22:43
  **/
 public class BehaviorData {
+
     @JsonProperty("stat_time")
+    @JsonDeserialize(using = Long2DateDeserializer.class)
     private Date statTime;
 
     @JsonProperty("chat_cnt")

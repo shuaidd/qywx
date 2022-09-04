@@ -30,6 +30,11 @@ public class WeChatConfigurationProperties {
     private String publicPath;
 
     /**
+     * 使用debug模式调用接口
+     */
+    private Boolean debugMode = false;
+
+    /**
      * 应用列表
      */
     private List<ApplicationProperties> applicationList;
@@ -74,5 +79,13 @@ public class WeChatConfigurationProperties {
 
     public void setCallbackList(List<CallbackProperties> callbackList) {
         this.callbackList = callbackList;
+    }
+
+    public Boolean getDebugMode() {
+        return debugMode;
+    }
+
+    public void setDebugMode(Boolean debugMode) {
+        this.debugMode = debugMode;
     }
 }

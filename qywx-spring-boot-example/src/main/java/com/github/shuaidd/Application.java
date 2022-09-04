@@ -3,6 +3,7 @@ package com.github.shuaidd;
 import com.github.shuaidd.autoconfigure.EnableWeChat;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * 描述 企业微信接口测试模块

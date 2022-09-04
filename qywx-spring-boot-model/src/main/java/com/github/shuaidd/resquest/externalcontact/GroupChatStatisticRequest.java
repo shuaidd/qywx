@@ -1,7 +1,9 @@
 package com.github.shuaidd.resquest.externalcontact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.github.shuaidd.dto.externalcontact.OwnerFilter;
+import com.github.shuaidd.json.Date2LongSerializer;
 import com.github.shuaidd.resquest.OffsetPageRequest;
 
 import java.util.Date;
@@ -14,9 +16,13 @@ import java.util.Date;
  **/
 
 public class GroupChatStatisticRequest extends OffsetPageRequest {
+
     @JsonProperty("day_begin_time")
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date dayBeginTime;
+
     @JsonProperty("day_end_time")
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date dayEndTime;
 
     /**

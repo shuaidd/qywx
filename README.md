@@ -4,7 +4,7 @@
 <dependency>
   <groupId>com.github.shuaidd</groupId>
   <artifactId>qywx-spring-boot-starter</artifactId>
-  <version>3.1.1</version>
+  <version>4.0.1</version>
 </dependency>
 
 ```
@@ -48,6 +48,9 @@ public class WeChatTest extends BaseTest {
 
 ### 更新记录
 ``` 
+2022-09-04  新增企业微信微盘管理相关接口
+2022-09-03  新增接口 支持知识库分组管理，支持知识库问答管理，支持企业为打卡人员补卡 
+2022-08-31  新增获取子部门ID列表接口，获取成员ID列表接口，回调小优化返回解密后的xml
 2022-01-12  优化细节，支持spring boot 高版本
 2021-11-25  新增微信客服模块接口[客服账号管理，接待人员管理 会话分配 消息收发 客户信息获取等]
 2021-11-24  新增通讯录异步导出接口-[导出成员，导出成员详情，导出部门，导出标签成员，获取导出结果，导出任务完成通知]，使用方式详见测试用例 AddressBookTest
@@ -56,4 +59,9 @@ public class WeChatTest extends BaseTest {
 2021-07-20  已实现模块 通讯录管理，客户联系，身份认证，应用管理，消息推送，素材管理，OA【除自建审批流外】，效率工具
 2021-07-15  补充OA模块新增的接口
 2021-07-14  处理企业微信回调数据统一解析处理
+```
+
+### 待完成 [来源企业微信变更日志]
+```
+
 ```

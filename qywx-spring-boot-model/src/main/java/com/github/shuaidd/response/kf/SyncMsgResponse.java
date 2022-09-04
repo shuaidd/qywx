@@ -17,9 +17,6 @@ public class SyncMsgResponse extends AbstractBaseResponse {
     @JsonProperty("msg_list")
     private List<MsgDetail> msgList;
 
-    @JsonProperty("has_more")
-    private Integer hasMore;
-
     public static class MsgDetail {
         @JsonProperty("msgid")
         private String msgId;
@@ -229,14 +226,6 @@ public class SyncMsgResponse extends AbstractBaseResponse {
 
     public void setMsgList(List<MsgDetail> msgList) {
         this.msgList = msgList;
-    }
-
-    public Integer getHasMore() {
-        return hasMore;
-    }
-
-    public void setHasMore(Integer hasMore) {
-        this.hasMore = hasMore;
     }
 
     @Override
