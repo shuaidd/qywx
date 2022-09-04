@@ -8,8 +8,11 @@ import com.github.shuaidd.dto.addressbook.WeChatUser;
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.*;
 import com.github.shuaidd.response.addressbook.*;
+import com.github.shuaidd.response.linkedcorp.*;
 import com.github.shuaidd.resquest.CursorPageRequest;
 import com.github.shuaidd.resquest.addressbook.*;
+import com.github.shuaidd.resquest.linkedcorp.LinkedCorpDeptRequest;
+import com.github.shuaidd.resquest.linkedcorp.LinkedCropUserRequest;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.fileupload.disk.DiskFileItem;
@@ -829,12 +832,67 @@ public class AddressBookService extends AbstractBaseService {
 
     /**
      * 获取成员ID列表
-     * @param request 分页请求
+     *
+     * @param request         分页请求
      * @param applicationName 应用名称
      * @return SimpleDeptUserResponse
      */
     public List<DeptUser> getUserIds(CursorPageRequest request, String applicationName) {
-        SimpleDeptUserResponse response = addressBookClient.getUserIds(request,applicationName);
+        SimpleDeptUserResponse response = addressBookClient.getUserIds(request, applicationName);
         return response.getDeptUsers();
+    }
+
+    /**
+     * 获取应用的可见范围
+     *
+     * @param applicationName 应用名称
+     * @return 可见范围
+     */
+    public PermListResponse getPermList(String applicationName) {
+        return linkedCorpClient.getPermList(applicationName);
+    }
+
+    /**
+     * 获取互联企业成员详细信息
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 详情
+     */
+    public LinkedCorpUserResponse getUserDetail(LinkedCropUserRequest request, String applicationName) {
+        return linkedCorpClient.getUserDetail(request, applicationName);
+    }
+
+    /**
+     * 获取互联企业部门成员
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 详情
+     */
+    public LinkedCorpDeptUserResponse getDeptUser(LinkedCorpDeptRequest request, String applicationName) {
+        return linkedCorpClient.getDeptUser(request, applicationName);
+    }
+
+    /**
+     * 获取互联企业部门成员详情
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 详情
+     */
+    public LinkedCorpDeptUserListResponse getDeptUserList(LinkedCorpDeptRequest request, String applicationName) {
+        return linkedCorpClient.getDeptUserList(request, applicationName);
+    }
+
+    /**
+     * 获取互联企业部门列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 详情
+     */
+    public LinkedCorpDeptResponse getDeptList(LinkedCorpDeptRequest request, String applicationName) {
+        return linkedCorpClient.getDeptList(request, applicationName);
     }
 }

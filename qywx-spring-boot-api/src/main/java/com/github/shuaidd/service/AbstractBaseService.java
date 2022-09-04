@@ -55,6 +55,9 @@ public abstract class AbstractBaseService {
     protected EfficiencyToolClient efficiencyToolClient;
 
     @Autowired
+    protected LinkedCorpClient linkedCorpClient;
+
+    @Autowired
     protected WeChatConfigurationProperties properties;
 
     boolean isSuccess(AbstractBaseResponse baseResponse) {
