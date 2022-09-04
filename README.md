@@ -63,5 +63,5 @@ public class WeChatTest extends BaseTest {
 
 ### 待完成 [来源企业微信变更日志]
 ```
-
+如果有未支持到的接口，而您又刚好想用，欢迎issue
 ```
