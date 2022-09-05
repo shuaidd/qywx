@@ -58,22 +58,10 @@ public abstract class AbstractBaseService {
     protected LinkedCorpClient linkedCorpClient;
 
     @Autowired
+    protected ServiceProviderClient serviceProviderClient;
+
+    @Autowired
     protected WeChatConfigurationProperties properties;
-
-    boolean isSuccess(AbstractBaseResponse baseResponse) {
-        if (Objects.nonNull(baseResponse)) {
-            if (ErrorCode.ERROR_CODE_0.getErrorCode().equals(baseResponse.getErrCode())) {
-                return true;
-            } else {
-                ErrorCode errorCode = ErrorCode.errorCode(baseResponse.getErrCode());
-                logger.error("企业微信调用异常：errorCode[{}],msg:[{}],response:{}", baseResponse.getErrCode(), errorCode.getErrorDesc(), baseResponse.getErrMsg());
-                throw new WeChatException(errorCode.getErrorDesc(), errorCode);
-            }
-        } else {
-            return false;
-        }
-
-    }
 
     /**
      * 获取应用密匙

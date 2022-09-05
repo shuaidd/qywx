@@ -1,10 +1,6 @@
 package com.github.shuaidd;
 
-import com.github.shuaidd.client.LinkedCorpClient;
-import com.github.shuaidd.service.AddressBookService;
-import com.github.shuaidd.support.WeChatManager;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author ddshuai

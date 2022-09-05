@@ -26,6 +26,7 @@ public class WeChatManager {
     private final EfficiencyToolService efficiencyToolService;
     private final WeChatCallCenterService callCenterService;
     private final CommonService commonService;
+    private final ServiceProviderService serviceProviderService;
 
     @Autowired
     public WeChatManager(AddressBookService addressBookService,
@@ -36,7 +37,7 @@ public class WeChatManager {
                          MediaService mediaService, MessageService messageService,
                          OAService oaService, CustomContactService customContactService,
                          EfficiencyToolService efficiencyToolService, WeChatCallCenterService callCenterService,
-                         CommonService commonService) {
+                         CommonService commonService, ServiceProviderService serviceProviderService) {
         this.addressBookService = addressBookService;
         this.tokenService = tokenService;
         this.properties = properties;
@@ -49,6 +50,7 @@ public class WeChatManager {
         this.efficiencyToolService = efficiencyToolService;
         this.callCenterService = callCenterService;
         this.commonService = commonService;
+        this.serviceProviderService = serviceProviderService;
     }
 
     /**
@@ -148,6 +150,14 @@ public class WeChatManager {
      */
     public WeChatCallCenterService callCenterService() {
         return callCenterService;
+    }
+
+    /**
+     * 服务商
+     * @return ServiceProviderService
+     */
+    public ServiceProviderService serviceProviderService() {
+        return serviceProviderService;
     }
 
     /**
