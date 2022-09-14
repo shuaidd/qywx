@@ -1,10 +1,13 @@
 package com.github.shuaidd.service;
 
 import com.github.shuaidd.exception.ParamCheckException;
+import com.github.shuaidd.response.auth.AuthUserInfoResponse;
+import com.github.shuaidd.response.auth.UserSensitiveDetailResponse;
 import com.github.shuaidd.response.tool.ApiDomainIpResponse;
 import com.github.shuaidd.response.auth.AuthenticationResponse;
 import com.github.shuaidd.response.tool.OpenUserId2UserIdResponse;
 import com.github.shuaidd.response.tool.TransformExternalUserIdResponse;
+import com.github.shuaidd.resquest.auth.UserSensitiveRequest;
 import com.github.shuaidd.resquest.tool.OpenUserId2UserIdRequest;
 import com.github.shuaidd.resquest.tool.TransformExternalUserIdRequest;
 import org.apache.commons.lang3.StringUtils;
@@ -66,7 +69,8 @@ public class AuthenticationService extends AbstractBaseService {
 
     /**
      * userid转换
-     * @param request 请求
+     *
+     * @param request         请求
      * @param applicationName 应用名
      * @return 转换结果
      */
@@ -76,11 +80,34 @@ public class AuthenticationService extends AbstractBaseService {
 
     /**
      * external_userid转换
-     * @param request 请求
+     *
+     * @param request         请求
      * @param applicationName 应用名
      * @return 转换结果
      */
-    public TransformExternalUserIdResponse transformExternalUserId(TransformExternalUserIdRequest request,String applicationName) {
+    public TransformExternalUserIdResponse transformExternalUserId(TransformExternalUserIdRequest request, String applicationName) {
         return weChatClient.transformExternalUserId(request, applicationName);
+    }
+
+    /**
+     * 获取访问用户身份
+     * @param code 授权码
+     * @param applicationName 应用名
+     * @return 用户信息
+     */
+    public AuthUserInfoResponse getUserInfo(String code, String applicationName) {
+        return authClient.getUserInfo(code, applicationName);
+    }
+
+    /**
+     * 获取访问用户敏感信息
+     * @param userTicket ticket
+     * @param applicationName 应用名
+     * @return 用户信息
+     */
+    public UserSensitiveDetailResponse getUserDetail(String userTicket, String applicationName) {
+        UserSensitiveRequest request = new UserSensitiveRequest();
+        request.setUserTicket(userTicket);
+        return authClient.getUserDetail(request, applicationName);
     }
 }

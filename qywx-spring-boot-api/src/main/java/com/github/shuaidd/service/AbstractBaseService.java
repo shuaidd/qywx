@@ -3,10 +3,7 @@ package com.github.shuaidd.service;
 import com.github.shuaidd.client.*;
 import com.github.shuaidd.client.config.ApplicationProperties;
 import com.github.shuaidd.client.config.WeChatConfigurationProperties;
-import com.github.shuaidd.enums.ErrorCode;
 import com.github.shuaidd.exception.ParamCheckException;
-import com.github.shuaidd.exception.WeChatException;
-import com.github.shuaidd.response.AbstractBaseResponse;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -15,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 /**
@@ -59,6 +55,9 @@ public abstract class AbstractBaseService {
 
     @Autowired
     protected ServiceProviderClient serviceProviderClient;
+
+    @Autowired
+    protected AuthClient authClient;
 
     @Autowired
     protected WeChatConfigurationProperties properties;

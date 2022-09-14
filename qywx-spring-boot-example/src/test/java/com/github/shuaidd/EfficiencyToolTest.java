@@ -1,5 +1,7 @@
 package com.github.shuaidd;
 
+import cn.hutool.core.util.ByteUtil;
+import cn.hutool.core.util.HexUtil;
 import cn.hutool.crypto.digest.DigestAlgorithm;
 import cn.hutool.crypto.digest.Digester;
 import com.github.shuaidd.dto.tool.CalendarData;
@@ -20,6 +22,7 @@ import com.github.shuaidd.resquest.tool.ScheduleRequest;
 import com.github.shuaidd.resquest.wedrive.*;
 import com.github.shuaidd.service.EfficiencyToolService;
 import com.google.common.collect.Lists;
+import com.google.common.primitives.Bytes;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -34,6 +37,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.*;
 import java.nio.ByteBuffer;
+import java.security.MessageDigest;
 import java.text.ParseException;
 import java.util.Collections;
 import java.util.List;
@@ -410,15 +414,27 @@ public class EfficiencyToolTest extends AbstractTest {
 
         try (FileInputStream inputStream = new FileInputStream(file);) {
             byte[] bytes = new byte[2097152];//2M
-            int loopCount = 0;
-            while (inputStream.read(bytes) != -1) {
-                loopCount++;
+            int byteCnt = inputStream.read(bytes);
+            while (byteCnt != -1) {
+                System.out.println(byteCnt);
+                if (2097152 - byteCnt  > 0) {
+                    //结束了
+                    sha1.getDigest().update(bytes,0,byteCnt);
+                    byte[] subBytes = new byte[byteCnt];
+                    System.arraycopy(bytes, 0, subBytes, 0, byteCnt);
+                    base64List.add(Base64.encodeBase64String(subBytes));
+                } else {
+                    sha1.getDigest().update(bytes);
+                    base64List.add(Base64.encodeBase64String(bytes));
+                }
 
-                String digestHex = sha1.digestHex(bytes);
-                blockSha.add(digestHex);
-                //IOUtils.write(bytes, new FileOutputStream(new File(tempDir.toString() + "/temp" + loopCount)));
-                base64List.add(Base64.encodeBase64String(bytes));
+                MessageDigest messageDigest = (MessageDigest) sha1.getDigest().clone();
+                blockSha.add(HexUtil.encodeHexStr(messageDigest.digest(),false));
+
+                byteCnt = inputStream.read(bytes);
             }
+            System.out.println(inputStream.getChannel().size());
+            System.out.println(blockSha);
 
             //todo 待测试分块上传
             InitUploadFileRequest request = new InitUploadFileRequest();

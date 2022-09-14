@@ -6,47 +6,63 @@ qywx:
   application-list:
     - secret: Dqwyy-IFoeH7EP7U2Tb-Gb1A7ksS4IP_cZ5JCu2qbl4
       application-name: customer-contact
-    - secret: xxxx
+    - secret: rrpIreNAFdtJc3cC-zLeURq6J-5xOgohWAiLCwbctSY
       agent-id: 3010084
       application-name: schedule
-    - secret: xxx
+    - secret: AfjvAed_ulqhK0OqTprDQ6xOSnqaT34ll2LsRe0D2NA
       application-name: address-book
       application-desc: 通讯录
-    - secret: xxx
+    - secret: hAoTUpLro0bV3q9w1rUiOsMaRnnxlom1tk6zZ9qMIY0
       application-name: check-in
       application-desc: 打卡
-    - secret: xxx
+    - secret: YOtNFA1HvMkGMj1QdokVSjXVBq7KCEcppHmtfkkfT0I
       application-name: public-telephone
       application-desc: 公费电话
-    - secret: xxx
+    - secret: Pdc49tNGMYx_oACDIEtxCssxyFk_eSj7t9GtclS7fdg
       application-name: approve
       application-desc: 审批
-    - secret: xxx
+    - secret: 8MP9pzAWN8XvVO-u96eAwAP5PAab49km2BU5Kctbkzs
       application-name: report
       application-desc: 汇报
-    - secret: xxx
+    - secret: fchDVYqJ-2A7n3O7MMZSogwwoJyGdtOHgTvffwx0EhY
       application-name: meeting-room
       application-desc: 会议室
-    - secret: xxxxx
+    - secret: XuZ_VHKE8ZBClGxMrA47bCG887wU_wBzItbz9SB1Jjg
       application-name: oy
       application-desc: 欧亚-冬冬
       agent-id: 1000010
     - secret: cWcNoZVagtV69mCufbiv3pcaBc-WpYvbOuxwwKVraDI
       application-name: wx-kf
       application-desc: 微信客服
+    - secret: CX93p3PSPeRmjHAEfuNy3p6cQqpbci0GARBU_3R4UZ4
+      application-name: micro-disk
+      application-desc: 微盘
 
   url: https://qyapi.weixin.qq.com
   public-path: cgi-bin
-  corp-id: xxxx
+  corp-id: ww36e0a51aab349a7d
   callback-list:
     - application-name: address-book
-      token: xxx
-      encoding-aes-key: xxx
-      receive-id: xxx
+      token: 4pd5Q2GAVKAapyTD0IGLMD7Lngiyx
+      encoding-aes-key: QJqvdlS4M4FTPUNqSQrMg3VwNRyBCqTqtNStREy3Ahd
+      receive-id: ww36e0a51aab349a7d
     - application-name: schedule
       token: CdEcnaCCdcic
-      encoding-aes-key: xxx
-      receive-id: xxx
+      encoding-aes-key: QJqvdlS4M4FTPUNqSQrMg3VwNRyBCqTqtNStREy3Ahd
+      receive-id: ww36e0a51aab349a7d
+    - application-name: oy
+      token: NTox2kVxd
+      encoding-aes-key: QJqvdlS4M4FTPUNqSQrMg3VwNRyBCqTqtNStREy3Ahd
+      receive-id: ww36e0a51aab349a7d
+    - application-name: wx-kf
+      token: xQNYp8WloVxIWkZeqp8bQWwkXG5
+      encoding-aes-key: 2XLgmJm7nZqsJuUyIGq5YIzAU8nYw7IR1bcQWROTl99
+      receive-id: ww36e0a51aab349a7d
+    - application-name: mini-kf
+      token: 8a0abb7ed0a1be90ab88bb75b40f4e30
+      encoding-aes-key: wjzyQdT5KTIqyuOLynElsQcYHkpssLeedOIR94POHOA
+      receive-id: wxc9245849a884c30a
+  debug-mode: true
 logging:
   level:
     root: warn
@@ -56,10 +72,10 @@ spring:
     active: dev
   redis:
     database: 0
-    host: 10.178.178.147
-    port: 9722
-    password: 43t54y65343454gh45343f34gf
+    host: 47.244.121.37
+    port: 6379
+    password: fvfbblwebnrwvcvguhsbnevfenv
   cache:
-    type: redis
+    type: none
   application:
     name: qywx-example
