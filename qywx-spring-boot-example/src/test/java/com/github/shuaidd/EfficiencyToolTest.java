@@ -1,14 +1,14 @@
 package com.github.shuaidd;
 
-import cn.hutool.core.util.ByteUtil;
 import cn.hutool.core.util.HexUtil;
 import cn.hutool.crypto.digest.DigestAlgorithm;
+import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.crypto.digest.Digester;
+import com.github.shuaidd.dto.addressbook.UserId;
+import com.github.shuaidd.dto.checkin.ScheduleData;
 import com.github.shuaidd.dto.tool.CalendarData;
 import com.github.shuaidd.dto.tool.DialRecord;
 import com.github.shuaidd.dto.tool.ReminderData;
-import com.github.shuaidd.dto.checkin.ScheduleData;
-import com.github.shuaidd.dto.addressbook.UserId;
 import com.github.shuaidd.dto.wedrive.AuthItem;
 import com.github.shuaidd.dto.wedrive.SpaceInfo;
 import com.github.shuaidd.response.tool.AddScheduleResponse;
@@ -22,7 +22,6 @@ import com.github.shuaidd.resquest.tool.ScheduleRequest;
 import com.github.shuaidd.resquest.wedrive.*;
 import com.github.shuaidd.service.EfficiencyToolService;
 import com.google.common.collect.Lists;
-import com.google.common.primitives.Bytes;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -35,8 +34,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.*;
-import java.nio.ByteBuffer;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.security.MessageDigest;
 import java.text.ParseException;
 import java.util.Collections;
@@ -403,6 +403,24 @@ public class EfficiencyToolTest extends AbstractTest {
         CapacityResponse response = toolService.capacity(request, MICRO_DISK);
         logger.info("操作成功--{}", response);
     }
+
+   @Test
+   public void calculateSha()  throws Exception {
+       File file = ResourceUtils.getFile("classpath:image/IMG_20190919_131404.jpg");
+       try (FileInputStream inputStream = new FileInputStream(file);) {
+           byte[] bytes = new byte[2097152];//2M
+           int read;
+           MessageDigest mdTemp = MessageDigest.getInstance("SHA1");
+           while ((read = inputStream.read(bytes)) > -1) {
+               mdTemp.update(bytes,0,read);
+               MessageDigest clone = (MessageDigest) mdTemp.clone();
+               logger.info("获取到的sha值--{}",HexUtil.encodeHexStr(clone.digest()));
+           }
+       }
+
+      String a = DigestUtil.sha1Hex("1");
+       logger.info("获取到的sha值--{}",a);
+   }
 
     /**
      * blocks: 2
