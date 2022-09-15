@@ -1,8 +1,13 @@
 {
-  "errcode": 0,
-  "errmsg": "ok",
-  "total_capacity_for_all": 22666689904640,
-  "total_capacity_for_vip": 22300038149020,
-  "rest_capacity_for_all": 0,
-  "rest_capacity_for_vip": 0
+  "size": 3902474,
+  "userid": "20170410022717",
+  "spaceid": "s.ww36e0a51aab349a7d.6620425469yR",
+  "fatherid": "s.ww36e0a51aab349a7d.6620425469yR",
+  "selected_ticket": null,
+  "file_name": "IMG_20190919_131404.jpg",
+  "skip_push_card": false,
+  "block_sha": [
+    "FE3C91D34B04BCB07A649542FEAE9DC6FEE22EDB",
+    "AB17BD269FE988AF8F2A2EF51C59BEADF68E2AC0"
+  ]
 }

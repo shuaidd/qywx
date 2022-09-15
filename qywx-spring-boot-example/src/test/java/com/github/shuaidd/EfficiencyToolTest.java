@@ -404,6 +404,12 @@ public class EfficiencyToolTest extends AbstractTest {
         logger.info("操作成功--{}", response);
     }
 
+    /**
+     * blocks: 2
+     * part_num: 1 end_offset: 2097152 cumulate_sha1: 70864d429c1abd1da6b33daf5365cfe47f40fbb6
+     * part_num: 2 end_offset: 3902474 cumulate_sha1: ab17bd269fe988af8f2a2ef51c59beadf68e2ac0”
+     * @throws Exception
+     */
     @Test
     public void initUploadFile() throws Exception {
         File file = ResourceUtils.getFile("classpath:image/IMG_20190919_131404.jpg");
@@ -429,7 +435,7 @@ public class EfficiencyToolTest extends AbstractTest {
                 }
 
                 MessageDigest messageDigest = (MessageDigest) sha1.getDigest().clone();
-                blockSha.add(HexUtil.encodeHexStr(messageDigest.digest(),false));
+                blockSha.add(HexUtil.encodeHexStr(messageDigest.digest(),true));
 
                 byteCnt = inputStream.read(bytes);
             }
