@@ -1,6 +1,8 @@
 package com.github.shuaidd;
 
+import com.github.shuaidd.response.auth.AuthUserInfoResponse;
 import com.github.shuaidd.response.auth.AuthenticationResponse;
+import com.github.shuaidd.response.auth.UserSensitiveDetailResponse;
 import org.junit.Test;
 
 import java.util.List;
@@ -42,6 +44,18 @@ public class AuthenticationServiceTest extends AbstractTest {
     @Test
     public void getAuthentication() {
         AuthenticationResponse response = weChatManager.authenticationService().getAuthentication("sdwwwdssds", appName);
+        logger.info("{}", response);
+    }
+
+    @Test
+    public void getUserInfo() {
+        AuthUserInfoResponse response = weChatManager.authenticationService().getUserInfo("ds",appName);
+        logger.info("{}", response);
+    }
+
+    @Test
+    public void getUserDetail() {
+        UserSensitiveDetailResponse response = weChatManager.authenticationService().getUserDetail("sds",appName);
         logger.info("{}", response);
     }
 }
