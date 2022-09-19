@@ -2,9 +2,7 @@ package com.github.shuaidd.client;
 
 import com.github.shuaidd.client.config.WeChatConfiguration;
 import com.github.shuaidd.response.BaseResponse;
-import com.github.shuaidd.response.exmail.CreatePublicMailResponse;
-import com.github.shuaidd.response.exmail.MailGroupDetailResponse;
-import com.github.shuaidd.response.exmail.SearchMailGroupResponse;
+import com.github.shuaidd.response.exmail.*;
 import com.github.shuaidd.resquest.exmail.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -86,7 +84,7 @@ public interface EnterpriseEmailClient extends CommonClient {
      * @return 业务邮箱ID
      */
     @PostMapping(value = "exmail/publicmail/update", headers = HEAD)
-    CreatePublicMailResponse updatePublicMail(UpdatePublicMailRequest request, @RequestParam(HEAD_KEY) String app);
+    BaseResponse updatePublicMail(UpdatePublicMailRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 删除业务邮箱
@@ -95,5 +93,25 @@ public interface EnterpriseEmailClient extends CommonClient {
      * @param app     应用
      * @return 操作结果
      */
-    BaseResponse deletePublicMail(DeletePublicMailRequest request,  @RequestParam(HEAD_KEY) String app);
+    BaseResponse deletePublicMail(DeletePublicMailRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取业务邮箱详情
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 详情信息
+     */
+    MailDetailResponse mailDetail(GetMailDetailRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 模糊搜索业务邮箱
+     *
+     * @param email 邮箱
+     * @param fuzzy 1开启模糊搜索，0获取全部业务邮箱
+     * @param app   应用
+     * @return 搜索结果
+     */
+    @GetMapping(value = "/exmail/publicmail/search", headers = HEAD)
+    SearchMailResponse searchEmail(@RequestParam("email") String email, @RequestParam("fuzzy") int fuzzy, @RequestParam(HEAD_KEY) String app);
 }

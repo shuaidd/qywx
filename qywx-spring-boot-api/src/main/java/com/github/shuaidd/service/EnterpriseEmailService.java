@@ -1,11 +1,10 @@
 package com.github.shuaidd.service;
 
 import com.github.shuaidd.response.exmail.CreatePublicMailResponse;
+import com.github.shuaidd.response.exmail.MailDetailResponse;
 import com.github.shuaidd.response.exmail.MailGroupDetailResponse;
 import com.github.shuaidd.response.exmail.SearchMailGroupResponse;
-import com.github.shuaidd.resquest.exmail.CreatePublicMailRequest;
-import com.github.shuaidd.resquest.exmail.DeleteMailGroupRequest;
-import com.github.shuaidd.resquest.exmail.MailGroupRequest;
+import com.github.shuaidd.resquest.exmail.*;
 import org.springframework.stereotype.Service;
 
 /**
@@ -68,11 +67,42 @@ public class EnterpriseEmailService extends AbstractBaseService {
     /**
      * 创建业务邮箱
      *
-     * @param request 请求
-     * @param applicationName     应用
+     * @param request         请求
+     * @param applicationName 应用
      * @return 业务邮箱ID
      */
     public CreatePublicMailResponse createPublicMail(CreatePublicMailRequest request, String applicationName) {
         return emailClient.createPublicMail(request, applicationName);
+    }
+
+    /**
+     * 更新业务邮箱
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     */
+    public void updatePublicMail(UpdatePublicMailRequest request, String applicationName) {
+        emailClient.updatePublicMail(request, applicationName);
+    }
+
+    /**
+     * 删除业务邮箱
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     */
+    public void deletePublicMail(DeletePublicMailRequest request, String applicationName) {
+        emailClient.deletePublicMail(request, applicationName);
+    }
+
+    /**
+     * 获取业务邮箱详情
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     * @return 详情信息
+     */
+    public MailDetailResponse mailDetail(GetMailDetailRequest request, String applicationName) {
+        return emailClient.mailDetail(request, applicationName);
     }
 }
