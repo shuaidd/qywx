@@ -3,6 +3,7 @@ package com.github.shuaidd.response.tool;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.shuaidd.dto.tool.UserIdList;
+import com.github.shuaidd.response.AbstractBaseResponse;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * date 2022-09-04 21:10
  **/
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class OpenUserId2UserIdResponse {
+public class OpenUserId2UserIdResponse extends AbstractBaseResponse {
 
     @JsonProperty("userid_list")
     private List<UserIdList> userIdList;

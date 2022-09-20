@@ -72,10 +72,9 @@ spring:
     active: dev
   redis:
     database: 0
-    host: 47.244.121.37
+    host: 127.0.0.1
     port: 6379
-    password: fvfbblwebnrwvcvguhsbnevfenv
   cache:
-    type: none
+    type: redis
   application:
     name: qywx-example

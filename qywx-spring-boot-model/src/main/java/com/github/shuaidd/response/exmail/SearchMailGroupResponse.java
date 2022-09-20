@@ -1,10 +1,11 @@
 package com.github.shuaidd.response.exmail;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.shuaidd.response.AbstractBaseResponse;
 
 import java.util.List;
 
-public class SearchMailGroupResponse {
+public class SearchMailGroupResponse extends AbstractBaseResponse {
 
     private Integer count;
 

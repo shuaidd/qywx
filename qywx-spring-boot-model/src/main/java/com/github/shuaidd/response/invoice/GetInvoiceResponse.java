@@ -1,10 +1,11 @@
 package com.github.shuaidd.response.invoice;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.shuaidd.response.AbstractBaseResponse;
 
 import java.util.List;
 
-public class GetInvoiceResponse {
+public class GetInvoiceResponse extends AbstractBaseResponse {
 
     @JsonProperty("card_id")
     private String cardId;

@@ -2,13 +2,14 @@ package com.github.shuaidd.response.auth;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.shuaidd.response.AbstractBaseResponse;
 
 /**
  * @author ddshuai
  * date 2022-09-05 21:50
  **/
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProviderTokenResponse {
+public class ProviderTokenResponse extends AbstractBaseResponse {
 
     @JsonProperty("provider_access_token")
     private String providerAccessToken;
