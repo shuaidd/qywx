@@ -93,6 +93,7 @@ public interface EnterpriseEmailClient extends CommonClient {
      * @param app     应用
      * @return 操作结果
      */
+    @PostMapping(value = "exmail/publicmail/delete", headers = HEAD)
     BaseResponse deletePublicMail(DeletePublicMailRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
@@ -102,6 +103,7 @@ public interface EnterpriseEmailClient extends CommonClient {
      * @param app     应用
      * @return 详情信息
      */
+    @PostMapping(value = "/exmail/publicmail/get", headers = HEAD)
     MailDetailResponse mailDetail(GetMailDetailRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
