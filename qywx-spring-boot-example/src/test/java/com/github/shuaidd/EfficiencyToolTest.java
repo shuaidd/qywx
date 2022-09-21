@@ -25,8 +25,8 @@ import com.google.common.collect.Lists;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.time.DateUtils;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -65,7 +65,7 @@ public class EfficiencyToolTest extends AbstractTest {
 
     public static final String USER_ID = "20170410022717";
 
-    @Before
+    @BeforeEach
     public void init() {
         toolService = weChatManager.efficiencyTool();
     }

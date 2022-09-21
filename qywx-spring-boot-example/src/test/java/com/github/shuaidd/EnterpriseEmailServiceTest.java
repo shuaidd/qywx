@@ -3,7 +3,7 @@ package com.github.shuaidd;
 import com.github.shuaidd.resquest.exmail.DeleteMailGroupRequest;
 import com.github.shuaidd.resquest.exmail.MailGroupRequest;
 import com.github.shuaidd.service.EnterpriseEmailService;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

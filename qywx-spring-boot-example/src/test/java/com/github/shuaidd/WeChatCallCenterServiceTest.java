@@ -7,14 +7,14 @@ import com.github.shuaidd.enums.MsgType;
 import com.github.shuaidd.response.kf.*;
 import com.github.shuaidd.resquest.kf.*;
 import com.github.shuaidd.service.MediaService;
-import com.google.common.collect.Maps;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -127,7 +127,7 @@ public class WeChatCallCenterServiceTest extends AbstractTest {
         request.setOpenKfId(kfId);
         request.setMsgType(MsgType.TEXT.getType());
 
-        Map<String, String> map = Maps.newHashMap();
+        Map<String, String> map = new HashMap<>();
         map.put("content", "你购买的物品已发货，可点击链接查看物流状态http://work.weixin.qq.com/xxxxxx");
         request.setText(map);
         weChatManager.callCenterService().sendMsg(request, appName);

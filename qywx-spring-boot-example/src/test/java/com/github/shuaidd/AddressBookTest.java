@@ -2,10 +2,9 @@ package com.github.shuaidd;
 
 import com.github.shuaidd.dto.addressbook.DeptUser;
 import com.github.shuaidd.response.addressbook.ExportResultResponse;
-import com.github.shuaidd.response.addressbook.SimpleDeptUserResponse;
 import com.github.shuaidd.resquest.CursorPageRequest;
 import com.github.shuaidd.resquest.addressbook.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.Date;

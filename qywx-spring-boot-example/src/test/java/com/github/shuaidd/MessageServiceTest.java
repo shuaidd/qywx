@@ -4,7 +4,7 @@ import com.github.shuaidd.dto.message.*;
 import com.github.shuaidd.enums.MsgType;
 import com.github.shuaidd.resquest.message.SendMessageRequest;
 import com.google.common.collect.Lists;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 

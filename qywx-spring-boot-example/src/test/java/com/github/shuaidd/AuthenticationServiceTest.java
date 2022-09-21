@@ -3,7 +3,7 @@ package com.github.shuaidd;
 import com.github.shuaidd.response.auth.AuthUserInfoResponse;
 import com.github.shuaidd.response.auth.AuthenticationResponse;
 import com.github.shuaidd.response.auth.UserSensitiveDetailResponse;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
