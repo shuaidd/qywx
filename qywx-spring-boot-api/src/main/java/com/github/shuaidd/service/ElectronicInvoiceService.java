@@ -50,6 +50,7 @@ public class ElectronicInvoiceService extends AbstractBaseService {
      *
      * @param request         请求
      * @param applicationName 应用
+     * @return 电子发票详情
      */
     public BatchInvoiceResponse getInvoices(BatchInvoiceRequest request, String applicationName) {
         return electronicInvoiceClient.getInvoices(request, applicationName);
