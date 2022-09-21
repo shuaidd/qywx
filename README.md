@@ -4,7 +4,7 @@
 <dependency>
   <groupId>com.github.shuaidd</groupId>
   <artifactId>qywx-spring-boot-starter</artifactId>
-  <version>4.0.1</version>
+  <version>4.2.1</version>
 </dependency>
 
 ```
@@ -64,4 +64,13 @@ public class WeChatTest extends BaseTest {
 ### 待完成 [来源企业微信变更日志]
 ```
 如果有未支持到的接口，而您又刚好想用，欢迎issue，看到后，会根据情况，同步新增
+
+客户联系-客户管理-获取规则组列表
+客户联系-在职继承
+客户联系-客户群管理-客户群opengid转换
+客户联系-联系我与客户入群方式-客户群「加入群聊」管理
+客户联系-客户朋友圈-获取规则组列表
+客户联系-消息推送-获取企业的全部群发记录版本2
+客户联系-管理商品图册
+客户联系-管理聊天敏感词
 ```

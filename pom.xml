@@ -7,7 +7,7 @@
     <groupId>com.github.shuaidd</groupId>
     <artifactId>qywx</artifactId>
     <packaging>pom</packaging>
-    <version>4.0.1</version>
+    <version>4.2.1</version>
     <modules>
         <module>qywx-spring-boot-starter</module>
         <module>qywx-spring-boot-autoconfigurator</module>
@@ -23,7 +23,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <org.springframework.cloud.version>2020.0.4</org.springframework.cloud.version>
+        <org.springframework.cloud.version>2021.0.4</org.springframework.cloud.version>
         <feign-jackson>10.2.0</feign-jackson>
         <commons-lang3>3.0</commons-lang3>
         <commons-collections4>4.1</commons-collections4>
@@ -36,7 +36,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.5.6</version>
+                <version>2.6.4</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -103,13 +103,19 @@
             <dependency>
                 <artifactId>qywx</artifactId>
                 <groupId>com.github.shuaidd</groupId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
                 <version>1.13</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.11.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -134,7 +140,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>2.2.1</version>
+                        <version>3.2.1</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
@@ -150,7 +156,7 @@
                         <version>2.9.1</version>
                         <configuration>
                             <javadocExecutable>
-                                /Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/bin/javadoc
+                                /Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home/bin/javadoc
                             </javadocExecutable>
                         </configuration>
                         <executions>

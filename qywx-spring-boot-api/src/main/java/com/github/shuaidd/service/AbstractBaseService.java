@@ -3,10 +3,7 @@ package com.github.shuaidd.service;
 import com.github.shuaidd.client.*;
 import com.github.shuaidd.client.config.ApplicationProperties;
 import com.github.shuaidd.client.config.WeChatConfigurationProperties;
-import com.github.shuaidd.enums.ErrorCode;
 import com.github.shuaidd.exception.ParamCheckException;
-import com.github.shuaidd.exception.WeChatException;
-import com.github.shuaidd.response.AbstractBaseResponse;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -15,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 /**
@@ -55,22 +51,25 @@ public abstract class AbstractBaseService {
     protected EfficiencyToolClient efficiencyToolClient;
 
     @Autowired
+    protected LinkedCorpClient linkedCorpClient;
+
+    @Autowired
+    protected ServiceProviderClient serviceProviderClient;
+
+    @Autowired
+    protected AuthClient authClient;
+
+    @Autowired
+    protected EnterpriseEmailClient emailClient;
+
+    @Autowired
+    protected ElectronicInvoiceClient electronicInvoiceClient;
+
+    @Autowired
+    protected EnterpriseInterConnectionClient enterpriseInterConnectionClient;
+
+    @Autowired
     protected WeChatConfigurationProperties properties;
-
-    boolean isSuccess(AbstractBaseResponse baseResponse) {
-        if (Objects.nonNull(baseResponse)) {
-            if (ErrorCode.ERROR_CODE_0.getErrorCode().equals(baseResponse.getErrCode())) {
-                return true;
-            } else {
-                ErrorCode errorCode = ErrorCode.errorCode(baseResponse.getErrCode());
-                logger.error("企业微信调用异常：errorCode[{}],msg:[{}],response:{}", baseResponse.getErrCode(), errorCode.getErrorDesc(), baseResponse.getErrMsg());
-                throw new WeChatException(errorCode.getErrorDesc(), errorCode);
-            }
-        } else {
-            return false;
-        }
-
-    }
 
     /**
      * 获取应用密匙

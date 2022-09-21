@@ -2,6 +2,7 @@ package com.github.shuaidd.response.wedrive;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.shuaidd.response.AbstractBaseResponse;
 
 import java.util.StringJoiner;
 
@@ -10,7 +11,7 @@ import java.util.StringJoiner;
  * date 2022-09-03 07:30
  **/
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class InitUploadFileResponse {
+public class InitUploadFileResponse extends AbstractBaseResponse {
 
     @JsonProperty("hit_exist")
     private Boolean hitExist;

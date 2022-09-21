@@ -8,7 +8,7 @@ import com.github.shuaidd.dto.message.MsgLink;
 import com.github.shuaidd.dto.message.MsgText;
 import com.github.shuaidd.response.addressbook.MobileHashCodeResponse;
 import com.github.shuaidd.response.externalcontact.*;
-import com.github.shuaidd.resquest.*;
+import com.github.shuaidd.resquest.PageRequest;
 import com.github.shuaidd.resquest.addressbook.MobileHashCodeRequest;
 import com.github.shuaidd.resquest.addressbook.TagGroupRequest;
 import com.github.shuaidd.resquest.externalcontact.*;
@@ -16,10 +16,8 @@ import com.github.shuaidd.service.CustomContactService;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 import java.util.Arrays;
@@ -35,7 +33,7 @@ public class CustomContactTest extends AbstractTest {
 
     private CustomContactService customContactService;
 
-    @Before
+    @BeforeEach
     public void init() {
         this.customContactService = weChatManager.customContactService();
     }

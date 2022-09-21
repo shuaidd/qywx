@@ -6,6 +6,7 @@ import com.github.shuaidd.response.addressbook.*;
 import com.github.shuaidd.response.application.ApplicationButtonResponse;
 import com.github.shuaidd.response.application.WeChatApplicationResponse;
 import com.github.shuaidd.response.auth.AuthenticationResponse;
+import com.github.shuaidd.response.auth.ProviderTokenResponse;
 import com.github.shuaidd.response.kf.*;
 import com.github.shuaidd.response.message.CreateAppChatResponse;
 import com.github.shuaidd.response.message.SearchAppChatResponse;
@@ -17,6 +18,7 @@ import com.github.shuaidd.resquest.JournalReportStatRequest;
 import com.github.shuaidd.resquest.addressbook.*;
 import com.github.shuaidd.resquest.application.ApplicationButtonRequest;
 import com.github.shuaidd.resquest.application.ApplicationSettingReuqest;
+import com.github.shuaidd.resquest.auth.ProviderTokenRequest;
 import com.github.shuaidd.resquest.kf.*;
 import com.github.shuaidd.resquest.message.CreateAppChatRequest;
 import com.github.shuaidd.resquest.message.SendAppChatRequest;
@@ -86,4 +88,26 @@ public interface WeChatClient extends CommonClient {
      */
     @GetMapping(value = "export/get_result", headers = HEAD)
     ExportResultResponse getExportResult(@RequestParam("jobid") String jobId, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * userid转换
+     * 将代开发应用或第三方应用获取的密文open_userid转换为明文userid。
+     * @param request 请求
+     * @param app   应用名
+     * @return 结果
+     */
+    @PostMapping(value = "batch/openuserid_to_userid", headers = HEAD)
+    OpenUserId2UserIdResponse openUserId2UserId(OpenUserId2UserIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * external_userid转换
+     * 将代开发应用或第三方应用获取的externaluserid转换成自建应用的externaluserid。
+     * @param request 请求
+     * @param app   应用名
+     * @return 结果
+     */
+    @PostMapping(value = "batch/openuserid_to_userid", headers = HEAD)
+    TransformExternalUserIdResponse transformExternalUserId(TransformExternalUserIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+
 }

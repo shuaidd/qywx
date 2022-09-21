@@ -2,10 +2,9 @@ package com.github.shuaidd;
 
 import com.github.shuaidd.dto.addressbook.DeptUser;
 import com.github.shuaidd.response.addressbook.ExportResultResponse;
-import com.github.shuaidd.response.addressbook.SimpleDeptUserResponse;
 import com.github.shuaidd.resquest.CursorPageRequest;
 import com.github.shuaidd.resquest.addressbook.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.Date;
@@ -45,7 +44,7 @@ public class AddressBookTest extends AbstractTest {
      */
     @Test
     public void getUser() {
-        weChatManager.addressBookService().getUser("2021041002271711", appName);
+        weChatManager.addressBookService().getUser("20170410022717", appName);
     }
 
     /**

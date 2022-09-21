@@ -21,7 +21,7 @@ import com.github.shuaidd.resquest.tool.DialRecordRequest;
 import com.google.common.collect.Lists;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.time.DateUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;

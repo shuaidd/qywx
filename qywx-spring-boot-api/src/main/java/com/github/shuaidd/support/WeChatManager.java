@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 描述
+ * 企业微信服务操作统一端口
  *
  * @author ddshuai
  * date 2019-04-03 16:10
@@ -26,6 +26,10 @@ public class WeChatManager {
     private final EfficiencyToolService efficiencyToolService;
     private final WeChatCallCenterService callCenterService;
     private final CommonService commonService;
+    private final ServiceProviderService serviceProviderService;
+    private final EnterpriseEmailService enterpriseEmailService;
+    private final ElectronicInvoiceService electronicInvoiceService;
+    private final EnterpriseInterConnectionService enterpriseInterConnectionService;
 
     @Autowired
     public WeChatManager(AddressBookService addressBookService,
@@ -36,7 +40,8 @@ public class WeChatManager {
                          MediaService mediaService, MessageService messageService,
                          OAService oaService, CustomContactService customContactService,
                          EfficiencyToolService efficiencyToolService, WeChatCallCenterService callCenterService,
-                         CommonService commonService) {
+                         CommonService commonService, ServiceProviderService serviceProviderService, EnterpriseEmailService enterpriseEmailService,
+                         ElectronicInvoiceService electronicInvoiceService, EnterpriseInterConnectionService enterpriseInterConnectionService) {
         this.addressBookService = addressBookService;
         this.tokenService = tokenService;
         this.properties = properties;
@@ -49,6 +54,10 @@ public class WeChatManager {
         this.efficiencyToolService = efficiencyToolService;
         this.callCenterService = callCenterService;
         this.commonService = commonService;
+        this.serviceProviderService = serviceProviderService;
+        this.enterpriseEmailService = enterpriseEmailService;
+        this.electronicInvoiceService = electronicInvoiceService;
+        this.enterpriseInterConnectionService = enterpriseInterConnectionService;
     }
 
     /**
@@ -148,6 +157,38 @@ public class WeChatManager {
      */
     public WeChatCallCenterService callCenterService() {
         return callCenterService;
+    }
+
+    /**
+     * 服务商
+     * @return ServiceProviderService
+     */
+    public ServiceProviderService serviceProviderService() {
+        return serviceProviderService;
+    }
+
+    /**
+     * 邮箱，群组管理
+     * @return enterpriseEmailService
+     */
+    public EnterpriseEmailService enterpriseEmailService() {
+        return enterpriseEmailService;
+    }
+
+    /**
+     * 电子发票
+     * @return ElectronicInvoiceService
+     */
+    public ElectronicInvoiceService electronicInvoiceService() {
+        return electronicInvoiceService;
+    }
+
+    /**
+     * 企业互联
+     * @return EnterpriseInterConnectionService
+     */
+    public EnterpriseInterConnectionService enterpriseInterConnectionService() {
+        return enterpriseInterConnectionService;
     }
 
     /**

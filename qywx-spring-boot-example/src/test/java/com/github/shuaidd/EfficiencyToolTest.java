@@ -1,12 +1,14 @@
 package com.github.shuaidd;
 
+import cn.hutool.core.util.HexUtil;
 import cn.hutool.crypto.digest.DigestAlgorithm;
+import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.crypto.digest.Digester;
+import com.github.shuaidd.dto.addressbook.UserId;
+import com.github.shuaidd.dto.checkin.ScheduleData;
 import com.github.shuaidd.dto.tool.CalendarData;
 import com.github.shuaidd.dto.tool.DialRecord;
 import com.github.shuaidd.dto.tool.ReminderData;
-import com.github.shuaidd.dto.checkin.ScheduleData;
-import com.github.shuaidd.dto.addressbook.UserId;
 import com.github.shuaidd.dto.wedrive.AuthItem;
 import com.github.shuaidd.dto.wedrive.SpaceInfo;
 import com.github.shuaidd.response.tool.AddScheduleResponse;
@@ -23,8 +25,8 @@ import com.google.common.collect.Lists;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.time.DateUtils;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -32,8 +34,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.*;
-import java.nio.ByteBuffer;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.security.MessageDigest;
 import java.text.ParseException;
 import java.util.Collections;
 import java.util.List;
@@ -61,7 +65,7 @@ public class EfficiencyToolTest extends AbstractTest {
 
     public static final String USER_ID = "20170410022717";
 
-    @Before
+    @BeforeEach
     public void init() {
         toolService = weChatManager.efficiencyTool();
     }
@@ -400,6 +404,32 @@ public class EfficiencyToolTest extends AbstractTest {
         logger.info("操作成功--{}", response);
     }
 
+   @Test
+   public void calculateSha()  throws Exception {
+       File file = ResourceUtils.getFile("classpath:image/IMG_20190919_131404.jpg");
+       try (FileInputStream inputStream = new FileInputStream(file);) {
+           byte[] bytes = new byte[2097152];//2M
+           int read;
+           MessageDigest mdTemp = MessageDigest.getInstance("SHA1");
+           while ((read = inputStream.read(bytes)) > -1) {
+               mdTemp.update(bytes,0,read);
+               MessageDigest clone = (MessageDigest) mdTemp.clone();
+               logger.info("获取到的sha值--{}",HexUtil.encodeHexStr(clone.digest()));
+           }
+       }
+
+      String a = DigestUtil.sha1Hex("1");
+       logger.info("获取到的sha值--{}",a);
+   }
+
+    /**
+     * blocks: 2
+     * part_num: 1 end_offset: 2097152 cumulate_sha1: 70864d429c1abd1da6b33daf5365cfe47f40fbb6
+     * part_num: 2 end_offset: 3902474 cumulate_sha1: ab17bd269fe988af8f2a2ef51c59beadf68e2ac0”
+     *
+     * ["fe3c91d34b04bcb07a649542feae9dc6fee22edb","ab17bd269fe988af8f2a2ef51c59beadf68e2ac0"]
+     * @throws Exception
+     */
     @Test
     public void initUploadFile() throws Exception {
         File file = ResourceUtils.getFile("classpath:image/IMG_20190919_131404.jpg");
@@ -407,49 +437,72 @@ public class EfficiencyToolTest extends AbstractTest {
         List<String> blockSha = Lists.newArrayList();
         List<String> base64List = Lists.newArrayList();
         Digester sha1 = new Digester(DigestAlgorithm.SHA1);
-
         try (FileInputStream inputStream = new FileInputStream(file);) {
             byte[] bytes = new byte[2097152];//2M
-            int loopCount = 0;
-            while (inputStream.read(bytes) != -1) {
-                loopCount++;
 
-                String digestHex = sha1.digestHex(bytes);
-                blockSha.add(digestHex);
-                //IOUtils.write(bytes, new FileOutputStream(new File(tempDir.toString() + "/temp" + loopCount)));
-                base64List.add(Base64.encodeBase64String(bytes));
+            int read;
+            while((read = inputStream.read(bytes, 0, 2097152)) > -1) {
+                sha1.getDigest().update(bytes, 0, read);
+               // MessageDigest messageDigest = (MessageDigest) sha1.getDigest().clone();
+                System.out.println(HexUtil.encodeHexStr(sha1.getDigest().digest()));
+                break;
             }
 
-            //todo 待测试分块上传
-            InitUploadFileRequest request = new InitUploadFileRequest();
-            request.setBlockSha(blockSha);
-            request.setFatherId("s.ww36e0a51aab349a7d.6620425469yR");
-            request.setUserId(USER_ID);
-            request.setFileName("IMG_20190919_131404.jpg");
-            request.setSize(inputStream.getChannel().size());
-            request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
-            request.setSkipPushCard(false);
-            InitUploadFileResponse response = toolService.initUploadFile(request, MICRO_DISK);
-            logger.info("获取到的上传初始化参数---{}",response);
-            int i = 1;
-            for (String content : base64List) {
-                FileUploadPartRequest uploadPartRequest = new FileUploadPartRequest();
-                uploadPartRequest.setFileBase64Content(content);
-                uploadPartRequest.setIndex(i);
-                uploadPartRequest.setUploadKey(response.getUploadKey());
-                uploadPartRequest.setUserId(USER_ID);
+//            int byteCnt = inputStream.read(bytes);
+//            while (byteCnt != -1) {
+//                System.out.println(byteCnt);
+//                if (2097152 - byteCnt  > 0) {
+//                    //结束了
+//                    byte[] subBytes = new byte[byteCnt];
+//                    System.arraycopy(bytes, 0, subBytes, 0, byteCnt);
+//                    base64List.add(Base64.encodeBase64String(subBytes));
+//                    sha1.getDigest().update(subBytes);
+//                } else {
+//                    sha1.getDigest().update(bytes);
+//                    base64List.add(Base64.encodeBase64String(bytes));
+//                }
+//
+//                MessageDigest messageDigest = (MessageDigest) sha1.getDigest().clone();
+//                System.out.println(HexUtil.encodeHexStr(messageDigest.digest()));
+//                byteCnt = inputStream.read(bytes);
+//            }
+//            System.out.println(inputStream.getChannel().size());
+//            System.out.println(blockSha);
 
-                //企业微信返回  unknow error  ！！！！！
-                toolService.fileUploadPart(uploadPartRequest,MICRO_DISK);
-                i++;
-            }
-
-            FileUploadFinishRequest finishRequest = new FileUploadFinishRequest();
-            finishRequest.setUploadKey(response.getUploadKey());
-            finishRequest.setUserId(USER_ID);
-            FileUploadFinishResponse finishResponse = toolService.fileUploadFinish(finishRequest,MICRO_DISK);
-            logger.info("分块上传完成--{}",finishResponse);
+          // uploadPart(blockSha,inputStream.getChannel().size(),base64List);
         }
+    }
+
+    private void uploadPart(List<String> blockSha,Long size,List<String> base64List) {
+        //todo 待测试分块上传
+        InitUploadFileRequest request = new InitUploadFileRequest();
+        request.setBlockSha(blockSha);
+        request.setFatherId("s.ww36e0a51aab349a7d.6620425469yR");
+        request.setUserId(USER_ID);
+        request.setFileName("IMG_20190919_131404.jpg");
+        request.setSize(size);
+        request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
+        request.setSkipPushCard(false);
+        InitUploadFileResponse response = toolService.initUploadFile(request, MICRO_DISK);
+        logger.info("获取到的上传初始化参数---{}",response);
+        int i = 1;
+        for (String content : base64List) {
+            FileUploadPartRequest uploadPartRequest = new FileUploadPartRequest();
+            uploadPartRequest.setFileBase64Content(content);
+            uploadPartRequest.setIndex(i);
+            uploadPartRequest.setUploadKey(response.getUploadKey());
+            uploadPartRequest.setUserId(USER_ID);
+
+            //企业微信返回  unknow error  ！！！！！
+            toolService.fileUploadPart(uploadPartRequest,MICRO_DISK);
+            i++;
+        }
+
+        FileUploadFinishRequest finishRequest = new FileUploadFinishRequest();
+        finishRequest.setUploadKey(response.getUploadKey());
+        finishRequest.setUserId(USER_ID);
+        FileUploadFinishResponse finishResponse = toolService.fileUploadFinish(finishRequest,MICRO_DISK);
+        logger.info("分块上传完成--{}",finishResponse);
     }
 
     @Test

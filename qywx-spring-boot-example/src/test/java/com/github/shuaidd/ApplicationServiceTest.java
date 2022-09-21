@@ -5,7 +5,7 @@ import com.github.shuaidd.enums.ButtonType;
 import com.github.shuaidd.response.application.ApplicationButtonResponse;
 import com.github.shuaidd.response.application.WeChatApplicationResponse;
 import com.github.shuaidd.resquest.application.ApplicationButtonRequest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 
