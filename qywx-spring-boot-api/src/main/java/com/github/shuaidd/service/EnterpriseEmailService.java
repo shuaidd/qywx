@@ -102,7 +102,7 @@ public class EnterpriseEmailService extends AbstractBaseService {
      * @param applicationName 应用
      * @return 详情信息
      */
-    public MailDetailResponse mailDetail(GetMailDetailRequest request, String applicationName) {
+    public MailDetailResponse getMailDetail(GetMailDetailRequest request, String applicationName) {
         return emailClient.mailDetail(request, applicationName);
     }
 }

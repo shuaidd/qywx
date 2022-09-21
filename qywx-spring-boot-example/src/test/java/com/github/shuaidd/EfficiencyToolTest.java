@@ -426,6 +426,8 @@ public class EfficiencyToolTest extends AbstractTest {
      * blocks: 2
      * part_num: 1 end_offset: 2097152 cumulate_sha1: 70864d429c1abd1da6b33daf5365cfe47f40fbb6
      * part_num: 2 end_offset: 3902474 cumulate_sha1: ab17bd269fe988af8f2a2ef51c59beadf68e2ac0”
+     *
+     * ["fe3c91d34b04bcb07a649542feae9dc6fee22edb","ab17bd269fe988af8f2a2ef51c59beadf68e2ac0"]
      * @throws Exception
      */
     @Test
@@ -435,61 +437,72 @@ public class EfficiencyToolTest extends AbstractTest {
         List<String> blockSha = Lists.newArrayList();
         List<String> base64List = Lists.newArrayList();
         Digester sha1 = new Digester(DigestAlgorithm.SHA1);
-
         try (FileInputStream inputStream = new FileInputStream(file);) {
             byte[] bytes = new byte[2097152];//2M
-            int byteCnt = inputStream.read(bytes);
-            while (byteCnt != -1) {
-                System.out.println(byteCnt);
-                if (2097152 - byteCnt  > 0) {
-                    //结束了
-                    sha1.getDigest().update(bytes,0,byteCnt);
-                    byte[] subBytes = new byte[byteCnt];
-                    System.arraycopy(bytes, 0, subBytes, 0, byteCnt);
-                    base64List.add(Base64.encodeBase64String(subBytes));
-                } else {
-                    sha1.getDigest().update(bytes);
-                    base64List.add(Base64.encodeBase64String(bytes));
-                }
 
-                MessageDigest messageDigest = (MessageDigest) sha1.getDigest().clone();
-                blockSha.add(HexUtil.encodeHexStr(messageDigest.digest(),true));
-
-                byteCnt = inputStream.read(bytes);
-            }
-            System.out.println(inputStream.getChannel().size());
-            System.out.println(blockSha);
-
-            //todo 待测试分块上传
-            InitUploadFileRequest request = new InitUploadFileRequest();
-            request.setBlockSha(blockSha);
-            request.setFatherId("s.ww36e0a51aab349a7d.6620425469yR");
-            request.setUserId(USER_ID);
-            request.setFileName("IMG_20190919_131404.jpg");
-            request.setSize(inputStream.getChannel().size());
-            request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
-            request.setSkipPushCard(false);
-            InitUploadFileResponse response = toolService.initUploadFile(request, MICRO_DISK);
-            logger.info("获取到的上传初始化参数---{}",response);
-            int i = 1;
-            for (String content : base64List) {
-                FileUploadPartRequest uploadPartRequest = new FileUploadPartRequest();
-                uploadPartRequest.setFileBase64Content(content);
-                uploadPartRequest.setIndex(i);
-                uploadPartRequest.setUploadKey(response.getUploadKey());
-                uploadPartRequest.setUserId(USER_ID);
-
-                //企业微信返回  unknow error  ！！！！！
-                toolService.fileUploadPart(uploadPartRequest,MICRO_DISK);
-                i++;
+            int read;
+            while((read = inputStream.read(bytes, 0, 2097152)) > -1) {
+                sha1.getDigest().update(bytes, 0, read);
+               // MessageDigest messageDigest = (MessageDigest) sha1.getDigest().clone();
+                System.out.println(HexUtil.encodeHexStr(sha1.getDigest().digest()));
+                break;
             }
 
-            FileUploadFinishRequest finishRequest = new FileUploadFinishRequest();
-            finishRequest.setUploadKey(response.getUploadKey());
-            finishRequest.setUserId(USER_ID);
-            FileUploadFinishResponse finishResponse = toolService.fileUploadFinish(finishRequest,MICRO_DISK);
-            logger.info("分块上传完成--{}",finishResponse);
+//            int byteCnt = inputStream.read(bytes);
+//            while (byteCnt != -1) {
+//                System.out.println(byteCnt);
+//                if (2097152 - byteCnt  > 0) {
+//                    //结束了
+//                    byte[] subBytes = new byte[byteCnt];
+//                    System.arraycopy(bytes, 0, subBytes, 0, byteCnt);
+//                    base64List.add(Base64.encodeBase64String(subBytes));
+//                    sha1.getDigest().update(subBytes);
+//                } else {
+//                    sha1.getDigest().update(bytes);
+//                    base64List.add(Base64.encodeBase64String(bytes));
+//                }
+//
+//                MessageDigest messageDigest = (MessageDigest) sha1.getDigest().clone();
+//                System.out.println(HexUtil.encodeHexStr(messageDigest.digest()));
+//                byteCnt = inputStream.read(bytes);
+//            }
+//            System.out.println(inputStream.getChannel().size());
+//            System.out.println(blockSha);
+
+          // uploadPart(blockSha,inputStream.getChannel().size(),base64List);
         }
+    }
+
+    private void uploadPart(List<String> blockSha,Long size,List<String> base64List) {
+        //todo 待测试分块上传
+        InitUploadFileRequest request = new InitUploadFileRequest();
+        request.setBlockSha(blockSha);
+        request.setFatherId("s.ww36e0a51aab349a7d.6620425469yR");
+        request.setUserId(USER_ID);
+        request.setFileName("IMG_20190919_131404.jpg");
+        request.setSize(size);
+        request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
+        request.setSkipPushCard(false);
+        InitUploadFileResponse response = toolService.initUploadFile(request, MICRO_DISK);
+        logger.info("获取到的上传初始化参数---{}",response);
+        int i = 1;
+        for (String content : base64List) {
+            FileUploadPartRequest uploadPartRequest = new FileUploadPartRequest();
+            uploadPartRequest.setFileBase64Content(content);
+            uploadPartRequest.setIndex(i);
+            uploadPartRequest.setUploadKey(response.getUploadKey());
+            uploadPartRequest.setUserId(USER_ID);
+
+            //企业微信返回  unknow error  ！！！！！
+            toolService.fileUploadPart(uploadPartRequest,MICRO_DISK);
+            i++;
+        }
+
+        FileUploadFinishRequest finishRequest = new FileUploadFinishRequest();
+        finishRequest.setUploadKey(response.getUploadKey());
+        finishRequest.setUserId(USER_ID);
+        FileUploadFinishResponse finishResponse = toolService.fileUploadFinish(finishRequest,MICRO_DISK);
+        logger.info("分块上传完成--{}",finishResponse);
     }
 
     @Test

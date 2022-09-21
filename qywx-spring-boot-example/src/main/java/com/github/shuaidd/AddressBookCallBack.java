@@ -20,11 +20,13 @@ public class AddressBookCallBack extends AbstractCallBackChain {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @Override
     public boolean match(String applicationName, BaseEventData eventData) {
         logger.info("回调的应用为--{}", applicationName);
         return "address-book".equals(applicationName);
     }
 
+    @Override
     public void handle(String applicationName, BaseEventData eventData) {
         logger.info("change-type---{}", eventData.getChangeType());
         if (ChangeType.UPDATE_USER.getChangeType().equals(eventData.getChangeType())) {

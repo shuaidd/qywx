@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 描述
+ * 企业微信服务操作统一端口
  *
  * @author ddshuai
  * date 2019-04-03 16:10
@@ -27,6 +27,7 @@ public class WeChatManager {
     private final WeChatCallCenterService callCenterService;
     private final CommonService commonService;
     private final ServiceProviderService serviceProviderService;
+    private final EnterpriseEmailService enterpriseEmailService;
 
     @Autowired
     public WeChatManager(AddressBookService addressBookService,
@@ -37,7 +38,7 @@ public class WeChatManager {
                          MediaService mediaService, MessageService messageService,
                          OAService oaService, CustomContactService customContactService,
                          EfficiencyToolService efficiencyToolService, WeChatCallCenterService callCenterService,
-                         CommonService commonService, ServiceProviderService serviceProviderService) {
+                         CommonService commonService, ServiceProviderService serviceProviderService, EnterpriseEmailService enterpriseEmailService) {
         this.addressBookService = addressBookService;
         this.tokenService = tokenService;
         this.properties = properties;
@@ -51,6 +52,7 @@ public class WeChatManager {
         this.callCenterService = callCenterService;
         this.commonService = commonService;
         this.serviceProviderService = serviceProviderService;
+        this.enterpriseEmailService = enterpriseEmailService;
     }
 
     /**
@@ -158,6 +160,14 @@ public class WeChatManager {
      */
     public ServiceProviderService serviceProviderService() {
         return serviceProviderService;
+    }
+
+    /**
+     * 邮箱，群组管理
+     * @return enterpriseEmailService
+     */
+    public EnterpriseEmailService enterpriseEmailService() {
+        return enterpriseEmailService;
     }
 
     /**
