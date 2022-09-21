@@ -28,6 +28,8 @@ public class WeChatManager {
     private final CommonService commonService;
     private final ServiceProviderService serviceProviderService;
     private final EnterpriseEmailService enterpriseEmailService;
+    private final ElectronicInvoiceService electronicInvoiceService;
+    private final EnterpriseInterConnectionService enterpriseInterConnectionService;
 
     @Autowired
     public WeChatManager(AddressBookService addressBookService,
@@ -38,7 +40,8 @@ public class WeChatManager {
                          MediaService mediaService, MessageService messageService,
                          OAService oaService, CustomContactService customContactService,
                          EfficiencyToolService efficiencyToolService, WeChatCallCenterService callCenterService,
-                         CommonService commonService, ServiceProviderService serviceProviderService, EnterpriseEmailService enterpriseEmailService) {
+                         CommonService commonService, ServiceProviderService serviceProviderService, EnterpriseEmailService enterpriseEmailService,
+                         ElectronicInvoiceService electronicInvoiceService, EnterpriseInterConnectionService enterpriseInterConnectionService) {
         this.addressBookService = addressBookService;
         this.tokenService = tokenService;
         this.properties = properties;
@@ -53,6 +56,8 @@ public class WeChatManager {
         this.commonService = commonService;
         this.serviceProviderService = serviceProviderService;
         this.enterpriseEmailService = enterpriseEmailService;
+        this.electronicInvoiceService = electronicInvoiceService;
+        this.enterpriseInterConnectionService = enterpriseInterConnectionService;
     }
 
     /**
@@ -168,6 +173,22 @@ public class WeChatManager {
      */
     public EnterpriseEmailService enterpriseEmailService() {
         return enterpriseEmailService;
+    }
+
+    /**
+     * 电子发票
+     * @return ElectronicInvoiceService
+     */
+    public ElectronicInvoiceService electronicInvoiceService() {
+        return electronicInvoiceService;
+    }
+
+    /**
+     * 企业互联
+     * @return EnterpriseInterConnectionService
+     */
+    public EnterpriseInterConnectionService enterpriseInterConnectionService() {
+        return enterpriseInterConnectionService;
     }
 
     /**

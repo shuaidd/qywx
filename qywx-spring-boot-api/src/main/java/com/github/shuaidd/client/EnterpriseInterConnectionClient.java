@@ -28,11 +28,11 @@ public interface EnterpriseInterConnectionClient extends CommonClient {
     AppShareInfoResponse appShareInfo(AppShareInfoRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
-     * 获取应用共享信息
+     * 获取accessToken
      *
      * @param request 请求
      * @param app     应用
-     * @return 应用共享信息
+     * @return 获取accessToken
      */
     @PostMapping(value = "/corpgroup/corp/gettoken", headers = HEAD)
     AccessTokenResponse getToken(CorpTokenRequest request, @RequestParam(HEAD_KEY) String app);

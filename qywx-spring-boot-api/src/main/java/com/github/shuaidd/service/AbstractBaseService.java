@@ -63,6 +63,12 @@ public abstract class AbstractBaseService {
     protected EnterpriseEmailClient emailClient;
 
     @Autowired
+    protected ElectronicInvoiceClient electronicInvoiceClient;
+
+    @Autowired
+    protected EnterpriseInterConnectionClient enterpriseInterConnectionClient;
+
+    @Autowired
     protected WeChatConfigurationProperties properties;
 
     /**
