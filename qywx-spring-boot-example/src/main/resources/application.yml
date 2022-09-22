@@ -40,24 +40,24 @@ qywx:
 
   url: https://qyapi.weixin.qq.com
   public-path: cgi-bin
-  corp-id: xxxxxxxxxxxx
+  corp-id: xxxxxxxxxxxxx
   callback-list:
     - application-name: address-book
       token: 4pd5Q2GAVKAapyTD0IGLMD7Lngiyx
       encoding-aes-key: QJqvdlS4M4FTPUNqSQrMg3VwNRyBCqTqtNStREy3Ahd
-      receive-id: ww36e0a51aab349a7d
+      receive-id: xxxxxxxxxxxxx
     - application-name: schedule
       token: CdEcnaCCdcic
       encoding-aes-key: QJqvdlS4M4FTPUNqSQrMg3VwNRyBCqTqtNStREy3Ahd
-      receive-id: ww36e0a51aab349a7d
+      receive-id: xxxxxxxxxxxxx
     - application-name: oy
       token: NTox2kVxd
       encoding-aes-key: QJqvdlS4M4FTPUNqSQrMg3VwNRyBCqTqtNStREy3Ahd
-      receive-id: ww36e0a51aab349a7d
+      receive-id: xxxxxxxxxxxxx
     - application-name: wx-kf
       token: xQNYp8WloVxIWkZeqp8bQWwkXG5
       encoding-aes-key: 2XLgmJm7nZqsJuUyIGq5YIzAU8nYw7IR1bcQWROTl99
-      receive-id: ww36e0a51aab349a7d
+      receive-id: xxxxxxxxxxxxx
     - application-name: mini-kf
       token: 8a0abb7ed0a1be90ab88bb75b40f4e30
       encoding-aes-key: wjzyQdT5KTIqyuOLynElsQcYHkpssLeedOIR94POHOA
