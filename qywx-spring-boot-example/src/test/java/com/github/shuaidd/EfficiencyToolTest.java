@@ -404,30 +404,31 @@ public class EfficiencyToolTest extends AbstractTest {
         logger.info("操作成功--{}", response);
     }
 
-   @Test
-   public void calculateSha()  throws Exception {
-       File file = ResourceUtils.getFile("classpath:image/IMG_20190919_131404.jpg");
-       try (FileInputStream inputStream = new FileInputStream(file);) {
-           byte[] bytes = new byte[2097152];//2M
-           int read;
-           MessageDigest mdTemp = MessageDigest.getInstance("SHA1");
-           while ((read = inputStream.read(bytes)) > -1) {
-               mdTemp.update(bytes,0,read);
-               MessageDigest clone = (MessageDigest) mdTemp.clone();
-               logger.info("获取到的sha值--{}",HexUtil.encodeHexStr(clone.digest()));
-           }
-       }
+    @Test
+    public void calculateSha() throws Exception {
+        File file = ResourceUtils.getFile("classpath:image/IMG_20190919_131404.jpg");
+        try (FileInputStream inputStream = new FileInputStream(file);) {
+            byte[] bytes = new byte[2097152];//2M
+            int read;
+            MessageDigest mdTemp = MessageDigest.getInstance("SHA1");
+            while ((read = inputStream.read(bytes)) > -1) {
+                mdTemp.update(bytes, 0, read);
+                MessageDigest clone = (MessageDigest) mdTemp.clone();
+                logger.info("获取到的sha值--{}", HexUtil.encodeHexStr(clone.digest()));
+            }
+        }
 
-      String a = DigestUtil.sha1Hex("1");
-       logger.info("获取到的sha值--{}",a);
-   }
+        String a = DigestUtil.sha1Hex("1");
+        logger.info("获取到的sha值--{}", a);
+    }
 
     /**
      * blocks: 2
      * part_num: 1 end_offset: 2097152 cumulate_sha1: 70864d429c1abd1da6b33daf5365cfe47f40fbb6
      * part_num: 2 end_offset: 3902474 cumulate_sha1: ab17bd269fe988af8f2a2ef51c59beadf68e2ac0”
-     *
+     * <p>
      * ["fe3c91d34b04bcb07a649542feae9dc6fee22edb","ab17bd269fe988af8f2a2ef51c59beadf68e2ac0"]
+     *
      * @throws Exception
      */
     @Test
@@ -438,42 +439,38 @@ public class EfficiencyToolTest extends AbstractTest {
         List<String> base64List = Lists.newArrayList();
         Digester sha1 = new Digester(DigestAlgorithm.SHA1);
         try (FileInputStream inputStream = new FileInputStream(file);) {
-            byte[] bytes = new byte[2097152];//2M
+            byte[] bytes = new byte[2 * 1024 * 1024];//2M
+            System.out.println(sha1.digestHex(file));
 
-            int read;
-            while((read = inputStream.read(bytes, 0, 2097152)) > -1) {
-                sha1.getDigest().update(bytes, 0, read);
-               // MessageDigest messageDigest = (MessageDigest) sha1.getDigest().clone();
-                System.out.println(HexUtil.encodeHexStr(sha1.getDigest().digest()));
-                break;
+            int byteCnt;
+            while ((byteCnt = inputStream.read(bytes)) > 0) {
+                System.out.println(byteCnt);
+                if (2097152 - byteCnt > 0) {
+                    //结束了
+                    byte[] subBytes = new byte[byteCnt];
+                    System.arraycopy(bytes, 0, subBytes, 0, byteCnt);
+                    base64List.add(Base64.encodeBase64String(subBytes));
+                    sha1.getDigest().update(subBytes);
+                } else {
+                    sha1.getDigest().update(bytes);
+                    base64List.add(Base64.encodeBase64String(bytes));
+
+                    Digester sha11 = new Digester(DigestAlgorithm.SHA1);
+                    System.out.println(HexUtil.encodeHexStr(sha11.digest(bytes)));
+                }
+
+                MessageDigest messageDigest = (MessageDigest) sha1.getDigest().clone();
+                System.out.println(HexUtil.encodeHexStr(messageDigest.digest()));
+                byteCnt = inputStream.read(bytes);
             }
+            System.out.println(inputStream.getChannel().size());
+            System.out.println(blockSha);
 
-//            int byteCnt = inputStream.read(bytes);
-//            while (byteCnt != -1) {
-//                System.out.println(byteCnt);
-//                if (2097152 - byteCnt  > 0) {
-//                    //结束了
-//                    byte[] subBytes = new byte[byteCnt];
-//                    System.arraycopy(bytes, 0, subBytes, 0, byteCnt);
-//                    base64List.add(Base64.encodeBase64String(subBytes));
-//                    sha1.getDigest().update(subBytes);
-//                } else {
-//                    sha1.getDigest().update(bytes);
-//                    base64List.add(Base64.encodeBase64String(bytes));
-//                }
-//
-//                MessageDigest messageDigest = (MessageDigest) sha1.getDigest().clone();
-//                System.out.println(HexUtil.encodeHexStr(messageDigest.digest()));
-//                byteCnt = inputStream.read(bytes);
-//            }
-//            System.out.println(inputStream.getChannel().size());
-//            System.out.println(blockSha);
-
-          // uploadPart(blockSha,inputStream.getChannel().size(),base64List);
+            // uploadPart(blockSha,inputStream.getChannel().size(),base64List);
         }
     }
 
-    private void uploadPart(List<String> blockSha,Long size,List<String> base64List) {
+    private void uploadPart(List<String> blockSha, Long size, List<String> base64List) {
         //todo 待测试分块上传
         InitUploadFileRequest request = new InitUploadFileRequest();
         request.setBlockSha(blockSha);
@@ -484,7 +481,7 @@ public class EfficiencyToolTest extends AbstractTest {
         request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
         request.setSkipPushCard(false);
         InitUploadFileResponse response = toolService.initUploadFile(request, MICRO_DISK);
-        logger.info("获取到的上传初始化参数---{}",response);
+        logger.info("获取到的上传初始化参数---{}", response);
         int i = 1;
         for (String content : base64List) {
             FileUploadPartRequest uploadPartRequest = new FileUploadPartRequest();
@@ -494,15 +491,15 @@ public class EfficiencyToolTest extends AbstractTest {
             uploadPartRequest.setUserId(USER_ID);
 
             //企业微信返回  unknow error  ！！！！！
-            toolService.fileUploadPart(uploadPartRequest,MICRO_DISK);
+            toolService.fileUploadPart(uploadPartRequest, MICRO_DISK);
             i++;
         }
 
         FileUploadFinishRequest finishRequest = new FileUploadFinishRequest();
         finishRequest.setUploadKey(response.getUploadKey());
         finishRequest.setUserId(USER_ID);
-        FileUploadFinishResponse finishResponse = toolService.fileUploadFinish(finishRequest,MICRO_DISK);
-        logger.info("分块上传完成--{}",finishResponse);
+        FileUploadFinishResponse finishResponse = toolService.fileUploadFinish(finishRequest, MICRO_DISK);
+        logger.info("分块上传完成--{}", finishResponse);
     }
 
     @Test
