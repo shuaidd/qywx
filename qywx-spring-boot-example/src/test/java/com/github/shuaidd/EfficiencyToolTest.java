@@ -1,6 +1,8 @@
 package com.github.shuaidd;
 
+import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.util.HexUtil;
+import cn.hutool.core.util.RuntimeUtil;
 import cn.hutool.crypto.digest.DigestAlgorithm;
 import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.crypto.digest.Digester;
@@ -37,6 +39,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.text.ParseException;
 import java.util.Collections;
@@ -404,77 +407,74 @@ public class EfficiencyToolTest extends AbstractTest {
         logger.info("操作成功--{}", response);
     }
 
-   @Test
-   public void calculateSha()  throws Exception {
-       File file = ResourceUtils.getFile("classpath:image/IMG_20190919_131404.jpg");
-       try (FileInputStream inputStream = new FileInputStream(file);) {
-           byte[] bytes = new byte[2097152];//2M
-           int read;
-           MessageDigest mdTemp = MessageDigest.getInstance("SHA1");
-           while ((read = inputStream.read(bytes)) > -1) {
-               mdTemp.update(bytes,0,read);
-               MessageDigest clone = (MessageDigest) mdTemp.clone();
-               logger.info("获取到的sha值--{}",HexUtil.encodeHexStr(clone.digest()));
-           }
-       }
+    @Test
+    public void calculateSha() throws Exception {
+        File file = ResourceUtils.getFile("classpath:image/IMG_20190919_131404.jpg");
+        try (FileInputStream inputStream = new FileInputStream(file);) {
+            byte[] bytes = new byte[2097152];//2M
+            int read;
+            MessageDigest mdTemp = MessageDigest.getInstance("SHA1");
+            while ((read = inputStream.read(bytes)) > -1) {
+                mdTemp.update(bytes, 0, read);
+                MessageDigest clone = (MessageDigest) mdTemp.clone();
+                logger.info("获取到的sha值--{}", HexUtil.encodeHexStr(clone.digest()));
+            }
+        }
 
-      String a = DigestUtil.sha1Hex("1");
-       logger.info("获取到的sha值--{}",a);
-   }
+        String a = DigestUtil.sha1Hex("1");
+        logger.info("获取到的sha值--{}", a);
+    }
 
     /**
      * blocks: 2
      * part_num: 1 end_offset: 2097152 cumulate_sha1: 70864d429c1abd1da6b33daf5365cfe47f40fbb6
      * part_num: 2 end_offset: 3902474 cumulate_sha1: ab17bd269fe988af8f2a2ef51c59beadf68e2ac0”
-     *
-     * ["fe3c91d34b04bcb07a649542feae9dc6fee22edb","ab17bd269fe988af8f2a2ef51c59beadf68e2ac0"]
-     * @throws Exception
+     * <p>
+     * 计算sha值
+     * ./file-block-digest-mac 文件绝对路径
+     * @throws Exception e
      */
     @Test
     public void initUploadFile() throws Exception {
         File file = ResourceUtils.getFile("classpath:image/IMG_20190919_131404.jpg");
-        File tempDir = ResourceUtils.getFile("classpath:upload");
-        List<String> blockSha = Lists.newArrayList();
+        List<String> blockSha = getBlockSha();
         List<String> base64List = Lists.newArrayList();
-        Digester sha1 = new Digester(DigestAlgorithm.SHA1);
         try (FileInputStream inputStream = new FileInputStream(file);) {
-            byte[] bytes = new byte[2097152];//2M
+            byte[] bytes = new byte[2 * 1024 * 1024];//2M
 
-            int read;
-            while((read = inputStream.read(bytes, 0, 2097152)) > -1) {
-                sha1.getDigest().update(bytes, 0, read);
-               // MessageDigest messageDigest = (MessageDigest) sha1.getDigest().clone();
-                System.out.println(HexUtil.encodeHexStr(sha1.getDigest().digest()));
-                break;
+            int byteCnt;
+            while ((byteCnt = inputStream.read(bytes)) > 0) {
+                if (2097152 - byteCnt > 0) {
+                    //结束了
+                    byte[] subBytes = new byte[byteCnt];
+                    System.arraycopy(bytes, 0, subBytes, 0, byteCnt);
+                    base64List.add(Base64.encodeBase64String(subBytes));
+                } else {
+                    base64List.add(Base64.encodeBase64String(bytes));
+                }
             }
 
-//            int byteCnt = inputStream.read(bytes);
-//            while (byteCnt != -1) {
-//                System.out.println(byteCnt);
-//                if (2097152 - byteCnt  > 0) {
-//                    //结束了
-//                    byte[] subBytes = new byte[byteCnt];
-//                    System.arraycopy(bytes, 0, subBytes, 0, byteCnt);
-//                    base64List.add(Base64.encodeBase64String(subBytes));
-//                    sha1.getDigest().update(subBytes);
-//                } else {
-//                    sha1.getDigest().update(bytes);
-//                    base64List.add(Base64.encodeBase64String(bytes));
-//                }
-//
-//                MessageDigest messageDigest = (MessageDigest) sha1.getDigest().clone();
-//                System.out.println(HexUtil.encodeHexStr(messageDigest.digest()));
-//                byteCnt = inputStream.read(bytes);
-//            }
-//            System.out.println(inputStream.getChannel().size());
-//            System.out.println(blockSha);
-
-          // uploadPart(blockSha,inputStream.getChannel().size(),base64List);
+            uploadPart(blockSha,inputStream.getChannel().size(),base64List);
         }
     }
 
-    private void uploadPart(List<String> blockSha,Long size,List<String> base64List) {
-        //todo 待测试分块上传
+    public List<String> getBlockSha() throws IOException {
+        // file-block-digest-mac 计算sha值二级制工具 是从官方的 c++ demo 里 编译的
+        File digestTool = ResourceUtils.getFile("classpath:file-digest/file-block-digest-mac");
+        File uploadFile = ResourceUtils.getFile("classpath:image/IMG_20190919_131404.jpg");
+        String cmd = String.format("%s %s",digestTool.getAbsolutePath(),uploadFile.getAbsolutePath());
+        String res = RuntimeUtil.execForStr(cmd);
+        List<String> blockSha = Lists.newArrayList();
+        for (String s : res.split("\n")) {
+            if (s.contains("cumulate_sha1:")) {
+                blockSha.add(s.split("cumulate_sha1:")[1].trim());
+            }
+        }
+
+        return blockSha;
+    }
+
+    private void uploadPart(List<String> blockSha, Long size, List<String> base64List) {
         InitUploadFileRequest request = new InitUploadFileRequest();
         request.setBlockSha(blockSha);
         request.setFatherId("s.ww36e0a51aab349a7d.6620425469yR");
@@ -484,7 +484,7 @@ public class EfficiencyToolTest extends AbstractTest {
         request.setSpaceId("s.ww36e0a51aab349a7d.6620425469yR");
         request.setSkipPushCard(false);
         InitUploadFileResponse response = toolService.initUploadFile(request, MICRO_DISK);
-        logger.info("获取到的上传初始化参数---{}",response);
+        logger.info("获取到的上传初始化参数---{}", response);
         int i = 1;
         for (String content : base64List) {
             FileUploadPartRequest uploadPartRequest = new FileUploadPartRequest();
@@ -494,15 +494,15 @@ public class EfficiencyToolTest extends AbstractTest {
             uploadPartRequest.setUserId(USER_ID);
 
             //企业微信返回  unknow error  ！！！！！
-            toolService.fileUploadPart(uploadPartRequest,MICRO_DISK);
+            toolService.fileUploadPart(uploadPartRequest, MICRO_DISK);
             i++;
         }
 
         FileUploadFinishRequest finishRequest = new FileUploadFinishRequest();
         finishRequest.setUploadKey(response.getUploadKey());
         finishRequest.setUserId(USER_ID);
-        FileUploadFinishResponse finishResponse = toolService.fileUploadFinish(finishRequest,MICRO_DISK);
-        logger.info("分块上传完成--{}",finishResponse);
+        FileUploadFinishResponse finishResponse = toolService.fileUploadFinish(finishRequest, MICRO_DISK);
+        logger.info("分块上传完成--{}", finishResponse);
     }
 
     @Test
