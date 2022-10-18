@@ -459,6 +459,7 @@ public class EfficiencyToolTest extends AbstractTest {
     }
 
     public List<String> getBlockSha() throws IOException {
+        // file-block-digest-mac 计算sha值二级制工具 是从官方的 c++ demo 里 编译的
         File digestTool = ResourceUtils.getFile("classpath:file-digest/file-block-digest-mac");
         File uploadFile = ResourceUtils.getFile("classpath:image/IMG_20190919_131404.jpg");
         String cmd = String.format("%s %s",digestTool.getAbsolutePath(),uploadFile.getAbsolutePath());
