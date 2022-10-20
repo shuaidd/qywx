@@ -3,6 +3,7 @@ package com.github.shuaidd.client;
 import com.github.shuaidd.client.config.WeChatConfiguration;
 import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.externalcontact.*;
+import com.github.shuaidd.resquest.CursorPageRequest;
 import com.github.shuaidd.resquest.PageRequest;
 import com.github.shuaidd.resquest.addressbook.TagGroupRequest;
 import com.github.shuaidd.resquest.externalcontact.*;
@@ -407,4 +408,54 @@ public interface ExternalContactClient extends CommonClient {
      */
     @PostMapping(value = "externalcontact/groupchat/statistic_group_by_day", headers = HEAD)
     GroupChatStatisticResponse getGroupChatStatisticByDay(GroupChatStatisticRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 创建商品图册
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return AddProductAlbumResponse
+     */
+    @PostMapping(value = "externalcontact/add_product_album", headers = HEAD)
+    AddProductAlbumResponse addProductAlbum(AddProductAlbumRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取商品图册
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return GetProductAlbumResponse
+     */
+    @PostMapping(value = "externalcontact/get_product_album", headers = HEAD)
+    GetProductAlbumResponse getProductAlbum(GetProductAlbumRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取商品图册列表
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return ProductAlbumListResponse
+     */
+    @PostMapping(value = "externalcontact/get_product_album_list", headers = HEAD)
+    ProductAlbumListResponse productAlbumList(CursorPageRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 编辑商品图册
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/get_product_album_list", headers = HEAD)
+    BaseResponse updateProductAlbum(UpdateProductAlbumRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除商品图册
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/delete_product_album", headers = HEAD)
+    BaseResponse deleteProductAlbum(DelProductAlbumRequest request, @RequestParam(HEAD_KEY) String app);
 }

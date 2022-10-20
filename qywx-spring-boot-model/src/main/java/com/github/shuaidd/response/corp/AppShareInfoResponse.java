@@ -14,9 +14,6 @@ public class AppShareInfoResponse  extends AbstractBaseResponse {
     @JsonProperty("corp_list")
     private List<CorpListDTO> corpList;
 
-    @JsonProperty("next_cursor")
-    private String nextCursor;
-
     public Integer getEnding() {
         return ending;
     }
@@ -31,14 +28,6 @@ public class AppShareInfoResponse  extends AbstractBaseResponse {
 
     public void setCorpList(List<CorpListDTO> corpList) {
         this.corpList = corpList;
-    }
-
-    public String getNextCursor() {
-        return nextCursor;
-    }
-
-    public void setNextCursor(String nextCursor) {
-        this.nextCursor = nextCursor;
     }
 
     public static class CorpListDTO {
