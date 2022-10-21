@@ -97,8 +97,7 @@ public class MediaService extends AbstractBaseService {
         if (Objects.nonNull(file) && Objects.nonNull(mediaType) && Objects.nonNull(attachmentType)) {
             DiskFileItem fileItem = diskFileItem(file, MediaType.parseMediaType("application/octet-stream"), applicationName);
             MultipartFile multi = new CommonsMultipartFile(fileItem);
-            WeChatMediaUploadResponse response = weChatMediaClient.uploadAttachment(multi, mediaType, attachmentType, applicationName);
-            return response.getMediaId();
+            return uploadAttachment(multi, mediaType, attachmentType, applicationName);
         }
 
         return null;

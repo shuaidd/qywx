@@ -61,12 +61,12 @@ public class MediaServiceTest extends AbstractTest {
 
     @Test
     public void downloadJsMedia() {
-        weChatManager.mediaService().downloadJsMedia("3S9f1Bg1H8D_dG4xuPWgaStwbec3AskA1eqBLWKb5GXysrq3Ik2LkuvL55-I41cdB", ADDRESS_BOOK);
+        ResponseEntity<byte[]> response = weChatManager.mediaService().downloadJsMedia("3S9f1Bg1H8D_dG4xuPWgaStwbec3AskA1eqBLWKb5GXysrq3Ik2LkuvL55-I41cdB", ADDRESS_BOOK);
     }
 
     @Test
     public void downloadJsMediaFile() {
         /*downloadFilePath 不填时 下载到临时文件夹*/
-        weChatManager.mediaService().downloadJsMediaFile("3S9f1Bg1H8D_dG4xuPWgaStwbec3AskA1eqBLWKb5GXysrq3Ik2LkuvL55-I41cdB",null, ADDRESS_BOOK);
+        File file = weChatManager.mediaService().downloadJsMediaFile("3S9f1Bg1H8D_dG4xuPWgaStwbec3AskA1eqBLWKb5GXysrq3Ik2LkuvL55-I41cdB",null, ADDRESS_BOOK);
     }
 }
