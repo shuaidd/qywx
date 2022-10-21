@@ -69,6 +69,44 @@ public class MediaService extends AbstractBaseService {
     }
 
     /**
+     * 上传附件
+     * @param file 文件
+     * @param mediaType 媒体类型
+     * @param attachmentType 附件类型
+     * @param applicationName 应用名称
+     * @return media_id
+     */
+    public String uploadAttachment(MultipartFile file, String mediaType, Integer attachmentType, String applicationName) {
+        if (Objects.nonNull(file) && Objects.nonNull(mediaType) && Objects.nonNull(attachmentType)) {
+            WeChatMediaUploadResponse response = weChatMediaClient.uploadAttachment(file, mediaType, attachmentType, applicationName);
+            return response.getMediaId();
+        }
+
+        return null;
+    }
+
+     /**
+     * 上传附件
+     * @param file 文件
+     * @param mediaType 媒体类型
+     * @param attachmentType 附件类型
+     * @param applicationName 应用名称
+     * @return media_id
+     */
+    public String uploadAttachment(File file, String mediaType, Integer attachmentType, String applicationName) {
+        if (Objects.nonNull(file) && Objects.nonNull(mediaType) && Objects.nonNull(attachmentType)) {
+            DiskFileItem fileItem = diskFileItem(file, MediaType.parseMediaType("application/octet-stream"), applicationName);
+            MultipartFile multi = new CommonsMultipartFile(fileItem);
+            WeChatMediaUploadResponse response = weChatMediaClient.uploadAttachment(multi, mediaType, attachmentType, applicationName);
+            return response.getMediaId();
+        }
+
+        return null;
+    }
+
+
+
+    /**
      * 上传永久图片
      *
      * @param file            文件

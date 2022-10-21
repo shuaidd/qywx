@@ -458,4 +458,53 @@ public interface ExternalContactClient extends CommonClient {
      */
     @PostMapping(value = "externalcontact/delete_product_album", headers = HEAD)
     BaseResponse deleteProductAlbum(DelProductAlbumRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 新建敏感词规则
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return AddInterceptRuleResponse
+     */
+    @PostMapping(value = "externalcontact/add_intercept_rule", headers = HEAD)
+    AddInterceptRuleResponse addInterceptRule(AddInterceptRuleRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取敏感词规则列表
+     *
+     * @param app 应用名
+     * @return InterceptRuleListResponse
+     */
+    @GetMapping(value = "externalcontact/get_intercept_rule_list", headers = HEAD)
+    InterceptRuleListResponse interceptRuleList(@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取敏感词规则详情
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return GetInterceptRuleResponse
+     */
+    @PostMapping(value = "externalcontact/get_intercept_rule", headers = HEAD)
+    GetInterceptRuleResponse getInterceptRuleDetail(InterceptRuleIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改敏感词规则
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/update_intercept_rule", headers = HEAD)
+    BaseResponse updateInterceptRule(UpdateInterceptRuleRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除敏感词规则
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/del_intercept_rule", headers = HEAD)
+    BaseResponse delInterceptRule(InterceptRuleIdRequest request, @RequestParam(HEAD_KEY) String app);
 }

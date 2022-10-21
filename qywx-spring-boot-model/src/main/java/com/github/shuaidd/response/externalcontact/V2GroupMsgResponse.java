@@ -1,8 +1,10 @@
 package com.github.shuaidd.response.externalcontact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.github.shuaidd.dto.externalcontact.V2GroupMsg;
 import com.github.shuaidd.dto.message.MsgText;
+import com.github.shuaidd.json.Long2DateDeserializer;
 import com.github.shuaidd.response.AbstractBaseResponse;
 
 import java.util.Date;
@@ -20,6 +22,7 @@ public class V2GroupMsgResponse extends AbstractBaseResponse {
     private String creator;
 
     @JsonProperty("create_time")
+    @JsonDeserialize(using = Long2DateDeserializer.class)
     private Date createTime;
 
     @JsonProperty("create_type")

@@ -1,6 +1,8 @@
 package com.github.shuaidd.dto.checkin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.github.shuaidd.json.Long2DateDeserializer;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
@@ -57,6 +59,7 @@ public class CheckInRuleGroup {
     private CheckInRuleGroupRange range;
 
     @JsonProperty("create_time")
+    @JsonDeserialize(using = Long2DateDeserializer.class)
     private Long createTime;
 
     @JsonProperty("white_users")
