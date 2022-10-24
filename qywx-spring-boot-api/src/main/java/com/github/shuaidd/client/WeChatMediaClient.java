@@ -2,8 +2,12 @@ package com.github.shuaidd.client;
 
 import com.github.shuaidd.client.config.MultipartSupportConfig;
 import com.github.shuaidd.dto.tool.Comm;
+import com.github.shuaidd.response.addressbook.AsyncJobResponse;
+import com.github.shuaidd.response.material.UploadByUrlResultResponse;
 import com.github.shuaidd.response.material.UploadImageResponse;
 import com.github.shuaidd.response.material.WeChatMediaUploadResponse;
+import com.github.shuaidd.resquest.job.JobIdRequest;
+import com.github.shuaidd.resquest.media.UploadByUrlRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

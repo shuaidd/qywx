@@ -1,7 +1,11 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.response.addressbook.AsyncJobResponse;
+import com.github.shuaidd.response.material.UploadByUrlResultResponse;
 import com.github.shuaidd.response.material.UploadImageResponse;
 import com.github.shuaidd.response.material.WeChatMediaUploadResponse;
+import com.github.shuaidd.resquest.job.JobIdRequest;
+import com.github.shuaidd.resquest.media.UploadByUrlRequest;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.io.IOUtils;
@@ -184,5 +188,28 @@ public class MediaService extends AbstractBaseService {
      */
     public File downloadFile(String mediaId, String downloadFilePath, String applicationName) {
         return weChatMediaClient.downloadFile(mediaId, downloadFilePath, applicationName);
+    }
+
+    /**
+     * 生成异步上传任务
+     *
+     * @param request          请求
+     * @param applicationName  应用名称
+     * @return 任务编号
+     */
+    public String uploadByUrl(UploadByUrlRequest request, String applicationName) {
+        AsyncJobResponse response = weChatClient.uploadByUrl(request, applicationName);
+        return response.getJobId();
+    }
+
+    /**
+     * 查询异步任务结果
+     *
+     * @param request          请求
+     * @param applicationName  应用名称
+     * @return 任务执行结果
+     */
+    public UploadByUrlResultResponse getUploadByUrlResult(JobIdRequest request, String applicationName) {
+        return weChatClient.getUploadByUrlResult(request, applicationName);
     }
 }

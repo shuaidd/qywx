@@ -8,6 +8,7 @@ import com.github.shuaidd.response.application.WeChatApplicationResponse;
 import com.github.shuaidd.response.auth.AuthenticationResponse;
 import com.github.shuaidd.response.auth.ProviderTokenResponse;
 import com.github.shuaidd.response.kf.*;
+import com.github.shuaidd.response.material.UploadByUrlResultResponse;
 import com.github.shuaidd.response.message.CreateAppChatResponse;
 import com.github.shuaidd.response.message.SearchAppChatResponse;
 import com.github.shuaidd.response.message.SendMessageResponse;
@@ -19,7 +20,9 @@ import com.github.shuaidd.resquest.addressbook.*;
 import com.github.shuaidd.resquest.application.ApplicationButtonRequest;
 import com.github.shuaidd.resquest.application.ApplicationSettingReuqest;
 import com.github.shuaidd.resquest.auth.ProviderTokenRequest;
+import com.github.shuaidd.resquest.job.JobIdRequest;
 import com.github.shuaidd.resquest.kf.*;
+import com.github.shuaidd.resquest.media.UploadByUrlRequest;
 import com.github.shuaidd.resquest.message.CreateAppChatRequest;
 import com.github.shuaidd.resquest.message.SendAppChatRequest;
 import com.github.shuaidd.resquest.message.SendMessageRequest;
@@ -109,5 +112,21 @@ public interface WeChatClient extends CommonClient {
     @PostMapping(value = "batch/openuserid_to_userid", headers = HEAD)
     TransformExternalUserIdResponse transformExternalUserId(TransformExternalUserIdRequest request, @RequestParam(HEAD_KEY) String app);
 
+    /**
+     * 生成异步上传任务
+     * @param request 请求
+     * @param app 应用
+     * @return 异步任务编号
+     */
+    @PostMapping(value = "media/upload_by_url", headers = HEAD)
+    AsyncJobResponse uploadByUrl(UploadByUrlRequest request, @RequestParam(HEAD_KEY) String app);
 
+    /**
+     * 查询异步任务结果
+     * @param request 请求
+     * @param app 应用
+     * @return 异步任务执行结果
+     */
+    @PostMapping(value = "media/get_upload_by_url_result", headers = HEAD)
+    UploadByUrlResultResponse getUploadByUrlResult(JobIdRequest request, @RequestParam(HEAD_KEY) String app);
 }
