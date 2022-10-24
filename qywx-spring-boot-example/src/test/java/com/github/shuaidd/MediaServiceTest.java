@@ -1,6 +1,5 @@
 package com.github.shuaidd;
 
-import cn.hutool.core.io.FileUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.github.shuaidd.response.material.UploadByUrlResultResponse;
 import com.github.shuaidd.resquest.job.JobIdRequest;
