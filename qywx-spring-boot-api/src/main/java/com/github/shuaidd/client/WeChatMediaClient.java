@@ -2,8 +2,12 @@ package com.github.shuaidd.client;
 
 import com.github.shuaidd.client.config.MultipartSupportConfig;
 import com.github.shuaidd.dto.tool.Comm;
+import com.github.shuaidd.response.addressbook.AsyncJobResponse;
+import com.github.shuaidd.response.material.UploadByUrlResultResponse;
 import com.github.shuaidd.response.material.UploadImageResponse;
 import com.github.shuaidd.response.material.WeChatMediaUploadResponse;
+import com.github.shuaidd.resquest.job.JobIdRequest;
+import com.github.shuaidd.resquest.media.UploadByUrlRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +41,21 @@ public interface WeChatMediaClient extends CommonClient {
      */
     @PostMapping(value = "media/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, headers = HEAD)
     WeChatMediaUploadResponse uploadMaterial(@RequestPart(value = "media") MultipartFile media, @RequestParam("type") String type, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 素材上传得到media_id，该media_id仅三天内有效
+     * media_id在同一企业内应用之间可以共享
+     * <p>
+     * 上传附件
+     *
+     * @param media 素材
+     * @param mediaType  类型
+     * @param attachmentType  附件类型，不同的附件类型用于不同的场景。1：朋友圈；2:商品图册
+     * @param app   应用名
+     * @return WeChatMediaUploadResponse
+     */
+    @PostMapping(value = "media/upload_attachment", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, headers = HEAD)
+    WeChatMediaUploadResponse uploadAttachment(@RequestPart(value = "media") MultipartFile media, @RequestParam("media_type") String mediaType,@RequestParam("attachment_type") Integer attachmentType, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 上传图片

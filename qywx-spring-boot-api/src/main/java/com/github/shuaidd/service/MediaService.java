@@ -1,7 +1,11 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.response.addressbook.AsyncJobResponse;
+import com.github.shuaidd.response.material.UploadByUrlResultResponse;
 import com.github.shuaidd.response.material.UploadImageResponse;
 import com.github.shuaidd.response.material.WeChatMediaUploadResponse;
+import com.github.shuaidd.resquest.job.JobIdRequest;
+import com.github.shuaidd.resquest.media.UploadByUrlRequest;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.io.IOUtils;
@@ -67,6 +71,43 @@ public class MediaService extends AbstractBaseService {
 
         return null;
     }
+
+    /**
+     * 上传附件
+     * @param file 文件
+     * @param mediaType 媒体类型
+     * @param attachmentType 附件类型
+     * @param applicationName 应用名称
+     * @return media_id
+     */
+    public String uploadAttachment(MultipartFile file, String mediaType, Integer attachmentType, String applicationName) {
+        if (Objects.nonNull(file) && Objects.nonNull(mediaType) && Objects.nonNull(attachmentType)) {
+            WeChatMediaUploadResponse response = weChatMediaClient.uploadAttachment(file, mediaType, attachmentType, applicationName);
+            return response.getMediaId();
+        }
+
+        return null;
+    }
+
+     /**
+     * 上传附件
+     * @param file 文件
+     * @param mediaType 媒体类型
+     * @param attachmentType 附件类型
+     * @param applicationName 应用名称
+     * @return media_id
+     */
+    public String uploadAttachment(File file, String mediaType, Integer attachmentType, String applicationName) {
+        if (Objects.nonNull(file) && Objects.nonNull(mediaType) && Objects.nonNull(attachmentType)) {
+            DiskFileItem fileItem = diskFileItem(file, MediaType.parseMediaType("application/octet-stream"), applicationName);
+            MultipartFile multi = new CommonsMultipartFile(fileItem);
+            return uploadAttachment(multi, mediaType, attachmentType, applicationName);
+        }
+
+        return null;
+    }
+
+
 
     /**
      * 上传永久图片
@@ -147,5 +188,28 @@ public class MediaService extends AbstractBaseService {
      */
     public File downloadFile(String mediaId, String downloadFilePath, String applicationName) {
         return weChatMediaClient.downloadFile(mediaId, downloadFilePath, applicationName);
+    }
+
+    /**
+     * 生成异步上传任务
+     *
+     * @param request          请求
+     * @param applicationName  应用名称
+     * @return 任务编号
+     */
+    public String uploadByUrl(UploadByUrlRequest request, String applicationName) {
+        AsyncJobResponse response = weChatClient.uploadByUrl(request, applicationName);
+        return response.getJobId();
+    }
+
+    /**
+     * 查询异步任务结果
+     *
+     * @param request          请求
+     * @param applicationName  应用名称
+     * @return 任务执行结果
+     */
+    public UploadByUrlResultResponse getUploadByUrlResult(JobIdRequest request, String applicationName) {
+        return weChatClient.getUploadByUrlResult(request, applicationName);
     }
 }

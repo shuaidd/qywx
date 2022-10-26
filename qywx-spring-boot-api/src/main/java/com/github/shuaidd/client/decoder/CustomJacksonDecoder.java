@@ -1,5 +1,8 @@
 package com.github.shuaidd.client.decoder;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.github.shuaidd.enums.ErrorCode;
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.AbstractBaseResponse;
@@ -22,6 +25,13 @@ public class CustomJacksonDecoder extends JacksonDecoder {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
+    static {
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    }
+
     @Override
     public Object decode(Response response, Type type) throws IOException {
         Object result = super.decode(response, type);
@@ -29,6 +39,9 @@ public class CustomJacksonDecoder extends JacksonDecoder {
             AbstractBaseResponse abstractBaseResponse = (AbstractBaseResponse) result;
 
             if (abstractBaseResponse.getErrCode().equals(ErrorCode.ERROR_CODE_0.getErrorCode())) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("从接口 {} 获取到企业微信的响应数据--->\n {}",response.request().requestTemplate().path(),objectMapper.writeValueAsString(result));
+                }
                 return result;
             }
 

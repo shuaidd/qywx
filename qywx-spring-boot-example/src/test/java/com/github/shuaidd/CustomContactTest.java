@@ -8,17 +8,22 @@ import com.github.shuaidd.dto.message.MsgLink;
 import com.github.shuaidd.dto.message.MsgText;
 import com.github.shuaidd.response.addressbook.MobileHashCodeResponse;
 import com.github.shuaidd.response.externalcontact.*;
+import com.github.shuaidd.resquest.CursorPageRequest;
 import com.github.shuaidd.resquest.PageRequest;
 import com.github.shuaidd.resquest.addressbook.MobileHashCodeRequest;
 import com.github.shuaidd.resquest.addressbook.TagGroupRequest;
 import com.github.shuaidd.resquest.externalcontact.*;
 import com.github.shuaidd.service.CustomContactService;
+import com.github.shuaidd.service.MediaService;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.util.ResourceUtils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Collections;
@@ -32,10 +37,12 @@ import java.util.Collections;
 public class CustomContactTest extends AbstractTest {
 
     private CustomContactService customContactService;
+    private MediaService mediaService;
 
     @BeforeEach
     public void init() {
         this.customContactService = weChatManager.customContactService();
+        this.mediaService = weChatManager.mediaService();
     }
 
     /**
@@ -389,4 +396,94 @@ public class CustomContactTest extends AbstractTest {
         GroupChatStatisticResponse response = customContactService.getGroupChatStatisticByDay(request, appName);
         logger.info("{}", response);
     }
+
+    @Test
+    public void addProductAlbum() throws Exception {
+        File file = ResourceUtils.getFile("classpath:image/WechatIMG16.png");
+        String mediaId = mediaService.uploadAttachment(file, "image", 2, appName);
+        AddProductAlbumRequest request = new AddProductAlbumRequest();
+        request.setDescription("小件瓷器");
+        request.setPrice(1);
+
+        AddProductAlbumRequest.AttachmentsDTO attachments = new AddProductAlbumRequest.AttachmentsDTO();
+        attachments.setType("image");
+
+        AddProductAlbumRequest.AttachmentsDTO.ImageDTO imageDTO = new AddProductAlbumRequest.AttachmentsDTO.ImageDTO();
+        imageDTO.setMediaId(mediaId);
+        attachments.setImage(imageDTO);
+        request.setAttachments(Lists.newArrayList(attachments));
+        AddProductAlbumResponse response = customContactService.addProductAlbum(request, appName);
+    }
+
+    @Test
+    public void productAlbumList() {
+        ProductAlbumListResponse response = customContactService.productAlbumList(new CursorPageRequest(), appName);
+    }
+
+    @Test
+    public void getProductAlbum() {
+        GetProductAlbumRequest request = new GetProductAlbumRequest();
+        request.setProductId("PACRbQBwAAgPq5FoC5GjIJAJsvW_GPJA");
+        GetProductAlbumResponse response = customContactService.getProductAlbum(request, appName);
+        logger.info("Product--{}", response);
+    }
+
+    @Test
+    public void updateProductAlbum() {
+        UpdateProductAlbumRequest request = new UpdateProductAlbumRequest();
+        request.setProductId("PACRbQBwAAgPq5FoC5GjIJAJsvW_GPJA");
+        request.setProductSn("SW0100021");
+        customContactService.updateProductAlbum(request, appName);
+    }
+
+    @Test
+    public void deleteProductAlbum() {
+        DelProductAlbumRequest request = new DelProductAlbumRequest();
+        request.setProductId("PACRbQBwAAgPq5FoC5GjIJAJsvW_GPJA");
+        customContactService.deleteProductAlbum(request, appName);
+    }
+
+    @Test
+    public void addInterceptRule() {
+        AddInterceptRuleRequest request = new AddInterceptRuleRequest();
+        request.setInterceptType(2);
+        request.setRuleName("禁止娱乐");
+        request.setSemanticsList(Lists.newArrayList(1, 2, 3));
+        request.setWordList(Lists.newArrayList("甄嬛传", "大考", "盗墓笔记"));
+
+        AddInterceptRuleRequest.ApplicableRangeDTO applicableRange = new AddInterceptRuleRequest.ApplicableRangeDTO();
+        applicableRange.setUserList(Lists.newArrayList("20170410022717"));
+        request.setApplicableRange(applicableRange);
+
+        AddInterceptRuleResponse response = customContactService.addInterceptRule(request, appName);
+    }
+
+    @Test
+    public void updateInterceptRule() {
+        UpdateInterceptRuleRequest request = new UpdateInterceptRuleRequest();
+        request.setRuleId("irCRbQBwAAgPq5FoC5GjIJAJsvW_GPJA");
+        request.setRuleName("禁止娱乐和看视频");
+        customContactService.updateInterceptRule(request, appName);
+    }
+
+    @Test
+    public void interceptRuleList() {
+        customContactService.interceptRuleList(appName);
+    }
+
+    @Test
+    public void getInterceptRuleDetail() {
+        InterceptRuleIdRequest request = new InterceptRuleIdRequest();
+        request.setRuleId("irCRbQBwAAgPq5FoC5GjIJAJsvW_GPJA");
+        GetInterceptRuleResponse response = customContactService.getInterceptRuleDetail(request, appName);
+    }
+
+    @Test
+    public void delInterceptRule() {
+        InterceptRuleIdRequest request = new InterceptRuleIdRequest();
+        request.setRuleId("irCRbQBwAAgPq5FoC5GjIJAJsvW_GPJA");
+        customContactService.delInterceptRule(request, appName);
+        interceptRuleList();
+    }
+
 }

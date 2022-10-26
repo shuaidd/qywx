@@ -1,7 +1,9 @@
 package com.github.shuaidd.dto.addressbook;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.github.shuaidd.dto.externalcontact.CustomTag;
+import com.github.shuaidd.json.Long2DateDeserializer;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Date;
@@ -23,6 +25,7 @@ public class TagGroup {
     private String groupName;
 
     @JsonProperty("create_time")
+    @JsonDeserialize(using = Long2DateDeserializer.class)
     private Date createTime;
 
     private Integer order;

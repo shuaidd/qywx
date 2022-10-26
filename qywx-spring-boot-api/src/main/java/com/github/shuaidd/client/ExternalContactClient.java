@@ -3,6 +3,7 @@ package com.github.shuaidd.client;
 import com.github.shuaidd.client.config.WeChatConfiguration;
 import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.externalcontact.*;
+import com.github.shuaidd.resquest.CursorPageRequest;
 import com.github.shuaidd.resquest.PageRequest;
 import com.github.shuaidd.resquest.addressbook.TagGroupRequest;
 import com.github.shuaidd.resquest.externalcontact.*;
@@ -407,4 +408,103 @@ public interface ExternalContactClient extends CommonClient {
      */
     @PostMapping(value = "externalcontact/groupchat/statistic_group_by_day", headers = HEAD)
     GroupChatStatisticResponse getGroupChatStatisticByDay(GroupChatStatisticRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 创建商品图册
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return AddProductAlbumResponse
+     */
+    @PostMapping(value = "externalcontact/add_product_album", headers = HEAD)
+    AddProductAlbumResponse addProductAlbum(AddProductAlbumRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取商品图册
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return GetProductAlbumResponse
+     */
+    @PostMapping(value = "externalcontact/get_product_album", headers = HEAD)
+    GetProductAlbumResponse getProductAlbum(GetProductAlbumRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取商品图册列表
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return ProductAlbumListResponse
+     */
+    @PostMapping(value = "externalcontact/get_product_album_list", headers = HEAD)
+    ProductAlbumListResponse productAlbumList(CursorPageRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 编辑商品图册
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/get_product_album_list", headers = HEAD)
+    BaseResponse updateProductAlbum(UpdateProductAlbumRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除商品图册
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/delete_product_album", headers = HEAD)
+    BaseResponse deleteProductAlbum(DelProductAlbumRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 新建敏感词规则
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return AddInterceptRuleResponse
+     */
+    @PostMapping(value = "externalcontact/add_intercept_rule", headers = HEAD)
+    AddInterceptRuleResponse addInterceptRule(AddInterceptRuleRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取敏感词规则列表
+     *
+     * @param app 应用名
+     * @return InterceptRuleListResponse
+     */
+    @GetMapping(value = "externalcontact/get_intercept_rule_list", headers = HEAD)
+    InterceptRuleListResponse interceptRuleList(@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取敏感词规则详情
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return GetInterceptRuleResponse
+     */
+    @PostMapping(value = "externalcontact/get_intercept_rule", headers = HEAD)
+    GetInterceptRuleResponse getInterceptRuleDetail(InterceptRuleIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改敏感词规则
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/update_intercept_rule", headers = HEAD)
+    BaseResponse updateInterceptRule(UpdateInterceptRuleRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除敏感词规则
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/del_intercept_rule", headers = HEAD)
+    BaseResponse delInterceptRule(InterceptRuleIdRequest request, @RequestParam(HEAD_KEY) String app);
 }

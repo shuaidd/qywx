@@ -2,6 +2,7 @@ package com.github.shuaidd.service;
 
 import com.github.shuaidd.response.addressbook.MobileHashCodeResponse;
 import com.github.shuaidd.response.externalcontact.*;
+import com.github.shuaidd.resquest.CursorPageRequest;
 import com.github.shuaidd.resquest.PageRequest;
 import com.github.shuaidd.resquest.addressbook.MobileHashCodeRequest;
 import com.github.shuaidd.resquest.addressbook.TagGroupRequest;
@@ -460,5 +461,110 @@ public class CustomContactService extends AbstractBaseService {
      */
     public GroupChatStatisticResponse getGroupChatStatisticByDay(GroupChatStatisticRequest request, String applicationName) {
         return externalContactClient.getGroupChatStatisticByDay(request, applicationName);
+    }
+
+    /**
+     * 创建商品图册
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return AddProductAlbumResponse
+     */
+    public AddProductAlbumResponse addProductAlbum(AddProductAlbumRequest request, String applicationName) {
+        return externalContactClient.addProductAlbum(request, applicationName);
+    }
+
+    /**
+     * 获取商品图册
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return GetProductAlbumResponse
+     */
+    public GetProductAlbumResponse getProductAlbum(GetProductAlbumRequest request, String applicationName) {
+        return externalContactClient.getProductAlbum(request, applicationName);
+    }
+
+    /**
+     * 获取商品图册列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return ProductAlbumListResponse
+     */
+    public ProductAlbumListResponse productAlbumList(CursorPageRequest request, String applicationName) {
+        return externalContactClient.productAlbumList(request, applicationName);
+    }
+
+    /**
+     * 更新商品图册
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void updateProductAlbum(UpdateProductAlbumRequest request, String applicationName) {
+        externalContactClient.updateProductAlbum(request, applicationName);
+    }
+
+    /**
+     * 删除商品图册
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void deleteProductAlbum(DelProductAlbumRequest request, String applicationName) {
+        externalContactClient.deleteProductAlbum(request, applicationName);
+    }
+
+    /**
+     * 新建敏感词规则
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return AddInterceptRuleResponse
+     */
+    public AddInterceptRuleResponse addInterceptRule(AddInterceptRuleRequest request, String applicationName) {
+        return externalContactClient.addInterceptRule(request, applicationName);
+    }
+
+    /**
+     * 获取敏感词规则列表
+     *
+     * @param applicationName 应用名称
+     * @return InterceptRuleListResponse
+     */
+    public InterceptRuleListResponse interceptRuleList(String applicationName) {
+        return externalContactClient.interceptRuleList(applicationName);
+    }
+
+    /**
+     * 新建敏感词规则
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return GetInterceptRuleResponse
+     */
+    public GetInterceptRuleResponse getInterceptRuleDetail(InterceptRuleIdRequest request, String applicationName) {
+        return externalContactClient.getInterceptRuleDetail(request, applicationName);
+    }
+
+    /**
+     * 修改敏感词规则
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void updateInterceptRule(UpdateInterceptRuleRequest request, String applicationName) {
+        externalContactClient.updateInterceptRule(request, applicationName);
+    }
+
+    /**
+     * 删除敏感词规则
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void delInterceptRule(InterceptRuleIdRequest request, String applicationName) {
+        externalContactClient.delInterceptRule(request, applicationName);
     }
 }
