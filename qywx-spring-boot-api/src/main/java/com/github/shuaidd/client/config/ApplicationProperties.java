@@ -10,6 +10,11 @@ package com.github.shuaidd.client.config;
 public class ApplicationProperties {
 
     /**
+     * 应用归属企业 默认取 qywx.corpId
+     */
+    private String corpId;
+
+    /**
      * 应用密匙
      */
     private String secret;
@@ -59,5 +64,13 @@ public class ApplicationProperties {
 
     public void setApplicationDesc(String applicationDesc) {
         this.applicationDesc = applicationDesc;
+    }
+
+    public String getCorpId() {
+        return corpId;
+    }
+
+    public void setCorpId(String corpId) {
+        this.corpId = corpId;
     }
 }
