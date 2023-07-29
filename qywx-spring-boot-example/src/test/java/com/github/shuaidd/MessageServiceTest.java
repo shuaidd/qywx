@@ -16,7 +16,7 @@ import java.util.Collections;
  **/
 public class MessageServiceTest extends AbstractTest {
 
-    public static final String OY = "oy";
+    public static final String APP = "robbot";
 
     @Test
     public void sendTextCardMsg() {
@@ -34,7 +34,7 @@ public class MessageServiceTest extends AbstractTest {
         textCard.setBtntxt("更多");
         textCardRequest.setTextcard(textCard);
 
-        weChatManager.messageService().sendMessage(textCardRequest, OY);
+        weChatManager.messageService().sendMessage(textCardRequest, APP);
     }
 
     @Test
@@ -44,11 +44,13 @@ public class MessageServiceTest extends AbstractTest {
          */
         SendMessageRequest textRequest = buildSendMessageRequest();
         textRequest.setMsgType(MsgType.TEXT);
+        textRequest.setAgentId("1000003");
+        textRequest.setToUser("HuiFeiDeYu");
 
         MsgText text = new MsgText();
         text.setContent("明天下午五点开会");
         textRequest.setText(text);
-        weChatManager.messageService().sendMessage(textRequest, OY);
+        weChatManager.messageService().sendMessage(textRequest, APP);
     }
 
     @Test
@@ -64,7 +66,7 @@ public class MessageServiceTest extends AbstractTest {
         msgFile.setMediaId("3bQm1Wvbn2QIcxDsWcVlkqsxV8CsVryX1k2cBKTXkO7U");
         fileRequest.setFile(msgFile);
 
-        weChatManager.messageService().sendMessage(fileRequest, OY);
+        weChatManager.messageService().sendMessage(fileRequest, APP);
     }
 
     @Test
@@ -80,7 +82,7 @@ public class MessageServiceTest extends AbstractTest {
         imgFile.setMediaId("3vTVBKnGTItDyDlt-x4mXImcfCQ_tl2fGbi9wTwtOu0I");
         imgRequest.setImage(imgFile);
 
-        weChatManager.messageService().sendMessage(imgRequest, OY);
+        weChatManager.messageService().sendMessage(imgRequest, APP);
     }
 
     @Test
@@ -96,7 +98,7 @@ public class MessageServiceTest extends AbstractTest {
         voiceFile.setMediaId("3F7poS9bUWHXwbIGuJ3FXf5xLa5Uk770IqBKBX93KMS8");
         voiceRequest.setVoice(voiceFile);
 
-        weChatManager.messageService().sendMessage(voiceRequest, OY);
+        weChatManager.messageService().sendMessage(voiceRequest, APP);
     }
 
     @Test
@@ -112,7 +114,7 @@ public class MessageServiceTest extends AbstractTest {
         videoFile.setMediaId("3p8NHhN5H2_P5YcOP494KnLliqNHYNn_d90GIDDJtD81dn-A-MRu5Qnt8Z9WT0z7a");
         videoRequest.setVideo(videoFile);
 
-        weChatManager.messageService().sendMessage(videoRequest, OY);
+        weChatManager.messageService().sendMessage(videoRequest, APP);
     }
 
     @Test
@@ -133,7 +135,7 @@ public class MessageServiceTest extends AbstractTest {
         msgNews.setArticles(Collections.singletonList(article));
         request.setNews(msgNews);
 
-        weChatManager.messageService().sendMessage(request, OY);
+        weChatManager.messageService().sendMessage(request, APP);
     }
 
     @Test
@@ -150,7 +152,7 @@ public class MessageServiceTest extends AbstractTest {
                 "\n> 事　项：<font color=\\\"info\\\">开会</font> ");
         request.setMarkdown(msgMarkdown);
 
-        weChatManager.messageService().sendMessage(request, OY);
+        weChatManager.messageService().sendMessage(request, APP);
     }
 
     /**
@@ -184,7 +186,7 @@ public class MessageServiceTest extends AbstractTest {
 
         request.setInteractiveTaskCard(taskCard);
 
-        weChatManager.messageService().sendMessage(request, OY);
+        weChatManager.messageService().sendMessage(request, APP);
     }
 
 
