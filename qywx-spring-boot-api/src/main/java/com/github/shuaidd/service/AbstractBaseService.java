@@ -71,6 +71,9 @@ public abstract class AbstractBaseService {
     @Autowired
     protected WeChatConfigurationProperties properties;
 
+    @Autowired
+    protected MeetingClient meetingClient;
+
     /**
      * 获取应用密匙
      *
@@ -97,6 +100,7 @@ public abstract class AbstractBaseService {
 
     /**
      * 获取应用配置信息
+     *
      * @param applicationName 应用
      * @return config
      */

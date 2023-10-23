@@ -30,6 +30,7 @@ public class WeChatManager {
     private final EnterpriseEmailService enterpriseEmailService;
     private final ElectronicInvoiceService electronicInvoiceService;
     private final EnterpriseInterConnectionService enterpriseInterConnectionService;
+    private final MeetingService meetingService;
 
     @Autowired
     public WeChatManager(AddressBookService addressBookService,
@@ -38,10 +39,16 @@ public class WeChatManager {
                          AuthenticationService authenticationService,
                          ApplicationService applicationService,
                          MediaService mediaService, MessageService messageService,
-                         OAService oaService, CustomContactService customContactService,
-                         EfficiencyToolService efficiencyToolService, WeChatCallCenterService callCenterService,
-                         CommonService commonService, ServiceProviderService serviceProviderService, EnterpriseEmailService enterpriseEmailService,
-                         ElectronicInvoiceService electronicInvoiceService, EnterpriseInterConnectionService enterpriseInterConnectionService) {
+                         OAService oaService,
+                         CustomContactService customContactService,
+                         EfficiencyToolService efficiencyToolService,
+                         WeChatCallCenterService callCenterService,
+                         CommonService commonService,
+                         ServiceProviderService serviceProviderService,
+                         EnterpriseEmailService enterpriseEmailService,
+                         ElectronicInvoiceService electronicInvoiceService,
+                         EnterpriseInterConnectionService enterpriseInterConnectionService,
+                         MeetingService meetingService) {
         this.addressBookService = addressBookService;
         this.tokenService = tokenService;
         this.properties = properties;
@@ -58,6 +65,7 @@ public class WeChatManager {
         this.enterpriseEmailService = enterpriseEmailService;
         this.electronicInvoiceService = electronicInvoiceService;
         this.enterpriseInterConnectionService = enterpriseInterConnectionService;
+        this.meetingService = meetingService;
     }
 
     /**
@@ -193,9 +201,19 @@ public class WeChatManager {
 
     /**
      * 公共服务
+     *
      * @return CommonService
      */
     public CommonService commonService() {
         return commonService;
+    }
+
+    /**
+     * 预约会议管理
+     *
+     * @return MeetingService
+     */
+    public MeetingService meetingService() {
+        return meetingService;
     }
 }
