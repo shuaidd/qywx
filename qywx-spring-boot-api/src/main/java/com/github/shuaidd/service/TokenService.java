@@ -1,9 +1,15 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.client.config.ApplicationProperties;
+import com.github.shuaidd.exception.ParamCheckException;
+import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.tool.AccessTokenResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 /**
  * 描述 访问令牌管理
@@ -25,7 +31,15 @@ public class TokenService extends AbstractBaseService {
         if (logger.isInfoEnabled()) {
             logger.info("调用接口获取AccessToken：应用名称-{}", applicationName);
         }
-        AccessTokenResponse accessTokenResponse = weChatClient.getAccessToken(properties.getCorpId(), getApplicationSecret(applicationName));
+
+        ApplicationProperties app = getApp(applicationName);
+
+        if (Objects.isNull(properties)) {
+            logger.error("{} 未配置的应用", applicationName);
+            throw  new ParamCheckException("未配置的应用");
+        }
+
+        AccessTokenResponse accessTokenResponse = weChatClient.getAccessToken(StringUtils.defaultString(app.getCorpId(),properties.getCorpId()), app.getSecret());
         return accessTokenResponse.getAccessToken();
     }
 

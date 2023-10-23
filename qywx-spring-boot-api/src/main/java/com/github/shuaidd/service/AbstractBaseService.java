@@ -71,6 +71,9 @@ public abstract class AbstractBaseService {
     @Autowired
     protected WeChatConfigurationProperties properties;
 
+    @Autowired
+    protected MeetingClient meetingClient;
+
     /**
      * 获取应用密匙
      *
@@ -95,7 +98,26 @@ public abstract class AbstractBaseService {
         return secret;
     }
 
-   public void checkApplication(String appName) {
+    /**
+     * 获取应用配置信息
+     *
+     * @param applicationName 应用
+     * @return config
+     */
+    ApplicationProperties getApp(String applicationName) {
+        List<ApplicationProperties> list = properties.getApplicationList();
+        if (CollectionUtils.isNotEmpty(list)) {
+            for (ApplicationProperties applicationProperties : list) {
+                if (Objects.equals(applicationName, applicationProperties.getApplicationName())) {
+                    return applicationProperties;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public void checkApplication(String appName) {
         if (StringUtils.isEmpty(appName)) {
             throw new ParamCheckException("调用接口的应用名称不能为空");
         }
@@ -110,7 +132,7 @@ public abstract class AbstractBaseService {
 
         List<String> validAppNames = properties.getApplicationList().stream().map(ApplicationProperties::getApplicationName).collect(Collectors.toList());
         if (!exist) {
-            throw new ParamCheckException("应用名称【" + appName + "】无效，不在有效配置列表之内-->"+ validAppNames);
+            throw new ParamCheckException("应用名称【" + appName + "】无效，不在有效配置列表之内-->" + validAppNames);
         }
     }
 }
