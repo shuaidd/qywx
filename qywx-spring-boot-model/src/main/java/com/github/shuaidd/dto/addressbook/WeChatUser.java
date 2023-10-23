@@ -39,6 +39,9 @@ public class WeChatUser extends AbstractBaseResponse {
     @JsonProperty("is_leader_in_dept")
     private List<Integer> isLeaderInDept;
 
+    @JsonProperty("direct_leader")
+    private String directLeader;
+
     private Integer enable;
 
     @JsonProperty("avatar_mediaid")
@@ -137,6 +140,14 @@ public class WeChatUser extends AbstractBaseResponse {
         this.isLeaderInDept = isLeaderInDept;
     }
 
+    public String getDirectLeader() {
+        return directLeader;
+    }
+
+    public void setDirectLeader(String directLeader) {
+        this.directLeader = directLeader;
+    }
+
     public Integer getEnable() {
         return enable;
     }
@@ -206,6 +217,7 @@ public class WeChatUser extends AbstractBaseResponse {
                 .add("gender='" + gender + "'")
                 .add("email='" + email + "'")
                 .add("isLeaderInDept=" + isLeaderInDept)
+                .add("directLeader=" + directLeader)
                 .add("enable=" + enable)
                 .add("avatarMediaId='" + avatarMediaId + "'")
                 .add("telephone='" + telephone + "'")
