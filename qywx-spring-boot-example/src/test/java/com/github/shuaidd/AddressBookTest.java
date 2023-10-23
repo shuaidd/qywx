@@ -44,7 +44,7 @@ public class AddressBookTest extends AbstractTest {
      */
     @Test
     public void getUser() {
-        weChatManager.addressBookService().getUser("20170410022717", appName);
+        weChatManager.addressBookService().getUser("20221212032994", appName);
     }
 
     /**

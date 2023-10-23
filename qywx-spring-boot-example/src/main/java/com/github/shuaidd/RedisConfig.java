@@ -60,8 +60,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         Map<String, RedisCacheConfiguration> cacheConfigurationMap = new HashMap<>();
         EXPIRE_MAP.forEach((key, value) -> {
             RedisSerializationContext.SerializationPair serializationPair = RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer());
-            RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
-                    .prefixKeysWith("qywx")
+            RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig().prefixCacheNameWith("qywx:")
                     .serializeValuesWith(serializationPair)
                     .entryTtl(Duration.ofSeconds(value));
             cacheConfigurationMap.put(key, redisCacheConfiguration);
