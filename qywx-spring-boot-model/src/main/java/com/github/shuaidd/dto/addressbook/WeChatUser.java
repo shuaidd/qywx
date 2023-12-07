@@ -40,7 +40,7 @@ public class WeChatUser extends AbstractBaseResponse {
     private List<Integer> isLeaderInDept;
 
     @JsonProperty("direct_leader")
-    private String directLeader;
+    private List<String> directLeader;
 
     private Integer enable;
 
@@ -140,11 +140,11 @@ public class WeChatUser extends AbstractBaseResponse {
         this.isLeaderInDept = isLeaderInDept;
     }
 
-    public String getDirectLeader() {
+    public List<String> getDirectLeader() {
         return directLeader;
     }
 
-    public void setDirectLeader(String directLeader) {
+    public void setDirectLeader(List<String> directLeader) {
         this.directLeader = directLeader;
     }
 
