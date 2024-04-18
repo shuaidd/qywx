@@ -74,6 +74,9 @@ public abstract class AbstractBaseService {
     @Autowired
     protected MeetingClient meetingClient;
 
+    @Autowired
+    protected FrontEndToolsClient frontEndToolsClient;
+
     /**
      * 获取应用密匙
      *
