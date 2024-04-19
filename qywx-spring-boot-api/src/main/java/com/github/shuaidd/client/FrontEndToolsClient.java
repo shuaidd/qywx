@@ -13,14 +13,14 @@ import java.util.Map;
  *
  * @author huangweilong
  **/
-@FeignClient(name = "wechat", url = "${qywx.url:https://qyapi.weixin.qq.com}", path = "${qywx.public-path:cgi-bin}", configuration = WeChatConfiguration.class)
-public interface FrontEndToolsClient extends CommonClient{
+@FeignClient(name = "frontEndToolsClient", url = "${qywx.url:https://qyapi.weixin.qq.com}", path = "${qywx.public-path:cgi-bin}", configuration = WeChatConfiguration.class)
+public interface FrontEndToolsClient extends CommonClient {
     /**
      * 获取应用 ticket
      *
      * @param applicationName 应用名
      * @return FrontEndTicket
      */
-    @GetMapping(value = "/get_jsapi_ticket",headers = HEAD)
+    @GetMapping(value = "/get_jsapi_ticket", headers = HEAD)
     FrontEndTicket getAppTicket(@RequestParam("access_token") String accessToken, @RequestParam(HEAD_KEY) String applicationName);
 }
