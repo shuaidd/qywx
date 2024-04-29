@@ -22,6 +22,9 @@ public class SendMessageResponse extends AbstractBaseResponse {
     @JsonProperty("invalidtag")
     private String inValidTag;
 
+    @JsonProperty("msgid")
+    private String msgId;
+
     public String getInValidUser() {
         return inValidUser;
     }
@@ -46,12 +49,21 @@ public class SendMessageResponse extends AbstractBaseResponse {
         this.inValidTag = inValidTag;
     }
 
+    public String getMsgId() {
+        return msgId;
+    }
+
+    public void setMsgId(String msgId) {
+        this.msgId = msgId;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", SendMessageResponse.class.getSimpleName() + "[", "]")
                 .add("inValidUser='" + inValidUser + "'")
                 .add("inValidParty='" + inValidParty + "'")
                 .add("inValidTag='" + inValidTag + "'")
+                .add("msgId='" + msgId + "'")
                 .toString();
     }
 }
