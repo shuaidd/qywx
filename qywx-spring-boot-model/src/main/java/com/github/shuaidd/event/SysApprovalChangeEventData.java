@@ -1,7 +1,7 @@
 package com.github.shuaidd.event;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 /**
  * 描述 审批申请状态变化回调通知

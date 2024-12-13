@@ -18,6 +18,6 @@ import java.lang.annotation.Target;
 @Import(WeChatAutoConfiguration.class)
 @EnableCaching
 @EnableAspectJAutoProxy
-@EnableFeignClients(basePackages = "com.github.shuaidd.client")
+//@EnableFeignClients(basePackages = "com.github.shuaidd.client")
 public @interface EnableWeChat {
 }

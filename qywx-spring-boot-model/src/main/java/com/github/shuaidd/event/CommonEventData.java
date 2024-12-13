@@ -1,6 +1,6 @@
 package com.github.shuaidd.event;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 /**
  * 描述

@@ -25,7 +25,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <org.springframework.cloud.version>2021.0.4</org.springframework.cloud.version>
         <feign-jackson>10.2.0</feign-jackson>
-        <commons-lang3>3.0</commons-lang3>
+        <commons-lang3>3.17.0</commons-lang3>
         <commons-collections4>4.1</commons-collections4>
         <hutool-all>4.5.3</hutool-all>
         <jackson-annotations>2.9.9</jackson-annotations>
@@ -36,7 +36,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.6.4</version>
+                <version>3.2.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -109,13 +109,13 @@
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
-                <version>1.13</version>
+                <version>1.17.1</version>
             </dependency>
 
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>2.11.0</version>
+                <version>2.18.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -156,7 +156,7 @@
                         <version>2.9.1</version>
                         <configuration>
                             <javadocExecutable>
-                                /Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home/bin/javadoc
+                                /Library/Java/JavaVirtualMachines/jdk-17.0.5.jdk/Contents/Home/bin/javadoc
                             </javadocExecutable>
                         </configuration>
                         <executions>

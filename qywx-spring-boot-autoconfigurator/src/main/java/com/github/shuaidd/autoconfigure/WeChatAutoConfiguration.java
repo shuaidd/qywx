@@ -24,7 +24,7 @@ import java.util.Collections;
  * @author shuaidongdong
  */
 @Configuration
-@ComponentScan(basePackages = {"com.github.shuaidd.service", "com.github.shuaidd.support", "com.github.shuaidd.aspect"})
+@ComponentScan(basePackages = {"com.github.shuaidd.registry","com.github.shuaidd.service", "com.github.shuaidd.support", "com.github.shuaidd.aspect"})
 @EnableConfigurationProperties(WeChatConfigurationProperties.class)
 public class WeChatAutoConfiguration implements InitializingBean {
 

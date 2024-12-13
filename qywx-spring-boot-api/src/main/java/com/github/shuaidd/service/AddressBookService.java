@@ -1,18 +1,18 @@
 package com.github.shuaidd.service;
 
-import com.github.shuaidd.dto.addressbook.DeptUser;
-import com.github.shuaidd.dto.tool.CallbackData;
 import com.github.shuaidd.dto.addressbook.Department;
+import com.github.shuaidd.dto.addressbook.DeptUser;
 import com.github.shuaidd.dto.addressbook.Tag;
 import com.github.shuaidd.dto.addressbook.WeChatUser;
-import com.github.shuaidd.exception.WeChatException;
-import com.github.shuaidd.response.*;
+import com.github.shuaidd.dto.tool.CallbackData;
+import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.addressbook.*;
 import com.github.shuaidd.response.linkedcorp.*;
 import com.github.shuaidd.resquest.CursorPageRequest;
 import com.github.shuaidd.resquest.addressbook.*;
 import com.github.shuaidd.resquest.linkedcorp.LinkedCorpDeptRequest;
 import com.github.shuaidd.resquest.linkedcorp.LinkedCropUserRequest;
+import com.github.shuaidd.support.CommonsMultipartFile;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.fileupload.disk.DiskFileItem;
@@ -26,7 +26,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -654,7 +653,7 @@ public class AddressBookService extends AbstractBaseService {
 
         try (OutputStream os = fileItem.getOutputStream()) {
             if (CollectionUtils.isNotEmpty(departments)) {
-                IOUtils.write(FULL_COVER_DEPARTMENT_FILE_TITLE, os);
+                IOUtils.write(FULL_COVER_DEPARTMENT_FILE_TITLE, os,"utf-8");
                 /*
                  * csv文件格式
                  * 部门名称,部门ID,父部门ID,排序
@@ -665,7 +664,7 @@ public class AddressBookService extends AbstractBaseService {
                             (department.getParentId() == null ? "" : String.valueOf(department.getParentId())) + "," +
                             (department.getOrder() == null ? "" : String.valueOf(department.getOrder())) + "\n";
 
-                    IOUtils.write(line, os);
+                    IOUtils.write(line, os,"utf-8");
                 }
             }
 
