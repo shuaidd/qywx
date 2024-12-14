@@ -31,6 +31,7 @@ public class TokenService extends AbstractBaseService {
         if (logger.isInfoEnabled()) {
             logger.info("调用接口获取AccessToken：应用名称-{}", applicationName);
         }
+        checkApplication(applicationName);
 
         ApplicationProperties app = getApp(applicationName);
 

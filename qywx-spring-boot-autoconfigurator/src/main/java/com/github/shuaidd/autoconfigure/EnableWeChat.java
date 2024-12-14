@@ -15,9 +15,9 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import(WeChatAutoConfiguration.class)
+@Import({WeChatAutoConfiguration.class})
 @EnableCaching
 @EnableAspectJAutoProxy
-//@EnableFeignClients(basePackages = "com.github.shuaidd.client")
+@EnableFeignClients(basePackages = "com.github.shuaidd.client")
 public @interface EnableWeChat {
 }

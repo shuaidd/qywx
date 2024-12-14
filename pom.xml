@@ -23,7 +23,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <org.springframework.cloud.version>2021.0.4</org.springframework.cloud.version>
+        <org.springframework.cloud.version>2023.0.4</org.springframework.cloud.version>
         <feign-jackson>10.2.0</feign-jackson>
         <commons-lang3>3.17.0</commons-lang3>
         <commons-collections4>4.1</commons-collections4>

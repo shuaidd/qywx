@@ -76,10 +76,10 @@ public class AddressBookService extends AbstractBaseService {
      */
     private static final String FULL_COVER_DEPARTMENT_FILE = "fullCoverUser-%s.csv";
 
-    private final MediaService mediaService;
+    private MediaService mediaService;
 
     @Autowired
-    public AddressBookService(MediaService mediaService) {
+    public void setMediaService(MediaService mediaService) {
         this.mediaService = mediaService;
     }
 
