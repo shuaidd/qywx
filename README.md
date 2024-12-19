@@ -1,5 +1,7 @@
 # qywx-spring-boot-starter
 企业微信API封装
+
+springboot3.x
 ``` 
 <dependency>
   <groupId>com.github.shuaidd</groupId>
@@ -7,6 +9,26 @@
   <version>5.0.0</version>
 </dependency>
 
+```
+
+springboot2.x
+``` 
+<dependency>
+  <groupId>com.github.shuaidd</groupId>
+  <artifactId>qywx-spring-boot-starter</artifactId>
+  <version>4.4.2</version>
+</dependency>
+```
+
+依赖说明
+``` 
+项目依赖
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-openfeign</artifactId>
+</dependency>
+
+openfeign与springboot 需要搭配合理的版本，具体可参考https://spring.io/projects/spring-cloud#overview
 ```
 
 使用示例
