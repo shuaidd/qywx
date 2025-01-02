@@ -27,55 +27,16 @@ public abstract class AbstractBaseService {
     protected WeChatClient weChatClient;
 
     @Autowired
-    protected ExternalContactClient externalContactClient;
-
-    @Autowired
     protected WorkOaClient workOaClient;
-
-    @Autowired
-    protected WeChatCallCenterClient callCenterClient;
 
     @Autowired
     protected AddressBookClient addressBookClient;
 
     @Autowired
-    protected WeChatMediaClient weChatMediaClient;
-
-    @Autowired
-    protected WorkApplicationClient applicationClient;
-
-    @Autowired
-    protected MessageClient messageClient;
-
-    @Autowired
-    protected EfficiencyToolClient efficiencyToolClient;
-
-    @Autowired
     protected LinkedCorpClient linkedCorpClient;
 
     @Autowired
-    protected ServiceProviderClient serviceProviderClient;
-
-    @Autowired
-    protected AuthClient authClient;
-
-    @Autowired
-    protected EnterpriseEmailClient emailClient;
-
-    @Autowired
-    protected ElectronicInvoiceClient electronicInvoiceClient;
-
-    @Autowired
-    protected EnterpriseInterConnectionClient enterpriseInterConnectionClient;
-
-    @Autowired
     protected WeChatConfigurationProperties properties;
-
-    @Autowired
-    protected MeetingClient meetingClient;
-
-    @Autowired
-    protected FrontEndToolsClient frontEndToolsClient;
 
     /**
      * 获取应用密匙
@@ -133,7 +94,7 @@ public abstract class AbstractBaseService {
             }
         }
 
-        List<String> validAppNames = properties.getApplicationList().stream().map(ApplicationProperties::getApplicationName).collect(Collectors.toList());
+        List<String> validAppNames = properties.getApplicationList().stream().map(ApplicationProperties::getApplicationName).toList();
         if (!exist) {
             throw new ParamCheckException("应用名称【" + appName + "】无效，不在有效配置列表之内-->" + validAppNames);
         }

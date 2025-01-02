@@ -1,5 +1,6 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.client.WorkApplicationClient;
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.application.ApplicationButtonResponse;
 import com.github.shuaidd.response.application.WeChatApplicationResponse;
@@ -18,6 +19,12 @@ import java.util.Objects;
  **/
 @Service
 public class ApplicationService extends AbstractBaseService {
+
+    private final WorkApplicationClient applicationClient;
+
+    public ApplicationService(WorkApplicationClient applicationClient) {
+        this.applicationClient = applicationClient;
+    }
 
     /**
      * 获取应用

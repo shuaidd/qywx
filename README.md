@@ -6,7 +6,7 @@ springboot3.x
 <dependency>
   <groupId>com.github.shuaidd</groupId>
   <artifactId>qywx-spring-boot-starter</artifactId>
-  <version>5.0.0</version>
+  <version>5.1.0</version>
 </dependency>
 
 ```

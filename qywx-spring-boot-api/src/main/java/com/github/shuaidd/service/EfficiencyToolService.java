@@ -1,5 +1,6 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.client.EfficiencyToolClient;
 import com.github.shuaidd.dto.tool.DialRecord;
 import com.github.shuaidd.dto.wedrive.SpaceInfo;
 import com.github.shuaidd.response.tool.*;
@@ -20,6 +21,12 @@ import java.util.Objects;
  **/
 @Service
 public class EfficiencyToolService extends AbstractBaseService {
+
+    private final EfficiencyToolClient efficiencyToolClient;
+
+    public EfficiencyToolService(EfficiencyToolClient efficiencyToolClient) {
+        this.efficiencyToolClient = efficiencyToolClient;
+    }
 
     /**
      * 创建日历

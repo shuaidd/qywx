@@ -1,8 +1,8 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.client.MessageClient;
 import com.github.shuaidd.dto.message.ChatInfo;
 import com.github.shuaidd.exception.ParamCheckException;
-import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.message.CreateAppChatResponse;
 import com.github.shuaidd.response.message.SearchAppChatResponse;
 import com.github.shuaidd.response.message.SendMessageResponse;
@@ -23,6 +23,12 @@ import java.util.Objects;
  **/
 @Service
 public class MessageService extends AbstractBaseService {
+
+    private final MessageClient messageClient;
+
+    public MessageService(MessageClient messageClient) {
+        this.messageClient = messageClient;
+    }
 
     /**
      * 发送消息

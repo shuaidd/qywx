@@ -1,5 +1,6 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.client.WeChatMediaClient;
 import com.github.shuaidd.response.addressbook.AsyncJobResponse;
 import com.github.shuaidd.response.material.UploadByUrlResultResponse;
 import com.github.shuaidd.response.material.UploadImageResponse;
@@ -35,6 +36,12 @@ public class MediaService extends AbstractBaseService {
     public static final String IMAGE = "image";
     public static final String VOICE = "voice";
     public static final String VIDEO = "video";
+
+    private final WeChatMediaClient weChatMediaClient;
+
+    public MediaService(WeChatMediaClient weChatMediaClient) {
+        this.weChatMediaClient = weChatMediaClient;
+    }
 
     /**
      * 上传临时素材

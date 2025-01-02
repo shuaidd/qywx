@@ -40,10 +40,13 @@ qywx:
     - secret: 26nMNcfcwPD_PtjyNBfuzFKgPqxKIzNLVywHbJqS5Xs
       application-name: robbot
       application-desc: 机器人
-      agent-id: 1000003
+    - secret: 3q5tLgXuHwOi9Gv_OwTVNRcNvSHJrAhKweIbb-qSQKc
+      application-name: doc-assistance
+      application-desc: 文档助手
+      agent-id: 1000059
   url: https://qyapi.weixin.qq.com
   public-path: cgi-bin
-  corp-id: xxxxxx
+  corp-id: ww36e0a51aab349a7d
   callback-list:
     - application-name: address-book
       token: 4pd5Q2GAVKAapyTD0IGLMD7Lngiyx
@@ -73,11 +76,12 @@ logging:
 spring:
   profiles:
     active: dev
-  redis:
-    database: 0
-    host: 127.0.0.1
-    port: 6379
   cache:
     type: redis
   application:
     name: qywx-example
+  data:
+    redis:
+      database: 0
+      host: 127.0.0.1
+      port: 6379

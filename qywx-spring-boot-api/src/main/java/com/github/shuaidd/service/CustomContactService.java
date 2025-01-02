@@ -1,5 +1,6 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.client.ExternalContactClient;
 import com.github.shuaidd.response.addressbook.MobileHashCodeResponse;
 import com.github.shuaidd.response.externalcontact.*;
 import com.github.shuaidd.resquest.CursorPageRequest;
@@ -18,6 +19,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomContactService extends AbstractBaseService {
+
+    private final ExternalContactClient externalContactClient;
+
+    public CustomContactService(ExternalContactClient externalContactClient) {
+        this.externalContactClient = externalContactClient;
+    }
 
     /* ---------企业服务人员管理---------- start */
 

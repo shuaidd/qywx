@@ -1,5 +1,6 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.client.WeChatCallCenterClient;
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.kf.*;
@@ -17,6 +18,12 @@ import java.util.List;
  **/
 @Service
 public class WeChatCallCenterService extends AbstractBaseService {
+
+    private final WeChatCallCenterClient callCenterClient;
+
+    public WeChatCallCenterService(WeChatCallCenterClient callCenterClient) {
+        this.callCenterClient = callCenterClient;
+    }
 
     /**
      * 添加客服

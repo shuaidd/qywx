@@ -1,5 +1,6 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.client.AuthClient;
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.auth.AuthUserInfoResponse;
 import com.github.shuaidd.response.auth.UserSensitiveDetailResponse;
@@ -23,6 +24,12 @@ import java.util.List;
  **/
 @Service
 public class AuthenticationService extends AbstractBaseService {
+
+    private final AuthClient authClient;
+
+    public AuthenticationService(AuthClient authClient) {
+        this.authClient = authClient;
+    }
 
     /**
      * 获取访问用户身份

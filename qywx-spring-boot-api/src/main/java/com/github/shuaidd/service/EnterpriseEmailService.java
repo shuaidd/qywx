@@ -1,5 +1,6 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.client.EnterpriseEmailClient;
 import com.github.shuaidd.response.exmail.CreatePublicMailResponse;
 import com.github.shuaidd.response.exmail.MailDetailResponse;
 import com.github.shuaidd.response.exmail.MailGroupDetailResponse;
@@ -12,6 +13,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class EnterpriseEmailService extends AbstractBaseService {
+
+    private final EnterpriseEmailClient emailClient;
+
+    public EnterpriseEmailService(EnterpriseEmailClient emailClient) {
+        this.emailClient = emailClient;
+    }
 
     /**
      * 创建邮件群组

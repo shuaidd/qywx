@@ -1,10 +1,12 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.client.FrontEndToolsClient;
 import com.github.shuaidd.client.config.ApplicationProperties;
 import com.github.shuaidd.dto.tool.FrontEndTicket;
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.tool.AccessTokenResponse;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -16,6 +18,12 @@ import java.util.Objects;
  **/
 @Service
 public class FrontEndToolService extends AbstractBaseService {
+
+    private final FrontEndToolsClient frontEndToolsClient;
+
+    public FrontEndToolService(FrontEndToolsClient frontEndToolsClient) {
+        this.frontEndToolsClient = frontEndToolsClient;
+    }
 
     /**
      * 获取企业微信应用的前端ticket
@@ -34,7 +42,6 @@ public class FrontEndToolService extends AbstractBaseService {
             throw  new ParamCheckException("未配置的应用");
         }
         AccessTokenResponse accessTokenResponse = weChatClient.getAccessToken(StringUtils.defaultString(app.getCorpId(),properties.getCorpId()), app.getSecret());
-        FrontEndTicket appTicket = frontEndToolsClient.getAppTicket(accessTokenResponse.getAccessToken(), applicationName);
-        return appTicket;
+        return frontEndToolsClient.getAppTicket(accessTokenResponse.getAccessToken(), applicationName);
     }
 }

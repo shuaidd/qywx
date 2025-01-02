@@ -1,5 +1,6 @@
 package com.github.shuaidd.service;
 
+import com.github.shuaidd.client.ElectronicInvoiceClient;
 import com.github.shuaidd.response.invoice.BatchInvoiceResponse;
 import com.github.shuaidd.response.invoice.GetInvoiceResponse;
 import com.github.shuaidd.resquest.invoice.BatchInvoiceRequest;
@@ -13,6 +14,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ElectronicInvoiceService extends AbstractBaseService {
+
+    private final ElectronicInvoiceClient electronicInvoiceClient;
+
+    public ElectronicInvoiceService(ElectronicInvoiceClient electronicInvoiceClient) {
+        this.electronicInvoiceClient = electronicInvoiceClient;
+    }
 
     /**
      * 查询电子发票

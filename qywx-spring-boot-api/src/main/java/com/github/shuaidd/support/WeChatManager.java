@@ -32,6 +32,7 @@ public class WeChatManager {
     private final EnterpriseInterConnectionService enterpriseInterConnectionService;
     private final MeetingService meetingService;
     private final FrontEndToolService frontEndToolService;
+    private final DocumentService documentService;
 
     @Autowired
     public WeChatManager(AddressBookService addressBookService,
@@ -50,7 +51,7 @@ public class WeChatManager {
                          ElectronicInvoiceService electronicInvoiceService,
                          EnterpriseInterConnectionService enterpriseInterConnectionService,
                          MeetingService meetingService,
-                         FrontEndToolService frontEndToolService) {
+                         FrontEndToolService frontEndToolService, DocumentService documentService) {
         this.addressBookService = addressBookService;
         this.tokenService = tokenService;
         this.properties = properties;
@@ -69,6 +70,7 @@ public class WeChatManager {
         this.enterpriseInterConnectionService = enterpriseInterConnectionService;
         this.meetingService = meetingService;
         this.frontEndToolService = frontEndToolService;
+        this.documentService = documentService;
     }
 
     /**
@@ -172,6 +174,7 @@ public class WeChatManager {
 
     /**
      * 服务商
+     *
      * @return ServiceProviderService
      */
     public ServiceProviderService serviceProviderService() {
@@ -180,6 +183,7 @@ public class WeChatManager {
 
     /**
      * 邮箱，群组管理
+     *
      * @return enterpriseEmailService
      */
     public EnterpriseEmailService enterpriseEmailService() {
@@ -188,6 +192,7 @@ public class WeChatManager {
 
     /**
      * 电子发票
+     *
      * @return ElectronicInvoiceService
      */
     public ElectronicInvoiceService electronicInvoiceService() {
@@ -196,6 +201,7 @@ public class WeChatManager {
 
     /**
      * 企业互联
+     *
      * @return EnterpriseInterConnectionService
      */
     public EnterpriseInterConnectionService enterpriseInterConnectionService() {
@@ -219,6 +225,7 @@ public class WeChatManager {
     public MeetingService meetingService() {
         return meetingService;
     }
+
     /**
      * 前端SDK管理
      *
@@ -226,5 +233,13 @@ public class WeChatManager {
      */
     public FrontEndToolService frontEndToolService() {
         return frontEndToolService;
+    }
+
+    /**
+     * 文档管理
+     * @return DocumentService
+     */
+    public DocumentService documentService() {
+        return documentService;
     }
 }
