@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -48,7 +49,9 @@ public class WeChatClientAspect {
     @Around("execution(* com.github.shuaidd.client.*Client.*(..))")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         Object result;
+        StopWatch watch = new StopWatch();
         try {
+            watch.start("调用接口 " + joinPoint.getSignature().getName());
             result = joinPoint.proceed();
         } catch (Throwable throwable) {
             if (throwable instanceof WeChatException || throwable.getCause() instanceof WeChatException) {
@@ -72,8 +75,13 @@ public class WeChatClientAspect {
             } else {
                 throw throwable;
             }
+        } finally {
+            watch.stop();
         }
 
+        if (weChatManager.properties().getDebugMode()) {
+            log.debug("调用企微接口耗时--{}秒",watch.getTotalTimeSeconds());
+        }
         return result;
     }
 

@@ -1,10 +1,15 @@
 package com.github.shuaidd.dto.wedoc;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * @author ddshuai
  */
+
+@Data
+@Accessors(chain = true)
 public class TextFormat {
 
     /**
@@ -43,60 +48,4 @@ public class TextFormat {
      */
     @JsonProperty("color")
     private Color color;
-
-    public String getFont() {
-        return font;
-    }
-
-    public void setFont(String font) {
-        this.font = font;
-    }
-
-    public Integer getFontSize() {
-        return fontSize;
-    }
-
-    public void setFontSize(Integer fontSize) {
-        this.fontSize = fontSize;
-    }
-
-    public Boolean getBold() {
-        return bold;
-    }
-
-    public void setBold(Boolean bold) {
-        this.bold = bold;
-    }
-
-    public Boolean getItalic() {
-        return italic;
-    }
-
-    public void setItalic(Boolean italic) {
-        this.italic = italic;
-    }
-
-    public Boolean getStrikethrough() {
-        return strikethrough;
-    }
-
-    public void setStrikethrough(Boolean strikethrough) {
-        this.strikethrough = strikethrough;
-    }
-
-    public Boolean getUnderline() {
-        return underline;
-    }
-
-    public void setUnderline(Boolean underline) {
-        this.underline = underline;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
 }

@@ -2,23 +2,23 @@ package com.github.shuaidd.dto.wedoc;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.NoArgsConstructor;
 
 /**
  * @author ddshuai
  */
+@NoArgsConstructor
 @Data
-@Accessors(chain = true)
-public class Link {
+public class InsertText {
 
     /**
-     * 链接url
-     */
-    @JsonProperty("url")
-    private String url;
-    /**
-     * 链接标题
+     * 要插入的文本
      */
     @JsonProperty("text")
     private String text;
+    /**
+     * 插入的位置
+     */
+    @JsonProperty("location")
+    private Location location;
 }

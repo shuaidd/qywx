@@ -35,9 +35,7 @@ public class CustomJacksonDecoder extends JacksonDecoder {
     @Override
     public Object decode(Response response, Type type) throws IOException {
         Object result = super.decode(response, type);
-        if (result instanceof AbstractBaseResponse) {
-            AbstractBaseResponse abstractBaseResponse = (AbstractBaseResponse) result;
-
+        if (result instanceof AbstractBaseResponse abstractBaseResponse) {
             if (abstractBaseResponse.getErrCode().equals(ErrorCode.ERROR_CODE_0.getErrorCode())) {
                 if (logger.isDebugEnabled()) {
                     logger.debug("从接口 {} 获取到企业微信的响应数据--->\n {}",response.request().requestTemplate().path(),objectMapper.writeValueAsString(result));

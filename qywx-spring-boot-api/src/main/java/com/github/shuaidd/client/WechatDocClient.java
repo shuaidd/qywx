@@ -94,5 +94,66 @@ public interface WechatDocClient extends CommonClient {
      * @return res
      */
     @PostMapping(value = "/wedoc/spreadsheet/get_sheet_range_data", headers = HEAD)
-    SheetDataResponse getSheetData(SheetDataRequest request,  @RequestParam(HEAD_KEY) String app);
+    SheetDataResponse getSheetData(SheetDataRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 编辑文档内容
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/document/batch_update", headers = HEAD)
+    BaseResponse batchUpdate(BatchUpdateDocRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 编辑表格内容
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/spreadsheet/batch_update", headers = HEAD)
+    UpdateSheetResponse batchUpdateSheet(BatchUpdateSheetRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取文档权限信息
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/doc_get_auth", headers = HEAD)
+    DocAuthResponse getDocAuth(DocIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改文档查看规则
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/mod_doc_join_rule", headers = HEAD)
+    BaseResponse modDocAuth(ModDocRuleRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改文档通知范围及权限
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/mod_doc_member", headers = HEAD)
+    BaseResponse modDocMember(ModDocMemberRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改文档安全设置
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/mod_doc_safty_setting", headers = HEAD)
+    BaseResponse modDocSafetySetting(ModDocSafetySettingRequest request, @RequestParam(HEAD_KEY) String app);
+
 }
