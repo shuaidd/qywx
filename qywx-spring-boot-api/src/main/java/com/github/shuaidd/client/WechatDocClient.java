@@ -155,5 +155,4 @@ public interface WechatDocClient extends CommonClient {
      */
     @PostMapping(value = "/wedoc/mod_doc_safty_setting", headers = HEAD)
     BaseResponse modDocSafetySetting(ModDocSafetySettingRequest request, @RequestParam(HEAD_KEY) String app);
-
 }

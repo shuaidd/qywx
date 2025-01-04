@@ -1,48 +1,34 @@
 {
-  "errcode":0,
-  "errmsg":"ok",
-  "access_rule":{
-    "enable_corp_internal":true,
-    "corp_internal_auth":1,
-    "enable_corp_external":true,
-    "corp_external_auth":1,
-    "corp_internal_approve_only_by_admin":true,
-    "corp_external_approve_only_by_admin":true,
-    "ban_share_external":false
-  },
-  "secure_setting":{
-    "enable_readonly_copy":false,
-    "watermark":{
-      "margin_type":2,
-      "show_visitor_name":false,
-      "show_text":false,
-      "text":""
-    },
-    "enable_readonly_comment":false
-  },
-  "doc_member_list":[
-    {
-      "type":1,
-      "userid":"USERID1",
-      "auth":7
-    },
-    {
-      "type":1,
-      "tmp_external_userid":"TMP_EXTERNAL_USERID2",
-      "auth":1
+  "sheet_id": "SHEETID",
+  "priv": 1,
+  "can_insert_record": true,
+  "can_delete_record": true,
+  "can_create_modify_delete_view": true,
+  "field_priv": {
+    "field_range_type": 2,
+    "field_rule_list": [{
+      "field_id": "FIELDID1",
+      "field_type": "FIELDID1",
+      "can_edit": true,
+      "can_insert": true,
+      "can_view": true
     }
-  ],
-  "co_auth_list":[
-    {
-      "type":2,
-      "departmentid":1,
-      "auth":1
-    }
-  ],
-  "watermark": {
-    "margin_type": 1,
-    "show_visitor_name": false,
-    "show_text": false,
-    "text": "watermark"
-  }
+    ],
+    "field_default_rule": "ss"
+  },
+  "record_priv": {
+    "record_range_type": 2,
+    "record_rule_list": [
+      {
+        "field_id": "FIELDID2",
+        "oper_type": 2,
+        "field_type": "FIELD_TYPE_SELECT",
+        "value": [
+          "OPTION1", "OPTION2", "OPTION3"
+        ],
+        "other_priv": 1
+      }
+    ]
+  },
+  "clear": false
 }
