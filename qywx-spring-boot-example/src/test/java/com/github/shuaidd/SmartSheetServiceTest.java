@@ -34,7 +34,7 @@ public class SmartSheetServiceTest extends AbstractTest {
      * "errmsg" : "ok",
      * "next_cursor" : null,
      * "has_more" : null,
-     * "url" : "https://doc.weixin.qq.com/smartsheet/s3_AMYAmhR_ANIg102trFmThSdb8vk4I_a?scode=AAkAFgfQAAcOq9GpxfAMYAmhR_ANI",
+     * "url" : "<a href="https://doc.weixin.qq.com/smartsheet/s3_AMYAmhR_ANIg102trFmThSdb8vk4I_a?scode=AAkAFgfQAAcOq9GpxfAMYAmhR_ANI">...</a>",
      * "docid" : "dcvV4dWTXK826wFi_V28xAiBkXtWgsM-UpXuAkpYTjmgVDYTJ4O0LYGE4qeZ59JS7WEpv9Ca6CEJPlE0ZVt7cQQg"
      * }
      */
