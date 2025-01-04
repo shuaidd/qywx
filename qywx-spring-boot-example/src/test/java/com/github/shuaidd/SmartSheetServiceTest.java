@@ -177,7 +177,7 @@ public class SmartSheetServiceTest extends AbstractTest {
     private List<SheetRecord> records() {
         SheetRecord record = new SheetRecord();
         Map<String, Object> values = new HashMap<>();
-        Lists.newArrayList("用戶姓名1:帅冬冬", "账号:ddshuai", "手机号:15268781020", "职位:开发", "状态:在职").forEach(item -> {
+        Lists.newArrayList("用戶姓名1:鲁瓦", "账号:luwa", "手机号:15268781020", "职位:开发", "状态:在职").forEach(item -> {
             String[] a = item.split(":");
             values.put(a[0], Lists.newArrayList(new CellTextValue().setType("text").setText(a[1])));
         });
@@ -188,7 +188,7 @@ public class SmartSheetServiceTest extends AbstractTest {
     private List<SheetRecord> updateRds() {
         SheetRecord record = new SheetRecord();
         Map<String, Object> values = new HashMap<>();
-        Lists.newArrayList("用戶姓名:帅冬冬", "账号:ddshuai", "手机号:15268781021", "职位:开发攻城狮1", "状态:离职").forEach(item -> {
+        Lists.newArrayList("用戶姓名:鲁瓦", "账号:luwa", "手机号:15268781021", "职位:开发攻城狮1", "状态:离职").forEach(item -> {
             String[] a = item.split(":");
             values.put(a[0], Lists.newArrayList(new CellTextValue().setType("text").setText(a[1])));
         });
