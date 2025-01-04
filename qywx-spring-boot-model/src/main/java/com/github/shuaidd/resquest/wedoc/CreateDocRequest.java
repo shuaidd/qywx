@@ -1,12 +1,18 @@
 package com.github.shuaidd.resquest.wedoc;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 
 /**
  * @author ddshuai
  */
+@Setter
+@Getter
+@Accessors(chain = true)
 public class CreateDocRequest {
 
     /**
@@ -35,43 +41,4 @@ public class CreateDocRequest {
     @JsonProperty("admin_users")
     private List<String> adminUsers;
 
-    public String getSpaceId() {
-        return spaceId;
-    }
-
-    public void setSpaceId(String spaceId) {
-        this.spaceId = spaceId;
-    }
-
-    public String getFatherId() {
-        return fatherId;
-    }
-
-    public void setFatherId(String fatherId) {
-        this.fatherId = fatherId;
-    }
-
-    public Integer getDocType() {
-        return docType;
-    }
-
-    public void setDocType(Integer docType) {
-        this.docType = docType;
-    }
-
-    public String getDocName() {
-        return docName;
-    }
-
-    public void setDocName(String docName) {
-        this.docName = docName;
-    }
-
-    public List<String> getAdminUsers() {
-        return adminUsers;
-    }
-
-    public void setAdminUsers(List<String> adminUsers) {
-        this.adminUsers = adminUsers;
-    }
 }

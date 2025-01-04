@@ -41,7 +41,7 @@ public interface WechatSmartSheetClient extends CommonClient {
      * @param app     app
      * @return res
      */
-    @PostMapping(value = "/wedoc/smartsheet/delete_sheet", headers = HEAD)
+    @PostMapping(value = "/wedoc/smartsheet/update_sheet", headers = HEAD)
     BaseResponse updateSheet(UpdateSheetRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
@@ -206,5 +206,23 @@ public interface WechatSmartSheetClient extends CommonClient {
     @PostMapping(value = "/wedoc/smartsheet/content_priv/create_rule", headers = HEAD)
     CreateRuleResponse createRule(CreateRuleRequest request, @RequestParam(HEAD_KEY) String app);
 
+    /**
+     * 更新智能表格指定成员额外权限
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartsheet/content_priv/mod_rule_member", headers = HEAD)
+    BaseResponse modRuleMember(ModRuleMemberRequest request, @RequestParam(HEAD_KEY) String app);
 
+    /**
+     * 删除智能表格指定成员额外权限
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartsheet/content_priv/delete_rule", headers = HEAD)
+    BaseResponse delRule(DeleteRuleRequest request, @RequestParam(HEAD_KEY) String app);
 }

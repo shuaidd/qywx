@@ -46,7 +46,7 @@ qywx:
       agent-id: 1000059
   url: https://qyapi.weixin.qq.com
   public-path: cgi-bin
-  corp-id: xxxx
+  corp-id: ww36e0a51aab349a7d
   callback-list:
     - application-name: address-book
       token: 4pd5Q2GAVKAapyTD0IGLMD7Lngiyx
