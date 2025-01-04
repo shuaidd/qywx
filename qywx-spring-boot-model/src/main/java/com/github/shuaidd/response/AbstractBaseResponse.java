@@ -1,6 +1,8 @@
 package com.github.shuaidd.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -9,6 +11,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * @author ddshuai
  * date 2019-04-03 20:30
  **/
+@Setter
+@Getter
 public abstract class AbstractBaseResponse {
 
     @JsonProperty("errcode")
@@ -21,39 +25,7 @@ public abstract class AbstractBaseResponse {
     private String nextCursor;
 
     @JsonProperty("has_more")
-    private Integer hasMore;
-
-    public String getErrCode() {
-        return errCode;
-    }
-
-    public void setErrCode(String errCode) {
-        this.errCode = errCode;
-    }
-
-    public String getErrMsg() {
-        return errMsg;
-    }
-
-    public void setErrMsg(String errMsg) {
-        this.errMsg = errMsg;
-    }
-
-    public String getNextCursor() {
-        return nextCursor;
-    }
-
-    public void setNextCursor(String nextCursor) {
-        this.nextCursor = nextCursor;
-    }
-
-    public Integer getHasMore() {
-        return hasMore;
-    }
-
-    public void setHasMore(Integer hasMore) {
-        this.hasMore = hasMore;
-    }
+    private Boolean hasMore;
 
     @Override
     public String toString() {

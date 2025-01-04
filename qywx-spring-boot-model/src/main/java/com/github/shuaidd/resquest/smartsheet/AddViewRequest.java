@@ -5,9 +5,11 @@ import com.github.shuaidd.dto.smartsheet.CalendarViewProperty;
 import com.github.shuaidd.dto.smartsheet.GanttViewProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 @NoArgsConstructor
 @Data
+@Accessors(chain = true)
 public class AddViewRequest {
 
     @JsonProperty("docid")

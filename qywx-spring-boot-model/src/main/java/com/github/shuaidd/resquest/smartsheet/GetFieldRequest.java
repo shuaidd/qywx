@@ -5,12 +5,14 @@ import com.github.shuaidd.resquest.OffsetPageRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @Data
+@Accessors(chain = true)
 public class GetFieldRequest extends OffsetPageRequest {
 
     /**

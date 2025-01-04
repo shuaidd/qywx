@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.shuaidd.dto.smartsheet.SheetRecord;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 
 @NoArgsConstructor
 @Data
+@Accessors(chain = true)
 public class AddRecordRequest {
 
     /**

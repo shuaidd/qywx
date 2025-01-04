@@ -1,6 +1,8 @@
 package com.github.shuaidd.enums;
 
 
+import lombok.Getter;
+
 import java.util.Objects;
 
 /**
@@ -8,6 +10,7 @@ import java.util.Objects;
  * 创建日期： 2018/6/13
  * 描述：微信端企业微信所有相关错误码描述
  */
+@Getter
 public enum ErrorCode {
     /**
      * 所有企业微信错误码
@@ -247,10 +250,6 @@ public enum ErrorCode {
         return null;
     }
 
-    public String getErrorCode() {
-        return errorCode;
-    }
-
     public static ErrorCode errorCode(String code) {
         for (ErrorCode value : values()) {
             if (Objects.nonNull(code)) {
@@ -263,7 +262,4 @@ public enum ErrorCode {
         return UNKNOWN;
     }
 
-    public String getErrorDesc() {
-        return errorDesc;
-    }
 }

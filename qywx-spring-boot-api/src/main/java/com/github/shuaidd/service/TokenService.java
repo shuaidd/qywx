@@ -2,7 +2,6 @@ package com.github.shuaidd.service;
 
 import com.github.shuaidd.client.config.ApplicationProperties;
 import com.github.shuaidd.exception.ParamCheckException;
-import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.tool.AccessTokenResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.CacheEvict;
@@ -40,7 +39,7 @@ public class TokenService extends AbstractBaseService {
             throw  new ParamCheckException("未配置的应用");
         }
 
-        AccessTokenResponse accessTokenResponse = weChatClient.getAccessToken(StringUtils.defaultString(app.getCorpId(),properties.getCorpId()), app.getSecret());
+        AccessTokenResponse accessTokenResponse = weChatClient.getAccessToken(StringUtils.defaultIfEmpty(app.getCorpId(),properties.getCorpId()), app.getSecret());
         return accessTokenResponse.getAccessToken();
     }
 
