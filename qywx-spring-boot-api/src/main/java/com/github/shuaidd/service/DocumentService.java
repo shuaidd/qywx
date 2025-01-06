@@ -18,6 +18,10 @@ public class DocumentService extends AbstractBaseService {
 
     private final WechatDocClient wechatDocClient;
 
+    /**
+     * DocumentService
+     * @param wechatDocClient client
+     */
     public DocumentService(WechatDocClient wechatDocClient) {
         this.wechatDocClient = wechatDocClient;
     }
@@ -72,7 +76,7 @@ public class DocumentService extends AbstractBaseService {
     /**
      * 获取文档基础信息
      *
-     * @param request     request
+     * @param docId     docId
      * @param application application
      */
     public GetDocBaseResponse getDocBaseInfo(String docId, String application) {
