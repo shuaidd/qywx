@@ -1,5 +1,6 @@
 package com.github.shuaidd;
 
+import com.github.shuaidd.response.linkedcorp.*;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -10,10 +11,10 @@ public class LinkedCorpTest extends AbstractTest {
 
     @Test
     public void test() {
-        weChatManager.addressBookService().getDeptList(null,"");
-        weChatManager.addressBookService().getDeptUserList(null,"");
-        weChatManager.addressBookService().getPermList("");
-        weChatManager.addressBookService().getDeptUser(null,"");
-        weChatManager.addressBookService().getUserDetail(null,"");
+        LinkedCorpDeptResponse res1 = weChatManager.addressBookService().getDeptList(null,"");
+        LinkedCorpDeptUserListResponse res2 = weChatManager.addressBookService().getDeptUserList(null,"");
+        PermListResponse res3 = weChatManager.addressBookService().getPermList("");
+        LinkedCorpDeptUserResponse res4 = weChatManager.addressBookService().getDeptUser(null,"");
+        LinkedCorpUserResponse res5 = weChatManager.addressBookService().getUserDetail(null,"");
     }
 }

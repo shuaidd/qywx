@@ -2,6 +2,7 @@ package com.github.shuaidd;
 
 import com.github.shuaidd.dto.addressbook.DeptUser;
 import com.github.shuaidd.response.addressbook.ExportResultResponse;
+import com.github.shuaidd.response.addressbook.UserIdResponse;
 import com.github.shuaidd.resquest.CursorPageRequest;
 import com.github.shuaidd.resquest.addressbook.*;
 import org.junit.jupiter.api.Test;
@@ -368,6 +369,18 @@ public class AddressBookTest extends AbstractTest {
     public void getUserIds() {
         CursorPageRequest request = new CursorPageRequest();
         List<DeptUser> response = weChatManager.addressBookService().getUserIds(request, appName);
+        logger.info("{}",response);
+    }
+
+    @Test
+    public void getUserIdByMobile() {
+        UserIdResponse response = weChatManager.addressBookService().getUserIdByMobile("122",appName);
+        logger.info("{}",response);
+    }
+
+    @Test
+    public void getUserIdByEmail() {
+        UserIdResponse response = weChatManager.addressBookService().getUserIdByEmail("122",1,appName);
         logger.info("{}",response);
     }
 }

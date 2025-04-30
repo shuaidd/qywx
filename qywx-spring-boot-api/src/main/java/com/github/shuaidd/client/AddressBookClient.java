@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.Serializable;
+import java.util.Map;
+
 /**
  * 通讯录接口
  *
@@ -403,4 +406,21 @@ public interface AddressBookClient extends CommonClient {
      */
     @GetMapping(value = "corp/get_join_qrcode", headers = HEAD)
     JoinQrCodeResponse getJoinQrCode(@RequestParam("size_type") Integer sizeType, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 手机号获取userid
+     * @param req req
+     * @param application 应用名
+     * @return 用户Id
+     */
+    @PostMapping("/user/getuserid")
+    UserIdResponse getUserIdByMobile(Map<String, String> req,@RequestParam(HEAD_KEY) String application);
+
+    /**
+     * 根据邮箱获取userid
+     * @param req req
+     * @param applicationName 应用名
+     * @return 用户Id
+     */
+    UserIdResponse getUserIdByEmail(Map<String, ? extends Serializable> req,@RequestParam(HEAD_KEY) String applicationName);
 }

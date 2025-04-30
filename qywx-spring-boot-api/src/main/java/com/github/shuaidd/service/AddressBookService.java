@@ -894,4 +894,31 @@ public class AddressBookService extends AbstractBaseService {
     public LinkedCorpDeptResponse getDeptList(LinkedCorpDeptRequest request, String applicationName) {
         return linkedCorpClient.getDeptList(request, applicationName);
     }
-}
+
+    /**
+     * 根据手机号获取userid
+     * @param mobile 手机号
+     * @param application app
+     * @return 用户编号
+     */
+    public UserIdResponse getUserIdByMobile(String mobile,String application) {
+        if (StringUtils.isEmpty(mobile)) {
+            return null;
+        }
+        return addressBookClient.getUserIdByMobile(Map.of("mobile",mobile),application);
+    }
+
+    /**
+     * 根据邮箱获取用户id
+     * @param email 邮箱
+     * @param emailType 类型
+     * @param applicationName 应用
+     * @return 用户编号
+     */
+    public UserIdResponse getUserIdByEmail(String email,Integer emailType,String applicationName) {
+        if (StringUtils.isEmpty(email)) {
+            return null;
+        }
+        return addressBookClient.getUserIdByEmail(Map.of("email",email,"emailType",emailType),applicationName);
+    }
+ }
