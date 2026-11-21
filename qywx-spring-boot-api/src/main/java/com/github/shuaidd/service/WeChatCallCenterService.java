@@ -8,7 +8,13 @@ import com.github.shuaidd.resquest.kf.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 微信客服中心
@@ -348,5 +354,68 @@ public class WeChatCallCenterService extends AbstractBaseService {
      */
     public KnowledgeIntentResponse queryKnowledgeIntent(QueryKnowledgeIntentRequest request, String applicationName) {
         return callCenterClient.queryKnowledgeIntent(request, applicationName);
+    }
+    /**
+     * 获取客服帐号企业汇总数据
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     * @return 企业汇总统计数据
+     */
+    public GetCorpStatisticResponse getCorpStatistic(CorpStatisticRequest request, String applicationName) {
+        if (Objects.isNull(request) || StringUtils.isBlank(request.getOpenKfid())) {
+            throw new ParamCheckException("客服帐号ID不能为空，请检查！！！");
+        }
+        checkStatisticDateRange(request.getStartTime(), request.getEndTime());
+        return callCenterClient.getCorpStatistic(request, applicationName);
+    }
+
+    /**
+     * 获取客服帐号接待人员明细数据
+     *
+     * @param request         请求
+     * @param applicationName 应用
+     * @return 接待人员明细统计数据
+     */
+    public GetServicerStatisticResponse getServicerStatistic(ServicerStatisticRequest request, String applicationName) {
+        if (Objects.isNull(request) || StringUtils.isBlank(request.getOpenKfid())) {
+            throw new ParamCheckException("客服帐号ID不能为空，请检查！！！");
+        }
+        if (StringUtils.isNotEmpty(request.getServicerUserid()) && StringUtils.isBlank(request.getServicerUserid())) {
+            throw new ParamCheckException("接待人员userid不能为空白字符，请检查！！！");
+        }
+        checkStatisticDateRange(request.getStartTime(), request.getEndTime());
+        return callCenterClient.getServicerStatistic(request, applicationName);
+    }
+
+    /**
+     * 校验并归一化客服统计日期；官方支持闭区间31天，且最早可查前180天、最新可查昨天
+     *
+     * @param startTime 统计起始时间
+     * @param endTime   统计结束时间
+     */
+    private void checkStatisticDateRange(Date startTime, Date endTime) {
+        if (Objects.isNull(startTime) || Objects.isNull(endTime)) {
+            throw new ParamCheckException("startTime 和 endTime 不能为空，请检查！！！");
+        }
+        if (startTime.after(endTime)) {
+            throw new ParamCheckException("startTime 不能晚于 endTime，请检查！！！");
+        }
+
+        ZoneId zoneId = ZoneId.systemDefault();
+        LocalDate startDate = Instant.ofEpochMilli(startTime.getTime()).atZone(zoneId).toLocalDate();
+        LocalDate endDate = Instant.ofEpochMilli(endTime.getTime()).atZone(zoneId).toLocalDate();
+        LocalDate today = LocalDate.now(zoneId);
+        if (startDate.isBefore(today.minusDays(180))) {
+            throw new ParamCheckException("统计起始日期最早只能查询前180天，请检查！！！");
+        }
+        if (endDate.isAfter(today.minusDays(1))) {
+            throw new ParamCheckException("统计结束日期只能查询到昨天，请检查！！！");
+        }
+        if (ChronoUnit.DAYS.between(startDate, endDate) > 30) {
+            throw new ParamCheckException("统计日期闭区间最大跨度为31天，请检查！！！");
+        }
+        startTime.setTime(startDate.atStartOfDay(zoneId).toInstant().toEpochMilli());
+        endTime.setTime(endDate.atStartOfDay(zoneId).toInstant().toEpochMilli());
     }
 }

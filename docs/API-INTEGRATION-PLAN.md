@@ -81,3 +81,5 @@
 - 2026-11-21：完成审批模板创建与更新 2 个文档页，覆盖 `oa/approval/create_template` 和 `oa/approval/update_template`；新增请求/响应字段均带中文含义注释，Service 校验模板名称、控件列表和更新时的 `templateId`；覆盖度更新为已对接 261 页、未对接 332 页，Feign 方法数达到 333；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。
 
 - 2026-11-21：完成待办详情与状态更新 2 个文档页，覆盖 `todo/get` 和 `todo/update`；新增请求/响应、参与人和提醒模型字段均带中文含义注释，Service 校验 `todoId`、状态枚举、参与人数量（最多20）及参与人字段；覆盖度更新为已对接 263 页、未对接 330 页，Feign 方法数达到 335；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。
+
+- 2026-11-21：完成微信客服客户数据统计 2 个文档页，覆盖 `kf/get_corp_statistic` 和 `kf/get_servicer_statistic`；新增请求/响应模型字段均带中文含义注释，Service 校验客服账号、接待人员可选 userid、自然日区间（最近180天、闭区间最大31天）并归一化到0点；覆盖度更新为已对接 265 页、未对接 328 页，Feign 方法数达到 337；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。

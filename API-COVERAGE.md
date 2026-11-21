@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 335 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 337 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 263 |
+| ✅ 已对接 | 265 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 330 |
+| ❌ 未对接 | 328 |
 | ⛔ 范围外 | 143 |
 | 合计 | 738 |
 
@@ -37,7 +37,7 @@
 6. 邮件发送、收件箱、应用邮箱账号、高级功能账号等。
 7. 智能文档、收集表、文档素材和智能表格编组。
 8. 日程重复日程/参与者，会议统计与高级会控/Webinar/录制/Rooms/MRA。
-9. 高级功能账号、人事助手、待办。
+9. 高级功能账号、人事助手。
 
 
 ## 开发指南
@@ -384,7 +384,7 @@
 
 ## 微信客服
 
-状态：✅ 16；⚠️ 0；❌ 2；⛔ 2
+状态：✅ 18；⚠️ 0；❌ 0；⛔ 2
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -403,8 +403,8 @@
 |  | 发送欢迎语等事件响应消息 | [95122](https://developer.work.weixin.qq.com/document/path/95122) | ✅ 已对接 | WeChatCallCenterClient.sendMsgOnEvent |
 |  | 「升级服务」配置 | [94674](https://developer.work.weixin.qq.com/document/path/94674) | ✅ 已对接 | WeChatCallCenterClient.getUpgradeServiceConfig / upgradeService / cancelUpgradeService |
 | 其他基础信息获取 | 获取客户基础信息 | [95159](https://developer.work.weixin.qq.com/document/path/95159) | ✅ 已对接 | WeChatCallCenterClient.getCustomer |
-| 统计管理 | 获取「客户数据统计」企业汇总数据 | [95489](https://developer.work.weixin.qq.com/document/path/95489) | ❌ 未对接 | — |
-|  | 获取「客户数据统计」接待人员明细数据 | [95490](https://developer.work.weixin.qq.com/document/path/95490) | ❌ 未对接 | — |
+| 统计管理 | 获取「客户数据统计」企业汇总数据 | [95489](https://developer.work.weixin.qq.com/document/path/95489) | ✅ 已对接 | WeChatCallCenterClient.getCorpStatistic（kf/get_corp_statistic） |
+|  | 获取「客户数据统计」接待人员明细数据 | [95490](https://developer.work.weixin.qq.com/document/path/95490) | ✅ 已对接 | WeChatCallCenterClient.getServicerStatistic（kf/get_servicer_statistic） |
 | 机器人管理 | 知识库分组管理 | [95971](https://developer.work.weixin.qq.com/document/path/95971) | ✅ 已对接 | WeChatCallCenterClient.add/mod/del/list KnowledgeGroup |
 |  | 知识库问答管理 | [95972](https://developer.work.weixin.qq.com/document/path/95972) | ✅ 已对接 | WeChatCallCenterClient.add/mod/del/list KnowledgeIntent |
 |  | 回调通知 | [97712](https://developer.work.weixin.qq.com/document/path/97712) | ⛔ 范围外 | — |

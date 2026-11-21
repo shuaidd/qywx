@@ -264,4 +264,23 @@ public interface WeChatCallCenterClient extends CommonClient {
      */
     @PostMapping(value = "kf/knowledge/list_intent", headers = HEAD)
     KnowledgeIntentResponse queryKnowledgeIntent(QueryKnowledgeIntentRequest request, @RequestParam(HEAD_KEY) String app);
+    /**
+     * 获取客服帐号企业汇总数据
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 企业汇总统计数据
+     */
+    @PostMapping(value = "kf/get_corp_statistic", headers = HEAD)
+    GetCorpStatisticResponse getCorpStatistic(CorpStatisticRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客服帐号接待人员明细数据
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 接待人员明细统计数据
+     */
+    @PostMapping(value = "kf/get_servicer_statistic", headers = HEAD)
+    GetServicerStatisticResponse getServicerStatistic(ServicerStatisticRequest request, @RequestParam(HEAD_KEY) String app);
 }
