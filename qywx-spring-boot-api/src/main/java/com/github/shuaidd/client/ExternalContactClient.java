@@ -795,6 +795,16 @@ public interface ExternalContactClient extends CommonClient {
     CustomerAcquisitionStatisticResponse getCustomerAcquisitionStatistic(CustomerAcquisitionStatisticRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
+     * 获取成员多次收消息详情
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CustomerAcquisitionChatInfoResponse
+     */
+    @PostMapping(value = "externalcontact/customer_acquisition/get_chat_info", headers = HEAD)
+    CustomerAcquisitionChatInfoResponse getCustomerAcquisitionChatInfo(CustomerAcquisitionChatKeyRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
      * 获取指定客户联系规则组下的企业客户标签
      *
      * @param request 请求体

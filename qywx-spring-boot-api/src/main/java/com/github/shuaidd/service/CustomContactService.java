@@ -986,6 +986,18 @@ public class CustomContactService extends AbstractBaseService {
         return externalContactClient.getCustomerAcquisitionStatistic(request, applicationName);
     }
 
+    /**
+     * 获取成员多次收消息详情
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return CustomerAcquisitionChatInfoResponse
+     */
+    public CustomerAcquisitionChatInfoResponse getCustomerAcquisitionChatInfo(CustomerAcquisitionChatKeyRequest request, String applicationName) {
+        checkCustomerAcquisitionChatKey(request);
+        return externalContactClient.getCustomerAcquisitionChatInfo(request, applicationName);
+    }
+
     /* ---------客户联系规则组企业客户标签管理---------- start */
 
     /**
@@ -1403,6 +1415,17 @@ public class CustomContactService extends AbstractBaseService {
         }
         request.setStartTime(Date.from(startDate.atStartOfDay(zoneId).toInstant()));
         request.setEndTime(Date.from(endDate.atStartOfDay(zoneId).toInstant()));
+    }
+
+    /**
+     * 校验成员多次收消息会话凭据，官方要求回调后 30 分钟内使用
+     *
+     * @param request 请求
+     */
+    private void checkCustomerAcquisitionChatKey(CustomerAcquisitionChatKeyRequest request) {
+        if (Objects.isNull(request) || StringUtils.isBlank(request.getChatKey())) {
+            throw new ParamCheckException("chatKey 不能为空，请检查！！！");
+        }
     }
 
     /**
