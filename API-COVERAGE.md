@@ -12,17 +12,17 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 348 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 350 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 273 |
+| ✅ 已对接 | 275 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 320 |
-| ⛔ 范围外 | 143 |
+| ❌ 未对接 | 317 |
+| ⛔ 范围外 | 144 |
 | 合计 | 738 |
 
 > 统计单位是官方文档页，不是路由数。一个页面可能聚合多个 REST 操作；例如“管理企业标签”页覆盖查询、新增、编辑、删除等多个路由。
@@ -678,7 +678,7 @@
 
 ## 日程
 
-状态：✅ 9；⚠️ 0；❌ 8；⛔ 2
+状态：✅ 11；⚠️ 0；❌ 5；⛔ 3
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -689,9 +689,9 @@
 |  | 删除日历 | [97718](https://developer.work.weixin.qq.com/document/path/97718) | ✅ 已对接 | WorkOaClient.delCalendar |
 | 管理日程 | 创建日程 | [93648](https://developer.work.weixin.qq.com/document/path/93648) | ✅ 已对接 | WorkOaClient.addSchedule |
 |  | 更新日程 | [97720](https://developer.work.weixin.qq.com/document/path/97720) | ✅ 已对接 | WorkOaClient.updateSchedule |
-|  | 更新重复日程 | [96204](https://developer.work.weixin.qq.com/document/path/96204) | ❌ 未对接 | — |
-|  | 新增日程参与者 | [97721](https://developer.work.weixin.qq.com/document/path/97721) | ❌ 未对接 | — |
-|  | 删除日程参与者 | [97722](https://developer.work.weixin.qq.com/document/path/97722) | ❌ 未对接 | — |
+|  | 更新重复日程 | [96204](https://developer.work.weixin.qq.com/document/path/96204) | ⛔ 范围外 | 官方说明页，无独立REST路由；重复日程模式由 WorkOaClient.updateSchedule 通过 op_mode/op_start_time 支持 |
+|  | 新增日程参与者 | [97721](https://developer.work.weixin.qq.com/document/path/97721) | ✅ 已对接 | WorkOaClient.addScheduleAttendees（oa/schedule/add_attendees） |
+|  | 删除日程参与者 | [97722](https://developer.work.weixin.qq.com/document/path/97722) | ✅ 已对接 | WorkOaClient.delScheduleAttendees（oa/schedule/del_attendees） |
 |  | 获取日历下的日程列表 | [97723](https://developer.work.weixin.qq.com/document/path/97723) | ✅ 已对接 | WorkOaClient.getScheduleByCalendar |
 |  | 获取日程详情 | [97724](https://developer.work.weixin.qq.com/document/path/97724) | ✅ 已对接 | WorkOaClient.getSchedules |
 |  | 取消日程 | [97725](https://developer.work.weixin.qq.com/document/path/97725) | ✅ 已对接 | WorkOaClient.delSchedule |

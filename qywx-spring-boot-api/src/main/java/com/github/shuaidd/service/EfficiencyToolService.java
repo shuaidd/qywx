@@ -1,13 +1,17 @@
 package com.github.shuaidd.service;
 
 import com.github.shuaidd.client.EfficiencyToolClient;
+import com.github.shuaidd.dto.addressbook.UserId;
 import com.github.shuaidd.dto.tool.DialRecord;
 import com.github.shuaidd.dto.wedrive.SpaceInfo;
+import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.tool.*;
 import com.github.shuaidd.response.wedrive.*;
 import com.github.shuaidd.resquest.oa.CalendarRequest;
 import com.github.shuaidd.resquest.tool.*;
 import com.github.shuaidd.resquest.wedrive.*;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +25,10 @@ import java.util.Objects;
  **/
 @Service
 public class EfficiencyToolService extends AbstractBaseService {
+
+    private static final int MAX_SCHEDULE_ATTENDEE_COUNT = 1000;
+    private static final int UPDATE_THIS_REPEAT_SCHEDULE_MODE = 1;
+    private static final int UPDATE_FUTURE_REPEAT_SCHEDULE_MODE = 2;
 
     private final EfficiencyToolClient efficiencyToolClient;
 
@@ -88,6 +96,7 @@ public class EfficiencyToolService extends AbstractBaseService {
      * @param applicationName 应用名称
      */
     public void updateSchedule(ScheduleRequest request, String applicationName) {
+        checkScheduleUpdateRequest(request);
         workOaClient.updateSchedule(request, applicationName);
     }
 
@@ -121,6 +130,57 @@ public class EfficiencyToolService extends AbstractBaseService {
      */
     public GetScheduleResponse getScheduleByCalendar(GetScheduleByCalendarRequest request, String applicationName) {
         return workOaClient.getScheduleByCalendar(request, applicationName);
+    }
+
+    /**
+     * 新增日程参与者
+     *
+     * @param request         请求体
+     * @param applicationName 应用名称
+     */
+    public void addScheduleAttendees(ScheduleAttendeesRequest request, String applicationName) {
+        checkScheduleAttendeesRequest(request);
+        workOaClient.addScheduleAttendees(request, applicationName);
+    }
+
+    /**
+     * 删除日程参与者
+     *
+     * @param request         请求体
+     * @param applicationName 应用名称
+     */
+    public void delScheduleAttendees(ScheduleAttendeesRequest request, String applicationName) {
+        checkScheduleAttendeesRequest(request);
+        workOaClient.delScheduleAttendees(request, applicationName);
+    }
+
+    private void checkScheduleUpdateRequest(ScheduleRequest request) {
+        Objects.requireNonNull(request, "request 不能为空，请检查！！！");
+        Objects.requireNonNull(request.getSchedule(), "schedule 不能为空，请检查！！！");
+        Integer opMode = request.getSchedule().getOpMode();
+        boolean isPartialRepeatUpdate = Objects.equals(opMode, UPDATE_THIS_REPEAT_SCHEDULE_MODE)
+                || Objects.equals(opMode, UPDATE_FUTURE_REPEAT_SCHEDULE_MODE);
+        if (isPartialRepeatUpdate && Objects.isNull(request.getSchedule().getOpStartTime())) {
+            throw new ParamCheckException("schedule.op_start_time 不能为空，请检查！！！");
+        }
+    }
+
+    private void checkScheduleAttendeesRequest(ScheduleAttendeesRequest request) {
+        Objects.requireNonNull(request, "request 不能为空，请检查！！！");
+        if (StringUtils.isBlank(request.getScheduleId())) {
+            throw new ParamCheckException("schedule_id 不能为空，请检查！！！");
+        }
+        if (CollectionUtils.isEmpty(request.getAttendees())) {
+            throw new ParamCheckException("attendees 不能为空，请检查！！！");
+        }
+        if (request.getAttendees().size() > MAX_SCHEDULE_ATTENDEE_COUNT) {
+            throw new ParamCheckException("attendees 累计不能超过1000人，请检查！！！");
+        }
+        for (UserId attendee : request.getAttendees()) {
+            if (Objects.isNull(attendee) || StringUtils.isBlank(attendee.getUserId())) {
+                throw new ParamCheckException("attendees.userid 不能为空，请检查！！！");
+            }
+        }
     }
 
     /**

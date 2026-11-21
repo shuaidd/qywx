@@ -41,6 +41,19 @@ public class ScheduleData {
     private ReminderData reminders;
     private Integer status;
 
+    /**
+     * 重复日程修改模式：0/空表示全部修改，1表示仅修改此日程，2表示修改将来的所有日程
+     */
+    @JsonProperty("op_mode")
+    private Integer opMode;
+
+    /**
+     * 指定从哪个周期开始修改，op_mode为1或2时必填
+     */
+    @JsonProperty("op_start_time")
+    @JsonSerialize(using = Date2LongSerializer.class)
+    private Date opStartTime;
+
     public String getScheduleId() {
         return scheduleId;
     }
@@ -127,5 +140,21 @@ public class ScheduleData {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getOpMode() {
+        return opMode;
+    }
+
+    public void setOpMode(Integer opMode) {
+        this.opMode = opMode;
+    }
+
+    public Date getOpStartTime() {
+        return opStartTime;
+    }
+
+    public void setOpStartTime(Date opStartTime) {
+        this.opStartTime = opStartTime;
     }
 }

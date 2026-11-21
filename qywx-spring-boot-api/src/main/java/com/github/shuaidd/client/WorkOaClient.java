@@ -115,6 +115,26 @@ public interface WorkOaClient extends CommonClient {
     GetScheduleResponse getScheduleByCalendar(GetScheduleByCalendarRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
+     * 新增日程参与者
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "oa/schedule/add_attendees", headers = HEAD)
+    BaseResponse addScheduleAttendees(ScheduleAttendeesRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除日程参与者
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "oa/schedule/del_attendees", headers = HEAD)
+    BaseResponse delScheduleAttendees(ScheduleAttendeesRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
      * 获取审批模板详情
      *
      * @param request 请求体
