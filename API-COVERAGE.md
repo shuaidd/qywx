@@ -19,9 +19,9 @@
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 244 |
+| ✅ 已对接 | 245 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 351 |
+| ❌ 未对接 | 350 |
 | ⛔ 范围外 | 141 |
 | 合计 | 738 |
 
@@ -329,12 +329,12 @@
 
 ## 客户联系
 
-状态：✅ 27；⚠️ 0；❌ 17；⛔ 4
+状态：✅ 28；⚠️ 0；❌ 16；⛔ 4
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
 | 客户联系 | 概述 | [92109](https://developer.work.weixin.qq.com/document/path/92109) | ⛔ 范围外 | — |
-|  | 成员对外信息 | [92230](https://developer.work.weixin.qq.com/document/path/92230) | ❌ 未对接 | — |
+|  | 成员对外信息 | [92230](https://developer.work.weixin.qq.com/document/path/92230) | ✅ 已对接 | AddressBookClient.createUser/updateUser/getUser 中 external_position/external_profile/extattr 模型 |
 | 企业服务人员管理 | 获取配置了客户联系功能的成员列表 | [92571](https://developer.work.weixin.qq.com/document/path/92571) | ✅ 已对接 | ExternalContactClient.getFollowUserList |
 | 客户管理 | 获取客户列表 | [92113](https://developer.work.weixin.qq.com/document/path/92113) | ✅ 已对接 | ExternalContactClient.getCustomList |
 |  | 获取客户详情 | [92114](https://developer.work.weixin.qq.com/document/path/92114) | ✅ 已对接 | ExternalContactClient.getExternalContact |

@@ -1,6 +1,7 @@
 package com.github.shuaidd.dto.addressbook;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.shuaidd.dto.externalcontact.ExternalProfile;
 import com.github.shuaidd.response.AbstractBaseResponse;
 
 import java.util.List;
@@ -56,6 +57,9 @@ public class WeChatUser extends AbstractBaseResponse {
 
     @JsonProperty("external_position")
     private String externalPosition;
+
+    @JsonProperty("external_profile")
+    private ExternalProfile externalProfile;
 
     @JsonProperty("extattr")
     private WeChatUserExtAttr extAttr;
@@ -196,6 +200,14 @@ public class WeChatUser extends AbstractBaseResponse {
         this.externalPosition = externalPosition;
     }
 
+    public ExternalProfile getExternalProfile() {
+        return externalProfile;
+    }
+
+    public void setExternalProfile(ExternalProfile externalProfile) {
+        this.externalProfile = externalProfile;
+    }
+
     public WeChatUserExtAttr getExtAttr() {
         return extAttr;
     }
@@ -224,6 +236,7 @@ public class WeChatUser extends AbstractBaseResponse {
                 .add("address='" + address + "'")
                 .add("toInvite=" + toInvite)
                 .add("externalPosition='" + externalPosition + "'")
+                .add("externalProfile=" + externalProfile)
                 .add("extAttr=" + extAttr)
                 .toString();
     }
