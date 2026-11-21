@@ -1,7 +1,9 @@
 package com.github.shuaidd.service;
 
 import com.github.shuaidd.client.ExternalContactClient;
+import com.github.shuaidd.dto.externalcontact.CustomerStrategyRange;
 import com.github.shuaidd.exception.ParamCheckException;
+import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.addressbook.MobileHashCodeResponse;
 import com.github.shuaidd.response.externalcontact.*;
 import com.github.shuaidd.resquest.CursorPageRequest;
@@ -9,8 +11,10 @@ import com.github.shuaidd.resquest.PageRequest;
 import com.github.shuaidd.resquest.addressbook.MobileHashCodeRequest;
 import com.github.shuaidd.resquest.addressbook.TagGroupRequest;
 import com.github.shuaidd.resquest.externalcontact.*;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.List;
 import java.util.Objects;
 import org.springframework.stereotype.Service;
 
@@ -591,5 +595,184 @@ public class CustomContactService extends AbstractBaseService {
             throw new ParamCheckException("agentid、msgtype 不能为空，请检查！！！");
         }
         return externalContactClient.sendSchoolNotification(request, applicationName);
+    }
+
+    /* ---------客户联系规则组管理---------- start */
+
+    /**
+     * 获取客户联系规则组 ID 列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return CustomerStrategyListResponse
+     */
+    public CustomerStrategyListResponse getCustomerStrategyList(CustomerStrategyListRequest request, String applicationName) {
+        if (Objects.isNull(request)) {
+            throw new ParamCheckException("request 不能为空，请检查！！！");
+        }
+        checkCustomerStrategyLimit(request.getLimit(), request);
+        return externalContactClient.getCustomerStrategyList(request, applicationName);
+    }
+
+    /**
+     * 获取客户联系规则组详情
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return CustomerStrategyResponse
+     */
+    public CustomerStrategyResponse getCustomerStrategy(CustomerStrategyIdRequest request, String applicationName) {
+        checkCustomerStrategyId(request);
+        return externalContactClient.getCustomerStrategy(request, applicationName);
+    }
+
+    /**
+     * 获取客户联系规则组管理范围
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return CustomerStrategyRangeResponse
+     */
+    public CustomerStrategyRangeResponse getCustomerStrategyRange(CustomerStrategyRangeRequest request, String applicationName) {
+        checkCustomerStrategyId(request);
+        checkCustomerStrategyLimit(request.getLimit(), request);
+        return externalContactClient.getCustomerStrategyRange(request, applicationName);
+    }
+
+    /**
+     * 创建客户联系规则组；官方要求串行调用，请勿并发创建
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return CustomerStrategyIdResponse
+     */
+    public CustomerStrategyIdResponse createCustomerStrategy(CustomerStrategyCreateRequest request, String applicationName) {
+        if (Objects.isNull(request) || StringUtils.isBlank(request.getStrategyName())
+                || CollectionUtils.isEmpty(request.getAdminList()) || CollectionUtils.isEmpty(request.getRange())) {
+            throw new ParamCheckException("strategyName、adminList、range 不能为空，请检查！！！");
+        }
+        checkCustomerStrategyAdminList(request.getAdminList());
+        checkCustomerStrategyRange(request.getRange());
+        return externalContactClient.createCustomerStrategy(request, applicationName);
+    }
+
+    /**
+     * 编辑客户联系规则组及其管理范围；官方要求串行调用，请勿并发编辑
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return BaseResponse
+     */
+    public BaseResponse editCustomerStrategy(CustomerStrategyEditRequest request, String applicationName) {
+        if (Objects.isNull(request) || Objects.isNull(request.getStrategyId())) {
+            throw new ParamCheckException("strategyId 不能为空，请检查！！！");
+        }
+        checkCustomerStrategyAdminList(request.getAdminList());
+        checkCustomerStrategyRange(request.getRangeAdd());
+        checkCustomerStrategyRange(request.getRangeDel());
+        return externalContactClient.editCustomerStrategy(request, applicationName);
+    }
+
+    /**
+     * 删除客户联系规则组
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return BaseResponse
+     */
+    public BaseResponse deleteCustomerStrategy(CustomerStrategyIdRequest request, String applicationName) {
+        checkCustomerStrategyId(request);
+        return externalContactClient.deleteCustomerStrategy(request, applicationName);
+    }
+
+    /* ---------客户联系规则组管理---------- end */
+
+    /**
+     * 校验规则组详情请求及规则组 ID
+     *
+     * @param request 请求
+     */
+    private void checkCustomerStrategyId(CustomerStrategyIdRequest request) {
+        if (Objects.isNull(request) || Objects.isNull(request.getStrategyId())) {
+            throw new ParamCheckException("strategyId 不能为空，请检查！！！");
+        }
+    }
+
+    /**
+     * 校验规则组管理范围请求及规则组 ID
+     *
+     * @param request 请求
+     */
+    private void checkCustomerStrategyId(CustomerStrategyRangeRequest request) {
+        if (Objects.isNull(request) || Objects.isNull(request.getStrategyId())) {
+            throw new ParamCheckException("strategyId 不能为空，请检查！！！");
+        }
+    }
+
+    /**
+     * 校验规则组分页大小，官方最大值为 1000
+     *
+     * @param limit   分页大小
+     * @param request 请求
+     */
+    private void checkCustomerStrategyLimit(Integer limit, Object request) {
+        if (Objects.isNull(limit)) {
+            if (request instanceof CustomerStrategyListRequest) {
+                ((CustomerStrategyListRequest) request).setLimit(1000);
+            } else if (request instanceof CustomerStrategyRangeRequest) {
+                ((CustomerStrategyRangeRequest) request).setLimit(1000);
+            } else {
+                throw new ParamCheckException("limit 不能为空，请检查！！！");
+            }
+            return;
+        }
+        if (limit <= 0 || limit > 1000) {
+            throw new ParamCheckException("limit 必须在 1 到 1000 之间，请检查！！！");
+        }
+    }
+
+    /**
+     * 校验规则组管理员列表，官方单次最多允许 20 个管理员
+     *
+     * @param adminList 管理员列表
+     */
+    private void checkCustomerStrategyAdminList(List<String> adminList) {
+        if (CollectionUtils.isEmpty(adminList)) {
+            return;
+        }
+        if (adminList.size() > 20) {
+            throw new ParamCheckException("adminList 最多允许 20 个管理员，请检查！！！");
+        }
+        for (String admin : adminList) {
+            if (StringUtils.isBlank(admin)) {
+                throw new ParamCheckException("adminList 中存在空的管理员 userid，请检查！！！");
+            }
+        }
+    }
+
+    /**
+     * 校验规则组管理范围节点，官方单次最多允许 100 个节点
+     *
+     * @param range 管理范围节点列表
+     */
+    private void checkCustomerStrategyRange(List<CustomerStrategyRange> range) {
+        if (CollectionUtils.isEmpty(range)) {
+            return;
+        }
+        if (range.size() > 100) {
+            throw new ParamCheckException("range 最多允许 100 个管理范围节点，请检查！！！");
+        }
+        for (CustomerStrategyRange node : range) {
+            if (Objects.isNull(node) || Objects.isNull(node.getType())) {
+                throw new ParamCheckException("管理范围节点和节点类型不能为空，请检查！！！");
+            }
+            if (Objects.equals(node.getType(), 1) && StringUtils.isBlank(node.getUserid())) {
+                throw new ParamCheckException("成员类型管理范围节点必须配置 userid，请检查！！！");
+            } else if (Objects.equals(node.getType(), 2) && Objects.isNull(node.getPartyid())) {
+                throw new ParamCheckException("部门类型管理范围节点必须配置 partyid，请检查！！！");
+            } else if (!Objects.equals(node.getType(), 1) && !Objects.equals(node.getType(), 2)) {
+                throw new ParamCheckException("管理范围节点类型只允许 1-成员 或 2-部门，请检查！！！");
+            }
+        }
     }
 }

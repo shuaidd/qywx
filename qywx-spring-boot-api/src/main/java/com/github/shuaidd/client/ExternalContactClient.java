@@ -516,4 +516,64 @@ public interface ExternalContactClient extends CommonClient {
      */
     @PostMapping(value = "externalcontact/message/send", headers = HEAD)
     SendSchoolNotificationResponse sendSchoolNotification(SendSchoolNotificationRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客户联系规则组 ID 列表
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CustomerStrategyListResponse
+     */
+    @PostMapping(value = "externalcontact/customer_strategy/list", headers = HEAD)
+    CustomerStrategyListResponse getCustomerStrategyList(CustomerStrategyListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客户联系规则组详情
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CustomerStrategyResponse
+     */
+    @PostMapping(value = "externalcontact/customer_strategy/get", headers = HEAD)
+    CustomerStrategyResponse getCustomerStrategy(CustomerStrategyIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客户联系规则组管理范围
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CustomerStrategyRangeResponse
+     */
+    @PostMapping(value = "externalcontact/customer_strategy/get_range", headers = HEAD)
+    CustomerStrategyRangeResponse getCustomerStrategyRange(CustomerStrategyRangeRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 创建客户联系规则组
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CustomerStrategyIdResponse
+     */
+    @PostMapping(value = "externalcontact/customer_strategy/create", headers = HEAD)
+    CustomerStrategyIdResponse createCustomerStrategy(CustomerStrategyCreateRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 编辑客户联系规则组及其管理范围
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/customer_strategy/edit", headers = HEAD)
+    BaseResponse editCustomerStrategy(CustomerStrategyEditRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除客户联系规则组
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/customer_strategy/del", headers = HEAD)
+    BaseResponse deleteCustomerStrategy(CustomerStrategyIdRequest request, @RequestParam(HEAD_KEY) String app);
 }

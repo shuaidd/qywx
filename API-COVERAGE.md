@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的 69 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 295 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 301 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 245 |
+| ✅ 已对接 | 246 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 350 |
+| ❌ 未对接 | 349 |
 | ⛔ 范围外 | 141 |
 | 合计 | 738 |
 
@@ -329,7 +329,7 @@
 
 ## 客户联系
 
-状态：✅ 28；⚠️ 0；❌ 16；⛔ 4
+状态：✅ 29；⚠️ 0；❌ 15；⛔ 4
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -340,7 +340,7 @@
 |  | 获取客户详情 | [92114](https://developer.work.weixin.qq.com/document/path/92114) | ✅ 已对接 | ExternalContactClient.getExternalContact |
 |  | 批量获取客户详情 | [92994](https://developer.work.weixin.qq.com/document/path/92994) | ✅ 已对接 | ExternalContactClient.getBatchExternalContact |
 |  | 修改客户备注信息 | [92115](https://developer.work.weixin.qq.com/document/path/92115) | ✅ 已对接 | ExternalContactClient.updateCustomRemark |
-|  | 客户联系规则组管理 | [94883](https://developer.work.weixin.qq.com/document/path/94883) | ❌ 未对接 | — |
+|  | 客户联系规则组管理 | [94883](https://developer.work.weixin.qq.com/document/path/94883) | ✅ 已对接 | ExternalContactClient.getCustomerStrategyList / getCustomerStrategy / getCustomerStrategyRange / createCustomerStrategy / editCustomerStrategy / deleteCustomerStrategy |
 | 客户标签管理 | 管理企业标签 | [92117](https://developer.work.weixin.qq.com/document/path/92117) | ✅ 已对接 | ExternalContactClient.getCorpTagList / addCorpTag / editCorpTag / delCorpTag |
 |  | 管理企业规则组下的客户标签 | [94882](https://developer.work.weixin.qq.com/document/path/94882) | ❌ 未对接 | — |
 |  | 编辑客户企业标签 | [92118](https://developer.work.weixin.qq.com/document/path/92118) | ✅ 已对接 | ExternalContactClient.markTag |
