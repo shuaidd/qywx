@@ -70,6 +70,46 @@ public interface ExternalContactClient extends CommonClient {
     BaseResponse deleteContactWay(GetContactWayRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
+     * 配置客户群加入群聊方式
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return GroupChatJoinWayCreateResponse
+     */
+    @PostMapping(value = "externalcontact/groupchat/add_join_way", headers = HEAD)
+    GroupChatJoinWayCreateResponse addGroupChatJoinWay(GroupChatJoinWayRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客户群加入群聊方式配置
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return GroupChatJoinWayConfigResponse
+     */
+    @PostMapping(value = "externalcontact/groupchat/get_join_way", headers = HEAD)
+    GroupChatJoinWayConfigResponse getGroupChatJoinWay(GroupChatJoinWayConfigRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 更新客户群加入群聊方式配置
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/groupchat/update_join_way", headers = HEAD)
+    BaseResponse updateGroupChatJoinWay(GroupChatJoinWayRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除客户群加入群聊方式配置
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/groupchat/del_join_way", headers = HEAD)
+    BaseResponse deleteGroupChatJoinWay(GroupChatJoinWayConfigRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
      * 结束临时会话
      *
      * @param request 请求体

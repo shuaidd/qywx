@@ -99,6 +99,51 @@ public class CustomContactService extends AbstractBaseService {
         externalContactClient.closeTempChat(request, applicationName);
     }
 
+    /**
+     * 配置客户群加入群聊方式
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return GroupChatJoinWayCreateResponse
+     */
+    public GroupChatJoinWayCreateResponse addGroupChatJoinWay(GroupChatJoinWayRequest request, String applicationName) {
+        checkGroupChatJoinWay(request, false);
+        return externalContactClient.addGroupChatJoinWay(request, applicationName);
+    }
+
+    /**
+     * 获取客户群加入群聊方式配置
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return GroupChatJoinWayConfigResponse
+     */
+    public GroupChatJoinWayConfigResponse getGroupChatJoinWay(GroupChatJoinWayConfigRequest request, String applicationName) {
+        checkGroupChatJoinWayConfigId(request);
+        return externalContactClient.getGroupChatJoinWay(request, applicationName);
+    }
+
+    /**
+     * 更新客户群加入群聊方式配置
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void updateGroupChatJoinWay(GroupChatJoinWayRequest request, String applicationName) {
+        checkGroupChatJoinWay(request, true);
+        externalContactClient.updateGroupChatJoinWay(request, applicationName);
+    }
+
+    /**
+     * 删除客户群加入群聊方式配置
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void deleteGroupChatJoinWay(GroupChatJoinWayConfigRequest request, String applicationName) {
+        checkGroupChatJoinWayConfigId(request);
+        externalContactClient.deleteGroupChatJoinWay(request, applicationName);
+    }
     /* ---------企业服务人员管理---------- end */
 
     /* ---------客户管理---------- start */
@@ -918,6 +963,58 @@ public class CustomContactService extends AbstractBaseService {
         }
         if (order < 0 || order >= 4294967296L) {
             throw new ParamCheckException(fieldName + " 必须在 0 到 4294967295 之间，请检查！！！");
+        }
+    }
+
+    /**
+     * 校验加入群聊配置 ID
+     *
+     * @param request 查询或删除配置请求
+     */
+    private void checkGroupChatJoinWayConfigId(GroupChatJoinWayConfigRequest request) {
+        if (Objects.isNull(request) || StringUtils.isBlank(request.getConfigId())) {
+            throw new ParamCheckException("configId 不能为空，请检查！！！");
+        }
+    }
+
+    /**
+     * 校验加入群聊配置内容
+     *
+     * @param request          配置请求
+     * @param requireConfigId 更新时必须携带配置 ID
+     */
+    private void checkGroupChatJoinWay(GroupChatJoinWayRequest request, boolean requireConfigId) {
+        if (Objects.isNull(request)) {
+            throw new ParamCheckException("request 不能为空，请检查！！！");
+        }
+        if (requireConfigId && StringUtils.isBlank(request.getConfigId())) {
+            throw new ParamCheckException("configId 不能为空，请检查！！！");
+        }
+        if (Objects.isNull(request.getScene()) || (request.getScene() != 1 && request.getScene() != 2)) {
+            throw new ParamCheckException("scene 仅允许 1-群的小程序插件或 2-群的二维码，请检查！！！");
+        }
+        checkCustomerStrategyIdList(request.getChatIdList(), "chatIdList");
+        if (CollectionUtils.isEmpty(request.getChatIdList()) || request.getChatIdList().size() > 5) {
+            throw new ParamCheckException("chatIdList 至少配置 1 个且最多配置 5 个，请检查！！！");
+        }
+        checkLength(request.getRemark(), 30, "remark");
+        checkLength(request.getState(), 30, "state");
+        checkLength(request.getRoomBaseName(), 40, "roomBaseName");
+        if (Objects.nonNull(request.getAutoCreateRoom()) && request.getAutoCreateRoom() != 0 && request.getAutoCreateRoom() != 1) {
+            throw new ParamCheckException("autoCreateRoom 仅允许 0 或 1，请检查！！！");
+        }
+    }
+
+    /**
+     * 校验可选字符串长度
+     *
+     * @param value     字符串值
+     * @param maxLength 最大长度
+     * @param fieldName 参数名称
+     */
+    private void checkLength(String value, int maxLength, String fieldName) {
+        if (StringUtils.isNotBlank(value) && value.length() > maxLength) {
+            throw new ParamCheckException(fieldName + " 最长允许 " + maxLength + " 个字符，请检查！！！");
         }
     }
 }

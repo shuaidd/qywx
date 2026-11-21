@@ -1,4 +1,4 @@
-# 企微服务端 API 补齐计划
+﻿# 企微服务端 API 补齐计划
 
 ## 目标与口径
 
@@ -24,7 +24,7 @@
 | 1 | 账号 ID 转换、手机号/邮箱获取 userid、单个部门详情 | 4 | 已完成 | 新增转换/查询 Feign、Service、请求响应模型；`API-COVERAGE.md` 已同步，模块编译通过。 |
 | 2 | 通讯录查看权限与身份验证二次验证 | 5 | 已完成 | 身份验证二次验证 2 页、通讯录查看权限 4 页已完成；路由 `auth/get_tfa_info`、`user/tfa_succ`、`contactrule/create`、`contactrule/list`、`contactrule/update`、`contactrule/delete` 已接入。 |
 | 3 | 消息接收与发送、应用管理、机器人消息 | 6 | 已完成 | 覆盖模板卡片更新、消息撤回、学校通知、机器人主动回复、智能表格自动化群聊列表和工作台自定义展示；共新增 10 个 Feign 方法。 |
-| 4 | 客户联系缺口 | 17 | 进行中 | 已完成成员对外信息、客户联系规则组管理、规则组客户标签和客户群 opengid 转换页；其余按加入群聊、朋友圈、获客助手和群发细分推进。 |
+| 4 | 客户联系缺口 | 17 | 进行中 | 已完成成员对外信息、客户联系规则组管理、规则组客户标签、客户群 opengid 转换和客户群「加入群聊」管理页；其余按朋友圈、获客助手和群发细分推进。 |
 | 5 | 企业支付与小程序收款 | 21 | 待开始 | 涉及资金能力，先确认路由和参数，不修改支付配置。 |
 | 6 | 效率工具：文档、日程、待办、收集表 | 53 | 待开始 | 文档页较多，按智能文档/智能表格/日程待办继续拆分。 |
 | 7 | 会议全家桶 | 128 | 待开始 | 最大批次，按基础会议、统计、会控、录制、Webinar、Rooms、MRA 拆成子批。 |
@@ -61,3 +61,4 @@
 - 2026-11-21：批次 4 完成客户联系规则组管理文档页，覆盖 `externalcontact/customer_strategy/list`、`customer_strategy/get`、`customer_strategy/get_range`、`customer_strategy/create`、`customer_strategy/edit` 和 `customer_strategy/del` 六条路由；覆盖度更新为已对接 246 页、未对接 349 页，Feign 方法数达到 301；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
 - 2026-11-21：批次 4 完成管理企业规则组下的客户标签文档页，覆盖 `externalcontact/get_strategy_tag_list`、`externalcontact/add_strategy_tag`、`externalcontact/edit_strategy_tag` 和 `externalcontact/del_strategy_tag` 四条路由；覆盖度更新为已对接 247 页、未对接 348 页，Feign 方法数达到 305；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
 - 2026-11-21：批次 4 完成客户群 opengid 转换文档页，覆盖 `externalcontact/opengid_to_chatid`；覆盖度更新为已对接 248 页、未对接 347 页，Feign 方法数达到 306；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
+- 2026-11-21：批次 4 完成客户群「加入群聊」管理文档页，覆盖 `externalcontact/groupchat/add_join_way`、`get_join_way`、`update_join_way` 和 `del_join_way` 四条路由；覆盖度更新为已对接 249 页、未对接 346 页，Feign 方法数达到 310；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
