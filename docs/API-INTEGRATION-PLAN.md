@@ -73,3 +73,5 @@
 - 2026-11-21：完成获取成员多次收消息详情文档页，覆盖 `externalcontact/customer_acquisition/get_chat_info`；新增模型字段均带中文含义注释，覆盖度更新为已对接 256 页、未对接 337 页，Feign 方法数达到 328；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
 
 - 2026-11-21：完成提醒成员群发文档页，覆盖 `externalcontact/remind_groupmsg_send`；新增请求模型字段带中文含义注释，Service 校验 `msgId`；覆盖度更新为已对接 257 页、未对接 336 页，Feign 方法数达到 329。
+
+- 2026-11-21：完成停止企业群发文档页，覆盖 `externalcontact/cancel_groupmsg_send`；新增请求模型字段带中文含义注释，Service 校验 `msgId`；覆盖度更新为已对接 258 页、未对接 335 页，Feign 方法数达到 330。

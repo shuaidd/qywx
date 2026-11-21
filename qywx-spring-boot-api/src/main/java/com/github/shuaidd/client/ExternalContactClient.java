@@ -418,6 +418,16 @@ public interface ExternalContactClient extends CommonClient {
     BaseResponse remindGroupMsgSend(GroupMsgRemindRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
+     * 停止企业群发
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/cancel_groupmsg_send", headers = HEAD)
+    BaseResponse cancelGroupMsgSend(GroupMsgCancelRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
      * 发送新客户欢迎语
      *
      * @param request 请求体

@@ -515,6 +515,20 @@ public class CustomContactService extends AbstractBaseService {
     }
 
     /**
+     * 停止企业群发
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return BaseResponse
+     */
+    public BaseResponse cancelGroupMsgSend(GroupMsgCancelRequest request, String applicationName) {
+        if (request == null || StringUtils.isBlank(request.getMsgId())) {
+            throw new ParamCheckException("msgId 不能为空，请检查！！！");
+        }
+        return externalContactClient.cancelGroupMsgSend(request, applicationName);
+    }
+
+    /**
      * 发送新客户欢迎语
      *
      * @param request         请求

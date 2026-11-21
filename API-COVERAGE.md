@@ -19,9 +19,9 @@
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 257 |
+| ✅ 已对接 | 258 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 336 |
+| ❌ 未对接 | 335 |
 | ⛔ 范围外 | 143 |
 | 合计 | 738 |
 
@@ -329,7 +329,7 @@
 
 ## 客户联系
 
-状态：✅ 37；⚠️ 0；❌ 6；⛔ 5
+状态：✅ 38；⚠️ 0；❌ 5；⛔ 5
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -368,7 +368,7 @@
 |  | 获取成员多次收消息详情 | [100130](https://developer.work.weixin.qq.com/document/path/100130) | ✅ 已对接 | ExternalContactClient.getCustomerAcquisitionChatInfo（externalcontact/customer_acquisition/get_chat_info） |
 | 消息推送 | 创建企业群发 | [92135](https://developer.work.weixin.qq.com/document/path/92135) | ✅ 已对接 | ExternalContactClient.addMsgTemplate |
 |  | 提醒成员群发 | [97610](https://developer.work.weixin.qq.com/document/path/97610) | ✅ 已对接 | ExternalContactClient.remindGroupMsgSend |
-|  | 停止企业群发 | [97611](https://developer.work.weixin.qq.com/document/path/97611) | ❌ 未对接 | — |
+|  | 停止企业群发 | [97611](https://developer.work.weixin.qq.com/document/path/97611) | ✅ 已对接 | ExternalContactClient.cancelGroupMsgSend |
 |  | 获取企业的全部群发记录 | [93338](https://developer.work.weixin.qq.com/document/path/93338) | ✅ 已对接 | ExternalContactClient.getGroupMsgList / getGroupMsgListV2 |
 |  | 发送新客户欢迎语 | [92137](https://developer.work.weixin.qq.com/document/path/92137) | ✅ 已对接 | ExternalContactClient.sendWelcomeMsg |
 |  | 入群欢迎语素材管理 | [92366](https://developer.work.weixin.qq.com/document/path/92366) | ✅ 已对接 | ExternalContactClient.add/edit/get/delete GroupWelcomeTemplate |
