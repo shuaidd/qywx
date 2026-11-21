@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 343 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 348 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 268 |
+| ✅ 已对接 | 273 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 325 |
+| ❌ 未对接 | 320 |
 | ⛔ 范围外 | 143 |
 | 合计 | 738 |
 
@@ -597,7 +597,7 @@
 
 ## 文档
 
-状态：✅ 31；⚠️ 0；❌ 41；⛔ 2
+状态：✅ 36；⚠️ 0；❌ 36；⛔ 2
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -653,11 +653,11 @@
 |  | 修改文档成员与权限 | [97781](https://developer.work.weixin.qq.com/document/path/97781) | ✅ 已对接 | WechatDocClient.modDocMember |
 |  | 修改文档安全设置 | [97782](https://developer.work.weixin.qq.com/document/path/97782) | ✅ 已对接 | WechatDocClient.modDocSafetySetting |
 |  | 管理智能表格内容权限 | [99935](https://developer.work.weixin.qq.com/document/path/99935) | ✅ 已对接 | WechatSmartSheetClient.get/update SheetPriv，create/mod/delete Rule |
-| 管理收集表 | 创建收集表 | [97462](https://developer.work.weixin.qq.com/document/path/97462) | ❌ 未对接 | — |
-|  | 编辑收集表 | [97816](https://developer.work.weixin.qq.com/document/path/97816) | ❌ 未对接 | — |
-|  | 获取收集表信息 | [97817](https://developer.work.weixin.qq.com/document/path/97817) | ❌ 未对接 | — |
-|  | 收集表的统计信息查询 | [97818](https://developer.work.weixin.qq.com/document/path/97818) | ❌ 未对接 | — |
-|  | 读取收集表答案 | [97819](https://developer.work.weixin.qq.com/document/path/97819) | ❌ 未对接 | — |
+| 管理收集表 | 创建收集表 | [97462](https://developer.work.weixin.qq.com/document/path/97462) | ✅ 已对接 | WechatDocClient.createForm |
+|  | 编辑收集表 | [97816](https://developer.work.weixin.qq.com/document/path/97816) | ✅ 已对接 | WechatDocClient.modifyForm |
+|  | 获取收集表信息 | [97817](https://developer.work.weixin.qq.com/document/path/97817) | ✅ 已对接 | WechatDocClient.getFormInfo |
+|  | 收集表的统计信息查询 | [97818](https://developer.work.weixin.qq.com/document/path/97818) | ✅ 已对接 | WechatDocClient.getFormStatistic |
+|  | 读取收集表答案 | [97819](https://developer.work.weixin.qq.com/document/path/97819) | ✅ 已对接 | WechatDocClient.getFormAnswer |
 | 回调通知 | 概述 | [97316](https://developer.work.weixin.qq.com/document/path/97316) | ⛔ 范围外 | — |
 |  | 修改文档成员事件 | [97833](https://developer.work.weixin.qq.com/document/path/97833) | ❌ 未对接 | — |
 |  | 删除文档事件 | [97834](https://developer.work.weixin.qq.com/document/path/97834) | ❌ 未对接 | — |

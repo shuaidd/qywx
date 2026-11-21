@@ -155,4 +155,54 @@ public interface WechatDocClient extends CommonClient {
      */
     @PostMapping(value = "/wedoc/mod_doc_safty_setting", headers = HEAD)
     BaseResponse modDocSafetySetting(ModDocSafetySettingRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 创建收集表
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/create_form", headers = HEAD)
+    CreateFormResponse createForm(CreateFormRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 编辑收集表
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/modify_form", headers = HEAD)
+    BaseResponse modifyForm(ModifyFormRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取收集表信息
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/get_form_info", headers = HEAD)
+    GetFormInfoResponse getFormInfo(FormIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 查询收集表统计信息
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/get_form_statistic", headers = HEAD)
+    FormStatisticResponse getFormStatistic(FormStatisticRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 读取收集表答案
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/get_form_answer", headers = HEAD)
+    FormAnswerResponse getFormAnswer(FormAnswerRequest request, @RequestParam(HEAD_KEY) String app);
 }

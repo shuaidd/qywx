@@ -26,7 +26,7 @@
 | 3 | 消息接收与发送、应用管理、机器人消息 | 6 | 已完成 | 覆盖模板卡片更新、消息撤回、学校通知、机器人主动回复、智能表格自动化群聊列表和工作台自定义展示；共新增 10 个 Feign 方法。 |
 | 4 | 客户联系缺口 | 17 | 已完成 | 客户联系目录 48 个文档页全部核对完毕：42 个已对接、6 个确认为范围外。覆盖成员对外信息、规则组、企业标签、继承、客户群、朋友圈、获客助手、群发、统计、商品图册、敏感词、附件资源与已服务外部联系人。 |
 | 5 | 企业支付与小程序收款 | 21 | 待开始 | 涉及资金能力，先确认路由和参数，不修改支付配置。 |
-| 6 | 效率工具：文档、日程、待办、收集表 | 53 | 进行中 | 已完成待办详情与状态更新；智能文档/智能表格/日程/收集表继续拆分推进。 |
+| 6 | 效率工具：文档、日程、待办、收集表 | 53 | 进行中 | 已完成待办详情与状态更新和收集表管理；智能文档/智能表格/日程继续拆分推进。 |
 | 7 | 会议全家桶 | 128 | 待开始 | 最大批次，按基础会议、统计、会控、录制、Webinar、Rooms、MRA 拆成子批。 |
 | 8 | 家校沟通与家校应用 | 42 | 待开始 | 按学生/家长通讯录、班级、关注接口分组。 |
 | 9 | 政民沟通 | 21 | 待开始 | 按人员、咨询、消息和转接接口分组。 |
@@ -85,3 +85,5 @@
 - 2026-11-21：完成微信客服客户数据统计 2 个文档页，覆盖 `kf/get_corp_statistic` 和 `kf/get_servicer_statistic`；新增请求/响应模型字段均带中文含义注释，Service 校验客服账号、接待人员可选 userid、自然日区间（最近180天、闭区间最大31天）并归一化到0点；覆盖度更新为已对接 265 页、未对接 328 页，Feign 方法数达到 337；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。
 
 - 2026-11-22：完成打卡 3 个文档页，覆盖 checkin/add_checkin_record、hardware/get_hardware_checkin_data，以及 checkin/add_checkin_option、update_checkin_option、clear_checkin_option_array_field、del_checkin_option；新增模型字段均带中文含义注释，Service 校验打卡记录、设备数据时间跨度/人员数量和规则字段约束；覆盖度更新为已对接 268 页、未对接 325 页，Feign 方法数达到 343；mvn -B -pl qywx-spring-boot-api -am -DskipTests package 编译通过。
+
+- 2026-11-22：批次 6 完成收集表管理 5 个文档页，覆盖 `wedoc/create_form`、`wedoc/modify_form`、`wedoc/get_form_info`、`wedoc/get_form_statistic` 和 `wedoc/get_form_answer`；新增模型字段均带中文含义注释，Service 校验表单/问题必填项、问题数量（最多200）、oper=2 时的 `fillOutAuth`、统计 `req_type`/时间范围/`limit`（最大10000）和答案批次（最多100）；覆盖度更新为已对接 273 页、未对接 320 页，Feign 方法数达到 348；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。
