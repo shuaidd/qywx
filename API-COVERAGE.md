@@ -19,9 +19,9 @@
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 259 |
+| ✅ 已对接 | 261 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 334 |
+| ❌ 未对接 | 332 |
 | ⛔ 范围外 | 143 |
 | 合计 | 738 |
 
@@ -948,7 +948,7 @@
 
 ## 审批
 
-状态：✅ 8；⚠️ 0；❌ 2；⛔ 3
+状态：✅ 10；⚠️ 0；❌ 0；⛔ 3
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -963,8 +963,8 @@
 |  | 获取成员假期余额 | [93376](https://developer.work.weixin.qq.com/document/path/93376) | ✅ 已对接 | WorkOaClient.getUserVacationQuota |
 |  | 修改成员假期余额 | [93377](https://developer.work.weixin.qq.com/document/path/93377) | ✅ 已对接 | WorkOaClient.setOneUserQuota |
 |  | 审批流程引擎 | [90269](https://developer.work.weixin.qq.com/document/path/90269) | ⛔ 范围外 | — |
-|  | 创建审批模板 | [97437](https://developer.work.weixin.qq.com/document/path/97437) | ❌ 未对接 | — |
-|  | 更新审批模板 | [97438](https://developer.work.weixin.qq.com/document/path/97438) | ❌ 未对接 | — |
+|  | 创建审批模板 | [97437](https://developer.work.weixin.qq.com/document/path/97437) | ✅ 已对接 | WorkOaClient.createApprovalTemplate（oa/approval/create_template） |
+|  | 更新审批模板 | [97438](https://developer.work.weixin.qq.com/document/path/97438) | ✅ 已对接 | WorkOaClient.updateApprovalTemplate（oa/approval/update_template） |
 
 ## 汇报
 

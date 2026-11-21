@@ -77,3 +77,5 @@
 - 2026-11-21：完成停止企业群发文档页，覆盖 `externalcontact/cancel_groupmsg_send`；新增请求模型字段带中文含义注释，Service 校验 `msgId`；覆盖度更新为已对接 258 页、未对接 335 页，Feign 方法数达到 330。
 
 - 2026-11-21：完成获取已服务的外部联系人文档页，覆盖 `externalcontact/contact_list`；新增请求/响应模型字段均带中文含义注释，Service 校验 `limit` 范围；覆盖度更新为已对接 259 页、未对接 334 页，Feign 方法数达到 331；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
+
+- 2026-11-21：完成审批模板创建与更新 2 个文档页，覆盖 `oa/approval/create_template` 和 `oa/approval/update_template`；新增请求/响应字段均带中文含义注释，Service 校验模板名称、控件列表和更新时的 `templateId`；覆盖度更新为已对接 261 页、未对接 332 页，Feign 方法数达到 333；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。

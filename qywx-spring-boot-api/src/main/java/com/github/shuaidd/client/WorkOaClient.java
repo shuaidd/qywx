@@ -125,6 +125,26 @@ public interface WorkOaClient extends CommonClient {
     ApproveTemplateResponse getTemplateDetail(TemplateRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
+     * 创建审批模板
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CreateApprovalTemplateResponse
+     */
+    @PostMapping(value = "oa/approval/create_template", headers = HEAD)
+    CreateApprovalTemplateResponse createApprovalTemplate(CreateApprovalTemplateRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 更新审批模板
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "oa/approval/update_template", headers = HEAD)
+    BaseResponse updateApprovalTemplate(UpdateApprovalTemplateRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
      * 提交审批申请
      *
      * @param request 请求体

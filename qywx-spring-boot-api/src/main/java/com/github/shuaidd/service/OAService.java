@@ -2,12 +2,14 @@ package com.github.shuaidd.service;
 
 import com.github.shuaidd.dto.checkin.CheckInData;
 import com.github.shuaidd.dto.checkin.CheckInRule;
+import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.oa.*;
 import com.github.shuaidd.resquest.JournalReportStatRequest;
 import com.github.shuaidd.resquest.kf.PunchCorrectionRequest;
 import com.github.shuaidd.resquest.oa.*;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -159,6 +161,48 @@ public class OAService extends AbstractBaseService {
      */
     public ApproveTemplateResponse getTemplateDetail(TemplateRequest request, String applicationName) {
         return workOaClient.getTemplateDetail(request, applicationName);
+    }
+
+    /**
+     * 创建审批模板
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return CreateApprovalTemplateResponse
+     */
+    public CreateApprovalTemplateResponse createApprovalTemplate(CreateApprovalTemplateRequest request, String applicationName) {
+        checkApprovalTemplate(request);
+        return workOaClient.createApprovalTemplate(request, applicationName);
+    }
+
+    /**
+     * 更新审批模板
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void updateApprovalTemplate(UpdateApprovalTemplateRequest request, String applicationName) {
+        checkApprovalTemplate(request);
+        if (StringUtils.isEmpty(request.getTemplateId())) {
+            throw new ParamCheckException("templateId 不能为空，请检查！！！");
+        }
+        workOaClient.updateApprovalTemplate(request, applicationName);
+    }
+
+    private void checkApprovalTemplate(CreateApprovalTemplateRequest request) {
+        if (request == null || CollectionUtils.isEmpty(request.getTemplateName())
+                || request.getTemplateContent() == null
+                || CollectionUtils.isEmpty(request.getTemplateContent().getControls())) {
+            throw new ParamCheckException("templateName、templateContent.controls 不能为空，请检查！！！");
+        }
+    }
+
+    private void checkApprovalTemplate(UpdateApprovalTemplateRequest request) {
+        if (request == null || CollectionUtils.isEmpty(request.getTemplateName())
+                || request.getTemplateContent() == null
+                || CollectionUtils.isEmpty(request.getTemplateContent().getControls())) {
+            throw new ParamCheckException("templateName、templateContent.controls 不能为空，请检查！！！");
+        }
     }
 
     /**
