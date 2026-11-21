@@ -145,6 +145,26 @@ public interface WorkOaClient extends CommonClient {
     BaseResponse updateApprovalTemplate(UpdateApprovalTemplateRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
+     * 获取待办详情
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return TodoDetailResponse
+     */
+    @PostMapping(value = "todo/get", headers = HEAD)
+    TodoDetailResponse getTodoDetail(TodoDetailRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 更新待办状态
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "todo/update", headers = HEAD)
+    BaseResponse updateTodo(UpdateTodoRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
      * 提交审批申请
      *
      * @param request 请求体

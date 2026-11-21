@@ -2,6 +2,7 @@ package com.github.shuaidd.service;
 
 import com.github.shuaidd.dto.checkin.CheckInData;
 import com.github.shuaidd.dto.checkin.CheckInRule;
+import com.github.shuaidd.dto.todo.TodoAttendee;
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.oa.*;
@@ -187,6 +188,54 @@ public class OAService extends AbstractBaseService {
             throw new ParamCheckException("templateId 不能为空，请检查！！！");
         }
         workOaClient.updateApprovalTemplate(request, applicationName);
+    }
+
+    /**
+     * 获取待办详情
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return TodoDetailResponse
+     */
+    public TodoDetailResponse getTodoDetail(TodoDetailRequest request, String applicationName) {
+        if (request == null || StringUtils.isEmpty(request.getTodoId())) {
+            throw new ParamCheckException("todoId 不能为空，请检查！！！");
+        }
+        return workOaClient.getTodoDetail(request, applicationName);
+    }
+
+    /**
+     * 更新待办状态
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void updateTodo(UpdateTodoRequest request, String applicationName) {
+        if (request == null || StringUtils.isEmpty(request.getTodoId())) {
+            throw new ParamCheckException("todoId 不能为空，请检查！！！");
+        }
+        if (Objects.nonNull(request.getStatus()) && request.getStatus() != 0 && request.getStatus() != 1) {
+            throw new ParamCheckException("status 只能为0或1，请检查！！！");
+        }
+        checkTodoAttendees(request.getAttendees());
+        workOaClient.updateTodo(request, applicationName);
+    }
+
+    private void checkTodoAttendees(List<TodoAttendee> attendees) {
+        if (CollectionUtils.isEmpty(attendees)) {
+            return;
+        }
+        if (attendees.size() > 20) {
+            throw new ParamCheckException("attendees 最多只能有20个参与人，请检查！！！");
+        }
+        for (TodoAttendee attendee : attendees) {
+            if (attendee == null || StringUtils.isEmpty(attendee.getUserId()) || Objects.isNull(attendee.getStatus())) {
+                throw new ParamCheckException("attendees.userid、attendees.status 不能为空，请检查！！！");
+            }
+            if (attendee.getStatus() != 0 && attendee.getStatus() != 1) {
+                throw new ParamCheckException("attendees.status 只能为0或1，请检查！！！");
+            }
+        }
     }
 
     private void checkApprovalTemplate(CreateApprovalTemplateRequest request) {

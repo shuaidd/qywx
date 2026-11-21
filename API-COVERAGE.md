@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 319 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 335 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 261 |
+| ✅ 已对接 | 263 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 332 |
+| ❌ 未对接 | 330 |
 | ⛔ 范围外 | 143 |
 | 合计 | 738 |
 
@@ -704,12 +704,12 @@
 
 ## 待办
 
-状态：✅ 0；⚠️ 0；❌ 2；⛔ 0
+状态：✅ 2；⚠️ 0；❌ 0；⛔ 0
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
-| 待办 | 获取待办详情 | [101524](https://developer.work.weixin.qq.com/document/path/101524) | ❌ 未对接 | — |
-|  | 更新待办状态 | [101534](https://developer.work.weixin.qq.com/document/path/101534) | ❌ 未对接 | — |
+| 待办 | 获取待办详情 | [101524](https://developer.work.weixin.qq.com/document/path/101524) | ✅ 已对接 | WorkOaClient.getTodoDetail（todo/get） |
+|  | 更新待办状态 | [101534](https://developer.work.weixin.qq.com/document/path/101534) | ✅ 已对接 | WorkOaClient.updateTodo（todo/update） |
 
 ## 会议
 
