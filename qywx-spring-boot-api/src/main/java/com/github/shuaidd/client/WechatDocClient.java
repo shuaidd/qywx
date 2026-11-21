@@ -245,4 +245,64 @@ public interface WechatDocClient extends CommonClient {
      */
     @PostMapping(value = "/wedoc/smartdoc/delete_page", headers = HEAD)
     BaseResponse delSmartDocPage(DeleteSmartDocPageRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 添加智能文档内容块
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartdoc/add_blocks", headers = HEAD)
+    SmartDocBlockResponse addSmartDocBlocks(SmartDocBlockRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 更新智能文档内容块
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartdoc/update_blocks", headers = HEAD)
+    SmartDocBlockResponse updateSmartDocBlocks(SmartDocBlockRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除智能文档内容块
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartdoc/delete_blocks", headers = HEAD)
+    BaseResponse delSmartDocBlocks(DeleteSmartDocBlockRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取智能文档内容块列表
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartdoc/get_block_list", headers = HEAD)
+    GetSmartDocBlockListResponse getSmartDocBlockList(GetSmartDocBlockListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 提交智能文档导出任务
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartdoc/export_task", headers = HEAD)
+    ExportSmartDocResponse exportSmartDoc(ExportSmartDocRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 查询智能文档导出任务结果
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartdoc/get_export_result", headers = HEAD)
+    GetSmartDocExportResultResponse getSmartDocExportResult(GetSmartDocExportResultRequest request, @RequestParam(HEAD_KEY) String app);
 }

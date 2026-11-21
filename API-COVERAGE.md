@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 358 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 364 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 283 |
+| ✅ 已对接 | 288 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 309 |
+| ❌ 未对接 | 304 |
 | ⛔ 范围外 | 144 |
 | 合计 | 738 |
 
@@ -597,7 +597,7 @@
 
 ## 文档
 
-状态：✅ 41；⚠️ 0；❌ 28；⛔ 2
+状态：✅ 46；⚠️ 0；❌ 23；⛔ 2
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -636,11 +636,11 @@
 |  | 更新页面 | [101621](https://developer.work.weixin.qq.com/document/path/101621) | ✅ 已对接 | WechatDocClient.updateSmartDocPage（wedoc/smartdoc/update_page） |
 |  | 删除页面 | [101622](https://developer.work.weixin.qq.com/document/path/101622) | ✅ 已对接 | WechatDocClient.delSmartDocPage（wedoc/smartdoc/delete_page） |
 |  | 获取页面结构 | [101619](https://developer.work.weixin.qq.com/document/path/101619) | ✅ 已对接 | WechatDocClient.getSmartDocPageHierarchy（wedoc/smartdoc/get_page_hierarchy） |
-|  | 添加内容块 | [101623](https://developer.work.weixin.qq.com/document/path/101623) | ❌ 未对接 | — |
-|  | 更新内容块 | [101624](https://developer.work.weixin.qq.com/document/path/101624) | ❌ 未对接 | — |
-|  | 删除内容块 | [101625](https://developer.work.weixin.qq.com/document/path/101625) | ❌ 未对接 | — |
-|  | 获取内容块列表 | [101626](https://developer.work.weixin.qq.com/document/path/101626) | ❌ 未对接 | — |
-|  | 导出内容块 | [101627](https://developer.work.weixin.qq.com/document/path/101627) | ❌ 未对接 | — |
+|  | 添加内容块 | [101623](https://developer.work.weixin.qq.com/document/path/101623) | ✅ 已对接 | WechatDocClient.addSmartDocBlocks（wedoc/smartdoc/add_blocks） |
+|  | 更新内容块 | [101624](https://developer.work.weixin.qq.com/document/path/101624) | ✅ 已对接 | WechatDocClient.updateSmartDocBlocks（wedoc/smartdoc/update_blocks） |
+|  | 删除内容块 | [101625](https://developer.work.weixin.qq.com/document/path/101625) | ✅ 已对接 | WechatDocClient.delSmartDocBlocks（wedoc/smartdoc/delete_blocks） |
+|  | 获取内容块列表 | [101626](https://developer.work.weixin.qq.com/document/path/101626) | ✅ 已对接 | WechatDocClient.getSmartDocBlockList（wedoc/smartdoc/get_block_list） |
+|  | 导出内容块 | [101627](https://developer.work.weixin.qq.com/document/path/101627) | ✅ 已对接 | WechatDocClient.exportSmartDoc / getSmartDocExportResult（wedoc/smartdoc/export_task、get_export_result） |
 |  | 获取数据源 | [101628](https://developer.work.weixin.qq.com/document/path/101628) | ❌ 未对接 | — |
 |  | 添加数据表 | [101629](https://developer.work.weixin.qq.com/document/path/101629) | ❌ 未对接 | — |
 |  | 删除数据表 | [101630](https://developer.work.weixin.qq.com/document/path/101630) | ❌ 未对接 | — |

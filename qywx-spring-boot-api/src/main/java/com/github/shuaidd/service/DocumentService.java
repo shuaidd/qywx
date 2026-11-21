@@ -3,6 +3,7 @@ package com.github.shuaidd.service;
 import com.github.shuaidd.client.WechatDocClient;
 import com.github.shuaidd.dto.wedoc.FormInfo;
 import com.github.shuaidd.dto.wedoc.FormQuestionItem;
+import com.github.shuaidd.dto.wedoc.SmartDocBlock;
 import com.github.shuaidd.dto.wedoc.SmartDocPageInfo;
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.BaseResponse;
@@ -77,6 +78,16 @@ public class DocumentService extends AbstractBaseService {
      * 智能文档全宽布局
      */
     private static final int SMART_DOC_PAGE_LAYOUT_FULL_WIDTH = 3;
+
+    /**
+     * 智能文档内容块分页最大数量
+     */
+    private static final int MAX_SMART_DOC_BLOCK_LIMIT = 200;
+
+    /**
+     * 智能文档导出 Markdown 格式
+     */
+    private static final int SMART_DOC_EXPORT_CONTENT_TYPE_MARKDOWN = 1;
 
     private final WechatDocClient wechatDocClient;
 
@@ -400,6 +411,134 @@ public class DocumentService extends AbstractBaseService {
             throw new ParamCheckException("page_id 不能为空，请检查！！！");
         }
         return wechatDocClient.delSmartDocPage(request, application);
+    }
+
+    /**
+     * 添加智能文档内容块
+     *
+     * @param request     request
+     * @param application application
+     * @return res
+     */
+    public SmartDocBlockResponse addSmartDocBlocks(SmartDocBlockRequest request, String application) {
+        checkSmartDocBlocks(request, false);
+        return wechatDocClient.addSmartDocBlocks(request, application);
+    }
+
+    /**
+     * 更新智能文档内容块
+     *
+     * @param request     request
+     * @param application application
+     * @return res
+     */
+    public SmartDocBlockResponse updateSmartDocBlocks(SmartDocBlockRequest request, String application) {
+        checkSmartDocBlocks(request, true);
+        return wechatDocClient.updateSmartDocBlocks(request, application);
+    }
+
+    /**
+     * 删除智能文档内容块
+     *
+     * @param request     request
+     * @param application application
+     * @return res
+     */
+    public BaseResponse delSmartDocBlocks(DeleteSmartDocBlockRequest request, String application) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getDocId())) {
+            throw new ParamCheckException("docid 不能为空，请检查！！！");
+        }
+        if (StringUtils.isEmpty(request.getPageId())) {
+            throw new ParamCheckException("page_id 不能为空，请检查！！！");
+        }
+        if (CollectionUtils.isEmpty(request.getIds())) {
+            throw new ParamCheckException("ids 不能为空，请检查！！！");
+        }
+        return wechatDocClient.delSmartDocBlocks(request, application);
+    }
+
+    /**
+     * 获取智能文档内容块列表
+     *
+     * @param request     request
+     * @param application application
+     * @return res
+     */
+    public GetSmartDocBlockListResponse getSmartDocBlockList(GetSmartDocBlockListRequest request, String application) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getDocId())) {
+            throw new ParamCheckException("docid 不能为空，请检查！！！");
+        }
+        if (StringUtils.isEmpty(request.getPageId())) {
+            throw new ParamCheckException("page_id 不能为空，请检查！！！");
+        }
+        if (Objects.nonNull(request.getStart()) && request.getStart() < 0) {
+            throw new ParamCheckException("start 不能小于0，请检查！！！");
+        }
+        if (Objects.nonNull(request.getLimit()) && request.getLimit() > MAX_SMART_DOC_BLOCK_LIMIT) {
+            throw new ParamCheckException("limit 不能大于200，请检查！！！");
+        }
+        return wechatDocClient.getSmartDocBlockList(request, application);
+    }
+
+    /**
+     * 提交智能文档导出任务
+     *
+     * @param request     request
+     * @param application application
+     * @return res
+     */
+    public ExportSmartDocResponse exportSmartDoc(ExportSmartDocRequest request, String application) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getDocId())) {
+            throw new ParamCheckException("docid 不能为空，请检查！！！");
+        }
+        if (Objects.isNull(request.getContentType())
+                || request.getContentType() != SMART_DOC_EXPORT_CONTENT_TYPE_MARKDOWN) {
+            throw new ParamCheckException("content_type 只能为1，请检查！！！");
+        }
+        return wechatDocClient.exportSmartDoc(request, application);
+    }
+
+    /**
+     * 查询智能文档导出任务结果
+     *
+     * @param request     request
+     * @param application application
+     * @return res
+     */
+    public GetSmartDocExportResultResponse getSmartDocExportResult(GetSmartDocExportResultRequest request, String application) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getTaskId())) {
+            throw new ParamCheckException("task_id 不能为空，请检查！！！");
+        }
+        return wechatDocClient.getSmartDocExportResult(request, application);
+    }
+
+    /**
+     * 校验添加或更新智能文档内容块请求
+     *
+     * @param request request
+     * @param update  是否为更新操作
+     */
+    private void checkSmartDocBlocks(SmartDocBlockRequest request, boolean update) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getDocId())) {
+            throw new ParamCheckException("docid 不能为空，请检查！！！");
+        }
+        if (StringUtils.isEmpty(request.getPageId())) {
+            throw new ParamCheckException("page_id 不能为空，请检查！！！");
+        }
+        if (CollectionUtils.isEmpty(request.getBlocks())) {
+            throw new ParamCheckException("blocks 不能为空，请检查！！！");
+        }
+        for (SmartDocBlock block : request.getBlocks()) {
+            if (Objects.isNull(block)) {
+                throw new ParamCheckException("blocks 不能包含空对象，请检查！！！");
+            }
+            if (StringUtils.isEmpty(block.getType())) {
+                throw new ParamCheckException("blocks[].type 不能为空，请检查！！！");
+            }
+            if (update && StringUtils.isEmpty(block.getId())) {
+                throw new ParamCheckException("blocks[].id 不能为空，请检查！！！");
+            }
+        }
     }
 
     /**
