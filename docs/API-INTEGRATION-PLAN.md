@@ -71,3 +71,5 @@
 - 2026-11-21：完成获客助手额度管理与使用统计文档页，覆盖 `externalcontact/customer_acquisition_quota` 和 `externalcontact/customer_acquisition/statistic`；统计请求已校验并归一化到自然日，覆盖度更新为已对接 255 页、未对接 339 页，Feign 方法数达到 327；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
 - 2026-11-21：核对提升广告有效率文档页，确认为广告运营指引页；`API-COVERAGE.md` 改记为范围外，不计入 REST 接口补齐数量。
 - 2026-11-21：完成获取成员多次收消息详情文档页，覆盖 `externalcontact/customer_acquisition/get_chat_info`；新增模型字段均带中文含义注释，覆盖度更新为已对接 256 页、未对接 337 页，Feign 方法数达到 328；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
+
+- 2026-11-21：完成提醒成员群发文档页，覆盖 `externalcontact/remind_groupmsg_send`；新增请求模型字段带中文含义注释，Service 校验 `msgId`；覆盖度更新为已对接 257 页、未对接 336 页，Feign 方法数达到 329。

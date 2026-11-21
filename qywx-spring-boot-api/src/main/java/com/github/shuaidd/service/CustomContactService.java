@@ -501,6 +501,20 @@ public class CustomContactService extends AbstractBaseService {
     }
 
     /**
+     * 提醒成员群发
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return BaseResponse
+     */
+    public BaseResponse remindGroupMsgSend(GroupMsgRemindRequest request, String applicationName) {
+        if (request == null || StringUtils.isBlank(request.getMsgId())) {
+            throw new ParamCheckException("msgId 不能为空，请检查！！！");
+        }
+        return externalContactClient.remindGroupMsgSend(request, applicationName);
+    }
+
+    /**
      * 发送新客户欢迎语
      *
      * @param request         请求

@@ -408,6 +408,16 @@ public interface ExternalContactClient extends CommonClient {
     GroupMsgSendResultResponse getGroupMsgSendResult(GroupMsgSendRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
+     * 提醒成员群发
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/remind_groupmsg_send", headers = HEAD)
+    BaseResponse remindGroupMsgSend(GroupMsgRemindRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
      * 发送新客户欢迎语
      *
      * @param request 请求体
