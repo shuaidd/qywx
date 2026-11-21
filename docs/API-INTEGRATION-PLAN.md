@@ -22,7 +22,7 @@
 | 批次 | 范围 | 初步数量 | 状态 | 说明 |
 | --- | --- | ---: | --- | --- |
 | 1 | 账号 ID 转换、手机号/邮箱获取 userid、单个部门详情 | 4 | 已完成 | 新增转换/查询 Feign、Service、请求响应模型；`API-COVERAGE.md` 已同步，模块编译通过。 |
-| 2 | 通讯录查看权限与身份验证二次验证 | 5 | 进行中 | 身份验证二次验证 2 页已完成；通讯录查看权限 4 页因官方文档频控暂缓，路由确认后继续。 |
+| 2 | 通讯录查看权限与身份验证二次验证 | 5 | 已完成 | 身份验证二次验证 2 页、通讯录查看权限 4 页已完成；路由 `auth/get_tfa_info`、`user/tfa_succ`、`contactrule/create`、`contactrule/list`、`contactrule/update`、`contactrule/delete` 已接入。 |
 | 3 | 消息接收与发送、应用管理、机器人消息 | 7 | 待开始 | 以消息模板卡片、撤回、学校通知和机器人补齐为主。 |
 | 4 | 客户联系缺口 | 17 | 待开始 | 按客户标签、客户群、朋友圈、离职继承等细分提交。 |
 | 5 | 企业支付与小程序收款 | 21 | 待开始 | 涉及资金能力，先确认路由和参数，不修改支付配置。 |
@@ -51,3 +51,5 @@
 - 2026-11-21：批次 1 完成 4 个文档页，覆盖 `convert_tmp_external_userid`、`user/getuserid`、`user/get_userid_by_email` 和 `department/get`。覆盖度更新为已对接 232 页、未对接 363 页；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
 
 - 2026-11-21：批次 2 部分完成身份验证二次验证 2 个文档页，覆盖 `auth/get_tfa_info` 和 `user/tfa_succ`；目标模块编译通过。通讯录查看权限 4 个文档页因官方文档验证码频控暂缓，未猜测路由。
+
+- 2026-11-21：批次 2 完成 4 个通讯录查看权限文档页，覆盖 `contactrule/create`、`contactrule/list`、`contactrule/update` 和 `contactrule/delete`。覆盖度更新为已对接 238 页、未对接 357 页；Feign 方法数达到 285；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。

@@ -433,6 +433,43 @@ public interface AddressBookClient extends CommonClient {
      */
     @GetMapping(value = "department/get", headers = HEAD)
     DepartmentDetailResponse getDepartmentDetail(@RequestParam("id") Integer id, @RequestParam(HEAD_KEY) String app);
+    /**
+     * 创建通讯录隐藏规则
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return ContactRuleIdsResponse
+     */
+    @PostMapping(value = "contactrule/create", headers = HEAD)
+    ContactRuleIdsResponse createContactRule(ContactRuleListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 读取通讯录隐藏规则列表
+     *
+     * @param app 应用名
+     * @return ContactRuleListResponse
+     */
+    @PostMapping(value = "contactrule/list", headers = HEAD)
+    ContactRuleListResponse getContactRuleList(@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改通讯录隐藏规则
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "contactrule/update", headers = HEAD)
+    BaseResponse updateContactRule(ContactRuleListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除通讯录隐藏规则
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "contactrule/delete", headers = HEAD)
+    BaseResponse deleteContactRule(DeleteContactRuleRequest request, @RequestParam(HEAD_KEY) String app);
 
 }
-

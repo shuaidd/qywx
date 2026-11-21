@@ -1,6 +1,7 @@
 package com.github.shuaidd.service;
 
 import com.github.shuaidd.dto.addressbook.Department;
+import com.github.shuaidd.dto.addressbook.ContactRule;
 import com.github.shuaidd.dto.addressbook.DeptUser;
 import com.github.shuaidd.dto.addressbook.Tag;
 import com.github.shuaidd.dto.addressbook.WeChatUser;
@@ -957,5 +958,94 @@ public class AddressBookService extends AbstractBaseService {
      */
     public LinkedCorpDeptResponse getDeptList(LinkedCorpDeptRequest request, String applicationName) {
         return linkedCorpClient.getDeptList(request, applicationName);
+    }
+    /**
+     * 创建通讯录隐藏规则
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 规则 ID 列表
+     */
+    public List<Integer> createContactRules(ContactRuleListRequest request, String applicationName) {
+        validateContactRules(request, false);
+        ContactRuleIdsResponse response = addressBookClient.createContactRule(request, applicationName);
+        if (logger.isInfoEnabled()) {
+            logger.info("创建通讯录隐藏规则成功：applicationName-{},response-{}", applicationName, response);
+        }
+
+        return response.getRuleIds();
+    }
+
+    /**
+     * 读取通讯录隐藏规则列表
+     *
+     * @param applicationName 应用名称
+     * @return 规则列表
+     */
+    public List<ContactRule> getContactRules(String applicationName) {
+        ContactRuleListResponse response = addressBookClient.getContactRuleList(applicationName);
+        List<ContactRule> rules = response.getRules();
+        if (logger.isInfoEnabled()) {
+            logger.info("读取通讯录隐藏规则列表成功：applicationName-{},规则数量-{}", applicationName, rules == null ? 0 : rules.size());
+        }
+
+        return rules;
+    }
+
+    /**
+     * 修改通讯录隐藏规则
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     */
+    public void updateContactRules(ContactRuleListRequest request, String applicationName) {
+        validateContactRules(request, true);
+        addressBookClient.updateContactRule(request, applicationName);
+        if (logger.isInfoEnabled()) {
+            logger.info("修改通讯录隐藏规则成功：applicationName-{},rules-{}", applicationName, request.getRules());
+        }
+    }
+
+    /**
+     * 删除通讯录隐藏规则
+     *
+     * @param ruleIds         规则 ID 列表
+     * @param applicationName 应用名称
+     */
+    public void deleteContactRules(List<Integer> ruleIds, String applicationName) {
+        if (CollectionUtils.isEmpty(ruleIds)) {
+            throw new ParamCheckException("ruleIds 不能为空，请检查！！！");
+        }
+
+        if (ruleIds.size() > 100) {
+            throw new ParamCheckException("ruleIds 最多支持 100 个，请检查！！！");
+        }
+
+        DeleteContactRuleRequest request = new DeleteContactRuleRequest();
+        request.setRuleIds(ruleIds);
+        addressBookClient.deleteContactRule(request, applicationName);
+        if (logger.isInfoEnabled()) {
+            logger.info("删除通讯录隐藏规则成功：applicationName-{},ruleIds-{}", applicationName, ruleIds);
+        }
+    }
+
+    private void validateContactRules(ContactRuleListRequest request, boolean requireRuleId) {
+        if (Objects.isNull(request) || CollectionUtils.isEmpty(request.getRules())) {
+            throw new ParamCheckException("rules 不能为空，请检查！！！");
+        }
+
+        if (request.getRules().size() > 100) {
+            throw new ParamCheckException("rules 最多支持 100 条，请检查！！！");
+        }
+
+        for (ContactRule rule : request.getRules()) {
+            if (Objects.isNull(rule) || Objects.isNull(rule.getRuleType()) || Objects.isNull(rule.getRange())) {
+                throw new ParamCheckException("ruleType 和 range 不能为空，请检查！！！");
+            }
+
+            if (requireRuleId && Objects.isNull(rule.getRuleId())) {
+                throw new ParamCheckException("修改规则时 ruleId 不能为空，请检查！！！");
+            }
+        }
     }
 }

@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的 59 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 281 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的 63 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 285 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 234 |
+| ✅ 已对接 | 238 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 361 |
+| ❌ 未对接 | 357 |
 | ⛔ 范围外 | 141 |
 | 合计 | 738 |
 
@@ -99,10 +99,10 @@
 |  | 增加标签成员 | [90214](https://developer.work.weixin.qq.com/document/path/90214) | ✅ 已对接 | AddressBookClient.addTagUsers |
 |  | 删除标签成员 | [90215](https://developer.work.weixin.qq.com/document/path/90215) | ✅ 已对接 | AddressBookClient.deleteTagUsers |
 |  | 获取标签列表 | [90216](https://developer.work.weixin.qq.com/document/path/90216) | ✅ 已对接 | AddressBookClient.getTagList |
-| 通讯录查看权限管理 | 创建规则 | [101536](https://developer.work.weixin.qq.com/document/path/101536) | ❌ 未对接 | — |
-|  | 读取规则列表 | [101537](https://developer.work.weixin.qq.com/document/path/101537) | ❌ 未对接 | — |
-|  | 修改规则 | [101539](https://developer.work.weixin.qq.com/document/path/101539) | ❌ 未对接 | — |
-|  | 删除规则 | [101540](https://developer.work.weixin.qq.com/document/path/101540) | ❌ 未对接 | — |
+| 通讯录查看权限管理 | 创建规则 | [101536](https://developer.work.weixin.qq.com/document/path/101536) | ✅ 已对接 | AddressBookClient.createContactRule |
+|  | 读取规则列表 | [101537](https://developer.work.weixin.qq.com/document/path/101537) | ✅ 已对接 | AddressBookClient.getContactRuleList |
+|  | 修改规则 | [101539](https://developer.work.weixin.qq.com/document/path/101539) | ✅ 已对接 | AddressBookClient.updateContactRule |
+|  | 删除规则 | [101540](https://developer.work.weixin.qq.com/document/path/101540) | ✅ 已对接 | AddressBookClient.deleteContactRule |
 | 异步导入接口 | 概述 | [90979](https://developer.work.weixin.qq.com/document/path/90979) | ⛔ 范围外 | — |
 |  | 增量更新成员 | [90980](https://developer.work.weixin.qq.com/document/path/90980) | ✅ 已对接 | AddressBookClient.asyncBatchUpdateUser（batch/syncuser） |
 |  | 全量覆盖成员 | [90981](https://developer.work.weixin.qq.com/document/path/90981) | ✅ 已对接 | AddressBookClient.fullCoverUser |
