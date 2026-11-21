@@ -32,7 +32,7 @@
 | 9 | 政民沟通 | 21 | 待开始 | 按人员、咨询、消息和转接接口分组。 |
 | 10 | 邮件 | 16 | 待开始 | 覆盖发送、收件箱、账号和高级功能账号。 |
 | 11 | 上下游、安全、微盘、智能表格编组 | 43 | 待开始 | 上下游已部分覆盖，优先补齐可独立验证的 REST 路由。 |
-| 12 | 打卡、审批、汇报、人事助手、高级功能等剩余业务 | 27 | 待开始 | 收尾时再次全量核对官方目录，防止目录调整导致遗漏。 |
+| 12 | 打卡、审批、汇报、人事助手、高级功能等剩余业务 | 27 | 进行中 | 已完成打卡 3 个文档页；其余按审批、汇报、人事助手和高级功能继续拆分推进。 |
 
 > 数量按 `API-COVERAGE.md` 当前文档页统计，不是接口路由数；实现时一个文档页可能产生多个 Feign 方法。
 
@@ -83,3 +83,5 @@
 - 2026-11-21：完成待办详情与状态更新 2 个文档页，覆盖 `todo/get` 和 `todo/update`；新增请求/响应、参与人和提醒模型字段均带中文含义注释，Service 校验 `todoId`、状态枚举、参与人数量（最多20）及参与人字段；覆盖度更新为已对接 263 页、未对接 330 页，Feign 方法数达到 335；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。
 
 - 2026-11-21：完成微信客服客户数据统计 2 个文档页，覆盖 `kf/get_corp_statistic` 和 `kf/get_servicer_statistic`；新增请求/响应模型字段均带中文含义注释，Service 校验客服账号、接待人员可选 userid、自然日区间（最近180天、闭区间最大31天）并归一化到0点；覆盖度更新为已对接 265 页、未对接 328 页，Feign 方法数达到 337；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。
+
+- 2026-11-22：完成打卡 3 个文档页，覆盖 checkin/add_checkin_record、hardware/get_hardware_checkin_data，以及 checkin/add_checkin_option、update_checkin_option、clear_checkin_option_array_field、del_checkin_option；新增模型字段均带中文含义注释，Service 校验打卡记录、设备数据时间跨度/人员数量和规则字段约束；覆盖度更新为已对接 268 页、未对接 325 页，Feign 方法数达到 343；mvn -B -pl qywx-spring-boot-api -am -DskipTests package 编译通过。

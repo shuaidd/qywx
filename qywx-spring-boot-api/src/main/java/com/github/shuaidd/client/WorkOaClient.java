@@ -423,6 +423,66 @@ public interface WorkOaClient extends CommonClient {
     BaseResponse addCheckInUserFace(AddCheckInUserFaceRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
+     * 添加打卡记录
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "checkin/add_checkin_record", headers = HEAD)
+    BaseResponse addCheckInRecord(AddCheckInRecordRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取考勤设备打卡数据
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return HardwareCheckInDataResponse
+     */
+    @PostMapping(value = "hardware/get_hardware_checkin_data", headers = HEAD)
+    HardwareCheckInDataResponse getHardwareCheckInData(HardwareCheckInDataRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 创建打卡规则
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "checkin/add_checkin_option", headers = HEAD)
+    BaseResponse createCheckInRule(CheckInRuleOptionRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改打卡规则
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "checkin/update_checkin_option", headers = HEAD)
+    BaseResponse updateCheckInRule(CheckInRuleOptionRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 清空打卡规则数组元素
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "checkin/clear_checkin_option_array_field", headers = HEAD)
+    BaseResponse clearCheckInRuleArrayField(ClearCheckInRuleArrayFieldRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除打卡规则
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "checkin/del_checkin_option", headers = HEAD)
+    BaseResponse deleteCheckInRule(DeleteCheckInRuleRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
      * 发起语音电话
      *
      * @param request 请求体

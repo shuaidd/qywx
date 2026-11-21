@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 337 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 343 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 265 |
+| ✅ 已对接 | 268 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 328 |
+| ❌ 未对接 | 325 |
 | ⛔ 范围外 | 143 |
 | 合计 | 738 |
 
@@ -929,7 +929,7 @@
 
 ## 打卡
 
-状态：✅ 9；⚠️ 0；❌ 3；⛔ 0
+状态：✅ 12；⚠️ 0；❌ 0；⛔ 0
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -941,10 +941,10 @@
 |  | 获取打卡人员排班信息 | [93380](https://developer.work.weixin.qq.com/document/path/93380) | ✅ 已对接 | WorkOaClient.getCheckInScheduList |
 |  | 为打卡人员排班 | [93385](https://developer.work.weixin.qq.com/document/path/93385) | ✅ 已对接 | WorkOaClient.setCheckInScheduleList |
 |  | 为打卡人员补卡 | [95803](https://developer.work.weixin.qq.com/document/path/95803) | ✅ 已对接 | WorkOaClient.punchCorrection |
-|  | 添加打卡记录 | [99647](https://developer.work.weixin.qq.com/document/path/99647) | ❌ 未对接 | — |
+|  | 添加打卡记录 | [99647](https://developer.work.weixin.qq.com/document/path/99647) | ✅ 已对接 | WorkOaClient.addCheckInRecord |
 |  | 录入打卡人员人脸信息 | [93378](https://developer.work.weixin.qq.com/document/path/93378) | ✅ 已对接 | WorkOaClient.addCheckInUserFace |
-|  | 获取设备打卡数据 | [94126](https://developer.work.weixin.qq.com/document/path/94126) | ❌ 未对接 | — |
-|  | 管理打卡规则 | [98041](https://developer.work.weixin.qq.com/document/path/98041) | ❌ 未对接 | — |
+|  | 获取设备打卡数据 | [94126](https://developer.work.weixin.qq.com/document/path/94126) | ✅ 已对接 | WorkOaClient.getHardwareCheckInData |
+|  | 管理打卡规则 | [98041](https://developer.work.weixin.qq.com/document/path/98041) | ✅ 已对接 | WorkOaClient.createCheckInRule / updateCheckInRule / clearCheckInRuleArrayField / deleteCheckInRule |
 
 ## 审批
 
