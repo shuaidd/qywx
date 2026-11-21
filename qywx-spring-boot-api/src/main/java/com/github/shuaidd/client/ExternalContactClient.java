@@ -576,4 +576,43 @@ public interface ExternalContactClient extends CommonClient {
      */
     @PostMapping(value = "externalcontact/customer_strategy/del", headers = HEAD)
     BaseResponse deleteCustomerStrategy(CustomerStrategyIdRequest request, @RequestParam(HEAD_KEY) String app);
+    /**
+     * 获取指定客户联系规则组下的企业客户标签
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CustomerStrategyTagListResponse
+     */
+    @PostMapping(value = "externalcontact/get_strategy_tag_list", headers = HEAD)
+    CustomerStrategyTagListResponse getCustomerStrategyTagList(CustomerStrategyTagListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 为指定客户联系规则组创建企业客户标签
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CustomerStrategyTagCreateResponse
+     */
+    @PostMapping(value = "externalcontact/add_strategy_tag", headers = HEAD)
+    CustomerStrategyTagCreateResponse createCustomerStrategyTag(CustomerStrategyTagCreateRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 编辑指定客户联系规则组下的企业客户标签或标签组
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/edit_strategy_tag", headers = HEAD)
+    BaseResponse editCustomerStrategyTag(CustomerStrategyTagEditRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除指定客户联系规则组下的企业客户标签或标签组
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/del_strategy_tag", headers = HEAD)
+    BaseResponse deleteCustomerStrategyTag(CustomerStrategyTagDeleteRequest request, @RequestParam(HEAD_KEY) String app);
 }

@@ -21,7 +21,7 @@ Java code uses package root `com.github.shuaidd` and the standard `src/main/java
 
 ## Coding Style & Naming Conventions
 
-Use Java 8 syntax, 4-space indentation, and existing formatting; no formatter is enforced. Packages are lowercase, classes are PascalCase, services end in `Service`, and tests end in `Test`. Reuse existing models before adding new request/response classes.
+Use Java 8 syntax, 4-space indentation, and existing formatting; no formatter is enforced. Packages are lowercase, classes are PascalCase, services end in `Service`, and tests end in `Test`. Reuse existing models before adding new request/response classes. Every newly added DTO/request/response field must have a concise Chinese comment explaining its business meaning.
 
 ## Testing Guidelines
 

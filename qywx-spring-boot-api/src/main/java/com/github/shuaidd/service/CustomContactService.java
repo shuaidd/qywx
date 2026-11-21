@@ -2,6 +2,7 @@ package com.github.shuaidd.service;
 
 import com.github.shuaidd.client.ExternalContactClient;
 import com.github.shuaidd.dto.externalcontact.CustomerStrategyRange;
+import com.github.shuaidd.dto.externalcontact.CustomerStrategyTag;
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.addressbook.MobileHashCodeResponse;
@@ -687,6 +688,88 @@ public class CustomContactService extends AbstractBaseService {
 
     /* ---------客户联系规则组管理---------- end */
 
+    /* ---------客户联系规则组企业客户标签管理---------- start */
+
+    /**
+     * 获取指定客户联系规则组下的企业客户标签
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return CustomerStrategyTagListResponse
+     */
+    public CustomerStrategyTagListResponse getCustomerStrategyTagList(CustomerStrategyTagListRequest request, String applicationName) {
+        if (Objects.isNull(request)) {
+            throw new ParamCheckException("request 不能为空，请检查！！！");
+        }
+        checkCustomerStrategyIdList(request.getTagId(), "tagId");
+        checkCustomerStrategyIdList(request.getGroupId(), "groupId");
+        return externalContactClient.getCustomerStrategyTagList(request, applicationName);
+    }
+
+    /**
+     * 为指定客户联系规则组创建企业客户标签
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return CustomerStrategyTagCreateResponse
+     */
+    public CustomerStrategyTagCreateResponse createCustomerStrategyTag(CustomerStrategyTagCreateRequest request, String applicationName) {
+        if (Objects.isNull(request) || Objects.isNull(request.getStrategyId())) {
+            throw new ParamCheckException("strategyId 不能为空，请检查！！！");
+        }
+        if (StringUtils.isBlank(request.getGroupId()) && StringUtils.isBlank(request.getGroupName())) {
+            throw new ParamCheckException("groupId 和 groupName 至少配置一个，请检查！！！");
+        }
+        if (StringUtils.isNotBlank(request.getGroupName()) && request.getGroupName().length() > 30) {
+            throw new ParamCheckException("groupName 最长允许 30 个字符，请检查！！！");
+        }
+        checkCustomerStrategyTagOrder(request.getOrder(), "order");
+        if (CollectionUtils.isEmpty(request.getTag())) {
+            throw new ParamCheckException("tag 不能为空，不支持创建空标签组，请检查！！！");
+        }
+        checkCustomerStrategyTagList(request.getTag());
+        return externalContactClient.createCustomerStrategyTag(request, applicationName);
+    }
+
+    /**
+     * 编辑指定客户联系规则组下的企业客户标签或标签组
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return BaseResponse
+     */
+    public BaseResponse editCustomerStrategyTag(CustomerStrategyTagEditRequest request, String applicationName) {
+        if (Objects.isNull(request) || StringUtils.isBlank(request.getId())) {
+            throw new ParamCheckException("id 不能为空，请检查！！！");
+        }
+        if (StringUtils.isBlank(request.getName()) && Objects.isNull(request.getOrder())) {
+            throw new ParamCheckException("name 和 order 至少配置一个，请检查！！！");
+        }
+        if (StringUtils.isNotBlank(request.getName()) && request.getName().length() > 30) {
+            throw new ParamCheckException("name 最长允许 30 个字符，请检查！！！");
+        }
+        checkCustomerStrategyTagOrder(request.getOrder(), "order");
+        return externalContactClient.editCustomerStrategyTag(request, applicationName);
+    }
+
+    /**
+     * 删除指定客户联系规则组下的企业客户标签或标签组
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return BaseResponse
+     */
+    public BaseResponse deleteCustomerStrategyTag(CustomerStrategyTagDeleteRequest request, String applicationName) {
+        if (Objects.isNull(request) || (CollectionUtils.isEmpty(request.getTagId()) && CollectionUtils.isEmpty(request.getGroupId()))) {
+            throw new ParamCheckException("tagId 和 groupId 不可同时为空，请检查！！！");
+        }
+        checkCustomerStrategyIdList(request.getTagId(), "tagId");
+        checkCustomerStrategyIdList(request.getGroupId(), "groupId");
+        return externalContactClient.deleteCustomerStrategyTag(request, applicationName);
+    }
+
+    /* ---------客户联系规则组企业客户标签管理---------- end */
+
     /**
      * 校验规则组详情请求及规则组 ID
      *
@@ -773,6 +856,55 @@ public class CustomContactService extends AbstractBaseService {
             } else if (!Objects.equals(node.getType(), 1) && !Objects.equals(node.getType(), 2)) {
                 throw new ParamCheckException("管理范围节点类型只允许 1-成员 或 2-部门，请检查！！！");
             }
+        }
+    }
+
+    /**
+     * 校验客户联系规则组标签 ID 列表
+     *
+     * @param idList    标签或标签组 ID 列表
+     * @param fieldName 参数名称
+     */
+    private void checkCustomerStrategyIdList(List<String> idList, String fieldName) {
+        if (CollectionUtils.isEmpty(idList)) {
+            return;
+        }
+        for (String id : idList) {
+            if (StringUtils.isBlank(id)) {
+                throw new ParamCheckException(fieldName + " 中存在空 ID，请检查！！！");
+            }
+        }
+    }
+
+    /**
+     * 校验客户联系规则组标签列表
+     *
+     * @param tagList 标签列表
+     */
+    private void checkCustomerStrategyTagList(List<CustomerStrategyTag> tagList) {
+        for (CustomerStrategyTag tag : tagList) {
+            if (Objects.isNull(tag) || StringUtils.isBlank(tag.getName())) {
+                throw new ParamCheckException("tag 中存在空标签或空标签名称，请检查！！！");
+            }
+            if (tag.getName().length() > 30) {
+                throw new ParamCheckException("tag 中存在超过 30 个字符的标签名称，请检查！！！");
+            }
+            checkCustomerStrategyTagOrder(tag.getOrder(), "tag.order");
+        }
+    }
+
+    /**
+     * 校验客户联系规则组标签排序值，官方有效范围是 [0, 2^32)
+     *
+     * @param order     排序值
+     * @param fieldName 参数名称
+     */
+    private void checkCustomerStrategyTagOrder(Long order, String fieldName) {
+        if (Objects.isNull(order)) {
+            return;
+        }
+        if (order < 0 || order >= 4294967296L) {
+            throw new ParamCheckException(fieldName + " 必须在 0 到 4294967295 之间，请检查！！！");
         }
     }
 }
