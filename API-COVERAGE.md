@@ -19,9 +19,9 @@
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 258 |
+| ✅ 已对接 | 259 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 335 |
+| ❌ 未对接 | 334 |
 | ⛔ 范围外 | 143 |
 | 合计 | 738 |
 
@@ -329,7 +329,7 @@
 
 ## 客户联系
 
-状态：✅ 38；⚠️ 0；❌ 5；⛔ 5
+状态：✅ 39；⚠️ 0；❌ 4；⛔ 5
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -380,7 +380,7 @@
 |  | 管理商品图册 | [95096](https://developer.work.weixin.qq.com/document/path/95096) | ✅ 已对接 | ExternalContactClient.add/get/list/update/delete ProductAlbum |
 |  | 管理聊天敏感词 | [95097](https://developer.work.weixin.qq.com/document/path/95097) | ✅ 已对接 | ExternalContactClient.add/list/detail/update/delete InterceptRule |
 |  | 上传附件资源 | [95098](https://developer.work.weixin.qq.com/document/path/95098) | ✅ 已对接 | WeChatMediaClient.uploadAttachment（media/upload_attachment） |
-|  | 获取已服务的外部联系人 | [99434](https://developer.work.weixin.qq.com/document/path/99434) | ❌ 未对接 | — |
+|  | 获取已服务的外部联系人 | [99434](https://developer.work.weixin.qq.com/document/path/99434) | ✅ 已对接 | ExternalContactClient.getServedContactList |
 
 ## 微信客服
 

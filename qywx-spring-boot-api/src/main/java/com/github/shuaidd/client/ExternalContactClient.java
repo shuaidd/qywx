@@ -428,6 +428,16 @@ public interface ExternalContactClient extends CommonClient {
     BaseResponse cancelGroupMsgSend(GroupMsgCancelRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
+     * 获取已服务的外部联系人
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return ServedContactListResponse
+     */
+    @PostMapping(value = "externalcontact/contact_list", headers = HEAD)
+    ServedContactListResponse getServedContactList(ServedContactListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
      * 发送新客户欢迎语
      *
      * @param request 请求体

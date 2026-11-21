@@ -529,6 +529,20 @@ public class CustomContactService extends AbstractBaseService {
     }
 
     /**
+     * 获取已服务的外部联系人
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return ServedContactListResponse
+     */
+    public ServedContactListResponse getServedContactList(ServedContactListRequest request, String applicationName) {
+        if (request != null && request.getLimit() != null && (request.getLimit() < 1 || request.getLimit() > 1000)) {
+            throw new ParamCheckException("limit 取值范围为 1~1000，请检查！！！");
+        }
+        return externalContactClient.getServedContactList(request, applicationName);
+    }
+
+    /**
      * 发送新客户欢迎语
      *
      * @param request         请求
