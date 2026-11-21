@@ -343,6 +343,29 @@ public class CustomContactService extends AbstractBaseService {
     /* ---------客户群管理---------- end */
 
     /**
+     * 创建企业朋友圈发表任务
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return MomentPublishCreateResponse
+     */
+    public MomentPublishCreateResponse addMomentPublishTask(MomentPublishRequest request, String applicationName) {
+        checkMomentPublishRequest(request);
+        return externalContactClient.addMomentPublishTask(request, applicationName);
+    }
+
+    /**
+     * 获取企业朋友圈发表任务创建结果
+     *
+     * @param jobId           异步任务 ID
+     * @param applicationName 应用名称
+     * @return MomentPublishTaskResultResponse
+     */
+    public MomentPublishTaskResultResponse getMomentPublishTaskResult(String jobId, String applicationName) {
+        checkMomentPublishJobId(jobId);
+        return externalContactClient.getMomentPublishTaskResult(jobId, applicationName);
+    }
+    /**
      * 获取企业全部的发表列表
      *
      * @param request         请求
@@ -1005,6 +1028,127 @@ public class CustomContactService extends AbstractBaseService {
         }
     }
 
+    /**
+     * 校验企业朋友圈发表请求
+     *
+     * @param request 发表任务请求
+     */
+    private void checkMomentPublishRequest(MomentPublishRequest request) {
+        if (Objects.isNull(request)) {
+            throw new ParamCheckException("request 不能为空，请检查！！！");
+        }
+        String textContent = Objects.isNull(request.getText()) ? null : request.getText().getContent();
+        checkLength(textContent, 2000, "text.content");
+        checkMomentPublishAttachments(request.getAttachments(), StringUtils.isNotBlank(textContent));
+        checkMomentPublishVisibleRange(request.getVisibleRange());
+    }
+
+    /**
+     * 校验企业朋友圈附件，官方要求图片、视频和链接三类不能混用
+     *
+     * @param attachments 附件列表
+     * @param hasText     是否已提供文本内容
+     */
+    private void checkMomentPublishAttachments(List<MomentPublishAttachment> attachments, boolean hasText) {
+        if (CollectionUtils.isEmpty(attachments)) {
+            if (!hasText) {
+                throw new ParamCheckException("text.content 与 attachments 不能同时为空，请检查！！！");
+            }
+            return;
+        }
+        String attachmentType = null;
+        for (MomentPublishAttachment attachment : attachments) {
+            if (Objects.isNull(attachment) || StringUtils.isBlank(attachment.getMsgType())) {
+                throw new ParamCheckException("attachments 中存在空附件或空 msgType，请检查！！！");
+            }
+            String msgType = attachment.getMsgType();
+            if (!"image".equals(msgType) && !"video".equals(msgType) && !"link".equals(msgType)) {
+                throw new ParamCheckException("attachments.msgType 仅允许 image、video 或 link，请检查！！！");
+            }
+            if (Objects.nonNull(attachmentType) && !attachmentType.equals(msgType)) {
+                throw new ParamCheckException("attachments 中的图片、视频和链接附件不能混用，请检查！！！");
+            }
+            attachmentType = msgType;
+            if ("image".equals(msgType) && (Objects.isNull(attachment.getImage()) || StringUtils.isBlank(attachment.getImage().getMediaId()))) {
+                throw new ParamCheckException("image.mediaId 不能为空，请检查！！！");
+            } else if ("video".equals(msgType) && (Objects.isNull(attachment.getVideo()) || StringUtils.isBlank(attachment.getVideo().getMediaId()))) {
+                throw new ParamCheckException("video.mediaId 不能为空，请检查！！！");
+            } else if ("link".equals(msgType)) {
+                if (Objects.isNull(attachment.getLink()) || StringUtils.isBlank(attachment.getLink().getUrl()) || StringUtils.isBlank(attachment.getLink().getMediaId())) {
+                    throw new ParamCheckException("link.url 与 link.mediaId 不能为空，请检查！！！");
+                }
+                checkLength(attachment.getLink().getTitle(), 64, "link.title");
+            }
+        }
+        if ("image".equals(attachmentType) && attachments.size() > 9) {
+            throw new ParamCheckException("image 类型附件最多允许 9 个，请检查！！！");
+        }
+        if (("video".equals(attachmentType) || "link".equals(attachmentType)) && attachments.size() > 1) {
+            throw new ParamCheckException("video 或 link 类型附件最多允许 1 个，请检查！！！");
+        }
+    }
+
+    /**
+     * 校验企业朋友圈发表范围
+     *
+     * @param visibleRange 发表范围
+     */
+    private void checkMomentPublishVisibleRange(MomentPublishVisibleRange visibleRange) {
+        if (Objects.isNull(visibleRange)) {
+            return;
+        }
+        MomentPublishSenderList senderList = visibleRange.getSenderList();
+        if (Objects.nonNull(senderList)) {
+            if (CollectionUtils.isEmpty(senderList.getUserList()) && CollectionUtils.isEmpty(senderList.getDepartmentList())) {
+                throw new ParamCheckException("senderList 的 userList 与 departmentList 不能同时为空，请检查！！！");
+            }
+            if (CollectionUtils.isNotEmpty(senderList.getUserList())) {
+                if (senderList.getUserList().size() > 100000) {
+                    throw new ParamCheckException("senderList.userList 最多允许 100000 个成员，请检查！！！");
+                }
+                checkMomentPublishIdList(senderList.getUserList(), "senderList.userList");
+            }
+            if (CollectionUtils.isNotEmpty(senderList.getDepartmentList())) {
+                for (Integer departmentId : senderList.getDepartmentList()) {
+                    if (Objects.isNull(departmentId)) {
+                        throw new ParamCheckException("senderList.departmentList 中存在空部门 ID，请检查！！！");
+                    }
+                }
+            }
+        }
+        MomentPublishExternalContactList externalContactList = visibleRange.getExternalContactList();
+        if (Objects.nonNull(externalContactList)) {
+            if (CollectionUtils.isEmpty(externalContactList.getTagList())) {
+                throw new ParamCheckException("externalContactList.tagList 不能为空，请检查！！！");
+            }
+            checkMomentPublishIdList(externalContactList.getTagList(), "externalContactList.tagList");
+        }
+    }
+
+    /**
+     * 校验企业朋友圈 ID 列表中的空值
+     *
+     * @param idList    ID 列表
+     * @param fieldName 参数名称
+     */
+    private void checkMomentPublishIdList(List<String> idList, String fieldName) {
+        for (String id : idList) {
+            if (StringUtils.isBlank(id)) {
+                throw new ParamCheckException(fieldName + " 中存在空 ID，请检查！！！");
+            }
+        }
+    }
+
+    /**
+     * 校验企业朋友圈异步任务 ID
+     *
+     * @param jobId 异步任务 ID
+     */
+    private void checkMomentPublishJobId(String jobId) {
+        if (StringUtils.isBlank(jobId) || jobId.length() > 64) {
+            throw new ParamCheckException("jobId 不能为空且最长 64 个字符，请检查！！！");
+        }
+    }
     /**
      * 校验可选字符串长度
      *

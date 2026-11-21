@@ -280,6 +280,25 @@ public interface ExternalContactClient extends CommonClient {
     GroupChatDetailResponse groupChatDetail(GroupChatDetailRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
+     * 创建企业朋友圈发表任务
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return MomentPublishCreateResponse
+     */
+    @PostMapping(value = "externalcontact/add_moment_task", headers = HEAD)
+    MomentPublishCreateResponse addMomentPublishTask(MomentPublishRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取企业朋友圈发表任务创建结果
+     *
+     * @param jobId 异步任务 ID
+     * @param app   应用名
+     * @return MomentPublishTaskResultResponse
+     */
+    @GetMapping(value = "externalcontact/get_moment_task_result", headers = HEAD)
+    MomentPublishTaskResultResponse getMomentPublishTaskResult(@RequestParam("jobid") String jobId, @RequestParam(HEAD_KEY) String app);
+    /**
      * 获取企业全部的发表列表
      *
      * @param request 请求体
