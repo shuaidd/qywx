@@ -1,6 +1,8 @@
 package com.github.shuaidd.service;
 
 import com.github.shuaidd.client.ExternalContactClient;
+import com.github.shuaidd.dto.externalcontact.CustomerAcquisitionPriorityOption;
+import com.github.shuaidd.dto.externalcontact.CustomerAcquisitionRange;
 import com.github.shuaidd.dto.externalcontact.CustomerStrategyRange;
 import com.github.shuaidd.dto.externalcontact.CustomerStrategyTag;
 import com.github.shuaidd.dto.externalcontact.MomentStrategyRange;
@@ -877,6 +879,74 @@ public class CustomContactService extends AbstractBaseService {
 
     /* ---------客户朋友圈规则组管理---------- end */
 
+    /* ---------获客链接管理---------- start */
+
+    /**
+     * 获取获客链接 ID 列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return CustomerAcquisitionLinkListResponse
+     */
+    public CustomerAcquisitionLinkListResponse getCustomerAcquisitionLinkList(CustomerAcquisitionLinkListRequest request, String applicationName) {
+        checkCustomerAcquisitionLinkListRequest(request);
+        return externalContactClient.getCustomerAcquisitionLinkList(request, applicationName);
+    }
+
+    /**
+     * 获取获客链接详情
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return CustomerAcquisitionLinkResponse
+     */
+    public CustomerAcquisitionLinkResponse getCustomerAcquisitionLink(CustomerAcquisitionLinkIdRequest request, String applicationName) {
+        checkCustomerAcquisitionLinkId(request);
+        return externalContactClient.getCustomerAcquisitionLink(request, applicationName);
+    }
+
+    /**
+     * 创建获客链接
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return CreateCustomerAcquisitionLinkResponse
+     */
+    public CreateCustomerAcquisitionLinkResponse createCustomerAcquisitionLink(CreateCustomerAcquisitionLinkRequest request, String applicationName) {
+        if (Objects.isNull(request) || StringUtils.isBlank(request.getLinkName())) {
+            throw new ParamCheckException("linkName 不能为空，请检查！！！");
+        }
+        checkCustomerAcquisitionRange(request.getRange(), true);
+        checkCustomerAcquisitionPriorityOption(request.getPriorityOption());
+        return externalContactClient.createCustomerAcquisitionLink(request, applicationName);
+    }
+
+    /**
+     * 编辑获客链接
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return BaseResponse
+     */
+    public BaseResponse updateCustomerAcquisitionLink(UpdateCustomerAcquisitionLinkRequest request, String applicationName) {
+        checkCustomerAcquisitionLinkUpdateRequest(request);
+        checkCustomerAcquisitionRange(request.getRange(), false);
+        checkCustomerAcquisitionPriorityOption(request.getPriorityOption());
+        return externalContactClient.updateCustomerAcquisitionLink(request, applicationName);
+    }
+
+    /**
+     * 删除获客链接
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return BaseResponse
+     */
+    public BaseResponse deleteCustomerAcquisitionLink(CustomerAcquisitionLinkIdRequest request, String applicationName) {
+        checkCustomerAcquisitionLinkId(request);
+        return externalContactClient.deleteCustomerAcquisitionLink(request, applicationName);
+    }
+
     /* ---------客户联系规则组企业客户标签管理---------- start */
 
     /**
@@ -1130,6 +1200,116 @@ public class CustomContactService extends AbstractBaseService {
                 throw new ParamCheckException("部门类型管理范围节点必须配置 partyid，请检查！！！");
             } else if (!Objects.equals(node.getType(), 1) && !Objects.equals(node.getType(), 2)) {
                 throw new ParamCheckException("管理范围节点类型只允许 1-成员 或 2-部门，请检查！！！");
+            }
+        }
+    }
+
+    /**
+     * 校验获客链接 ID 列表请求，官方分页大小最大 100
+     *
+     * @param request 请求
+     */
+    private void checkCustomerAcquisitionLinkListRequest(CustomerAcquisitionLinkListRequest request) {
+        if (Objects.isNull(request)) {
+            throw new ParamCheckException("request 不能为空，请检查！！！");
+        }
+        Integer limit = request.getLimit();
+        if (Objects.isNull(limit)) {
+            request.setLimit(100);
+            return;
+        }
+        if (limit <= 0 || limit > 100) {
+            throw new ParamCheckException("limit 必须在 1 到 100 之间，请检查！！！");
+        }
+    }
+
+    /**
+     * 校验获客链接 ID 请求
+     *
+     * @param request 请求
+     */
+    private void checkCustomerAcquisitionLinkId(CustomerAcquisitionLinkIdRequest request) {
+        if (Objects.isNull(request) || StringUtils.isBlank(request.getLinkId())) {
+            throw new ParamCheckException("linkId 不能为空，请检查！！！");
+        }
+    }
+
+    /**
+     * 校验编辑获客链接请求
+     *
+     * @param request 请求
+     */
+    private void checkCustomerAcquisitionLinkUpdateRequest(UpdateCustomerAcquisitionLinkRequest request) {
+        if (Objects.isNull(request) || StringUtils.isBlank(request.getLinkId())) {
+            throw new ParamCheckException("linkId 不能为空，请检查！！！");
+        }
+        if (Objects.nonNull(request.getLinkName()) && StringUtils.isBlank(request.getLinkName())) {
+            throw new ParamCheckException("linkName 不能只包含空白字符，请检查！！！");
+        }
+    }
+
+    /**
+     * 校验获客链接使用范围，官方有效成员人数上限 500
+     *
+     * @param range    使用范围
+     * @param required 创建时是否必填
+     */
+    private void checkCustomerAcquisitionRange(CustomerAcquisitionRange range, boolean required) {
+        if (Objects.isNull(range)) {
+            if (required) {
+                throw new ParamCheckException("range 不能为空，请检查！！！");
+            }
+            return;
+        }
+        boolean hasUser = CollectionUtils.isNotEmpty(range.getUserList());
+        boolean hasDepartment = CollectionUtils.isNotEmpty(range.getDepartmentList());
+        if (!hasUser && !hasDepartment) {
+            throw new ParamCheckException("range 的 userList 与 departmentList 不能同时为空，请检查！！！");
+        }
+        if (hasUser) {
+            for (String userId : range.getUserList()) {
+                if (StringUtils.isBlank(userId)) {
+                    throw new ParamCheckException("range.userList 中存在空成员 userid，请检查！！！");
+                }
+            }
+        }
+        if (hasDepartment) {
+            for (Integer departmentId : range.getDepartmentList()) {
+                if (Objects.isNull(departmentId)) {
+                    throw new ParamCheckException("range.departmentList 中存在空部门 ID，请检查！！！");
+                }
+            }
+        }
+        int effectiveUserCount = (hasUser ? range.getUserList().size() : 0) + (hasDepartment ? range.getDepartmentList().size() : 0);
+        if (effectiveUserCount > 500) {
+            throw new ParamCheckException("range 配置的成员与部门有效人数不能超过 500，请检查！！！");
+        }
+    }
+
+    /**
+     * 校验获客链接成员分配优先级
+     *
+     * @param priorityOption 成员分配优先级配置
+     */
+    private void checkCustomerAcquisitionPriorityOption(CustomerAcquisitionPriorityOption priorityOption) {
+        if (Objects.isNull(priorityOption)) {
+            return;
+        }
+        Integer priorityType = priorityOption.getPriorityType();
+        if (Objects.isNull(priorityType)) {
+            throw new ParamCheckException("priorityOption.priorityType 不能为空，请检查！！！");
+        }
+        if (!Objects.equals(priorityType, 1) && !Objects.equals(priorityType, 2)) {
+            throw new ParamCheckException("priorityOption.priorityType 只允许 1 或 2，请检查！！！");
+        }
+        if (Objects.equals(priorityType, 2)) {
+            if (CollectionUtils.isEmpty(priorityOption.getPriorityUseridList())) {
+                throw new ParamCheckException("priorityOption.priorityUseridList 在 priorityType 为 2 时不能为空，请检查！！！");
+            }
+            for (String userId : priorityOption.getPriorityUseridList()) {
+                if (StringUtils.isBlank(userId)) {
+                    throw new ParamCheckException("priorityOption.priorityUseridList 中存在空成员 userid，请检查！！！");
+                }
             }
         }
     }

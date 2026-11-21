@@ -19,9 +19,9 @@
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 252 |
+| ✅ 已对接 | 253 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 342 |
+| ❌ 未对接 | 341 |
 | ⛔ 范围外 | 142 |
 | 合计 | 738 |
 
@@ -329,7 +329,7 @@
 
 ## 客户联系
 
-状态：✅ 32；⚠️ 0；❌ 12；⛔ 4
+状态：✅ 33；⚠️ 0；❌ 11；⛔ 4
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -361,7 +361,7 @@
 |  | 停止发表企业朋友圈 | [97612](https://developer.work.weixin.qq.com/document/path/97612) | ✅ 已对接 | ExternalContactClient.cancelMomentPublishTask |
 |  | 获取客户朋友圈全部的发表记录 | [93333](https://developer.work.weixin.qq.com/document/path/93333) | ✅ 已对接 | ExternalContactClient.getMomentList / getMomentTask / getMomentCustomerList / getMomentSendResult / getMomentComments |
 |  | 客户朋友圈规则组管理 | [94890](https://developer.work.weixin.qq.com/document/path/94890) | ✅ 已对接 | ExternalContactClient.getMomentStrategyList / getMomentStrategy / getMomentStrategyRange / createMomentStrategy / editMomentStrategy / deleteMomentStrategy |
-| 获客助手 | 获客链接管理 | [97297](https://developer.work.weixin.qq.com/document/path/97297) | ❌ 未对接 | — |
+| 获客助手 | 获客链接管理 | [97297](https://developer.work.weixin.qq.com/document/path/97297) | ✅ 已对接 | ExternalContactClient.getCustomerAcquisitionLinkList / getCustomerAcquisitionLink / createCustomerAcquisitionLink / updateCustomerAcquisitionLink / deleteCustomerAcquisitionLink |
 |  | 获取由获客链接添加的客户信息 | [97298](https://developer.work.weixin.qq.com/document/path/97298) | ❌ 未对接 | — |
 |  | 获客助手额度管理与使用统计 | [97375](https://developer.work.weixin.qq.com/document/path/97375) | ❌ 未对接 | — |
 |  | 提升广告有效率 | [99596](https://developer.work.weixin.qq.com/document/path/99596) | ❌ 未对接 | — |

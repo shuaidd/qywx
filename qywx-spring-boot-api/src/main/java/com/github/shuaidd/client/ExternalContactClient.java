@@ -714,6 +714,56 @@ public interface ExternalContactClient extends CommonClient {
      */
     @PostMapping(value = "externalcontact/moment_strategy/del", headers = HEAD)
     BaseResponse deleteMomentStrategy(MomentStrategyIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取获客链接 ID 列表
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CustomerAcquisitionLinkListResponse
+     */
+    @PostMapping(value = "externalcontact/customer_acquisition/list_link", headers = HEAD)
+    CustomerAcquisitionLinkListResponse getCustomerAcquisitionLinkList(CustomerAcquisitionLinkListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取获客链接详情
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CustomerAcquisitionLinkResponse
+     */
+    @PostMapping(value = "externalcontact/customer_acquisition/get", headers = HEAD)
+    CustomerAcquisitionLinkResponse getCustomerAcquisitionLink(CustomerAcquisitionLinkIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 创建获客链接
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CreateCustomerAcquisitionLinkResponse
+     */
+    @PostMapping(value = "externalcontact/customer_acquisition/create_link", headers = HEAD)
+    CreateCustomerAcquisitionLinkResponse createCustomerAcquisitionLink(CreateCustomerAcquisitionLinkRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 编辑获客链接
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/customer_acquisition/update_link", headers = HEAD)
+    BaseResponse updateCustomerAcquisitionLink(UpdateCustomerAcquisitionLinkRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除获客链接
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/customer_acquisition/delete_link", headers = HEAD)
+    BaseResponse deleteCustomerAcquisitionLink(CustomerAcquisitionLinkIdRequest request, @RequestParam(HEAD_KEY) String app);
     /**
      * 获取指定客户联系规则组下的企业客户标签
      *
