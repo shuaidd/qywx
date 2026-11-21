@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的 59 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 273 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的 59 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 281 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 228 |
+| ✅ 已对接 | 234 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 367 |
+| ❌ 未对接 | 361 |
 | ⛔ 范围外 | 141 |
 | 合计 | 738 |
 
@@ -55,18 +55,18 @@
 
 ## 账号ID
 
-状态：✅ 0；⚠️ 2；❌ 1；⛔ 1
+状态：✅ 1；⚠️ 2；❌ 0；⛔ 1
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
 | 账号ID | 概述 | [98728](https://developer.work.weixin.qq.com/document/path/98728) | ⛔ 范围外 | — |
 |  | 自建应用与第三方应用的对接 | [95884](https://developer.work.weixin.qq.com/document/path/95884) | ⚠️ 部分已对接 | 部分：WeChatClient.openUserId2UserId（batch/openuserid_to_userid） |
 |  | 自建应用与智能机器人的对接 | [101521](https://developer.work.weixin.qq.com/document/path/101521) | ⚠️ 部分已对接 | 部分：WeChatClient.openUserId2UserId（batch/openuserid_to_userid） |
-|  | tmp_external_userid的转换 | [98729](https://developer.work.weixin.qq.com/document/path/98729) | ❌ 未对接 | — |
+|  | tmp_external_userid的转换 | [98729](https://developer.work.weixin.qq.com/document/path/98729) | ✅ 已对接 | WeChatClient.convertTmpExternalUserId（idconvert/convert_tmp_external_userid） |
 
 ## 通讯录管理
 
-状态：✅ 33；⚠️ 0；❌ 7；⛔ 11
+状态：✅ 37；⚠️ 0；❌ 3；⛔ 11
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -83,15 +83,15 @@
 |  | 登录二次验证 | [90203](https://developer.work.weixin.qq.com/document/path/90203) | ✅ 已对接 | AddressBookClient.authSucc（user/authsucc） |
 |  | 邀请成员 | [90975](https://developer.work.weixin.qq.com/document/path/90975) | ✅ 已对接 | AddressBookClient.invite（batch/invite） |
 |  | 获取加入企业二维码 | [91714](https://developer.work.weixin.qq.com/document/path/91714) | ✅ 已对接 | AddressBookClient.getJoinQrCode |
-|  | 手机号获取userid | [95402](https://developer.work.weixin.qq.com/document/path/95402) | ❌ 未对接 | — |
-|  | 邮箱获取userid | [95895](https://developer.work.weixin.qq.com/document/path/95895) | ❌ 未对接 | — |
+|  | 手机号获取userid | [95402](https://developer.work.weixin.qq.com/document/path/95402) | ✅ 已对接 | AddressBookClient.getUserIdByMobile（user/getuserid） |
+|  | 邮箱获取userid | [95895](https://developer.work.weixin.qq.com/document/path/95895) | ✅ 已对接 | AddressBookClient.getUserIdByEmail（user/get_userid_by_email） |
 |  | 获取成员ID列表 | [96067](https://developer.work.weixin.qq.com/document/path/96067) | ✅ 已对接 | AddressBookClient.getUserIds（user/list_id） |
 | 部门管理 | 创建部门 | [90205](https://developer.work.weixin.qq.com/document/path/90205) | ✅ 已对接 | AddressBookClient.createDepartment |
 |  | 更新部门 | [90206](https://developer.work.weixin.qq.com/document/path/90206) | ✅ 已对接 | AddressBookClient.updateDepartment |
 |  | 删除部门 | [90207](https://developer.work.weixin.qq.com/document/path/90207) | ✅ 已对接 | AddressBookClient.deleteDepartment |
 |  | 获取部门列表 | [90208](https://developer.work.weixin.qq.com/document/path/90208) | ✅ 已对接 | AddressBookClient.departmentList（department/list） |
 |  | 获取子部门ID列表 | [95350](https://developer.work.weixin.qq.com/document/path/95350) | ✅ 已对接 | AddressBookClient.departmentSimpleList |
-|  | 获取单个部门详情 | [95351](https://developer.work.weixin.qq.com/document/path/95351) | ❌ 未对接 | — |
+|  | 获取单个部门详情 | [95351](https://developer.work.weixin.qq.com/document/path/95351) | ✅ 已对接 | AddressBookClient.getDepartmentDetail（department/get） |
 | 标签管理 | 创建标签 | [90210](https://developer.work.weixin.qq.com/document/path/90210) | ✅ 已对接 | AddressBookClient.createTag |
 |  | 更新标签名字 | [90211](https://developer.work.weixin.qq.com/document/path/90211) | ✅ 已对接 | AddressBookClient.updateTag |
 |  | 删除标签 | [90212](https://developer.work.weixin.qq.com/document/path/90212) | ✅ 已对接 | AddressBookClient.deleteTag |
@@ -124,7 +124,7 @@
 
 ## 身份验证
 
-状态：✅ 4；⚠️ 0；❌ 2；⛔ 5
+状态：✅ 6；⚠️ 0；❌ 0；⛔ 5
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -136,9 +136,9 @@
 |  | Web登录组件 | [98152](https://developer.work.weixin.qq.com/document/path/98152) | ⛔ 范围外 | — |
 |  | 获取用户登录身份 | [98176](https://developer.work.weixin.qq.com/document/path/98176) | ✅ 已对接 | AuthClient.getUserInfo（auth/getuserinfo） |
 | 二次验证 | 概述 | [99519](https://developer.work.weixin.qq.com/document/path/99519) | ⛔ 范围外 | — |
-|  | 获取用户二次验证信息 | [99499](https://developer.work.weixin.qq.com/document/path/99499) | ❌ 未对接 | — |
+|  | 获取用户二次验证信息 | [99499](https://developer.work.weixin.qq.com/document/path/99499) | ✅ 已对接 | AuthClient.getUserTfaInfo（auth/get_tfa_info） |
 |  | 登录二次验证 | [99521](https://developer.work.weixin.qq.com/document/path/99521) | ✅ 已对接 | AddressBookClient.authSucc（user/authsucc） |
-|  | 使用二次验证 | [99500](https://developer.work.weixin.qq.com/document/path/99500) | ❌ 未对接 | — |
+|  | 使用二次验证 | [99500](https://developer.work.weixin.qq.com/document/path/99500) | ✅ 已对接 | AuthClient.useUserTfa（user/tfa_succ） |
 
 ## 企业互联
 

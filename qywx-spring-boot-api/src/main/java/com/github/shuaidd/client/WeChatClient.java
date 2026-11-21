@@ -129,4 +129,16 @@ public interface WeChatClient extends CommonClient {
      */
     @PostMapping(value = "media/get_upload_by_url_result", headers = HEAD)
     UploadByUrlResultResponse getUploadByUrlResult(JobIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * tmp_external_userid转换
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 转换结果
+     */
+    @PostMapping(value = "idconvert/convert_tmp_external_userid", headers = HEAD)
+    TmpExternalUserIdConvertResponse convertTmpExternalUserId(TmpExternalUserIdConvertRequest request, @RequestParam(HEAD_KEY) String app);
+
 }
+

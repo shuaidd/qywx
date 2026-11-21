@@ -5,6 +5,7 @@ import com.github.shuaidd.dto.addressbook.DeptUser;
 import com.github.shuaidd.dto.addressbook.Tag;
 import com.github.shuaidd.dto.addressbook.WeChatUser;
 import com.github.shuaidd.dto.tool.CallbackData;
+import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.addressbook.*;
 import com.github.shuaidd.response.linkedcorp.*;
@@ -369,6 +370,69 @@ public class AddressBookService extends AbstractBaseService {
         }
 
         return departments;
+    }
+
+    /**
+     * 根据手机号获取 userid
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return UserIdResponse
+     */
+    public UserIdResponse getUserIdByMobile(GetUserIdByMobileRequest request, String applicationName) {
+        if (Objects.nonNull(request) && StringUtils.isNotEmpty(request.getMobile())) {
+            UserIdResponse response = addressBookClient.getUserIdByMobile(request, applicationName);
+            if (logger.isInfoEnabled()) {
+                logger.info("根据手机号获取 userid 成功：applicationName-{},response-{}", applicationName, response);
+            }
+
+            return response;
+        }
+
+        throw new ParamCheckException("mobile 不能为空，请检查！！！");
+    }
+
+    /**
+     * 根据邮箱获取 userid
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return UserIdResponse
+     */
+    public UserIdResponse getUserIdByEmail(GetUserIdByEmailRequest request, String applicationName) {
+        if (Objects.nonNull(request)
+                && StringUtils.isNotEmpty(request.getEmail())
+                && Objects.nonNull(request.getEmailType())) {
+            UserIdResponse response = addressBookClient.getUserIdByEmail(request, applicationName);
+            if (logger.isInfoEnabled()) {
+                logger.info("根据邮箱获取 userid 成功：applicationName-{},response-{}", applicationName, response);
+            }
+
+            return response;
+        }
+
+        throw new ParamCheckException("email 和 emailType 不能为空，请检查！！！");
+    }
+
+    /**
+     * 获取单个部门详情
+     *
+     * @param departmentId    企业微信部门编号
+     * @param applicationName 应用名称
+     * @return Department
+     */
+    public Department getDepartmentDetail(Integer departmentId, String applicationName) {
+        if (Objects.isNull(departmentId)) {
+            throw new ParamCheckException("departmentId 不能为空，请检查！！！");
+        }
+
+        DepartmentDetailResponse response = addressBookClient.getDepartmentDetail(departmentId, applicationName);
+        Department department = response.getDepartment();
+        if (logger.isInfoEnabled()) {
+            logger.info("获取部门详情成功：applicationName-{},department-{}", applicationName, department);
+        }
+
+        return department;
     }
 
     /**

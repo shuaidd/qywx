@@ -403,4 +403,36 @@ public interface AddressBookClient extends CommonClient {
      */
     @GetMapping(value = "corp/get_join_qrcode", headers = HEAD)
     JoinQrCodeResponse getJoinQrCode(@RequestParam("size_type") Integer sizeType, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 根据手机号获取 userid
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return UserIdResponse
+     */
+    @PostMapping(value = "user/getuserid", headers = HEAD)
+    UserIdResponse getUserIdByMobile(GetUserIdByMobileRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 根据邮箱获取 userid
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return UserIdResponse
+     */
+    @PostMapping(value = "user/get_userid_by_email", headers = HEAD)
+    UserIdResponse getUserIdByEmail(GetUserIdByEmailRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取单个部门详情
+     *
+     * @param id  部门id
+     * @param app 应用名
+     * @return DepartmentDetailResponse
+     */
+    @GetMapping(value = "department/get", headers = HEAD)
+    DepartmentDetailResponse getDepartmentDetail(@RequestParam("id") Integer id, @RequestParam(HEAD_KEY) String app);
+
 }
+
