@@ -18,6 +18,11 @@ import com.github.shuaidd.resquest.externalcontact.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.stereotype.Service;
@@ -959,6 +964,28 @@ public class CustomContactService extends AbstractBaseService {
         return externalContactClient.getCustomerAcquisitionCustomerList(request, applicationName);
     }
 
+    /**
+     * 查询获客助手剩余使用量
+     *
+     * @param applicationName 应用名称
+     * @return CustomerAcquisitionQuotaResponse
+     */
+    public CustomerAcquisitionQuotaResponse getCustomerAcquisitionQuota(String applicationName) {
+        return externalContactClient.getCustomerAcquisitionQuota(applicationName);
+    }
+
+    /**
+     * 查询获客链接使用详情；官方按自然日统计，参数会归一化到当日零点且最多查询 30 天
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return CustomerAcquisitionStatisticResponse
+     */
+    public CustomerAcquisitionStatisticResponse getCustomerAcquisitionStatistic(CustomerAcquisitionStatisticRequest request, String applicationName) {
+        checkCustomerAcquisitionStatisticRequest(request);
+        return externalContactClient.getCustomerAcquisitionStatistic(request, applicationName);
+    }
+
     /* ---------客户联系规则组企业客户标签管理---------- start */
 
     /**
@@ -1344,6 +1371,40 @@ public class CustomContactService extends AbstractBaseService {
             throw new ParamCheckException("limit 必须在 1 到 1000 之间，请检查！！！");
         }
     }
+
+    /**
+     * 校验获客链接使用详情请求，官方仅支持最近 180 天且时间跨度不超过 30 天
+     *
+     * @param request 请求
+     */
+    private void checkCustomerAcquisitionStatisticRequest(CustomerAcquisitionStatisticRequest request) {
+        if (Objects.isNull(request) || StringUtils.isBlank(request.getLinkId())) {
+            throw new ParamCheckException("linkId 不能为空，请检查！！！");
+        }
+        if (Objects.isNull(request.getStartTime()) || Objects.isNull(request.getEndTime())) {
+            throw new ParamCheckException("startTime 和 endTime 不能为空，请检查！！！");
+        }
+        if (request.getStartTime().after(request.getEndTime())) {
+            throw new ParamCheckException("startTime 不能晚于 endTime，请检查！！！");
+        }
+
+        ZoneId zoneId = ZoneId.systemDefault();
+        LocalDate startDate = Instant.ofEpochMilli(request.getStartTime().getTime()).atZone(zoneId).toLocalDate();
+        LocalDate endDate = Instant.ofEpochMilli(request.getEndTime().getTime()).atZone(zoneId).toLocalDate();
+        LocalDate today = LocalDate.now(zoneId);
+        if (startDate.isBefore(today.minusDays(179))) {
+            throw new ParamCheckException("统计时间范围只能包含最近 180 天（含今天），请检查！！！");
+        }
+        if (endDate.isAfter(today)) {
+            throw new ParamCheckException("endTime 不能晚于今天，请检查！！！");
+        }
+        if (ChronoUnit.DAYS.between(startDate, endDate) > 30) {
+            throw new ParamCheckException("统计起始与结束时间跨度不能超过 30 天，请检查！！！");
+        }
+        request.setStartTime(Date.from(startDate.atStartOfDay(zoneId).toInstant()));
+        request.setEndTime(Date.from(endDate.atStartOfDay(zoneId).toInstant()));
+    }
+
     /**
      * 校验客户联系规则组标签 ID 列表
      *

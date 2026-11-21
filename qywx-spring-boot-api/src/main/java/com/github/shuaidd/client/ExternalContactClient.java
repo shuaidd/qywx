@@ -774,6 +774,26 @@ public interface ExternalContactClient extends CommonClient {
      */
     @PostMapping(value = "externalcontact/customer_acquisition/customer", headers = HEAD)
     CustomerAcquisitionCustomerListResponse getCustomerAcquisitionCustomerList(CustomerAcquisitionCustomerListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 查询获客助手剩余使用量
+     *
+     * @param app 应用名
+     * @return CustomerAcquisitionQuotaResponse
+     */
+    @GetMapping(value = "externalcontact/customer_acquisition_quota", headers = HEAD)
+    CustomerAcquisitionQuotaResponse getCustomerAcquisitionQuota(@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 查询获客链接使用详情
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CustomerAcquisitionStatisticResponse
+     */
+    @PostMapping(value = "externalcontact/customer_acquisition/statistic", headers = HEAD)
+    CustomerAcquisitionStatisticResponse getCustomerAcquisitionStatistic(CustomerAcquisitionStatisticRequest request, @RequestParam(HEAD_KEY) String app);
+
     /**
      * 获取指定客户联系规则组下的企业客户标签
      *
