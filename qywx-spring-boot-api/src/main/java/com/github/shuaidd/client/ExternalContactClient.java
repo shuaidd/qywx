@@ -299,6 +299,15 @@ public interface ExternalContactClient extends CommonClient {
     @GetMapping(value = "externalcontact/get_moment_task_result", headers = HEAD)
     MomentPublishTaskResultResponse getMomentPublishTaskResult(@RequestParam("jobid") String jobId, @RequestParam(HEAD_KEY) String app);
     /**
+     * 停止发表企业朋友圈
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/cancel_moment_task", headers = HEAD)
+    BaseResponse cancelMomentPublishTask(MomentPublishCancelRequest request, @RequestParam(HEAD_KEY) String app);
+    /**
      * 获取企业全部的发表列表
      *
      * @param request 请求体

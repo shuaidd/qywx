@@ -365,6 +365,23 @@ public class CustomContactService extends AbstractBaseService {
         checkMomentPublishJobId(jobId);
         return externalContactClient.getMomentPublishTaskResult(jobId, applicationName);
     }
+
+    /**
+     * 停止发表企业朋友圈
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return BaseResponse
+     */
+    public BaseResponse cancelMomentPublishTask(MomentPublishCancelRequest request, String applicationName) {
+        if (Objects.isNull(request)) {
+            throw new ParamCheckException("request 不能为空，请检查！！！");
+        }
+        if (StringUtils.isBlank(request.getMomentId())) {
+            throw new ParamCheckException("momentId 不能为空，请检查！！！");
+        }
+        return externalContactClient.cancelMomentPublishTask(request, applicationName);
+    }
     /**
      * 获取企业全部的发表列表
      *

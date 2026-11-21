@@ -24,7 +24,7 @@
 | 1 | 账号 ID 转换、手机号/邮箱获取 userid、单个部门详情 | 4 | 已完成 | 新增转换/查询 Feign、Service、请求响应模型；`API-COVERAGE.md` 已同步，模块编译通过。 |
 | 2 | 通讯录查看权限与身份验证二次验证 | 5 | 已完成 | 身份验证二次验证 2 页、通讯录查看权限 4 页已完成；路由 `auth/get_tfa_info`、`user/tfa_succ`、`contactrule/create`、`contactrule/list`、`contactrule/update`、`contactrule/delete` 已接入。 |
 | 3 | 消息接收与发送、应用管理、机器人消息 | 6 | 已完成 | 覆盖模板卡片更新、消息撤回、学校通知、机器人主动回复、智能表格自动化群聊列表和工作台自定义展示；共新增 10 个 Feign 方法。 |
-| 4 | 客户联系缺口 | 17 | 进行中 | 已完成成员对外信息、客户联系规则组管理、规则组客户标签、客户群 opengid 转换、客户群「加入群聊」管理和企业发表客户朋友圈页；其余按朋友圈、获客助手和群发细分推进。 |
+| 4 | 客户联系缺口 | 17 | 进行中 | 已完成成员对外信息、客户联系规则组管理、规则组客户标签、客户群 opengid 转换、客户群「加入群聊」管理和企业朋友圈发表与停止页；其余按朋友圈、获客助手和群发细分推进。 |
 | 5 | 企业支付与小程序收款 | 21 | 待开始 | 涉及资金能力，先确认路由和参数，不修改支付配置。 |
 | 6 | 效率工具：文档、日程、待办、收集表 | 53 | 待开始 | 文档页较多，按智能文档/智能表格/日程待办继续拆分。 |
 | 7 | 会议全家桶 | 128 | 待开始 | 最大批次，按基础会议、统计、会控、录制、Webinar、Rooms、MRA 拆成子批。 |
@@ -64,3 +64,4 @@
 - 2026-11-21：批次 4 完成客户群「加入群聊」管理文档页，覆盖 `externalcontact/groupchat/add_join_way`、`get_join_way`、`update_join_way` 和 `del_join_way` 四条路由；覆盖度更新为已对接 249 页、未对接 346 页，Feign 方法数达到 310；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
 - 2026-11-21：核对客户朋友圈概述页，确认为概念说明页；`API-COVERAGE.md` 改记为范围外，不计入 REST 接口补齐数量。
 - 2026-11-21：批次 4 完成企业发表内容到客户的朋友圈文档页，覆盖 `externalcontact/add_moment_task` 和 `externalcontact/get_moment_task_result`；创建、查询 Service 入口与请求参数校验已补齐，覆盖度更新为已对接 250 页、未对接 344 页，Feign 方法数达到 312；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
+- 2026-11-21：批次 4 完成停止发表企业朋友圈文档页，覆盖 `externalcontact/cancel_moment_task`；覆盖度更新为已对接 251 页、未对接 343 页，Feign 方法数达到 313；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
