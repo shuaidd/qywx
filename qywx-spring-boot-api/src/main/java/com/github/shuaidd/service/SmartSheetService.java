@@ -1,15 +1,18 @@
 package com.github.shuaidd.service;
 
 import com.github.shuaidd.client.WechatDocClient;
+import com.github.shuaidd.dto.smartsheet.FieldGroupChild;
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.client.WechatSmartSheetClient;
 import com.github.shuaidd.response.smartsheet.*;
 import com.github.shuaidd.response.wedoc.CreateDocResponse;
 import com.github.shuaidd.resquest.smartsheet.*;
 import com.github.shuaidd.resquest.wedoc.CreateDocRequest;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -129,6 +132,115 @@ public class SmartSheetService extends AbstractBaseService {
      */
     public void delField(DeleteFieldRequest request, String app) {
         smartSheetClient.delField(request, app);
+    }
+
+    /**
+     * 添加编组
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    public AddFieldGroupResponse addFieldGroup(AddFieldGroupRequest request, String app) {
+        checkFieldGroupBase(request);
+        if (StringUtils.isEmpty(request.getName())) {
+            throw new ParamCheckException("编组名称不能为空，请检查！！！");
+        }
+        checkFieldGroupChildren(request.getChildren());
+        return smartSheetClient.addFieldGroup(request, app);
+    }
+
+    /**
+     * 更新编组
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    public UpdateFieldGroupResponse updateFieldGroup(UpdateFieldGroupRequest request, String app) {
+        checkFieldGroupBase(request);
+        if (StringUtils.isEmpty(request.getFieldGroupId())) {
+            throw new ParamCheckException("field_group_id 不能为空，请检查！！！");
+        }
+        if (StringUtils.isEmpty(request.getName()) && CollectionUtils.isEmpty(request.getChildren())) {
+            throw new ParamCheckException("编组名称和字段列表至少填写一项，请检查！！！");
+        }
+        checkFieldGroupChildren(request.getChildren());
+        return smartSheetClient.updateFieldGroup(request, app);
+    }
+
+    /**
+     * 删除编组
+     *
+     * @param request req
+     * @param app     app
+     */
+    public void delFieldGroups(DeleteFieldGroupsRequest request, String app) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getDocId())) {
+            throw new ParamCheckException("docid 不能为空，请检查！！！");
+        }
+        if (StringUtils.isEmpty(request.getSheetId())) {
+            throw new ParamCheckException("sheet_id 不能为空，请检查！！！");
+        }
+        if (CollectionUtils.isEmpty(request.getFieldGroupIds())) {
+            throw new ParamCheckException("field_group_ids 不能为空，请检查！！！");
+        }
+        smartSheetClient.delFieldGroups(request, app);
+    }
+
+    /**
+     * 获取编组
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    public GetFieldGroupsResponse getFieldGroups(GetFieldGroupsRequest request, String app) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getDocId())) {
+            throw new ParamCheckException("docid 不能为空，请检查！！！");
+        }
+        if (StringUtils.isEmpty(request.getSheetId())) {
+            throw new ParamCheckException("sheet_id 不能为空，请检查！！！");
+        }
+        if (Objects.nonNull(request.getOffset()) && request.getOffset() < 0) {
+            throw new ParamCheckException("offset 不能小于0，请检查！！！");
+        }
+        if (Objects.nonNull(request.getLimit()) && request.getLimit() < 1) {
+            throw new ParamCheckException("limit 最小为1，请检查！！！");
+        }
+        return smartSheetClient.getFieldGroups(request, app);
+    }
+
+    private void checkFieldGroupBase(AddFieldGroupRequest request) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getDocId())) {
+            throw new ParamCheckException("docid 不能为空，请检查！！！");
+        }
+        if (StringUtils.isEmpty(request.getSheetId())) {
+            throw new ParamCheckException("sheet_id 不能为空，请检查！！！");
+        }
+    }
+
+    private void checkFieldGroupBase(UpdateFieldGroupRequest request) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getDocId())) {
+            throw new ParamCheckException("docid 不能为空，请检查！！！");
+        }
+        if (StringUtils.isEmpty(request.getSheetId())) {
+            throw new ParamCheckException("sheet_id 不能为空，请检查！！！");
+        }
+    }
+
+    private void checkFieldGroupChildren(List<FieldGroupChild> children) {
+        if (CollectionUtils.isEmpty(children)) {
+            return;
+        }
+        if (children.size() > 150) {
+            throw new ParamCheckException("编组最多支持150个字段，请检查！！！");
+        }
+        for (FieldGroupChild child : children) {
+            if (Objects.isNull(child) || StringUtils.isEmpty(child.getFieldId())) {
+                throw new ParamCheckException("children.field_id 不能为空，请检查！！！");
+            }
+        }
     }
 
     /**

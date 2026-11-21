@@ -106,6 +106,46 @@ public interface WechatSmartSheetClient extends CommonClient {
     BaseResponse delField(DeleteFieldRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
+     * 添加编组
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartsheet/add_field_group", headers = HEAD)
+    AddFieldGroupResponse addFieldGroup(AddFieldGroupRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 更新编组
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartsheet/update_field_group", headers = HEAD)
+    UpdateFieldGroupResponse updateFieldGroup(UpdateFieldGroupRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除编组
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartsheet/delete_field_groups", headers = HEAD)
+    BaseResponse delFieldGroups(DeleteFieldGroupsRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取编组
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartsheet/get_field_groups", headers = HEAD)
+    GetFieldGroupsResponse getFieldGroups(GetFieldGroupsRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
      * 添加记录
      *
      * @param request req
