@@ -225,4 +225,14 @@ public interface WechatSmartSheetClient extends CommonClient {
      */
     @PostMapping(value = "/wedoc/smartsheet/content_priv/delete_rule", headers = HEAD)
     BaseResponse delRule(DeleteRuleRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 查询智能表格自动化创建的群聊列表
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartsheet/groupchat/list", headers = HEAD)
+    AutomationGroupChatListResponse getAutomationGroupChatList(AutomationGroupChatListRequest request, @RequestParam(HEAD_KEY) String app);
 }

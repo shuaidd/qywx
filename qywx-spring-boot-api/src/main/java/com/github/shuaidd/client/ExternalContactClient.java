@@ -507,4 +507,13 @@ public interface ExternalContactClient extends CommonClient {
      */
     @PostMapping(value = "externalcontact/del_intercept_rule", headers = HEAD)
     BaseResponse delInterceptRule(InterceptRuleIdRequest request, @RequestParam(HEAD_KEY) String app);
+    /**
+     * 发送「学校通知」
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return SendSchoolNotificationResponse
+     */
+    @PostMapping(value = "externalcontact/message/send", headers = HEAD)
+    SendSchoolNotificationResponse sendSchoolNotification(SendSchoolNotificationRequest request, @RequestParam(HEAD_KEY) String app);
 }

@@ -1,5 +1,8 @@
 package com.github.shuaidd.dto.message;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.shuaidd.dto.message.MessageFeedback;
+
 import java.util.StringJoiner;
 
 /**
@@ -12,6 +15,8 @@ import java.util.StringJoiner;
 public class MsgMarkdown {
     private String content;
 
+    private MessageFeedback feedback;
+
     public MsgMarkdown(String content) {
         this.content = content;
     }
@@ -23,6 +28,9 @@ public class MsgMarkdown {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public MessageFeedback getFeedback() { return feedback; }
+    public void setFeedback(MessageFeedback feedback) { this.feedback = feedback; }
 
     @Override
     public String toString() {

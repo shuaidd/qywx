@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的 63 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 285 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的 69 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 295 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 238 |
+| ✅ 已对接 | 244 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 357 |
+| ❌ 未对接 | 351 |
 | ⛔ 范围外 | 141 |
 | 合计 | 738 |
 
@@ -29,7 +29,7 @@
 
 ## 待补齐的重点模块
 
-1. 消息/机器人：模板卡片更新、消息撤回、学校通知、机器人主动回复等。
+1. 消息/机器人：剩余机器人与消息相关缺口。
 2. 上下游：通讯录、对接规则和关联客户信息接口。
 3. 安全管理：文件防泄漏、设备、截屏录屏、操作日志。
 4. 企业支付与小程序对外收款。
@@ -203,8 +203,8 @@
 | --- | --- | --- | --- | --- |
 | 消息接收与发送 | 概述 | [90235](https://developer.work.weixin.qq.com/document/path/90235) | ⛔ 范围外 | — |
 |  | 发送应用消息 | [90236](https://developer.work.weixin.qq.com/document/path/90236) | ✅ 已对接 | MessageClient.sendMessage（message/send） |
-|  | 更新模版卡片消息 | [94888](https://developer.work.weixin.qq.com/document/path/94888) | ❌ 未对接 | — |
-|  | 撤回应用消息 | [94867](https://developer.work.weixin.qq.com/document/path/94867) | ❌ 未对接 | — |
+|  | 更新模版卡片消息 | [94888](https://developer.work.weixin.qq.com/document/path/94888) | ✅ 已对接 | MessageClient.updateTemplateCard（message/update_template_card） |
+|  | 撤回应用消息 | [94867](https://developer.work.weixin.qq.com/document/path/94867) | ✅ 已对接 | MessageClient.recallMessage（message/recall） |
 | 接收消息与事件 | 概述 | [90238](https://developer.work.weixin.qq.com/document/path/90238) | ⛔ 范围外 | — |
 |  | 消息格式 | [90239](https://developer.work.weixin.qq.com/document/path/90239) | ⛔ 范围外 | — |
 |  | 事件格式 | [90240](https://developer.work.weixin.qq.com/document/path/90240) | ⛔ 范围外 | — |
@@ -214,7 +214,7 @@
 |  | 修改群聊会话 | [98913](https://developer.work.weixin.qq.com/document/path/98913) | ✅ 已对接 | MessageClient.updateAppChat |
 |  | 获取群聊会话 | [98914](https://developer.work.weixin.qq.com/document/path/98914) | ✅ 已对接 | MessageClient.searchAppChat |
 |  | 应用推送消息 | [90248](https://developer.work.weixin.qq.com/document/path/90248) | ✅ 已对接 | MessageClient.sendAppChatMessage（appchat/send） |
-| 家校消息推送 | 发送「学校通知」 | [91609](https://developer.work.weixin.qq.com/document/path/91609) | ❌ 未对接 | — |
+| 家校消息推送 | 发送「学校通知」 | [91609](https://developer.work.weixin.qq.com/document/path/91609) | ✅ 已对接 | MessageClient.sendSchoolNotification（externalcontact/message/send） |
 | 消息推送（原“群机器人”） | 消息推送配置说明 | [99110](https://developer.work.weixin.qq.com/document/path/99110) | ⛔ 范围外 | — |
 | 智能机器人 | 概述 | [101039](https://developer.work.weixin.qq.com/document/path/101039) | ⛔ 范围外 | — |
 |  | 接收消息 | [100719](https://developer.work.weixin.qq.com/document/path/100719) | ⛔ 范围外 | — |
@@ -222,10 +222,10 @@
 |  | 被动回复消息 | [101031](https://developer.work.weixin.qq.com/document/path/101031) | ⛔ 范围外 | — |
 |  | 模板卡片类型 | [101032](https://developer.work.weixin.qq.com/document/path/101032) | ⛔ 范围外 | — |
 |  | 回调和回复的加解密方案 | [101033](https://developer.work.weixin.qq.com/document/path/101033) | ⛔ 范围外 | — |
-|  | 主动回复消息 | [101138](https://developer.work.weixin.qq.com/document/path/101138) | ❌ 未对接 | — |
+|  | 主动回复消息 | [101138](https://developer.work.weixin.qq.com/document/path/101138) | ✅ 已对接 | MessageClient.responseAiBot（aibot/response） |
 |  | 智能机器人长连接 | [101463](https://developer.work.weixin.qq.com/document/path/101463) | ⛔ 范围外 | — |
 |  | API模式机器人文档使用说明 | [101468](https://developer.work.weixin.qq.com/document/path/101468) | ⛔ 范围外 | — |
-| 智能表格自动化创建的群聊 | 获取群聊列表 | [100989](https://developer.work.weixin.qq.com/document/path/100989) | ❌ 未对接 | — |
+| 智能表格自动化创建的群聊 | 获取群聊列表 | [100989](https://developer.work.weixin.qq.com/document/path/100989) | ✅ 已对接 | WechatSmartSheetClient.getAutomationGroupChatList（wedoc/smartsheet/groupchat/list） |
 |  | 获取群聊会话 | [101028](https://developer.work.weixin.qq.com/document/path/101028) | ✅ 已对接 | MessageClient.searchAppChat |
 |  | 修改群聊会话 | [101029](https://developer.work.weixin.qq.com/document/path/101029) | ✅ 已对接 | MessageClient.updateAppChat |
 
@@ -241,7 +241,7 @@
 | 自定义菜单 | 创建菜单 | [90231](https://developer.work.weixin.qq.com/document/path/90231) | ✅ 已对接 | WorkApplicationClient.createApplicationButton |
 |  | 获取菜单 | [90232](https://developer.work.weixin.qq.com/document/path/90232) | ✅ 已对接 | WorkApplicationClient.getApplicationButtons |
 |  | 删除菜单 | [90233](https://developer.work.weixin.qq.com/document/path/90233) | ✅ 已对接 | WorkApplicationClient.deleteApplicationButtons |
-|  | 设置工作台自定义展示 | [92535](https://developer.work.weixin.qq.com/document/path/92535) | ❌ 未对接 | — |
+|  | 设置工作台自定义展示 | [92535](https://developer.work.weixin.qq.com/document/path/92535) | ✅ 已对接 | WorkApplicationClient 工作台模板/数据 5 条路由 |
 
 ## 素材管理
 

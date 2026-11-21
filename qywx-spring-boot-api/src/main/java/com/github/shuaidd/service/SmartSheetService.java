@@ -1,11 +1,13 @@
 package com.github.shuaidd.service;
 
 import com.github.shuaidd.client.WechatDocClient;
+import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.client.WechatSmartSheetClient;
 import com.github.shuaidd.response.smartsheet.*;
 import com.github.shuaidd.response.wedoc.CreateDocResponse;
 import com.github.shuaidd.resquest.smartsheet.*;
 import com.github.shuaidd.resquest.wedoc.CreateDocRequest;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -255,5 +257,22 @@ public class SmartSheetService extends AbstractBaseService {
      */
     public void delRule(DeleteRuleRequest request, String app) {
         smartSheetClient.delRule(request, app);
+    }
+
+    /**
+     * 查询智能表格自动化创建的群聊列表
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    public AutomationGroupChatListResponse getAutomationGroupChatList(AutomationGroupChatListRequest request, String app) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getDocId())) {
+            throw new ParamCheckException("docid 不能为空，请检查！！！");
+        }
+        if (Objects.nonNull(request.getLimit()) && (request.getLimit() < 1 || request.getLimit() > 200)) {
+            throw new ParamCheckException("limit 最小为1，最大为200，请检查！！！");
+        }
+        return smartSheetClient.getAutomationGroupChatList(request, app);
     }
 }

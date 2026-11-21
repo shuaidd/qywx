@@ -4,11 +4,15 @@ import com.github.shuaidd.client.config.WeChatConfiguration;
 import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.message.CreateAppChatResponse;
 import com.github.shuaidd.response.message.SearchAppChatResponse;
+import com.github.shuaidd.response.message.UpdateTemplateCardResponse;
 import com.github.shuaidd.response.message.SendMessageResponse;
+import com.github.shuaidd.resquest.message.AiBotResponseRequest;
 import com.github.shuaidd.resquest.message.CreateAppChatRequest;
 import com.github.shuaidd.resquest.message.SendAppChatRequest;
+import com.github.shuaidd.resquest.message.RecallMessageRequest;
 import com.github.shuaidd.resquest.message.SendMessageRequest;
 import com.github.shuaidd.resquest.message.UpdateAppChatRequest;
+import com.github.shuaidd.resquest.message.UpdateTemplateCardRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +36,27 @@ public interface MessageClient extends CommonClient {
      */
     @PostMapping(value = "message/send", headers = HEAD)
     SendMessageResponse sendMessage(SendMessageRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 撤回应用消息
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "message/recall", headers = HEAD)
+    BaseResponse recallMessage(RecallMessageRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 智能机器人主动回复消息
+     *
+     * @param request      请求体
+     * @param responseCode 回调返回的响应码
+     * @param app          应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "aibot/response", headers = HEAD)
+    BaseResponse responseAiBot(AiBotResponseRequest request, @RequestParam("response_code") String responseCode, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 创建群聊会话
@@ -62,6 +87,16 @@ public interface MessageClient extends CommonClient {
      */
     @GetMapping(value = "appchat/get", headers = HEAD)
     SearchAppChatResponse searchAppChat(@RequestParam("chatid") String chatId, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 更新模版卡片消息
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return UpdateTemplateCardResponse
+     */
+    @PostMapping(value = "message/update_template_card", headers = HEAD)
+    UpdateTemplateCardResponse updateTemplateCard(UpdateTemplateCardRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
      * 发送群消息

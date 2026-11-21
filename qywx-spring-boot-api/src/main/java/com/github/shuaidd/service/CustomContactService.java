@@ -1,6 +1,7 @@
 package com.github.shuaidd.service;
 
 import com.github.shuaidd.client.ExternalContactClient;
+import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.addressbook.MobileHashCodeResponse;
 import com.github.shuaidd.response.externalcontact.*;
 import com.github.shuaidd.resquest.CursorPageRequest;
@@ -8,6 +9,9 @@ import com.github.shuaidd.resquest.PageRequest;
 import com.github.shuaidd.resquest.addressbook.MobileHashCodeRequest;
 import com.github.shuaidd.resquest.addressbook.TagGroupRequest;
 import com.github.shuaidd.resquest.externalcontact.*;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Objects;
 import org.springframework.stereotype.Service;
 
 /**
@@ -573,5 +577,19 @@ public class CustomContactService extends AbstractBaseService {
      */
     public void delInterceptRule(InterceptRuleIdRequest request, String applicationName) {
         externalContactClient.delInterceptRule(request, applicationName);
+    }
+
+    /**
+     * 发送「学校通知」
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return SendSchoolNotificationResponse
+     */
+    public SendSchoolNotificationResponse sendSchoolNotification(SendSchoolNotificationRequest request, String applicationName) {
+        if (Objects.isNull(request) || Objects.isNull(request.getAgentid()) || Objects.isNull(request.getMsgType())) {
+            throw new ParamCheckException("agentid、msgtype 不能为空，请检查！！！");
+        }
+        return externalContactClient.sendSchoolNotification(request, applicationName);
     }
 }
