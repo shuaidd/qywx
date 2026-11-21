@@ -210,6 +210,16 @@ public interface ExternalContactClient extends CommonClient {
     FailedChatResponse groupChatTransfer(GroupChatTransferRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
+     * 客户群 opengid 转换
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return OpenGidToChatIdResponse
+     */
+    @PostMapping(value = "externalcontact/opengid_to_chatid", headers = HEAD)
+    OpenGidToChatIdResponse openGidToChatId(OpenGidToChatIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
      * 获取客户群列表
      *
      * @param request 请求体

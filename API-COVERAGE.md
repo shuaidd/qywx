@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 305 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 306 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 247 |
+| ✅ 已对接 | 248 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 348 |
+| ❌ 未对接 | 347 |
 | ⛔ 范围外 | 141 |
 | 合计 | 738 |
 
@@ -353,7 +353,7 @@
 |  | 分配离职成员的客户群 | [92127](https://developer.work.weixin.qq.com/document/path/92127) | ✅ 已对接 | ExternalContactClient.groupChatTransfer |
 | 客户群管理 | 获取客户群列表 | [92120](https://developer.work.weixin.qq.com/document/path/92120) | ✅ 已对接 | ExternalContactClient.groupChatList |
 |  | 获取客户群详情 | [92122](https://developer.work.weixin.qq.com/document/path/92122) | ✅ 已对接 | ExternalContactClient.groupChatDetail |
-|  | 客户群opengid转换 | [94822](https://developer.work.weixin.qq.com/document/path/94822) | ❌ 未对接 | — |
+|  | 客户群opengid转换 | [94822](https://developer.work.weixin.qq.com/document/path/94822) | ✅ 已对接 | ExternalContactClient.openGidToChatId |
 | 联系我与客户入群方式 | 客户联系「联系我」管理 | [92228](https://developer.work.weixin.qq.com/document/path/92228) | ✅ 已对接 | ExternalContactClient.add/get/update/delete ContactWay |
 |  | 客户群「加入群聊」管理 | [92229](https://developer.work.weixin.qq.com/document/path/92229) | ❌ 未对接 | — |
 | 客户朋友圈 | 概述 | [93506](https://developer.work.weixin.qq.com/document/path/93506) | ❌ 未对接 | — |

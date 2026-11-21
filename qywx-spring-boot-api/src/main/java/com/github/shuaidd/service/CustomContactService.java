@@ -282,6 +282,19 @@ public class CustomContactService extends AbstractBaseService {
     public GroupChatDetailResponse groupChatDetail(GroupChatDetailRequest request, String applicationName) {
         return externalContactClient.groupChatDetail(request, applicationName);
     }
+    /**
+     * 客户群 opengid 转换
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return OpenGidToChatIdResponse
+     */
+    public OpenGidToChatIdResponse openGidToChatId(OpenGidToChatIdRequest request, String applicationName) {
+        if (Objects.isNull(request) || StringUtils.isBlank(request.getOpengid())) {
+            throw new ParamCheckException("opengid 不能为空，请检查！！！");
+        }
+        return externalContactClient.openGidToChatId(request, applicationName);
+    }
     /* ---------客户群管理---------- end */
 
     /**
