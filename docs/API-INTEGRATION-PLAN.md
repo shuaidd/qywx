@@ -62,3 +62,4 @@
 - 2026-11-21：批次 4 完成管理企业规则组下的客户标签文档页，覆盖 `externalcontact/get_strategy_tag_list`、`externalcontact/add_strategy_tag`、`externalcontact/edit_strategy_tag` 和 `externalcontact/del_strategy_tag` 四条路由；覆盖度更新为已对接 247 页、未对接 348 页，Feign 方法数达到 305；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
 - 2026-11-21：批次 4 完成客户群 opengid 转换文档页，覆盖 `externalcontact/opengid_to_chatid`；覆盖度更新为已对接 248 页、未对接 347 页，Feign 方法数达到 306；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
 - 2026-11-21：批次 4 完成客户群「加入群聊」管理文档页，覆盖 `externalcontact/groupchat/add_join_way`、`get_join_way`、`update_join_way` 和 `del_join_way` 四条路由；覆盖度更新为已对接 249 页、未对接 346 页，Feign 方法数达到 310；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
+- 2026-11-21：核对客户朋友圈概述页，确认为概念说明页；`API-COVERAGE.md` 改记为范围外，不计入 REST 接口补齐数量。

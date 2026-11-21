@@ -21,8 +21,8 @@
 | --- | ---: |
 | ✅ 已对接 | 249 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 346 |
-| ⛔ 范围外 | 141 |
+| ❌ 未对接 | 345 |
+| ⛔ 范围外 | 142 |
 | 合计 | 738 |
 
 > 统计单位是官方文档页，不是路由数。一个页面可能聚合多个 REST 操作；例如“管理企业标签”页覆盖查询、新增、编辑、删除等多个路由。
@@ -356,7 +356,7 @@
 |  | 客户群opengid转换 | [94822](https://developer.work.weixin.qq.com/document/path/94822) | ✅ 已对接 | ExternalContactClient.openGidToChatId |
 | 联系我与客户入群方式 | 客户联系「联系我」管理 | [92228](https://developer.work.weixin.qq.com/document/path/92228) | ✅ 已对接 | ExternalContactClient.add/get/update/delete ContactWay |
 |  | 客户群「加入群聊」管理 | [92229](https://developer.work.weixin.qq.com/document/path/92229) | ✅ 已对接 | ExternalContactClient.add/get/update/deleteGroupChatJoinWay |
-| 客户朋友圈 | 概述 | [93506](https://developer.work.weixin.qq.com/document/path/93506) | ❌ 未对接 | — |
+| 客户朋友圈 | 概述 | [93506](https://developer.work.weixin.qq.com/document/path/93506) | ⛔ 范围外 | 概念说明页，无服务端 REST 路由 |
 |  | 企业发表内容到客户的朋友圈 | [95094](https://developer.work.weixin.qq.com/document/path/95094) | ❌ 未对接 | — |
 |  | 停止发表企业朋友圈 | [97612](https://developer.work.weixin.qq.com/document/path/97612) | ❌ 未对接 | — |
 |  | 获取客户朋友圈全部的发表记录 | [93333](https://developer.work.weixin.qq.com/document/path/93333) | ✅ 已对接 | ExternalContactClient.getMomentList / getMomentTask / getMomentCustomerList / getMomentSendResult / getMomentComments |
