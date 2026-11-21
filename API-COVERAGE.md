@@ -21,8 +21,8 @@
 | --- | ---: |
 | ✅ 已对接 | 255 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 339 |
-| ⛔ 范围外 | 142 |
+| ❌ 未对接 | 338 |
+| ⛔ 范围外 | 143 |
 | 合计 | 738 |
 
 > 统计单位是官方文档页，不是路由数。一个页面可能聚合多个 REST 操作；例如“管理企业标签”页覆盖查询、新增、编辑、删除等多个路由。
@@ -329,7 +329,7 @@
 
 ## 客户联系
 
-状态：✅ 35；⚠️ 0；❌ 9；⛔ 4
+状态：✅ 35；⚠️ 0；❌ 8；⛔ 5
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -364,7 +364,7 @@
 | 获客助手 | 获客链接管理 | [97297](https://developer.work.weixin.qq.com/document/path/97297) | ✅ 已对接 | ExternalContactClient.getCustomerAcquisitionLinkList / getCustomerAcquisitionLink / createCustomerAcquisitionLink / updateCustomerAcquisitionLink / deleteCustomerAcquisitionLink |
 |  | 获取由获客链接添加的客户信息 | [97298](https://developer.work.weixin.qq.com/document/path/97298) | ✅ 已对接 | ExternalContactClient.getCustomerAcquisitionCustomerList（externalcontact/customer_acquisition/customer） |
 |  | 获客助手额度管理与使用统计 | [97375](https://developer.work.weixin.qq.com/document/path/97375) | ✅ 已对接 | ExternalContactClient.getCustomerAcquisitionQuota / getCustomerAcquisitionStatistic（externalcontact/customer_acquisition_quota / customer_acquisition/statistic） |
-|  | 提升广告有效率 | [99596](https://developer.work.weixin.qq.com/document/path/99596) | ❌ 未对接 | — |
+|  | 提升广告有效率 | [99596](https://developer.work.weixin.qq.com/document/path/99596) | ⛔ 范围外 | 官方页为广告运营指引，未提供服务端 REST 接口 |
 |  | 获取成员多次收消息详情 | [100130](https://developer.work.weixin.qq.com/document/path/100130) | ❌ 未对接 | — |
 | 消息推送 | 创建企业群发 | [92135](https://developer.work.weixin.qq.com/document/path/92135) | ✅ 已对接 | ExternalContactClient.addMsgTemplate |
 |  | 提醒成员群发 | [97610](https://developer.work.weixin.qq.com/document/path/97610) | ❌ 未对接 | — |

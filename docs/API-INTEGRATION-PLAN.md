@@ -69,3 +69,4 @@
 - 2026-11-21：完成获客链接管理文档页，覆盖 `externalcontact/customer_acquisition/list_link`、`get`、`create_link`、`update_link`、`delete_link` 五条路由；覆盖度更新为已对接 253 页、未对接 341 页，Feign 方法数达到 324；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
 - 2026-11-21：完成获取由获客链接添加的客户信息文档页，覆盖 `externalcontact/customer_acquisition/customer`；覆盖度更新为已对接 254 页、未对接 340 页，Feign 方法数达到 325；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
 - 2026-11-21：完成获客助手额度管理与使用统计文档页，覆盖 `externalcontact/customer_acquisition_quota` 和 `externalcontact/customer_acquisition/statistic`；统计请求已校验并归一化到自然日，覆盖度更新为已对接 255 页、未对接 339 页，Feign 方法数达到 327；`mvn -B -pl qywx-spring-boot-model,qywx-spring-boot-api -am -DskipTests package` 编译通过。
+- 2026-11-21：核对提升广告有效率文档页，确认为广告运营指引页；`API-COVERAGE.md` 改记为范围外，不计入 REST 接口补齐数量。
