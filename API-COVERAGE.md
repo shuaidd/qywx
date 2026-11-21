@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 313 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 319 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 251 |
+| ✅ 已对接 | 252 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 343 |
+| ❌ 未对接 | 342 |
 | ⛔ 范围外 | 142 |
 | 合计 | 738 |
 
@@ -329,7 +329,7 @@
 
 ## 客户联系
 
-状态：✅ 31；⚠️ 0；❌ 13；⛔ 4
+状态：✅ 32；⚠️ 0；❌ 12；⛔ 4
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -360,7 +360,7 @@
 |  | 企业发表内容到客户的朋友圈 | [95094](https://developer.work.weixin.qq.com/document/path/95094) | ✅ 已对接 | ExternalContactClient.addMomentPublishTask / getMomentPublishTaskResult |
 |  | 停止发表企业朋友圈 | [97612](https://developer.work.weixin.qq.com/document/path/97612) | ✅ 已对接 | ExternalContactClient.cancelMomentPublishTask |
 |  | 获取客户朋友圈全部的发表记录 | [93333](https://developer.work.weixin.qq.com/document/path/93333) | ✅ 已对接 | ExternalContactClient.getMomentList / getMomentTask / getMomentCustomerList / getMomentSendResult / getMomentComments |
-|  | 客户朋友圈规则组管理 | [94890](https://developer.work.weixin.qq.com/document/path/94890) | ❌ 未对接 | — |
+|  | 客户朋友圈规则组管理 | [94890](https://developer.work.weixin.qq.com/document/path/94890) | ✅ 已对接 | ExternalContactClient.getMomentStrategyList / getMomentStrategy / getMomentStrategyRange / createMomentStrategy / editMomentStrategy / deleteMomentStrategy |
 | 获客助手 | 获客链接管理 | [97297](https://developer.work.weixin.qq.com/document/path/97297) | ❌ 未对接 | — |
 |  | 获取由获客链接添加的客户信息 | [97298](https://developer.work.weixin.qq.com/document/path/97298) | ❌ 未对接 | — |
 |  | 获客助手额度管理与使用统计 | [97375](https://developer.work.weixin.qq.com/document/path/97375) | ❌ 未对接 | — |

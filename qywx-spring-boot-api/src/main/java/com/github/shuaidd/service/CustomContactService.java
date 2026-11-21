@@ -3,6 +3,7 @@ package com.github.shuaidd.service;
 import com.github.shuaidd.client.ExternalContactClient;
 import com.github.shuaidd.dto.externalcontact.CustomerStrategyRange;
 import com.github.shuaidd.dto.externalcontact.CustomerStrategyTag;
+import com.github.shuaidd.dto.externalcontact.MomentStrategyRange;
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.addressbook.MobileHashCodeResponse;
@@ -786,6 +787,96 @@ public class CustomContactService extends AbstractBaseService {
 
     /* ---------客户联系规则组管理---------- end */
 
+    /* ---------客户朋友圈规则组管理---------- start */
+
+    /**
+     * 获取客户朋友圈规则组 ID 列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return MomentStrategyListResponse
+     */
+    public MomentStrategyListResponse getMomentStrategyList(MomentStrategyListRequest request, String applicationName) {
+        if (Objects.isNull(request)) {
+            throw new ParamCheckException("request 不能为空，请检查！！！");
+        }
+        checkMomentStrategyLimit(request.getLimit(), request);
+        return externalContactClient.getMomentStrategyList(request, applicationName);
+    }
+
+    /**
+     * 获取客户朋友圈规则组详情
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return MomentStrategyResponse
+     */
+    public MomentStrategyResponse getMomentStrategy(MomentStrategyIdRequest request, String applicationName) {
+        checkMomentStrategyId(request);
+        return externalContactClient.getMomentStrategy(request, applicationName);
+    }
+
+    /**
+     * 获取客户朋友圈规则组管理范围
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return MomentStrategyRangeResponse
+     */
+    public MomentStrategyRangeResponse getMomentStrategyRange(MomentStrategyRangeRequest request, String applicationName) {
+        checkMomentStrategyId(request);
+        checkMomentStrategyLimit(request.getLimit(), request);
+        return externalContactClient.getMomentStrategyRange(request, applicationName);
+    }
+
+    /**
+     * 创建客户朋友圈规则组；官方要求串行调用，请勿并发创建
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return MomentStrategyIdResponse
+     */
+    public MomentStrategyIdResponse createMomentStrategy(MomentStrategyCreateRequest request, String applicationName) {
+        if (Objects.isNull(request) || StringUtils.isBlank(request.getStrategyName())
+                || CollectionUtils.isEmpty(request.getAdminList()) || CollectionUtils.isEmpty(request.getRange())) {
+            throw new ParamCheckException("strategyName、adminList、range 不能为空，请检查！！！");
+        }
+        checkMomentStrategyAdminList(request.getAdminList());
+        checkMomentStrategyRange(request.getRange());
+        return externalContactClient.createMomentStrategy(request, applicationName);
+    }
+
+    /**
+     * 编辑客户朋友圈规则组及其管理范围；官方要求串行调用，请勿并发编辑
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return BaseResponse
+     */
+    public BaseResponse editMomentStrategy(MomentStrategyEditRequest request, String applicationName) {
+        if (Objects.isNull(request) || Objects.isNull(request.getStrategyId())) {
+            throw new ParamCheckException("strategyId 不能为空，请检查！！！");
+        }
+        checkMomentStrategyAdminList(request.getAdminList());
+        checkMomentStrategyRange(request.getRangeAdd());
+        checkMomentStrategyRange(request.getRangeDel());
+        return externalContactClient.editMomentStrategy(request, applicationName);
+    }
+
+    /**
+     * 删除客户朋友圈规则组
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return BaseResponse
+     */
+    public BaseResponse deleteMomentStrategy(MomentStrategyIdRequest request, String applicationName) {
+        checkMomentStrategyId(request);
+        return externalContactClient.deleteMomentStrategy(request, applicationName);
+    }
+
+    /* ---------客户朋友圈规则组管理---------- end */
+
     /* ---------客户联系规则组企业客户标签管理---------- start */
 
     /**
@@ -944,6 +1035,92 @@ public class CustomContactService extends AbstractBaseService {
             throw new ParamCheckException("range 最多允许 100 个管理范围节点，请检查！！！");
         }
         for (CustomerStrategyRange node : range) {
+            if (Objects.isNull(node) || Objects.isNull(node.getType())) {
+                throw new ParamCheckException("管理范围节点和节点类型不能为空，请检查！！！");
+            }
+            if (Objects.equals(node.getType(), 1) && StringUtils.isBlank(node.getUserid())) {
+                throw new ParamCheckException("成员类型管理范围节点必须配置 userid，请检查！！！");
+            } else if (Objects.equals(node.getType(), 2) && Objects.isNull(node.getPartyid())) {
+                throw new ParamCheckException("部门类型管理范围节点必须配置 partyid，请检查！！！");
+            } else if (!Objects.equals(node.getType(), 1) && !Objects.equals(node.getType(), 2)) {
+                throw new ParamCheckException("管理范围节点类型只允许 1-成员 或 2-部门，请检查！！！");
+            }
+        }
+    }
+
+    /**
+     * 校验客户朋友圈规则组请求及规则组 ID
+     *
+     * @param request 请求
+     */
+    private void checkMomentStrategyId(MomentStrategyIdRequest request) {
+        if (Objects.isNull(request) || Objects.isNull(request.getStrategyId())) {
+            throw new ParamCheckException("strategyId 不能为空，请检查！！！");
+        }
+    }
+
+    /**
+     * 校验客户朋友圈规则组管理范围请求及规则组 ID
+     *
+     * @param request 请求
+     */
+    private void checkMomentStrategyId(MomentStrategyRangeRequest request) {
+        if (Objects.isNull(request) || Objects.isNull(request.getStrategyId())) {
+            throw new ParamCheckException("strategyId 不能为空，请检查！！！");
+        }
+    }
+
+    /**
+     * 校验客户朋友圈规则组分页大小，官方最大值为 1000
+     *
+     * @param limit   分页大小
+     * @param request 请求
+     */
+    private void checkMomentStrategyLimit(Integer limit, Object request) {
+        if (Objects.isNull(limit)) {
+            if (request instanceof MomentStrategyListRequest) {
+                ((MomentStrategyListRequest) request).setLimit(1000);
+            } else if (request instanceof MomentStrategyRangeRequest) {
+                ((MomentStrategyRangeRequest) request).setLimit(1000);
+            } else {
+                throw new ParamCheckException("limit 不能为空，请检查！！！");
+            }
+            return;
+        }
+        if (limit <= 0 || limit > 1000) {
+            throw new ParamCheckException("limit 必须在 1 到 1000 之间，请检查！！！");
+        }
+    }
+
+    /**
+     * 校验客户朋友圈规则组管理员列表
+     *
+     * @param adminList 管理员列表
+     */
+    private void checkMomentStrategyAdminList(List<String> adminList) {
+        if (CollectionUtils.isEmpty(adminList)) {
+            return;
+        }
+        for (String admin : adminList) {
+            if (StringUtils.isBlank(admin)) {
+                throw new ParamCheckException("adminList 中存在空的管理员 userid，请检查！！！");
+            }
+        }
+    }
+
+    /**
+     * 校验客户朋友圈规则组管理范围节点，官方单次最多允许 100 个节点
+     *
+     * @param range 管理范围节点列表
+     */
+    private void checkMomentStrategyRange(List<MomentStrategyRange> range) {
+        if (CollectionUtils.isEmpty(range)) {
+            return;
+        }
+        if (range.size() > 100) {
+            throw new ParamCheckException("range 最多允许 100 个管理范围节点，请检查！！！");
+        }
+        for (MomentStrategyRange node : range) {
             if (Objects.isNull(node) || Objects.isNull(node.getType())) {
                 throw new ParamCheckException("管理范围节点和节点类型不能为空，请检查！！！");
             }

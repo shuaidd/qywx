@@ -654,6 +654,66 @@ public interface ExternalContactClient extends CommonClient {
      */
     @PostMapping(value = "externalcontact/customer_strategy/del", headers = HEAD)
     BaseResponse deleteCustomerStrategy(CustomerStrategyIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客户朋友圈规则组 ID 列表
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return MomentStrategyListResponse
+     */
+    @PostMapping(value = "externalcontact/moment_strategy/list", headers = HEAD)
+    MomentStrategyListResponse getMomentStrategyList(MomentStrategyListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客户朋友圈规则组详情
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return MomentStrategyResponse
+     */
+    @PostMapping(value = "externalcontact/moment_strategy/get", headers = HEAD)
+    MomentStrategyResponse getMomentStrategy(MomentStrategyIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客户朋友圈规则组管理范围
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return MomentStrategyRangeResponse
+     */
+    @PostMapping(value = "externalcontact/moment_strategy/get_range", headers = HEAD)
+    MomentStrategyRangeResponse getMomentStrategyRange(MomentStrategyRangeRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 创建客户朋友圈规则组；官方要求串行调用
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return MomentStrategyIdResponse
+     */
+    @PostMapping(value = "externalcontact/moment_strategy/create", headers = HEAD)
+    MomentStrategyIdResponse createMomentStrategy(MomentStrategyCreateRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 编辑客户朋友圈规则组及其管理范围
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/moment_strategy/edit", headers = HEAD)
+    BaseResponse editMomentStrategy(MomentStrategyEditRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除客户朋友圈规则组
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return BaseResponse
+     */
+    @PostMapping(value = "externalcontact/moment_strategy/del", headers = HEAD)
+    BaseResponse deleteMomentStrategy(MomentStrategyIdRequest request, @RequestParam(HEAD_KEY) String app);
     /**
      * 获取指定客户联系规则组下的企业客户标签
      *
