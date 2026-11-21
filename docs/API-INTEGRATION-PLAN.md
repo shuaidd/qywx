@@ -90,3 +90,4 @@
 
 - 2026-11-22：批次 6 完成日程参与者 2 个文档页，覆盖 `oa/schedule/add_attendees` 和 `oa/schedule/del_attendees`；更新重复日程页核对为官方说明页，无独立REST路由，已在更新日程模型中补充 `op_mode`/`op_start_time` 并校验模式1/2时的周期开始时间；覆盖度更新为已对接 275 页、未对接 317 页、范围外 144 页，Feign 方法数达到 350；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。
 - 2026-11-22：批次 6 完成智能表格编组 4 个文档页，覆盖 `wedoc/smartsheet/add_field_group`、`update_field_group`、`delete_field_groups` 和 `get_field_groups`；新增编组模型字段均带中文含义注释，Service 校验文档/子表/编组必填项、编组字段数量（最多150）和分页参数；覆盖度更新为已对接 279 页、未对接 313 页，Feign 方法数达到 354；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。
+- 2026-11-22：批次 6 完成智能文档页面管理 4 个文档页，覆盖 `wedoc/smartdoc/get_page_hierarchy`、`add_page`、`update_page` 和 `delete_page`；新增页面模型字段均带中文含义注释，Service 校验文档、页面、更新时的页面 ID 和布局模式（1/2/3）；覆盖度更新为已对接 283 页、未对接 309 页，Feign 方法数达到 358；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。

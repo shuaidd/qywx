@@ -205,4 +205,44 @@ public interface WechatDocClient extends CommonClient {
      */
     @PostMapping(value = "/wedoc/get_form_answer", headers = HEAD)
     FormAnswerResponse getFormAnswer(FormAnswerRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取智能文档页面结构
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartdoc/get_page_hierarchy", headers = HEAD)
+    GetSmartDocPageHierarchyResponse getSmartDocPageHierarchy(DocIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 添加智能文档页面
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartdoc/add_page", headers = HEAD)
+    SmartDocPageResponse addSmartDocPage(SmartDocPageRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 更新智能文档页面
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartdoc/update_page", headers = HEAD)
+    SmartDocPageResponse updateSmartDocPage(SmartDocPageRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除智能文档页面
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartdoc/delete_page", headers = HEAD)
+    BaseResponse delSmartDocPage(DeleteSmartDocPageRequest request, @RequestParam(HEAD_KEY) String app);
 }

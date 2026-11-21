@@ -3,6 +3,7 @@ package com.github.shuaidd.service;
 import com.github.shuaidd.client.WechatDocClient;
 import com.github.shuaidd.dto.wedoc.FormInfo;
 import com.github.shuaidd.dto.wedoc.FormQuestionItem;
+import com.github.shuaidd.dto.wedoc.SmartDocPageInfo;
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.wedoc.*;
@@ -61,6 +62,21 @@ public class DocumentService extends AbstractBaseService {
      * 查询收集表未提交列表
      */
     private static final int FORM_STATISTIC_TYPE_UNSUBMITTED = 3;
+
+    /**
+     * 智能文档默认布局
+     */
+    private static final int SMART_DOC_PAGE_LAYOUT_DEFAULT = 1;
+
+    /**
+     * 智能文档纸张布局
+     */
+    private static final int SMART_DOC_PAGE_LAYOUT_PAPER = 2;
+
+    /**
+     * 智能文档全宽布局
+     */
+    private static final int SMART_DOC_PAGE_LAYOUT_FULL_WIDTH = 3;
 
     private final WechatDocClient wechatDocClient;
 
@@ -329,6 +345,95 @@ public class DocumentService extends AbstractBaseService {
             throw new ParamCheckException("answer_ids 数量不能超过100，请检查！！！");
         }
         return wechatDocClient.getFormAnswer(request, application);
+    }
+
+    /**
+     * 获取智能文档页面结构
+     *
+     * @param request     request
+     * @param application application
+     * @return res
+     */
+    public GetSmartDocPageHierarchyResponse getSmartDocPageHierarchy(DocIdRequest request, String application) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getDocId())) {
+            throw new ParamCheckException("docid 不能为空，请检查！！！");
+        }
+        return wechatDocClient.getSmartDocPageHierarchy(request, application);
+    }
+
+    /**
+     * 添加智能文档页面
+     *
+     * @param request     request
+     * @param application application
+     * @return res
+     */
+    public SmartDocPageResponse addSmartDocPage(SmartDocPageRequest request, String application) {
+        checkSmartDocPage(request, false);
+        return wechatDocClient.addSmartDocPage(request, application);
+    }
+
+    /**
+     * 更新智能文档页面
+     *
+     * @param request     request
+     * @param application application
+     * @return res
+     */
+    public SmartDocPageResponse updateSmartDocPage(SmartDocPageRequest request, String application) {
+        checkSmartDocPage(request, true);
+        return wechatDocClient.updateSmartDocPage(request, application);
+    }
+
+    /**
+     * 删除智能文档页面
+     *
+     * @param request     request
+     * @param application application
+     * @return res
+     */
+    public BaseResponse delSmartDocPage(DeleteSmartDocPageRequest request, String application) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getDocId())) {
+            throw new ParamCheckException("docid 不能为空，请检查！！！");
+        }
+        if (StringUtils.isEmpty(request.getPageId())) {
+            throw new ParamCheckException("page_id 不能为空，请检查！！！");
+        }
+        return wechatDocClient.delSmartDocPage(request, application);
+    }
+
+    /**
+     * 校验添加或更新智能文档页面请求
+     *
+     * @param request request
+     * @param update  是否为更新操作
+     */
+    private void checkSmartDocPage(SmartDocPageRequest request, boolean update) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getDocId())) {
+            throw new ParamCheckException("docid 不能为空，请检查！！！");
+        }
+        if (Objects.isNull(request.getInfo())) {
+            throw new ParamCheckException("info 不能为空，请检查！！！");
+        }
+        if (update && StringUtils.isEmpty(request.getInfo().getPageId())) {
+            throw new ParamCheckException("page_id 不能为空，请检查！！！");
+        }
+        checkSmartDocPageLayoutMode(request.getInfo());
+    }
+
+    /**
+     * 校验智能文档页面布局模式
+     *
+     * @param pageInfo pageInfo
+     */
+    private void checkSmartDocPageLayoutMode(SmartDocPageInfo pageInfo) {
+        Integer layoutMode = pageInfo.getLayoutMode();
+        if (Objects.nonNull(layoutMode)
+                && layoutMode != SMART_DOC_PAGE_LAYOUT_DEFAULT
+                && layoutMode != SMART_DOC_PAGE_LAYOUT_PAPER
+                && layoutMode != SMART_DOC_PAGE_LAYOUT_FULL_WIDTH) {
+            throw new ParamCheckException("layout_mode 只能为1、2或3，请检查！！！");
+        }
     }
 
     /**

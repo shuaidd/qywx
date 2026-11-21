@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 354 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的 70 个官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 358 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 279 |
+| ✅ 已对接 | 283 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 313 |
+| ❌ 未对接 | 309 |
 | ⛔ 范围外 | 144 |
 | 合计 | 738 |
 
@@ -597,7 +597,7 @@
 
 ## 文档
 
-状态：✅ 40；⚠️ 0；❌ 32；⛔ 2
+状态：✅ 41；⚠️ 0；❌ 28；⛔ 2
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -632,10 +632,10 @@
 |  | 删除编组 | [101102](https://developer.work.weixin.qq.com/document/path/101102) | ✅ 已对接 | WechatSmartSheetClient.delFieldGroups |
 |  | 更新编组 | [101101](https://developer.work.weixin.qq.com/document/path/101101) | ✅ 已对接 | WechatSmartSheetClient.updateFieldGroup |
 |  | 获取编组 | [101103](https://developer.work.weixin.qq.com/document/path/101103) | ✅ 已对接 | WechatSmartSheetClient.getFieldGroups |
-| 管理智能文档内容 | 添加页面 | [101620](https://developer.work.weixin.qq.com/document/path/101620) | ❌ 未对接 | — |
-|  | 更新页面 | [101621](https://developer.work.weixin.qq.com/document/path/101621) | ❌ 未对接 | — |
-|  | 删除页面 | [101622](https://developer.work.weixin.qq.com/document/path/101622) | ❌ 未对接 | — |
-|  | 获取页面结构 | [101619](https://developer.work.weixin.qq.com/document/path/101619) | ❌ 未对接 | — |
+| 管理智能文档内容 | 添加页面 | [101620](https://developer.work.weixin.qq.com/document/path/101620) | ✅ 已对接 | WechatDocClient.addSmartDocPage（wedoc/smartdoc/add_page） |
+|  | 更新页面 | [101621](https://developer.work.weixin.qq.com/document/path/101621) | ✅ 已对接 | WechatDocClient.updateSmartDocPage（wedoc/smartdoc/update_page） |
+|  | 删除页面 | [101622](https://developer.work.weixin.qq.com/document/path/101622) | ✅ 已对接 | WechatDocClient.delSmartDocPage（wedoc/smartdoc/delete_page） |
+|  | 获取页面结构 | [101619](https://developer.work.weixin.qq.com/document/path/101619) | ✅ 已对接 | WechatDocClient.getSmartDocPageHierarchy（wedoc/smartdoc/get_page_hierarchy） |
 |  | 添加内容块 | [101623](https://developer.work.weixin.qq.com/document/path/101623) | ❌ 未对接 | — |
 |  | 更新内容块 | [101624](https://developer.work.weixin.qq.com/document/path/101624) | ❌ 未对接 | — |
 |  | 删除内容块 | [101625](https://developer.work.weixin.qq.com/document/path/101625) | ❌ 未对接 | — |
