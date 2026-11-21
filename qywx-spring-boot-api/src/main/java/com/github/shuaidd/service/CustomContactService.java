@@ -947,6 +947,18 @@ public class CustomContactService extends AbstractBaseService {
         return externalContactClient.deleteCustomerAcquisitionLink(request, applicationName);
     }
 
+    /**
+     * 获取由获客链接添加的客户列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return CustomerAcquisitionCustomerListResponse
+     */
+    public CustomerAcquisitionCustomerListResponse getCustomerAcquisitionCustomerList(CustomerAcquisitionCustomerListRequest request, String applicationName) {
+        checkCustomerAcquisitionCustomerListRequest(request);
+        return externalContactClient.getCustomerAcquisitionCustomerList(request, applicationName);
+    }
+
     /* ---------客户联系规则组企业客户标签管理---------- start */
 
     /**
@@ -1314,6 +1326,24 @@ public class CustomContactService extends AbstractBaseService {
         }
     }
 
+    /**
+     * 校验获客客户列表请求，官方分页大小最大 1000
+     *
+     * @param request 请求
+     */
+    private void checkCustomerAcquisitionCustomerListRequest(CustomerAcquisitionCustomerListRequest request) {
+        if (Objects.isNull(request) || StringUtils.isBlank(request.getLinkId())) {
+            throw new ParamCheckException("linkId 不能为空，请检查！！！");
+        }
+        Integer limit = request.getLimit();
+        if (Objects.isNull(limit)) {
+            request.setLimit(1000);
+            return;
+        }
+        if (limit <= 0 || limit > 1000) {
+            throw new ParamCheckException("limit 必须在 1 到 1000 之间，请检查！！！");
+        }
+    }
     /**
      * 校验客户联系规则组标签 ID 列表
      *

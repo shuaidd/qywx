@@ -764,6 +764,16 @@ public interface ExternalContactClient extends CommonClient {
      */
     @PostMapping(value = "externalcontact/customer_acquisition/delete_link", headers = HEAD)
     BaseResponse deleteCustomerAcquisitionLink(CustomerAcquisitionLinkIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取由获客链接添加的客户列表
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return CustomerAcquisitionCustomerListResponse
+     */
+    @PostMapping(value = "externalcontact/customer_acquisition/customer", headers = HEAD)
+    CustomerAcquisitionCustomerListResponse getCustomerAcquisitionCustomerList(CustomerAcquisitionCustomerListRequest request, @RequestParam(HEAD_KEY) String app);
     /**
      * 获取指定客户联系规则组下的企业客户标签
      *
