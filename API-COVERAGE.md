@@ -21,8 +21,8 @@
 | --- | ---: |
 | ✅ 已对接 | 406 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 183 |
-| ⛔ 范围外 | 147 |
+| ❌ 未对接 | 152 |
+| ⛔ 范围外 | 178 |
 | 合计 | 738 |
 
 > 统计单位是官方文档页，不是路由数。一个页面可能聚合多个 REST 操作；例如“管理企业标签”页覆盖查询、新增、编辑、删除等多个路由。
@@ -713,7 +713,7 @@
 
 ## 会议
 
-状态：✅ 108；⚠️ 0；❌ 32；⛔ 1
+状态：✅ 108；⚠️ 0；❌ 1；⛔ 32
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -826,37 +826,37 @@
 | 高级功能账号管理 | 分配高级功能账号 | [99508](https://developer.work.weixin.qq.com/document/path/99508) | ✅ 已对接 | MeetingAdvancedClient.submitMeetingVipAccounts/getMeetingVipAddJobResult（meeting/vip/submit_batch_add_job、meeting/vip/batch_add_job_result） |
 |  | 取消高级功能账号 | [99509](https://developer.work.weixin.qq.com/document/path/99509) | ✅ 已对接 | MeetingAdvancedClient.cancelMeetingVipAccounts/getMeetingVipDeleteJobResult（meeting/vip/submit_batch_del_job、meeting/vip/batch_del_job_result） |
 |  | 获取高级功能账号列表 | [99510](https://developer.work.weixin.qq.com/document/path/99510) | ✅ 已对接 | MeetingAdvancedClient.listMeetingVips（meeting/vip/list） |
-| 回调通知 | 概述 | [99103](https://developer.work.weixin.qq.com/document/path/99103) | ❌ 未对接 | — |
-|  | 修改会议事件 | [99081](https://developer.work.weixin.qq.com/document/path/99081) | ❌ 未对接 | — |
-|  | 取消会议事件 | [99082](https://developer.work.weixin.qq.com/document/path/99082) | ❌ 未对接 | — |
-|  | 会议开始事件 | [98333](https://developer.work.weixin.qq.com/document/path/98333) | ❌ 未对接 | — |
-|  | 会议结束事件 | [98337](https://developer.work.weixin.qq.com/document/path/98337) | ❌ 未对接 | — |
-|  | 会议全体静音事件 | [98341](https://developer.work.weixin.qq.com/document/path/98341) | ❌ 未对接 | — |
-|  | 会议解除全体静音事件 | [98345](https://developer.work.weixin.qq.com/document/path/98345) | ❌ 未对接 | — |
-|  | 成员入会事件 | [98348](https://developer.work.weixin.qq.com/document/path/98348) | ❌ 未对接 | — |
-|  | 成员离会事件 | [98352](https://developer.work.weixin.qq.com/document/path/98352) | ❌ 未对接 | — |
-|  | 成员等待主持人入会事件 | [98353](https://developer.work.weixin.qq.com/document/path/98353) | ❌ 未对接 | — |
-|  | 成员进入等候室事件 | [98354](https://developer.work.weixin.qq.com/document/path/98354) | ❌ 未对接 | — |
-|  | 成员离开等候室事件 | [98355](https://developer.work.weixin.qq.com/document/path/98355) | ❌ 未对接 | — |
-|  | 成员从等候室进入会议事件 | [98393](https://developer.work.weixin.qq.com/document/path/98393) | ❌ 未对接 | — |
-|  | 成员从会议中被移入等候室事件 | [98394](https://developer.work.weixin.qq.com/document/path/98394) | ❌ 未对接 | — |
-|  | 共享屏幕开启事件 | [98395](https://developer.work.weixin.qq.com/document/path/98395) | ❌ 未对接 | — |
-|  | 共享屏幕结束事件 | [98396](https://developer.work.weixin.qq.com/document/path/98396) | ❌ 未对接 | — |
-|  | 会议成员角色变更事件 | [98397](https://developer.work.weixin.qq.com/document/path/98397) | ❌ 未对接 | — |
-|  | 网络研讨会成员角色变更事件 | [98771](https://developer.work.weixin.qq.com/document/path/98771) | ❌ 未对接 | — |
-|  | 网络研讨会暖场上传结果 | [98773](https://developer.work.weixin.qq.com/document/path/98773) | ❌ 未对接 | — |
-|  | PSTN 外呼状态更新事件 | [98774](https://developer.work.weixin.qq.com/document/path/98774) | ❌ 未对接 | — |
-|  | 素材上传结果 | [98775](https://developer.work.weixin.qq.com/document/path/98775) | ❌ 未对接 | — |
-|  | 开始云录制事件 | [98398](https://developer.work.weixin.qq.com/document/path/98398) | ❌ 未对接 | — |
-|  | 暂停云录制事件 | [98399](https://developer.work.weixin.qq.com/document/path/98399) | ❌ 未对接 | — |
-|  | 恢复云录制事件 | [98400](https://developer.work.weixin.qq.com/document/path/98400) | ❌ 未对接 | — |
-|  | 停止云录制事件 | [98401](https://developer.work.weixin.qq.com/document/path/98401) | ❌ 未对接 | — |
-|  | 云录制已完成事件 | [98402](https://developer.work.weixin.qq.com/document/path/98402) | ❌ 未对接 | — |
-|  | 删除云录制事件 | [98404](https://developer.work.weixin.qq.com/document/path/98404) | ❌ 未对接 | — |
-|  | 用户报名事件 | [98781](https://developer.work.weixin.qq.com/document/path/98781) | ❌ 未对接 | — |
-|  | 用户取消报名事件 | [98782](https://developer.work.weixin.qq.com/document/path/98782) | ❌ 未对接 | — |
-|  | 会议室应答事件 | [98783](https://developer.work.weixin.qq.com/document/path/98783) | ❌ 未对接 | — |
-|  | 会议发起事件 | [99648](https://developer.work.weixin.qq.com/document/path/99648) | ❌ 未对接 | — |
+| 回调通知 | 概述 | [99103](https://developer.work.weixin.qq.com/document/path/99103) | ⛔ 范围外 | — |
+|  | 修改会议事件 | [99081](https://developer.work.weixin.qq.com/document/path/99081) | ⛔ 范围外 | — |
+|  | 取消会议事件 | [99082](https://developer.work.weixin.qq.com/document/path/99082) | ⛔ 范围外 | — |
+|  | 会议开始事件 | [98333](https://developer.work.weixin.qq.com/document/path/98333) | ⛔ 范围外 | — |
+|  | 会议结束事件 | [98337](https://developer.work.weixin.qq.com/document/path/98337) | ⛔ 范围外 | — |
+|  | 会议全体静音事件 | [98341](https://developer.work.weixin.qq.com/document/path/98341) | ⛔ 范围外 | — |
+|  | 会议解除全体静音事件 | [98345](https://developer.work.weixin.qq.com/document/path/98345) | ⛔ 范围外 | — |
+|  | 成员入会事件 | [98348](https://developer.work.weixin.qq.com/document/path/98348) | ⛔ 范围外 | — |
+|  | 成员离会事件 | [98352](https://developer.work.weixin.qq.com/document/path/98352) | ⛔ 范围外 | — |
+|  | 成员等待主持人入会事件 | [98353](https://developer.work.weixin.qq.com/document/path/98353) | ⛔ 范围外 | — |
+|  | 成员进入等候室事件 | [98354](https://developer.work.weixin.qq.com/document/path/98354) | ⛔ 范围外 | — |
+|  | 成员离开等候室事件 | [98355](https://developer.work.weixin.qq.com/document/path/98355) | ⛔ 范围外 | — |
+|  | 成员从等候室进入会议事件 | [98393](https://developer.work.weixin.qq.com/document/path/98393) | ⛔ 范围外 | — |
+|  | 成员从会议中被移入等候室事件 | [98394](https://developer.work.weixin.qq.com/document/path/98394) | ⛔ 范围外 | — |
+|  | 共享屏幕开启事件 | [98395](https://developer.work.weixin.qq.com/document/path/98395) | ⛔ 范围外 | — |
+|  | 共享屏幕结束事件 | [98396](https://developer.work.weixin.qq.com/document/path/98396) | ⛔ 范围外 | — |
+|  | 会议成员角色变更事件 | [98397](https://developer.work.weixin.qq.com/document/path/98397) | ⛔ 范围外 | — |
+|  | 网络研讨会成员角色变更事件 | [98771](https://developer.work.weixin.qq.com/document/path/98771) | ⛔ 范围外 | — |
+|  | 网络研讨会暖场上传结果 | [98773](https://developer.work.weixin.qq.com/document/path/98773) | ⛔ 范围外 | — |
+|  | PSTN 外呼状态更新事件 | [98774](https://developer.work.weixin.qq.com/document/path/98774) | ⛔ 范围外 | — |
+|  | 素材上传结果 | [98775](https://developer.work.weixin.qq.com/document/path/98775) | ⛔ 范围外 | — |
+|  | 开始云录制事件 | [98398](https://developer.work.weixin.qq.com/document/path/98398) | ⛔ 范围外 | — |
+|  | 暂停云录制事件 | [98399](https://developer.work.weixin.qq.com/document/path/98399) | ⛔ 范围外 | — |
+|  | 恢复云录制事件 | [98400](https://developer.work.weixin.qq.com/document/path/98400) | ⛔ 范围外 | — |
+|  | 停止云录制事件 | [98401](https://developer.work.weixin.qq.com/document/path/98401) | ⛔ 范围外 | — |
+|  | 云录制已完成事件 | [98402](https://developer.work.weixin.qq.com/document/path/98402) | ⛔ 范围外 | — |
+|  | 删除云录制事件 | [98404](https://developer.work.weixin.qq.com/document/path/98404) | ⛔ 范围外 | — |
+|  | 用户报名事件 | [98781](https://developer.work.weixin.qq.com/document/path/98781) | ⛔ 范围外 | — |
+|  | 用户取消报名事件 | [98782](https://developer.work.weixin.qq.com/document/path/98782) | ⛔ 范围外 | — |
+|  | 会议室应答事件 | [98783](https://developer.work.weixin.qq.com/document/path/98783) | ⛔ 范围外 | — |
+|  | 会议发起事件 | [99648](https://developer.work.weixin.qq.com/document/path/99648) | ⛔ 范围外 | — |
 
 ## 微盘
 
