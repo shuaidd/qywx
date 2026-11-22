@@ -27,7 +27,7 @@
 | 4 | 客户联系缺口 | 17 | 已完成 | 客户联系目录 48 个文档页全部核对完毕：42 个已对接、6 个确认为范围外。覆盖成员对外信息、规则组、企业标签、继承、客户群、朋友圈、获客助手、群发、统计、商品图册、敏感词、附件资源与已服务外部联系人。 |
 | 5 | 企业支付与小程序收款 | 21 | 已完成 | 14 个 REST 文档页接入，15 个 Feign 方法；JS-SDK 与回调页、微信支付商户 XML/证书 API 确认为范围外，未修改支付配置。 |
 | 6 | 效率工具：文档、日程、待办、收集表 | 53 | 已完成 | 已完成待办详情与状态更新、收集表管理、日程参与者、智能表格编组和智能文档页面、内容块、数据表与发布能力；更新重复日程核对为官方说明页。 |
-| 7 | 会议全家桶 | 128 | 进行中 | 第一子批完成基础成员/嘉宾、等候室、健康度、报名和发起统计 19 页；第二子批完成会控和投票 17 页；第三子批完成 Webinar 14 页；第四子批完成 PSTN 3 页；其余按 Rooms、MRA、布局背景和录制等继续拆分。 |
+| 7 | 会议全家桶 | 128 | 进行中 | 第一子批完成基础成员/嘉宾、等候室、健康度、报名和发起统计 19 页；第二子批完成会控和投票 17 页；第三子批完成 Webinar 14 页；第四子批完成 PSTN 3 页；第五子批完成 Rooms 12 页；其余按 MRA、布局背景、录制和高级功能账号继续拆分。 |
 | 8 | 家校沟通与家校应用 | 42 | 待开始 | 按学生/家长通讯录、班级、关注接口分组。 |
 | 9 | 政民沟通 | 21 | 待开始 | 按人员、咨询、消息和转接接口分组。 |
 | 10 | 邮件 | 16 | 待开始 | 覆盖发送、收件箱、账号和高级功能账号。 |
@@ -100,3 +100,4 @@
 
 - 2026-11-22：批次 7 第三子批完成网络研讨会 14 个文档页，覆盖 `meeting/webinar/create`、`update`、`cancel`、`get`、`list_guest`、`update_guest_list`、`update_warm_up`，以及 `meeting/webinar/enroll/set_config`、`get_config`、`query_by_tmp_openid`、`list`、`approve`、`import`、`delete`；新增模型字段均带中文业务含义注释，Service 校验会议 ID、会议 Code、设置、嘉宾、暖场和报名记录；覆盖度更新为已对接 359 页、未对接 230 页，Feign 方法数达到 436；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。
 - 2026-11-22：批次 7 第四子批完成电话入会 3 个文档页，覆盖 `meeting/phone/callout`、`get_callout_status` 和 `get_tmp_openid`；新增模型字段均带中文业务含义注释，Service 校验会议 ID、电话区号/号码、外呼 50 路、查询号码 20 个和分页 100 条上限；覆盖度更新为已对接 362 页、未对接 227 页，Feign 方法数达到 439；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。
+- 2026-11-22：批次 7 第五子批完成 Rooms会议室管理 12 个文档页，覆盖 `meeting/rooms/book`、`release`、`list`、`get_info`、`get_config`、`list_meetings`、`list_devices`、`list_controllers`、`get_inventory`、`call`、`cancel_call` 和 `get_response_status`；新增模型字段均带中文业务含义注释，Service 校验会议 ID、Rooms ID 列表、分页上限、会议室/设备 ID 二选一、90 天时间区间以及 MRA 协议和信令地址；覆盖度更新为已对接 374 页、未对接 215 页，Feign 方法数达到 451；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。

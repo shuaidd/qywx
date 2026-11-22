@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 439 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 451 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 362 |
+| ✅ 已对接 | 374 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 227 |
+| ❌ 未对接 | 215 |
 | ⛔ 范围外 | 147 |
 | 合计 | 738 |
 
@@ -713,7 +713,7 @@
 
 ## 会议
 
-状态：✅ 64；⚠️ 0；❌ 75；⛔ 1
+状态：✅ 76；⚠️ 0；❌ 63；⛔ 1
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -782,18 +782,18 @@
 | 电话入会（PSTN）管理 | 批量外呼 | [98823](https://developer.work.weixin.qq.com/document/path/98823) | ✅ 已对接 | MeetingAdvancedClient.calloutPhones（meeting/phone/callout）
 |  | 获取会议的外呼状态 | [98824](https://developer.work.weixin.qq.com/document/path/98824) | ✅ 已对接 | MeetingAdvancedClient.getPhoneCalloutStatus（meeting/phone/get_callout_status）
 |  | 获取电话入会的成员ID | [98825](https://developer.work.weixin.qq.com/document/path/98825) | ✅ 已对接 | MeetingAdvancedClient.getPhoneTmpOpenIds（meeting/phone/get_tmp_openid）
-| Rooms会议室管理 | 预定Rooms会议室 | [98791](https://developer.work.weixin.qq.com/document/path/98791) | ❌ 未对接 | — |
-|  | 释放Rooms会议室 | [98792](https://developer.work.weixin.qq.com/document/path/98792) | ❌ 未对接 | — |
-|  | 获取Rooms会议室列表 | [98795](https://developer.work.weixin.qq.com/document/path/98795) | ❌ 未对接 | — |
-|  | 获取Rooms会议室详情 | [98793](https://developer.work.weixin.qq.com/document/path/98793) | ❌ 未对接 | — |
-|  | 获取Rooms会议室配置项 | [98802](https://developer.work.weixin.qq.com/document/path/98802) | ❌ 未对接 | — |
-|  | 获取Rooms会议室下的会议列表 | [98796](https://developer.work.weixin.qq.com/document/path/98796) | ❌ 未对接 | — |
-|  | 获取设备列表 | [98798](https://developer.work.weixin.qq.com/document/path/98798) | ❌ 未对接 | — |
-|  | 获取控制器列表 | [98799](https://developer.work.weixin.qq.com/document/path/98799) | ❌ 未对接 | — |
-|  | 获取Rooms会议室资源 | [98809](https://developer.work.weixin.qq.com/document/path/98809) | ❌ 未对接 | — |
-|  | 呼叫Rooms会议室 | [98804](https://developer.work.weixin.qq.com/document/path/98804) | ❌ 未对接 | — |
-|  | 取消呼叫Rooms会议室 | [98805](https://developer.work.weixin.qq.com/document/path/98805) | ❌ 未对接 | — |
-|  | 获取Rooms会议室应答状态 | [98806](https://developer.work.weixin.qq.com/document/path/98806) | ❌ 未对接 | — |
+| Rooms会议室管理 | 预定Rooms会议室 | [98791](https://developer.work.weixin.qq.com/document/path/98791) | ✅ 已对接 | MeetingAdvancedClient.bookRooms（meeting/rooms/book） |
+|  | 释放Rooms会议室 | [98792](https://developer.work.weixin.qq.com/document/path/98792) | ✅ 已对接 | MeetingAdvancedClient.releaseRooms（meeting/rooms/release） |
+|  | 获取Rooms会议室列表 | [98795](https://developer.work.weixin.qq.com/document/path/98795) | ✅ 已对接 | MeetingAdvancedClient.listRooms（meeting/rooms/list） |
+|  | 获取Rooms会议室详情 | [98793](https://developer.work.weixin.qq.com/document/path/98793) | ✅ 已对接 | MeetingAdvancedClient.getRoomsInfo（meeting/rooms/get_info） |
+|  | 获取Rooms会议室配置项 | [98802](https://developer.work.weixin.qq.com/document/path/98802) | ✅ 已对接 | MeetingAdvancedClient.getRoomsConfig（meeting/rooms/get_config） |
+|  | 获取Rooms会议室下的会议列表 | [98796](https://developer.work.weixin.qq.com/document/path/98796) | ✅ 已对接 | MeetingAdvancedClient.listRoomsMeetings（meeting/rooms/list_meetings） |
+|  | 获取设备列表 | [98798](https://developer.work.weixin.qq.com/document/path/98798) | ✅ 已对接 | MeetingAdvancedClient.listRoomsDevices（meeting/rooms/list_devices） |
+|  | 获取控制器列表 | [98799](https://developer.work.weixin.qq.com/document/path/98799) | ✅ 已对接 | MeetingAdvancedClient.listRoomsControllers（meeting/rooms/list_controllers） |
+|  | 获取Rooms会议室资源 | [98809](https://developer.work.weixin.qq.com/document/path/98809) | ✅ 已对接 | MeetingAdvancedClient.getRoomsInventory（meeting/rooms/get_inventory） |
+|  | 呼叫Rooms会议室 | [98804](https://developer.work.weixin.qq.com/document/path/98804) | ✅ 已对接 | MeetingAdvancedClient.callRooms（meeting/rooms/call） |
+|  | 取消呼叫Rooms会议室 | [98805](https://developer.work.weixin.qq.com/document/path/98805) | ✅ 已对接 | MeetingAdvancedClient.cancelRoomsCall（meeting/rooms/cancel_call） |
+|  | 获取Rooms会议室应答状态 | [98806](https://developer.work.weixin.qq.com/document/path/98806) | ✅ 已对接 | MeetingAdvancedClient.getRoomsCallResponseStatus（meeting/rooms/get_response_status） |
 | 会议室连接器（MRA）管理 | 获取 MRA 状态信息 | [98786](https://developer.work.weixin.qq.com/document/path/98786) | ❌ 未对接 | — |
 |  | 切换 MRA 默认布局 | [98787](https://developer.work.weixin.qq.com/document/path/98787) | ❌ 未对接 | — |
 |  | 设置 MRA 举手或手放下 | [98788](https://developer.work.weixin.qq.com/document/path/98788) | ❌ 未对接 | — |

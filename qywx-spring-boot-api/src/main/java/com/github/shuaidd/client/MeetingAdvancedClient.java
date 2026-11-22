@@ -546,4 +546,124 @@ public interface MeetingAdvancedClient extends CommonClient {
      */
     @PostMapping(value = "meeting/phone/get_tmp_openid", headers = HEAD)
     MeetingPhoneTmpOpenIdResponse getPhoneTmpOpenIds(MeetingPhoneTmpOpenIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 为会议预定Rooms会议室
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return Rooms会议室列表
+     */
+    @PostMapping(value = "meeting/rooms/book", headers = HEAD)
+    MeetingRoomsBookResponse bookRooms(MeetingRoomsBookRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 释放会议已预定的Rooms会议室
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/rooms/release", headers = HEAD)
+    BaseResponse releaseRooms(MeetingRoomsReleaseRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取Rooms会议室列表
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return Rooms会议室列表
+     */
+    @PostMapping(value = "meeting/rooms/list", headers = HEAD)
+    MeetingRoomsListResponse listRooms(MeetingRoomsListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取Rooms会议室详情
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return Rooms会议室详情
+     */
+    @PostMapping(value = "meeting/rooms/get_info", headers = HEAD)
+    MeetingRoomsInfoResponse getRoomsInfo(MeetingRoomsInfoRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取Rooms会议室配置
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return Rooms会议室配置
+     */
+    @PostMapping(value = "meeting/rooms/get_config", headers = HEAD)
+    MeetingRoomsConfigResponse getRoomsConfig(MeetingRoomsConfigRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取Rooms会议室下的会议列表
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 会议列表
+     */
+    @PostMapping(value = "meeting/rooms/list_meetings", headers = HEAD)
+    MeetingRoomsMeetingListResponse listRoomsMeetings(MeetingRoomsMeetingListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取Rooms设备列表
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 设备列表
+     */
+    @PostMapping(value = "meeting/rooms/list_devices", headers = HEAD)
+    MeetingRoomsDeviceListResponse listRoomsDevices(MeetingRoomsDeviceListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取Rooms控制器列表
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 控制器列表
+     */
+    @PostMapping(value = "meeting/rooms/list_controllers", headers = HEAD)
+    MeetingRoomsControllerListResponse listRoomsControllers(MeetingRoomsControllerListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取企业Rooms会议室资源
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return Rooms资源统计
+     */
+    @PostMapping(value = "meeting/rooms/get_inventory", headers = HEAD)
+    MeetingRoomsInventoryResponse getRoomsInventory(MeetingRoomsInventoryRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 呼叫Rooms会议室入会
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 呼叫ID
+     */
+    @PostMapping(value = "meeting/rooms/call", headers = HEAD)
+    MeetingRoomsCallResponse callRooms(MeetingRoomsCallRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 取消呼叫Rooms会议室
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/rooms/cancel_call", headers = HEAD)
+    BaseResponse cancelRoomsCall(MeetingRoomsCancelCallRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取Rooms会议室呼叫应答状态
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 应答状态
+     */
+    @PostMapping(value = "meeting/rooms/get_response_status", headers = HEAD)
+    MeetingRoomsResponseStatusResponse getRoomsCallResponseStatus(MeetingRoomsResponseStatusRequest request, @RequestParam(HEAD_KEY) String app);
 }

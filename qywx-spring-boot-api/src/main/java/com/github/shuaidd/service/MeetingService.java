@@ -4,6 +4,7 @@ import com.github.shuaidd.client.MeetingAdvancedClient;
 import com.github.shuaidd.client.MeetingClient;
 import com.github.shuaidd.dto.meeting.MeetingPollQuestion;
 import com.github.shuaidd.dto.meeting.MeetingRealControlUser;
+import com.github.shuaidd.dto.meeting.RoomsMra;
 import com.github.shuaidd.dto.meeting.MeetingPhoneNumber;
 import com.github.shuaidd.dto.meeting.MeetingWebinarGuest;
 import com.github.shuaidd.dto.meeting.MeetingWebinarHost;
@@ -584,9 +585,212 @@ public class MeetingService extends AbstractBaseService {
         return meetingAdvancedClient.finishPoll(request, applicationName);
     }
 
+    /**
+     * 为会议预定Rooms会议室
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return Rooms会议室列表
+     */
+    public MeetingRoomsBookResponse bookRooms(MeetingRoomsBookRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (CollectionUtils.isEmpty(request.getMeetingRoomIdList())) {
+            throw new ParamCheckException("待预定的Rooms会议室列表不能为空");
+        }
+        return meetingAdvancedClient.bookRooms(request, applicationName);
+    }
+
+    /**
+     * 释放会议已预定的Rooms会议室
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse releaseRooms(MeetingRoomsReleaseRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (CollectionUtils.isEmpty(request.getMeetingRoomIdList())) {
+            throw new ParamCheckException("待释放的Rooms会议室列表不能为空");
+        }
+        return meetingAdvancedClient.releaseRooms(request, applicationName);
+    }
+
+    /**
+     * 获取Rooms会议室列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return Rooms会议室列表
+     */
+    public MeetingRoomsListResponse listRooms(MeetingRoomsListRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkRoomsLimit(request.getLimit(), 50, "Rooms会议室分页");
+        return meetingAdvancedClient.listRooms(request, applicationName);
+    }
+
+    /**
+     * 获取Rooms会议室详情
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return Rooms会议室详情
+     */
+    public MeetingRoomsInfoResponse getRoomsInfo(MeetingRoomsInfoRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        if (StringUtils.isEmpty(request.getMeetingRoomId())) {
+            throw new ParamCheckException("Rooms会议室ID不能为空");
+        }
+        return meetingAdvancedClient.getRoomsInfo(request, applicationName);
+    }
+
+    /**
+     * 获取Rooms会议室配置
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return Rooms会议室配置
+     */
+    public MeetingRoomsConfigResponse getRoomsConfig(MeetingRoomsConfigRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        if (StringUtils.isEmpty(request.getMeetingRoomId())) {
+            throw new ParamCheckException("Rooms会议室ID不能为空");
+        }
+        return meetingAdvancedClient.getRoomsConfig(request, applicationName);
+    }
+
+    /**
+     * 获取Rooms会议室下的会议列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 会议列表
+     */
+    public MeetingRoomsMeetingListResponse listRoomsMeetings(MeetingRoomsMeetingListRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        if (StringUtils.isEmpty(request.getMeetingRoomId()) == StringUtils.isEmpty(request.getRoomsId())) {
+            throw new ParamCheckException("Rooms会议室ID和Rooms设备ID必须二选一");
+        }
+        if (request.getStartTime() != null && request.getEndTime() != null) {
+            if (request.getStartTime() > request.getEndTime()) {
+                throw new ParamCheckException("Rooms会议查询起始时间不能晚于结束时间");
+            }
+            if (request.getEndTime() - request.getStartTime() > 90L * 24 * 60 * 60) {
+                throw new ParamCheckException("Rooms会议查询时间区间不能超过90天");
+            }
+        }
+        checkRoomsLimit(request.getLimit(), 20, "Rooms会议分页");
+        return meetingAdvancedClient.listRoomsMeetings(request, applicationName);
+    }
+
+    /**
+     * 获取Rooms设备列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 设备列表
+     */
+    public MeetingRoomsDeviceListResponse listRoomsDevices(MeetingRoomsDeviceListRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkRoomsLimit(request.getLimit(), 50, "Rooms设备分页");
+        return meetingAdvancedClient.listRoomsDevices(request, applicationName);
+    }
+
+    /**
+     * 获取Rooms控制器列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 控制器列表
+     */
+    public MeetingRoomsControllerListResponse listRoomsControllers(MeetingRoomsControllerListRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkRoomsLimit(request.getLimit(), 50, "Rooms控制器分页");
+        return meetingAdvancedClient.listRoomsControllers(request, applicationName);
+    }
+
+    /**
+     * 获取企业Rooms会议室资源
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return Rooms资源统计
+     */
+    public MeetingRoomsInventoryResponse getRoomsInventory(MeetingRoomsInventoryRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        return meetingAdvancedClient.getRoomsInventory(request, applicationName);
+    }
+
+    /**
+     * 呼叫Rooms会议室入会
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 呼叫ID
+     */
+    public MeetingRoomsCallResponse callRooms(MeetingRoomsCallRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        checkRoomsCallTarget(request.getMeetingRoomId(), request.getMraAddress());
+        return meetingAdvancedClient.callRooms(request, applicationName);
+    }
+
+    /**
+     * 取消呼叫Rooms会议室
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse cancelRoomsCall(MeetingRoomsCancelCallRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (StringUtils.isEmpty(request.getInviteId())) {
+            throw new ParamCheckException("Rooms呼叫ID不能为空");
+        }
+        checkRoomsCallTarget(request.getMeetingRoomId(), request.getMraAddress());
+        return meetingAdvancedClient.cancelRoomsCall(request, applicationName);
+    }
+
+    /**
+     * 获取Rooms会议室呼叫应答状态
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 应答状态
+     */
+    public MeetingRoomsResponseStatusResponse getRoomsCallResponseStatus(MeetingRoomsResponseStatusRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        checkRoomsCallTarget(request.getMeetingRoomId(), request.getMraAddress());
+        return meetingAdvancedClient.getRoomsCallResponseStatus(request, applicationName);
+    }
+
     private void checkMeetingRequest(Object request) {
         if (request == null) {
             throw new ParamCheckException("请求参数不能为空");
+        }
+    }
+
+    private void checkRoomsLimit(Integer limit, int maxSize, String label) {
+        if (limit != null && (limit < 1 || limit > maxSize)) {
+            throw new ParamCheckException(label + "大小必须在1到" + maxSize + "之间");
+        }
+    }
+
+    private void checkRoomsCallTarget(String meetingRoomId, RoomsMra mraAddress) {
+        if (StringUtils.isEmpty(meetingRoomId) == (mraAddress == null)) {
+            throw new ParamCheckException("Rooms会议室ID和MRA地址必须二选一");
+        }
+        if (mraAddress == null) {
+            return;
+        }
+        if (mraAddress.getProtocol() == null || mraAddress.getProtocol() < 1 || mraAddress.getProtocol() > 2) {
+            throw new ParamCheckException("Rooms MRA信令协议只允许1或2");
+        }
+        if (StringUtils.isEmpty(mraAddress.getDialString())) {
+            throw new ParamCheckException("Rooms MRA信令地址不能为空");
         }
     }
 
