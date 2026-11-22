@@ -32,7 +32,7 @@
 | 9 | 政民沟通 | 21 | 进行中 | 已完成配置网格结构 5 页；事件类别和巡查/居民上报因官方文档返回验证码暂缓，不猜测路由。 |
 | 10 | 邮件 | 16 | 待开始 | 覆盖发送、收件箱、账号和高级功能账号。 |
 | 11 | 上下游、安全、微盘、智能表格编组 | 43 | 待开始 | 上下游已部分覆盖，优先补齐可独立验证的 REST 路由。 |
-| 12 | 打卡、审批、汇报、人事助手、高级功能等剩余业务 | 27 | 进行中 | 已完成打卡 3 个文档页、人事助手花名册 3 个文档页、高级功能审批 3 个文档页和 12D 高级功能账号 12 个文档页；其余按操作日志、域名 IP 及安全管理剩余模块继续拆分推进。 |
+| 12 | 打卡、审批、汇报、人事助手、高级功能等剩余业务 | 27 | 进行中 | 已完成打卡 3 个文档页、人事助手花名册 3 个文档页、高级功能审批 3 个文档页、12D 高级功能账号 12 个文档页和 12E 安全管理日志与域名 IP 3 个文档页；其余按安全管理剩余模块继续拆分推进。 |
 
 > 数量按 `API-COVERAGE.md` 当前文档页统计，不是接口路由数；实现时一个文档页可能产生多个 Feign 方法。
 
@@ -115,3 +115,4 @@
 - 2026-11-22：批次 12 完成高级功能审批 3 个文档页，覆盖 `advanced_feature/set_approval_detail`、`advanced_feature/get_apply_id_list` 和 `advanced_feature/get_approval_info`；新增模型字段均带中文业务含义注释，Service 校验申请/审批ID、审批状态、审批链接 http(s) 前缀、审批节点状态与多人审批方式必填、待处理/已处理审批人各最多100个且不可同时为空、账号类型 1~4、分页上限 1~200 和申请单类型 0~2；覆盖度更新为已对接 456 页、部分对接 2 页、未对接 102 页、范围外 178 页，Feign 方法数达到 537；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。真实企微调用未执行。
 - 2026-11-22：批次 12 续做 12C 完成汇报下载微盘文件 1 个文档页，覆盖 `oa/journal/download_wedrive_file`；新增模型字段均带中文业务含义注释，Service 校验应用名、汇报记录 `journaluuid` 和微盘文件 `fileid`；覆盖度更新为已对接 457 页、部分对接 2 页、未对接 101 页、范围外 178 页，Feign 方法数达到 538；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。真实企微调用未执行。
 - 2026-11-22：批次 12 续做 12D 完成高级功能账号 12 个文档页，覆盖 14 个 REST 路由：`security/vip/submit_batch_add_job`、`security/vip/batch_add_job_result`、`security/vip/submit_batch_del_job`、`security/vip/batch_del_job_result`、`security/vip/list`、`exmail/vip/batch_add`、`exmail/vip/batch_del`、`exmail/vip/list`、`/wedoc/vip/batch_add`、`/wedoc/vip/batch_del`、`/wedoc/vip/list`、`wedrive/vip/batch_add`、`wedrive/vip/batch_del` 和 `wedrive/vip/list`；安全模块复用异步提交/结果查询响应，其余模块为同步响应，新增 7 个通用 VIP 模型字段均带中文业务含义注释。Service 统一校验应用名，`userid_list` 非空且最多 100 个，异步结果查询校验 `jobid`，账号列表的 `limit` 可不传但传入时必须在 1~200；覆盖度更新为已对接 469 页、部分对接 2 页、未对接 89 页、范围外 178 页，Feign 方法数达到 552；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。真实企微调用未执行。
+- 2026-11-22：批次 12 续做 12E 完成安全管理日志与域名 IP 3 个文档页，覆盖 `security/member_oper_log/list`、`security/admin_oper_log/list` 和 `security/get_server_domain_ip`；新增模型字段均带中文业务含义注释，Service 校验应用名、起止时间、时间跨度不超过7天以及可选 limit 1~400；请求分页字段使用正确拼写 cursor，域名响应保留官方字段 universal_domian；覆盖度更新为已对接 472 页、部分对接 2 页、未对接 86 页、范围外 178 页，Feign 方法数达到 555；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。真实企微调用未执行。

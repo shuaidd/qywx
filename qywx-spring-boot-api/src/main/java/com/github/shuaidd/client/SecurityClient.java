@@ -1,13 +1,18 @@
 package com.github.shuaidd.client;
 
 import com.github.shuaidd.client.config.WeChatConfiguration;
+import com.github.shuaidd.response.security.AdminOperLogListResponse;
+import com.github.shuaidd.response.security.MemberOperLogListResponse;
+import com.github.shuaidd.response.security.ServerDomainIpResponse;
 import com.github.shuaidd.response.vip.VipAccountListResponse;
 import com.github.shuaidd.response.vip.VipBatchOperateResponse;
 import com.github.shuaidd.response.vip.VipJobResultResponse;
+import com.github.shuaidd.resquest.security.SecurityOperLogListRequest;
 import com.github.shuaidd.resquest.vip.VipAccountListRequest;
 import com.github.shuaidd.resquest.vip.VipJobResultRequest;
 import com.github.shuaidd.resquest.vip.VipUserBatchRequest;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -69,4 +74,33 @@ public interface SecurityClient extends CommonClient {
      */
     @PostMapping(value = "security/vip/list", headers = HEAD)
     VipAccountListResponse listVipAccounts(VipAccountListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取成员操作记录
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 成员操作记录列表
+     */
+    @PostMapping(value = "security/member_oper_log/list", headers = HEAD)
+    MemberOperLogListResponse listMemberOperLog(SecurityOperLogListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取管理端操作日志
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 管理端操作日志列表
+     */
+    @PostMapping(value = "security/admin_oper_log/list", headers = HEAD)
+    AdminOperLogListResponse listAdminOperLog(SecurityOperLogListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取企业微信域名IP信息
+     *
+     * @param app 应用名
+     * @return 企业微信域名IP信息
+     */
+    @GetMapping(value = "security/get_server_domain_ip", headers = HEAD)
+    ServerDomainIpResponse getServerDomainIp(@RequestParam(HEAD_KEY) String app);
 }

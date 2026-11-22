@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 552 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 555 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 469 |
+| ✅ 已对接 | 472 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 89 |
+| ❌ 未对接 | 86 |
 | ⛔ 范围外 | 178 |
 | 合计 | 738 |
 
@@ -180,7 +180,7 @@
 
 ## 安全管理
 
-状态：✅ 3；⚠️ 0；❌ 6；⛔ 1
+状态：✅ 6；⚠️ 0；❌ 3；⛔ 1
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -190,9 +190,9 @@
 | 高级功能账号管理 | 分配高级功能账号 | [99503](https://developer.work.weixin.qq.com/document/path/99503) | ✅ 已对接 | SecurityClient.submitBatchAddVipAccounts / getBatchAddVipJobResult（security/vip/submit_batch_add_job、batch_add_job_result） |
 |  | 取消高级功能账号 | [99505](https://developer.work.weixin.qq.com/document/path/99505) | ✅ 已对接 | SecurityClient.submitBatchDeleteVipAccounts / getBatchDeleteVipJobResult（security/vip/submit_batch_del_job、batch_del_job_result） |
 |  | 获取高级功能账号列表 | [99506](https://developer.work.weixin.qq.com/document/path/99506) | ✅ 已对接 | SecurityClient.listVipAccounts（security/vip/list） |
-| 操作日志 | 获取成员操作记录 | [100178](https://developer.work.weixin.qq.com/document/path/100178) | ❌ 未对接 | — |
-|  | 获取管理端操作日志 | [100179](https://developer.work.weixin.qq.com/document/path/100179) | ❌ 未对接 | — |
-|  | 获取企业微信域名IP信息 | [100079](https://developer.work.weixin.qq.com/document/path/100079) | ❌ 未对接 | — |
+| 操作日志 | 获取成员操作记录 | [100178](https://developer.work.weixin.qq.com/document/path/100178) | ✅ 已对接 | SecurityClient.listMemberOperLog / SecurityService.listMemberOperLog（security/member_oper_log/list） |
+|  | 获取管理端操作日志 | [100179](https://developer.work.weixin.qq.com/document/path/100179) | ✅ 已对接 | SecurityClient.listAdminOperLog / SecurityService.listAdminOperLog（security/admin_oper_log/list） |
+|  | 获取企业微信域名IP信息 | [100079](https://developer.work.weixin.qq.com/document/path/100079) | ✅ 已对接 | SecurityClient.getServerDomainIp / SecurityService.getServerDomainIp（security/get_server_domain_ip） |
 |  | 回调通知 | [100080](https://developer.work.weixin.qq.com/document/path/100080) | ⛔ 范围外 | — |
 
 ## 消息接收与发送
