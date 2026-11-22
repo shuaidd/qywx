@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 422 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 436 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 345 |
+| ✅ 已对接 | 359 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 244 |
+| ❌ 未对接 | 230 |
 | ⛔ 范围外 | 147 |
 | 合计 | 738 |
 
@@ -713,7 +713,7 @@
 
 ## 会议
 
-状态：✅ 47；⚠️ 0；❌ 92；⛔ 1
+状态：✅ 61；⚠️ 0；❌ 78；⛔ 1
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -765,20 +765,20 @@
 |  | 删除会议投票 | [98839](https://developer.work.weixin.qq.com/document/path/98839) | ✅ 已对接 | MeetingAdvancedClient.deletePoll（meeting/poll/delete）
 |  | 发起会议投票 | [98840](https://developer.work.weixin.qq.com/document/path/98840) | ✅ 已对接 | MeetingAdvancedClient.startPoll（meeting/poll/start）
 |  | 结束会议投票 | [98841](https://developer.work.weixin.qq.com/document/path/98841) | ✅ 已对接 | MeetingAdvancedClient.finishPoll（meeting/poll/finish）
-| 网络研讨会 (Webinar) 管理 | 创建网络研讨会 | [98842](https://developer.work.weixin.qq.com/document/path/98842) | ❌ 未对接 | — |
-|  | 修改网络研讨会 | [98843](https://developer.work.weixin.qq.com/document/path/98843) | ❌ 未对接 | — |
-|  | 取消网络研讨会 | [98870](https://developer.work.weixin.qq.com/document/path/98870) | ❌ 未对接 | — |
-|  | 获取网络研讨会详情 | [98860](https://developer.work.weixin.qq.com/document/path/98860) | ❌ 未对接 | — |
-|  | 获取网络研讨会嘉宾列表 | [98871](https://developer.work.weixin.qq.com/document/path/98871) | ❌ 未对接 | — |
-|  | 更新网络研讨会嘉宾列表 | [98872](https://developer.work.weixin.qq.com/document/path/98872) | ❌ 未对接 | — |
-|  | 管理网络研讨会暖场配置 | [98882](https://developer.work.weixin.qq.com/document/path/98882) | ❌ 未对接 | — |
-|  | 修改网络研讨会报名配置 | [98875](https://developer.work.weixin.qq.com/document/path/98875) | ❌ 未对接 | — |
-|  | 获取网络研讨会报名配置 | [98874](https://developer.work.weixin.qq.com/document/path/98874) | ❌ 未对接 | — |
-|  | 获取网络研讨会成员报名 ID | [98873](https://developer.work.weixin.qq.com/document/path/98873) | ❌ 未对接 | — |
-|  | 获取网络研讨会报名信息 | [98876](https://developer.work.weixin.qq.com/document/path/98876) | ❌ 未对接 | — |
-|  | 审批网络研讨会报名信息 | [98877](https://developer.work.weixin.qq.com/document/path/98877) | ❌ 未对接 | — |
-|  | 导入网络研讨会报名信息 | [98880](https://developer.work.weixin.qq.com/document/path/98880) | ❌ 未对接 | — |
-|  | 删除网络研讨会报名信息 | [98881](https://developer.work.weixin.qq.com/document/path/98881) | ❌ 未对接 | — |
+| 网络研讨会 (Webinar) 管理 | 创建网络研讨会 | [98842](https://developer.work.weixin.qq.com/document/path/98842) | ✅ 已对接 | MeetingAdvancedClient.createWebinar（meeting/webinar/create）
+|  | 修改网络研讨会 | [98843](https://developer.work.weixin.qq.com/document/path/98843) | ✅ 已对接 | MeetingAdvancedClient.updateWebinar（meeting/webinar/update）
+|  | 取消网络研讨会 | [98870](https://developer.work.weixin.qq.com/document/path/98870) | ✅ 已对接 | MeetingAdvancedClient.cancelWebinar（meeting/webinar/cancel）
+|  | 获取网络研讨会详情 | [98860](https://developer.work.weixin.qq.com/document/path/98860) | ✅ 已对接 | MeetingAdvancedClient.getWebinar（meeting/webinar/get）
+|  | 获取网络研讨会嘉宾列表 | [98871](https://developer.work.weixin.qq.com/document/path/98871) | ✅ 已对接 | MeetingAdvancedClient.getWebinarGuests（meeting/webinar/list_guest）
+|  | 更新网络研讨会嘉宾列表 | [98872](https://developer.work.weixin.qq.com/document/path/98872) | ✅ 已对接 | MeetingAdvancedClient.updateWebinarGuests（meeting/webinar/update_guest_list）
+|  | 管理网络研讨会暖场配置 | [98882](https://developer.work.weixin.qq.com/document/path/98882) | ✅ 已对接 | MeetingAdvancedClient.updateWebinarWarmUp（meeting/webinar/update_warm_up）
+|  | 修改网络研讨会报名配置 | [98875](https://developer.work.weixin.qq.com/document/path/98875) | ✅ 已对接 | MeetingAdvancedClient.setWebinarEnrollConfig（meeting/webinar/enroll/set_config）
+|  | 获取网络研讨会报名配置 | [98874](https://developer.work.weixin.qq.com/document/path/98874) | ✅ 已对接 | MeetingAdvancedClient.getWebinarEnrollConfig（meeting/webinar/enroll/get_config）
+|  | 获取网络研讨会成员报名 ID | [98873](https://developer.work.weixin.qq.com/document/path/98873) | ✅ 已对接 | MeetingAdvancedClient.queryWebinarEnrollIds（meeting/webinar/enroll/query_by_tmp_openid）
+|  | 获取网络研讨会报名信息 | [98876](https://developer.work.weixin.qq.com/document/path/98876) | ✅ 已对接 | MeetingAdvancedClient.listWebinarEnrolls（meeting/webinar/enroll/list）
+|  | 审批网络研讨会报名信息 | [98877](https://developer.work.weixin.qq.com/document/path/98877) | ✅ 已对接 | MeetingAdvancedClient.approveWebinarEnrolls（meeting/webinar/enroll/approve）
+|  | 导入网络研讨会报名信息 | [98880](https://developer.work.weixin.qq.com/document/path/98880) | ✅ 已对接 | MeetingAdvancedClient.importWebinarEnrolls（meeting/webinar/enroll/import）
+|  | 删除网络研讨会报名信息 | [98881](https://developer.work.weixin.qq.com/document/path/98881) | ✅ 已对接 | MeetingAdvancedClient.deleteWebinarEnrolls（meeting/webinar/enroll/delete）
 | 电话入会（PSTN）管理 | 批量外呼 | [98823](https://developer.work.weixin.qq.com/document/path/98823) | ❌ 未对接 | — |
 |  | 获取会议的外呼状态 | [98824](https://developer.work.weixin.qq.com/document/path/98824) | ❌ 未对接 | — |
 |  | 获取电话入会的成员ID | [98825](https://developer.work.weixin.qq.com/document/path/98825) | ❌ 未对接 | — |

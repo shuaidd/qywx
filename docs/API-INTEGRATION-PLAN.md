@@ -27,7 +27,7 @@
 | 4 | 客户联系缺口 | 17 | 已完成 | 客户联系目录 48 个文档页全部核对完毕：42 个已对接、6 个确认为范围外。覆盖成员对外信息、规则组、企业标签、继承、客户群、朋友圈、获客助手、群发、统计、商品图册、敏感词、附件资源与已服务外部联系人。 |
 | 5 | 企业支付与小程序收款 | 21 | 已完成 | 14 个 REST 文档页接入，15 个 Feign 方法；JS-SDK 与回调页、微信支付商户 XML/证书 API 确认为范围外，未修改支付配置。 |
 | 6 | 效率工具：文档、日程、待办、收集表 | 53 | 已完成 | 已完成待办详情与状态更新、收集表管理、日程参与者、智能表格编组和智能文档页面、内容块、数据表与发布能力；更新重复日程核对为官方说明页。 |
-| 7 | 会议全家桶 | 128 | 进行中 | 第一子批完成基础成员/嘉宾、等候室、健康度、报名和发起统计 19 页；第二子批完成会控和投票 17 页；其余按录制、Webinar、Rooms、MRA 等继续拆分。 |
+| 7 | 会议全家桶 | 128 | 进行中 | 第一子批完成基础成员/嘉宾、等候室、健康度、报名和发起统计 19 页；第二子批完成会控和投票 17 页；第三子批完成 Webinar 14 页；其余按 PSTN、Rooms、MRA、布局背景和录制等继续拆分。 |
 | 8 | 家校沟通与家校应用 | 42 | 待开始 | 按学生/家长通讯录、班级、关注接口分组。 |
 | 9 | 政民沟通 | 21 | 待开始 | 按人员、咨询、消息和转接接口分组。 |
 | 10 | 邮件 | 16 | 待开始 | 覆盖发送、收件箱、账号和高级功能账号。 |
@@ -97,3 +97,5 @@
 - 2026-11-22：批次 7 第一子批完成会议基础与统计 19 个文档页，覆盖 `meeting/statistics/get_start_list`、`meeting/set_invitees`、`meeting/create_customer_short_url`、`meeting/get_customer_short_url`、`meeting/get_realtime_attendee_list`、`meeting/get_attendee_list`、`meeting/waitingroom/get_current_user_list`、`meeting/waitingroom/get_user_list`、`meeting/check_device_in_meeting`、`meeting/get_guests`、`meeting/set_guests`、`meeting/get_quality`、`meeting/enroll/set_config`、`meeting/enroll/get_config`、`meeting/enroll/query_by_tmp_openid`、`meeting/enroll/list`、`meeting/enroll/approve`、`meeting/enroll/import` 和 `meeting/enroll/delete`；新增模型字段均带中文业务含义注释，Service 校验会议/子会议 ID、专属链接字段、嘉宾/报名列表、审批操作、设备入会查询和时间范围；覆盖度更新为已对接 328 页、未对接 261 页，Feign 方法数达到 405；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。
 
 - 2026-11-22：批次 7 第二子批完成会控和投票 17 个文档页，覆盖 `meeting/realcontrol/set`、`set_cohost`、`mute_user`、`switch_user_video`、`close_screen_share`、`set_nicknames`、`manage_waiting_room_users`、`kickout_users`、`dismiss`，以及 `meeting/poll/create_theme`、`update_theme`、`get_poll_list`、`get_theme_info`、`get_poll_detail`、`delete`、`start`、`finish`；新增模型字段均带中文业务含义注释，Service 校验会控成员设备、等候室操作、结束会议参数、投票操作者、主题/问题/选项长度和投票 ID 组合；覆盖度更新为已对接 345 页、未对接 244 页，Feign 方法数达到 422；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。
+
+- 2026-11-22：批次 7 第三子批完成网络研讨会 14 个文档页，覆盖 `meeting/webinar/create`、`update`、`cancel`、`get`、`list_guest`、`update_guest_list`、`update_warm_up`，以及 `meeting/webinar/enroll/set_config`、`get_config`、`query_by_tmp_openid`、`list`、`approve`、`import`、`delete`；新增模型字段均带中文业务含义注释，Service 校验会议 ID、会议 Code、设置、嘉宾、暖场和报名记录；覆盖度更新为已对接 359 页、未对接 230 页，Feign 方法数达到 436；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。

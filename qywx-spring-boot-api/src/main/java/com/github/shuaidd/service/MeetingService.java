@@ -4,6 +4,9 @@ import com.github.shuaidd.client.MeetingAdvancedClient;
 import com.github.shuaidd.client.MeetingClient;
 import com.github.shuaidd.dto.meeting.MeetingPollQuestion;
 import com.github.shuaidd.dto.meeting.MeetingRealControlUser;
+import com.github.shuaidd.dto.meeting.MeetingWebinarGuest;
+import com.github.shuaidd.dto.meeting.MeetingWebinarHost;
+import com.github.shuaidd.dto.meeting.MeetingWebinarMediaSetting;
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.meeting.*;
@@ -772,6 +775,280 @@ public class MeetingService extends AbstractBaseService {
                 if (StringUtils.isEmpty(option) || StringUtils.length(option) > 36) {
                     throw new ParamCheckException("投票选项不能为空且不能超过36个字符");
                 }
+            }
+        }
+    }
+
+    /**
+     * 创建网络研讨会
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 网络研讨会信息
+     */
+    public MeetingWebinarCreateResponse createWebinar(MeetingWebinarCreateRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkWebinarSetting(request);
+        if (StringUtils.isEmpty(request.getAdminUserId())) {
+            throw new ParamCheckException("网络研讨会管理员userid不能为空");
+        }
+        return meetingAdvancedClient.createWebinar(request, applicationName);
+    }
+
+    /**
+     * 修改网络研讨会
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse updateWebinar(MeetingWebinarUpdateRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        checkWebinarSetting(request);
+        return meetingAdvancedClient.updateWebinar(request, applicationName);
+    }
+
+    /**
+     * 取消网络研讨会
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse cancelWebinar(MeetingWebinarCancelRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        return meetingAdvancedClient.cancelWebinar(request, applicationName);
+    }
+
+    /**
+     * 获取网络研讨会详情
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 网络研讨会详情
+     */
+    public MeetingWebinarDetailResponse getWebinar(MeetingWebinarQueryRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkWebinarQuery(request);
+        return meetingAdvancedClient.getWebinar(request, applicationName);
+    }
+
+    /**
+     * 获取网络研讨会嘉宾列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 网络研讨会嘉宾列表
+     */
+    public MeetingWebinarGuestListResponse getWebinarGuests(MeetingWebinarQueryRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkWebinarQuery(request);
+        return meetingAdvancedClient.getWebinarGuests(request, applicationName);
+    }
+
+    /**
+     * 更新网络研讨会嘉宾列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse updateWebinarGuests(MeetingWebinarGuestRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        checkWebinarGuests(request.getGuests());
+        return meetingAdvancedClient.updateWebinarGuests(request, applicationName);
+    }
+
+    /**
+     * 设置网络研讨会暖场配置
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse updateWebinarWarmUp(MeetingWebinarWarmUpRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (StringUtils.isNotEmpty(request.getWarmUpPicture()) && StringUtils.isNotEmpty(request.getWarmUpVideo())) {
+            throw new ParamCheckException("暖场图片和暖场视频只能选择一个");
+        }
+        return meetingAdvancedClient.updateWebinarWarmUp(request, applicationName);
+    }
+
+    /**
+     * 修改网络研讨会报名配置
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 报名配置和问题数量
+     */
+    public MeetingEnrollConfigResponse setWebinarEnrollConfig(MeetingEnrollConfigRequest request, String applicationName) {
+        checkMeetingRequest(request);
+        if (request.getApproveType() == null) {
+            throw new ParamCheckException("网络研讨会报名审批方式不能为空");
+        }
+        if (CollectionUtils.isEmpty(request.getQuestionList())) {
+            throw new ParamCheckException("网络研讨会报名问题列表不能为空");
+        }
+        return meetingAdvancedClient.setWebinarEnrollConfig(request, applicationName);
+    }
+
+    /**
+     * 获取网络研讨会报名配置
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 网络研讨会报名配置
+     */
+    public MeetingEnrollConfigResponse getWebinarEnrollConfig(MeetingGuestRequest request, String applicationName) {
+        checkMeetingRequest(request);
+        return meetingAdvancedClient.getWebinarEnrollConfig(request, applicationName);
+    }
+
+    /**
+     * 获取网络研讨会成员报名 ID
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 报名 ID 映射列表
+     */
+    public MeetingEnrollIdListResponse queryWebinarEnrollIds(MeetingEnrollIdQueryRequest request, String applicationName) {
+        checkMeetingRequest(request);
+        if (CollectionUtils.isEmpty(request.getTmpOpenidList())) {
+            throw new ParamCheckException("网络研讨会成员临时OpenID列表不能为空");
+        }
+        return meetingAdvancedClient.queryWebinarEnrollIds(request, applicationName);
+    }
+
+    /**
+     * 获取网络研讨会报名信息
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 网络研讨会报名记录列表
+     */
+    public MeetingEnrollListResponse listWebinarEnrolls(MeetingEnrollListRequest request, String applicationName) {
+        checkMeetingRequest(request);
+        return meetingAdvancedClient.listWebinarEnrolls(request, applicationName);
+    }
+
+    /**
+     * 批量审批网络研讨会报名信息
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 审批处理数量
+     */
+    public MeetingEnrollApproveResponse approveWebinarEnrolls(MeetingEnrollApproveRequest request, String applicationName) {
+        checkMeetingRequest(request);
+        if (request.getAction() == null) {
+            throw new ParamCheckException("网络研讨会报名审批操作类型不能为空");
+        }
+        if (CollectionUtils.isEmpty(request.getEnrollIdList())) {
+            throw new ParamCheckException("网络研讨会报名ID列表不能为空");
+        }
+        return meetingAdvancedClient.approveWebinarEnrolls(request, applicationName);
+    }
+
+    /**
+     * 导入网络研讨会报名信息
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 导入后的报名列表
+     */
+    public MeetingEnrollImportResponse importWebinarEnrolls(MeetingEnrollImportRequest request, String applicationName) {
+        checkMeetingRequest(request);
+        if (CollectionUtils.isEmpty(request.getEnrollList())) {
+            throw new ParamCheckException("网络研讨会导入报名信息列表不能为空");
+        }
+        return meetingAdvancedClient.importWebinarEnrolls(request, applicationName);
+    }
+
+    /**
+     * 删除网络研讨会报名信息
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 删除数量
+     */
+    public MeetingEnrollDeleteResponse deleteWebinarEnrolls(MeetingEnrollDeleteRequest request, String applicationName) {
+        checkMeetingRequest(request);
+        if (CollectionUtils.isEmpty(request.getEnrollIdList())) {
+            throw new ParamCheckException("网络研讨会待删除报名ID列表不能为空");
+        }
+        return meetingAdvancedClient.deleteWebinarEnrolls(request, applicationName);
+    }
+
+    private void checkWebinarSetting(MeetingWebinarSettingRequest request) {
+        if (StringUtils.isEmpty(request.getTitle())) {
+            throw new ParamCheckException("网络研讨会主题不能为空");
+        }
+        if (StringUtils.length(request.getTitle()) > 255) {
+            throw new ParamCheckException("网络研讨会主题不能超过255个字符");
+        }
+        if (StringUtils.isNotEmpty(request.getSponsor()) && StringUtils.length(request.getSponsor()) > 40) {
+            throw new ParamCheckException("网络研讨会主办方名称不能超过40个字符");
+        }
+        if (StringUtils.isEmpty(request.getStartTime()) || StringUtils.isEmpty(request.getEndTime())) {
+            throw new ParamCheckException("网络研讨会开始和结束时间不能为空");
+        }
+        if (request.getAdmissionType() == null || request.getAdmissionType() < 0 || request.getAdmissionType() > 2) {
+            throw new ParamCheckException("网络研讨会观众观看限制类型不符合要求");
+        }
+        if (request.getAdmissionType() == 2 && (StringUtils.length(request.getPassword()) < 4 || StringUtils.length(request.getPassword()) > 6)) {
+            throw new ParamCheckException("密码观看方式必须传入4~6位数字密码");
+        }
+        if (CollectionUtils.isNotEmpty(request.getHosts())) {
+            for (MeetingWebinarHost host : request.getHosts()) {
+                if (host == null || StringUtils.isEmpty(host.getUserId())) {
+                    throw new ParamCheckException("网络研讨会主持人userid不能为空");
+                }
+            }
+        }
+        if (CollectionUtils.isNotEmpty(request.getSensitiveWords())) {
+            if (request.getSensitiveWords().size() > 50) {
+                throw new ParamCheckException("网络研讨会敏感词最多50个");
+            }
+            for (String word : request.getSensitiveWords()) {
+                if (StringUtils.isEmpty(word) || StringUtils.length(word) > 10) {
+                    throw new ParamCheckException("网络研讨会敏感词不能为空且不能超过10个字符");
+                }
+            }
+        }
+        if (Boolean.TRUE.equals(request.getPlaybackForAudience())) {
+            MeetingWebinarMediaSetting mediaSetting = request.getMediaSetting();
+            if (mediaSetting == null || !"cloud".equals(mediaSetting.getAutoRecordType())) {
+                throw new ParamCheckException("允许观众观看回放时必须开启云录制");
+            }
+        }
+    }
+
+    private void checkWebinarQuery(MeetingWebinarQueryRequest request) {
+        if (StringUtils.isEmpty(request.getMeetingId()) && StringUtils.isEmpty(request.getMeetingCode())) {
+            throw new ParamCheckException("网络研讨会ID和会议号不能同时为空");
+        }
+    }
+
+    private void checkWebinarGuests(java.util.List<MeetingWebinarGuest> guests) {
+        if (CollectionUtils.isEmpty(guests)) {
+            throw new ParamCheckException("网络研讨会嘉宾列表不能为空");
+        }
+        for (MeetingWebinarGuest guest : guests) {
+            if (guest == null || guest.getGuestType() == null) {
+                throw new ParamCheckException("网络研讨会嘉宾类型不能为空");
+            }
+            if (guest.getGuestType() == 1 && StringUtils.isEmpty(guest.getUserId())) {
+                throw new ParamCheckException("网络研讨会内部嘉宾userid不能为空");
+            }
+            if (guest.getGuestType() == 2 && (StringUtils.isEmpty(guest.getArea())
+                    || StringUtils.isEmpty(guest.getPhoneNumber())
+                    || StringUtils.isEmpty(guest.getGuestName())
+                    || StringUtils.length(guest.getGuestName()) > 16)) {
+                throw new ParamCheckException("网络研讨会外部嘉宾地区、手机号和不超过16位名称必填");
             }
         }
     }

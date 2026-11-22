@@ -376,4 +376,144 @@ public interface MeetingAdvancedClient extends CommonClient {
      */
     @PostMapping(value = "meeting/poll/finish", headers = HEAD)
     BaseResponse finishPoll(MeetingPollFinishRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 创建网络研讨会
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 网络研讨会信息
+     */
+    @PostMapping(value = "meeting/webinar/create", headers = HEAD)
+    MeetingWebinarCreateResponse createWebinar(MeetingWebinarCreateRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改网络研讨会
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/webinar/update", headers = HEAD)
+    BaseResponse updateWebinar(MeetingWebinarUpdateRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 取消网络研讨会
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/webinar/cancel", headers = HEAD)
+    BaseResponse cancelWebinar(MeetingWebinarCancelRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取网络研讨会详情
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 网络研讨会详情
+     */
+    @PostMapping(value = "meeting/webinar/get", headers = HEAD)
+    MeetingWebinarDetailResponse getWebinar(MeetingWebinarQueryRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取网络研讨会嘉宾列表
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 嘉宾列表
+     */
+    @PostMapping(value = "meeting/webinar/list_guest", headers = HEAD)
+    MeetingWebinarGuestListResponse getWebinarGuests(MeetingWebinarQueryRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 更新网络研讨会嘉宾列表
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/webinar/update_guest_list", headers = HEAD)
+    BaseResponse updateWebinarGuests(MeetingWebinarGuestRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 设置网络研讨会暖场配置
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/webinar/update_warm_up", headers = HEAD)
+    BaseResponse updateWebinarWarmUp(MeetingWebinarWarmUpRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改网络研讨会报名配置
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 报名配置和问题数量
+     */
+    @PostMapping(value = "meeting/webinar/enroll/set_config", headers = HEAD)
+    MeetingEnrollConfigResponse setWebinarEnrollConfig(MeetingEnrollConfigRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取网络研讨会报名配置
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 报名配置
+     */
+    @PostMapping(value = "meeting/webinar/enroll/get_config", headers = HEAD)
+    MeetingEnrollConfigResponse getWebinarEnrollConfig(MeetingGuestRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取网络研讨会成员报名 ID
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 报名 ID 映射列表
+     */
+    @PostMapping(value = "meeting/webinar/enroll/query_by_tmp_openid", headers = HEAD)
+    MeetingEnrollIdListResponse queryWebinarEnrollIds(MeetingEnrollIdQueryRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取网络研讨会报名信息
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 报名记录列表
+     */
+    @PostMapping(value = "meeting/webinar/enroll/list", headers = HEAD)
+    MeetingEnrollListResponse listWebinarEnrolls(MeetingEnrollListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量审批网络研讨会报名信息
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 审批处理数量
+     */
+    @PostMapping(value = "meeting/webinar/enroll/approve", headers = HEAD)
+    MeetingEnrollApproveResponse approveWebinarEnrolls(MeetingEnrollApproveRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 导入网络研讨会报名信息
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 导入后的报名列表
+     */
+    @PostMapping(value = "meeting/webinar/enroll/import", headers = HEAD)
+    MeetingEnrollImportResponse importWebinarEnrolls(MeetingEnrollImportRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除网络研讨会报名信息
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 删除数量
+     */
+    @PostMapping(value = "meeting/webinar/enroll/delete", headers = HEAD)
+    MeetingEnrollDeleteResponse deleteWebinarEnrolls(MeetingEnrollDeleteRequest request, @RequestParam(HEAD_KEY) String app);
 }
