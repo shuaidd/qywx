@@ -305,4 +305,74 @@ public interface WechatDocClient extends CommonClient {
      */
     @PostMapping(value = "/wedoc/smartdoc/get_export_result", headers = HEAD)
     GetSmartDocExportResultResponse getSmartDocExportResult(GetSmartDocExportResultRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取智能文档数据源
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartdoc/get_smartsheet_info", headers = HEAD)
+    GetSmartDocSheetInfoResponse getSmartDocSheetInfo(DocIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 添加智能文档数据表
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartdoc/add_smartsheet", headers = HEAD)
+    SmartDocSheetResponse addSmartDocSheet(SmartDocSheetRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 更新智能文档数据表
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartdoc/update_smartsheet", headers = HEAD)
+    SmartDocSheetResponse updateSmartDocSheet(SmartDocSheetRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除智能文档数据表
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartdoc/delete_smartsheet", headers = HEAD)
+    BaseResponse delSmartDocSheet(DeleteSmartDocSheetRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 发布智能文档
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartdoc/publish", headers = HEAD)
+    SmartDocPublishResponse publishSmartDoc(SmartDocPublishRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 取消发布智能文档
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartdoc/cancel_publish", headers = HEAD)
+    BaseResponse cancelSmartDocPublish(DocIdRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改智能文档发布页可查看范围
+     *
+     * @param request req
+     * @param app     app
+     * @return res
+     */
+    @PostMapping(value = "/wedoc/smartdoc/publish_setting", headers = HEAD)
+    BaseResponse setSmartDocPublishRange(SmartDocPublishRequest request, @RequestParam(HEAD_KEY) String app);
 }

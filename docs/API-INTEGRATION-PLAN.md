@@ -26,7 +26,7 @@
 | 3 | 消息接收与发送、应用管理、机器人消息 | 6 | 已完成 | 覆盖模板卡片更新、消息撤回、学校通知、机器人主动回复、智能表格自动化群聊列表和工作台自定义展示；共新增 10 个 Feign 方法。 |
 | 4 | 客户联系缺口 | 17 | 已完成 | 客户联系目录 48 个文档页全部核对完毕：42 个已对接、6 个确认为范围外。覆盖成员对外信息、规则组、企业标签、继承、客户群、朋友圈、获客助手、群发、统计、商品图册、敏感词、附件资源与已服务外部联系人。 |
 | 5 | 企业支付与小程序收款 | 21 | 待开始 | 涉及资金能力，先确认路由和参数，不修改支付配置。 |
-| 6 | 效率工具：文档、日程、待办、收集表 | 53 | 进行中 | 已完成待办详情与状态更新、收集表管理、日程参与者和智能表格编组；更新重复日程核对为官方说明页；智能文档继续拆分推进。 |
+| 6 | 效率工具：文档、日程、待办、收集表 | 53 | 已完成 | 已完成待办详情与状态更新、收集表管理、日程参与者、智能表格编组和智能文档页面、内容块、数据表与发布能力；更新重复日程核对为官方说明页。 |
 | 7 | 会议全家桶 | 128 | 待开始 | 最大批次，按基础会议、统计、会控、录制、Webinar、Rooms、MRA 拆成子批。 |
 | 8 | 家校沟通与家校应用 | 42 | 待开始 | 按学生/家长通讯录、班级、关注接口分组。 |
 | 9 | 政民沟通 | 21 | 待开始 | 按人员、咨询、消息和转接接口分组。 |
@@ -92,3 +92,4 @@
 - 2026-11-22：批次 6 完成智能表格编组 4 个文档页，覆盖 `wedoc/smartsheet/add_field_group`、`update_field_group`、`delete_field_groups` 和 `get_field_groups`；新增编组模型字段均带中文含义注释，Service 校验文档/子表/编组必填项、编组字段数量（最多150）和分页参数；覆盖度更新为已对接 279 页、未对接 313 页，Feign 方法数达到 354；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。
 - 2026-11-22：批次 6 完成智能文档页面管理 4 个文档页，覆盖 `wedoc/smartdoc/get_page_hierarchy`、`add_page`、`update_page` 和 `delete_page`；新增页面模型字段均带中文含义注释，Service 校验文档、页面、更新时的页面 ID 和布局模式（1/2/3）；覆盖度更新为已对接 283 页、未对接 309 页，Feign 方法数达到 358；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。
 - 2026-11-22：批次 6 完成智能文档内容块 5 个文档页，覆盖 `wedoc/smartdoc/add_blocks`、`update_blocks`、`delete_blocks`、`get_block_list`、`export_task` 和 `get_export_result`；新增模型字段均带中文业务含义注释，Service 校验文档、页面、内容块、更新时的内容块 ID、删除 ID 列表、导出任务 ID、`content_type` 只支持 Markdown（1）以及内容块分页 `start`/`limit`；覆盖度更新为已对接 288 页、未对接 304 页，Feign 方法数达到 364；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。
+- 2026-11-22：批次 6 完成智能文档数据表与发布 7 个文档页，覆盖 `wedoc/smartdoc/get_smartsheet_info`、`add_smartsheet`、`update_smartsheet`、`delete_smartsheet`、`publish`、`cancel_publish` 和 `publish_setting`；新增模型字段均带中文业务含义注释，Service 校验 `docid`、`block_id`、`info`、发布范围以及指定成员可见时的成员/部门字段；覆盖度更新为已对接 295 页、未对接 299 页，Feign 方法数达到 371；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。

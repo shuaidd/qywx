@@ -5,6 +5,8 @@ import com.github.shuaidd.dto.wedoc.FormInfo;
 import com.github.shuaidd.dto.wedoc.FormQuestionItem;
 import com.github.shuaidd.dto.wedoc.SmartDocBlock;
 import com.github.shuaidd.dto.wedoc.SmartDocPageInfo;
+import com.github.shuaidd.dto.wedoc.SmartDocPublishAuth;
+import com.github.shuaidd.dto.wedoc.SmartDocSheetInfo;
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.wedoc.*;
@@ -88,6 +90,31 @@ public class DocumentService extends AbstractBaseService {
      * 智能文档导出 Markdown 格式
      */
     private static final int SMART_DOC_EXPORT_CONTENT_TYPE_MARKDOWN = 1;
+
+    /**
+     * 智能文档企业内可见
+     */
+    private static final int SMART_DOC_PUBLISH_RANGE_CORP = 1;
+
+    /**
+     * 智能文档企业内外可见
+     */
+    private static final int SMART_DOC_PUBLISH_RANGE_PUBLIC = 3;
+
+    /**
+     * 智能文档指定成员可见
+     */
+    private static final int SMART_DOC_PUBLISH_RANGE_SPECIFIED = 4;
+
+    /**
+     * 智能文档发布页可见成员
+     */
+    private static final int SMART_DOC_PUBLISH_AUTH_USER = 1;
+
+    /**
+     * 智能文档发布页可见部门
+     */
+    private static final int SMART_DOC_PUBLISH_AUTH_DEPARTMENT = 2;
 
     private final WechatDocClient wechatDocClient;
 
@@ -510,6 +537,174 @@ public class DocumentService extends AbstractBaseService {
             throw new ParamCheckException("task_id 不能为空，请检查！！！");
         }
         return wechatDocClient.getSmartDocExportResult(request, application);
+    }
+
+    /**
+     * 获取智能文档数据源
+     *
+     * @param request     request
+     * @param application application
+     * @return res
+     */
+    public GetSmartDocSheetInfoResponse getSmartDocSheetInfo(DocIdRequest request, String application) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getDocId())) {
+            throw new ParamCheckException("docid 不能为空，请检查！！！");
+        }
+        return wechatDocClient.getSmartDocSheetInfo(request, application);
+    }
+
+    /**
+     * 添加智能文档数据表
+     *
+     * @param request     request
+     * @param application application
+     * @return res
+     */
+    public SmartDocSheetResponse addSmartDocSheet(SmartDocSheetRequest request, String application) {
+        checkSmartDocSheet(request, false);
+        return wechatDocClient.addSmartDocSheet(request, application);
+    }
+
+    /**
+     * 更新智能文档数据表
+     *
+     * @param request     request
+     * @param application application
+     * @return res
+     */
+    public SmartDocSheetResponse updateSmartDocSheet(SmartDocSheetRequest request, String application) {
+        checkSmartDocSheet(request, true);
+        return wechatDocClient.updateSmartDocSheet(request, application);
+    }
+
+    /**
+     * 删除智能文档数据表
+     *
+     * @param request     request
+     * @param application application
+     * @return res
+     */
+    public BaseResponse delSmartDocSheet(DeleteSmartDocSheetRequest request, String application) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getDocId())) {
+            throw new ParamCheckException("docid 不能为空，请检查！！！");
+        }
+        if (StringUtils.isEmpty(request.getBlockId())) {
+            throw new ParamCheckException("block_id 不能为空，请检查！！！");
+        }
+        return wechatDocClient.delSmartDocSheet(request, application);
+    }
+
+    /**
+     * 发布智能文档
+     *
+     * @param request     request
+     * @param application application
+     * @return res
+     */
+    public SmartDocPublishResponse publishSmartDoc(SmartDocPublishRequest request, String application) {
+        checkSmartDocPublishRequest(request, false);
+        return wechatDocClient.publishSmartDoc(request, application);
+    }
+
+    /**
+     * 取消发布智能文档
+     *
+     * @param request     request
+     * @param application application
+     * @return res
+     */
+    public BaseResponse cancelSmartDocPublish(DocIdRequest request, String application) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getDocId())) {
+            throw new ParamCheckException("docid 不能为空，请检查！！！");
+        }
+        return wechatDocClient.cancelSmartDocPublish(request, application);
+    }
+
+    /**
+     * 修改智能文档发布页可查看范围
+     *
+     * @param request     request
+     * @param application application
+     * @return res
+     */
+    public BaseResponse setSmartDocPublishRange(SmartDocPublishRequest request, String application) {
+        checkSmartDocPublishRequest(request, true);
+        return wechatDocClient.setSmartDocPublishRange(request, application);
+    }
+
+    /**
+     * 校验添加或更新智能文档数据表请求
+     *
+     * @param request request
+     * @param update  是否为更新操作
+     */
+    private void checkSmartDocSheet(SmartDocSheetRequest request, boolean update) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getDocId())) {
+            throw new ParamCheckException("docid 不能为空，请检查！！！");
+        }
+        SmartDocSheetInfo info = request.getInfo();
+        if (Objects.isNull(info)) {
+            throw new ParamCheckException("info 不能为空，请检查！！！");
+        }
+        if (update && StringUtils.isEmpty(info.getBlockId())) {
+            throw new ParamCheckException("info.block_id 不能为空，请检查！！！");
+        }
+    }
+
+    /**
+     * 校验发布智能文档或修改发布范围请求
+     *
+     * @param request request
+     * @param update  是否为修改范围操作
+     */
+    private void checkSmartDocPublishRequest(SmartDocPublishRequest request, boolean update) {
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getDocId())) {
+            throw new ParamCheckException("docid 不能为空，请检查！！！");
+        }
+        Integer publishRange = request.getPublishRange();
+        if (update && Objects.isNull(publishRange)) {
+            throw new ParamCheckException("publish_range 不能为空，请检查！！！");
+        }
+        if (Objects.nonNull(publishRange)
+                && publishRange != SMART_DOC_PUBLISH_RANGE_CORP
+                && publishRange != SMART_DOC_PUBLISH_RANGE_PUBLIC
+                && publishRange != SMART_DOC_PUBLISH_RANGE_SPECIFIED) {
+            throw new ParamCheckException("publish_range 只能为1、3或4，请检查！！！");
+        }
+        if (Objects.nonNull(publishRange) && publishRange == SMART_DOC_PUBLISH_RANGE_SPECIFIED
+                && CollectionUtils.isEmpty(request.getAuthList())) {
+            throw new ParamCheckException("publish_range 为4时 auth_list 不能为空，请检查！！！");
+        }
+        checkSmartDocPublishAuthList(request.getAuthList());
+    }
+
+    /**
+     * 校验智能文档发布页可见权限列表
+     *
+     * @param authList authList
+     */
+    private void checkSmartDocPublishAuthList(List<SmartDocPublishAuth> authList) {
+        if (CollectionUtils.isEmpty(authList)) {
+            return;
+        }
+        for (SmartDocPublishAuth auth : authList) {
+            if (Objects.isNull(auth)) {
+                throw new ParamCheckException("auth_list 不能包含空对象，请检查！！！");
+            }
+            Integer type = auth.getType();
+            if (Objects.isNull(type)) {
+                throw new ParamCheckException("auth_list[].type 不能为空，请检查！！！");
+            }
+            if (type != SMART_DOC_PUBLISH_AUTH_USER && type != SMART_DOC_PUBLISH_AUTH_DEPARTMENT) {
+                throw new ParamCheckException("auth_list[].type 只能为1或2，请检查！！！");
+            }
+            if (type == SMART_DOC_PUBLISH_AUTH_USER && StringUtils.isEmpty(auth.getUserid())) {
+                throw new ParamCheckException("auth_list[].userid 不能为空，请检查！！！");
+            }
+            if (type == SMART_DOC_PUBLISH_AUTH_DEPARTMENT && Objects.isNull(auth.getDepartmentId())) {
+                throw new ParamCheckException("auth_list[].departmentid 不能为空，请检查！！！");
+            }
+        }
     }
 
     /**

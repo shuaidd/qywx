@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 364 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 371 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 288 |
+| ✅ 已对接 | 295 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 304 |
+| ❌ 未对接 | 299 |
 | ⛔ 范围外 | 144 |
 | 合计 | 738 |
 
@@ -597,7 +597,7 @@
 
 ## 文档
 
-状态：✅ 46；⚠️ 0；❌ 23；⛔ 2
+状态：✅ 53；⚠️ 0；❌ 16；⛔ 2
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -641,13 +641,13 @@
 |  | 删除内容块 | [101625](https://developer.work.weixin.qq.com/document/path/101625) | ✅ 已对接 | WechatDocClient.delSmartDocBlocks（wedoc/smartdoc/delete_blocks） |
 |  | 获取内容块列表 | [101626](https://developer.work.weixin.qq.com/document/path/101626) | ✅ 已对接 | WechatDocClient.getSmartDocBlockList（wedoc/smartdoc/get_block_list） |
 |  | 导出内容块 | [101627](https://developer.work.weixin.qq.com/document/path/101627) | ✅ 已对接 | WechatDocClient.exportSmartDoc / getSmartDocExportResult（wedoc/smartdoc/export_task、get_export_result） |
-|  | 获取数据源 | [101628](https://developer.work.weixin.qq.com/document/path/101628) | ❌ 未对接 | — |
-|  | 添加数据表 | [101629](https://developer.work.weixin.qq.com/document/path/101629) | ❌ 未对接 | — |
-|  | 删除数据表 | [101630](https://developer.work.weixin.qq.com/document/path/101630) | ❌ 未对接 | — |
-|  | 更新数据表 | [101631](https://developer.work.weixin.qq.com/document/path/101631) | ❌ 未对接 | — |
-|  | 发布智能文档 | [101616](https://developer.work.weixin.qq.com/document/path/101616) | ❌ 未对接 | — |
-|  | 取消发布智能文档 | [101617](https://developer.work.weixin.qq.com/document/path/101617) | ❌ 未对接 | — |
-|  | 修改发布页可查看范围 | [101618](https://developer.work.weixin.qq.com/document/path/101618) | ❌ 未对接 | — |
+|  | 获取数据源 | [101628](https://developer.work.weixin.qq.com/document/path/101628) | ✅ 已对接 | WechatDocClient.getSmartDocSheetInfo（wedoc/smartdoc/get_smartsheet_info） |
+|  | 添加数据表 | [101629](https://developer.work.weixin.qq.com/document/path/101629) | ✅ 已对接 | WechatDocClient.addSmartDocSheet（wedoc/smartdoc/add_smartsheet） |
+|  | 删除数据表 | [101630](https://developer.work.weixin.qq.com/document/path/101630) | ✅ 已对接 | WechatDocClient.delSmartDocSheet（wedoc/smartdoc/delete_smartsheet） |
+|  | 更新数据表 | [101631](https://developer.work.weixin.qq.com/document/path/101631) | ✅ 已对接 | WechatDocClient.updateSmartDocSheet（wedoc/smartdoc/update_smartsheet） |
+|  | 发布智能文档 | [101616](https://developer.work.weixin.qq.com/document/path/101616) | ✅ 已对接 | WechatDocClient.publishSmartDoc（wedoc/smartdoc/publish） |
+|  | 取消发布智能文档 | [101617](https://developer.work.weixin.qq.com/document/path/101617) | ✅ 已对接 | WechatDocClient.cancelSmartDocPublish（wedoc/smartdoc/cancel_publish） |
+|  | 修改发布页可查看范围 | [101618](https://developer.work.weixin.qq.com/document/path/101618) | ✅ 已对接 | WechatDocClient.setSmartDocPublishRange（wedoc/smartdoc/publish_setting） |
 | 设置文档权限 | 获取文档权限信息 | [97461](https://developer.work.weixin.qq.com/document/path/97461) | ✅ 已对接 | WechatDocClient.getDocAuth |
 |  | 修改文档加入规则 | [97778](https://developer.work.weixin.qq.com/document/path/97778) | ✅ 已对接 | WechatDocClient.modDocAuth |
 |  | 修改文档成员与权限 | [97781](https://developer.work.weixin.qq.com/document/path/97781) | ✅ 已对接 | WechatDocClient.modDocMember |
