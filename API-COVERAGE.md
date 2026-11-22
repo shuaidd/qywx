@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 485 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 493 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 406 |
+| ✅ 已对接 | 414 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 152 |
+| ❌ 未对接 | 144 |
 | ⛔ 范围外 | 178 |
 | 合计 | 738 |
 
@@ -468,21 +468,21 @@
 
 ## 家校沟通
 
-状态：✅ 0；⚠️ 0；❌ 29；⛔ 6
+状态：✅ 8；⚠️ 0；❌ 21；⛔ 6
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
 | 家校沟通 | 概述 | [91638](https://developer.work.weixin.qq.com/document/path/91638) | ⛔ 范围外 | — |
-| 基础接口 | 获取「学校通知」二维码 | [92320](https://developer.work.weixin.qq.com/document/path/92320) | ❌ 未对接 | — |
-|  | 管理「学校通知」的关注模式 | [92318](https://developer.work.weixin.qq.com/document/path/92318) | ❌ 未对接 | — |
-|  | 发送「学校通知」 | [92321](https://developer.work.weixin.qq.com/document/path/92321) | ❌ 未对接 | — |
-|  | 管理「班级群创建方式」 | [92430](https://developer.work.weixin.qq.com/document/path/92430) | ❌ 未对接 | — |
-|  | 外部联系人openid转换 | [92323](https://developer.work.weixin.qq.com/document/path/92323) | ❌ 未对接 | — |
-|  | 获取可使用的家长范围 | [94895](https://developer.work.weixin.qq.com/document/path/94895) | ❌ 未对接 | — |
+| 基础接口 | 获取「学校通知」二维码 | [92320](https://developer.work.weixin.qq.com/document/path/92320) | ✅ 已对接 | ExternalContactClient/SchoolClient#92320 相关路由与 SchoolService |
+|  | 管理「学校通知」的关注模式 | [92318](https://developer.work.weixin.qq.com/document/path/92318) | ✅ 已对接 | SchoolClient#92318 相关路由与 SchoolService |
+|  | 发送「学校通知」 | [92321](https://developer.work.weixin.qq.com/document/path/92321) | ✅ 已对接 | ExternalContactClient#sendSchoolNotification 与 CustomContactService#sendSchoolNotification |
+|  | 管理「班级群创建方式」 | [92430](https://developer.work.weixin.qq.com/document/path/92430) | ✅ 已对接 | SchoolClient#92430 相关路由与 SchoolService |
+|  | 外部联系人openid转换 | [92323](https://developer.work.weixin.qq.com/document/path/92323) | ✅ 已对接 | SchoolClient#92323 相关路由与 SchoolService |
+|  | 获取可使用的家长范围 | [94895](https://developer.work.weixin.qq.com/document/path/94895) | ✅ 已对接 | SchoolClient#94895 相关路由与 SchoolService |
 | 网页授权登录 | 开始开发 | [91856](https://developer.work.weixin.qq.com/document/path/91856) | ⛔ 范围外 | — |
 |  | 构造网页授权链接 | [91857](https://developer.work.weixin.qq.com/document/path/91857) | ⛔ 范围外 | — |
-|  | 获取访问用户身份 | [91707](https://developer.work.weixin.qq.com/document/path/91707) | ❌ 未对接 | — |
-|  | 获取家校访问用户身份 | [95791](https://developer.work.weixin.qq.com/document/path/95791) | ❌ 未对接 | — |
+|  | 获取访问用户身份 | [91707](https://developer.work.weixin.qq.com/document/path/91707) | ✅ 已对接 | AuthClient#getUserInfo 与 AuthenticationService#getUserInfo |
+|  | 获取家校访问用户身份 | [95791](https://developer.work.weixin.qq.com/document/path/95791) | ✅ 已对接 | SchoolClient#95791 相关路由与 SchoolService |
 | 学生与家长管理 | 创建学生 | [92325](https://developer.work.weixin.qq.com/document/path/92325) | ❌ 未对接 | — |
 |  | 删除学生 | [92326](https://developer.work.weixin.qq.com/document/path/92326) | ❌ 未对接 | — |
 |  | 更新学生 | [92327](https://developer.work.weixin.qq.com/document/path/92327) | ❌ 未对接 | — |

@@ -14,6 +14,12 @@ public class AuthUserInfoResponse extends AbstractBaseResponse {
     @JsonProperty("user_ticket")
     private String userTicket;
 
+    /**
+     * 家长的外部联系人id
+     */
+    @JsonProperty("parent_userid")
+    private String parentUserId;
+
     @JsonProperty("external_userid")
     private String externalUserId;
 
@@ -39,6 +45,14 @@ public class AuthUserInfoResponse extends AbstractBaseResponse {
 
     public void setUserTicket(String userTicket) {
         this.userTicket = userTicket;
+    }
+
+    public String getParentUserId() {
+        return parentUserId;
+    }
+
+    public void setParentUserId(String parentUserId) {
+        this.parentUserId = parentUserId;
     }
 
     public String getExternalUserId() {
