@@ -4,6 +4,7 @@ import com.github.shuaidd.client.MeetingAdvancedClient;
 import com.github.shuaidd.client.MeetingClient;
 import com.github.shuaidd.dto.meeting.MeetingPollQuestion;
 import com.github.shuaidd.dto.meeting.MeetingRealControlUser;
+import com.github.shuaidd.dto.meeting.MeetingPhoneNumber;
 import com.github.shuaidd.dto.meeting.MeetingWebinarGuest;
 import com.github.shuaidd.dto.meeting.MeetingWebinarHost;
 import com.github.shuaidd.dto.meeting.MeetingWebinarMediaSetting;
@@ -983,6 +984,50 @@ public class MeetingService extends AbstractBaseService {
         return meetingAdvancedClient.deleteWebinarEnrolls(request, applicationName);
     }
 
+    /**
+     * 批量电话入会外呼
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 外呼结果
+     */
+    public MeetingPhoneCalloutResponse calloutPhones(MeetingPhoneCalloutRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        checkPhoneNumbers(request.getPhoneNumbers(), 50, "待外呼电话号码");
+        return meetingAdvancedClient.calloutPhones(request, applicationName);
+    }
+
+    /**
+     * 获取电话入会外呼状态
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 外呼状态列表
+     */
+    public MeetingPhoneCalloutStatusResponse getPhoneCalloutStatus(MeetingPhoneCalloutStatusRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (request.getLimit() != null && (request.getLimit() < 1 || request.getLimit() > 100)) {
+            throw new ParamCheckException("电话外呼状态分页大小必须在1~100之间");
+        }
+        return meetingAdvancedClient.getPhoneCalloutStatus(request, applicationName);
+    }
+
+    /**
+     * 获取电话入会成员临时ID
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 电话号码与临时ID列表
+     */
+    public MeetingPhoneTmpOpenIdResponse getPhoneTmpOpenIds(MeetingPhoneTmpOpenIdRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        checkPhoneNumbers(request.getPhoneNumbers(), 20, "待查询电话号码");
+        return meetingAdvancedClient.getPhoneTmpOpenIds(request, applicationName);
+    }
+
     private void checkWebinarSetting(MeetingWebinarSettingRequest request) {
         if (StringUtils.isEmpty(request.getTitle())) {
             throw new ParamCheckException("网络研讨会主题不能为空");
@@ -1023,6 +1068,20 @@ public class MeetingService extends AbstractBaseService {
             MeetingWebinarMediaSetting mediaSetting = request.getMediaSetting();
             if (mediaSetting == null || !"cloud".equals(mediaSetting.getAutoRecordType())) {
                 throw new ParamCheckException("允许观众观看回放时必须开启云录制");
+            }
+        }
+    }
+
+    private void checkPhoneNumbers(java.util.List<MeetingPhoneNumber> phoneNumbers, int maxSize, String label) {
+        if (CollectionUtils.isEmpty(phoneNumbers)) {
+            throw new ParamCheckException(label + "列表不能为空");
+        }
+        if (phoneNumbers.size() > maxSize) {
+            throw new ParamCheckException(label + "列表最多" + maxSize + "个");
+        }
+        for (MeetingPhoneNumber phone : phoneNumbers) {
+            if (phone == null || phone.getArea() == null || StringUtils.isEmpty(phone.getPhone())) {
+                throw new ParamCheckException(label + "的国家区号和号码不能为空");
             }
         }
     }

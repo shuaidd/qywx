@@ -516,4 +516,34 @@ public interface MeetingAdvancedClient extends CommonClient {
      */
     @PostMapping(value = "meeting/webinar/enroll/delete", headers = HEAD)
     MeetingEnrollDeleteResponse deleteWebinarEnrolls(MeetingEnrollDeleteRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量电话入会外呼
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 外呼结果
+     */
+    @PostMapping(value = "meeting/phone/callout", headers = HEAD)
+    MeetingPhoneCalloutResponse calloutPhones(MeetingPhoneCalloutRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取电话入会外呼状态
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 外呼状态列表
+     */
+    @PostMapping(value = "meeting/phone/get_callout_status", headers = HEAD)
+    MeetingPhoneCalloutStatusResponse getPhoneCalloutStatus(MeetingPhoneCalloutStatusRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取电话入会成员临时ID
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 电话号码与临时ID列表
+     */
+    @PostMapping(value = "meeting/phone/get_tmp_openid", headers = HEAD)
+    MeetingPhoneTmpOpenIdResponse getPhoneTmpOpenIds(MeetingPhoneTmpOpenIdRequest request, @RequestParam(HEAD_KEY) String app);
 }

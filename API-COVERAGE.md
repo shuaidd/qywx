@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 436 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 439 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 359 |
+| ✅ 已对接 | 362 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 230 |
+| ❌ 未对接 | 227 |
 | ⛔ 范围外 | 147 |
 | 合计 | 738 |
 
@@ -713,7 +713,7 @@
 
 ## 会议
 
-状态：✅ 61；⚠️ 0；❌ 78；⛔ 1
+状态：✅ 64；⚠️ 0；❌ 75；⛔ 1
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -779,9 +779,9 @@
 |  | 审批网络研讨会报名信息 | [98877](https://developer.work.weixin.qq.com/document/path/98877) | ✅ 已对接 | MeetingAdvancedClient.approveWebinarEnrolls（meeting/webinar/enroll/approve）
 |  | 导入网络研讨会报名信息 | [98880](https://developer.work.weixin.qq.com/document/path/98880) | ✅ 已对接 | MeetingAdvancedClient.importWebinarEnrolls（meeting/webinar/enroll/import）
 |  | 删除网络研讨会报名信息 | [98881](https://developer.work.weixin.qq.com/document/path/98881) | ✅ 已对接 | MeetingAdvancedClient.deleteWebinarEnrolls（meeting/webinar/enroll/delete）
-| 电话入会（PSTN）管理 | 批量外呼 | [98823](https://developer.work.weixin.qq.com/document/path/98823) | ❌ 未对接 | — |
-|  | 获取会议的外呼状态 | [98824](https://developer.work.weixin.qq.com/document/path/98824) | ❌ 未对接 | — |
-|  | 获取电话入会的成员ID | [98825](https://developer.work.weixin.qq.com/document/path/98825) | ❌ 未对接 | — |
+| 电话入会（PSTN）管理 | 批量外呼 | [98823](https://developer.work.weixin.qq.com/document/path/98823) | ✅ 已对接 | MeetingAdvancedClient.calloutPhones（meeting/phone/callout）
+|  | 获取会议的外呼状态 | [98824](https://developer.work.weixin.qq.com/document/path/98824) | ✅ 已对接 | MeetingAdvancedClient.getPhoneCalloutStatus（meeting/phone/get_callout_status）
+|  | 获取电话入会的成员ID | [98825](https://developer.work.weixin.qq.com/document/path/98825) | ✅ 已对接 | MeetingAdvancedClient.getPhoneTmpOpenIds（meeting/phone/get_tmp_openid）
 | Rooms会议室管理 | 预定Rooms会议室 | [98791](https://developer.work.weixin.qq.com/document/path/98791) | ❌ 未对接 | — |
 |  | 释放Rooms会议室 | [98792](https://developer.work.weixin.qq.com/document/path/98792) | ❌ 未对接 | — |
 |  | 获取Rooms会议室列表 | [98795](https://developer.work.weixin.qq.com/document/path/98795) | ❌ 未对接 | — |
