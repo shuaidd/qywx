@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 386 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 405 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 309 |
+| ✅ 已对接 | 328 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 280 |
+| ❌ 未对接 | 261 |
 | ⛔ 范围外 | 147 |
 | 合计 | 738 |
 
@@ -713,7 +713,7 @@
 
 ## 会议
 
-状态：✅ 11；⚠️ 0；❌ 128；⛔ 1
+状态：✅ 30；⚠️ 0；❌ 109；⛔ 1
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -723,31 +723,31 @@
 |  | 取消预约会议 | [99048](https://developer.work.weixin.qq.com/document/path/99048) | ✅ 已对接 | EfficiencyToolClient.cancelMeeting |
 |  | 获取会议详情 | [99049](https://developer.work.weixin.qq.com/document/path/99049) | ✅ 已对接 | EfficiencyToolClient.getMeetingInfo |
 |  | 获取成员会议ID列表 | [99050](https://developer.work.weixin.qq.com/document/path/99050) | ✅ 已对接 | EfficiencyToolClient.getUserMeetingId |
-| 会议统计管理 | 获取会议发起记录 | [99651](https://developer.work.weixin.qq.com/document/path/99651) | ❌ 未对接 | — |
+| 会议统计管理 | 获取会议发起记录 | [99651](https://developer.work.weixin.qq.com/document/path/99651) | ✅ 已对接 | MeetingAdvancedClient.getStartList（meeting/statistics/get_start_list） |
 | 预约会议高级管理 | 创建预约会议 | [98148](https://developer.work.weixin.qq.com/document/path/98148) | ✅ 已对接 | EfficiencyToolClient.createMeeting |
 |  | 修改预约会议 | [98154](https://developer.work.weixin.qq.com/document/path/98154) | ✅ 已对接 | EfficiencyToolClient.updateMeeting |
 |  | 取消预约会议 | [98153](https://developer.work.weixin.qq.com/document/path/98153) | ✅ 已对接 | EfficiencyToolClient.cancelMeeting |
 |  | 获取会议详情 | [98149](https://developer.work.weixin.qq.com/document/path/98149) | ✅ 已对接 | EfficiencyToolClient.getMeetingInfo |
 |  | 获取会议受邀成员列表 | [98160](https://developer.work.weixin.qq.com/document/path/98160) | ✅ 已对接 | MeetingClient.getInvitees（meeting/get_invitees） |
-|  | 更新会议受邀成员列表 | [98162](https://developer.work.weixin.qq.com/document/path/98162) | ❌ 未对接 | — |
+|  | 更新会议受邀成员列表 | [98162](https://developer.work.weixin.qq.com/document/path/98162) | ✅ 已对接 | MeetingAdvancedClient.setInvitees（meeting/set_invitees） |
 |  | 获取成员会议ID列表 | [98714](https://developer.work.weixin.qq.com/document/path/98714) | ✅ 已对接 | EfficiencyToolClient.getUserMeetingId |
-|  | 创建用户专属参会链接 | [98818](https://developer.work.weixin.qq.com/document/path/98818) | ❌ 未对接 | — |
-|  | 获取用户专属参会链接 | [98819](https://developer.work.weixin.qq.com/document/path/98819) | ❌ 未对接 | — |
-|  | 获取实时会中成员列表 | [98157](https://developer.work.weixin.qq.com/document/path/98157) | ❌ 未对接 | — |
-|  | 获取已参会成员列表 | [98156](https://developer.work.weixin.qq.com/document/path/98156) | ❌ 未对接 | — |
-|  | 获取实时等候室成员列表 | [98163](https://developer.work.weixin.qq.com/document/path/98163) | ❌ 未对接 | — |
-|  | 获取等候室成员记录 | [98164](https://developer.work.weixin.qq.com/document/path/98164) | ❌ 未对接 | — |
-|  | 获取成员设备是否入会 | [98165](https://developer.work.weixin.qq.com/document/path/98165) | ❌ 未对接 | — |
-|  | 获取会议嘉宾列表 | [99039](https://developer.work.weixin.qq.com/document/path/99039) | ❌ 未对接 | — |
-|  | 更新会议嘉宾列表 | [99040](https://developer.work.weixin.qq.com/document/path/99040) | ❌ 未对接 | — |
-|  | 获取会议健康度 | [98821](https://developer.work.weixin.qq.com/document/path/98821) | ❌ 未对接 | — |
-|  | 修改会议报名配置 | [98797](https://developer.work.weixin.qq.com/document/path/98797) | ❌ 未对接 | — |
-|  | 获取会议报名配置 | [98800](https://developer.work.weixin.qq.com/document/path/98800) | ❌ 未对接 | — |
-|  | 获取会议成员报名 ID | [98794](https://developer.work.weixin.qq.com/document/path/98794) | ❌ 未对接 | — |
-|  | 获取会议报名信息 | [98810](https://developer.work.weixin.qq.com/document/path/98810) | ❌ 未对接 | — |
-|  | 审批会议报名信息 | [98807](https://developer.work.weixin.qq.com/document/path/98807) | ❌ 未对接 | — |
-|  | 导入会议报名信息 | [98816](https://developer.work.weixin.qq.com/document/path/98816) | ❌ 未对接 | — |
-|  | 删除会议报名信息 | [98817](https://developer.work.weixin.qq.com/document/path/98817) | ❌ 未对接 | — |
+|  | 创建用户专属参会链接 | [98818](https://developer.work.weixin.qq.com/document/path/98818) | ✅ 已对接 | MeetingAdvancedClient.createCustomerShortUrl（meeting/create_customer_short_url） |
+|  | 获取用户专属参会链接 | [98819](https://developer.work.weixin.qq.com/document/path/98819) | ✅ 已对接 | MeetingAdvancedClient.getCustomerShortUrl（meeting/get_customer_short_url） |
+|  | 获取实时会中成员列表 | [98157](https://developer.work.weixin.qq.com/document/path/98157) | ✅ 已对接 | MeetingAdvancedClient.getRealtimeAttendees（meeting/get_realtime_attendee_list） |
+|  | 获取已参会成员列表 | [98156](https://developer.work.weixin.qq.com/document/path/98156) | ✅ 已对接 | MeetingAdvancedClient.getAttendees（meeting/get_attendee_list） |
+|  | 获取实时等候室成员列表 | [98163](https://developer.work.weixin.qq.com/document/path/98163) | ✅ 已对接 | MeetingAdvancedClient.getCurrentWaitingRoomUsers（meeting/waitingroom/get_current_user_list） |
+|  | 获取等候室成员记录 | [98164](https://developer.work.weixin.qq.com/document/path/98164) | ✅ 已对接 | MeetingAdvancedClient.getWaitingRoomUsers（meeting/waitingroom/get_user_list） |
+|  | 获取成员设备是否入会 | [98165](https://developer.work.weixin.qq.com/document/path/98165) | ✅ 已对接 | MeetingAdvancedClient.checkDeviceInMeeting（meeting/check_device_in_meeting） |
+|  | 获取会议嘉宾列表 | [99039](https://developer.work.weixin.qq.com/document/path/99039) | ✅ 已对接 | MeetingAdvancedClient.getGuests（meeting/get_guests） |
+|  | 更新会议嘉宾列表 | [99040](https://developer.work.weixin.qq.com/document/path/99040) | ✅ 已对接 | MeetingAdvancedClient.setGuests（meeting/set_guests） |
+|  | 获取会议健康度 | [98821](https://developer.work.weixin.qq.com/document/path/98821) | ✅ 已对接 | MeetingAdvancedClient.getQuality（meeting/get_quality） |
+|  | 修改会议报名配置 | [98797](https://developer.work.weixin.qq.com/document/path/98797) | ✅ 已对接 | MeetingAdvancedClient.setEnrollConfig（meeting/enroll/set_config） |
+|  | 获取会议报名配置 | [98800](https://developer.work.weixin.qq.com/document/path/98800) | ✅ 已对接 | MeetingAdvancedClient.getEnrollConfig（meeting/enroll/get_config） |
+|  | 获取会议成员报名 ID | [98794](https://developer.work.weixin.qq.com/document/path/98794) | ✅ 已对接 | MeetingAdvancedClient.queryEnrollIds（meeting/enroll/query_by_tmp_openid） |
+|  | 获取会议报名信息 | [98810](https://developer.work.weixin.qq.com/document/path/98810) | ✅ 已对接 | MeetingAdvancedClient.listEnrolls（meeting/enroll/list） |
+|  | 审批会议报名信息 | [98807](https://developer.work.weixin.qq.com/document/path/98807) | ✅ 已对接 | MeetingAdvancedClient.approveEnrolls（meeting/enroll/approve） |
+|  | 导入会议报名信息 | [98816](https://developer.work.weixin.qq.com/document/path/98816) | ✅ 已对接 | MeetingAdvancedClient.importEnrolls（meeting/enroll/import） |
+|  | 删除会议报名信息 | [98817](https://developer.work.weixin.qq.com/document/path/98817) | ✅ 已对接 | MeetingAdvancedClient.deleteEnrolls（meeting/enroll/delete） |
 | 会中控制管理 | 管理会中设置 | [98175](https://developer.work.weixin.qq.com/document/path/98175) | ❌ 未对接 | — |
 |  | 管理联席主持人 | [98180](https://developer.work.weixin.qq.com/document/path/98180) | ❌ 未对接 | — |
 |  | 静音成员 | [98184](https://developer.work.weixin.qq.com/document/path/98184) | ❌ 未对接 | — |
