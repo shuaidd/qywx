@@ -118,6 +118,116 @@ public interface EnterpriseEmailClient extends CommonClient {
      */
     @GetMapping(value = "/exmail/publicmail/search", headers = HEAD)
     SearchMailResponse searchEmail(@RequestParam("email") String email, @RequestParam("fuzzy") int fuzzy, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 发送普通邮件
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 操作结果
+     */
+    @PostMapping(value = "exmail/app/compose_send", headers = HEAD)
+    BaseResponse composeSend(ComposeEmailRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取收件箱邮件列表
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 邮件列表
+     */
+    @PostMapping(value = "exmail/app/get_mail_list", headers = HEAD)
+    MailListResponse getMailList(GetMailListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取邮件内容
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 邮件内容
+     */
+    @PostMapping(value = "exmail/app/read_mail", headers = HEAD)
+    ReadMailResponse readMail(ReadMailRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 更新应用邮箱账号
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 操作结果
+     */
+    @PostMapping(value = "exmail/app/update_email_alias", headers = HEAD)
+    BaseResponse updateEmailAlias(UpdateEmailAliasRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 查询应用邮箱账号，官方接口不需要请求包体
+     *
+     * @param app 应用
+     * @return 应用邮箱账号及别名列表
+     */
+    @PostMapping(value = "exmail/app/get_email_alias", headers = HEAD)
+    EmailAliasResponse getEmailAlias(@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取客户端专用密码列表
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 客户端专用密码列表
+     */
+    @PostMapping(value = "exmail/publicmail/get_auth_code_list", headers = HEAD)
+    AuthCodeListResponse getAuthCodeList(GetAuthCodeListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除客户端专用密码
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 操作结果
+     */
+    @PostMapping(value = "exmail/publicmail/delete_auth_code", headers = HEAD)
+    BaseResponse deleteAuthCode(DeleteAuthCodeRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 禁用或启用邮箱账号
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 操作结果
+     */
+    @PostMapping(value = "exmail/account/act_email", headers = HEAD)
+    BaseResponse actEmail(ActEmailRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取用户功能属性
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 用户功能属性
+     */
+    @PostMapping(value = "exmail/useroption/get", headers = HEAD)
+    UserOptionResponse getUserOption(GetUserOptionRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 更改用户功能属性
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 操作结果
+     */
+    @PostMapping(value = "exmail/useroption/update", headers = HEAD)
+    BaseResponse updateUserOption(UpdateUserOptionRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取邮件未读数
+     *
+     * @param request 请求
+     * @param app     应用
+     * @return 未读邮件数量
+     */
+    @PostMapping(value = "exmail/mail/get_newcount", headers = HEAD)
+    MailUnreadCountResponse getMailUnreadCount(GetMailUnreadCountRequest request, @RequestParam(HEAD_KEY) String app);
+
     /**
      * 批量分配高级功能账号
      *

@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 563 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 574 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 475 |
+| ✅ 已对接 | 488 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 83 |
+| ❌ 未对接 | 70 |
 | ⛔ 范围外 | 178 |
 | 合计 | 738 |
 
@@ -561,18 +561,18 @@
 
 ## 邮件
 
-状态：✅ 13；⚠️ 0；❌ 13；⛔ 3
+状态：✅ 26；⚠️ 0；❌ 0；⛔ 3
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
 | 邮件 | 概述 | [95486](https://developer.work.weixin.qq.com/document/path/95486) | ⛔ 范围外 | — |
-| 发送邮件 | 发送普通邮件 | [97445](https://developer.work.weixin.qq.com/document/path/97445) | ❌ 未对接 | — |
-|  | 发送日程邮件 | [97854](https://developer.work.weixin.qq.com/document/path/97854) | ❌ 未对接 | — |
-|  | 发送会议邮件 | [97855](https://developer.work.weixin.qq.com/document/path/97855) | ❌ 未对接 | — |
-| 获取接收的邮件 | 获取收件箱邮件列表 | [97369](https://developer.work.weixin.qq.com/document/path/97369) | ❌ 未对接 | — |
-|  | 获取邮件内容 | [97979](https://developer.work.weixin.qq.com/document/path/97979) | ❌ 未对接 | — |
-| 管理应用邮箱账号 | 更新应用邮箱账号 | [97373](https://developer.work.weixin.qq.com/document/path/97373) | ❌ 未对接 | — |
-|  | 查询应用邮箱账号 | [97991](https://developer.work.weixin.qq.com/document/path/97991) | ❌ 未对接 | — |
+| 发送邮件 | 发送普通邮件 | [97445](https://developer.work.weixin.qq.com/document/path/97445) | ✅ 已对接 | EnterpriseEmailService.sendNormalEmail（exmail/app/compose_send） |
+|  | 发送日程邮件 | [97854](https://developer.work.weixin.qq.com/document/path/97854) | ✅ 已对接 | EnterpriseEmailService.sendScheduleEmail（exmail/app/compose_send） |
+|  | 发送会议邮件 | [97855](https://developer.work.weixin.qq.com/document/path/97855) | ✅ 已对接 | EnterpriseEmailService.sendMeetingEmail（exmail/app/compose_send） |
+| 获取接收的邮件 | 获取收件箱邮件列表 | [97369](https://developer.work.weixin.qq.com/document/path/97369) | ✅ 已对接 | EnterpriseEmailService.getMailList（exmail/app/get_mail_list） |
+|  | 获取邮件内容 | [97979](https://developer.work.weixin.qq.com/document/path/97979) | ✅ 已对接 | EnterpriseEmailService.readMail（exmail/app/read_mail） |
+| 管理应用邮箱账号 | 更新应用邮箱账号 | [97373](https://developer.work.weixin.qq.com/document/path/97373) | ✅ 已对接 | EnterpriseEmailService.updateEmailAlias（exmail/app/update_email_alias） |
+|  | 查询应用邮箱账号 | [97991](https://developer.work.weixin.qq.com/document/path/97991) | ✅ 已对接 | EnterpriseEmailService.getEmailAlias（exmail/app/get_email_alias） |
 | 管理邮件群组 | 创建邮件群组 | [95510](https://developer.work.weixin.qq.com/document/path/95510) | ✅ 已对接 | EnterpriseEmailClient.createMailGroup |
 |  | 更新邮件群组 | [97995](https://developer.work.weixin.qq.com/document/path/97995) | ✅ 已对接 | EnterpriseEmailClient.updateMailGroup |
 |  | 删除邮件群组 | [97996](https://developer.work.weixin.qq.com/document/path/97996) | ✅ 已对接 | EnterpriseEmailClient.deleteMailGroup |
@@ -584,15 +584,15 @@
 |  | 获取公共邮箱详情 | [98002](https://developer.work.weixin.qq.com/document/path/98002) | ✅ 已对接 | EnterpriseEmailClient.mailDetail |
 |  | 模糊搜索公共邮箱 | [98003](https://developer.work.weixin.qq.com/document/path/98003) | ✅ 已对接 | EnterpriseEmailClient.searchEmail |
 |  | 回调通知 | [100180](https://developer.work.weixin.qq.com/document/path/100180) | ⛔ 范围外 | — |
-|  | 获取客户端专用密码列表 | [100183](https://developer.work.weixin.qq.com/document/path/100183) | ❌ 未对接 | — |
-|  | 删除客户端专用密码 | [100184](https://developer.work.weixin.qq.com/document/path/100184) | ❌ 未对接 | — |
+|  | 获取客户端专用密码列表 | [100183](https://developer.work.weixin.qq.com/document/path/100183) | ✅ 已对接 | EnterpriseEmailService.listAuthCodes（exmail/publicmail/get_auth_code_list） |
+|  | 删除客户端专用密码 | [100184](https://developer.work.weixin.qq.com/document/path/100184) | ✅ 已对接 | EnterpriseEmailService.deleteAuthCode（exmail/publicmail/delete_auth_code） |
 | 高级功能账号管理 | 分配高级功能账号 | [99316](https://developer.work.weixin.qq.com/document/path/99316) | ✅ 已对接 | EnterpriseEmailClient.batchAddVipAccounts（exmail/vip/batch_add） |
 |  | 取消高级功能账号 | [99317](https://developer.work.weixin.qq.com/document/path/99317) | ✅ 已对接 | EnterpriseEmailClient.batchDeleteVipAccounts（exmail/vip/batch_del） |
 |  | 获取高级功能账号列表 | [99318](https://developer.work.weixin.qq.com/document/path/99318) | ✅ 已对接 | EnterpriseEmailClient.listVipAccounts（exmail/vip/list） |
-|  | 禁用/启用邮箱账号 | [95512](https://developer.work.weixin.qq.com/document/path/95512) | ❌ 未对接 | — |
-| 其他邮件客户端登录设置 | 获取用户功能属性 | [95513](https://developer.work.weixin.qq.com/document/path/95513) | ❌ 未对接 | — |
-|  | 更改用户功能属性 | [98008](https://developer.work.weixin.qq.com/document/path/98008) | ❌ 未对接 | — |
-|  | 获取邮件未读数 | [95514](https://developer.work.weixin.qq.com/document/path/95514) | ❌ 未对接 | — |
+|  | 禁用/启用邮箱账号 | [95512](https://developer.work.weixin.qq.com/document/path/95512) | ✅ 已对接 | EnterpriseEmailService.actEmail（exmail/account/act_email） |
+| 其他邮件客户端登录设置 | 获取用户功能属性 | [95513](https://developer.work.weixin.qq.com/document/path/95513) | ✅ 已对接 | EnterpriseEmailService.getUserOption（exmail/useroption/get） |
+|  | 更改用户功能属性 | [98008](https://developer.work.weixin.qq.com/document/path/98008) | ✅ 已对接 | EnterpriseEmailService.updateUserOption（exmail/useroption/update） |
+|  | 获取邮件未读数 | [95514](https://developer.work.weixin.qq.com/document/path/95514) | ✅ 已对接 | EnterpriseEmailService.getMailUnreadCount（exmail/mail/get_newcount） |
 |  | 回调通知 | [97495](https://developer.work.weixin.qq.com/document/path/97495) | ⛔ 范围外 | — |
 
 ## 文档
