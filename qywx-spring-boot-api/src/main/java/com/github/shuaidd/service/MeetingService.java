@@ -4,6 +4,16 @@ import com.github.shuaidd.client.MeetingAdvancedClient;
 import com.github.shuaidd.client.MeetingClient;
 import com.github.shuaidd.dto.meeting.MeetingPollQuestion;
 import com.github.shuaidd.dto.meeting.MeetingRealControlUser;
+import com.github.shuaidd.dto.meeting.MeetingAdvancedLayout;
+import com.github.shuaidd.dto.meeting.MeetingAdvancedLayoutPage;
+import com.github.shuaidd.dto.meeting.MeetingAdvancedLayoutSeat;
+import com.github.shuaidd.dto.meeting.MeetingBackgroundImage;
+import com.github.shuaidd.dto.meeting.MeetingLayoutPage;
+import com.github.shuaidd.dto.meeting.MeetingLayoutGridUser;
+import com.github.shuaidd.dto.meeting.MeetingLayoutPollingSetting;
+import com.github.shuaidd.dto.meeting.MeetingLayoutResult;
+import com.github.shuaidd.dto.meeting.MeetingLayoutSeat;
+import com.github.shuaidd.dto.meeting.MeetingLayoutUser;
 import com.github.shuaidd.dto.meeting.MeetingMraDevice;
 import com.github.shuaidd.dto.meeting.RoomsMra;
 import com.github.shuaidd.dto.meeting.MeetingPhoneNumber;
@@ -1296,6 +1306,276 @@ public class MeetingService extends AbstractBaseService {
         return meetingAdvancedClient.hangupMra(request, applicationName);
     }
 
+    /**
+     * 获取企业布局模板列表
+     *
+     * @param applicationName 应用名称
+     * @return 布局模板列表
+     */
+    public MeetingLayoutTemplateListResponse listMeetingLayoutTemplates(String applicationName) {
+        return meetingAdvancedClient.listMeetingLayoutTemplates(applicationName);
+    }
+
+    /**
+     * 添加会议基础布局
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 新增布局列表
+     */
+    public MeetingLayoutAddResponse addMeetingLayouts(MeetingLayoutAddRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (CollectionUtils.isEmpty(request.getLayoutList()) || request.getLayoutList().size() > 10) {
+            throw new ParamCheckException("会议布局列表必须为1~10个");
+        }
+        if (request.getDefaultLayoutOrder() != null
+                && (request.getDefaultLayoutOrder() < 1 || request.getDefaultLayoutOrder() > request.getLayoutList().size())) {
+            throw new ParamCheckException("需要应用的布局序号不符合要求");
+        }
+        for (MeetingLayoutResult layout : request.getLayoutList()) {
+            checkMeetingLayoutPages(layout == null ? null : layout.getPageList());
+        }
+        return meetingAdvancedClient.addMeetingLayouts(request, applicationName);
+    }
+
+    /**
+     * 添加会议高级布局
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 新增高级布局列表
+     */
+    public MeetingAdvancedLayoutAddResponse addMeetingAdvancedLayouts(MeetingAdvancedLayoutAddRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (CollectionUtils.isEmpty(request.getLayoutList()) || request.getLayoutList().size() > 20) {
+            throw new ParamCheckException("会议高级布局列表必须为1~20个");
+        }
+        for (MeetingAdvancedLayout layout : request.getLayoutList()) {
+            checkMeetingAdvancedLayoutPages(layout == null ? null : layout.getPageList());
+        }
+        return meetingAdvancedClient.addMeetingAdvancedLayouts(request, applicationName);
+    }
+
+    /**
+     * 修改会议基础布局
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse updateMeetingLayout(MeetingLayoutUpdateRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (StringUtils.isEmpty(request.getLayoutId())) {
+            throw new ParamCheckException("布局ID不能为空");
+        }
+        checkMeetingLayoutPages(request.getPageList());
+        return meetingAdvancedClient.updateMeetingLayout(request, applicationName);
+    }
+
+    /**
+     * 修改会议高级布局
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse updateMeetingAdvancedLayout(MeetingAdvancedLayoutUpdateRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (StringUtils.isEmpty(request.getLayoutId())) {
+            throw new ParamCheckException("布局ID不能为空");
+        }
+        checkMeetingAdvancedLayoutPages(request.getPageList());
+        return meetingAdvancedClient.updateMeetingAdvancedLayout(request, applicationName);
+    }
+
+    /**
+     * 设置会议默认布局
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse setDefaultMeetingLayout(MeetingLayoutDefaultRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (request.getSelectedLayoutId() == null) {
+            throw new ParamCheckException("布局ID不能为null，空字符串表示恢复默认原始布局");
+        }
+        return meetingAdvancedClient.setDefaultMeetingLayout(request, applicationName);
+    }
+
+    /**
+     * 应用会议高级布局
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse applyMeetingAdvancedLayout(MeetingAdvancedLayoutApplyRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (request.getLayoutId() == null) {
+            throw new ParamCheckException("布局ID不能为null，空字符串表示恢复默认布局");
+        }
+        if (CollectionUtils.isNotEmpty(request.getUserList())) {
+            if (request.getUserList().size() > 20) {
+                throw new ParamCheckException("个性布局用户列表最多20个");
+            }
+            for (MeetingLayoutUser user : request.getUserList()) {
+                if (user == null || StringUtils.isEmpty(user.getTmpOpenid())) {
+                    throw new ParamCheckException("个性布局用户的会议临时ID不能为空");
+                }
+            }
+        }
+        return meetingAdvancedClient.applyMeetingAdvancedLayout(request, applicationName);
+    }
+
+    /**
+     * 获取会议基础和高级布局列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 布局列表
+     */
+    public MeetingAdvancedLayoutListResponse listMeetingAdvancedLayouts(MeetingAdvancedLayoutListRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        return meetingAdvancedClient.listMeetingAdvancedLayouts(request, applicationName);
+    }
+
+    /**
+     * 获取用户高级布局
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 用户布局
+     */
+    public MeetingAdvancedLayoutUserResponse getMeetingUserLayout(MeetingAdvancedLayoutUserRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (StringUtils.isEmpty(request.getTmpOpenid())) {
+            throw new ParamCheckException("被查询用户的会议临时ID不能为空");
+        }
+        checkMeetingInstanceId(request.getInstanceId());
+        return meetingAdvancedClient.getMeetingUserLayout(request, applicationName);
+    }
+
+    /**
+     * 批量删除会议布局
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse batchDeleteMeetingLayouts(MeetingLayoutBatchDeleteRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (CollectionUtils.isEmpty(request.getLayoutIdList()) || request.getLayoutIdList().size() > 20) {
+            throw new ParamCheckException("待删除布局ID列表必须为1~20个");
+        }
+        for (String layoutId : request.getLayoutIdList()) {
+            if (StringUtils.isEmpty(layoutId)) {
+                throw new ParamCheckException("待删除布局ID不能为空");
+            }
+        }
+        return meetingAdvancedClient.batchDeleteMeetingLayouts(request, applicationName);
+    }
+
+    /**
+     * 添加会议背景
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 新增背景列表
+     */
+    public MeetingBackgroundAddResponse addMeetingBackgrounds(MeetingBackgroundAddRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (CollectionUtils.isEmpty(request.getImageList()) || request.getImageList().size() > 7) {
+            throw new ParamCheckException("会议背景图片列表必须为1~7个");
+        }
+        if (request.getDefaultImageOrder() != null
+                && (request.getDefaultImageOrder() < 1 || request.getDefaultImageOrder() > request.getImageList().size())) {
+            throw new ParamCheckException("需要使用的背景图片序号不符合要求");
+        }
+        for (MeetingBackgroundImage image : request.getImageList()) {
+            if (image == null || StringUtils.isEmpty(image.getImageMd5()) || StringUtils.isEmpty(image.getImageUrl())) {
+                throw new ParamCheckException("背景图片MD5和URL不能为空");
+            }
+        }
+        return meetingAdvancedClient.addMeetingBackgrounds(request, applicationName);
+    }
+
+    /**
+     * 设置会议默认背景
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse setDefaultMeetingBackground(MeetingBackgroundDefaultRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (request.getSelectedBackgroundId() == null) {
+            throw new ParamCheckException("背景ID不能为null，空字符串表示恢复默认黑色背景");
+        }
+        return meetingAdvancedClient.setDefaultMeetingBackground(request, applicationName);
+    }
+
+    /**
+     * 获取会议背景列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 背景列表
+     */
+    public MeetingBackgroundListResponse listMeetingBackgrounds(MeetingBackgroundListRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        return meetingAdvancedClient.listMeetingBackgrounds(request, applicationName);
+    }
+
+    /**
+     * 删除单个会议背景
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse deleteMeetingBackground(MeetingBackgroundDeleteRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (StringUtils.isEmpty(request.getBackgroundId())) {
+            throw new ParamCheckException("待删除背景ID不能为空");
+        }
+        return meetingAdvancedClient.deleteMeetingBackground(request, applicationName);
+    }
+
+    /**
+     * 批量删除会议背景
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse batchDeleteMeetingBackgrounds(MeetingBackgroundBatchDeleteRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (CollectionUtils.isEmpty(request.getBackgroundIdList()) || request.getBackgroundIdList().size() > 7) {
+            throw new ParamCheckException("待删除背景ID列表必须为1~7个");
+        }
+        for (String backgroundId : request.getBackgroundIdList()) {
+            if (StringUtils.isEmpty(backgroundId)) {
+                throw new ParamCheckException("待删除背景ID不能为空");
+            }
+        }
+        return meetingAdvancedClient.batchDeleteMeetingBackgrounds(request, applicationName);
+    }
+
     private void checkMraDevice(MeetingMraDevice mra) {
         if (mra == null || StringUtils.isEmpty(mra.getTmpOpenid())) {
             throw new ParamCheckException("MRA设备的会中临时ID不能为空");
@@ -1306,6 +1586,109 @@ public class MeetingService extends AbstractBaseService {
         if (value == null || value < minValue || value > maxValue) {
             throw new ParamCheckException(label + "不符合要求");
         }
+    }
+
+    private void checkMeetingLayoutPages(java.util.List<MeetingLayoutPage> pageList) {
+        if (CollectionUtils.isEmpty(pageList)) {
+            throw new ParamCheckException("布局单页列表不能为空");
+        }
+        for (MeetingLayoutPage page : pageList) {
+            if (page == null || StringUtils.isEmpty(page.getLayoutTemplateId())) {
+                throw new ParamCheckException("布局模板ID不能为空");
+            }
+            if (CollectionUtils.isEmpty(page.getUserSeatList())) {
+                continue;
+            }
+            for (MeetingLayoutSeat seat : page.getUserSeatList()) {
+                if (seat == null || StringUtils.isEmpty(seat.getGridId())) {
+                    throw new ParamCheckException("布局座次宫格ID不能为空");
+                }
+                if (seat.getGridType() == null || seat.getGridType() < 1 || seat.getGridType() > 3) {
+                    throw new ParamCheckException("布局宫格类型只允许1~3");
+                }
+                int identityCount = 0;
+                identityCount += StringUtils.isNotEmpty(seat.getUserId()) ? 1 : 0;
+                identityCount += StringUtils.isNotEmpty(seat.getTmpOpenid()) ? 1 : 0;
+                identityCount += StringUtils.isNotEmpty(seat.getToolSdkId()) ? 1 : 0;
+                if (identityCount != 1) {
+                    throw new ParamCheckException("布局座次的userid、tmpOpenid和toolSdkid必须三选一");
+                }
+                if (seat.getGridType() == 1 && StringUtils.isEmpty(seat.getNickName())) {
+                    throw new ParamCheckException("视频宫格的展示昵称不能为空");
+                }
+            }
+        }
+    }
+
+    private void checkMeetingAdvancedLayoutPages(java.util.List<MeetingAdvancedLayoutPage> pageList) {
+        if (CollectionUtils.isEmpty(pageList)) {
+            throw new ParamCheckException("高级布局单页列表不能为空");
+        }
+        for (MeetingAdvancedLayoutPage page : pageList) {
+            if (page == null || StringUtils.isEmpty(page.getLayoutTemplateId())) {
+                throw new ParamCheckException("高级布局模板ID不能为空");
+            }
+            if (Boolean.TRUE.equals(page.getEnablePolling())) {
+                MeetingLayoutPollingSetting setting = page.getPollingSetting();
+                if (setting == null) {
+                    throw new ParamCheckException("开启轮询后轮询设置不能为空");
+                }
+                if (setting.getPollingIntervalUnit() == null
+                        || setting.getPollingIntervalUnit() < 1
+                        || setting.getPollingIntervalUnit() > 2) {
+                    throw new ParamCheckException("轮询间隔时间类型只允许1或2");
+                }
+                if (setting.getPollingInterval() == null
+                        || setting.getPollingInterval() < 1
+                        || setting.getPollingInterval() > 999999) {
+                    throw new ParamCheckException("轮询间隔时长必须在1~999999之间");
+                }
+                if (setting.getIgnoreUserNoVideo() == null || setting.getIgnoreUserAbsence() == null) {
+                    throw new ParamCheckException("开启轮询后忽略成员设置不能为空");
+                }
+            }
+            if (CollectionUtils.isEmpty(page.getUserSeatList())) {
+                throw new ParamCheckException("高级布局用户座次列表不能为空");
+            }
+            for (MeetingAdvancedLayoutSeat seat : page.getUserSeatList()) {
+                if (seat == null || StringUtils.isEmpty(seat.getGridId())) {
+                    throw new ParamCheckException("高级布局座次宫格ID不能为空");
+                }
+                if (seat.getGridType() == null || seat.getGridType() < 1 || seat.getGridType() > 2) {
+                    throw new ParamCheckException("高级布局宫格类型只允许1或2");
+                }
+                if (seat.getVideoType() != null && (seat.getVideoType() < 1 || seat.getVideoType() > 3)) {
+                    throw new ParamCheckException("高级布局视频画面来源只允许1~3");
+                }
+                if (seat.getVideoType() != null && seat.getVideoType() == 3 && CollectionUtils.isEmpty(seat.getUserList())) {
+                    throw new ParamCheckException("指定人员画面必须传入用户列表");
+                }
+                if (CollectionUtils.isNotEmpty(seat.getUserList())) {
+                    for (MeetingLayoutGridUser user : seat.getUserList()) {
+                        if (user == null || (StringUtils.isEmpty(user.getUserId()) && StringUtils.isEmpty(user.getTmpOpenid()))) {
+                            throw new ParamCheckException("高级布局用户的userid和tmpOpenid必填其一");
+                        }
+                        if (seat.getVideoType() != null && seat.getVideoType() == 3
+                                && (StringUtils.isEmpty(user.getTmpOpenid()) || StringUtils.isEmpty(user.getNickName()))) {
+                            throw new ParamCheckException("指定人员画面的tmpOpenid和Base64昵称不能为空");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void checkMeetingInstanceId(Integer instanceId) {
+        int[] allowed = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 21, 22, 30, 32, 33};
+        if (instanceId == null) {
+            throw new ParamCheckException("用户终端设备类型不能为空");
+        }
+        for (int item : allowed) {
+            if (item == instanceId) {
+                return;
+            }
+        }
+        throw new ParamCheckException("用户终端设备类型不符合要求");
     }
 
     private void checkWebinarSetting(MeetingWebinarSettingRequest request) {

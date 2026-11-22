@@ -5,6 +5,7 @@ import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.meeting.*;
 import com.github.shuaidd.resquest.meeting.*;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -706,4 +707,153 @@ public interface MeetingAdvancedClient extends CommonClient {
      */
     @PostMapping(value = "meeting/mra/hangup", headers = HEAD)
     BaseResponse hangupMra(MeetingMraHangupRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取企业布局模板列表
+     *
+     * @param app 应用名
+     * @return 布局模板列表
+     */
+    @GetMapping(value = "meeting/layout/list_template", headers = HEAD)
+    MeetingLayoutTemplateListResponse listMeetingLayoutTemplates(@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 添加会议基础布局
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 新增布局列表
+     */
+    @PostMapping(value = "meeting/layout/add", headers = HEAD)
+    MeetingLayoutAddResponse addMeetingLayouts(MeetingLayoutAddRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 添加会议高级布局
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 新增高级布局列表
+     */
+    @PostMapping(value = "meeting/advanced_layout/add", headers = HEAD)
+    MeetingAdvancedLayoutAddResponse addMeetingAdvancedLayouts(MeetingAdvancedLayoutAddRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改会议基础布局
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/layout/update", headers = HEAD)
+    BaseResponse updateMeetingLayout(MeetingLayoutUpdateRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改会议高级布局
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/advanced_layout/update", headers = HEAD)
+    BaseResponse updateMeetingAdvancedLayout(MeetingAdvancedLayoutUpdateRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 设置会议默认布局
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/layout/set_default", headers = HEAD)
+    BaseResponse setDefaultMeetingLayout(MeetingLayoutDefaultRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 应用会议高级布局
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/advanced_layout/apply", headers = HEAD)
+    BaseResponse applyMeetingAdvancedLayout(MeetingAdvancedLayoutApplyRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取会议基础和高级布局列表
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 布局列表
+     */
+    @PostMapping(value = "meeting/advanced_layout/list", headers = HEAD)
+    MeetingAdvancedLayoutListResponse listMeetingAdvancedLayouts(MeetingAdvancedLayoutListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取用户高级布局
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 用户布局
+     */
+    @PostMapping(value = "meeting/advanced_layout/get_user_layout", headers = HEAD)
+    MeetingAdvancedLayoutUserResponse getMeetingUserLayout(MeetingAdvancedLayoutUserRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量删除会议布局
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/advanced_layout/batch_delete", headers = HEAD)
+    BaseResponse batchDeleteMeetingLayouts(MeetingLayoutBatchDeleteRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 添加会议背景
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 新增背景列表
+     */
+    @PostMapping(value = "meeting/layout/add_background", headers = HEAD)
+    MeetingBackgroundAddResponse addMeetingBackgrounds(MeetingBackgroundAddRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 设置会议默认背景
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/layout/set_default_background", headers = HEAD)
+    BaseResponse setDefaultMeetingBackground(MeetingBackgroundDefaultRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取会议背景列表
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 背景列表
+     */
+    @PostMapping(value = "meeting/layout/list_background", headers = HEAD)
+    MeetingBackgroundListResponse listMeetingBackgrounds(MeetingBackgroundListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除单个会议背景
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/layout/delete_background", headers = HEAD)
+    BaseResponse deleteMeetingBackground(MeetingBackgroundDeleteRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量删除会议背景
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/layout/batch_delete_background", headers = HEAD)
+    BaseResponse batchDeleteMeetingBackgrounds(MeetingBackgroundBatchDeleteRequest request, @RequestParam(HEAD_KEY) String app);
 }

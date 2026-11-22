@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 455 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 470 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 378 |
+| ✅ 已对接 | 393 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 211 |
+| ❌ 未对接 | 196 |
 | ⛔ 范围外 | 147 |
 | 合计 | 738 |
 
@@ -713,7 +713,7 @@
 
 ## 会议
 
-状态：✅ 80；⚠️ 0；❌ 59；⛔ 1
+状态：✅ 95；⚠️ 0；❌ 44；⛔ 1
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -798,21 +798,21 @@
 |  | 切换 MRA 默认布局 | [98787](https://developer.work.weixin.qq.com/document/path/98787) | ❌ 未对接 | — |
 |  | 设置 MRA 举手或手放下 | [98788](https://developer.work.weixin.qq.com/document/path/98788) | ❌ 未对接 | — |
 |  | 挂断 MRA 呼叫 | [98789](https://developer.work.weixin.qq.com/document/path/98789) | ✅ 已对接 | MeetingAdvancedClient.hangupMra（meeting/mra/hangup） |
-| 会议布局和背景管理 | 获取布局模板列表 | [98844](https://developer.work.weixin.qq.com/document/path/98844) | ❌ 未对接 | — |
-|  | 添加会议基础布局 | [98845](https://developer.work.weixin.qq.com/document/path/98845) | ❌ 未对接 | — |
-|  | 添加会议高级布局 | [98861](https://developer.work.weixin.qq.com/document/path/98861) | ❌ 未对接 | — |
-|  | 修改会议基础布局 | [98846](https://developer.work.weixin.qq.com/document/path/98846) | ❌ 未对接 | — |
-|  | 修改会议高级布局 | [98868](https://developer.work.weixin.qq.com/document/path/98868) | ❌ 未对接 | — |
-|  | 设置会议默认布局 | [98847](https://developer.work.weixin.qq.com/document/path/98847) | ❌ 未对接 | — |
-|  | 设置高级布局 | [98869](https://developer.work.weixin.qq.com/document/path/98869) | ❌ 未对接 | — |
-|  | 获取会议布局列表 | [98862](https://developer.work.weixin.qq.com/document/path/98862) | ❌ 未对接 | — |
-|  | 获取用户布局 | [98865](https://developer.work.weixin.qq.com/document/path/98865) | ❌ 未对接 | — |
-|  | 批量删除布局 | [98866](https://developer.work.weixin.qq.com/document/path/98866) | ❌ 未对接 | — |
-|  | 添加会议背景 | [98851](https://developer.work.weixin.qq.com/document/path/98851) | ❌ 未对接 | — |
-|  | 设置会议默认背景 | [98852](https://developer.work.weixin.qq.com/document/path/98852) | ❌ 未对接 | — |
-|  | 获取会议背景列表 | [98856](https://developer.work.weixin.qq.com/document/path/98856) | ❌ 未对接 | — |
-|  | 删除会议背景 | [98853](https://developer.work.weixin.qq.com/document/path/98853) | ❌ 未对接 | — |
-|  | 批量删除会议背景 | [98854](https://developer.work.weixin.qq.com/document/path/98854) | ❌ 未对接 | — |
+| 会议布局和背景管理 | 获取布局模板列表 | [98844](https://developer.work.weixin.qq.com/document/path/98844) | ✅ 已对接 | MeetingAdvancedClient.listMeetingLayoutTemplates（meeting/layout/list_template） |
+|  | 添加会议基础布局 | [98845](https://developer.work.weixin.qq.com/document/path/98845) | ✅ 已对接 | MeetingAdvancedClient.addMeetingLayouts（meeting/layout/add） |
+|  | 添加会议高级布局 | [98861](https://developer.work.weixin.qq.com/document/path/98861) | ✅ 已对接 | MeetingAdvancedClient.addMeetingAdvancedLayouts（meeting/advanced_layout/add） |
+|  | 修改会议基础布局 | [98846](https://developer.work.weixin.qq.com/document/path/98846) | ✅ 已对接 | MeetingAdvancedClient.updateMeetingLayout（meeting/layout/update） |
+|  | 修改会议高级布局 | [98868](https://developer.work.weixin.qq.com/document/path/98868) | ✅ 已对接 | MeetingAdvancedClient.updateMeetingAdvancedLayout（meeting/advanced_layout/update） |
+|  | 设置会议默认布局 | [98847](https://developer.work.weixin.qq.com/document/path/98847) | ✅ 已对接 | MeetingAdvancedClient.setDefaultMeetingLayout（meeting/layout/set_default） |
+|  | 设置高级布局 | [98869](https://developer.work.weixin.qq.com/document/path/98869) | ✅ 已对接 | MeetingAdvancedClient.applyMeetingAdvancedLayout（meeting/advanced_layout/apply） |
+|  | 获取会议布局列表 | [98862](https://developer.work.weixin.qq.com/document/path/98862) | ✅ 已对接 | MeetingAdvancedClient.listMeetingAdvancedLayouts（meeting/advanced_layout/list） |
+|  | 获取用户布局 | [98865](https://developer.work.weixin.qq.com/document/path/98865) | ✅ 已对接 | MeetingAdvancedClient.getMeetingUserLayout（meeting/advanced_layout/get_user_layout） |
+|  | 批量删除布局 | [98866](https://developer.work.weixin.qq.com/document/path/98866) | ✅ 已对接 | MeetingAdvancedClient.batchDeleteMeetingLayouts（meeting/advanced_layout/batch_delete） |
+|  | 添加会议背景 | [98851](https://developer.work.weixin.qq.com/document/path/98851) | ✅ 已对接 | MeetingAdvancedClient.addMeetingBackgrounds（meeting/layout/add_background） |
+|  | 设置会议默认背景 | [98852](https://developer.work.weixin.qq.com/document/path/98852) | ✅ 已对接 | MeetingAdvancedClient.setDefaultMeetingBackground（meeting/layout/set_default_background） |
+|  | 获取会议背景列表 | [98856](https://developer.work.weixin.qq.com/document/path/98856) | ✅ 已对接 | MeetingAdvancedClient.listMeetingBackgrounds（meeting/layout/list_background） |
+|  | 删除会议背景 | [98853](https://developer.work.weixin.qq.com/document/path/98853) | ✅ 已对接 | MeetingAdvancedClient.deleteMeetingBackground（meeting/layout/delete_background） |
+|  | 批量删除会议背景 | [98854](https://developer.work.weixin.qq.com/document/path/98854) | ✅ 已对接 | MeetingAdvancedClient.batchDeleteMeetingBackgrounds（meeting/layout/batch_delete_background） |
 | 录制管理 | 获取会议录制列表 | [98192](https://developer.work.weixin.qq.com/document/path/98192) | ❌ 未对接 | — |
 |  | 获取录制文件访问统计 | [98209](https://developer.work.weixin.qq.com/document/path/98209) | ❌ 未对接 | — |
 |  | 修改会议录制共享设置 | [98208](https://developer.work.weixin.qq.com/document/path/98208) | ❌ 未对接 | — |
