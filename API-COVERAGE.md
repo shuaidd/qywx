@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 509 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 513 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 430 |
+| ✅ 已对接 | 435 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 128 |
+| ❌ 未对接 | 123 |
 | ⛔ 范围外 | 178 |
 | 合计 | 738 |
 
@@ -468,7 +468,7 @@
 
 ## 家校沟通
 
-状态：✅ 24；⚠️ 0；❌ 5；⛔ 6
+状态：✅ 29；⚠️ 0；❌ 0；⛔ 6
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -499,11 +499,11 @@
 |  | 获取部门学生详情 | [92338](https://developer.work.weixin.qq.com/document/path/92338) | ✅ 已对接 | SchoolClient#92338 相关路由与 SchoolService |
 |  | 设置家校通讯录自动同步模式 | [92345](https://developer.work.weixin.qq.com/document/path/92345) | ✅ 已对接 | SchoolClient#92345 相关路由与 SchoolService |
 |  | 获取部门家长详情 | [92446](https://developer.work.weixin.qq.com/document/path/92446) | ✅ 已对接 | SchoolClient#92446 相关路由与 SchoolService |
-| 部门管理 | 创建部门 | [92340](https://developer.work.weixin.qq.com/document/path/92340) | ❌ 未对接 | — |
-|  | 更新部门 | [92341](https://developer.work.weixin.qq.com/document/path/92341) | ❌ 未对接 | — |
-|  | 删除部门 | [92342](https://developer.work.weixin.qq.com/document/path/92342) | ❌ 未对接 | — |
-|  | 获取部门列表 | [92343](https://developer.work.weixin.qq.com/document/path/92343) | ❌ 未对接 | — |
-|  | 标准年级对照表 | [92344](https://developer.work.weixin.qq.com/document/path/92344) | ❌ 未对接 | — |
+| 部门管理 | 创建部门 | [92340](https://developer.work.weixin.qq.com/document/path/92340) | ✅ 已对接 | SchoolClient.createSchoolDepartment 与 SchoolService |
+|  | 更新部门 | [92341](https://developer.work.weixin.qq.com/document/path/92341) | ✅ 已对接 | SchoolClient.updateSchoolDepartment 与 SchoolService |
+|  | 删除部门 | [92342](https://developer.work.weixin.qq.com/document/path/92342) | ✅ 已对接 | SchoolClient.deleteSchoolDepartment 与 SchoolService |
+|  | 获取部门列表 | [92343](https://developer.work.weixin.qq.com/document/path/92343) | ✅ 已对接 | SchoolClient.listSchoolDepartments 与 SchoolService |
+|  | 标准年级对照表 | [92344](https://developer.work.weixin.qq.com/document/path/92344) | ✅ 已对接 | SchoolService.getStandardGrades |
 |  | 修改自动升年级的配置 | [92949](https://developer.work.weixin.qq.com/document/path/92949) | ⛔ 范围外 | — |
 | 家校通讯录变更回调 | 成员变更事件 | [92032](https://developer.work.weixin.qq.com/document/path/92032) | ⛔ 范围外 | — |
 |  | 部门变更事件 | [92052](https://developer.work.weixin.qq.com/document/path/92052) | ⛔ 范围外 | — |

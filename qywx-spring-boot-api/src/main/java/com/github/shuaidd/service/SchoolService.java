@@ -5,11 +5,15 @@ import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.resquest.school.BatchParentOperationRequest;
 import com.github.shuaidd.resquest.school.BatchStudentOperationRequest;
 import com.github.shuaidd.resquest.school.ConvertExternalUserToOpenIdRequest;
+import com.github.shuaidd.resquest.school.CreateSchoolDepartmentRequest;
 import com.github.shuaidd.resquest.school.CreateParentRequest;
 import com.github.shuaidd.resquest.school.CreateStudentRequest;
 import com.github.shuaidd.resquest.school.ParentChildItem;
 import com.github.shuaidd.resquest.school.ParentItem;
+import com.github.shuaidd.resquest.school.SchoolDepartmentAdminItem;
+import com.github.shuaidd.resquest.school.SchoolDepartmentUpdateAdminItem;
 import com.github.shuaidd.resquest.school.SetArchSyncModeRequest;
+import com.github.shuaidd.resquest.school.UpdateSchoolDepartmentRequest;
 import com.github.shuaidd.resquest.school.StudentItem;
 import com.github.shuaidd.resquest.school.UpdateParentRequest;
 import com.github.shuaidd.resquest.school.UpdateStudentRequest;
@@ -20,7 +24,10 @@ import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.school.BatchParentResultResponse;
 import com.github.shuaidd.response.school.BatchStudentResultResponse;
 import com.github.shuaidd.response.school.ChatCreateModeResponse;
+import com.github.shuaidd.response.school.CreateSchoolDepartmentResponse;
 import com.github.shuaidd.response.school.ParentListResponse;
+import com.github.shuaidd.response.school.SchoolDepartmentListResponse;
+import com.github.shuaidd.response.school.SchoolDepartment;
 import com.github.shuaidd.response.school.SchoolUserDetailResponse;
 import com.github.shuaidd.response.school.StudentListResponse;
 import com.github.shuaidd.response.school.ExternalUserOpenIdResponse;
@@ -31,7 +38,10 @@ import com.github.shuaidd.response.school.SchoolUserInfoResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -386,6 +396,144 @@ public class SchoolService extends AbstractBaseService {
         checkApplication(applicationName);
         checkDepartmentId(departmentId);
         return schoolClient.listParents(departmentId, applicationName);
+    }
+
+    /**
+     * 创建家校部门
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 创建结果
+     */
+    public CreateSchoolDepartmentResponse createSchoolDepartment(CreateSchoolDepartmentRequest request, String applicationName) {
+        checkApplication(applicationName);
+        checkCreateSchoolDepartmentRequest(request);
+        return schoolClient.createSchoolDepartment(request, applicationName);
+    }
+
+    /**
+     * 更新家校部门
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse updateSchoolDepartment(UpdateSchoolDepartmentRequest request, String applicationName) {
+        checkApplication(applicationName);
+        checkUpdateSchoolDepartmentRequest(request);
+        return schoolClient.updateSchoolDepartment(request, applicationName);
+    }
+
+    /**
+     * 删除家校部门
+     *
+     * @param departmentId    家校部门id
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse deleteSchoolDepartment(Integer departmentId, String applicationName) {
+        checkApplication(applicationName);
+        checkDepartmentId(departmentId);
+        return schoolClient.deleteSchoolDepartment(departmentId, applicationName);
+    }
+
+    /**
+     * 获取家校部门列表
+     *
+     * @param departmentId    家校部门id；为空时获取全量组织架构
+     * @param applicationName 应用名称
+     * @return 部门列表
+     */
+    public SchoolDepartmentListResponse listSchoolDepartments(Integer departmentId, String applicationName) {
+        checkApplication(applicationName);
+        if (Objects.nonNull(departmentId) && departmentId <= 0) {
+            throw new ParamCheckException("department_id 必须大于0，请检查！！！");
+        }
+        return schoolClient.listSchoolDepartments(departmentId, applicationName);
+    }
+
+    /**
+     * 获取家校标准年级对照表
+     *
+     * @return 标准年级参数值和名称
+     */
+    public Map<Integer, String> getStandardGrades() {
+        Map<Integer, String> grades = new LinkedHashMap<Integer, String>();
+        grades.put(0, "非标准年级");
+        grades.put(1, "幼儿园小小班");
+        grades.put(2, "幼儿园小班");
+        grades.put(3, "幼儿园中班");
+        grades.put(4, "幼儿园大班");
+        grades.put(5, "幼儿园学前班");
+        grades.put(31, "小学一年级");
+        grades.put(32, "小学二年级");
+        grades.put(33, "小学三年级");
+        grades.put(34, "小学四年级");
+        grades.put(35, "小学五年级");
+        grades.put(36, "小学六年级");
+        grades.put(37, "小学七年级");
+        grades.put(38, "小学八年级");
+        grades.put(39, "小学九年级");
+        grades.put(61, "初中一年级");
+        grades.put(62, "初中二年级");
+        grades.put(63, "初中三年级");
+        grades.put(64, "初中四年级");
+        grades.put(91, "高中一年级");
+        grades.put(92, "高中二年级");
+        grades.put(93, "高中三年级");
+        grades.put(94, "高中四年级");
+        grades.put(121, "自定义学段一年级");
+        grades.put(122, "自定义学段二年级");
+        grades.put(123, "自定义学段三年级");
+        grades.put(124, "自定义学段四年级");
+        grades.put(125, "自定义学段五年级");
+        grades.put(126, "自定义学段六年级");
+        grades.put(127, "自定义学段七年级");
+        grades.put(128, "自定义学段八年级");
+        grades.put(129, "自定义学段九年级");
+        grades.put(130, "自定义学段十年级");
+        grades.put(131, "自定义学段十一年级");
+        grades.put(132, "自定义学段十二年级");
+        return Collections.unmodifiableMap(grades);
+    }
+
+    private void checkCreateSchoolDepartmentRequest(CreateSchoolDepartmentRequest request) {
+        if (Objects.isNull(request) || Objects.isNull(request.getParentId()) || request.getParentId() <= 0) {
+            throw new ParamCheckException("parentid 不能为空且必须大于0，请检查！！！");
+        }
+        if (Objects.isNull(request.getType()) || request.getType() < 1 || request.getType() > 4) {
+            throw new ParamCheckException("type 只能为1、2、3或4，请检查！！！");
+        }
+        if (Objects.nonNull(request.getId()) && request.getId() <= 1) {
+            throw new ParamCheckException("指定id时必须大于1，请检查！！！");
+        }
+        checkSchoolDepartmentAdmins(request.getDepartmentAdmins());
+    }
+
+    private void checkUpdateSchoolDepartmentRequest(UpdateSchoolDepartmentRequest request) {
+        if (Objects.isNull(request) || Objects.isNull(request.getId()) || request.getId() <= 0) {
+            throw new ParamCheckException("id 不能为空且必须大于0，请检查！！！");
+        }
+        if (Objects.nonNull(request.getDepartmentAdmins())) {
+            for (SchoolDepartmentUpdateAdminItem admin : request.getDepartmentAdmins()) {
+                if (Objects.isNull(admin) || Objects.isNull(admin.getOp()) || admin.getOp() < 0 || admin.getOp() > 1
+                        || StringUtils.isEmpty(admin.getUserid())) {
+                    throw new ParamCheckException("department_admins.op和userid不能为空，op只能为0或1，请检查！！！");
+                }
+            }
+        }
+    }
+
+    private void checkSchoolDepartmentAdmins(List<SchoolDepartmentAdminItem> admins) {
+        if (Objects.isNull(admins)) {
+            return;
+        }
+        for (SchoolDepartmentAdminItem admin : admins) {
+            if (Objects.isNull(admin) || StringUtils.isEmpty(admin.getUserid())
+                    || Objects.isNull(admin.getType()) || admin.getType() < 1 || admin.getType() > 5) {
+                throw new ParamCheckException("department_admins.userid和type不能为空，type只能为1~5，请检查！！！");
+            }
+        }
     }
 
     private void checkUserId(String userId, String fieldName) {

@@ -2,6 +2,7 @@ package com.github.shuaidd.client;
 
 import com.github.shuaidd.client.config.WeChatConfiguration;
 import com.github.shuaidd.resquest.school.BatchParentOperationRequest;
+import com.github.shuaidd.resquest.school.CreateSchoolDepartmentRequest;
 import com.github.shuaidd.resquest.school.BatchStudentOperationRequest;
 import com.github.shuaidd.resquest.school.CreateParentRequest;
 import com.github.shuaidd.resquest.school.CreateStudentRequest;
@@ -11,12 +12,15 @@ import com.github.shuaidd.resquest.school.SetArchSyncModeRequest;
 import com.github.shuaidd.resquest.school.StudentItem;
 import com.github.shuaidd.resquest.school.UpdateParentRequest;
 import com.github.shuaidd.resquest.school.UpdateStudentRequest;
+import com.github.shuaidd.resquest.school.UpdateSchoolDepartmentRequest;
 import com.github.shuaidd.resquest.school.UserIdListRequest;
 import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.school.BatchParentResultResponse;
+import com.github.shuaidd.response.school.CreateSchoolDepartmentResponse;
 import com.github.shuaidd.response.school.BatchStudentResultResponse;
 import com.github.shuaidd.response.school.ChatCreateModeResponse;
 import com.github.shuaidd.response.school.ParentListResponse;
+import com.github.shuaidd.response.school.SchoolDepartmentListResponse;
 import com.github.shuaidd.response.school.SchoolUserDetailResponse;
 import com.github.shuaidd.response.school.StudentListResponse;
 import com.github.shuaidd.response.school.ExternalUserOpenIdResponse;
@@ -276,4 +280,44 @@ public interface SchoolClient extends CommonClient {
      */
     @GetMapping(value = "school/user/list_parent", headers = HEAD)
     ParentListResponse listParents(@RequestParam("department_id") Integer departmentId, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 创建家校部门
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 创建结果
+     */
+    @PostMapping(value = "school/department/create", headers = HEAD)
+    CreateSchoolDepartmentResponse createSchoolDepartment(CreateSchoolDepartmentRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 更新家校部门
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "school/department/update", headers = HEAD)
+    BaseResponse updateSchoolDepartment(UpdateSchoolDepartmentRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除家校部门
+     *
+     * @param id  部门id
+     * @param app 应用名
+     * @return 基础响应
+     */
+    @GetMapping(value = "school/department/delete", headers = HEAD)
+    BaseResponse deleteSchoolDepartment(@RequestParam("id") Integer id, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取家校部门列表
+     *
+     * @param id  部门id；不填获取全量组织架构
+     * @param app 应用名
+     * @return 部门列表
+     */
+    @GetMapping(value = "school/department/list", headers = HEAD)
+    SchoolDepartmentListResponse listSchoolDepartments(@RequestParam(value = "id", required = false) Integer id, @RequestParam(HEAD_KEY) String app);
 }
