@@ -32,7 +32,7 @@
 | 9 | 政民沟通 | 21 | 进行中 | 已完成配置网格结构 5 页；事件类别和巡查/居民上报因官方文档返回验证码暂缓，不猜测路由。 |
 | 10 | 邮件 | 16 | 待开始 | 覆盖发送、收件箱、账号和高级功能账号。 |
 | 11 | 上下游、安全、微盘、智能表格编组 | 43 | 待开始 | 上下游已部分覆盖，优先补齐可独立验证的 REST 路由。 |
-| 12 | 打卡、审批、汇报、人事助手、高级功能等剩余业务 | 27 | 进行中 | 已完成打卡 3 个文档页、人事助手花名册 3 个文档页、高级功能审批 3 个文档页、12D 高级功能账号 12 个文档页和 12E 安全管理日志与域名 IP 3 个文档页；其余按安全管理剩余模块继续拆分推进。 |
+| 12 | 打卡、审批、汇报、人事助手、高级功能等剩余业务 | 27 | 进行中 | 已完成打卡 3 个文档页、人事助手花名册 3 个文档页、高级功能审批 3 个文档页、12D 高级功能账号 12 个文档页和 12E 安全管理日志与域名 IP 3 个文档页，以及 12F 文件防泄漏、设备管理和截屏/录屏管理 3 个文档页；后续继续按剩余可验证 REST 页面推进。 |
 
 > 数量按 `API-COVERAGE.md` 当前文档页统计，不是接口路由数；实现时一个文档页可能产生多个 Feign 方法。
 
@@ -116,3 +116,4 @@
 - 2026-11-22：批次 12 续做 12C 完成汇报下载微盘文件 1 个文档页，覆盖 `oa/journal/download_wedrive_file`；新增模型字段均带中文业务含义注释，Service 校验应用名、汇报记录 `journaluuid` 和微盘文件 `fileid`；覆盖度更新为已对接 457 页、部分对接 2 页、未对接 101 页、范围外 178 页，Feign 方法数达到 538；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。真实企微调用未执行。
 - 2026-11-22：批次 12 续做 12D 完成高级功能账号 12 个文档页，覆盖 14 个 REST 路由：`security/vip/submit_batch_add_job`、`security/vip/batch_add_job_result`、`security/vip/submit_batch_del_job`、`security/vip/batch_del_job_result`、`security/vip/list`、`exmail/vip/batch_add`、`exmail/vip/batch_del`、`exmail/vip/list`、`/wedoc/vip/batch_add`、`/wedoc/vip/batch_del`、`/wedoc/vip/list`、`wedrive/vip/batch_add`、`wedrive/vip/batch_del` 和 `wedrive/vip/list`；安全模块复用异步提交/结果查询响应，其余模块为同步响应，新增 7 个通用 VIP 模型字段均带中文业务含义注释。Service 统一校验应用名，`userid_list` 非空且最多 100 个，异步结果查询校验 `jobid`，账号列表的 `limit` 可不传但传入时必须在 1~200；覆盖度更新为已对接 469 页、部分对接 2 页、未对接 89 页、范围外 178 页，Feign 方法数达到 552；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。真实企微调用未执行。
 - 2026-11-22：批次 12 续做 12E 完成安全管理日志与域名 IP 3 个文档页，覆盖 `security/member_oper_log/list`、`security/admin_oper_log/list` 和 `security/get_server_domain_ip`；新增模型字段均带中文业务含义注释，Service 校验应用名、起止时间、时间跨度不超过7天以及可选 limit 1~400；请求分页字段使用正确拼写 cursor，域名响应保留官方字段 universal_domian；覆盖度更新为已对接 472 页、部分对接 2 页、未对接 86 页、范围外 178 页，Feign 方法数达到 555；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。真实企微调用未执行。
+- 2026-11-22：批次 12 续做 12F 完成安全管理剩余 3 个文档页，覆盖 8 条 REST 路由：`security/get_file_oper_record`、`security/trustdevice/import`、`security/trustdevice/list`、`security/trustdevice/get_by_user`、`security/trustdevice/delete`、`security/trustdevice/approve`、`security/trustdevice/reject` 和 `security/get_screen_oper_record`；新增模型字段均带中文业务含义注释，Service 校验应用名、文件/截屏起止时间、14天跨度、可选 userid 和部门过滤上限、游标拼写 cursor、limit 1~1000、截屏类型 1~6、设备系统 Windows/Mac 差异、设备批量上限100、设备类型 1~3 和设备列表 limit 1~100；覆盖度更新为已对接 475 页、部分对接 2 页、未对接 83 页、范围外 178 页，Feign 方法数达到 563；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。真实企微调用未执行。

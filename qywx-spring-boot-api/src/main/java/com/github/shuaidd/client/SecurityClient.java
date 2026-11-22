@@ -2,12 +2,26 @@ package com.github.shuaidd.client;
 
 import com.github.shuaidd.client.config.WeChatConfiguration;
 import com.github.shuaidd.response.security.AdminOperLogListResponse;
+import com.github.shuaidd.response.security.FileOperRecordListResponse;
 import com.github.shuaidd.response.security.MemberOperLogListResponse;
+import com.github.shuaidd.response.security.ScreenOperRecordListResponse;
 import com.github.shuaidd.response.security.ServerDomainIpResponse;
+import com.github.shuaidd.response.security.TrustDeviceDeleteResponse;
+import com.github.shuaidd.response.security.TrustDeviceGetByUserResponse;
+import com.github.shuaidd.response.security.TrustDeviceImportResponse;
+import com.github.shuaidd.response.security.TrustDeviceListResponse;
+import com.github.shuaidd.response.security.TrustDeviceOperateResponse;
 import com.github.shuaidd.response.vip.VipAccountListResponse;
 import com.github.shuaidd.response.vip.VipBatchOperateResponse;
 import com.github.shuaidd.response.vip.VipJobResultResponse;
+import com.github.shuaidd.resquest.security.FileOperRecordListRequest;
+import com.github.shuaidd.resquest.security.ScreenOperRecordListRequest;
 import com.github.shuaidd.resquest.security.SecurityOperLogListRequest;
+import com.github.shuaidd.resquest.security.TrustDeviceCodeListRequest;
+import com.github.shuaidd.resquest.security.TrustDeviceDeleteRequest;
+import com.github.shuaidd.resquest.security.TrustDeviceGetByUserRequest;
+import com.github.shuaidd.resquest.security.TrustDeviceImportRequest;
+import com.github.shuaidd.resquest.security.TrustDeviceListRequest;
 import com.github.shuaidd.resquest.vip.VipAccountListRequest;
 import com.github.shuaidd.resquest.vip.VipJobResultRequest;
 import com.github.shuaidd.resquest.vip.VipUserBatchRequest;
@@ -103,4 +117,84 @@ public interface SecurityClient extends CommonClient {
      */
     @GetMapping(value = "security/get_server_domain_ip", headers = HEAD)
     ServerDomainIpResponse getServerDomainIp(@RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取文件操作记录
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 文件操作记录列表
+     */
+    @PostMapping(value = "security/get_file_oper_record", headers = HEAD)
+    FileOperRecordListResponse listFileOperRecords(FileOperRecordListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 导入可信企业设备
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 设备导入结果列表
+     */
+    @PostMapping(value = "security/trustdevice/import", headers = HEAD)
+    TrustDeviceImportResponse importTrustDevices(TrustDeviceImportRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取可信设备信息
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 可信设备信息列表
+     */
+    @PostMapping(value = "security/trustdevice/list", headers = HEAD)
+    TrustDeviceListResponse listTrustDevices(TrustDeviceListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取成员使用设备
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 成员使用设备列表
+     */
+    @PostMapping(value = "security/trustdevice/get_by_user", headers = HEAD)
+    TrustDeviceGetByUserResponse getTrustDevicesByUser(TrustDeviceGetByUserRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除可信设备信息
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 删除结果
+     */
+    @PostMapping(value = "security/trustdevice/delete", headers = HEAD)
+    TrustDeviceDeleteResponse deleteTrustDevices(TrustDeviceDeleteRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 确认可信设备
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 设备确认结果列表
+     */
+    @PostMapping(value = "security/trustdevice/approve", headers = HEAD)
+    TrustDeviceOperateResponse approveTrustDevices(TrustDeviceCodeListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 驳回可信设备申请
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 设备驳回结果列表
+     */
+    @PostMapping(value = "security/trustdevice/reject", headers = HEAD)
+    TrustDeviceOperateResponse rejectTrustDevices(TrustDeviceCodeListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取截屏操作记录
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 截屏操作记录列表
+     */
+    @PostMapping(value = "security/get_screen_oper_record", headers = HEAD)
+    ScreenOperRecordListResponse listScreenOperRecords(ScreenOperRecordListRequest request, @RequestParam(HEAD_KEY) String app);
 }

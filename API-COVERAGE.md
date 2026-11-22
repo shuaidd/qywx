@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 555 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 563 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 472 |
+| ✅ 已对接 | 475 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 86 |
+| ❌ 未对接 | 83 |
 | ⛔ 范围外 | 178 |
 | 合计 | 738 |
 
@@ -184,9 +184,9 @@
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
-| 安全管理 | 文件防泄漏 | [98079](https://developer.work.weixin.qq.com/document/path/98079) | ❌ 未对接 | — |
-|  | 设备管理 | [98920](https://developer.work.weixin.qq.com/document/path/98920) | ❌ 未对接 | — |
-|  | 截屏/录屏管理 | [100128](https://developer.work.weixin.qq.com/document/path/100128) | ❌ 未对接 | — |
+| 安全管理 | 文件防泄漏 | [98079](https://developer.work.weixin.qq.com/document/path/98079) | ✅ 已对接 | SecurityClient.listFileOperRecords（security/get_file_oper_record） |
+|  | 设备管理 | [98920](https://developer.work.weixin.qq.com/document/path/98920) | ✅ 已对接 | SecurityClient.importTrustDevices、listTrustDevices、getTrustDevicesByUser、deleteTrustDevices、approveTrustDevices、rejectTrustDevices（security/trustdevice/import、/list、/get_by_user、/delete、/approve、/reject） |
+|  | 截屏/录屏管理 | [100128](https://developer.work.weixin.qq.com/document/path/100128) | ✅ 已对接 | SecurityClient.listScreenOperRecords（security/get_screen_oper_record） |
 | 高级功能账号管理 | 分配高级功能账号 | [99503](https://developer.work.weixin.qq.com/document/path/99503) | ✅ 已对接 | SecurityClient.submitBatchAddVipAccounts / getBatchAddVipJobResult（security/vip/submit_batch_add_job、batch_add_job_result） |
 |  | 取消高级功能账号 | [99505](https://developer.work.weixin.qq.com/document/path/99505) | ✅ 已对接 | SecurityClient.submitBatchDeleteVipAccounts / getBatchDeleteVipJobResult（security/vip/submit_batch_del_job、batch_del_job_result） |
 |  | 获取高级功能账号列表 | [99506](https://developer.work.weixin.qq.com/document/path/99506) | ✅ 已对接 | SecurityClient.listVipAccounts（security/vip/list） |
