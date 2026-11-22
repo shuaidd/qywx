@@ -274,6 +274,16 @@ public interface WorkOaClient extends CommonClient {
     JournalReportStatResponse getJournalStatList(JournalReportStatRequest request, @RequestParam(HEAD_KEY) String app);
 
     /**
+     * 下载汇报关联的微盘文件
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return JournalWedriveFileResponse
+     */
+    @PostMapping(value = "oa/journal/download_wedrive_file", headers = HEAD)
+    JournalWedriveFileResponse downloadJournalWedriveFile(JournalWedriveFileRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
      * 添加会议室
      *
      * @param request 请求体

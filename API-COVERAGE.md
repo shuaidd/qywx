@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 537 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 538 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 456 |
+| ✅ 已对接 | 457 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 102 |
+| ❌ 未对接 | 101 |
 | ⛔ 范围外 | 178 |
 | 合计 | 738 |
 
@@ -968,7 +968,7 @@
 
 ## 汇报
 
-状态：✅ 3；⚠️ 0；❌ 1；⛔ 1
+状态：✅ 4；⚠️ 0；❌ 0；⛔ 1
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -976,7 +976,7 @@
 |  | 批量获取汇报记录单号 | [93393](https://developer.work.weixin.qq.com/document/path/93393) | ✅ 已对接 | WorkOaClient.getJournalRecordList |
 |  | 获取汇报记录详情 | [93394](https://developer.work.weixin.qq.com/document/path/93394) | ✅ 已对接 | WorkOaClient.getJournalRecordDetail |
 |  | 获取汇报统计数据 | [93395](https://developer.work.weixin.qq.com/document/path/93395) | ✅ 已对接 | WorkOaClient.getJournalStatList |
-|  | 下载微盘文件 | [98021](https://developer.work.weixin.qq.com/document/path/98021) | ❌ 未对接 | — |
+|  | 下载微盘文件 | [98021](https://developer.work.weixin.qq.com/document/path/98021) | ✅ 已对接 | WorkOaClient.downloadJournalWedriveFile（oa/journal/download_wedrive_file） |
 
 ## 人事助手
 

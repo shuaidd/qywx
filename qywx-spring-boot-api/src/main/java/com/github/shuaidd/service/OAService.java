@@ -505,6 +505,24 @@ public class OAService extends AbstractBaseService {
     }
 
     /**
+     * 下载汇报关联的微盘文件
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return JournalWedriveFileResponse
+     */
+    public JournalWedriveFileResponse downloadJournalWedriveFile(JournalWedriveFileRequest request, String applicationName) {
+        checkApplication(applicationName);
+        if (Objects.isNull(request) || StringUtils.isBlank(request.getJournaluuid())) {
+            throw new ParamCheckException("journaluuid 不能为空，请检查！！！");
+        }
+        if (StringUtils.isBlank(request.getFileid())) {
+            throw new ParamCheckException("fileid 不能为空，请检查！！！");
+        }
+        return workOaClient.downloadJournalWedriveFile(request, applicationName);
+    }
+
+    /**
      * 添加会议室
      *
      * @param request         请求
