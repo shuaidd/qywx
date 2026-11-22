@@ -206,4 +206,174 @@ public interface MeetingAdvancedClient extends CommonClient {
      */
     @PostMapping(value = "meeting/statistics/get_start_list", headers = HEAD)
     MeetingStartListResponse getStartList(MeetingStartListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 设置进行中会议的会控参数
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/realcontrol/set", headers = HEAD)
+    BaseResponse setRealControl(MeetingRealControlSettingRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 设置或撤销联席主持人
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/realcontrol/set_cohost", headers = HEAD)
+    BaseResponse setCoHost(MeetingCoHostRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 设置或解除成员静音
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/realcontrol/mute_user", headers = HEAD)
+    BaseResponse muteUser(MeetingMuteUserRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 开启或关闭成员视频
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/realcontrol/switch_user_video", headers = HEAD)
+    BaseResponse switchUserVideo(MeetingUserVideoRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 停止成员屏幕共享
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/realcontrol/close_screen_share", headers = HEAD)
+    BaseResponse closeScreenShare(MeetingCloseScreenShareRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改成员会中昵称
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/realcontrol/set_nicknames", headers = HEAD)
+    BaseResponse setNicknames(MeetingNicknameRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 管理等候室成员
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/realcontrol/manage_waiting_room_users", headers = HEAD)
+    BaseResponse manageWaitingRoomUsers(MeetingWaitingRoomManageRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 将成员移出会议
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/realcontrol/kickout_users", headers = HEAD)
+    BaseResponse kickoutUsers(MeetingKickoutUsersRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 结束进行中的会议
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/realcontrol/dismiss", headers = HEAD)
+    BaseResponse dismissMeeting(MeetingDismissRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 创建会议投票
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 投票主题 ID
+     */
+    @PostMapping(value = "meeting/poll/create_theme", headers = HEAD)
+    MeetingPollCreateResponse createPoll(MeetingPollCreateRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 全量更新会议投票主题
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/poll/update_theme", headers = HEAD)
+    BaseResponse updatePoll(MeetingPollUpdateRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取会议投票列表
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 投票列表
+     */
+    @PostMapping(value = "meeting/poll/get_poll_list", headers = HEAD)
+    MeetingPollListResponse getPollList(MeetingPollListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取投票主题详情
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 投票主题详情
+     */
+    @PostMapping(value = "meeting/poll/get_theme_info", headers = HEAD)
+    MeetingPollThemeInfoResponse getPollThemeInfo(MeetingPollThemeInfoRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取投票详情和结果
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 投票详情
+     */
+    @PostMapping(value = "meeting/poll/get_poll_detail", headers = HEAD)
+    MeetingPollDetailResponse getPollDetail(MeetingPollDetailRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除投票或投票主题
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/poll/delete", headers = HEAD)
+    BaseResponse deletePoll(MeetingPollDeleteRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 发起已有投票主题
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 投票 ID
+     */
+    @PostMapping(value = "meeting/poll/start", headers = HEAD)
+    MeetingPollStartResponse startPoll(MeetingPollStartRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 结束指定投票
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/poll/finish", headers = HEAD)
+    BaseResponse finishPoll(MeetingPollFinishRequest request, @RequestParam(HEAD_KEY) String app);
 }

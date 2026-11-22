@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 405 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 422 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 328 |
+| ✅ 已对接 | 345 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 261 |
+| ❌ 未对接 | 244 |
 | ⛔ 范围外 | 147 |
 | 合计 | 738 |
 
@@ -713,7 +713,7 @@
 
 ## 会议
 
-状态：✅ 30；⚠️ 0；❌ 109；⛔ 1
+状态：✅ 47；⚠️ 0；❌ 92；⛔ 1
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -748,23 +748,23 @@
 |  | 审批会议报名信息 | [98807](https://developer.work.weixin.qq.com/document/path/98807) | ✅ 已对接 | MeetingAdvancedClient.approveEnrolls（meeting/enroll/approve） |
 |  | 导入会议报名信息 | [98816](https://developer.work.weixin.qq.com/document/path/98816) | ✅ 已对接 | MeetingAdvancedClient.importEnrolls（meeting/enroll/import） |
 |  | 删除会议报名信息 | [98817](https://developer.work.weixin.qq.com/document/path/98817) | ✅ 已对接 | MeetingAdvancedClient.deleteEnrolls（meeting/enroll/delete） |
-| 会中控制管理 | 管理会中设置 | [98175](https://developer.work.weixin.qq.com/document/path/98175) | ❌ 未对接 | — |
-|  | 管理联席主持人 | [98180](https://developer.work.weixin.qq.com/document/path/98180) | ❌ 未对接 | — |
-|  | 静音成员 | [98184](https://developer.work.weixin.qq.com/document/path/98184) | ❌ 未对接 | — |
-|  | 关闭或开启成员视频 | [98189](https://developer.work.weixin.qq.com/document/path/98189) | ❌ 未对接 | — |
-|  | 关闭成员屏幕共享 | [98185](https://developer.work.weixin.qq.com/document/path/98185) | ❌ 未对接 | — |
-|  | 修改成员在会中显示的昵称 | [98188](https://developer.work.weixin.qq.com/document/path/98188) | ❌ 未对接 | — |
-|  | 管理等候室成员 | [98186](https://developer.work.weixin.qq.com/document/path/98186) | ❌ 未对接 | — |
-|  | 移出成员 | [98181](https://developer.work.weixin.qq.com/document/path/98181) | ❌ 未对接 | — |
-|  | 结束会议 | [98187](https://developer.work.weixin.qq.com/document/path/98187) | ❌ 未对接 | — |
-|  | 创建会议投票主题 | [98834](https://developer.work.weixin.qq.com/document/path/98834) | ❌ 未对接 | — |
-|  | 修改会议投票主题 | [98835](https://developer.work.weixin.qq.com/document/path/98835) | ❌ 未对接 | — |
-|  | 获取会议投票列表 | [98836](https://developer.work.weixin.qq.com/document/path/98836) | ❌ 未对接 | — |
-|  | 获取会议投票主题信息 | [98837](https://developer.work.weixin.qq.com/document/path/98837) | ❌ 未对接 | — |
-|  | 获取会议投票详情 | [98838](https://developer.work.weixin.qq.com/document/path/98838) | ❌ 未对接 | — |
-|  | 删除会议投票 | [98839](https://developer.work.weixin.qq.com/document/path/98839) | ❌ 未对接 | — |
-|  | 发起会议投票 | [98840](https://developer.work.weixin.qq.com/document/path/98840) | ❌ 未对接 | — |
-|  | 结束会议投票 | [98841](https://developer.work.weixin.qq.com/document/path/98841) | ❌ 未对接 | — |
+| 会中控制管理 | 管理会中设置 | [98175](https://developer.work.weixin.qq.com/document/path/98175) | ✅ 已对接 | MeetingAdvancedClient.setRealControl（meeting/realcontrol/set）
+|  | 管理联席主持人 | [98180](https://developer.work.weixin.qq.com/document/path/98180) | ✅ 已对接 | MeetingAdvancedClient.setCoHost（meeting/realcontrol/set_cohost）
+|  | 静音成员 | [98184](https://developer.work.weixin.qq.com/document/path/98184) | ✅ 已对接 | MeetingAdvancedClient.muteUser（meeting/realcontrol/mute_user）
+|  | 关闭或开启成员视频 | [98189](https://developer.work.weixin.qq.com/document/path/98189) | ✅ 已对接 | MeetingAdvancedClient.switchUserVideo（meeting/realcontrol/switch_user_video）
+|  | 关闭成员屏幕共享 | [98185](https://developer.work.weixin.qq.com/document/path/98185) | ✅ 已对接 | MeetingAdvancedClient.closeScreenShare（meeting/realcontrol/close_screen_share）
+|  | 修改成员在会中显示的昵称 | [98188](https://developer.work.weixin.qq.com/document/path/98188) | ✅ 已对接 | MeetingAdvancedClient.setNicknames（meeting/realcontrol/set_nicknames）
+|  | 管理等候室成员 | [98186](https://developer.work.weixin.qq.com/document/path/98186) | ✅ 已对接 | MeetingAdvancedClient.manageWaitingRoomUsers（meeting/realcontrol/manage_waiting_room_users）
+|  | 移出成员 | [98181](https://developer.work.weixin.qq.com/document/path/98181) | ✅ 已对接 | MeetingAdvancedClient.kickoutUsers（meeting/realcontrol/kickout_users）
+|  | 结束会议 | [98187](https://developer.work.weixin.qq.com/document/path/98187) | ✅ 已对接 | MeetingAdvancedClient.dismissMeeting（meeting/realcontrol/dismiss）
+|  | 创建会议投票主题 | [98834](https://developer.work.weixin.qq.com/document/path/98834) | ✅ 已对接 | MeetingAdvancedClient.createPoll（meeting/poll/create_theme）
+|  | 修改会议投票主题 | [98835](https://developer.work.weixin.qq.com/document/path/98835) | ✅ 已对接 | MeetingAdvancedClient.updatePoll（meeting/poll/update_theme）
+|  | 获取会议投票列表 | [98836](https://developer.work.weixin.qq.com/document/path/98836) | ✅ 已对接 | MeetingAdvancedClient.getPollList（meeting/poll/get_poll_list）
+|  | 获取会议投票主题信息 | [98837](https://developer.work.weixin.qq.com/document/path/98837) | ✅ 已对接 | MeetingAdvancedClient.getPollThemeInfo（meeting/poll/get_theme_info）
+|  | 获取会议投票详情 | [98838](https://developer.work.weixin.qq.com/document/path/98838) | ✅ 已对接 | MeetingAdvancedClient.getPollDetail（meeting/poll/get_poll_detail）
+|  | 删除会议投票 | [98839](https://developer.work.weixin.qq.com/document/path/98839) | ✅ 已对接 | MeetingAdvancedClient.deletePoll（meeting/poll/delete）
+|  | 发起会议投票 | [98840](https://developer.work.weixin.qq.com/document/path/98840) | ✅ 已对接 | MeetingAdvancedClient.startPoll（meeting/poll/start）
+|  | 结束会议投票 | [98841](https://developer.work.weixin.qq.com/document/path/98841) | ✅ 已对接 | MeetingAdvancedClient.finishPoll（meeting/poll/finish）
 | 网络研讨会 (Webinar) 管理 | 创建网络研讨会 | [98842](https://developer.work.weixin.qq.com/document/path/98842) | ❌ 未对接 | — |
 |  | 修改网络研讨会 | [98843](https://developer.work.weixin.qq.com/document/path/98843) | ❌ 未对接 | — |
 |  | 取消网络研讨会 | [98870](https://developer.work.weixin.qq.com/document/path/98870) | ❌ 未对接 | — |

@@ -2,6 +2,8 @@ package com.github.shuaidd.service;
 
 import com.github.shuaidd.client.MeetingAdvancedClient;
 import com.github.shuaidd.client.MeetingClient;
+import com.github.shuaidd.dto.meeting.MeetingPollQuestion;
+import com.github.shuaidd.dto.meeting.MeetingRealControlUser;
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.meeting.*;
@@ -311,6 +313,273 @@ public class MeetingService extends AbstractBaseService {
         return meetingAdvancedClient.getStartList(request, applicationName);
     }
 
+
+    /**
+     * 设置进行中会议的会控参数
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse setRealControl(MeetingRealControlSettingRequest request, String applicationName) {
+        checkMeetingRequest(request);
+        checkMeetingId(request.getMeetingId());
+        return meetingAdvancedClient.setRealControl(request, applicationName);
+    }
+
+    /**
+     * 设置或撤销联席主持人
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse setCoHost(MeetingCoHostRequest request, String applicationName) {
+        checkRealControlRequest(request);
+        if (request.getAction() == null) {
+            throw new ParamCheckException("联席主持人操作类型不能为空");
+        }
+        return meetingAdvancedClient.setCoHost(request, applicationName);
+    }
+
+    /**
+     * 设置或解除成员静音
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse muteUser(MeetingMuteUserRequest request, String applicationName) {
+        checkRealControlRequest(request);
+        if (request.getOption() == null) {
+            throw new ParamCheckException("成员静音操作类型不能为空");
+        }
+        return meetingAdvancedClient.muteUser(request, applicationName);
+    }
+
+    /**
+     * 开启或关闭成员视频
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse switchUserVideo(MeetingUserVideoRequest request, String applicationName) {
+        checkRealControlRequest(request);
+        return meetingAdvancedClient.switchUserVideo(request, applicationName);
+    }
+
+    /**
+     * 停止成员屏幕共享
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse closeScreenShare(MeetingCloseScreenShareRequest request, String applicationName) {
+        checkRealControlRequest(request);
+        return meetingAdvancedClient.closeScreenShare(request, applicationName);
+    }
+
+    /**
+     * 修改成员会中昵称
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse setNicknames(MeetingNicknameRequest request, String applicationName) {
+        checkMeetingRequest(request);
+        checkMeetingId(request.getMeetingId());
+        if (CollectionUtils.isEmpty(request.getOperatedUsers())) {
+            throw new ParamCheckException("待修改昵称的成员列表不能为空");
+        }
+        for (MeetingRealControlUser user : request.getOperatedUsers()) {
+            checkRealControlUser(user);
+            if (StringUtils.isNotEmpty(user.getNickname()) && StringUtils.length(user.getNickname()) > 20) {
+                throw new ParamCheckException("成员会中昵称不能超过20个字符");
+            }
+        }
+        return meetingAdvancedClient.setNicknames(request, applicationName);
+    }
+
+    /**
+     * 管理等候室成员
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse manageWaitingRoomUsers(MeetingWaitingRoomManageRequest request, String applicationName) {
+        checkMeetingRequest(request);
+        checkMeetingId(request.getMeetingId());
+        if (request.getOperateType() == null || request.getOperateType() < 1 || request.getOperateType() > 3) {
+            throw new ParamCheckException("等候室成员操作类型必须为1、2或3");
+        }
+        if (request.getOperateType() != 3 && request.getAllowRejoin() != null) {
+            throw new ParamCheckException("仅移出等候室时允许设置是否再次加入");
+        }
+        checkRealControlUsers(request.getOperatedUsers(), "等候室被操作成员列表");
+        return meetingAdvancedClient.manageWaitingRoomUsers(request, applicationName);
+    }
+
+    /**
+     * 将成员移出会议
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse kickoutUsers(MeetingKickoutUsersRequest request, String applicationName) {
+        checkMeetingRequest(request);
+        checkMeetingId(request.getMeetingId());
+        if (request.getAllowRejoin() == null) {
+            throw new ParamCheckException("是否允许再次入会不能为空");
+        }
+        checkRealControlUsers(request.getOperatedUsers(), "待移出的会议成员列表");
+        return meetingAdvancedClient.kickoutUsers(request, applicationName);
+    }
+
+    /**
+     * 结束进行中的会议
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse dismissMeeting(MeetingDismissRequest request, String applicationName) {
+        checkMeetingRequest(request);
+        checkMeetingId(request.getMeetingId());
+        if (request.getForceDismiss() != null && request.getForceDismiss() != 0 && request.getForceDismiss() != 1) {
+            throw new ParamCheckException("是否强制结束会议只能为0或1");
+        }
+        if (request.getRetrieveCode() != null && request.getRetrieveCode() != 0 && request.getRetrieveCode() != 1) {
+            throw new ParamCheckException("是否回收会议号只能为0或1");
+        }
+        return meetingAdvancedClient.dismissMeeting(request, applicationName);
+    }
+
+    /**
+     * 创建会议投票
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 投票主题 ID
+     */
+    public MeetingPollCreateResponse createPoll(MeetingPollCreateRequest request, String applicationName) {
+        checkPollRequest(request);
+        checkPollTopic(request.getPollTopic(), request.getPollDesc());
+        checkPollQuestions(request.getPollQuestions(), true);
+        return meetingAdvancedClient.createPoll(request, applicationName);
+    }
+
+    /**
+     * 全量更新会议投票主题
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse updatePoll(MeetingPollUpdateRequest request, String applicationName) {
+        checkPollRequest(request);
+        if (StringUtils.isEmpty(request.getPollThemeId())) {
+            throw new ParamCheckException("投票主题ID不能为空");
+        }
+        checkPollTopic(request.getPollTopic(), request.getPollDesc());
+        checkPollQuestions(request.getPollQuestions(), false);
+        return meetingAdvancedClient.updatePoll(request, applicationName);
+    }
+
+    /**
+     * 获取会议投票列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 投票列表
+     */
+    public MeetingPollListResponse getPollList(MeetingPollListRequest request, String applicationName) {
+        checkPollRequest(request);
+        return meetingAdvancedClient.getPollList(request, applicationName);
+    }
+
+    /**
+     * 获取投票主题详情
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 投票主题详情
+     */
+    public MeetingPollThemeInfoResponse getPollThemeInfo(MeetingPollThemeInfoRequest request, String applicationName) {
+        checkPollRequest(request);
+        if (StringUtils.isEmpty(request.getPollThemeId())) {
+            throw new ParamCheckException("投票主题ID不能为空");
+        }
+        return meetingAdvancedClient.getPollThemeInfo(request, applicationName);
+    }
+
+    /**
+     * 获取投票详情和结果
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 投票详情
+     */
+    public MeetingPollDetailResponse getPollDetail(MeetingPollDetailRequest request, String applicationName) {
+        checkPollRequest(request);
+        if (StringUtils.isEmpty(request.getPollId())) {
+            throw new ParamCheckException("投票ID不能为空");
+        }
+        return meetingAdvancedClient.getPollDetail(request, applicationName);
+    }
+
+    /**
+     * 删除投票或投票主题
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse deletePoll(MeetingPollDeleteRequest request, String applicationName) {
+        checkPollRequest(request);
+        if (StringUtils.isEmpty(request.getPollThemeId()) && StringUtils.isEmpty(request.getPollId())) {
+            throw new ParamCheckException("投票主题ID和投票ID不能同时为空");
+        }
+        return meetingAdvancedClient.deletePoll(request, applicationName);
+    }
+
+    /**
+     * 发起已有投票主题
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 投票 ID
+     */
+    public MeetingPollStartResponse startPoll(MeetingPollStartRequest request, String applicationName) {
+        checkPollRequest(request);
+        if (StringUtils.isEmpty(request.getPollThemeId())) {
+            throw new ParamCheckException("投票主题ID不能为空");
+        }
+        return meetingAdvancedClient.startPoll(request, applicationName);
+    }
+
+    /**
+     * 结束指定投票
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse finishPoll(MeetingPollFinishRequest request, String applicationName) {
+        checkPollRequest(request);
+        if (StringUtils.isEmpty(request.getPollThemeId())) {
+            throw new ParamCheckException("投票主题ID不能为空");
+        }
+        if (StringUtils.isEmpty(request.getPollId())) {
+            throw new ParamCheckException("投票ID不能为空");
+        }
+        return meetingAdvancedClient.finishPoll(request, applicationName);
+    }
+
     private void checkMeetingRequest(Object request) {
         if (request == null) {
             throw new ParamCheckException("请求参数不能为空");
@@ -384,5 +653,126 @@ public class MeetingService extends AbstractBaseService {
     private void checkMeetingRequest(MeetingEnrollDeleteRequest request) {
         checkMeetingRequest((Object) request);
         checkMeetingId(request.getMeetingId());
+    }
+
+
+    private void checkRealControlRequest(MeetingCoHostRequest request) {
+        checkRealControlBase(request.getMeetingId(), request.getOperatedUser());
+    }
+
+    private void checkRealControlRequest(MeetingMuteUserRequest request) {
+        checkRealControlBase(request.getMeetingId(), request.getOperatedUser());
+    }
+
+    private void checkRealControlRequest(MeetingUserVideoRequest request) {
+        checkRealControlBase(request.getMeetingId(), request.getOperatedUser());
+    }
+
+    private void checkRealControlRequest(MeetingCloseScreenShareRequest request) {
+        checkRealControlBase(request.getMeetingId(), request.getOperatedUser());
+    }
+
+    private void checkRealControlBase(String meetingId, MeetingRealControlUser user) {
+        checkMeetingId(meetingId);
+        checkRealControlUser(user);
+    }
+
+    private void checkRealControlUsers(java.util.List<MeetingRealControlUser> users, String fieldName) {
+        if (CollectionUtils.isEmpty(users)) {
+            throw new ParamCheckException(fieldName + "不能为空");
+        }
+        for (MeetingRealControlUser user : users) {
+            checkRealControlUser(user);
+        }
+    }
+
+    private void checkRealControlUser(MeetingRealControlUser user) {
+        if (user == null || StringUtils.isEmpty(user.getTmpOpenid()) || user.getInstanceId() == null) {
+            throw new ParamCheckException("被操作成员的临时ID和终端设备类型不能为空");
+        }
+    }
+
+    private void checkPollRequest(MeetingPollListRequest request) {
+        checkPollOperator(request.getOperatorUserId(), request.getInstanceId(), request.getMeetingId());
+    }
+
+    private void checkPollRequest(MeetingPollThemeInfoRequest request) {
+        checkPollOperator(request.getOperatorUserId(), request.getInstanceId(), request.getMeetingId());
+    }
+
+    private void checkPollRequest(MeetingPollDetailRequest request) {
+        checkPollOperator(request.getOperatorUserId(), request.getInstanceId(), request.getMeetingId());
+    }
+
+    private void checkPollRequest(MeetingPollDeleteRequest request) {
+        checkPollOperator(request.getOperatorUserId(), request.getInstanceId(), request.getMeetingId());
+    }
+
+    private void checkPollRequest(MeetingPollStartRequest request) {
+        checkPollOperator(request.getOperatorUserId(), request.getInstanceId(), request.getMeetingId());
+    }
+
+    private void checkPollRequest(MeetingPollFinishRequest request) {
+        checkPollOperator(request.getOperatorUserId(), request.getInstanceId(), request.getMeetingId());
+    }
+
+    private void checkPollRequest(MeetingPollCreateRequest request) {
+        checkPollOperator(request.getOperatorUserId(), request.getInstanceId(), request.getMeetingId());
+    }
+
+    private void checkPollRequest(MeetingPollUpdateRequest request) {
+        checkPollOperator(request.getOperatorUserId(), request.getInstanceId(), request.getMeetingId());
+    }
+
+    private void checkPollOperator(String operatorUserId, Integer instanceId, String meetingId) {
+        checkMeetingId(meetingId);
+        if (StringUtils.isEmpty(operatorUserId)) {
+            throw new ParamCheckException("投票操作者openid不能为空");
+        }
+        if (instanceId == null) {
+            throw new ParamCheckException("投票操作者终端设备类型不能为空");
+        }
+    }
+
+    private void checkPollTopic(String topic, String desc) {
+        if (StringUtils.isEmpty(topic)) {
+            throw new ParamCheckException("投票主题不能为空");
+        }
+        if (StringUtils.length(topic) > 50) {
+            throw new ParamCheckException("投票主题不能超过50个字符");
+        }
+        if (StringUtils.isNotEmpty(desc) && StringUtils.length(desc) > 100) {
+            throw new ParamCheckException("投票描述不能超过100个字符");
+        }
+    }
+
+    private void checkPollQuestions(java.util.List<MeetingPollQuestion> questions, boolean create) {
+        if (CollectionUtils.isEmpty(questions)) {
+            throw new ParamCheckException("投票问题列表不能为空");
+        }
+        if (questions.size() > 10) {
+            throw new ParamCheckException("每个投票最多包含10个问题");
+        }
+        for (MeetingPollQuestion question : questions) {
+            if (question == null || StringUtils.isEmpty(question.getQuestionDesc())) {
+                throw new ParamCheckException("投票问题描述不能为空");
+            }
+            if (StringUtils.length(question.getQuestionDesc()) > 50) {
+                throw new ParamCheckException("投票问题描述不能超过50个字符");
+            }
+            if (question.getQuestionType() == null || question.getQuestionType() < 0 || question.getQuestionType() > 1) {
+                throw new ParamCheckException("投票问题类型必须为单选或多选");
+            }
+            if (CollectionUtils.isEmpty(question.getPollOption())
+                    || question.getPollOption().size() > 10
+                    || (create && question.getPollOption().size() < 2)) {
+                throw new ParamCheckException("投票问题选项数量不符合要求");
+            }
+            for (String option : question.getPollOption()) {
+                if (StringUtils.isEmpty(option) || StringUtils.length(option) > 36) {
+                    throw new ParamCheckException("投票选项不能为空且不能超过36个字符");
+                }
+            }
+        }
     }
 }
