@@ -4,6 +4,7 @@ import com.github.shuaidd.client.MeetingAdvancedClient;
 import com.github.shuaidd.client.MeetingClient;
 import com.github.shuaidd.dto.meeting.MeetingPollQuestion;
 import com.github.shuaidd.dto.meeting.MeetingRealControlUser;
+import com.github.shuaidd.dto.meeting.MeetingMraDevice;
 import com.github.shuaidd.dto.meeting.RoomsMra;
 import com.github.shuaidd.dto.meeting.MeetingPhoneNumber;
 import com.github.shuaidd.dto.meeting.MeetingWebinarGuest;
@@ -1230,6 +1231,81 @@ public class MeetingService extends AbstractBaseService {
         checkMeetingId(request.getMeetingId());
         checkPhoneNumbers(request.getPhoneNumbers(), 20, "待查询电话号码");
         return meetingAdvancedClient.getPhoneTmpOpenIds(request, applicationName);
+    }
+
+    /**
+     * 获取MRA设备状态
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return MRA设备状态
+     */
+    public MeetingMraStatusResponse getMraStatus(MeetingMraStatusRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        if (StringUtils.isEmpty(request.getTmpOpenid())) {
+            throw new ParamCheckException("被查询MRA成员临时身份ID不能为空");
+        }
+        return meetingAdvancedClient.queryMraStatus(request, applicationName);
+    }
+
+    /**
+     * 设置MRA设备默认布局
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse setMraDefaultLayout(MeetingMraDefaultLayoutRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        checkMraDevice(request.getMra());
+        checkMraEnum(request.getDefaultLayout(), 1, 3, "MRA默认分屏设置");
+        checkMraEnum(request.getDefaultNoVideoUser(), 1, 2, "MRA默认非视频与会者显示方式");
+        return meetingAdvancedClient.setMraDefaultLayout(request, applicationName);
+    }
+
+    /**
+     * 设置MRA设备举手状态
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse setMraRaiseHand(MeetingMraRaiseHandRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        checkMraDevice(request.getMra());
+        if (request.getRaiseHand() == null) {
+            throw new ParamCheckException("MRA举手操作不能为空");
+        }
+        return meetingAdvancedClient.setMraRaiseHand(request, applicationName);
+    }
+
+    /**
+     * 挂断MRA设备呼叫
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse hangupMra(MeetingMraHangupRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingId(request.getMeetingId());
+        checkMraDevice(request.getMra());
+        return meetingAdvancedClient.hangupMra(request, applicationName);
+    }
+
+    private void checkMraDevice(MeetingMraDevice mra) {
+        if (mra == null || StringUtils.isEmpty(mra.getTmpOpenid())) {
+            throw new ParamCheckException("MRA设备的会中临时ID不能为空");
+        }
+    }
+
+    private void checkMraEnum(Integer value, int minValue, int maxValue, String label) {
+        if (value == null || value < minValue || value > maxValue) {
+            throw new ParamCheckException(label + "不符合要求");
+        }
     }
 
     private void checkWebinarSetting(MeetingWebinarSettingRequest request) {

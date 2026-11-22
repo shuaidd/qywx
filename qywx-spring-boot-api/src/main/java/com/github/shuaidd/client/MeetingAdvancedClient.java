@@ -666,4 +666,44 @@ public interface MeetingAdvancedClient extends CommonClient {
      */
     @PostMapping(value = "meeting/rooms/get_response_status", headers = HEAD)
     MeetingRoomsResponseStatusResponse getRoomsCallResponseStatus(MeetingRoomsResponseStatusRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取MRA设备状态
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return MRA设备状态
+     */
+    @PostMapping(value = "meeting/mra/query_status", headers = HEAD)
+    MeetingMraStatusResponse queryMraStatus(MeetingMraStatusRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 设置MRA设备默认布局
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/mra/set_default_layout", headers = HEAD)
+    BaseResponse setMraDefaultLayout(MeetingMraDefaultLayoutRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 设置MRA设备举手状态
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/mra/set_raise_hand", headers = HEAD)
+    BaseResponse setMraRaiseHand(MeetingMraRaiseHandRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 挂断MRA设备呼叫
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/mra/hangup", headers = HEAD)
+    BaseResponse hangupMra(MeetingMraHangupRequest request, @RequestParam(HEAD_KEY) String app);
 }
