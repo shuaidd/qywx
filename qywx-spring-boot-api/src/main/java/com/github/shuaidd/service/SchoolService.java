@@ -14,6 +14,16 @@ import com.github.shuaidd.resquest.school.SchoolDepartmentAdminItem;
 import com.github.shuaidd.resquest.school.SchoolDepartmentUpdateAdminItem;
 import com.github.shuaidd.resquest.school.SetArchSyncModeRequest;
 import com.github.shuaidd.resquest.school.UpdateSchoolDepartmentRequest;
+import com.github.shuaidd.resquest.school.HealthReportStatRequest;
+import com.github.shuaidd.resquest.school.HealthReportJobIdsRequest;
+import com.github.shuaidd.resquest.school.HealthReportJobInfoRequest;
+import com.github.shuaidd.resquest.school.HealthReportAnswerRequest;
+import com.github.shuaidd.resquest.school.LivingListRequest;
+import com.github.shuaidd.resquest.school.LivingStatV1Request;
+import com.github.shuaidd.resquest.school.LivingStatV2Request;
+import com.github.shuaidd.resquest.school.DeleteLivingReplayRequest;
+import com.github.shuaidd.resquest.school.PaymentResultRequest;
+import com.github.shuaidd.resquest.school.TradeQueryRequest;
 import com.github.shuaidd.resquest.school.StudentItem;
 import com.github.shuaidd.resquest.school.UpdateParentRequest;
 import com.github.shuaidd.resquest.school.UpdateStudentRequest;
@@ -27,6 +37,18 @@ import com.github.shuaidd.response.school.ChatCreateModeResponse;
 import com.github.shuaidd.response.school.CreateSchoolDepartmentResponse;
 import com.github.shuaidd.response.school.ParentListResponse;
 import com.github.shuaidd.response.school.SchoolDepartmentListResponse;
+import com.github.shuaidd.response.school.HealthReportStatResponse;
+import com.github.shuaidd.response.school.HealthReportJobIdsResponse;
+import com.github.shuaidd.response.school.HealthReportJobInfoResponse;
+import com.github.shuaidd.response.school.HealthReportAnswerResponse;
+import com.github.shuaidd.response.school.LivingListResponse;
+import com.github.shuaidd.response.school.LivingInfoResponse;
+import com.github.shuaidd.response.school.LivingWatchStatResponse;
+import com.github.shuaidd.response.school.LivingUnwatchStatResponse;
+import com.github.shuaidd.response.school.LivingWatchStatV2Response;
+import com.github.shuaidd.response.school.LivingUnwatchStatV2Response;
+import com.github.shuaidd.response.school.PaymentResultResponse;
+import com.github.shuaidd.response.school.TradeResponse;
 import com.github.shuaidd.response.school.SchoolDepartment;
 import com.github.shuaidd.response.school.SchoolUserDetailResponse;
 import com.github.shuaidd.response.school.StudentListResponse;
@@ -495,6 +517,268 @@ public class SchoolService extends AbstractBaseService {
         grades.put(131, "自定义学段十一年级");
         grades.put(132, "自定义学段十二年级");
         return Collections.unmodifiableMap(grades);
+    }
+
+    /**
+     * 获取健康上报使用统计
+     *
+     * @param date            统计日期，格式YYYY-MM-DD，最长支持获取30天前数据
+     * @param applicationName 应用名称
+     * @return 使用统计
+     */
+    public HealthReportStatResponse getHealthReportStat(String date, String applicationName) {
+        checkApplication(applicationName);
+        checkDate(date);
+        HealthReportStatRequest request = new HealthReportStatRequest();
+        request.setDate(date);
+        return schoolClient.getHealthReportStat(request, applicationName);
+    }
+
+    /**
+     * 获取健康上报任务id列表
+     *
+     * @param offset          分页偏移量，可为空默认0
+     * @param limit           分页数据量，可为空默认100，取值范围1~100
+     * @param applicationName 应用名称
+     * @return 任务id列表
+     */
+    public HealthReportJobIdsResponse getReportJobIds(Integer offset, Integer limit, String applicationName) {
+        checkApplication(applicationName);
+        checkOffset(offset);
+        checkLimit(limit);
+        HealthReportJobIdsRequest request = new HealthReportJobIdsRequest();
+        request.setOffset(offset);
+        request.setLimit(limit);
+        return schoolClient.getReportJobIds(request, applicationName);
+    }
+
+    /**
+     * 获取指定的健康上报任务详情
+     *
+     * @param jobid           任务id
+     * @param date            任务日期，格式YYYY-MM-DD，仅支持获取最近14天数据
+     * @param applicationName 应用名称
+     * @return 任务详情
+     */
+    public HealthReportJobInfoResponse getReportJobInfo(String jobid, String date, String applicationName) {
+        checkApplication(applicationName);
+        checkRequiredText(jobid, "jobid");
+        checkDate(date);
+        HealthReportJobInfoRequest request = new HealthReportJobInfoRequest();
+        request.setJobid(jobid);
+        request.setDate(date);
+        return schoolClient.getReportJobInfo(request, applicationName);
+    }
+
+    /**
+     * 获取指定的健康上报任务填写答案
+     *
+     * @param jobid           任务id
+     * @param date            任务日期，格式YYYY-MM-DD，仅支持获取最近14天数据
+     * @param offset          数据偏移量，可为空默认0
+     * @param limit           拉取数据量，可为空默认100，最大值100
+     * @param applicationName 应用名称
+     * @return 填写答案列表
+     */
+    public HealthReportAnswerResponse getReportAnswer(String jobid, String date, Integer offset, Integer limit, String applicationName) {
+        checkApplication(applicationName);
+        checkRequiredText(jobid, "jobid");
+        checkDate(date);
+        checkOffset(offset);
+        checkLimit(limit);
+        HealthReportAnswerRequest request = new HealthReportAnswerRequest();
+        request.setJobid(jobid);
+        request.setDate(date);
+        request.setOffset(offset);
+        request.setLimit(limit);
+        return schoolClient.getReportAnswer(request, applicationName);
+    }
+
+    /**
+     * 获取指定老师的所有直播id
+     *
+     * @param userid          企业成员的userid
+     * @param cursor          上一次调用返回的next_cursor，可为空
+     * @param limit           每次拉取的数据量，默认值和最大值都为100
+     * @param applicationName 应用名称
+     * @return 直播id列表
+     */
+    public LivingListResponse getUserAllLivingId(String userid, String cursor, Integer limit, String applicationName) {
+        checkApplication(applicationName);
+        checkUserId(userid, "userid");
+        if (Objects.isNull(limit)) {
+            limit = 100;
+        } else if (limit < 1 || limit > 100) {
+            throw new ParamCheckException("limit 取值范围必须为1~100，请检查！！！");
+        }
+        LivingListRequest request = new LivingListRequest();
+        request.setUserid(userid);
+        if (StringUtils.isNotEmpty(cursor)) {
+            request.setCursor(cursor);
+        }
+        request.setLimit(limit);
+        return schoolClient.getUserAllLivingId(request, applicationName);
+    }
+
+    /**
+     * 获取上课直播详情
+     *
+     * @param livingid        直播id
+     * @param applicationName 应用名称
+     * @return 直播详情
+     */
+    public LivingInfoResponse getLivingInfo(String livingid, String applicationName) {
+        checkApplication(applicationName);
+        checkRequiredText(livingid, "livingid");
+        return schoolClient.getLivingInfo(livingid, applicationName);
+    }
+
+    /**
+     * 获取所有观看直播的人员统计
+     *
+     * @param livingid        直播id
+     * @param nextKey         上一次调用返回的next_key，初次调用可传空
+     * @param applicationName 应用名称
+     * @return 观看统计
+     */
+    public LivingWatchStatResponse getWatchStat(String livingid, String nextKey, String applicationName) {
+        checkApplication(applicationName);
+        checkRequiredText(livingid, "livingid");
+        LivingStatV1Request request = new LivingStatV1Request();
+        request.setLivingid(livingid);
+        if (StringUtils.isNotEmpty(nextKey)) {
+            request.setNextKey(nextKey);
+        }
+        return schoolClient.getWatchStat(request, applicationName);
+    }
+
+    /**
+     * 获取未观看直播的学生统计
+     *
+     * @param livingid        直播id
+     * @param nextKey         上一次调用返回的next_key，初次调用可传空
+     * @param applicationName 应用名称
+     * @return 未观看统计
+     */
+    public LivingUnwatchStatResponse getUnwatchStat(String livingid, String nextKey, String applicationName) {
+        checkApplication(applicationName);
+        checkRequiredText(livingid, "livingid");
+        LivingStatV1Request request = new LivingStatV1Request();
+        request.setLivingid(livingid);
+        if (StringUtils.isNotEmpty(nextKey)) {
+            request.setNextKey(nextKey);
+        }
+        return schoolClient.getUnwatchStat(request, applicationName);
+    }
+
+    /**
+     * 删除直播回放数据
+     *
+     * @param livingid        直播id
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse deleteReplayData(String livingid, String applicationName) {
+        checkApplication(applicationName);
+        checkRequiredText(livingid, "livingid");
+        DeleteLivingReplayRequest request = new DeleteLivingReplayRequest();
+        request.setLivingid(livingid);
+        return schoolClient.deleteReplayData(request, applicationName);
+    }
+
+    /**
+     * 获取所有观看直播的人员统计（v2分页协议）
+     *
+     * @param livingid        直播id
+     * @param nextCursor      上一次调用返回的next_cursor，初次调用可传空
+     * @param applicationName 应用名称
+     * @return 观看统计
+     */
+    public LivingWatchStatV2Response getWatchStatV2(String livingid, String nextCursor, String applicationName) {
+        checkApplication(applicationName);
+        checkRequiredText(livingid, "livingid");
+        LivingStatV2Request request = new LivingStatV2Request();
+        request.setLivingid(livingid);
+        if (StringUtils.isNotEmpty(nextCursor)) {
+            request.setNextCursor(nextCursor);
+        }
+        return schoolClient.getWatchStatV2(request, applicationName);
+    }
+
+    /**
+     * 获取未观看直播的学生和家长统计（v2分页协议）
+     *
+     * @param livingid        直播id
+     * @param nextCursor      上一次调用返回的next_cursor，初次调用可传空
+     * @param applicationName 应用名称
+     * @return 未观看统计
+     */
+    public LivingUnwatchStatV2Response getUnwatchStatV2(String livingid, String nextCursor, String applicationName) {
+        checkApplication(applicationName);
+        checkRequiredText(livingid, "livingid");
+        LivingStatV2Request request = new LivingStatV2Request();
+        request.setLivingid(livingid);
+        if (StringUtils.isNotEmpty(nextCursor)) {
+            request.setNextCursor(nextCursor);
+        }
+        return schoolClient.getUnwatchStatV2(request, applicationName);
+    }
+
+    /**
+     * 获取班级收款项目付款结果
+     *
+     * @param paymentId       收款项目id，由发起班级收款接口返回
+     * @param applicationName 应用名称
+     * @return 付款结果
+     */
+    public PaymentResultResponse getPaymentResult(String paymentId, String applicationName) {
+        checkApplication(applicationName);
+        checkRequiredText(paymentId, "payment_id");
+        PaymentResultRequest request = new PaymentResultRequest();
+        request.setPaymentId(paymentId);
+        return schoolClient.getPaymentResult(request, applicationName);
+    }
+
+    /**
+     * 获取班级收款订单详情
+     *
+     * @param paymentId       收款项目id，由发起班级收款接口返回
+     * @param tradeNo         订单号，由获取学生付款结果接口返回
+     * @param applicationName 应用名称
+     * @return 订单详情
+     */
+    public TradeResponse getTrade(String paymentId, String tradeNo, String applicationName) {
+        checkApplication(applicationName);
+        checkRequiredText(paymentId, "payment_id");
+        checkRequiredText(tradeNo, "trade_no");
+        TradeQueryRequest request = new TradeQueryRequest();
+        request.setPaymentId(paymentId);
+        request.setTradeNo(tradeNo);
+        return schoolClient.getTrade(request, applicationName);
+    }
+
+    private void checkDate(String date) {
+        if (StringUtils.isEmpty(date) || !date.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            throw new ParamCheckException("date 不能为空且格式必须为YYYY-MM-DD，请检查！！！");
+        }
+    }
+
+    private void checkOffset(Integer offset) {
+        if (Objects.nonNull(offset) && offset < 0) {
+            throw new ParamCheckException("offset 不能小于0，请检查！！！");
+        }
+    }
+
+    private void checkLimit(Integer limit) {
+        if (Objects.nonNull(limit) && (limit < 1 || limit > 100)) {
+            throw new ParamCheckException("limit 取值范围必须为1~100，请检查！！！");
+        }
+    }
+
+    private void checkRequiredText(String value, String fieldName) {
+        if (StringUtils.isEmpty(value)) {
+            throw new ParamCheckException(fieldName + " 不能为空，请检查！！！");
+        }
     }
 
     private void checkCreateSchoolDepartmentRequest(CreateSchoolDepartmentRequest request) {

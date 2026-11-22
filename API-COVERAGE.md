@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 513 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 526 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 435 |
+| ✅ 已对接 | 445 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 123 |
+| ❌ 未对接 | 113 |
 | ⛔ 范围外 | 178 |
 | 合计 | 738 |
 
@@ -510,23 +510,23 @@
 
 ## 家校应用
 
-状态：✅ 0；⚠️ 0；❌ 13；⛔ 0
+状态：✅ 13；⚠️ 0；❌ 0；⛔ 0
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
-| 健康上报 | 获取健康上报使用统计 | [93676](https://developer.work.weixin.qq.com/document/path/93676) | ❌ 未对接 | — |
-|  | 获取健康上报任务ID列表 | [93677](https://developer.work.weixin.qq.com/document/path/93677) | ❌ 未对接 | — |
-|  | 获取健康上报任务详情 | [93678](https://developer.work.weixin.qq.com/document/path/93678) | ❌ 未对接 | — |
-|  | 获取用户填写答案 | [93679](https://developer.work.weixin.qq.com/document/path/93679) | ❌ 未对接 | — |
-| 上课直播 | 获取老师直播ID列表 | [93739](https://developer.work.weixin.qq.com/document/path/93739) | ❌ 未对接 | — |
-|  | 获取直播详情 | [93740](https://developer.work.weixin.qq.com/document/path/93740) | ❌ 未对接 | — |
-|  | 获取观看直播统计 | [93741](https://developer.work.weixin.qq.com/document/path/93741) | ❌ 未对接 | — |
-|  | 获取未观看直播统计 | [93742](https://developer.work.weixin.qq.com/document/path/93742) | ❌ 未对接 | — |
-|  | 删除直播回放 | [93743](https://developer.work.weixin.qq.com/document/path/93743) | ❌ 未对接 | — |
-|  | 获取观看直播统计V2 | [95793](https://developer.work.weixin.qq.com/document/path/95793) | ❌ 未对接 | — |
-|  | 获取未观看直播统计V2 | [95795](https://developer.work.weixin.qq.com/document/path/95795) | ❌ 未对接 | — |
-| 班级收款 | 获取学生付款结果 | [94470](https://developer.work.weixin.qq.com/document/path/94470) | ❌ 未对接 | — |
-|  | 获取订单详情 | [94471](https://developer.work.weixin.qq.com/document/path/94471) | ❌ 未对接 | — |
+| 健康上报 | 获取健康上报使用统计 | [93676](https://developer.work.weixin.qq.com/document/path/93676) | ✅ 已对接 | `SchoolClient.getHealthReportStat` / `SchoolService.getHealthReportStat` |
+|  | 获取健康上报任务ID列表 | [93677](https://developer.work.weixin.qq.com/document/path/93677) | ✅ 已对接 | `SchoolClient.getReportJobIds` / `SchoolService.getReportJobIds` |
+|  | 获取健康上报任务详情 | [93678](https://developer.work.weixin.qq.com/document/path/93678) | ✅ 已对接 | `SchoolClient.getReportJobInfo` / `SchoolService.getReportJobInfo` |
+|  | 获取用户填写答案 | [93679](https://developer.work.weixin.qq.com/document/path/93679) | ✅ 已对接 | `SchoolClient.getReportAnswer` / `SchoolService.getReportAnswer` |
+| 上课直播 | 获取老师直播ID列表 | [93739](https://developer.work.weixin.qq.com/document/path/93739) | ✅ 已对接 | `SchoolClient.getUserAllLivingId` / `SchoolService.getUserAllLivingId` |
+|  | 获取直播详情 | [93740](https://developer.work.weixin.qq.com/document/path/93740) | ✅ 已对接 | `SchoolClient.getLivingInfo` / `SchoolService.getLivingInfo` |
+|  | 获取观看直播统计 | [93741](https://developer.work.weixin.qq.com/document/path/93741) | ✅ 已对接 | `SchoolClient.getWatchStat` / `SchoolService.getWatchStat` |
+|  | 获取未观看直播统计 | [93742](https://developer.work.weixin.qq.com/document/path/93742) | ✅ 已对接 | `SchoolClient.getUnwatchStat` / `SchoolService.getUnwatchStat` |
+|  | 删除直播回放 | [93743](https://developer.work.weixin.qq.com/document/path/93743) | ✅ 已对接 | `SchoolClient.deleteReplayData` / `SchoolService.deleteReplayData` |
+|  | 获取观看直播统计V2 | [95793](https://developer.work.weixin.qq.com/document/path/95793) | ✅ 已对接 | `SchoolClient.getWatchStatV2` / `SchoolService.getWatchStatV2` |
+|  | 获取未观看直播统计V2 | [95795](https://developer.work.weixin.qq.com/document/path/95795) | ✅ 已对接 | `SchoolClient.getUnwatchStatV2` / `SchoolService.getUnwatchStatV2` |
+| 班级收款 | 获取学生付款结果 | [94470](https://developer.work.weixin.qq.com/document/path/94470) | ✅ 已对接 | `SchoolClient.getPaymentResult` / `SchoolService.getPaymentResult` |
+|  | 获取订单详情 | [94471](https://developer.work.weixin.qq.com/document/path/94471) | ✅ 已对接 | `SchoolClient.getTrade` / `SchoolService.getTrade` |
 
 ## 政民沟通
 
