@@ -4,6 +4,7 @@ import com.github.shuaidd.client.MeetingAdvancedClient;
 import com.github.shuaidd.client.MeetingClient;
 import com.github.shuaidd.dto.meeting.MeetingPollQuestion;
 import com.github.shuaidd.dto.meeting.MeetingRealControlUser;
+import com.github.shuaidd.dto.meeting.MeetingRecordSharingConfig;
 import com.github.shuaidd.dto.meeting.MeetingAdvancedLayout;
 import com.github.shuaidd.dto.meeting.MeetingAdvancedLayoutPage;
 import com.github.shuaidd.dto.meeting.MeetingAdvancedLayoutSeat;
@@ -776,6 +777,215 @@ public class MeetingService extends AbstractBaseService {
         checkMeetingId(request.getMeetingId());
         checkRoomsCallTarget(request.getMeetingRoomId(), request.getMraAddress());
         return meetingAdvancedClient.getRoomsCallResponseStatus(request, applicationName);
+    }
+
+
+    /**
+     * 获取云录制记录
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 云录制记录列表
+     */
+    public MeetingRecordListResponse listMeetingRecords(MeetingRecordListRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        int queryKeyCount = 0;
+        queryKeyCount += StringUtils.isNotEmpty(request.getMeetingId()) ? 1 : 0;
+        queryKeyCount += StringUtils.isNotEmpty(request.getMeetingCode()) ? 1 : 0;
+        queryKeyCount += StringUtils.isNotEmpty(request.getUserId()) ? 1 : 0;
+        if (queryKeyCount != 1) {
+            throw new ParamCheckException("会议ID、会议Code和查询成员userid必须且只能选择一项");
+        }
+        checkRecordTimeRange(request.getStartTime(), request.getEndTime(), true);
+        checkRoomsLimit(request.getLimit(), 20, "单次返回录制数量");
+        return meetingAdvancedClient.listMeetingRecords(request, applicationName);
+    }
+
+    /**
+     * 获取云录制访问统计数据
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 云录制访问统计列表
+     */
+    public MeetingRecordStatisticsResponse getMeetingRecordStatistics(MeetingRecordStatisticsRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        if (StringUtils.isEmpty(request.getMeetingRecordId()) || StringUtils.isEmpty(request.getMeetingId())) {
+            throw new ParamCheckException("会议录制ID和会议ID不能为空");
+        }
+        if (request.getStartTime() != null && request.getEndTime() != null) {
+            checkRecordTimeRange(request.getStartTime(), request.getEndTime(), false);
+        }
+        return meetingAdvancedClient.getMeetingRecordStatistics(request, applicationName);
+    }
+
+    /**
+     * 修改会议录制共享配置
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse updateMeetingRecordSharingConfig(MeetingRecordSharingUpdateRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        if (StringUtils.isEmpty(request.getMeetingRecordId()) || StringUtils.isEmpty(request.getMeetingId())) {
+            throw new ParamCheckException("会议录制ID和会议ID不能为空");
+        }
+        checkRecordSharingConfig(request.getSharingConfig());
+        return meetingAdvancedClient.updateMeetingRecordSharingConfig(request, applicationName);
+    }
+
+    /**
+     * 删除会议录制
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse deleteMeetingRecord(MeetingRecordRequest request, String applicationName) {
+        checkMeetingRecordRequest(request);
+        return meetingAdvancedClient.deleteMeetingRecord(request, applicationName);
+    }
+
+    /**
+     * 删除单个录制文件
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse deleteMeetingRecordFile(MeetingRecordFileRequest request, String applicationName) {
+        checkMeetingRecordFileRequest(request);
+        return meetingAdvancedClient.deleteMeetingRecordFile(request, applicationName);
+    }
+
+    /**
+     * 获取单个录制文件详情
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 录制文件详情
+     */
+    public MeetingRecordFileDetailResponse getMeetingRecordFile(MeetingRecordFileRequest request, String applicationName) {
+        checkMeetingRecordFileRequest(request);
+        return meetingAdvancedClient.getMeetingRecordFile(request, applicationName);
+    }
+
+    /**
+     * 获取会议录制文件列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 录制文件列表
+     */
+    public MeetingRecordFileListResponse listMeetingRecordFiles(MeetingRecordRequest request, String applicationName) {
+        checkMeetingRecordRequest(request);
+        return meetingAdvancedClient.listMeetingRecordFiles(request, applicationName);
+    }
+
+    /**
+     * 获取录制转写段落列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 转写段落列表
+     */
+    public MeetingTranscriptParagraphListResponse listMeetingTranscriptParagraphs(MeetingRecordFileRequest request, String applicationName) {
+        checkMeetingRecordFileRequest(request);
+        return meetingAdvancedClient.listMeetingTranscriptParagraphs(request, applicationName);
+    }
+
+    /**
+     * 获取录制转写详情
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 转写详情
+     */
+    public MeetingTranscriptDetailResponse getMeetingTranscriptDetail(MeetingTranscriptDetailRequest request, String applicationName) {
+        checkMeetingRecordFileRequest(request.getRecordFileId(), request.getMeetingId());
+        if (request.getLimit() != null && request.getLimit() <= 0) {
+            throw new ParamCheckException("查询转写段落数必须大于0");
+        }
+        return meetingAdvancedClient.getMeetingTranscriptDetail(request, applicationName);
+    }
+
+    /**
+     * 搜索录制转写内容
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 转写搜索结果
+     */
+    public MeetingTranscriptSearchResponse searchMeetingTranscript(MeetingTranscriptSearchRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkMeetingRecordFileRequest(request.getRecordFileId(), request.getMeetingId());
+        if (StringUtils.isEmpty(request.getText())) {
+            throw new ParamCheckException("搜索文本不能为空");
+        }
+        return meetingAdvancedClient.searchMeetingTranscript(request, applicationName);
+    }
+
+    private void checkRecordTimeRange(Integer startTime, Integer endTime, boolean required) {
+        if (required && (startTime == null || endTime == null)) {
+            throw new ParamCheckException("查询开始和结束时间不能为空");
+        }
+        if (startTime == null || endTime == null) {
+            return;
+        }
+        if (startTime > endTime) {
+            throw new ParamCheckException("查询开始时间不能晚于结束时间");
+        }
+        if (endTime - startTime > 31L * 24 * 60 * 60) {
+            throw new ParamCheckException("查询时间区间不能超过31天");
+        }
+    }
+
+    private void checkRecordSharingConfig(MeetingRecordSharingConfig config) {
+        if (config == null) {
+            return;
+        }
+        boolean sharingDisabled = Boolean.FALSE.equals(config.getEnableSharing());
+        if (sharingDisabled && (config.getSharingAuthType() != null
+                || config.getEnablePassword() != null
+                || config.getPassword() != null
+                || config.getEnableSharingExpire() != null
+                || config.getSharingExpire() != null
+                || config.getAllowDownload() != null)) {
+            throw new ParamCheckException("关闭录制共享时不允许携带其他共享配置");
+        }
+        if (config.getSharingAuthType() != null && (config.getSharingAuthType() < 0 || config.getSharingAuthType() > 5)) {
+            throw new ParamCheckException("录制共享权限类型不符合要求");
+        }
+        if (Boolean.TRUE.equals(config.getEnablePassword()) && StringUtils.isEmpty(config.getPassword())) {
+            throw new ParamCheckException("开启共享密码时必须传入共享密码");
+        }
+        if (Boolean.FALSE.equals(config.getEnablePassword()) && config.getPassword() != null) {
+            throw new ParamCheckException("关闭共享密码时不允许传入共享密码");
+        }
+        if (Boolean.TRUE.equals(config.getEnableSharingExpire()) && config.getSharingExpire() == null) {
+            throw new ParamCheckException("开启共享有效期时必须传入共享有效期");
+        }
+        if (Boolean.FALSE.equals(config.getEnableSharingExpire()) && config.getSharingExpire() != null) {
+            throw new ParamCheckException("关闭共享有效期时不允许传入共享有效期");
+        }
+    }
+
+    private void checkMeetingRecordRequest(MeetingRecordRequest request) {
+        checkMeetingRequest((Object) request);
+        checkMeetingRecordFileRequest(request.getMeetingRecordId(), request.getMeetingId());
+    }
+
+    private void checkMeetingRecordFileRequest(MeetingRecordFileRequest request) {
+        checkMeetingRequest((Object) request);
+        checkMeetingRecordFileRequest(request.getRecordFileId(), request.getMeetingId());
+    }
+
+    private void checkMeetingRecordFileRequest(String recordFileId, String meetingId) {
+        if (StringUtils.isEmpty(recordFileId)) {
+            throw new ParamCheckException("录制文件ID不能为空");
+        }
+        checkMeetingId(meetingId);
     }
 
     private void checkMeetingRequest(Object request) {

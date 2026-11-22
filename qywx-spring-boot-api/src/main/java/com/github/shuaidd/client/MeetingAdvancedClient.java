@@ -856,4 +856,104 @@ public interface MeetingAdvancedClient extends CommonClient {
      */
     @PostMapping(value = "meeting/layout/batch_delete_background", headers = HEAD)
     BaseResponse batchDeleteMeetingBackgrounds(MeetingBackgroundBatchDeleteRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取云录制记录
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 云录制记录列表
+     */
+    @PostMapping(value = "meeting/record/list", headers = HEAD)
+    MeetingRecordListResponse listMeetingRecords(MeetingRecordListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取云录制访问统计数据
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 云录制访问统计列表
+     */
+    @PostMapping(value = "meeting/record/get_statistics", headers = HEAD)
+    MeetingRecordStatisticsResponse getMeetingRecordStatistics(MeetingRecordStatisticsRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 修改会议录制共享配置
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/record/update_sharing_config", headers = HEAD)
+    BaseResponse updateMeetingRecordSharingConfig(MeetingRecordSharingUpdateRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除会议录制
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/record/delete", headers = HEAD)
+    BaseResponse deleteMeetingRecord(MeetingRecordRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除单个录制文件
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "meeting/record/delete_file", headers = HEAD)
+    BaseResponse deleteMeetingRecordFile(MeetingRecordFileRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取单个录制文件详情
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 录制文件详情
+     */
+    @PostMapping(value = "meeting/record/get_file", headers = HEAD)
+    MeetingRecordFileDetailResponse getMeetingRecordFile(MeetingRecordFileRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取会议录制文件列表
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 录制文件列表
+     */
+    @PostMapping(value = "meeting/record/get_file_list", headers = HEAD)
+    MeetingRecordFileListResponse listMeetingRecordFiles(MeetingRecordRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取录制转写段落列表
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 转写段落列表
+     */
+    @PostMapping(value = "meeting/record/transcript/get_paragraph_list", headers = HEAD)
+    MeetingTranscriptParagraphListResponse listMeetingTranscriptParagraphs(MeetingRecordFileRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取录制转写详情
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 转写详情
+     */
+    @PostMapping(value = "meeting/record/transcript/get_detail", headers = HEAD)
+    MeetingTranscriptDetailResponse getMeetingTranscriptDetail(MeetingTranscriptDetailRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 搜索录制转写内容
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 转写搜索结果
+     */
+    @PostMapping(value = "meeting/record/transcript/search", headers = HEAD)
+    MeetingTranscriptSearchResponse searchMeetingTranscript(MeetingTranscriptSearchRequest request, @RequestParam(HEAD_KEY) String app);
 }

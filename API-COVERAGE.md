@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 470 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 480 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 393 |
+| ✅ 已对接 | 403 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 196 |
+| ❌ 未对接 | 186 |
 | ⛔ 范围外 | 147 |
 | 合计 | 738 |
 
@@ -713,7 +713,7 @@
 
 ## 会议
 
-状态：✅ 95；⚠️ 0；❌ 44；⛔ 1
+状态：✅ 105；⚠️ 0；❌ 35；⛔ 1
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -813,16 +813,16 @@
 |  | 获取会议背景列表 | [98856](https://developer.work.weixin.qq.com/document/path/98856) | ✅ 已对接 | MeetingAdvancedClient.listMeetingBackgrounds（meeting/layout/list_background） |
 |  | 删除会议背景 | [98853](https://developer.work.weixin.qq.com/document/path/98853) | ✅ 已对接 | MeetingAdvancedClient.deleteMeetingBackground（meeting/layout/delete_background） |
 |  | 批量删除会议背景 | [98854](https://developer.work.weixin.qq.com/document/path/98854) | ✅ 已对接 | MeetingAdvancedClient.batchDeleteMeetingBackgrounds（meeting/layout/batch_delete_background） |
-| 录制管理 | 获取会议录制列表 | [98192](https://developer.work.weixin.qq.com/document/path/98192) | ❌ 未对接 | — |
-|  | 获取录制文件访问统计 | [98209](https://developer.work.weixin.qq.com/document/path/98209) | ❌ 未对接 | — |
-|  | 修改会议录制共享设置 | [98208](https://developer.work.weixin.qq.com/document/path/98208) | ❌ 未对接 | — |
-|  | 删除会议录制 | [98206](https://developer.work.weixin.qq.com/document/path/98206) | ❌ 未对接 | — |
-|  | 删除单个录制文件 | [98207](https://developer.work.weixin.qq.com/document/path/98207) | ❌ 未对接 | — |
-|  | 获取单个录制文件详情 | [98205](https://developer.work.weixin.qq.com/document/path/98205) | ❌ 未对接 | — |
-|  | 获取会议录制地址 | [98196](https://developer.work.weixin.qq.com/document/path/98196) | ❌ 未对接 | — |
-|  | 获取录制转写段落信息 | [98212](https://developer.work.weixin.qq.com/document/path/98212) | ❌ 未对接 | — |
-|  | 获取录制转写详情 | [98211](https://developer.work.weixin.qq.com/document/path/98211) | ❌ 未对接 | — |
-|  | 获取录制转写搜索结果 | [98213](https://developer.work.weixin.qq.com/document/path/98213) | ❌ 未对接 | — |
+| 录制管理 | 获取会议录制列表 | [98192](https://developer.work.weixin.qq.com/document/path/98192) | ✅ 已对接 | MeetingAdvancedClient.listMeetingRecords（meeting/record/list） |
+|  | 获取录制文件访问统计 | [98209](https://developer.work.weixin.qq.com/document/path/98209) | ✅ 已对接 | MeetingAdvancedClient.getMeetingRecordStatistics（meeting/record/get_statistics） |
+|  | 修改会议录制共享设置 | [98208](https://developer.work.weixin.qq.com/document/path/98208) | ✅ 已对接 | MeetingAdvancedClient.updateMeetingRecordSharingConfig（meeting/record/update_sharing_config） |
+|  | 删除会议录制 | [98206](https://developer.work.weixin.qq.com/document/path/98206) | ✅ 已对接 | MeetingAdvancedClient.deleteMeetingRecord（meeting/record/delete） |
+|  | 删除单个录制文件 | [98207](https://developer.work.weixin.qq.com/document/path/98207) | ✅ 已对接 | MeetingAdvancedClient.deleteMeetingRecordFile（meeting/record/delete_file） |
+|  | 获取单个录制文件详情 | [98205](https://developer.work.weixin.qq.com/document/path/98205) | ✅ 已对接 | MeetingAdvancedClient.getMeetingRecordFile（meeting/record/get_file） |
+|  | 获取会议录制地址 | [98196](https://developer.work.weixin.qq.com/document/path/98196) | ✅ 已对接 | MeetingAdvancedClient.listMeetingRecordFiles（meeting/record/get_file_list） |
+|  | 获取录制转写段落信息 | [98212](https://developer.work.weixin.qq.com/document/path/98212) | ✅ 已对接 | MeetingAdvancedClient.listMeetingTranscriptParagraphs（meeting/record/transcript/get_paragraph_list） |
+|  | 获取录制转写详情 | [98211](https://developer.work.weixin.qq.com/document/path/98211) | ✅ 已对接 | MeetingAdvancedClient.getMeetingTranscriptDetail（meeting/record/transcript/get_detail） |
+|  | 获取录制转写搜索结果 | [98213](https://developer.work.weixin.qq.com/document/path/98213) | ✅ 已对接 | MeetingAdvancedClient.searchMeetingTranscript（meeting/record/transcript/search） |
 | 高级功能账号管理 | 分配高级功能账号 | [99508](https://developer.work.weixin.qq.com/document/path/99508) | ❌ 未对接 | — |
 |  | 取消高级功能账号 | [99509](https://developer.work.weixin.qq.com/document/path/99509) | ❌ 未对接 | — |
 |  | 获取高级功能账号列表 | [99510](https://developer.work.weixin.qq.com/document/path/99510) | ❌ 未对接 | — |
