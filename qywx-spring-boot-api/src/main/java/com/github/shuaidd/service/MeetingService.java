@@ -926,6 +926,90 @@ public class MeetingService extends AbstractBaseService {
         return meetingAdvancedClient.searchMeetingTranscript(request, applicationName);
     }
 
+    /**
+     * 批量分配高级功能账号
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 批量任务ID
+     */
+    public MeetingVipJobSubmitResponse submitMeetingVipAccounts(MeetingVipUserBatchRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkVipUserids(request.getUseridList());
+        return meetingAdvancedClient.submitMeetingVipAccounts(request, applicationName);
+    }
+
+    /**
+     * 查询批量分配高级功能账号结果
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 批量分配任务结果
+     */
+    public MeetingVipJobResultResponse getMeetingVipAddJobResult(MeetingVipJobResultRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkVipJobId(request.getJobId());
+        return meetingAdvancedClient.getMeetingVipAddJobResult(request, applicationName);
+    }
+
+    /**
+     * 批量撤销高级功能账号
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 批量任务ID
+     */
+    public MeetingVipJobSubmitResponse cancelMeetingVipAccounts(MeetingVipUserBatchRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkVipUserids(request.getUseridList());
+        return meetingAdvancedClient.cancelMeetingVipAccounts(request, applicationName);
+    }
+
+    /**
+     * 查询批量撤销高级功能账号结果
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 批量撤销任务结果
+     */
+    public MeetingVipJobResultResponse getMeetingVipDeleteJobResult(MeetingVipJobResultRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        checkVipJobId(request.getJobId());
+        return meetingAdvancedClient.getMeetingVipDeleteJobResult(request, applicationName);
+    }
+
+    /**
+     * 获取高级功能账号列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 高级功能账号列表
+     */
+    public MeetingVipListResponse listMeetingVips(MeetingVipListRequest request, String applicationName) {
+        checkMeetingRequest((Object) request);
+        if (request.getLimit() != null && (request.getLimit() < 1 || request.getLimit() > 200)) {
+            throw new ParamCheckException("单次返回高级功能账号数量必须在1~200之间");
+        }
+        return meetingAdvancedClient.listMeetingVips(request, applicationName);
+    }
+
+    private void checkVipUserids(java.util.List<String> useridList) {
+        if (CollectionUtils.isEmpty(useridList) || useridList.size() > 100) {
+            throw new ParamCheckException("高级功能账号成员列表不能为空且最多100个");
+        }
+        for (String userid : useridList) {
+            if (StringUtils.isEmpty(userid)) {
+                throw new ParamCheckException("高级功能账号成员userid不能为空");
+            }
+        }
+    }
+
+    private void checkVipJobId(String jobId) {
+        if (StringUtils.isEmpty(jobId)) {
+            throw new ParamCheckException("高级功能账号任务ID不能为空");
+        }
+    }
+
     private void checkRecordTimeRange(Integer startTime, Integer endTime, boolean required) {
         if (required && (startTime == null || endTime == null)) {
             throw new ParamCheckException("查询开始和结束时间不能为空");

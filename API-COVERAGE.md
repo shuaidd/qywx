@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 480 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 485 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 403 |
+| ✅ 已对接 | 406 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 186 |
+| ❌ 未对接 | 183 |
 | ⛔ 范围外 | 147 |
 | 合计 | 738 |
 
@@ -713,7 +713,7 @@
 
 ## 会议
 
-状态：✅ 105；⚠️ 0；❌ 35；⛔ 1
+状态：✅ 108；⚠️ 0；❌ 32；⛔ 1
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -823,9 +823,9 @@
 |  | 获取录制转写段落信息 | [98212](https://developer.work.weixin.qq.com/document/path/98212) | ✅ 已对接 | MeetingAdvancedClient.listMeetingTranscriptParagraphs（meeting/record/transcript/get_paragraph_list） |
 |  | 获取录制转写详情 | [98211](https://developer.work.weixin.qq.com/document/path/98211) | ✅ 已对接 | MeetingAdvancedClient.getMeetingTranscriptDetail（meeting/record/transcript/get_detail） |
 |  | 获取录制转写搜索结果 | [98213](https://developer.work.weixin.qq.com/document/path/98213) | ✅ 已对接 | MeetingAdvancedClient.searchMeetingTranscript（meeting/record/transcript/search） |
-| 高级功能账号管理 | 分配高级功能账号 | [99508](https://developer.work.weixin.qq.com/document/path/99508) | ❌ 未对接 | — |
-|  | 取消高级功能账号 | [99509](https://developer.work.weixin.qq.com/document/path/99509) | ❌ 未对接 | — |
-|  | 获取高级功能账号列表 | [99510](https://developer.work.weixin.qq.com/document/path/99510) | ❌ 未对接 | — |
+| 高级功能账号管理 | 分配高级功能账号 | [99508](https://developer.work.weixin.qq.com/document/path/99508) | ✅ 已对接 | MeetingAdvancedClient.submitMeetingVipAccounts/getMeetingVipAddJobResult（meeting/vip/submit_batch_add_job、meeting/vip/batch_add_job_result） |
+|  | 取消高级功能账号 | [99509](https://developer.work.weixin.qq.com/document/path/99509) | ✅ 已对接 | MeetingAdvancedClient.cancelMeetingVipAccounts/getMeetingVipDeleteJobResult（meeting/vip/submit_batch_del_job、meeting/vip/batch_del_job_result） |
+|  | 获取高级功能账号列表 | [99510](https://developer.work.weixin.qq.com/document/path/99510) | ✅ 已对接 | MeetingAdvancedClient.listMeetingVips（meeting/vip/list） |
 | 回调通知 | 概述 | [99103](https://developer.work.weixin.qq.com/document/path/99103) | ❌ 未对接 | — |
 |  | 修改会议事件 | [99081](https://developer.work.weixin.qq.com/document/path/99081) | ❌ 未对接 | — |
 |  | 取消会议事件 | [99082](https://developer.work.weixin.qq.com/document/path/99082) | ❌ 未对接 | — |

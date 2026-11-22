@@ -956,4 +956,54 @@ public interface MeetingAdvancedClient extends CommonClient {
      */
     @PostMapping(value = "meeting/record/transcript/search", headers = HEAD)
     MeetingTranscriptSearchResponse searchMeetingTranscript(MeetingTranscriptSearchRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量分配高级功能账号
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 批量任务ID
+     */
+    @PostMapping(value = "meeting/vip/submit_batch_add_job", headers = HEAD)
+    MeetingVipJobSubmitResponse submitMeetingVipAccounts(MeetingVipUserBatchRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 查询批量分配高级功能账号结果
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 批量分配任务结果
+     */
+    @PostMapping(value = "meeting/vip/batch_add_job_result", headers = HEAD)
+    MeetingVipJobResultResponse getMeetingVipAddJobResult(MeetingVipJobResultRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量撤销高级功能账号
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 批量任务ID
+     */
+    @PostMapping(value = "meeting/vip/submit_batch_del_job", headers = HEAD)
+    MeetingVipJobSubmitResponse cancelMeetingVipAccounts(MeetingVipUserBatchRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 查询批量撤销高级功能账号结果
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 批量撤销任务结果
+     */
+    @PostMapping(value = "meeting/vip/batch_del_job_result", headers = HEAD)
+    MeetingVipJobResultResponse getMeetingVipDeleteJobResult(MeetingVipJobResultRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取高级功能账号列表
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 高级功能账号列表
+     */
+    @PostMapping(value = "meeting/vip/list", headers = HEAD)
+    MeetingVipListResponse listMeetingVips(MeetingVipListRequest request, @RequestParam(HEAD_KEY) String app);
 }
