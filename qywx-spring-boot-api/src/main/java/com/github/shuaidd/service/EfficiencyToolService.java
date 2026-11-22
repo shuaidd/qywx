@@ -6,9 +6,11 @@ import com.github.shuaidd.dto.tool.DialRecord;
 import com.github.shuaidd.dto.wedrive.SpaceInfo;
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.tool.*;
+import com.github.shuaidd.response.vip.*;
 import com.github.shuaidd.response.wedrive.*;
 import com.github.shuaidd.resquest.oa.CalendarRequest;
 import com.github.shuaidd.resquest.tool.*;
+import com.github.shuaidd.resquest.vip.*;
 import com.github.shuaidd.resquest.wedrive.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -29,6 +31,16 @@ public class EfficiencyToolService extends AbstractBaseService {
     private static final int MAX_SCHEDULE_ATTENDEE_COUNT = 1000;
     private static final int UPDATE_THIS_REPEAT_SCHEDULE_MODE = 1;
     private static final int UPDATE_FUTURE_REPEAT_SCHEDULE_MODE = 2;
+
+    /**
+     * 高级功能账号单次批量操作人数上限
+     */
+    private static final int MAX_VIP_BATCH_USER_COUNT = 100;
+
+    /**
+     * 高级功能账号列表单页数据上限
+     */
+    private static final int MAX_VIP_LIST_LIMIT = 200;
 
     private final EfficiencyToolClient efficiencyToolClient;
 
@@ -607,5 +619,72 @@ public class EfficiencyToolService extends AbstractBaseService {
      */
     public FileUploadFinishResponse fileUploadFinish(FileUploadFinishRequest request, String applicationName) {
         return efficiencyToolClient.fileUploadFinish(request, applicationName);
+    }
+
+    /**
+     * 批量分配高级功能账号
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 分配结果
+     */
+    public VipBatchOperateResponse batchAddVipAccounts(VipUserBatchRequest request, String applicationName) {
+        checkApplication(applicationName);
+        checkVipUserBatchRequest(request);
+        return efficiencyToolClient.batchAddVipAccounts(request, applicationName);
+    }
+
+    /**
+     * 批量撤销高级功能账号
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 撤销分配结果
+     */
+    public VipBatchOperateResponse batchDeleteVipAccounts(VipUserBatchRequest request, String applicationName) {
+        checkApplication(applicationName);
+        checkVipUserBatchRequest(request);
+        return efficiencyToolClient.batchDeleteVipAccounts(request, applicationName);
+    }
+
+    /**
+     * 获取高级功能账号列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 高级功能账号列表
+     */
+    public VipAccountListResponse listVipAccounts(VipAccountListRequest request, String applicationName) {
+        checkApplication(applicationName);
+        checkVipAccountListRequest(request);
+        return efficiencyToolClient.listVipAccounts(request, applicationName);
+    }
+
+    private void checkVipUserBatchRequest(VipUserBatchRequest request) {
+        if (Objects.isNull(request) || CollectionUtils.isEmpty(request.getUseridList())) {
+            throw new ParamCheckException("userid_list 不能为空，请检查！！！");
+        }
+        if (request.getUseridList().size() > MAX_VIP_BATCH_USER_COUNT) {
+            throw new ParamCheckException("userid_list 最多100个，请检查！！！");
+        }
+        checkVipUserIds(request.getUseridList());
+    }
+
+    private void checkVipAccountListRequest(VipAccountListRequest request) {
+        if (Objects.isNull(request)) {
+            throw new ParamCheckException("请求参数不能为空，请检查！！！");
+        }
+        if (Objects.nonNull(request.getLimit())
+                && (request.getLimit() < 1 || request.getLimit() > MAX_VIP_LIST_LIMIT)) {
+            throw new ParamCheckException("limit 取值范围为 1~200，请检查！！！");
+        }
+    }
+
+    private void checkVipUserIds(List<String> useridList) {
+        for (String userid : useridList) {
+            if (StringUtils.isBlank(userid)) {
+                throw new ParamCheckException("userid_list 不能包含空userid，请检查！！！");
+            }
+        }
     }
 }

@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 538 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 552 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 457 |
+| ✅ 已对接 | 469 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 101 |
+| ❌ 未对接 | 89 |
 | ⛔ 范围外 | 178 |
 | 合计 | 738 |
 
@@ -180,16 +180,16 @@
 
 ## 安全管理
 
-状态：✅ 0；⚠️ 0；❌ 9；⛔ 1
+状态：✅ 3；⚠️ 0；❌ 6；⛔ 1
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
 | 安全管理 | 文件防泄漏 | [98079](https://developer.work.weixin.qq.com/document/path/98079) | ❌ 未对接 | — |
 |  | 设备管理 | [98920](https://developer.work.weixin.qq.com/document/path/98920) | ❌ 未对接 | — |
 |  | 截屏/录屏管理 | [100128](https://developer.work.weixin.qq.com/document/path/100128) | ❌ 未对接 | — |
-| 高级功能账号管理 | 分配高级功能账号 | [99503](https://developer.work.weixin.qq.com/document/path/99503) | ❌ 未对接 | — |
-|  | 取消高级功能账号 | [99505](https://developer.work.weixin.qq.com/document/path/99505) | ❌ 未对接 | — |
-|  | 获取高级功能账号列表 | [99506](https://developer.work.weixin.qq.com/document/path/99506) | ❌ 未对接 | — |
+| 高级功能账号管理 | 分配高级功能账号 | [99503](https://developer.work.weixin.qq.com/document/path/99503) | ✅ 已对接 | SecurityClient.submitBatchAddVipAccounts / getBatchAddVipJobResult（security/vip/submit_batch_add_job、batch_add_job_result） |
+|  | 取消高级功能账号 | [99505](https://developer.work.weixin.qq.com/document/path/99505) | ✅ 已对接 | SecurityClient.submitBatchDeleteVipAccounts / getBatchDeleteVipJobResult（security/vip/submit_batch_del_job、batch_del_job_result） |
+|  | 获取高级功能账号列表 | [99506](https://developer.work.weixin.qq.com/document/path/99506) | ✅ 已对接 | SecurityClient.listVipAccounts（security/vip/list） |
 | 操作日志 | 获取成员操作记录 | [100178](https://developer.work.weixin.qq.com/document/path/100178) | ❌ 未对接 | — |
 |  | 获取管理端操作日志 | [100179](https://developer.work.weixin.qq.com/document/path/100179) | ❌ 未对接 | — |
 |  | 获取企业微信域名IP信息 | [100079](https://developer.work.weixin.qq.com/document/path/100079) | ❌ 未对接 | — |
@@ -561,7 +561,7 @@
 
 ## 邮件
 
-状态：✅ 10；⚠️ 0；❌ 16；⛔ 3
+状态：✅ 13；⚠️ 0；❌ 13；⛔ 3
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -586,9 +586,9 @@
 |  | 回调通知 | [100180](https://developer.work.weixin.qq.com/document/path/100180) | ⛔ 范围外 | — |
 |  | 获取客户端专用密码列表 | [100183](https://developer.work.weixin.qq.com/document/path/100183) | ❌ 未对接 | — |
 |  | 删除客户端专用密码 | [100184](https://developer.work.weixin.qq.com/document/path/100184) | ❌ 未对接 | — |
-| 高级功能账号管理 | 分配高级功能账号 | [99316](https://developer.work.weixin.qq.com/document/path/99316) | ❌ 未对接 | — |
-|  | 取消高级功能账号 | [99317](https://developer.work.weixin.qq.com/document/path/99317) | ❌ 未对接 | — |
-|  | 获取高级功能账号列表 | [99318](https://developer.work.weixin.qq.com/document/path/99318) | ❌ 未对接 | — |
+| 高级功能账号管理 | 分配高级功能账号 | [99316](https://developer.work.weixin.qq.com/document/path/99316) | ✅ 已对接 | EnterpriseEmailClient.batchAddVipAccounts（exmail/vip/batch_add） |
+|  | 取消高级功能账号 | [99317](https://developer.work.weixin.qq.com/document/path/99317) | ✅ 已对接 | EnterpriseEmailClient.batchDeleteVipAccounts（exmail/vip/batch_del） |
+|  | 获取高级功能账号列表 | [99318](https://developer.work.weixin.qq.com/document/path/99318) | ✅ 已对接 | EnterpriseEmailClient.listVipAccounts（exmail/vip/list） |
 |  | 禁用/启用邮箱账号 | [95512](https://developer.work.weixin.qq.com/document/path/95512) | ❌ 未对接 | — |
 | 其他邮件客户端登录设置 | 获取用户功能属性 | [95513](https://developer.work.weixin.qq.com/document/path/95513) | ❌ 未对接 | — |
 |  | 更改用户功能属性 | [98008](https://developer.work.weixin.qq.com/document/path/98008) | ❌ 未对接 | — |
@@ -597,7 +597,7 @@
 
 ## 文档
 
-状态：✅ 53；⚠️ 0；❌ 16；⛔ 2
+状态：✅ 56；⚠️ 0；❌ 13；⛔ 2
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -669,9 +669,9 @@
 | 接收外部数据到智能表格 | 概述 | [101239](https://developer.work.weixin.qq.com/document/path/101239) | ❌ 未对接 | — |
 |  | 添加记录 | [101240](https://developer.work.weixin.qq.com/document/path/101240) | ❌ 未对接 | — |
 |  | 更新记录 | [101241](https://developer.work.weixin.qq.com/document/path/101241) | ❌ 未对接 | — |
-| 高级功能账号管理 | 分配高级功能账号 | [99516](https://developer.work.weixin.qq.com/document/path/99516) | ❌ 未对接 | — |
-|  | 取消高级功能账号 | [99517](https://developer.work.weixin.qq.com/document/path/99517) | ❌ 未对接 | — |
-|  | 获取高级功能账号列表 | [99518](https://developer.work.weixin.qq.com/document/path/99518) | ❌ 未对接 | — |
+| 高级功能账号管理 | 分配高级功能账号 | [99516](https://developer.work.weixin.qq.com/document/path/99516) | ✅ 已对接 | WechatDocClient.batchAddVipAccounts（/wedoc/vip/batch_add） |
+|  | 取消高级功能账号 | [99517](https://developer.work.weixin.qq.com/document/path/99517) | ✅ 已对接 | WechatDocClient.batchDeleteVipAccounts（/wedoc/vip/batch_del） |
+|  | 获取高级功能账号列表 | [99518](https://developer.work.weixin.qq.com/document/path/99518) | ✅ 已对接 | WechatDocClient.listVipAccounts（/wedoc/vip/list） |
 | 素材管理 | 上传文档图片 | [99933](https://developer.work.weixin.qq.com/document/path/99933) | ❌ 未对接 | — |
 |  | 上传文档文件 | [101870](https://developer.work.weixin.qq.com/document/path/101870) | ❌ 未对接 | — |
 |  | 分块上传文档文件 | [101871](https://developer.work.weixin.qq.com/document/path/101871) | ❌ 未对接 | — |
@@ -860,7 +860,7 @@
 
 ## 微盘
 
-状态：✅ 24；⚠️ 0；❌ 10；⛔ 2
+状态：✅ 27；⚠️ 0；❌ 7；⛔ 2
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -896,9 +896,9 @@
 |  | 解散空间 | [97901](https://developer.work.weixin.qq.com/document/path/97901) | ❌ 未对接 | — |
 |  | 修改空间成员 | [97902](https://developer.work.weixin.qq.com/document/path/97902) | ❌ 未对接 | — |
 |  | 修改空间安全设置 | [97903](https://developer.work.weixin.qq.com/document/path/97903) | ❌ 未对接 | — |
-| 高级功能账号管理 | 分配高级功能账号 | [99512](https://developer.work.weixin.qq.com/document/path/99512) | ❌ 未对接 | — |
-|  | 取消高级功能账号 | [99513](https://developer.work.weixin.qq.com/document/path/99513) | ❌ 未对接 | — |
-|  | 获取高级功能账号列表 | [99514](https://developer.work.weixin.qq.com/document/path/99514) | ❌ 未对接 | — |
+| 高级功能账号管理 | 分配高级功能账号 | [99512](https://developer.work.weixin.qq.com/document/path/99512) | ✅ 已对接 | EfficiencyToolClient.batchAddVipAccounts（wedrive/vip/batch_add） |
+|  | 取消高级功能账号 | [99513](https://developer.work.weixin.qq.com/document/path/99513) | ✅ 已对接 | EfficiencyToolClient.batchDeleteVipAccounts（wedrive/vip/batch_del） |
+|  | 获取高级功能账号列表 | [99514](https://developer.work.weixin.qq.com/document/path/99514) | ✅ 已对接 | EfficiencyToolClient.listVipAccounts（wedrive/vip/list） |
 |  | 版本和容量管理 | [95856](https://developer.work.weixin.qq.com/document/path/95856) | ✅ 已对接 | EfficiencyToolClient.proInfo / capacity |
 
 ## 直播

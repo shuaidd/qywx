@@ -4,8 +4,10 @@ import com.github.shuaidd.client.config.WeChatConfiguration;
 import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.tool.*;
 import com.github.shuaidd.response.wedrive.*;
+import com.github.shuaidd.response.vip.*;
 import com.github.shuaidd.resquest.tool.*;
 import com.github.shuaidd.resquest.wedrive.*;
+import com.github.shuaidd.resquest.vip.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -421,4 +423,34 @@ public interface EfficiencyToolClient extends CommonClient {
      */
     @PostMapping(value = "wedrive/file_upload_finish", headers = HEAD)
     FileUploadFinishResponse fileUploadFinish(FileUploadFinishRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量分配高级功能账号
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 分配结果
+     */
+    @PostMapping(value = "wedrive/vip/batch_add", headers = HEAD)
+    VipBatchOperateResponse batchAddVipAccounts(VipUserBatchRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量撤销高级功能账号
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 撤销分配结果
+     */
+    @PostMapping(value = "wedrive/vip/batch_del", headers = HEAD)
+    VipBatchOperateResponse batchDeleteVipAccounts(VipUserBatchRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取高级功能账号列表
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 高级功能账号列表
+     */
+    @PostMapping(value = "wedrive/vip/list", headers = HEAD)
+    VipAccountListResponse listVipAccounts(VipAccountListRequest request, @RequestParam(HEAD_KEY) String app);
 }

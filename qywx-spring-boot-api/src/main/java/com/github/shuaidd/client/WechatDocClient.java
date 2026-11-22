@@ -2,7 +2,9 @@ package com.github.shuaidd.client;
 
 import com.github.shuaidd.client.config.WeChatConfiguration;
 import com.github.shuaidd.response.BaseResponse;
+import com.github.shuaidd.response.vip.*;
 import com.github.shuaidd.response.wedoc.*;
+import com.github.shuaidd.resquest.vip.*;
 import com.github.shuaidd.resquest.wedoc.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -375,4 +377,34 @@ public interface WechatDocClient extends CommonClient {
      */
     @PostMapping(value = "/wedoc/smartdoc/publish_setting", headers = HEAD)
     BaseResponse setSmartDocPublishRange(SmartDocPublishRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量分配高级功能账号
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 分配结果
+     */
+    @PostMapping(value = "/wedoc/vip/batch_add", headers = HEAD)
+    VipBatchOperateResponse batchAddVipAccounts(VipUserBatchRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量撤销高级功能账号
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 撤销分配结果
+     */
+    @PostMapping(value = "/wedoc/vip/batch_del", headers = HEAD)
+    VipBatchOperateResponse batchDeleteVipAccounts(VipUserBatchRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取高级功能账号列表
+     *
+     * @param request 请求
+     * @param app     应用名
+     * @return 高级功能账号列表
+     */
+    @PostMapping(value = "/wedoc/vip/list", headers = HEAD)
+    VipAccountListResponse listVipAccounts(VipAccountListRequest request, @RequestParam(HEAD_KEY) String app);
 }

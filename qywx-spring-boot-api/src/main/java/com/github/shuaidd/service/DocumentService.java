@@ -9,7 +9,9 @@ import com.github.shuaidd.dto.wedoc.SmartDocPublishAuth;
 import com.github.shuaidd.dto.wedoc.SmartDocSheetInfo;
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.BaseResponse;
+import com.github.shuaidd.response.vip.*;
 import com.github.shuaidd.response.wedoc.*;
+import com.github.shuaidd.resquest.vip.*;
 import com.github.shuaidd.resquest.wedoc.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -115,6 +117,16 @@ public class DocumentService extends AbstractBaseService {
      * 智能文档发布页可见部门
      */
     private static final int SMART_DOC_PUBLISH_AUTH_DEPARTMENT = 2;
+
+    /**
+     * 高级功能账号单次批量操作人数上限
+     */
+    private static final int MAX_VIP_BATCH_USER_COUNT = 100;
+
+    /**
+     * 高级功能账号列表单页数据上限
+     */
+    private static final int MAX_VIP_LIST_LIMIT = 200;
 
     private final WechatDocClient wechatDocClient;
 
@@ -839,6 +851,73 @@ public class DocumentService extends AbstractBaseService {
             }
             if (Objects.isNull(question.getMustReply())) {
                 throw new ParamCheckException("mustReply 不能为空，请检查！！！");
+            }
+        }
+    }
+
+    /**
+     * 批量分配高级功能账号
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 分配结果
+     */
+    public VipBatchOperateResponse batchAddVipAccounts(VipUserBatchRequest request, String applicationName) {
+        checkApplication(applicationName);
+        checkVipUserBatchRequest(request);
+        return wechatDocClient.batchAddVipAccounts(request, applicationName);
+    }
+
+    /**
+     * 批量撤销高级功能账号
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 撤销分配结果
+     */
+    public VipBatchOperateResponse batchDeleteVipAccounts(VipUserBatchRequest request, String applicationName) {
+        checkApplication(applicationName);
+        checkVipUserBatchRequest(request);
+        return wechatDocClient.batchDeleteVipAccounts(request, applicationName);
+    }
+
+    /**
+     * 获取高级功能账号列表
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 高级功能账号列表
+     */
+    public VipAccountListResponse listVipAccounts(VipAccountListRequest request, String applicationName) {
+        checkApplication(applicationName);
+        checkVipAccountListRequest(request);
+        return wechatDocClient.listVipAccounts(request, applicationName);
+    }
+
+    private void checkVipUserBatchRequest(VipUserBatchRequest request) {
+        if (Objects.isNull(request) || CollectionUtils.isEmpty(request.getUseridList())) {
+            throw new ParamCheckException("userid_list 不能为空，请检查！！！");
+        }
+        if (request.getUseridList().size() > MAX_VIP_BATCH_USER_COUNT) {
+            throw new ParamCheckException("userid_list 最多100个，请检查！！！");
+        }
+        checkVipUserIds(request.getUseridList());
+    }
+
+    private void checkVipAccountListRequest(VipAccountListRequest request) {
+        if (Objects.isNull(request)) {
+            throw new ParamCheckException("请求参数不能为空，请检查！！！");
+        }
+        if (Objects.nonNull(request.getLimit())
+                && (request.getLimit() < 1 || request.getLimit() > MAX_VIP_LIST_LIMIT)) {
+            throw new ParamCheckException("limit 取值范围为 1~200，请检查！！！");
+        }
+    }
+
+    private void checkVipUserIds(List<String> useridList) {
+        for (String userid : useridList) {
+            if (StringUtils.isBlank(userid)) {
+                throw new ParamCheckException("userid_list 不能包含空userid，请检查！！！");
             }
         }
     }
