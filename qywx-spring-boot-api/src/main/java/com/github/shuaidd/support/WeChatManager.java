@@ -34,6 +34,7 @@ public class WeChatManager {
     private final FrontEndToolService frontEndToolService;
     private final DocumentService documentService;
     private final SmartSheetService smartSheetService;
+    private final PaymentService paymentService;
 
     @Autowired
     public WeChatManager(AddressBookService addressBookService,
@@ -52,7 +53,7 @@ public class WeChatManager {
                          ElectronicInvoiceService electronicInvoiceService,
                          EnterpriseInterConnectionService enterpriseInterConnectionService,
                          MeetingService meetingService,
-                         FrontEndToolService frontEndToolService, DocumentService documentService, SmartSheetService smartSheetService) {
+                         FrontEndToolService frontEndToolService, DocumentService documentService, SmartSheetService smartSheetService, PaymentService paymentService) {
         this.addressBookService = addressBookService;
         this.tokenService = tokenService;
         this.properties = properties;
@@ -73,6 +74,7 @@ public class WeChatManager {
         this.frontEndToolService = frontEndToolService;
         this.documentService = documentService;
         this.smartSheetService = smartSheetService;
+        this.paymentService = paymentService;
     }
 
     /**
@@ -251,5 +253,14 @@ public class WeChatManager {
      */
     public SmartSheetService smartSheetService() {
         return smartSheetService;
+    }
+
+    /**
+     * 企业支付与小程序对外收款
+     *
+     * @return PaymentService
+     */
+    public PaymentService paymentService() {
+        return paymentService;
     }
 }

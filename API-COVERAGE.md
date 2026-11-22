@@ -12,17 +12,17 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 371 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 386 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 295 |
+| ✅ 已对接 | 309 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 299 |
-| ⛔ 范围外 | 144 |
+| ❌ 未对接 | 280 |
+| ⛔ 范围外 | 147 |
 | 合计 | 738 |
 
 > 统计单位是官方文档页，不是路由数。一个页面可能聚合多个 REST 操作；例如“管理企业标签”页覆盖查询、新增、编辑、删除等多个路由。
@@ -411,7 +411,7 @@
 
 ## 企业支付
 
-状态：✅ 0；⚠️ 0；❌ 12；⛔ 3
+状态：✅ 7；⚠️ 0；❌ 4；⛔ 4
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -420,34 +420,34 @@
 |  | 查询红包记录 | [90276](https://developer.work.weixin.qq.com/document/path/90276) | ❌ 未对接 | — |
 | 向员工付款 | 向员工付款 | [90278](https://developer.work.weixin.qq.com/document/path/90278) | ❌ 未对接 | — |
 |  | 查询付款记录 | [90279](https://developer.work.weixin.qq.com/document/path/90279) | ❌ 未对接 | — |
-|  | 向员工收款 | [90280](https://developer.work.weixin.qq.com/document/path/90280) | ❌ 未对接 | — |
+|  | 向员工收款 | [90280](https://developer.work.weixin.qq.com/document/path/90280) | ⛔ 范围外 | JS-SDK 签名说明，不属于服务端 REST 接入范围 |
 | 对外收款 | 概述 | [93665](https://developer.work.weixin.qq.com/document/path/93665) | ⛔ 范围外 | — |
-|  | 收款商户号管理 | [93666](https://developer.work.weixin.qq.com/document/path/93666) | ❌ 未对接 | — |
-|  | 获取对外收款记录 | [93667](https://developer.work.weixin.qq.com/document/path/93667) | ❌ 未对接 | — |
-|  | 获取收款项目的商户单号 | [95944](https://developer.work.weixin.qq.com/document/path/95944) | ❌ 未对接 | — |
-|  | 获取资金流水 | [98100](https://developer.work.weixin.qq.com/document/path/98100) | ❌ 未对接 | — |
+|  | 收款商户号管理 | [93666](https://developer.work.weixin.qq.com/document/path/93666) | ✅ 已对接 | PaymentClient.getMerchant / setMerchantUseScope（externalpay/getmerchant、externalpay/set_mch_use_scope） |
+|  | 获取对外收款记录 | [93667](https://developer.work.weixin.qq.com/document/path/93667) | ✅ 已对接 | PaymentClient.getBillList（externalpay/get_bill_list） |
+|  | 获取收款项目的商户单号 | [95944](https://developer.work.weixin.qq.com/document/path/95944) | ✅ 已对接 | PaymentClient.getPaymentInfo（externalpay/get_payment_info） |
+|  | 获取资金流水 | [98100](https://developer.work.weixin.qq.com/document/path/98100) | ✅ 已对接 | PaymentClient.getFundFlow（externalpay/get_fund_flow） |
 |  | 签名算法 | [90281](https://developer.work.weixin.qq.com/document/path/90281) | ⛔ 范围外 | — |
-| 创建对外收款账户 | 提交创建对外收款账户的申请单 | [98973](https://developer.work.weixin.qq.com/document/path/98973) | ❌ 未对接 | — |
-|  | 查询申请单状态 | [98974](https://developer.work.weixin.qq.com/document/path/98974) | ❌ 未对接 | — |
-|  | 提交图片 | [98972](https://developer.work.weixin.qq.com/document/path/98972) | ❌ 未对接 | — |
+| 创建对外收款账户 | 提交创建对外收款账户的申请单 | [98973](https://developer.work.weixin.qq.com/document/path/98973) | ✅ 已对接 | PaymentClient.applyMch（miniapppay/apply_mch） |
+|  | 查询申请单状态 | [98974](https://developer.work.weixin.qq.com/document/path/98974) | ✅ 已对接 | PaymentClient.getApplymentStatus（miniapppay/get_applyment_status） |
+|  | 提交图片 | [98972](https://developer.work.weixin.qq.com/document/path/98972) | ✅ 已对接 | PaymentUploadClient.uploadImage（miniapppay/upload_image） |
 
 ## 小程序接入对外收款
 
-状态：✅ 0；⚠️ 0；❌ 9；⛔ 2
+状态：✅ 7；⚠️ 0；❌ 0；⛔ 4
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
 | 小程序接入对外收款 | 概述 | [98723](https://developer.work.weixin.qq.com/document/path/98723) | ⛔ 范围外 | — |
-| 普通支付 | 小程序下单 | [97322](https://developer.work.weixin.qq.com/document/path/97322) | ❌ 未对接 | — |
-|  | 查询订单 | [97323](https://developer.work.weixin.qq.com/document/path/97323) | ❌ 未对接 | — |
-|  | 关闭订单 | [97324](https://developer.work.weixin.qq.com/document/path/97324) | ❌ 未对接 | — |
-|  | 获取支付签名 | [98130](https://developer.work.weixin.qq.com/document/path/98130) | ❌ 未对接 | — |
-| 退款 | 申请退款 | [97333](https://developer.work.weixin.qq.com/document/path/97333) | ❌ 未对接 | — |
-|  | 查询退款 | [97352](https://developer.work.weixin.qq.com/document/path/97352) | ❌ 未对接 | — |
+| 普通支付 | 小程序下单 | [97322](https://developer.work.weixin.qq.com/document/path/97322) | ✅ 已对接 | PaymentClient.createOrder（miniapppay/create_order） |
+|  | 查询订单 | [97323](https://developer.work.weixin.qq.com/document/path/97323) | ✅ 已对接 | PaymentClient.getOrder（miniapppay/get_order） |
+|  | 关闭订单 | [97324](https://developer.work.weixin.qq.com/document/path/97324) | ✅ 已对接 | PaymentClient.closeOrder（miniapppay/close_order） |
+|  | 获取支付签名 | [98130](https://developer.work.weixin.qq.com/document/path/98130) | ✅ 已对接 | PaymentClient.getSign（miniapppay/get_sign） |
+| 退款 | 申请退款 | [97333](https://developer.work.weixin.qq.com/document/path/97333) | ✅ 已对接 | PaymentClient.refund（miniapppay/refund） |
+|  | 查询退款 | [97352](https://developer.work.weixin.qq.com/document/path/97352) | ✅ 已对接 | PaymentClient.getRefundDetail（miniapppay/get_refund_detail） |
 | 回调通知 | 概述 | [97478](https://developer.work.weixin.qq.com/document/path/97478) | ⛔ 范围外 | — |
-|  | 支付通知 | [97335](https://developer.work.weixin.qq.com/document/path/97335) | ❌ 未对接 | — |
-|  | 退款通知 | [97338](https://developer.work.weixin.qq.com/document/path/97338) | ❌ 未对接 | — |
-| 账单 | 交易账单申请 | [98115](https://developer.work.weixin.qq.com/document/path/98115) | ❌ 未对接 | — |
+|  | 支付通知 | [97335](https://developer.work.weixin.qq.com/document/path/97335) | ⛔ 范围外 | 支付回调通知，超出服务端 REST 调用范围 |
+|  | 退款通知 | [97338](https://developer.work.weixin.qq.com/document/path/97338) | ⛔ 范围外 | 退款回调通知，超出服务端 REST 调用范围 |
+| 账单 | 交易账单申请 | [98115](https://developer.work.weixin.qq.com/document/path/98115) | ✅ 已对接 | PaymentClient.getBill（miniapppay/get_bill） |
 
 ## 会话内容存档
 
