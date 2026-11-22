@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 526 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 534 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 450 |
+| ✅ 已对接 | 453 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 108 |
+| ❌ 未对接 | 105 |
 | ⛔ 范围外 | 178 |
 | 合计 | 738 |
 
@@ -37,7 +37,7 @@
 6. 邮件发送、收件箱、应用邮箱账号、高级功能账号等。
 7. 智能文档、收集表、文档素材和智能表格编组。
 8. 日程重复日程/参与者，会议统计与高级会控/Webinar/录制/Rooms/MRA。
-9. 高级功能账号、人事助手。
+9. 高级功能账号。
 
 
 ## 开发指南
@@ -980,14 +980,14 @@
 
 ## 人事助手
 
-状态：✅ 0；⚠️ 0；❌ 3；⛔ 1
+状态：✅ 3；⚠️ 0；❌ 0；⛔ 1
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
 | 花名册 | 概述 | [99130](https://developer.work.weixin.qq.com/document/path/99130) | ⛔ 范围外 | — |
-|  | 获取员工字段配置 | [99131](https://developer.work.weixin.qq.com/document/path/99131) | ❌ 未对接 | — |
-|  | 获取员工花名册信息 | [99132](https://developer.work.weixin.qq.com/document/path/99132) | ❌ 未对接 | — |
-|  | 更新员工花名册信息 | [99133](https://developer.work.weixin.qq.com/document/path/99133) | ❌ 未对接 | — |
+|  | 获取员工字段配置 | [99131](https://developer.work.weixin.qq.com/document/path/99131) | ✅ 已对接 | HrClient.getStaffFields（hr/get_fields） |
+|  | 获取员工花名册信息 | [99132](https://developer.work.weixin.qq.com/document/path/99132) | ✅ 已对接 | HrClient.getStaffInfo（hr/get_staff_info） |
+|  | 更新员工花名册信息 | [99133](https://developer.work.weixin.qq.com/document/path/99133) | ✅ 已对接 | HrClient.updateStaffInfo（hr/update_staff_info） |
 
 ## 会议室
 

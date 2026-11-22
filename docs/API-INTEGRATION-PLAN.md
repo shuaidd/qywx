@@ -32,7 +32,7 @@
 | 9 | 政民沟通 | 21 | 进行中 | 已完成配置网格结构 5 页；事件类别和巡查/居民上报因官方文档返回验证码暂缓，不猜测路由。 |
 | 10 | 邮件 | 16 | 待开始 | 覆盖发送、收件箱、账号和高级功能账号。 |
 | 11 | 上下游、安全、微盘、智能表格编组 | 43 | 待开始 | 上下游已部分覆盖，优先补齐可独立验证的 REST 路由。 |
-| 12 | 打卡、审批、汇报、人事助手、高级功能等剩余业务 | 27 | 进行中 | 已完成打卡 3 个文档页；其余按审批、汇报、人事助手和高级功能继续拆分推进。 |
+| 12 | 打卡、审批、汇报、人事助手、高级功能等剩余业务 | 27 | 进行中 | 已完成打卡 3 个文档页和人事助手花名册 3 个文档页；其余按审批、汇报和高级功能继续拆分推进。 |
 
 > 数量按 `API-COVERAGE.md` 当前文档页统计，不是接口路由数；实现时一个文档页可能产生多个 Feign 方法。
 
@@ -110,3 +110,5 @@
 - 2026-11-22：批次 8 完成 8D 家校应用 13 个文档页，覆盖 `health/get_health_report_stat`、`health/get_report_jobids`、`health/get_report_job_info`、`health/get_report_answer`、`living/get_user_all_livingid`、`school/living/get_living_info`、`school/living/get_watch_stat`、`school/living/get_unwatch_stat`、`living/delete_replay_data`、`school/living/get_watch_stat_v2`、`school/living/get_unwatch_stat_v2`、`school/get_payment_result` 和 `school/get_trade`；新增模型字段均带中文业务含义注释，Service 校验日期、任务/直播/收款/订单/成员 ID、分页范围和游标；覆盖度更新为已对接 445 页、部分对接 2 页、未对接 113 页、范围外 178 页，Feign 方法数达到 526；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。真实企微调用未执行。
 
 - 2026-11-22：批次 9 首子批完成配置网格结构 5 个文档页，覆盖 `report/grid/add`、`report/grid/update`、`report/grid/delete`、`report/grid/list` 和 `report/grid/get_user_grid_info`；新增模型字段均带中文业务含义注释，Service 校验应用名、网格名称长度、父/目标网格 ID、负责人数量、成员上限和成员 ID；事件类别及巡查/居民上报页当前被官方站验证码拦截，已保留未对接且不猜测路由。覆盖度更新为已对接 450 页、部分对接 2 页、未对接 108 页、范围外 178 页，Feign 方法数达到 531；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。真实企微调用未执行。
+
+- 2026-11-22：批次 12 完成人事助手花名册 3 个文档页，覆盖 `hr/get_fields`、`hr/get_staff_info` 和 `hr/update_staff_info`；新增模型字段均带中文业务含义注释，Service 校验应用名、员工 userid、字段列表以及更新时新增/修改/删除操作至少一项非空，更新结果按官方 JSON 示例映射 `insert_result` 单数字段；覆盖度更新为已对接 453 页、部分对接 2 页、未对接 105 页、范围外 178 页，Feign 方法数达到 534；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。真实企微调用未执行。
