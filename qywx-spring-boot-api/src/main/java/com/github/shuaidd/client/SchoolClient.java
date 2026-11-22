@@ -1,8 +1,24 @@
 package com.github.shuaidd.client;
 
 import com.github.shuaidd.client.config.WeChatConfiguration;
+import com.github.shuaidd.resquest.school.BatchParentOperationRequest;
+import com.github.shuaidd.resquest.school.BatchStudentOperationRequest;
+import com.github.shuaidd.resquest.school.CreateParentRequest;
+import com.github.shuaidd.resquest.school.CreateStudentRequest;
+import com.github.shuaidd.resquest.school.ParentChildItem;
+import com.github.shuaidd.resquest.school.ParentItem;
+import com.github.shuaidd.resquest.school.SetArchSyncModeRequest;
+import com.github.shuaidd.resquest.school.StudentItem;
+import com.github.shuaidd.resquest.school.UpdateParentRequest;
+import com.github.shuaidd.resquest.school.UpdateStudentRequest;
+import com.github.shuaidd.resquest.school.UserIdListRequest;
 import com.github.shuaidd.response.BaseResponse;
+import com.github.shuaidd.response.school.BatchParentResultResponse;
+import com.github.shuaidd.response.school.BatchStudentResultResponse;
 import com.github.shuaidd.response.school.ChatCreateModeResponse;
+import com.github.shuaidd.response.school.ParentListResponse;
+import com.github.shuaidd.response.school.SchoolUserDetailResponse;
+import com.github.shuaidd.response.school.StudentListResponse;
 import com.github.shuaidd.response.school.ExternalUserOpenIdResponse;
 import com.github.shuaidd.response.school.SchoolAgentAllowScopeResponse;
 import com.github.shuaidd.response.school.SchoolNotificationModeResponse;
@@ -101,4 +117,163 @@ public interface SchoolClient extends CommonClient {
      */
     @GetMapping(value = "school/getuserinfo", headers = HEAD)
     SchoolUserInfoResponse getSchoolUserInfo(@RequestParam("code") String code, @RequestParam(HEAD_KEY) String app);
+    /**
+     * 创建学生
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "school/user/create_student", headers = HEAD)
+    BaseResponse createStudent(CreateStudentRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除学生
+     *
+     * @param userid 家校通讯录学生userid
+     * @param app    应用名
+     * @return 基础响应
+     */
+    @GetMapping(value = "school/user/delete_student", headers = HEAD)
+    BaseResponse deleteStudent(@RequestParam("userid") String userid, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 更新学生
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "school/user/update_student", headers = HEAD)
+    BaseResponse updateStudent(UpdateStudentRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量创建学生
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 批量结果
+     */
+    @PostMapping(value = "school/user/batch_create_student", headers = HEAD)
+    BatchStudentResultResponse batchCreateStudent(BatchStudentOperationRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量删除学生
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 批量结果
+     */
+    @PostMapping(value = "school/user/batch_delete_student", headers = HEAD)
+    BatchStudentResultResponse batchDeleteStudent(UserIdListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量更新学生
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 批量结果
+     */
+    @PostMapping(value = "school/user/batch_update_student", headers = HEAD)
+    BatchStudentResultResponse batchUpdateStudent(BatchStudentOperationRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 创建家长
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "school/user/create_parent", headers = HEAD)
+    BaseResponse createParent(CreateParentRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 删除家长
+     *
+     * @param userid 家校通讯录家长userid
+     * @param app    应用名
+     * @return 基础响应
+     */
+    @GetMapping(value = "school/user/delete_parent", headers = HEAD)
+    BaseResponse deleteParent(@RequestParam("userid") String userid, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 更新家长
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "school/user/update_parent", headers = HEAD)
+    BaseResponse updateParent(UpdateParentRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量创建家长
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 批量结果
+     */
+    @PostMapping(value = "school/user/batch_create_parent", headers = HEAD)
+    BatchParentResultResponse batchCreateParent(BatchParentOperationRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量删除家长
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 批量结果
+     */
+    @PostMapping(value = "school/user/batch_delete_parent", headers = HEAD)
+    BatchParentResultResponse batchDeleteParent(UserIdListRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 批量更新家长
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 批量结果
+     */
+    @PostMapping(value = "school/user/batch_update_parent", headers = HEAD)
+    BatchParentResultResponse batchUpdateParent(BatchParentOperationRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取家校通讯录成员详情
+     *
+     * @param userid 家长或学生的userid
+     * @param app    应用名
+     * @return 用户详情
+     */
+    @GetMapping(value = "school/user/get", headers = HEAD)
+    SchoolUserDetailResponse getSchoolUser(@RequestParam("userid") String userid, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取班级下的学生列表
+     *
+     * @param departmentId 家校部门id
+     * @param app          应用名
+     * @return 学生列表
+     */
+    @GetMapping(value = "school/user/list", headers = HEAD)
+    StudentListResponse listStudents(@RequestParam("department_id") Integer departmentId, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 设置家校通讯录自动同步模式
+     *
+     * @param request 请求体
+     * @param app     应用名
+     * @return 基础响应
+     */
+    @PostMapping(value = "school/set_arch_sync_mode", headers = HEAD)
+    BaseResponse setArchSyncMode(SetArchSyncModeRequest request, @RequestParam(HEAD_KEY) String app);
+
+    /**
+     * 获取班级下的家长列表
+     *
+     * @param departmentId 家校部门id
+     * @param app          应用名
+     * @return 家长列表
+     */
+    @GetMapping(value = "school/user/list_parent", headers = HEAD)
+    ParentListResponse listParents(@RequestParam("department_id") Integer departmentId, @RequestParam(HEAD_KEY) String app);
 }

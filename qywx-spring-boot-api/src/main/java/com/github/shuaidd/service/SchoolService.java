@@ -2,11 +2,27 @@ package com.github.shuaidd.service;
 
 import com.github.shuaidd.client.SchoolClient;
 import com.github.shuaidd.exception.ParamCheckException;
+import com.github.shuaidd.resquest.school.BatchParentOperationRequest;
+import com.github.shuaidd.resquest.school.BatchStudentOperationRequest;
 import com.github.shuaidd.resquest.school.ConvertExternalUserToOpenIdRequest;
+import com.github.shuaidd.resquest.school.CreateParentRequest;
+import com.github.shuaidd.resquest.school.CreateStudentRequest;
+import com.github.shuaidd.resquest.school.ParentChildItem;
+import com.github.shuaidd.resquest.school.ParentItem;
+import com.github.shuaidd.resquest.school.SetArchSyncModeRequest;
+import com.github.shuaidd.resquest.school.StudentItem;
+import com.github.shuaidd.resquest.school.UpdateParentRequest;
+import com.github.shuaidd.resquest.school.UpdateStudentRequest;
+import com.github.shuaidd.resquest.school.UserIdListRequest;
 import com.github.shuaidd.resquest.school.SetChatCreateModeRequest;
 import com.github.shuaidd.resquest.school.SetSchoolNotificationModeRequest;
 import com.github.shuaidd.response.BaseResponse;
+import com.github.shuaidd.response.school.BatchParentResultResponse;
+import com.github.shuaidd.response.school.BatchStudentResultResponse;
 import com.github.shuaidd.response.school.ChatCreateModeResponse;
+import com.github.shuaidd.response.school.ParentListResponse;
+import com.github.shuaidd.response.school.SchoolUserDetailResponse;
+import com.github.shuaidd.response.school.StudentListResponse;
 import com.github.shuaidd.response.school.ExternalUserOpenIdResponse;
 import com.github.shuaidd.response.school.SchoolAgentAllowScopeResponse;
 import com.github.shuaidd.response.school.SchoolNotificationModeResponse;
@@ -15,6 +31,7 @@ import com.github.shuaidd.response.school.SchoolUserInfoResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -138,6 +155,308 @@ public class SchoolService extends AbstractBaseService {
             throw new ParamCheckException("code 长度不能超过512字节，请检查！！！");
         }
         return schoolClient.getSchoolUserInfo(code, applicationName);
+    }
+
+    /**
+     * 创建学生
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse createStudent(CreateStudentRequest request, String applicationName) {
+        checkApplication(applicationName);
+        if (Objects.isNull(request)) {
+            throw new ParamCheckException("请求不能为空，请检查！！！");
+        }
+        checkUserId(request.getStudentUserId(), "student_userid");
+        if (StringUtils.isEmpty(request.getName())) {
+            throw new ParamCheckException("学生姓名不能为空，请检查！！！");
+        }
+        checkDepartmentList(request.getDepartment());
+        return schoolClient.createStudent(request, applicationName);
+    }
+
+    /**
+     * 删除学生
+     *
+     * @param userId          家校通讯录学生userid
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse deleteStudent(String userId, String applicationName) {
+        checkApplication(applicationName);
+        checkUserId(userId, "userid");
+        return schoolClient.deleteStudent(userId, applicationName);
+    }
+
+    /**
+     * 更新学生
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse updateStudent(UpdateStudentRequest request, String applicationName) {
+        checkApplication(applicationName);
+        if (Objects.isNull(request)) {
+            throw new ParamCheckException("请求不能为空，请检查！！！");
+        }
+        checkUserId(request.getStudentUserId(), "student_userid");
+        return schoolClient.updateStudent(request, applicationName);
+    }
+
+    /**
+     * 批量创建学生
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 批量结果
+     */
+    public BatchStudentResultResponse batchCreateStudent(BatchStudentOperationRequest request, String applicationName) {
+        checkApplication(applicationName);
+        checkStudentOperationRequest(request, true);
+        return schoolClient.batchCreateStudent(request, applicationName);
+    }
+
+    /**
+     * 批量删除学生
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 批量结果
+     */
+    public BatchStudentResultResponse batchDeleteStudent(UserIdListRequest request, String applicationName) {
+        checkApplication(applicationName);
+        checkUserIdList(request);
+        return schoolClient.batchDeleteStudent(request, applicationName);
+    }
+
+    /**
+     * 批量更新学生
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 批量结果
+     */
+    public BatchStudentResultResponse batchUpdateStudent(BatchStudentOperationRequest request, String applicationName) {
+        checkApplication(applicationName);
+        checkStudentOperationRequest(request, false);
+        return schoolClient.batchUpdateStudent(request, applicationName);
+    }
+
+    /**
+     * 创建家长
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse createParent(CreateParentRequest request, String applicationName) {
+        checkApplication(applicationName);
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getParentUserId())) {
+            throw new ParamCheckException("parent_userid 不能为空，请检查！！！");
+        }
+        if (StringUtils.isEmpty(request.getMobile())) {
+            throw new ParamCheckException("家长手机号不能为空，请检查！！！");
+        }
+        checkParentChildren(request.getChildren());
+        return schoolClient.createParent(request, applicationName);
+    }
+
+    /**
+     * 删除家长
+     *
+     * @param userId          家校通讯录家长userid
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse deleteParent(String userId, String applicationName) {
+        checkApplication(applicationName);
+        checkUserId(userId, "userid");
+        return schoolClient.deleteParent(userId, applicationName);
+    }
+
+    /**
+     * 更新家长
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse updateParent(UpdateParentRequest request, String applicationName) {
+        checkApplication(applicationName);
+        if (Objects.isNull(request) || StringUtils.isEmpty(request.getParentUserId())) {
+            throw new ParamCheckException("parent_userid 不能为空，请检查！！！");
+        }
+        checkParentChildren(request.getChildren());
+        return schoolClient.updateParent(request, applicationName);
+    }
+
+    /**
+     * 批量创建家长
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 批量结果
+     */
+    public BatchParentResultResponse batchCreateParent(BatchParentOperationRequest request, String applicationName) {
+        checkApplication(applicationName);
+        checkParentOperationRequest(request, true);
+        return schoolClient.batchCreateParent(request, applicationName);
+    }
+
+    /**
+     * 批量删除家长
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 批量结果
+     */
+    public BatchParentResultResponse batchDeleteParent(UserIdListRequest request, String applicationName) {
+        checkApplication(applicationName);
+        checkUserIdList(request);
+        return schoolClient.batchDeleteParent(request, applicationName);
+    }
+
+    /**
+     * 批量更新家长
+     *
+     * @param request         请求
+     * @param applicationName 应用名称
+     * @return 批量结果
+     */
+    public BatchParentResultResponse batchUpdateParent(BatchParentOperationRequest request, String applicationName) {
+        checkApplication(applicationName);
+        checkParentOperationRequest(request, false);
+        return schoolClient.batchUpdateParent(request, applicationName);
+    }
+
+    /**
+     * 获取家校通讯录成员详情
+     *
+     * @param userId          家长或学生的userid
+     * @param applicationName 应用名称
+     * @return 用户详情
+     */
+    public SchoolUserDetailResponse getSchoolUser(String userId, String applicationName) {
+        checkApplication(applicationName);
+        checkUserId(userId, "userid");
+        return schoolClient.getSchoolUser(userId, applicationName);
+    }
+
+    /**
+     * 获取班级下的学生列表
+     *
+     * @param departmentId    家校部门id
+     * @param applicationName 应用名称
+     * @return 学生列表
+     */
+    public StudentListResponse listStudents(Integer departmentId, String applicationName) {
+        checkApplication(applicationName);
+        checkDepartmentId(departmentId);
+        return schoolClient.listStudents(departmentId, applicationName);
+    }
+
+    /**
+     * 设置家校通讯录自动同步模式
+     *
+     * @param archSyncMode    同步模式
+     * @param applicationName 应用名称
+     * @return 基础响应
+     */
+    public BaseResponse setArchSyncMode(Integer archSyncMode, String applicationName) {
+        checkApplication(applicationName);
+        if (Objects.isNull(archSyncMode) || archSyncMode < 1 || archSyncMode > 3) {
+            throw new ParamCheckException("arch_sync_mode 只能为1、2或3，请检查！！！");
+        }
+        SetArchSyncModeRequest request = new SetArchSyncModeRequest();
+        request.setArchSyncMode(archSyncMode);
+        return schoolClient.setArchSyncMode(request, applicationName);
+    }
+
+    /**
+     * 获取班级下的家长列表
+     *
+     * @param departmentId    家校部门id
+     * @param applicationName 应用名称
+     * @return 家长列表
+     */
+    public ParentListResponse listParents(Integer departmentId, String applicationName) {
+        checkApplication(applicationName);
+        checkDepartmentId(departmentId);
+        return schoolClient.listParents(departmentId, applicationName);
+    }
+
+    private void checkUserId(String userId, String fieldName) {
+        if (StringUtils.isEmpty(userId) || userId.length() > 64) {
+            throw new ParamCheckException(fieldName + " 不能为空且长度为1~64个字符，请检查！！！");
+        }
+    }
+
+    private void checkDepartmentList(List<Integer> departments) {
+        if (Objects.isNull(departments) || departments.isEmpty() || departments.size() > 20) {
+            throw new ParamCheckException("department 必须包含1~20个班级id，请检查！！！");
+        }
+    }
+
+    private void checkUserIdList(UserIdListRequest request) {
+        if (Objects.isNull(request) || Objects.isNull(request.getUserIdList())
+                || request.getUserIdList().isEmpty() || request.getUserIdList().size() > 100) {
+            throw new ParamCheckException("useridlist 必须包含1~100个账号，请检查！！！");
+        }
+        for (String userId : request.getUserIdList()) {
+            checkUserId(userId, "useridlist 中的userid");
+        }
+    }
+
+    private void checkStudentOperationRequest(BatchStudentOperationRequest request, boolean createMode) {
+        if (Objects.isNull(request) || Objects.isNull(request.getStudents())
+                || request.getStudents().isEmpty() || request.getStudents().size() > 100) {
+            throw new ParamCheckException("students 必须包含1~100个学生，请检查！！！");
+        }
+        for (StudentItem student : request.getStudents()) {
+            checkUserId(student.getStudentUserId(), "students.student_userid");
+            if (createMode) {
+                if (StringUtils.isEmpty(student.getName())) {
+                    throw new ParamCheckException("students.name 不能为空，请检查！！！");
+                }
+                checkDepartmentList(student.getDepartment());
+            }
+        }
+    }
+
+    private void checkParentOperationRequest(BatchParentOperationRequest request, boolean createMode) {
+        if (Objects.isNull(request) || Objects.isNull(request.getParents())
+                || request.getParents().isEmpty() || request.getParents().size() > 100) {
+            throw new ParamCheckException("parents 必须包含1~100个家长，请检查！！！");
+        }
+        for (ParentItem parent : request.getParents()) {
+            checkUserId(parent.getParentUserId(), "parents.parent_userid");
+            if (createMode) {
+                if (StringUtils.isEmpty(parent.getMobile())) {
+                    throw new ParamCheckException("parents.mobile 不能为空，请检查！！！");
+                }
+                checkParentChildren(parent.getChildren());
+            }
+        }
+    }
+
+    private void checkParentChildren(List<ParentChildItem> children) {
+        if (Objects.isNull(children) || children.isEmpty() || children.size() > 10) {
+            throw new ParamCheckException("children 必须包含1~10个孩子关系，请检查！！！");
+        }
+        for (ParentChildItem child : children) {
+            if (StringUtils.isEmpty(child.getStudentUserId()) || StringUtils.isEmpty(child.getRelation())) {
+                throw new ParamCheckException("孩子的student_userid和relation不能为空，请检查！！！");
+            }
+        }
+    }
+
+    private void checkDepartmentId(Integer departmentId) {
+        if (Objects.isNull(departmentId) || departmentId <= 0) {
+            throw new ParamCheckException("department_id 不能为空且必须大于0，请检查！！！");
+        }
     }
 
     private void checkNotificationMode(Integer subscribeMode) {

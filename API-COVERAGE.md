@@ -12,16 +12,16 @@
   - ⚠️ 部分已对接：一个文档页包含多条路由，其中至少一条已实现，但未全部实现。
   - ❌ 未对接：属于服务端 API，但当前代码未找到对应 Feign 路由。
   - ⛔ 范围外：概念说明、接入指引、回调事件、前端/客户端能力、官方 SDK/专区程序、调试资料或非 REST 内容。
-- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 493 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
+- 核对方法：官方侧边栏标题 + 已成功抓取的官方页路由 + `src/main/java/com/github/shuaidd/client/*.java` 中 509 个 Feign 方法静态比对。官方站点抓取触发频控后未绕过验证码；未抓到真实路由的页面按分类、页面标题和代码方法判断。
 - 一个文档页可能包含多个路由或多个操作；“已对接”证据列只列主要 Feign Client/方法。
 
 ## 总体统计
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 414 |
+| ✅ 已对接 | 430 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 144 |
+| ❌ 未对接 | 128 |
 | ⛔ 范围外 | 178 |
 | 合计 | 738 |
 
@@ -468,7 +468,7 @@
 
 ## 家校沟通
 
-状态：✅ 8；⚠️ 0；❌ 21；⛔ 6
+状态：✅ 24；⚠️ 0；❌ 5；⛔ 6
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
@@ -483,22 +483,22 @@
 |  | 构造网页授权链接 | [91857](https://developer.work.weixin.qq.com/document/path/91857) | ⛔ 范围外 | — |
 |  | 获取访问用户身份 | [91707](https://developer.work.weixin.qq.com/document/path/91707) | ✅ 已对接 | AuthClient#getUserInfo 与 AuthenticationService#getUserInfo |
 |  | 获取家校访问用户身份 | [95791](https://developer.work.weixin.qq.com/document/path/95791) | ✅ 已对接 | SchoolClient#95791 相关路由与 SchoolService |
-| 学生与家长管理 | 创建学生 | [92325](https://developer.work.weixin.qq.com/document/path/92325) | ❌ 未对接 | — |
-|  | 删除学生 | [92326](https://developer.work.weixin.qq.com/document/path/92326) | ❌ 未对接 | — |
-|  | 更新学生 | [92327](https://developer.work.weixin.qq.com/document/path/92327) | ❌ 未对接 | — |
-|  | 批量创建学生 | [92328](https://developer.work.weixin.qq.com/document/path/92328) | ❌ 未对接 | — |
-|  | 批量删除学生 | [92329](https://developer.work.weixin.qq.com/document/path/92329) | ❌ 未对接 | — |
-|  | 批量更新学生 | [92330](https://developer.work.weixin.qq.com/document/path/92330) | ❌ 未对接 | — |
-|  | 创建家长 | [92331](https://developer.work.weixin.qq.com/document/path/92331) | ❌ 未对接 | — |
-|  | 删除家长 | [92332](https://developer.work.weixin.qq.com/document/path/92332) | ❌ 未对接 | — |
-|  | 更新家长 | [92333](https://developer.work.weixin.qq.com/document/path/92333) | ❌ 未对接 | — |
-|  | 批量创建家长 | [92334](https://developer.work.weixin.qq.com/document/path/92334) | ❌ 未对接 | — |
-|  | 批量删除家长 | [92335](https://developer.work.weixin.qq.com/document/path/92335) | ❌ 未对接 | — |
-|  | 批量更新家长 | [92336](https://developer.work.weixin.qq.com/document/path/92336) | ❌ 未对接 | — |
-|  | 读取学生或家长 | [92337](https://developer.work.weixin.qq.com/document/path/92337) | ❌ 未对接 | — |
-|  | 获取部门学生详情 | [92338](https://developer.work.weixin.qq.com/document/path/92338) | ❌ 未对接 | — |
-|  | 设置家校通讯录自动同步模式 | [92345](https://developer.work.weixin.qq.com/document/path/92345) | ❌ 未对接 | — |
-|  | 获取部门家长详情 | [92446](https://developer.work.weixin.qq.com/document/path/92446) | ❌ 未对接 | — |
+| 学生与家长管理 | 创建学生 | [92325](https://developer.work.weixin.qq.com/document/path/92325) | ✅ 已对接 | SchoolClient#92325 相关路由与 SchoolService |
+|  | 删除学生 | [92326](https://developer.work.weixin.qq.com/document/path/92326) | ✅ 已对接 | SchoolClient#92326 相关路由与 SchoolService |
+|  | 更新学生 | [92327](https://developer.work.weixin.qq.com/document/path/92327) | ✅ 已对接 | SchoolClient#92327 相关路由与 SchoolService |
+|  | 批量创建学生 | [92328](https://developer.work.weixin.qq.com/document/path/92328) | ✅ 已对接 | SchoolClient#92328 相关路由与 SchoolService |
+|  | 批量删除学生 | [92329](https://developer.work.weixin.qq.com/document/path/92329) | ✅ 已对接 | SchoolClient#92329 相关路由与 SchoolService |
+|  | 批量更新学生 | [92330](https://developer.work.weixin.qq.com/document/path/92330) | ✅ 已对接 | SchoolClient#92330 相关路由与 SchoolService |
+|  | 创建家长 | [92331](https://developer.work.weixin.qq.com/document/path/92331) | ✅ 已对接 | SchoolClient#92331 相关路由与 SchoolService |
+|  | 删除家长 | [92332](https://developer.work.weixin.qq.com/document/path/92332) | ✅ 已对接 | SchoolClient#92332 相关路由与 SchoolService |
+|  | 更新家长 | [92333](https://developer.work.weixin.qq.com/document/path/92333) | ✅ 已对接 | SchoolClient#92333 相关路由与 SchoolService |
+|  | 批量创建家长 | [92334](https://developer.work.weixin.qq.com/document/path/92334) | ✅ 已对接 | SchoolClient#92334 相关路由与 SchoolService |
+|  | 批量删除家长 | [92335](https://developer.work.weixin.qq.com/document/path/92335) | ✅ 已对接 | SchoolClient#92335 相关路由与 SchoolService |
+|  | 批量更新家长 | [92336](https://developer.work.weixin.qq.com/document/path/92336) | ✅ 已对接 | SchoolClient#92336 相关路由与 SchoolService |
+|  | 读取学生或家长 | [92337](https://developer.work.weixin.qq.com/document/path/92337) | ✅ 已对接 | SchoolClient#92337 相关路由与 SchoolService |
+|  | 获取部门学生详情 | [92338](https://developer.work.weixin.qq.com/document/path/92338) | ✅ 已对接 | SchoolClient#92338 相关路由与 SchoolService |
+|  | 设置家校通讯录自动同步模式 | [92345](https://developer.work.weixin.qq.com/document/path/92345) | ✅ 已对接 | SchoolClient#92345 相关路由与 SchoolService |
+|  | 获取部门家长详情 | [92446](https://developer.work.weixin.qq.com/document/path/92446) | ✅ 已对接 | SchoolClient#92446 相关路由与 SchoolService |
 | 部门管理 | 创建部门 | [92340](https://developer.work.weixin.qq.com/document/path/92340) | ❌ 未对接 | — |
 |  | 更新部门 | [92341](https://developer.work.weixin.qq.com/document/path/92341) | ❌ 未对接 | — |
 |  | 删除部门 | [92342](https://developer.work.weixin.qq.com/document/path/92342) | ❌ 未对接 | — |
