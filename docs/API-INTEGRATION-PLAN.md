@@ -29,7 +29,7 @@
 | 6 | 效率工具：文档、日程、待办、收集表 | 53 | 已完成 | 已完成待办详情与状态更新、收集表管理、日程参与者、智能表格编组和智能文档页面、内容块、数据表与发布能力；更新重复日程核对为官方说明页。 |
 | 7 | 会议全家桶 | 128 | 已完成 | 第一子批完成基础成员/嘉宾、等候室、健康度、报名和发起统计 19 页；第二子批完成会控和投票 17 页；第三子批完成 Webinar 14 页；第四子批完成 PSTN 3 页；第五子批完成 Rooms 12 页，第六子批完成 MRA 4 页，第七子批完成布局和背景 15 页，第八子批完成录制 10 页，第九子批完成高级功能账号 3 页；31 个会议回调文档页已调整为范围外。 |
 | 8 | 家校沟通与家校应用 | 42 | 已完成 | 2026-11-22 完成 8A-8D 共 42 页；Feign 方法数 526；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过，真实接口调用未执行。 |
-| 9 | 政民沟通 | 21 | 待开始 | 按人员、咨询、消息和转接接口分组。 |
+| 9 | 政民沟通 | 21 | 进行中 | 已完成配置网格结构 5 页；事件类别和巡查/居民上报因官方文档返回验证码暂缓，不猜测路由。 |
 | 10 | 邮件 | 16 | 待开始 | 覆盖发送、收件箱、账号和高级功能账号。 |
 | 11 | 上下游、安全、微盘、智能表格编组 | 43 | 待开始 | 上下游已部分覆盖，优先补齐可独立验证的 REST 路由。 |
 | 12 | 打卡、审批、汇报、人事助手、高级功能等剩余业务 | 27 | 进行中 | 已完成打卡 3 个文档页；其余按审批、汇报、人事助手和高级功能继续拆分推进。 |
@@ -108,3 +108,5 @@
 - 2026-11-22：批次 7 第九子批完成高级功能账号 3 个文档页，覆盖 `meeting/vip/submit_batch_add_job`、`batch_add_job_result`、`submit_batch_del_job`、`batch_del_job_result` 和 `list`；一个批次包含 3 个文档页 / 5 个 REST 路由，新增 7 个模型文件均带中文业务含义注释，Service 校验成员列表非空且最多100个、成员ID、任务ID以及分页上限1~200；覆盖度更新为已对接406页、未对接183页，会议模块已对接108页、未对接32页，Feign方法数达到485；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。真实企微调用未执行。
 - 2026-11-22：批次 7 收尾完成，将 31 个会议回调文档 ID 调整为范围外，不实现回调代码；会议模块覆盖状态更新为已对接108页、未对接1页、范围外32页，总体状态更新为已对接406页、部分对接2页、未对接152页、范围外178页，Feign方法数保持485；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。真实企微调用未执行。
 - 2026-11-22：批次 8 完成 8D 家校应用 13 个文档页，覆盖 `health/get_health_report_stat`、`health/get_report_jobids`、`health/get_report_job_info`、`health/get_report_answer`、`living/get_user_all_livingid`、`school/living/get_living_info`、`school/living/get_watch_stat`、`school/living/get_unwatch_stat`、`living/delete_replay_data`、`school/living/get_watch_stat_v2`、`school/living/get_unwatch_stat_v2`、`school/get_payment_result` 和 `school/get_trade`；新增模型字段均带中文业务含义注释，Service 校验日期、任务/直播/收款/订单/成员 ID、分页范围和游标；覆盖度更新为已对接 445 页、部分对接 2 页、未对接 113 页、范围外 178 页，Feign 方法数达到 526；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。真实企微调用未执行。
+
+- 2026-11-22：批次 9 首子批完成配置网格结构 5 个文档页，覆盖 `report/grid/add`、`report/grid/update`、`report/grid/delete`、`report/grid/list` 和 `report/grid/get_user_grid_info`；新增模型字段均带中文业务含义注释，Service 校验应用名、网格名称长度、父/目标网格 ID、负责人数量、成员上限和成员 ID；事件类别及巡查/居民上报页当前被官方站验证码拦截，已保留未对接且不猜测路由。覆盖度更新为已对接 450 页、部分对接 2 页、未对接 108 页、范围外 178 页，Feign 方法数达到 531；`mvn -B -pl qywx-spring-boot-api -am -DskipTests package` 编译通过。真实企微调用未执行。

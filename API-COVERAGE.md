@@ -19,9 +19,9 @@
 
 | 状态 | 文档页数 |
 | --- | ---: |
-| ✅ 已对接 | 445 |
+| ✅ 已对接 | 450 |
 | ⚠️ 部分已对接 | 2 |
-| ❌ 未对接 | 113 |
+| ❌ 未对接 | 108 |
 | ⛔ 范围外 | 178 |
 | 合计 | 738 |
 
@@ -530,16 +530,16 @@
 
 ## 政民沟通
 
-状态：✅ 0；⚠️ 0；❌ 21；⛔ 3
+状态：✅ 5；⚠️ 0；❌ 16；⛔ 3
 
 | 分组 | 文档页 | 官方链接 | 状态 | 代码证据 / 说明 |
 | --- | --- | --- | --- | --- |
 | 配置网格结构 | 概述 | [94557](https://developer.work.weixin.qq.com/document/path/94557) | ⛔ 范围外 | — |
-|  | 添加网格 | [94478](https://developer.work.weixin.qq.com/document/path/94478) | ❌ 未对接 | — |
-|  | 编辑网格 | [94479](https://developer.work.weixin.qq.com/document/path/94479) | ❌ 未对接 | — |
-|  | 删除网格 | [94480](https://developer.work.weixin.qq.com/document/path/94480) | ❌ 未对接 | — |
-|  | 获取网格列表 | [94481](https://developer.work.weixin.qq.com/document/path/94481) | ❌ 未对接 | — |
-|  | 获取用户负责及参与的网格列表 | [94482](https://developer.work.weixin.qq.com/document/path/94482) | ❌ 未对接 | — |
+|  | 添加网格 | [94478](https://developer.work.weixin.qq.com/document/path/94478) | ✅ 已对接 | `GovernmentCommunicationClient.addGrid` / `GovernmentCommunicationService.addGrid` |
+|  | 编辑网格 | [94479](https://developer.work.weixin.qq.com/document/path/94479) | ✅ 已对接 | `GovernmentCommunicationClient.updateGrid` / `GovernmentCommunicationService.updateGrid` |
+|  | 删除网格 | [94480](https://developer.work.weixin.qq.com/document/path/94480) | ✅ 已对接 | `GovernmentCommunicationClient.deleteGrid` / `GovernmentCommunicationService.deleteGrid` |
+|  | 获取网格列表 | [94481](https://developer.work.weixin.qq.com/document/path/94481) | ✅ 已对接 | `GovernmentCommunicationClient.listGrid` / `GovernmentCommunicationService.listGrid` |
+|  | 获取用户负责及参与的网格列表 | [94482](https://developer.work.weixin.qq.com/document/path/94482) | ✅ 已对接 | `GovernmentCommunicationClient.getUserGridInfo` / `GovernmentCommunicationService.getUserGridInfo` |
 | 配置事件类别 | 添加事件类别 | [94536](https://developer.work.weixin.qq.com/document/path/94536) | ❌ 未对接 | — |
 |  | 修改事件类别 | [94537](https://developer.work.weixin.qq.com/document/path/94537) | ❌ 未对接 | — |
 |  | 删除事件类别 | [94538](https://developer.work.weixin.qq.com/document/path/94538) | ❌ 未对接 | — |
