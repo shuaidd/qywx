@@ -36,12 +36,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * 描述 已迁移到 qywx-core 的 client 接口的守卫测试
  * <p>
- * 迁移由 codemod 分批完成（P2.2–P2.6），每批把新落地的接口追加到 {@link #MIGRATED}：
+ * 迁移由 codemod 分五批完成（P2.2–P2.6），每批把新落地的接口追加到 {@link #MIGRATED}，现已覆盖全部 27 个 client：
  * <ul>
  * <li>逐个接口在 {@link QywxContract} 下创建代理：{@code target} 会解析全部方法的契约，
  * 模板变量与 {@code @Param} 不对应、落盘目标参数以外的未引用参数都会在这一步抛错</li>
  * <li>显式清单必须与 {@code com.github.shuaidd.client} 包里的接口一一对应，防止新增的 client 漏测；
- * 清单里的每个接口都必须出现在 5.2.0 契约快照的 manifest 中</li>
+ * 清单必须与 5.2.0 契约快照 manifest 里的 client 完全相等，多一个少一个都失败</li>
  * <li>5.x 的 {@code @RequestParam(required = false)} 为 null 时 Spring MVC 契约不发送该查询参数；
  * 原生 Feign 对 null 的 {@code @Param} 同样整体省略（{@code RequestTemplate#resolve}），用例锁定这一等价性</li>
  * </ul>
@@ -71,7 +71,9 @@ class ClientInterfaceTest {
             // 批 3
             WeChatCallCenterClient.class, WorkOaClient.class, EfficiencyToolClient.class,
             // 批 4
-            WechatDocClient.class, SchoolClient.class, AddressBookClient.class));
+            WechatDocClient.class, SchoolClient.class, AddressBookClient.class,
+            // 批 5
+            ExternalContactClient.class, MeetingAdvancedClient.class));
 
     /**
      * 5.x 写法：{@code @RequestParam(value = "id", required = false) Integer id}，即可选的查询参数
@@ -109,11 +111,12 @@ class ClientInterfaceTest {
     }
 
     /**
-     * 清单里的每个接口都有 5.2.0 契约快照（全部迁移完成后清单与 manifest 相等）
+     * 清单与 5.2.0 契约快照 manifest 完全相等：多出的接口没有契约快照，缺少的接口尚未迁移
      */
     @Test
     void everyMigratedInterfaceHasAContractSnapshot() throws IOException {
-        assertTrue(manifestClients().containsAll(names(MIGRATED)), "清单里的接口都应出现在 5.2.0 契约快照中");
+        assertEquals(manifestClients(), names(MIGRATED),
+                "MIGRATED 必须与 5.2.0 契约快照 manifest 中的 client 完全相等：多出的接口没有契约快照，缺少的接口尚未迁移");
     }
 
     /**
