@@ -8,10 +8,13 @@ import com.github.shuaidd.file.QywxFile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
@@ -56,6 +59,17 @@ public final class ContractSnapshot {
             }
         }
         throw new AssertionError("找不到契约条目：" + id);
+    }
+
+    /**
+     * 取指定 client 的全部契约条目（不可变，按快照顺序）；P1.6 的参数化回放与 P2.7 的全量回放共用
+     */
+    public static List<JsonNode> entries(String client) {
+        List<JsonNode> entries = new ArrayList<>();
+        for (JsonNode entry : CLIENTS.computeIfAbsent(client, ContractSnapshot::load)) {
+            entries.add(entry);
+        }
+        return Collections.unmodifiableList(entries);
     }
 
     /**

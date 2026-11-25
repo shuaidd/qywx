@@ -229,6 +229,16 @@ public final class ContractFeign {
     }
 
     /**
+     * 构造 gettoken 的响应体（JSON），供 {@code RecordingClient#respond} 预置响应
+     *
+     * @param accessToken 令牌
+     * @return 响应体
+     */
+    public static String tokenBody(String accessToken) {
+        return "{\"errcode\":0,\"errmsg\":\"ok\",\"access_token\":\"" + accessToken
+                + "\",\"expires_in\":7200}";
+    }
+    /**
      * 构造 gettoken 的响应体
      *
      * @param accessToken 令牌
