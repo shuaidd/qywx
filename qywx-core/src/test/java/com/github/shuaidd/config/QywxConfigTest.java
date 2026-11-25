@@ -2,9 +2,12 @@ package com.github.shuaidd.config;
 
 import com.github.shuaidd.client.config.ApplicationProperties;
 import com.github.shuaidd.client.config.CallbackProperties;
+import com.github.shuaidd.token.InMemoryTokenStore;
+import com.github.shuaidd.token.TokenStore;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -117,5 +120,36 @@ public class QywxConfigTest {
         config.setCallbackList(null);
         assertTrue(config.getApplicationList().isEmpty());
         assertTrue(config.getCallbackList().isEmpty());
+    }
+    /**
+     * 按应用别名查找应用配置；未配置时返回 null
+     */
+    @Test
+    public void findApplicationByName() {
+        ApplicationProperties a = new ApplicationProperties();
+        a.setApplicationName("a");
+        ApplicationProperties b = new ApplicationProperties();
+        b.setApplicationName("b");
+        QywxConfig config = new QywxConfig();
+        config.setApplicationList(Arrays.asList(a, b));
+
+        assertSame(a, config.findApplication("a"));
+        assertSame(b, config.findApplication("b"));
+        assertNull(config.findApplication("c"));
+        assertNull(new QywxConfig().findApplication("a"));
+    }
+
+    /**
+     * tokenStore 默认为 null（入口装配时回退到进程内缓存），可经 Builder 或 setter 指定
+     */
+    @Test
+    public void tokenStoreDefaultsToNullAndIsSettable() {
+        TokenStore store = new InMemoryTokenStore();
+        assertNull(new QywxConfig().getTokenStore());
+        assertSame(store, QywxConfig.builder().tokenStore(store).build().getTokenStore());
+
+        QywxConfig config = new QywxConfig();
+        config.setTokenStore(store);
+        assertSame(store, config.getTokenStore());
     }
 }

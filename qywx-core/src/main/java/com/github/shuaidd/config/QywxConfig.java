@@ -2,9 +2,11 @@ package com.github.shuaidd.config;
 
 import com.github.shuaidd.client.config.ApplicationProperties;
 import com.github.shuaidd.client.config.CallbackProperties;
+import com.github.shuaidd.token.TokenStore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 描述 企业微信客户端配置（不依赖 Spring，可在纯 Java 环境直接使用）。
@@ -76,6 +78,11 @@ public class QywxConfig {
      * 读取响应的超时时间（毫秒）
      */
     private int readTimeoutMillis = DEFAULT_READ_TIMEOUT_MILLIS;
+
+    /**
+     * access_token 缓存组件；为 null 时使用进程内缓存（{@link com.github.shuaidd.token.InMemoryTokenStore}）
+     */
+    private TokenStore tokenStore;
 
     public String getCorpId() {
         return corpId;
@@ -149,6 +156,29 @@ public class QywxConfig {
 
     public void setReadTimeoutMillis(int readTimeoutMillis) {
         this.readTimeoutMillis = readTimeoutMillis;
+    }
+
+    public TokenStore getTokenStore() {
+        return tokenStore;
+    }
+
+    public void setTokenStore(TokenStore tokenStore) {
+        this.tokenStore = tokenStore;
+    }
+
+    /**
+     * 按应用别名查找应用配置
+     *
+     * @param applicationName 应用别名
+     * @return 应用配置；未配置时返回 null
+     */
+    public ApplicationProperties findApplication(String applicationName) {
+        for (ApplicationProperties application : applicationList) {
+            if (application != null && Objects.equals(applicationName, application.getApplicationName())) {
+                return application;
+            }
+        }
+        return null;
     }
 
     /**
@@ -263,6 +293,17 @@ public class QywxConfig {
 
         public Builder readTimeoutMillis(int readTimeoutMillis) {
             config.setReadTimeoutMillis(readTimeoutMillis);
+            return this;
+        }
+
+        /**
+         * 指定 access_token 缓存组件（不指定则使用进程内缓存）
+         *
+         * @param tokenStore 缓存组件
+         * @return this
+         */
+        public Builder tokenStore(TokenStore tokenStore) {
+            config.setTokenStore(tokenStore);
             return this;
         }
 
