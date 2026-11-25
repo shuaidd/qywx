@@ -9,6 +9,7 @@
     <packaging>pom</packaging>
     <version>5.2.0</version>
     <modules>
+        <module>qywx-core</module>
         <module>qywx-spring-boot-starter</module>
         <module>qywx-spring-boot-autoconfigurator</module>
         <module>qywx-spring-boot-api</module>
@@ -21,8 +22,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.release>17</maven.compiler.release>
         <org.springframework.cloud.version>2023.0.4</org.springframework.cloud.version>
         <feign-jackson>10.2.0</feign-jackson>
         <commons-lang3>3.17.0</commons-lang3>
@@ -74,6 +74,12 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool-all}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.shuaidd</groupId>
+                <artifactId>qywx-core</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>

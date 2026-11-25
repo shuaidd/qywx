@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>qywx</artifactId>
+        <groupId>com.github.shuaidd</groupId>
+        <version>5.2.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>qywx-core</artifactId>
+
+    <name>qywx-core</name>
+    <url>https://github.com/shuaidd</url>
+    <description>企业微信api调用核心实现（不依赖 Spring，可在纯 Java 环境直接使用）</description>
+
+    <properties>
+        <!-- 以下三项显式声明版本：core 不依赖 Spring，版本不能跟随 spring-boot-dependencies 漂移 -->
+        <qywx.feign.version>13.5</qywx.feign.version>
+        <qywx.jackson.version>2.15.4</qywx.jackson.version>
+        <qywx.slf4j.version>2.0.9</qywx.slf4j.version>
+        <qywx.junit-jupiter.version>5.10.1</qywx.junit-jupiter.version>
+    </properties>
+
+    <dependencies>
+        <!-- 声明式 HTTP 客户端（feign-core 自身无编译期依赖） -->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-core</artifactId>
+            <version>${qywx.feign.version}</version>
+        </dependency>
+
+        <!-- JSON 编解码；三件套版本保持一致 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${qywx.jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${qywx.jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${qywx.jackson.version}</version>
+        </dependency>
+
+        <!-- 日志门面 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${qywx.slf4j.version}</version>
+        </dependency>
+
+        <!-- 以下由根 pom 的 dependencyManagement 管理版本 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <!-- 仅 API（XML 解析用到 JAXB 注解）；运行时实现由使用者按需提供 -->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${qywx.junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <compilerArgs>
+                        <compilerArg>-parameters</compilerArg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
