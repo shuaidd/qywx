@@ -69,7 +69,9 @@ class ClientInterfaceTest {
             GovernmentCommunicationClient.class, LinkedCorpClient.class, MessageClient.class, WorkApplicationClient.class,
             PaymentClient.class, SecurityClient.class, WechatSmartSheetClient.class, EnterpriseEmailClient.class,
             // 批 3
-            WeChatCallCenterClient.class, WorkOaClient.class, EfficiencyToolClient.class));
+            WeChatCallCenterClient.class, WorkOaClient.class, EfficiencyToolClient.class,
+            // 批 4
+            WechatDocClient.class, SchoolClient.class, AddressBookClient.class));
 
     /**
      * 5.x 写法：{@code @RequestParam(value = "id", required = false) Integer id}，即可选的查询参数
@@ -131,6 +133,42 @@ class ClientInterfaceTest {
 
         assertEquals(RecordingClient.TARGET_URL + "/department/list?app=contract", recording.request(0).url());
         assertEquals(RecordingClient.TARGET_URL + "/department/list?id=5&app=contract", recording.request(1).url());
+    }
+
+    /**
+     * 真实 client 上的可选查询参数（5.x 的 {@code @RequestParam(required = false)}，共 4 处，全部在批 4）
+     * 为 null 时整体省略：URL 里不出现 {@code id=}，其余参数按模板顺序保留
+     */
+    @Test
+    void omitsNullOptionalParamOnRealClients() {
+        RecordingClient recording = new RecordingClient();
+        QywxContract contract = new QywxContract();
+        AddressBookClient addressBook = Feign.builder()
+                .contract(contract)
+                .client(recording)
+                .decoder(new CustomJacksonDecoder())
+                .target(AddressBookClient.class, RecordingClient.TARGET_URL);
+        SchoolClient school = Feign.builder()
+                .contract(contract)
+                .client(recording)
+                .decoder(new CustomJacksonDecoder())
+                .target(SchoolClient.class, RecordingClient.TARGET_URL);
+
+        addressBook.deleteDepartment(null, "contract");
+        addressBook.departmentList(null, "contract");
+        addressBook.departmentSimpleList(null, "contract");
+        school.listSchoolDepartments(null, "contract");
+
+        String[] expectedPaths = {
+                "/department/delete?app=contract",
+                "/department/list?app=contract",
+                "/department/simplelist?app=contract",
+                "/school/department/list?app=contract"
+        };
+        assertEquals(expectedPaths.length, recording.requests().size());
+        for (int i = 0; i < expectedPaths.length; i++) {
+            assertEquals(RecordingClient.TARGET_URL + expectedPaths[i], recording.request(i).url());
+        }
     }
 
     /**
