@@ -4,11 +4,13 @@ import com.github.shuaidd.client.CommonClient;
 import com.github.shuaidd.config.QywxConfig;
 import com.github.shuaidd.enums.ErrorCode;
 import com.github.shuaidd.exception.WeChatException;
+import com.github.shuaidd.file.DownloadContext;
 import com.github.shuaidd.token.TokenManager;
 import feign.InvocationHandlerFactory;
 import feign.InvocationHandlerFactory.MethodHandler;
 import feign.Param;
 import feign.Target;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,6 +33,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * 40014 / 41001 / 42001 时，清除该应用的 access_token 缓存后重试一次；其余异常原样抛出，重试仍失败也原样抛出。
  * 与 5.x 的差异：应用名取自 {@code @Param("app")} 标注的参数，而不是「最后一个参数」；没有该参数的方法不重试。
  * 错误码以响应原始码为准：{@code WeChatException.unknown} 携带 42001 等码时同样重试（5.x 的切面只认枚举码，不重试）。
+ * <p>
+ * 另一职责是在调用期间传递素材下载的落盘目标：{@code @Param("downloadFilePath")} 不随请求发送（{@code QywxContract} 把它移出表单参数），
+ * 这里在调用期间（含令牌失效后的重试）用 {@link DownloadContext} 打开作用域，结束后恢复为之前的值。该 handler 是 core 的必装项。
  *
  * @author ddshuai
  * date 2026-11-26 00:03
@@ -56,6 +61,9 @@ public class TokenRetryInvocationHandlerFactory implements InvocationHandlerFact
 
     /** 方法到 {@code @Param("app")} 参数下标的缓存，-1 表示方法没有应用名参数 */
     private final ConcurrentHashMap<Method, Integer> appParamIndexes = new ConcurrentHashMap<>();
+
+    /** 方法到 {@code @Param("downloadFilePath")} 参数下标的缓存，-1 表示方法没有落盘目标参数 */
+    private final ConcurrentHashMap<Method, Integer> downloadParamIndexes = new ConcurrentHashMap<>();
 
     public TokenRetryInvocationHandlerFactory(TokenManager tokenManager, QywxConfig config) {
         this.tokenManager = Objects.requireNonNull(tokenManager, "tokenManager");
@@ -91,6 +99,20 @@ public class TokenRetryInvocationHandlerFactory implements InvocationHandlerFact
                 return invokeObjectMethod(proxy, method, args);
             }
 
+            String downloadTarget = downloadTargetOf(method, args);
+            if (downloadTarget == null) {
+                return invokeWithRetry(proxy, method, args);
+            }
+            //带外参数：调用期间（含令牌失效后的重试）打开落盘目标作用域，结束后恢复为之前的值
+            try (DownloadContext.Scope ignored = DownloadContext.scope(downloadTarget)) {
+                return invokeWithRetry(proxy, method, args);
+            }
+        }
+
+        /**
+         * 先按默认流程调用，令牌失效时重试一次；debug 模式下打印耗时
+         */
+        private Object invokeWithRetry(Object proxy, Method method, Object[] args) throws Throwable {
             boolean logTiming = Boolean.TRUE.equals(config.getDebugMode()) && logger.isDebugEnabled();
             long start = logTiming ? System.nanoTime() : 0L;
             try {
@@ -194,6 +216,22 @@ public class TokenRetryInvocationHandlerFactory implements InvocationHandlerFact
         private int appParamIndexOf(Method method) {
             return appParamIndexes.computeIfAbsent(method, TokenRetryInvocationHandlerFactory::findAppParamIndex);
         }
+
+        /**
+         * 取方法上落盘目标参数的实参；没有该参数、实参为 null 或空白时返回 null（此时不打开作用域，沿用 {@link DownloadContext} 当前的值）
+         */
+        private String downloadTargetOf(Method method, Object[] args) {
+            int index = downloadParamIndexOf(method);
+            if (index < 0 || args == null || index >= args.length) {
+                return null;
+            }
+            Object value = args[index];
+            return value == null || StringUtils.isBlank(value.toString()) ? null : value.toString();
+        }
+
+        private int downloadParamIndexOf(Method method) {
+            return downloadParamIndexes.computeIfAbsent(method, TokenRetryInvocationHandlerFactory::findDownloadParamIndex);
+        }
     }
 
     /**
@@ -203,10 +241,31 @@ public class TokenRetryInvocationHandlerFactory implements InvocationHandlerFact
      * @return 参数下标，没有则为 -1
      */
     private static int findAppParamIndex(Method method) {
+        return findParamIndex(method, CommonClient.HEAD_KEY);
+    }
+
+    /**
+     * 查找标注了 {@code @Param("downloadFilePath")} 的参数下标
+     *
+     * @param method client 方法
+     * @return 参数下标，没有则为 -1
+     */
+    private static int findDownloadParamIndex(Method method) {
+        return findParamIndex(method, DownloadContext.DOWNLOAD_FILE_PATH);
+    }
+
+    /**
+     * 查找标注了指定名称 {@code @Param} 的参数下标
+     *
+     * @param method client 方法
+     * @param name    参数名
+     * @return 参数下标，没有则为 -1
+     */
+    private static int findParamIndex(Method method, String name) {
         Annotation[][] parameterAnnotations = method.getParameterAnnotations();
         for (int i = 0; i < parameterAnnotations.length; i++) {
             for (Annotation annotation : parameterAnnotations[i]) {
-                if (annotation instanceof Param && CommonClient.HEAD_KEY.equals(((Param) annotation).value())) {
+                if (annotation instanceof Param && name.equals(((Param) annotation).value())) {
                     return i;
                 }
             }

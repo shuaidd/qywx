@@ -1,6 +1,7 @@
 package com.github.shuaidd.contract;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.github.shuaidd.client.QywxContract;
 import com.github.shuaidd.client.config.ApplicationProperties;
 import com.github.shuaidd.client.decoder.CustomJacksonDecoder;
 import com.github.shuaidd.client.encoder.JacksonJsonEncoder;
@@ -15,6 +16,7 @@ import com.github.shuaidd.token.TokenManager;
 import com.github.shuaidd.token.TokenStore;
 import feign.Feign;
 import feign.Retryer;
+import feign.codec.Decoder;
 import feign.codec.Encoder;
 
 import java.lang.reflect.InvocationTargetException;
@@ -24,9 +26,10 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * 描述 契约回放的装配辅助：按 core 的装配方式（multipart 包 JSON encoder、自定义 decoder、令牌拦截器、重试 handler）
+ * 描述 契约回放的装配辅助：按 core 的装配方式（QywxContract、multipart 包 JSON encoder、自定义 decoder、令牌拦截器、重试 handler）
  * 组装 Feign 客户端，并按契约条目反射发起调用
  * <p>
  * 契约快照里的参数（含文件内容）一律在运行时从快照读取，测试代码不写死。
@@ -79,11 +82,20 @@ public final class ContractFeign {
     }
 
     /**
-     * 带 token 拦截器的装配
+     * 带 token 拦截器的装配（decoder 为默认的 JSON decoder）
      */
     public static <T> T create(Class<T> type, Encoder encoder, QywxConfig config, TokenManager manager,
                                RecordingClient recording) {
+        return create(type, new CustomJacksonDecoder(), encoder, config, manager, recording);
+    }
+
+    /**
+     * 带 token 拦截器、指定 decoder 的装配（下载场景传 {@code WeChatMediaDecoder}）
+     */
+    public static <T> T create(Class<T> type, Decoder decoder, Encoder encoder, QywxConfig config, TokenManager manager,
+                               RecordingClient recording) {
         return builder(config, recording)
+                .decoder(decoder)
                 .encoder(new MultipartEncoder(encoder))
                 .requestInterceptor(new WeChatInterceptor(manager, config))
                 .invocationHandlerFactory(new TokenRetryInvocationHandlerFactory(manager, config))
@@ -107,6 +119,7 @@ public final class ContractFeign {
     public static Feign.Builder builder(QywxConfig config, RecordingClient recording) {
         assertEquals(RecordingClient.TARGET_URL, config.baseUrl(), "契约回放要求 baseUrl 恰为 RecordingClient.TARGET_URL");
         return Feign.builder()
+                .contract(new QywxContract())
                 .client(recording)
                 .decoder(new CustomJacksonDecoder())
                 .retryer(Retryer.NEVER_RETRY);
@@ -120,7 +133,27 @@ public final class ContractFeign {
      * @return 调用结果
      */
     public static Object call(Object api, JsonNode entry) {
+        return invoke(api, entry, ContractSnapshot.args(entry));
+    }
+
+    /**
+     * 按契约条目的方法名发起调用，并把指定下标的参数换成调用方给的值（快照里的值在回放时不适用时使用，
+     * 例如 5.2.0 录制的 downloadFilePath 是录制时的临时目录）
+     *
+     * @param api      Feign 代理
+     * @param entry    契约条目
+     * @param index    参数下标
+     * @param argument 替换后的实参
+     * @return 调用结果
+     */
+    public static Object call(Object api, JsonNode entry, int index, Object argument) {
         Object[] args = ContractSnapshot.args(entry);
+        assertTrue(index >= 0 && index < args.length, "参数下标超出契约条目的参数个数：" + index + "/" + args.length);
+        args[index] = argument;
+        return invoke(api, entry, args);
+    }
+
+    private static Object invoke(Object api, JsonNode entry, Object[] args) {
         String id = entry.path("id").asText();
         Method method = findMethod(api.getClass(), entry.path("method").asText(), args.length);
         try {
