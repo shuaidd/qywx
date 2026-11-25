@@ -67,7 +67,9 @@ class ClientInterfaceTest {
             ElectronicInvoiceClient.class, EnterpriseInterConnectionClient.class, HrClient.class,
             // 批 2
             GovernmentCommunicationClient.class, LinkedCorpClient.class, MessageClient.class, WorkApplicationClient.class,
-            PaymentClient.class, SecurityClient.class, WechatSmartSheetClient.class, EnterpriseEmailClient.class));
+            PaymentClient.class, SecurityClient.class, WechatSmartSheetClient.class, EnterpriseEmailClient.class,
+            // 批 3
+            WeChatCallCenterClient.class, WorkOaClient.class, EfficiencyToolClient.class));
 
     /**
      * 5.x 写法：{@code @RequestParam(value = "id", required = false) Integer id}，即可选的查询参数
