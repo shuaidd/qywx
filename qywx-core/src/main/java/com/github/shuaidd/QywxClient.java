@@ -1,7 +1,10 @@
 package com.github.shuaidd;
 
+import com.github.shuaidd.client.AddressBookClient;
+import com.github.shuaidd.client.LinkedCorpClient;
 import com.github.shuaidd.client.QywxContract;
 import com.github.shuaidd.client.WeChatClient;
+import com.github.shuaidd.client.WorkOaClient;
 import com.github.shuaidd.client.decoder.CustomJacksonDecoder;
 import com.github.shuaidd.client.encoder.JacksonJsonEncoder;
 import com.github.shuaidd.client.encoder.MultipartEncoder;
@@ -37,8 +40,9 @@ import java.util.concurrent.atomic.AtomicReference;
  * 回调 {@link WeChatClient#getAccessToken}，而该 client 的拦截器与重试 handler 又依赖 manager，
  * 二者用 {@code AtomicReference} 解环：manager 先建（取号器延迟读取引用），代理建好后再登记。
  * <p>
- * 本阶段只装配 {@link WeChatClient} 与 {@link TokenService}；其余 client、service 与 {@code WeChatManager}
- * 随后续步骤补齐，本类的入口与访问器保持不变。
+ * 本阶段装配 {@link WeChatClient}、{@link TokenService} 与基类 {@code AbstractBaseService} 需要的 3 个 client
+ * （{@link WorkOaClient}、{@link AddressBookClient}、{@link LinkedCorpClient}，经 {@link QywxContext} 交给 service）；
+ * 其余 client 与 service 的访问器随后续步骤补齐，本类的入口保持不变。
  *
  * @author ddshuai
  * date 2026-11-26 06:40
@@ -46,6 +50,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public final class QywxClient {
 
     private final QywxConfig config;
+
+    private final Client http;
 
     private final TokenManager tokenManager;
 
@@ -58,6 +64,7 @@ public final class QywxClient {
     private QywxClient(QywxConfig config, Client http) {
         this.config = Objects.requireNonNull(config, "config");
         Objects.requireNonNull(http, "http");
+        this.http = http;
         TokenStore store = config.getTokenStore() == null ? new InMemoryTokenStore() : config.getTokenStore();
         //取号器要调 WeChatClient 代理，而代理的拦截器与重试 handler 又要 TokenManager：先建 manager，代理建好后再登记
         AtomicReference<WeChatClient> reference = new AtomicReference<WeChatClient>();
@@ -65,7 +72,10 @@ public final class QywxClient {
                 (corpId, secret) -> reference.get().getAccessToken(corpId, secret));
         this.weChatClient = client(WeChatClient.class, config, tokenManager, http);
         reference.set(weChatClient);
-        this.context = new QywxContext(config, weChatClient);
+        this.context = new QywxContext(config, weChatClient,
+                client(WorkOaClient.class, config, tokenManager, http),
+                client(AddressBookClient.class, config, tokenManager, http),
+                client(LinkedCorpClient.class, config, tokenManager, http));
         this.tokenService = new TokenService(tokenManager);
     }
 
@@ -104,6 +114,16 @@ public final class QywxClient {
                 .requestInterceptor(new WeChatInterceptor(tokenManager, config))
                 .invocationHandlerFactory(new TokenRetryInvocationHandlerFactory(tokenManager, config))
                 .target(type, config.baseUrl());
+    }
+
+    /**
+     * 按与本客户端相同的装配方式再建一个 client 代理（service 层组装与测试用）
+     *
+     * @param type client 接口
+     * @return 代理
+     */
+    <T> T proxy(Class<T> type) {
+        return client(type, config, tokenManager, http);
     }
 
     public QywxConfig config() {
