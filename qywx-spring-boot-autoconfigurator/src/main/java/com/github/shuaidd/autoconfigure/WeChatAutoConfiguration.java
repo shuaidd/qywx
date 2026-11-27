@@ -9,20 +9,22 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Collections;
 
 /**
- * 描述
+ * 描述 企业微信 Spring 适配层配置：绑定 {@code qywx.*}、提供默认的本地 {@link CacheManager}，并把回调配置登记到
+ * {@link CallBackManager}
+ * <p>
+ * 由 5.x 的同名类迁移而来，去掉了 {@code @ComponentScan}：service / support / aspect 已迁入 qywx-core，不再带 Spring
+ * 构造型注解，扫描不会命中任何类；client 是原生 OpenFeign 代理，也不经 Spring Cloud OpenFeign 注册。
  *
  * @author ddshuai
  * date 2019-04-03 15:46
  * @author shuaidongdong
  */
 @Configuration
-@ComponentScan(basePackages = {"com.github.shuaidd.service", "com.github.shuaidd.support", "com.github.shuaidd.aspect"})
 @EnableConfigurationProperties(WeChatConfigurationProperties.class)
 public class WeChatAutoConfiguration implements InitializingBean {
 

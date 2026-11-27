@@ -1,12 +1,14 @@
 package com.github.shuaidd.client.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 import java.util.List;
 
 /**
- * 描述
+ * 描述 {@code qywx.*} 配置项在 Spring 环境下的载体：纯 Java 入口直接构造 {@link com.github.shuaidd.config.QywxConfig}
+ * <p>
+ * 由 5.x 的同名类迁入适配层模块：类名与所在包保持不变，{@code @ConfigurationProperties(prefix = "qywx")} 的绑定方式不受影响；
+ * 只去掉了未使用的 {@code NestedConfigurationProperty} 引用。
  *
  * @author ddshuai
  * date 2019-04-03 15:47

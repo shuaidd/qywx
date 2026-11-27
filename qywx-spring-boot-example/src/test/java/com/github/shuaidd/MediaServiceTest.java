@@ -1,6 +1,7 @@
 package com.github.shuaidd;
 
 import cn.hutool.crypto.digest.DigestUtil;
+import com.github.shuaidd.file.FileDownload;
 import com.github.shuaidd.response.material.UploadByUrlResultResponse;
 import com.github.shuaidd.resquest.job.JobIdRequest;
 import com.github.shuaidd.resquest.media.UploadByUrlRequest;
@@ -8,7 +9,6 @@ import com.github.shuaidd.service.MediaService;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
@@ -39,7 +39,7 @@ public class MediaServiceTest extends AbstractTest {
     @Test
     public void upload() throws FileNotFoundException {
         File file = ResourceUtils.getFile("classpath:image/20659972.png");
-        String url = weChatManager.mediaService().uploadImage(file, MediaType.IMAGE_PNG, ADDRESS_BOOK);
+        String url = weChatManager.mediaService().uploadImage(file, MediaType.IMAGE_PNG.toString(), ADDRESS_BOOK);
         logger.info("上传的图片地址--{}", url);
     }
 
@@ -51,14 +51,14 @@ public class MediaServiceTest extends AbstractTest {
     @Test
     public void uploadMaterial() throws FileNotFoundException {
         File file = ResourceUtils.getFile("classpath:video/1626849301272424.mp4");
-        String mediaId = weChatManager.mediaService().uploadMaterial(file, MediaType.APPLICATION_OCTET_STREAM, MediaService.VIDEO, ADDRESS_BOOK);
+        String mediaId = weChatManager.mediaService().uploadMaterial(file, MediaType.APPLICATION_OCTET_STREAM.toString(), MediaService.VIDEO, ADDRESS_BOOK);
         logger.info("上传的临时素材 media id--{}", mediaId);
     }
 
     @Test
     public void download() throws IOException {
-        ResponseEntity<byte[]> responseEntity = weChatManager.mediaService().download("3S9f1Bg1H8D_dG4xuPWgaStwbec3AskA1eqBLWKb5GXysrq3Ik2LkuvL55-I41cdB", ADDRESS_BOOK);
-        IOUtils.write(responseEntity.getBody(), new FileOutputStream(new File("download.mp4")));
+        FileDownload download = weChatManager.mediaService().download("3S9f1Bg1H8D_dG4xuPWgaStwbec3AskA1eqBLWKb5GXysrq3Ik2LkuvL55-I41cdB", ADDRESS_BOOK);
+        IOUtils.write(download.getContent(), new FileOutputStream(new File("download.mp4")));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class MediaServiceTest extends AbstractTest {
 
     @Test
     public void downloadJsMedia() {
-        ResponseEntity<byte[]> response = weChatManager.mediaService().downloadJsMedia("3S9f1Bg1H8D_dG4xuPWgaStwbec3AskA1eqBLWKb5GXysrq3Ik2LkuvL55-I41cdB", ADDRESS_BOOK);
+        FileDownload response = weChatManager.mediaService().downloadJsMedia("3S9f1Bg1H8D_dG4xuPWgaStwbec3AskA1eqBLWKb5GXysrq3Ik2LkuvL55-I41cdB", ADDRESS_BOOK);
     }
 
     @Test

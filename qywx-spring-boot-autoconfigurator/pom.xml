@@ -18,20 +18,15 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
             <optional>true</optional>
         </dependency>
 
+        <!-- 核心实现（原生 OpenFeign，不含 Spring）；适配层只做属性绑定与 bean 注册 -->
         <dependency>
             <groupId>com.github.shuaidd</groupId>
-            <artifactId>qywx-spring-boot-api</artifactId>
+            <artifactId>qywx-core</artifactId>
         </dependency>
 
         <dependency>

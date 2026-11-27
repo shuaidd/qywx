@@ -35,7 +35,7 @@ public class WeChatCallCenterServiceTest extends AbstractTest {
     @Test
     public void addKf() throws FileNotFoundException {
         File file = ResourceUtils.getFile("classpath:image/20659972.png");
-        String mediaId = weChatManager.mediaService().uploadMaterial(file, MediaType.APPLICATION_OCTET_STREAM, MediaService.IMAGE, appName);
+        String mediaId = weChatManager.mediaService().uploadMaterial(file, MediaType.APPLICATION_OCTET_STREAM.toString(), MediaService.IMAGE, appName);
         String kfId = weChatManager.callCenterService().addKfAccount("帅小二客服", mediaId, appName);
         logger.info("创建的客服编号-{}", kfId);
     }
