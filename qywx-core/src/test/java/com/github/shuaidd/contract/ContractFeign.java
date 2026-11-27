@@ -21,9 +21,13 @@ import feign.codec.Encoder;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -44,6 +48,8 @@ public final class ContractFeign {
     public static final String SECRET = "secret-contract";
 
     public static final String APP = "contract";
+
+    public static final byte[] DOWNLOAD_CONTENT = "CONTRACT-DOWNLOAD-CONTENT".getBytes(StandardCharsets.UTF_8);
 
     private ContractFeign() {
     }
@@ -237,6 +243,34 @@ public final class ContractFeign {
     public static String tokenBody(String accessToken) {
         return "{\"errcode\":0,\"errmsg\":\"ok\",\"access_token\":\"" + accessToken
                 + "\",\"expires_in\":7200}";
+    }
+
+    /**
+     * 构造下载成功的响应头
+     *
+     * @return 带固定文件名的响应头
+     */
+    public static Map<String, Collection<String>> downloadHeaders() {
+        Map<String, Collection<String>> headers = new LinkedHashMap<>();
+        headers.put("Content-Disposition", Collections.singletonList("attachment; filename=contract.bin"));
+        headers.put("Content-Type", Collections.singletonList("application/octet-stream"));
+        return headers;
+    }
+
+    /**
+     * 构造下载出错的响应头
+     *
+     * @param errorCode 企微错误码
+     * @param errorMsg  企微错误信息；null 时不写入该头
+     * @return 下载错误响应头
+     */
+    public static Map<String, Collection<String>> downloadErrorHeaders(String errorCode, String errorMsg) {
+        Map<String, Collection<String>> headers = downloadHeaders();
+        headers.put("error-code", Collections.singletonList(errorCode));
+        if (errorMsg != null) {
+            headers.put("error-msg", Collections.singletonList(errorMsg));
+        }
+        return headers;
     }
     /**
      * 构造 gettoken 的响应体
