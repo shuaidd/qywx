@@ -2,13 +2,20 @@ package com.github.shuaidd.client;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.shuaidd.QywxClient;
+import com.github.shuaidd.client.config.CallbackProperties;
 import com.github.shuaidd.client.decoder.CustomJacksonDecoder;
+import com.github.shuaidd.contract.ContractFeign;
 import com.github.shuaidd.contract.RecordingClient;
 import com.github.shuaidd.response.BaseResponse;
+import com.github.shuaidd.support.CallBackManager;
+import com.github.shuaidd.support.WeChatContextHolder;
 import feign.Feign;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -31,6 +38,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -44,6 +52,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * 清单必须与 5.2.0 契约快照 manifest 里的 client 完全相等，多一个少一个都失败</li>
  * <li>5.x 的 {@code @RequestParam(required = false)} 为 null 时 Spring MVC 契约不发送该查询参数；
  * 原生 Feign 对 null 的 {@code @Param} 同样整体省略（{@code RequestTemplate#resolve}），用例锁定这一等价性</li>
+ * <li>每个接口都能经 {@link QywxClient#client(Class)} 取到且两次相同——显式清单与公开入口的漂移守卫：
+ * 新增 client 若只进了清单、没进 {@code QywxClient} 的装配集合，这里立刻失败</li>
  * </ul>
  * 请求形态（路径、查询参数、请求头、请求体）的逐条比对由 P2.7 的契约回放负责，这里不做重复断言。
  *
@@ -75,6 +85,14 @@ class ClientInterfaceTest {
             // 批 5
             ExternalContactClient.class, MeetingAdvancedClient.class));
 
+    /** 整个类只装配一次（只建代理、不发请求），各参数化用例共用 */
+    private static QywxClient assembled;
+
+    @BeforeAll
+    static void assembleOnce() {
+        assembled = QywxClient.create(ContractFeign.config(false));
+    }
+
     /**
      * 5.x 写法：{@code @RequestParam(value = "id", required = false) Integer id}，即可选的查询参数
      */
@@ -99,6 +117,27 @@ class ClientInterfaceTest {
 
         assertNotNull(proxy);
         assertTrue(type.isInstance(proxy));
+    }
+
+    /**
+     * 每个已迁移的接口都能经 {@code QywxClient.client(Class)} 取到且两次相同：
+     * 清单里的接口没有进 {@code QywxClient} 的装配集合时失败
+     */
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("migrated")
+    void exposesEveryClientThroughQywxClient(Class<?> type) {
+        Object first = assembled.client(type);
+
+        assertNotNull(first);
+        assertTrue(type.isInstance(first));
+        assertSame(first, assembled.client(type));
+    }
+
+    @AfterEach
+    void clearStaticEntrances() {
+        //QywxClient.create 会登记两处进程级静态入口，测试里动过就清掉，避免污染其他用例
+        WeChatContextHolder.setWeChatManager(null);
+        CallBackManager.properties(new ArrayList<CallbackProperties>());
     }
 
     /**

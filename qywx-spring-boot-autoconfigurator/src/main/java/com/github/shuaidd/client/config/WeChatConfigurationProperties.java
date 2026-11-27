@@ -19,7 +19,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * {@code ${qywx.url:...}} / {@code ${qywx.public-path:...}} 以同值兜底，实际请求地址不变；</li>
  * <li>{@code application-list} / {@code callback-list} 未配置时是空列表而不是 null
  * （{@code CallBackManager} 对两者同等处理，行为不变）；</li>
- * <li>{@code tokenStore} 是编程式配置项，没有对应的 {@code qywx.*} 键，Spring 下保持 null（进程内缓存）。</li>
+ * <li>{@code tokenStore} 是编程式配置项，没有对应的 {@code qywx.*} 键；Spring 下由 {@code WeChatAutoConfiguration} 装配
+ * {@code QywxClient} 时按容器里的 {@code TokenStore} → {@code CacheManager}（包成 {@code SpringCacheTokenStore}）接线，
+ * 适配层自带本地 {@code CacheManager} 兜底，容器里有 Redis 等共享缓存时自动共用；未经适配层装配时保持 null（core 进程内缓存）。</li>
  * </ol>
  *
  * @author ddshuai

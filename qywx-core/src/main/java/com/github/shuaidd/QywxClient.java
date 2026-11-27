@@ -72,7 +72,13 @@ import feign.Feign;
 import feign.Request;
 import feign.Retryer;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -80,7 +86,8 @@ import java.util.concurrent.atomic.AtomicReference;
  * 描述 企业微信客户端入口：纯 Java 环境下用它替代 5.x 的 Spring 自动装配，按配置装配 client 与 service
  * <p>
  * 用法：{@code QywxClient client = QywxClient.create(QywxConfig.builder()....build());}，
- * 业务调用经 {@link #weChatManager()} 取各 service，底层 client 经 {@link #weChatClient()} 等访问器获取。
+ * 业务调用经 {@link #weChatManager()} 取各 service，底层 client 经 {@link #client(Class)} 按接口类型获取
+ * （{@link #weChatClient()} 等访问器是常用 client 的快捷方式）。
  * <p>
  * 装配方式（与契约测试 {@code ContractFeign} 一致）：27 个 client 每个恰建一个原生 OpenFeign 代理——
  * {@code QywxContract}（下载落盘目标不进表单体）、按配置的超时、{@code NEVER_RETRY}（令牌失效重试只由
@@ -105,9 +112,27 @@ import java.util.concurrent.atomic.AtomicReference;
  **/
 public final class QywxClient {
 
+    /**
+     * 本客户端装配的 27 个 client 接口（与契约测试的 MIGRATED 清单同序；不含常量接口 {@code CommonClient}），
+     * {@link #client(Class)} 只接受其中的类型
+     */
+    private static final Set<Class<?>> CLIENT_TYPES = Collections.unmodifiableSet(new HashSet<Class<?>>(
+            Arrays.<Class<?>>asList(
+                    WeChatClient.class, WeChatMediaClient.class, FrontEndToolsClient.class, MeetingClient.class,
+                    ServiceProviderClient.class, PaymentUploadClient.class, AdvancedFeatureClient.class, AuthClient.class,
+                    ElectronicInvoiceClient.class, EnterpriseInterConnectionClient.class, HrClient.class,
+                    GovernmentCommunicationClient.class, LinkedCorpClient.class, MessageClient.class,
+                    WorkApplicationClient.class, PaymentClient.class, SecurityClient.class, WechatSmartSheetClient.class,
+                    EnterpriseEmailClient.class, WeChatCallCenterClient.class, WorkOaClient.class,
+                    EfficiencyToolClient.class, WechatDocClient.class, SchoolClient.class, AddressBookClient.class,
+                    ExternalContactClient.class, MeetingAdvancedClient.class)));
+
     private final QywxConfig config;
 
     private final Client http;
+
+    /** 装配好的 client 代理，按接口类型记忆化（{@link #client(Class)} 的缓存） */
+    private final Map<Class<?>, Object> clients = new ConcurrentHashMap<Class<?>, Object>();
 
     private final TokenManager tokenManager;
 
@@ -128,44 +153,44 @@ public final class QywxClient {
         AtomicReference<WeChatClient> reference = new AtomicReference<WeChatClient>();
         this.tokenManager = new TokenManager(config, store,
                 (corpId, secret) -> reference.get().getAccessToken(corpId, secret));
-        this.weChatClient = client(WeChatClient.class, config, tokenManager, http);
+        this.weChatClient = client(WeChatClient.class);
         reference.set(weChatClient);
         this.context = new QywxContext(config, weChatClient,
-                client(WorkOaClient.class, config, tokenManager, http),
-                client(AddressBookClient.class, config, tokenManager, http),
-                client(LinkedCorpClient.class, config, tokenManager, http));
+                client(WorkOaClient.class),
+                client(AddressBookClient.class),
+                client(LinkedCorpClient.class));
         this.tokenService = new TokenService(context, tokenManager);
 
         //基类依赖之外的 client：每个恰建一个代理，WechatDocClient 由 Document 与 SmartSheet 两个 service 共用
-        AuthenticationService authenticationService = new AuthenticationService(context, client(AuthClient.class, config, tokenManager, http));
-        ApplicationService applicationService = new ApplicationService(context, client(WorkApplicationClient.class, config, tokenManager, http));
-        MediaService mediaService = new MediaService(context, client(WeChatMediaClient.class, config, tokenManager, http));
-        MessageService messageService = new MessageService(context, client(MessageClient.class, config, tokenManager, http));
+        AuthenticationService authenticationService = new AuthenticationService(context, client(AuthClient.class));
+        ApplicationService applicationService = new ApplicationService(context, client(WorkApplicationClient.class));
+        MediaService mediaService = new MediaService(context, client(WeChatMediaClient.class));
+        MessageService messageService = new MessageService(context, client(MessageClient.class));
         OAService oaService = new OAService(context);
-        CustomContactService customContactService = new CustomContactService(context, client(ExternalContactClient.class, config, tokenManager, http));
-        EfficiencyToolService efficiencyToolService = new EfficiencyToolService(context, client(EfficiencyToolClient.class, config, tokenManager, http));
-        WeChatCallCenterService callCenterService = new WeChatCallCenterService(context, client(WeChatCallCenterClient.class, config, tokenManager, http));
+        CustomContactService customContactService = new CustomContactService(context, client(ExternalContactClient.class));
+        EfficiencyToolService efficiencyToolService = new EfficiencyToolService(context, client(EfficiencyToolClient.class));
+        WeChatCallCenterService callCenterService = new WeChatCallCenterService(context, client(WeChatCallCenterClient.class));
         CommonService commonService = new CommonService(context);
-        ServiceProviderService serviceProviderService = new ServiceProviderService(context, client(ServiceProviderClient.class, config, tokenManager, http));
-        EnterpriseEmailService enterpriseEmailService = new EnterpriseEmailService(context, client(EnterpriseEmailClient.class, config, tokenManager, http));
-        ElectronicInvoiceService electronicInvoiceService = new ElectronicInvoiceService(context, client(ElectronicInvoiceClient.class, config, tokenManager, http));
-        EnterpriseInterConnectionService enterpriseInterConnectionService = new EnterpriseInterConnectionService(context, client(EnterpriseInterConnectionClient.class, config, tokenManager, http));
+        ServiceProviderService serviceProviderService = new ServiceProviderService(context, client(ServiceProviderClient.class));
+        EnterpriseEmailService enterpriseEmailService = new EnterpriseEmailService(context, client(EnterpriseEmailClient.class));
+        ElectronicInvoiceService electronicInvoiceService = new ElectronicInvoiceService(context, client(ElectronicInvoiceClient.class));
+        EnterpriseInterConnectionService enterpriseInterConnectionService = new EnterpriseInterConnectionService(context, client(EnterpriseInterConnectionClient.class));
         MeetingService meetingService = new MeetingService(context,
-                client(MeetingClient.class, config, tokenManager, http),
-                client(MeetingAdvancedClient.class, config, tokenManager, http));
-        FrontEndToolService frontEndToolService = new FrontEndToolService(context, client(FrontEndToolsClient.class, config, tokenManager, http));
-        WechatDocClient wechatDocClient = client(WechatDocClient.class, config, tokenManager, http);
+                client(MeetingClient.class),
+                client(MeetingAdvancedClient.class));
+        FrontEndToolService frontEndToolService = new FrontEndToolService(context, client(FrontEndToolsClient.class));
+        WechatDocClient wechatDocClient = client(WechatDocClient.class);
         DocumentService documentService = new DocumentService(context, wechatDocClient);
         SmartSheetService smartSheetService = new SmartSheetService(context,
-                client(WechatSmartSheetClient.class, config, tokenManager, http), wechatDocClient);
+                client(WechatSmartSheetClient.class), wechatDocClient);
         PaymentService paymentService = new PaymentService(context,
-                client(PaymentClient.class, config, tokenManager, http),
-                client(PaymentUploadClient.class, config, tokenManager, http));
-        SchoolService schoolService = new SchoolService(context, client(SchoolClient.class, config, tokenManager, http));
-        AdvancedFeatureService advancedFeatureService = new AdvancedFeatureService(context, client(AdvancedFeatureClient.class, config, tokenManager, http));
-        GovernmentCommunicationService governmentCommunicationService = new GovernmentCommunicationService(context, client(GovernmentCommunicationClient.class, config, tokenManager, http));
-        HrService hrService = new HrService(context, client(HrClient.class, config, tokenManager, http));
-        SecurityService securityService = new SecurityService(context, client(SecurityClient.class, config, tokenManager, http));
+                client(PaymentClient.class),
+                client(PaymentUploadClient.class));
+        SchoolService schoolService = new SchoolService(context, client(SchoolClient.class));
+        AdvancedFeatureService advancedFeatureService = new AdvancedFeatureService(context, client(AdvancedFeatureClient.class));
+        GovernmentCommunicationService governmentCommunicationService = new GovernmentCommunicationService(context, client(GovernmentCommunicationClient.class));
+        HrService hrService = new HrService(context, client(HrClient.class));
+        SecurityService securityService = new SecurityService(context, client(SecurityClient.class));
         AddressBookService addressBookService = new AddressBookService(context, mediaService,
                 new RawDownloader(http, options(config)));
 
@@ -202,9 +227,10 @@ public final class QywxClient {
     }
 
     /**
-     * 装配一个原生 OpenFeign 代理：必装 {@link QywxContract}，不叠加 Feign 自带的重试
+     * 装配一个原生 OpenFeign 代理：必装 {@link QywxContract}，不叠加 Feign 自带的重试。
+     * {@link #client(Class)} 按类型记忆化它，{@link #proxy(Class)} 每次新建
      */
-    private static <T> T client(Class<T> type, QywxConfig config, TokenManager tokenManager, Client http) {
+    private static <T> T build(Class<T> type, QywxConfig config, TokenManager tokenManager, Client http) {
         Feign.Builder builder = Feign.builder()
                 .contract(new QywxContract())
                 .client(http)
@@ -234,13 +260,32 @@ public final class QywxClient {
     }
 
     /**
-     * 按与本客户端相同的装配方式再建一个 client 代理（service 层组装与测试用）
+     * 按接口类型取装配好的 client 代理：同一类型每次返回同一实例（构造期装配的那一个）。
+     * 只接受本客户端装配的 27 个 client 接口（不含常量接口 {@code CommonClient}），其它类型抛
+     * {@link IllegalArgumentException}——避免对任意接口建出没有契约、调用时才报错的代理
+     *
+     * @param type client 接口
+     * @return 对应类型的代理
+     * @throws NullPointerException     type 为 null
+     * @throws IllegalArgumentException type 不在本客户端装配的 client 接口里
+     */
+    public <T> T client(Class<T> type) {
+        Objects.requireNonNull(type, "type");
+        if (!CLIENT_TYPES.contains(type)) {
+            throw new IllegalArgumentException("不是本客户端装配的 client 接口：" + type.getName());
+        }
+        return type.cast(clients.computeIfAbsent(type, key -> build(key, config, tokenManager, http)));
+    }
+
+    /**
+     * 按与本客户端相同的装配方式再建一个 client 代理（service 层组装与测试用）：每次调用都新建，
+     * 不校验类型，也不进 {@link #client(Class)} 的缓存
      *
      * @param type client 接口
      * @return 代理
      */
     <T> T proxy(Class<T> type) {
-        return client(type, config, tokenManager, http);
+        return build(type, config, tokenManager, http);
     }
 
     public QywxConfig config() {

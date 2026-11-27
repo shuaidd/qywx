@@ -23,6 +23,13 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- SpringFileBridge 用到的 MultipartFile / ResponseEntity 类型；用户项目里没有 spring-web 时不传递，版本由 Boot BOM 管 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- 核心实现（原生 OpenFeign，不含 Spring）；适配层只做属性绑定与 bean 注册 -->
         <dependency>
             <groupId>com.github.shuaidd</groupId>
@@ -39,6 +46,13 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- SpringFileBridgeTest 用到的 MockMultipartFile -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
