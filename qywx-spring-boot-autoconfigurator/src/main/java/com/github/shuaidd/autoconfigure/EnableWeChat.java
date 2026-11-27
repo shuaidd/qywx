@@ -13,6 +13,10 @@ import java.lang.annotation.Target;
  * 由 5.x 的同名注解迁移而来，去掉了三个随之失效的开关：core 的 client 是原生 OpenFeign 的 {@code @RequestLine} 接口，
  * {@code @EnableFeignClients} 扫不到；令牌失效重试已由 core 的调用处理器完成，不再需要 {@code @EnableAspectJAutoProxy}；
  * core 内部没有 {@code @Cacheable} 等注解式缓存，不需要 {@code @EnableCaching} 开启的注解代理。
+ * <p>
+ * Boot 2.7 起适配层还会经 {@code META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports}
+ * 自动注册：类路径上有本模块时不必再标注 {@code @EnableWeChat}；显式标注时 {@code @Import} 导入的是同一个配置类，
+ * Spring 按类去重，不会重复注册 bean。
  *
  * @author shuaidongdong
  */

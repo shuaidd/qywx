@@ -34,6 +34,13 @@
             <artifactId>snakeyaml</artifactId>
             <version>1.33</version>
         </dependency>
+
+        <!-- 适配层的装配/绑定守卫测试；版本由 Boot BOM（junit-bom）管理，与 core 的 5.10.1 一致 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>
