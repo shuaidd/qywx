@@ -13,10 +13,13 @@ import com.github.shuaidd.client.HrClient;
 import com.github.shuaidd.client.MeetingAdvancedClient;
 import com.github.shuaidd.client.MeetingClient;
 import com.github.shuaidd.client.MessageClient;
+import com.github.shuaidd.client.PaymentClient;
+import com.github.shuaidd.client.PaymentUploadClient;
 import com.github.shuaidd.client.SchoolClient;
 import com.github.shuaidd.client.SecurityClient;
 import com.github.shuaidd.client.ServiceProviderClient;
 import com.github.shuaidd.client.WeChatCallCenterClient;
+import com.github.shuaidd.client.WeChatMediaClient;
 import com.github.shuaidd.client.WechatDocClient;
 import com.github.shuaidd.client.WechatSmartSheetClient;
 import com.github.shuaidd.client.WorkApplicationClient;
@@ -61,7 +64,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * 描述 service 层迁入 core 后的装配守卫：包内类清单、每个 service 的构造器形态（首参 {@link QywxContext}、其余参数为各自的 client），
  * 以及经上下文里的基础 client 真实发起请求的报文
  * <p>
- * 21 个 service 由 5.x 机械迁移而来（codemod {@code p3-1-copy.py}），这里用反射把「构造器签名 + 父类」锁成结构守卫，
+ * 23 个 service 由 5.x 机械迁移而来（codemod {@code p3-1-copy.py} 与 {@code p3-2-copy.py}），这里用反射把「构造器签名 + 父类」锁成结构守卫，
  * 再用 {@code RecordingClient} 记录 Feign 实际发出的请求，证明依赖改走 {@link QywxContext} 后地址、应用名与 access_token 的注入与 5.x 一致。
  *
  * @author ddshuai
@@ -76,7 +79,7 @@ public class ServiceWiringTest {
     private static final String GET_TOKEN_URL = BASE + "gettoken?corpid=corp-contract&corpsecret=secret-contract";
 
     /**
-     * 21 个机械迁移的 service 与各自构造器需要的 client 接口（顺序即构造器参数顺序）；AddressBook/Media/Payment/Token 不在此列
+     * 23 个机械迁移的 service 与各自构造器需要的 client 接口（顺序即构造器参数顺序）；AddressBook/Token 不在此列
      */
     private static final Map<String, Class<?>[]> SERVICES = new LinkedHashMap<>();
 
@@ -94,9 +97,11 @@ public class ServiceWiringTest {
         SERVICES.put("FrontEndToolService", new Class<?>[]{FrontEndToolsClient.class});
         SERVICES.put("GovernmentCommunicationService", new Class<?>[]{GovernmentCommunicationClient.class});
         SERVICES.put("HrService", new Class<?>[]{HrClient.class});
+        SERVICES.put("MediaService", new Class<?>[]{WeChatMediaClient.class});
         SERVICES.put("MeetingService", new Class<?>[]{MeetingClient.class, MeetingAdvancedClient.class});
         SERVICES.put("MessageService", new Class<?>[]{MessageClient.class});
         SERVICES.put("OAService", new Class<?>[0]);
+        SERVICES.put("PaymentService", new Class<?>[]{PaymentClient.class, PaymentUploadClient.class});
         SERVICES.put("SchoolService", new Class<?>[]{SchoolClient.class});
         SERVICES.put("SecurityService", new Class<?>[]{SecurityClient.class});
         SERVICES.put("ServiceProviderService", new Class<?>[]{ServiceProviderClient.class});
@@ -105,13 +110,15 @@ public class ServiceWiringTest {
     }
 
     /**
-     * service 包里只有基类、TokenService 与 21 个机械迁移的 service：多一个或少一个都在这里失败
+     * service 包里只有基类、TokenService 与 23 个机械迁移的 service（AddressBookService 依赖 MediaService 与 RawDownloader，
+     * 另在 SpecialServiceWiringTest 里验证）：多一个或少一个都在这里失败
      */
     @Test
     public void servicePackageContainsExactlyTheMigratedClasses() throws IOException, URISyntaxException {
         Set<String> expected = new TreeSet<>(SERVICES.keySet());
         expected.add("AbstractBaseService");
         expected.add("TokenService");
+        expected.add("AddressBookService");
 
         assertEquals(expected, compiledClassNames(SERVICE_PACKAGE));
     }

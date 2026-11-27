@@ -6,6 +6,7 @@ import com.github.shuaidd.client.QywxContract;
 import com.github.shuaidd.client.WeChatClient;
 import com.github.shuaidd.client.WorkOaClient;
 import com.github.shuaidd.client.decoder.CustomJacksonDecoder;
+import com.github.shuaidd.client.decoder.WeChatMediaDecoder;
 import com.github.shuaidd.client.encoder.JacksonJsonEncoder;
 import com.github.shuaidd.client.encoder.MultipartEncoder;
 import com.github.shuaidd.client.interceptor.WeChatInterceptor;
@@ -76,7 +77,7 @@ public final class QywxClient {
                 client(WorkOaClient.class, config, tokenManager, http),
                 client(AddressBookClient.class, config, tokenManager, http),
                 client(LinkedCorpClient.class, config, tokenManager, http));
-        this.tokenService = new TokenService(tokenManager);
+        this.tokenService = new TokenService(context, tokenManager);
     }
 
     /**
@@ -110,7 +111,7 @@ public final class QywxClient {
                 .options(new Request.Options(config.getConnectTimeoutMillis(), TimeUnit.MILLISECONDS, config.getReadTimeoutMillis(), TimeUnit.MILLISECONDS, true))
                 .retryer(Retryer.NEVER_RETRY)
                 .encoder(new MultipartEncoder(JacksonJsonEncoder.indented()))
-                .decoder(new CustomJacksonDecoder())
+                .decoder(new WeChatMediaDecoder(new CustomJacksonDecoder()))
                 .requestInterceptor(new WeChatInterceptor(tokenManager, config))
                 .invocationHandlerFactory(new TokenRetryInvocationHandlerFactory(tokenManager, config))
                 .target(type, config.baseUrl());
