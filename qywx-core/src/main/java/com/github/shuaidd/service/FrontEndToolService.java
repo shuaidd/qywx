@@ -4,11 +4,8 @@ import com.github.shuaidd.QywxContext;
 import com.github.shuaidd.client.FrontEndToolsClient;
 import com.github.shuaidd.client.config.ApplicationProperties;
 import com.github.shuaidd.dto.tool.FrontEndTicket;
-import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.response.tool.AccessTokenResponse;
 import org.apache.commons.lang3.StringUtils;
-
-import java.util.Objects;
 
 /**
  * 描述 前端SDK管理
@@ -36,10 +33,6 @@ public class FrontEndToolService extends AbstractBaseService {
         }
         ApplicationProperties app = getApp(applicationName);
 
-        if (Objects.isNull(properties)) {
-            logger.error("{} 未配置的应用", applicationName);
-            throw  new ParamCheckException("未配置的应用");
-        }
         AccessTokenResponse accessTokenResponse = weChatClient.getAccessToken(StringUtils.defaultString(app.getCorpId(),properties.getCorpId()), app.getSecret());
         return frontEndToolsClient.getAppTicket(accessTokenResponse.getAccessToken(), applicationName);
     }
