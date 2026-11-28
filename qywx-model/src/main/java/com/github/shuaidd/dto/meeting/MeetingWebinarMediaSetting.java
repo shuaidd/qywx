@@ -3,7 +3,6 @@ package com.github.shuaidd.dto.meeting;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import lombok.EqualsAndHashCode;
 
 /**
  * 网络研讨会媒体参数配置

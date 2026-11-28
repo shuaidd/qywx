@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.shuaidd.response.AbstractBaseResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import com.github.shuaidd.dto.payment.*;
 
 /**
  * 提交小程序收款申请图片响应

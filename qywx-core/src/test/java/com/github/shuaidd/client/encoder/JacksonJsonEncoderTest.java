@@ -83,7 +83,7 @@ class JacksonJsonEncoderTest {
 
         assertEquals(1, fixture.recording.requestCount());
         Request request = fixture.recording.request(0);
-        assertEquals("POST", request.method());
+        assertEquals("POST", request.httpMethod().name());
         assertTrue(request.url().startsWith(RecordingClient.TARGET_URL + "/meeting/rooms/get_inventory?app="
                 + ContractFeign.APP + "&access_token="), "请求地址：" + request.url());
         Map<String, String> headers = ContractSnapshot.headerValues(request.headers());
@@ -146,10 +146,11 @@ class JacksonJsonEncoderTest {
     }
 
     /**
-     * getter 抛异常的请求对象，用来验证序列化失败的包装
+     * getter 抛异常的请求对象，用来验证序列化失败的包装；getter 由 Jackson 反射调用，故抑制 unused 警告
      */
     private static final class Broken {
 
+        @SuppressWarnings("unused")
         public String getValue() {
             throw new IllegalStateException("boom");
         }

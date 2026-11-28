@@ -1,7 +1,6 @@
 package com.github.shuaidd.dto.meeting;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.meeting.MeetingGuest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

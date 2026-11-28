@@ -1,7 +1,5 @@
 package com.github.shuaidd.dto.message;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.message.MessageFeedback;
 
 import java.util.StringJoiner;
 

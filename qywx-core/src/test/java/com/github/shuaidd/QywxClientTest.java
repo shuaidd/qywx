@@ -78,7 +78,7 @@ public class QywxClientTest {
 
         assertEquals(1, recording.requestCount());
         Request request = recording.request(0);
-        assertEquals("GET", request.method());
+        assertEquals("GET", request.httpMethod().name());
         assertEquals(GET_TOKEN_URL, request.url());
         assertTrue(ContractSnapshot.headerValues(request.headers()).isEmpty());
         assertTrue(request.body() == null || request.body().length == 0);
@@ -147,7 +147,7 @@ public class QywxClientTest {
         assertEquals(2, recording.requestCount());
         assertEquals(GET_TOKEN_URL, recording.request(0).url());
         Request business = recording.request(1);
-        assertEquals("GET", business.method());
+        assertEquals("GET", business.httpMethod().name());
         assertEquals("http://contract.invalid/cgi-bin/get_api_domain_ip?app=contract&access_token=tok-1",
                 business.url());
         assertEquals("contract", ContractSnapshot.headerValues(business.headers()).get("app"));

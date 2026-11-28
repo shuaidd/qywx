@@ -2,7 +2,6 @@ package com.github.shuaidd.response.corp;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.shuaidd.response.AbstractBaseResponse;
-import com.github.shuaidd.response.BaseResponse;
 
 import java.util.List;
 

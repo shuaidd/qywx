@@ -3,13 +3,11 @@ package com.github.shuaidd.support;
 import com.github.shuaidd.enums.ChangeType;
 import com.github.shuaidd.enums.MsgType;
 import com.github.shuaidd.event.*;
-import com.github.shuaidd.exception.WeChatException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 /**
  * 描述 企业微信 事件回调数据管理

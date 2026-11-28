@@ -47,4 +47,8 @@ public enum WorkbenchDataType {
     public String getType() {
         return type;
     }
+
+    public String getDescription() {
+        return description;
+    }
 }

@@ -46,7 +46,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -167,7 +166,7 @@ public class ServiceWiringTest {
         assertEquals(2, recording.requestCount());
         assertEquals(GET_TOKEN_URL, recording.request(0).url());
         Request request = recording.request(1);
-        assertEquals("POST", request.method());
+        assertEquals("POST", request.httpMethod().name());
         assertEquals(BASE + "checkin/getcorpcheckinoption?app=contract&access_token=tok-1", request.url());
         assertEquals("contract", ContractSnapshot.headerValues(request.headers()).get("app"));
     }
@@ -187,7 +186,7 @@ public class ServiceWiringTest {
         assertEquals(2, recording.requestCount());
         assertEquals(GET_TOKEN_URL, recording.request(0).url());
         Request request = recording.request(1);
-        assertEquals("GET", request.method());
+        assertEquals("GET", request.httpMethod().name());
         assertEquals(BASE + "user/getuserinfo?code=code-1&app=contract&access_token=tok-1", request.url());
     }
 
@@ -209,7 +208,7 @@ public class ServiceWiringTest {
         assertEquals(GET_TOKEN_URL, recording.request(0).url());
         assertEquals(GET_TOKEN_URL, recording.request(1).url());
         Request request = recording.request(2);
-        assertEquals("GET", request.method());
+        assertEquals("GET", request.httpMethod().name());
         assertEquals(BASE + "get_jsapi_ticket?access_token=tok-1&access_token=tok-2&app=contract", request.url());
     }
 

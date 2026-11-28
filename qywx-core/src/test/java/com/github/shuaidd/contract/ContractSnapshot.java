@@ -58,7 +58,6 @@ import java.util.regex.Pattern;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * 描述 读取 5.2.0 契约快照，并把参数与请求转换成可回放的断言
@@ -714,7 +713,7 @@ public final class ContractSnapshot {
     }
 
     private static void assertRequest(JsonNode expected, feign.Request actual, String message) {
-        assertEquals(expected.path("method").asText(), actual.method(), message + "method");
+        assertEquals(expected.path("method").asText(), actual.httpMethod().name(), message + "method");
 
         String relative = actual.url().substring(RecordingClient.TARGET_URL.length());
         int queryIndex = relative.indexOf('?');

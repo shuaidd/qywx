@@ -7,7 +7,6 @@ import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.file.DownloadContext;
 import com.github.shuaidd.token.TokenManager;
 import feign.InvocationHandlerFactory;
-import feign.InvocationHandlerFactory.MethodHandler;
 import feign.Param;
 import feign.Target;
 import org.apache.commons.lang3.StringUtils;
@@ -77,6 +76,8 @@ public class TokenRetryInvocationHandlerFactory implements InvocationHandlerFact
      * @param dispatch 方法到调用器的映射
      * @return InvocationHandler
      */
+    // feign 的 InvocationHandlerFactory.create 声明的就是 raw Target，改成 Target<?> 会与接口方法名称冲突，只能在此压制 rawtypes 警告
+    @SuppressWarnings("rawtypes")
     @Override
     public InvocationHandler create(Target target, Map<Method, MethodHandler> dispatch) {
         return new RetryInvocationHandler(delegate.create(target, dispatch));

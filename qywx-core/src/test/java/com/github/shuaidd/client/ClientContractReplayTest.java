@@ -114,7 +114,7 @@ class ClientContractReplayTest {
             Object result = ContractFeign.call(api, entry);
             assertNotNull(result);
             assertEquals(2, recording.requestCount());
-            assertEquals("POST", recording.request(1).method());
+            assertEquals("POST", recording.request(1).httpMethod().name());
             assertEquals("http://contract.invalid/cgi-bin/meeting/rooms/get_inventory?app=contract&access_token=tok-1",
                     recording.request(1).url());
             assertEquals("contract", ContractSnapshot.headerValues(recording.request(1).headers()).get("app"));

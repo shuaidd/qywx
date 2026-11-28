@@ -124,7 +124,7 @@ public class QywxAssemblyTest {
         assertEquals(1, recording.requestCount(), "不应先取号：ServiceProviderClient 只发一次请求");
         Request sent = recording.request(0);
         Map<String, String> headers = ContractSnapshot.headerValues(sent.headers());
-        assertEquals("POST", sent.method());
+        assertEquals("POST", sent.httpMethod().name());
         assertTrue(sent.url().endsWith("/service/get_provider_token"), sent.url());
         assertFalse(sent.url().contains("access_token"), sent.url());
         assertFalse(headers.containsKey("app"), "ServiceProviderClient 的接口不传应用名");

@@ -5,7 +5,8 @@ import com.github.shuaidd.client.FrontEndToolsClient;
 import com.github.shuaidd.client.config.ApplicationProperties;
 import com.github.shuaidd.dto.tool.FrontEndTicket;
 import com.github.shuaidd.response.tool.AccessTokenResponse;
-import org.apache.commons.lang3.StringUtils;
+
+import java.util.Objects;
 
 /**
  * 描述 前端SDK管理
@@ -33,7 +34,7 @@ public class FrontEndToolService extends AbstractBaseService {
         }
         ApplicationProperties app = getApp(applicationName);
 
-        AccessTokenResponse accessTokenResponse = weChatClient.getAccessToken(StringUtils.defaultString(app.getCorpId(),properties.getCorpId()), app.getSecret());
+        AccessTokenResponse accessTokenResponse = weChatClient.getAccessToken(Objects.toString(app.getCorpId(), properties.getCorpId()), app.getSecret());
         return frontEndToolsClient.getAppTicket(accessTokenResponse.getAccessToken(), applicationName);
     }
 }

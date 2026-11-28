@@ -1,7 +1,6 @@
 package com.github.shuaidd.dto.checkin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.dto.checkin.CheckInTime;
 
 import java.util.List;
 

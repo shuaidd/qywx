@@ -9,7 +9,6 @@ import com.github.shuaidd.dto.payment.ApplyMchContactInfo;
 import com.github.shuaidd.dto.payment.ApplyMchIdCardInfo;
 import com.github.shuaidd.dto.payment.ApplyMchSalesSceneInfo;
 import com.github.shuaidd.dto.payment.OrderAmount;
-import com.github.shuaidd.dto.payment.OrderPayer;
 import com.github.shuaidd.dto.payment.RefundAmount;
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.file.QywxFile;

@@ -32,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class CustomJacksonDecoderTest {
 
     private static final Request REQUEST = Request.create(Request.HttpMethod.GET,
-            "http://contract.invalid/cgi-bin/get_api_domain_ip", Collections.emptyMap(), null, Util.UTF_8);
+            "http://contract.invalid/cgi-bin/get_api_domain_ip", Collections.emptyMap(), null, Util.UTF_8, null);
 
     private final CustomJacksonDecoder decoder = new CustomJacksonDecoder();
 

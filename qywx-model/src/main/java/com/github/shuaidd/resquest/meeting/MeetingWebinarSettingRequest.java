@@ -5,7 +5,6 @@ import com.github.shuaidd.dto.meeting.MeetingWebinarHost;
 import com.github.shuaidd.dto.meeting.MeetingWebinarMediaSetting;
 import java.util.List;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * 网络研讨会基础设置请求

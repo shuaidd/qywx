@@ -3,8 +3,9 @@ package com.github.shuaidd.callback;
 /**
  * @author shuaidongdong
  */
-@SuppressWarnings("serial")
 public class AesException extends Exception {
+
+    private static final long serialVersionUID = 1L;
 
     public final static int OK = 0;
     public final static int VALIDATE_SIGNATURE_ERROR = -40001;

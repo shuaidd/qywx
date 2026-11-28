@@ -1,6 +1,5 @@
 package com.github.shuaidd.response.school;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * 家校部门管理员信息

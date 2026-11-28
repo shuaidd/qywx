@@ -2,9 +2,6 @@ package com.github.shuaidd.resquest.externalcontact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.shuaidd.dto.externalcontact.V2GroupMsg;
-import com.github.shuaidd.dto.message.MiniProgram;
-import com.github.shuaidd.dto.message.MsgImage;
-import com.github.shuaidd.dto.message.MsgLink;
 import com.github.shuaidd.dto.message.MsgText;
 
 import java.util.List;

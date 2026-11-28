@@ -42,4 +42,8 @@ public enum MsgType {
     public String getType() {
         return type;
     }
+
+    public String getDescription() {
+        return description;
+    }
 }

@@ -160,6 +160,6 @@ public final class CallBackManager {
 
         WXBizMsgXmlCrypt crypt = new WXBizMsgXmlCrypt(properties.getToken(), properties.getEncodingAesKey(), properties.getReceiveId());
 
-        return crypt.EncryptMsg(text, System.currentTimeMillis() + "", RandomStringUtils.random(10, true, true));
+        return crypt.EncryptMsg(text, System.currentTimeMillis() + "", RandomStringUtils.secure().next(10, true, true));
     }
 }

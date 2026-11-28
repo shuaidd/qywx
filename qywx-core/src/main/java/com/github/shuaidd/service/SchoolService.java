@@ -50,7 +50,6 @@ import com.github.shuaidd.response.school.LivingWatchStatV2Response;
 import com.github.shuaidd.response.school.LivingUnwatchStatV2Response;
 import com.github.shuaidd.response.school.PaymentResultResponse;
 import com.github.shuaidd.response.school.TradeResponse;
-import com.github.shuaidd.response.school.SchoolDepartment;
 import com.github.shuaidd.response.school.SchoolUserDetailResponse;
 import com.github.shuaidd.response.school.StudentListResponse;
 import com.github.shuaidd.response.school.ExternalUserOpenIdResponse;

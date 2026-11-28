@@ -3,7 +3,6 @@ package com.github.shuaidd.resquest.payment;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import com.github.shuaidd.dto.payment.*;
 
 /**
  * 申请小程序收款交易账单请求

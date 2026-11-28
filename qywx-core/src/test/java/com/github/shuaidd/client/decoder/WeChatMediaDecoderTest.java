@@ -61,7 +61,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class WeChatMediaDecoderTest {
 
     private static final Request REQUEST = Request.create(Request.HttpMethod.GET,
-            "http://contract.invalid/cgi-bin/media/get", Collections.emptyMap(), null, Util.UTF_8);
+            "http://contract.invalid/cgi-bin/media/get", Collections.emptyMap(), null, Util.UTF_8, null);
 
     /** 5.2.0 录制时的下载响应体 */
     private static final byte[] CONTENT = "CONTRACT-DOWNLOAD-CONTENT".getBytes(Util.UTF_8);

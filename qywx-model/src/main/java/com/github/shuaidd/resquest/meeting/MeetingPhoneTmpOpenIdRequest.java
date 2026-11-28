@@ -5,7 +5,6 @@ import java.util.List;
 import com.github.shuaidd.dto.meeting.MeetingPhoneNumber;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import lombok.EqualsAndHashCode;
 
 /**
  * 获取电话入会成员临时ID请求

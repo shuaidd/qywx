@@ -3,7 +3,6 @@ package com.github.shuaidd.resquest.meeting;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import lombok.EqualsAndHashCode;
 
 /**
  * 按 ID 或会议号查询网络研讨会请求

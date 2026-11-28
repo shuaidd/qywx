@@ -3,7 +3,6 @@ package com.github.shuaidd.resquest.meeting;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import lombok.EqualsAndHashCode;
 
 /**
  * 查询电话入会外呼状态请求

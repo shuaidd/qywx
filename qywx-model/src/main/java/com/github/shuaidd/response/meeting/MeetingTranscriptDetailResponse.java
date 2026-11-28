@@ -2,7 +2,6 @@ package com.github.shuaidd.response.meeting;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.shuaidd.response.AbstractBaseResponse;
-import java.util.List;
 import com.github.shuaidd.dto.meeting.MeetingTranscriptDetail;
 
 import lombok.Data;

@@ -1,6 +1,5 @@
 package com.github.shuaidd.dto.message;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * 消息反馈信息

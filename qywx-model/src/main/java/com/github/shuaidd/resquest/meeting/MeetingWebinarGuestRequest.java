@@ -5,7 +5,6 @@ import com.github.shuaidd.dto.meeting.MeetingWebinarGuest;
 import java.util.List;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import lombok.EqualsAndHashCode;
 
 /**
  * 更新网络研讨会嘉宾列表请求

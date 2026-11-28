@@ -75,7 +75,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class TokenRetryInvocationHandlerFactoryTest {
 
     private static final Request REQUEST = Request.create(Request.HttpMethod.GET,
-            RecordingClient.TARGET_URL + "/get_api_domain_ip", Collections.emptyMap(), null, Util.UTF_8);
+            RecordingClient.TARGET_URL + "/get_api_domain_ip", Collections.emptyMap(), null, Util.UTF_8, null);
 
     private static final Pattern TOKEN = Pattern.compile("access_token=([^&]+)");
 
@@ -527,7 +527,7 @@ class TokenRetryInvocationHandlerFactoryTest {
      * 断言一次带令牌的业务请求：GET、路径、查询参数顺序、应用名请求头
      */
     private static void assertTokenRequest(Request request, String token) {
-        assertEquals("GET", request.method());
+        assertEquals("GET", request.httpMethod().name());
         assertEquals("/get_api_domain_ip", pathOf(request));
         assertEquals("app=" + ContractFeign.APP + "&access_token=" + token, queryOf(request));
         assertEquals(ContractFeign.APP, ContractSnapshot.headerValues(request.headers()).get("app"));
@@ -629,7 +629,7 @@ class TokenRetryInvocationHandlerFactoryTest {
      * 断言一次素材下载请求：GET、路径、查询参数顺序（含指定令牌）、应用名请求头；落盘目标不出现在请求里
      */
     private static void assertDownloadRequest(Request request, String token) {
-        assertEquals("GET", request.method());
+        assertEquals("GET", request.httpMethod().name());
         assertEquals("/media/get", pathOf(request));
         assertEquals("media_id=v_media_id&app=" + ContractFeign.APP + "&access_token=" + token, queryOf(request));
         assertEquals(ContractFeign.APP, ContractSnapshot.headerValues(request.headers()).get("app"));

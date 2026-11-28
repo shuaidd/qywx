@@ -2,7 +2,6 @@ package com.github.shuaidd.dto.meeting;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * 电话入会电话号码信息

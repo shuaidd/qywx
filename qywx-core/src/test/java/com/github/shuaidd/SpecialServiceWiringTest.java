@@ -164,7 +164,7 @@ public class SpecialServiceWiringTest {
 
         assertEquals(GET_TOKEN_URL, recording.request(0).url());
         Request image = recording.request(1);
-        assertEquals("POST", image.method());
+        assertEquals("POST", image.httpMethod().name());
         assertEquals(BASE + "media/upload?type=image&" + TOKEN_QUERY, image.url());
         assertTrue(MULTIPART_CONTENT_TYPE.matcher(header(image, "Content-Type")).matches(), header(image, "Content-Type"));
         String imageBody = new String(image.body(), StandardCharsets.UTF_8);
@@ -186,7 +186,7 @@ public class SpecialServiceWiringTest {
         assertEquals("contract.bin", download.getFileName());
         assertEquals("application/octet-stream", download.getContentType());
         Request getRequest = recording.request(3);
-        assertEquals("GET", getRequest.method());
+        assertEquals("GET", getRequest.httpMethod().name());
         assertEquals(BASE + "media/get?media_id=media-1&" + TOKEN_QUERY, getRequest.url());
 
         assertNull(service.uploadMaterial((File) null, "image/png", MediaService.IMAGE, ContractFeign.APP));
@@ -223,7 +223,7 @@ public class SpecialServiceWiringTest {
 
         assertEquals(GET_TOKEN_URL, recording.request(0).url());
         Request request = recording.request(1);
-        assertEquals("POST", request.method());
+        assertEquals("POST", request.httpMethod().name());
         assertEquals(BASE + "miniapppay/upload_image?" + TOKEN_QUERY, request.url());
         assertTrue(MULTIPART_CONTENT_TYPE.matcher(header(request, "Content-Type")).matches(), header(request, "Content-Type"));
         String body = new String(request.body(), StandardCharsets.UTF_8);
@@ -255,7 +255,7 @@ public class SpecialServiceWiringTest {
         assertEquals(GET_TOKEN_URL, recording.request(0).url());
         assertCsvUpload(recording.request(1), "asyncBatchUpdateUser-", USER_TITLE + userLine);
         Request sync = recording.request(2);
-        assertEquals("POST", sync.method());
+        assertEquals("POST", sync.httpMethod().name());
         assertEquals(BASE + "batch/syncuser?" + TOKEN_QUERY, sync.url());
         String syncBody = new String(sync.body(), StandardCharsets.UTF_8);
         assertTrue(syncBody.contains("\"media_id\" : \"csv-1\""), syncBody);
@@ -266,7 +266,7 @@ public class SpecialServiceWiringTest {
         assertEquals("job-2", service.fullCoverUser(Collections.singletonList(user()), false, ContractFeign.APP));
         assertCsvUpload(recording.request(3), "fullCoverUser-", USER_TITLE + userLine);
         Request replace = recording.request(4);
-        assertEquals("POST", replace.method());
+        assertEquals("POST", replace.httpMethod().name());
         assertEquals(BASE + "batch/replaceuser?" + TOKEN_QUERY, replace.url());
         String replaceBody = new String(replace.body(), StandardCharsets.UTF_8);
         assertTrue(replaceBody.contains("\"to_invite\" : false"), replaceBody);
@@ -299,7 +299,7 @@ public class SpecialServiceWiringTest {
 
         assertCsvUpload(recording.request(1), "fullCoverUser-", DEPARTMENT_TITLE + "研发部,2,1,3\n");
         Request request = recording.request(2);
-        assertEquals("POST", request.method());
+        assertEquals("POST", request.httpMethod().name());
         assertEquals(BASE + "batch/replaceparty?" + TOKEN_QUERY, request.url());
         String body = new String(request.body(), StandardCharsets.UTF_8);
         assertTrue(body.contains("\"media_id\" : \"csv-d\""), body);
@@ -328,7 +328,7 @@ public class SpecialServiceWiringTest {
         assertEquals(Integer.valueOf(100), result.getPercentage());
         assertEquals(GET_TOKEN_URL, recording.request(0).url());
         Request request = recording.request(1);
-        assertEquals("GET", request.method());
+        assertEquals("GET", request.httpMethod().name());
         assertEquals(BASE + "batch/getresult?jobid=job-1&" + TOKEN_QUERY, request.url());
     }
 
@@ -355,7 +355,7 @@ public class SpecialServiceWiringTest {
 
         assertEquals(plain, service.getDecryptExportData(aesKey, url));
 
-        assertEquals("GET", recording.request(0).method());
+        assertEquals("GET", recording.request(0).httpMethod().name());
         assertEquals(url, recording.request(0).url());
         assertNull(recording.request(0).body());
 
@@ -480,7 +480,7 @@ public class SpecialServiceWiringTest {
         assertNull(downloader.download(url));
         assertThrows(FeignException.class, () -> downloader.download(url));
 
-        assertEquals("GET", recording.request(0).method());
+        assertEquals("GET", recording.request(0).httpMethod().name());
         assertEquals(url, recording.request(0).url());
         assertNull(recording.request(0).body());
         assertEquals(3, recording.requestCount());
@@ -568,7 +568,7 @@ public class SpecialServiceWiringTest {
      * 断言一次 CSV 上传：POST media/upload?type=file、multipart 头、文件名前缀、part 的 Content-Type 为 text/plain、内容逐字相等
      */
     private static void assertCsvUpload(Request request, String prefix, String expectedContent) {
-        assertEquals("POST", request.method());
+        assertEquals("POST", request.httpMethod().name());
         assertEquals(BASE + "media/upload?type=file&" + TOKEN_QUERY, request.url());
         assertTrue(MULTIPART_CONTENT_TYPE.matcher(header(request, "Content-Type")).matches(),
                 "上传 CSV 的 Content-Type: " + header(request, "Content-Type"));

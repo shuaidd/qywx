@@ -1,16 +1,11 @@
 package com.github.shuaidd.client;
 
 import com.github.shuaidd.client.annotation.Part;
-import com.github.shuaidd.dto.tool.Comm;
 import com.github.shuaidd.file.DownloadContext;
 import com.github.shuaidd.file.FileDownload;
 import com.github.shuaidd.file.QywxFile;
-import com.github.shuaidd.response.addressbook.AsyncJobResponse;
-import com.github.shuaidd.response.material.UploadByUrlResultResponse;
 import com.github.shuaidd.response.material.UploadImageResponse;
 import com.github.shuaidd.response.material.WeChatMediaUploadResponse;
-import com.github.shuaidd.resquest.job.JobIdRequest;
-import com.github.shuaidd.resquest.media.UploadByUrlRequest;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;

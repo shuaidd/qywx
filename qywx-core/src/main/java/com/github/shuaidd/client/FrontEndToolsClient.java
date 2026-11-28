@@ -5,7 +5,6 @@ import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
 
-import java.util.Map;
 
 /**
  * 前端SDK工具

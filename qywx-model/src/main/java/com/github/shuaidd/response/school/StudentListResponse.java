@@ -1,6 +1,5 @@
 package com.github.shuaidd.response.school;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.shuaidd.response.AbstractBaseResponse;
 
 import java.util.List;

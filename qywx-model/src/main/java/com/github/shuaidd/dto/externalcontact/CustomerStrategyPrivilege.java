@@ -3,7 +3,6 @@ package com.github.shuaidd.dto.externalcontact;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.util.List;
 
 /**
  * 客户联系规则组权限配置

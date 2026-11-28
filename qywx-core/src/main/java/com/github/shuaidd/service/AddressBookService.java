@@ -9,7 +9,6 @@ import com.github.shuaidd.dto.addressbook.WeChatUser;
 import com.github.shuaidd.dto.tool.CallbackData;
 import com.github.shuaidd.exception.ParamCheckException;
 import com.github.shuaidd.file.QywxFile;
-import com.github.shuaidd.response.BaseResponse;
 import com.github.shuaidd.response.addressbook.*;
 import com.github.shuaidd.response.linkedcorp.*;
 import com.github.shuaidd.resquest.CursorPageRequest;
@@ -260,7 +259,7 @@ public class AddressBookService extends AbstractBaseService {
     public void authSuccess(String userId, String applicationName) {
 
         if (StringUtils.isNotEmpty(userId)) {
-            BaseResponse response = addressBookClient.authSucc(userId, applicationName);
+            addressBookClient.authSucc(userId, applicationName);
             if (logger.isInfoEnabled()) {
                 logger.info("二次验证成功：userId-{},applicationName-{}", userId, applicationName);
             }
@@ -279,7 +278,7 @@ public class AddressBookService extends AbstractBaseService {
             if (CollectionUtils.isEmpty(request.getParty()) && CollectionUtils.isEmpty(request.getTag()) && CollectionUtils.isEmpty(request.getUser())) {
                 return;
             }
-            BaseResponse baseResponse = addressBookClient.invite(request, applicationName);
+            addressBookClient.invite(request, applicationName);
             if (logger.isInfoEnabled()) {
                 logger.info("邀请成功：applicationName-{}", applicationName);
             }
@@ -638,7 +637,7 @@ public class AddressBookService extends AbstractBaseService {
                  * */
                 for (WeChatUser weChatUser : weChatUsers) {
                     String line = buildUserLine(weChatUser);
-                    os.write(StringUtils.defaultString(line).getBytes(StandardCharsets.UTF_8));
+                    os.write(Objects.toString(line).getBytes(StandardCharsets.UTF_8));
                 }
             }
 
@@ -662,17 +661,17 @@ public class AddressBookService extends AbstractBaseService {
 
     private String buildUserLine(WeChatUser weChatUser) {
         if (Objects.nonNull(weChatUser)) {
-            return StringUtils.defaultString(weChatUser.getName(), "") + "," +
-                    StringUtils.defaultString(weChatUser.getUserId(), "") + "," +
-                    StringUtils.defaultString(weChatUser.getMobile(), "") + "," +
-                    StringUtils.defaultString(weChatUser.getEmail(), "") + "," +
+            return Objects.toString(weChatUser.getName(), "") + "," +
+                    Objects.toString(weChatUser.getUserId(), "") + "," +
+                    Objects.toString(weChatUser.getMobile(), "") + "," +
+                    Objects.toString(weChatUser.getEmail(), "") + "," +
                     getStringFromList(weChatUser.getDepartment()) + "," +
-                    StringUtils.defaultString(weChatUser.getPosition(), "") + "," +
+                    Objects.toString(weChatUser.getPosition(), "") + "," +
                     getStringFromList(weChatUser.getIsLeaderInDept()) + "," +
                     getStringFromList(weChatUser.getOrder()) + "," +
-                    StringUtils.defaultString(weChatUser.getAlias(), "") + "," +
-                    StringUtils.defaultString(weChatUser.getAddress(), "") + "," +
-                    StringUtils.defaultString(weChatUser.getTelephone(), "") + "," +
+                    Objects.toString(weChatUser.getAlias(), "") + "," +
+                    Objects.toString(weChatUser.getAddress(), "") + "," +
+                    Objects.toString(weChatUser.getTelephone(), "") + "," +
                     (weChatUser.getEnable() == null ? "" : String.valueOf(weChatUser.getEnable())) + ",\n";
         }
 
@@ -721,7 +720,7 @@ public class AddressBookService extends AbstractBaseService {
                  * 部门名称,部门ID,父部门ID,排序
                  * */
                 for (Department department : departments) {
-                    String line = StringUtils.defaultString(department.getName(), "") + "," +
+                    String line = Objects.toString(department.getName(), "") + "," +
                             (department.getId() == null ? "" : String.valueOf(department.getId())) + "," +
                             (department.getParentId() == null ? "" : String.valueOf(department.getParentId())) + "," +
                             (department.getOrder() == null ? "" : String.valueOf(department.getOrder())) + "\n";

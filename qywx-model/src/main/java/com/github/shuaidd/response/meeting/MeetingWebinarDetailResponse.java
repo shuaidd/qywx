@@ -1,7 +1,6 @@
 package com.github.shuaidd.response.meeting;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.shuaidd.response.AbstractBaseResponse;
 import com.github.shuaidd.dto.meeting.MeetingWebinarHost;
 import com.github.shuaidd.dto.meeting.MeetingWebinarMediaSetting;
 import java.util.List;

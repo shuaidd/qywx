@@ -1,6 +1,5 @@
 package com.github.shuaidd.response.school;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * 创建家校部门的响应

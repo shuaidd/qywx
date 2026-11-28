@@ -1,6 +1,5 @@
 package com.github.shuaidd.response.externalcontact;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.shuaidd.response.AbstractBaseResponse;
 
