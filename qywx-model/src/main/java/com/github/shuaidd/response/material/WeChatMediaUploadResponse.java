@@ -1,6 +1,8 @@
 package com.github.shuaidd.response.material;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.github.shuaidd.json.Long2DateDeserializer;
 import com.github.shuaidd.response.AbstractBaseResponse;
 
 import java.util.Date;
@@ -19,7 +21,9 @@ public class WeChatMediaUploadResponse extends AbstractBaseResponse {
     @JsonProperty("media_id")
     private String mediaId;
 
+    /** 上传时间：企业微信返回秒级时间戳字符串，必须按秒解析（Jackson 默认会把数字字符串当成毫秒） */
     @JsonProperty("created_at")
+    @JsonDeserialize(using = Long2DateDeserializer.class)
     private Date createdAt;
 
     public String getType() {

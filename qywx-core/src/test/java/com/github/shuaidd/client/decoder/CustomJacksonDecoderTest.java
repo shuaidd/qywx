@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.shuaidd.enums.ErrorCode;
 import com.github.shuaidd.exception.WeChatException;
 import com.github.shuaidd.response.BaseResponse;
+import com.github.shuaidd.response.material.WeChatMediaUploadResponse;
 import com.github.shuaidd.response.tool.ApiDomainIpResponse;
 import feign.Request;
 import feign.Response;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -146,6 +148,24 @@ class CustomJacksonDecoderTest {
         decoder.decode(response, BaseResponse.class);
 
         assertTrue(closed.get());
+    }
+
+    /**
+     * 临时素材上传响应的 created_at 是秒级时间戳字符串（文档 90253）：按秒解析成 Date
+     * <p>
+     * 回归：该字段曾缺少 {@code Long2DateDeserializer}，Jackson 默认把秒当毫秒，解析出来落在 1970 年
+     */
+    @Test
+    void parsesMediaUploadCreatedAtAsSeconds() throws IOException {
+        Object result = decoder.decode(response(200,
+                "{\"errcode\":0,\"errmsg\":\"ok\",\"type\":\"image\",\"media_id\":\"MEDIA_ID\",\"created_at\":\"1795868555\"}"),
+                WeChatMediaUploadResponse.class);
+
+        assertTrue(result instanceof WeChatMediaUploadResponse);
+        WeChatMediaUploadResponse response = (WeChatMediaUploadResponse) result;
+        assertEquals("image", response.getType());
+        assertEquals("MEDIA_ID", response.getMediaId());
+        assertEquals(new Date(1795868555000L), response.getCreatedAt());
     }
 
     private static Response response(int status, String body) {
