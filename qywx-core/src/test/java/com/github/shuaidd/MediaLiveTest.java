@@ -204,7 +204,7 @@ public class MediaLiveTest {
         WeChatMediaUploadResponse response = imageUpload();
 
         assertEquals(MediaService.IMAGE, response.getType(), "type 应为 image");
-        assertTrue(!isBlank(response.getMediaId()), "media_id 为空");
+        assertFalse(isBlank(response.getMediaId()), "media_id 为空");
         assertNotNull(response.getCreatedAt(), "created_at 为空");
         long createdAtAge = Math.abs(System.currentTimeMillis() - response.getCreatedAt().getTime());
         assertTrue(createdAtAge < TimeUnit.DAYS.toMillis(1), "created_at 应为最近的时间（企业微信返回秒级时间戳），实际为：" + response.getCreatedAt());
@@ -219,7 +219,7 @@ public class MediaLiveTest {
     public void uploadMaterialFileViaServiceReturnsMediaId() throws IOException {
         String byFile = mediaService.uploadMaterial(writeTempFile("live-file.txt", TEXT_BYTES), "text/plain", MediaService.FILE, app);
 
-        assertTrue(!isBlank(byFile), "File 重载未返回 media_id");
+        assertFalse(isBlank(byFile), "File 重载未返回 media_id");
         assertNotEquals(fileMediaId(), byFile, "两次上传应得到不同的 media_id");
         System.out.println("[live] media/upload file ok, mediaIdLength=" + byFile.length());
     }
@@ -244,9 +244,9 @@ public class MediaLiveTest {
 
         assertNotNull(download, "下载结果为空");
         assertArrayEquals(TEXT_BYTES, download.getContent(), "下载内容与上传内容不一致");
-        assertTrue(!isBlank(download.getContentType()), "Content-Type 为空");
-        assertTrue(!isBlank(download.getFileName()), "Content-Disposition 文件名为空");
-        assertTrue(!isBlank(download.getHeader(FileDownload.CONTENT_DISPOSITION)), "Content-Disposition 为空");
+        assertFalse(isBlank(download.getContentType()), "Content-Type 为空");
+        assertFalse(isBlank(download.getFileName()), "Content-Disposition 文件名为空");
+        assertFalse(isBlank(download.getHeader(FileDownload.CONTENT_DISPOSITION)), "Content-Disposition 为空");
         System.out.println("[live] media/get ok, length=" + download.getContent().length + ", fileName=" + download.getFileName());
     }
 
@@ -292,7 +292,7 @@ public class MediaLiveTest {
     public void downloadJsMediaWithInvalidIdThrowsWeChatException() {
         WeChatException error = weChatError(() -> mediaService.downloadJsMedia(BOGUS_JS_MEDIA_ID, app));
 
-        assertTrue(!isBlank(error.getCode()), "errcode 为空");
+        assertFalse(isBlank(error.getCode()), "errcode 为空");
         System.out.println("[live] media/get/jssdk invalid id errcode=" + error.getCode());
     }
 
@@ -304,7 +304,7 @@ public class MediaLiveTest {
         Path target = tempDir.resolve("js-should-not-exist.dat");
         WeChatException error = weChatError(() -> mediaService.downloadJsMediaFile(BOGUS_JS_MEDIA_ID, target.toString(), app));
 
-        assertTrue(!isBlank(error.getCode()), "errcode 为空");
+        assertFalse(isBlank(error.getCode()), "errcode 为空");
         assertFalse(Files.exists(target), "下载出错时不应创建目标文件");
         assertNull(DownloadContext.get(), "downloadJsMediaFile 返回后 DownloadContext 应已恢复");
         System.out.println("[live] media/get/jssdk -> file invalid id errcode=" + error.getCode());
@@ -329,7 +329,7 @@ public class MediaLiveTest {
         request.setUrl(url);
         request.setMd5(md5);
         String jobId = mediaService.uploadByUrl(request, app);
-        assertTrue(!isBlank(jobId), "jobid 为空");
+        assertFalse(isBlank(jobId), "jobid 为空");
         System.out.println("[live] media/upload_by_url ok, jobIdLength=" + jobId.length());
 
         JobIdRequest query = new JobIdRequest();
@@ -352,7 +352,7 @@ public class MediaLiveTest {
         }
         assertEquals(Integer.valueOf(2), result.getStatus(), "异步任务应完成（status=2）");
         assertNotNull(result.getDetail(), "detail 为空");
-        assertTrue(!isBlank(result.getDetail().getMediaId()), "detail.media_id 为空");
+        assertFalse(isBlank(result.getDetail().getMediaId()), "detail.media_id 为空");
         assertNotNull(result.getDetail().getCreatedAt(), "detail.created_at 为空");
 
         FileDownload download = mediaService.download(result.getDetail().getMediaId(), app);
@@ -370,7 +370,7 @@ public class MediaLiveTest {
         request.setJobId("invalid-jobid-for-live-test");
         WeChatException error = weChatError(() -> mediaService.getUploadByUrlResult(request, app));
 
-        assertTrue(!isBlank(error.getCode()), "errcode 为空");
+        assertFalse(isBlank(error.getCode()), "errcode 为空");
         System.out.println("[live] media/get_upload_by_url_result unknown job errcode=" + error.getCode());
     }
 
@@ -381,7 +381,7 @@ public class MediaLiveTest {
     public void uploadAttachmentImageReturnsDownloadableMediaId() throws IOException {
         String mediaId = mediaService.uploadAttachment(writeTempFile("live-attachment.png", png()), MediaService.IMAGE, 1, app);
 
-        assertTrue(!isBlank(mediaId), "media_id 为空");
+        assertFalse(isBlank(mediaId), "media_id 为空");
         assertArrayEquals(png(), mediaService.download(mediaId, app).getContent(), "附件取回内容与上传内容不一致");
         System.out.println("[live] media/upload_attachment ok, mediaIdLength=" + mediaId.length());
     }
@@ -394,7 +394,7 @@ public class MediaLiveTest {
         WeChatException error = weChatError(() -> mediaService.uploadMaterial(
                 new QywxFile("abcd".getBytes(StandardCharsets.UTF_8), "too-small.txt", "text/plain"), MediaService.FILE, app));
 
-        assertTrue(!isBlank(error.getCode()), "errcode 为空");
+        assertFalse(isBlank(error.getCode()), "errcode 为空");
         System.out.println("[live] media/upload too small file errcode=" + error.getCode() + " (" + error.getMessage() + ")");
     }
 
@@ -440,7 +440,7 @@ public class MediaLiveTest {
 
     private String imageMediaId() throws IOException {
         WeChatMediaUploadResponse response = imageUpload();
-        assertTrue(!isBlank(response.getMediaId()), "media_id 为空");
+        assertFalse(isBlank(response.getMediaId()), "media_id 为空");
         return response.getMediaId();
     }
 
@@ -450,7 +450,7 @@ public class MediaLiveTest {
     private String fileMediaId() {
         if (fileMediaId == null) {
             fileMediaId = mediaService.uploadMaterial(new QywxFile(TEXT_BYTES, "live.txt", "text/plain"), MediaService.FILE, app);
-            assertTrue(!isBlank(fileMediaId), "media_id 为空");
+            assertFalse(isBlank(fileMediaId), "media_id 为空");
         }
         return fileMediaId;
     }

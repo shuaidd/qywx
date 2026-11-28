@@ -151,7 +151,7 @@ public class AddressBookLiveTest {
         AccessTokenResponse response = client.weChatClient().getAccessToken(corpId, secret);
 
         assertNotNull(response, "gettoken 响应为空");
-        assertTrue(!isBlank(response.getAccessToken()), "access_token 为空");
+        assertFalse(isBlank(response.getAccessToken()), "access_token 为空");
         assertNotNull(response.getExpiresIn(), "expires_in 为空");
         assertTrue(response.getExpiresIn() > 0, "expires_in 应大于 0");
         System.out.println("[live] gettoken ok, tokenLength=" + response.getAccessToken().length()
@@ -166,7 +166,7 @@ public class AddressBookLiveTest {
         String first = client.tokenService().getAccessToken(app);
         String second = client.tokenService().getAccessToken(app);
 
-        assertTrue(!isBlank(first), "首次取号为空");
+        assertFalse(isBlank(first), "首次取号为空");
         assertEquals(first, second, "第二次取号应命中缓存");
         assertEquals(first, client.tokenManager().getAccessToken(app), "TokenManager 与 TokenService 应共享缓存");
         System.out.println("[live] token cache ok, tokenLength=" + first.length());
@@ -221,7 +221,7 @@ public class AddressBookLiveTest {
 
         assertNotNull(detail, "部门详情为空");
         assertEquals(rootId, detail.getId(), "部门详情 id 不一致");
-        assertTrue(!isBlank(detail.getName()), "部门详情名称为空");
+        assertFalse(isBlank(detail.getName()), "部门详情名称为空");
         System.out.println("[live] getDepartmentDetail ok, hasParentId=" + (detail.getParentId() != null));
     }
 
@@ -231,7 +231,7 @@ public class AddressBookLiveTest {
 
         assertNotNull(users, "部门成员（简易）为空");
         for (WeChatUser user : users) {
-            assertTrue(!isBlank(user.getUserId()), "成员 userId 为空");
+            assertFalse(isBlank(user.getUserId()), "成员 userId 为空");
         }
         System.out.println("[live] getDepartmentUser(root, fetchChild=false) size=" + users.size());
     }
@@ -242,7 +242,7 @@ public class AddressBookLiveTest {
 
         assertNotNull(users, "部门成员（详情）为空");
         for (WeChatUser user : users) {
-            assertTrue(!isBlank(user.getUserId()), "成员 userId 为空");
+            assertFalse(isBlank(user.getUserId()), "成员 userId 为空");
             assertNotNull(user.getName(), "成员 name 为空");
         }
         System.out.println("[live] getDepartmentUserDetail(root, fetchChild=false) size=" + users.size());
@@ -266,7 +266,7 @@ public class AddressBookLiveTest {
         assertNotNull(withChild, "递归部门成员详情为空");
         assertTrue(withChild.size() >= direct.size(), "fetch_child=1 的详情结果不应少于 fetch_child=0");
         for (WeChatUser user : withChild) {
-            assertTrue(!isBlank(user.getUserId()), "成员 userId 为空");
+            assertFalse(isBlank(user.getUserId()), "成员 userId 为空");
             assertNotNull(user.getName(), "成员 name 为空");
         }
         System.out.println("[live] getDepartmentUserDetail(root, fetchChild=true) size=" + withChild.size()
@@ -285,7 +285,7 @@ public class AddressBookLiveTest {
         assertNotNull(deptUsers, "list_id 响应为空");
         assertTrue(deptUsers.size() <= 100, "单页不应超过 limit");
         for (DeptUser deptUser : deptUsers) {
-            assertTrue(!isBlank(deptUser.getUserId()), "dept_user.userId 为空");
+            assertFalse(isBlank(deptUser.getUserId()), "dept_user.userId 为空");
             assertNotNull(deptUser.getDepartment(), "dept_user.department 为空");
         }
         System.out.println("[live] getUserIds(limit=100) size=" + deptUsers.size());
@@ -298,7 +298,7 @@ public class AddressBookLiveTest {
 
         WeChatUserResponse user = sampleUser();
         assertEquals(userId, user.getUserId(), "成员详情 userId 不一致");
-        assertTrue(!isBlank(user.getName()), "成员详情 name 为空");
+        assertFalse(isBlank(user.getName()), "成员详情 name 为空");
         assertTrue(user.getDepartment() != null && !user.getDepartment().isEmpty(), "成员详情 department 为空");
         System.out.println("[live] getUser ok, hasMobile=" + !isBlank(user.getMobile())
                 + ", hasEmail=" + !isBlank(user.getEmail()));
@@ -323,7 +323,7 @@ public class AddressBookLiveTest {
 
         String openId = addressBookService.convertToOpenId(userId, app);
 
-        assertTrue(!isBlank(openId), "openid 为空");
+        assertFalse(isBlank(openId), "openid 为空");
         String back = addressBookService.convertToUserId(openId, app);
         assertEquals(userId, back, "openid 转回 userid 不一致");
         System.out.println("[live] convertToOpenId/convertToUserId round trip ok");
@@ -348,10 +348,10 @@ public class AddressBookLiveTest {
                 addressBookService.getTagUser(list.get(0).getTagId(), app);
 
         assertNotNull(tagUser, "标签成员为空");
-        assertTrue(!isBlank(tagUser.getTagName()), "标签名称为空");
+        assertFalse(isBlank(tagUser.getTagName()), "标签名称为空");
         assertNotNull(tagUser.getUserList(), "标签成员列表为空");
         for (WeChatUser user : tagUser.getUserList()) {
-            assertTrue(!isBlank(user.getUserId()), "标签成员 userId 为空");
+            assertFalse(isBlank(user.getUserId()), "标签成员 userId 为空");
         }
         System.out.println("[live] getTagUser(first) size=" + tagUser.getUserList().size()
                 + ", partyList=" + (tagUser.getPartyList() == null ? 0 : tagUser.getPartyList().size()));
@@ -377,7 +377,7 @@ public class AddressBookLiveTest {
     public void getCorpQrCodeReturnsUrl() {
         String qrCode = addressBookService.getCorpQrCode(1, app);
 
-        assertTrue(!isBlank(qrCode), "加入企业二维码为空");
+        assertFalse(isBlank(qrCode), "加入企业二维码为空");
         assertTrue(qrCode.startsWith("http"), "加入企业二维码应为 URL：" + qrCode);
         System.out.println("[live] getCorpQrCode ok, length=" + qrCode.length());
     }
@@ -492,7 +492,7 @@ public class AddressBookLiveTest {
         TokenEntry refreshed = store.get(app);
         assertNotNull(refreshed, "重试后缓存应写入新令牌");
         assertNotEquals(bogus, refreshed.getAccessToken(), "重试后缓存仍是无效令牌");
-        assertTrue(!isBlank(refreshed.getAccessToken()), "重试后缓存的新令牌为空");
+        assertFalse(isBlank(refreshed.getAccessToken()), "重试后缓存的新令牌为空");
         System.out.println("[live] invalid token -> retry ok, refreshedTokenLength=" + refreshed.getAccessToken().length());
     }
 
