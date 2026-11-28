@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import org.springframework.lang.NonNull;
 
 import java.util.Objects;
 
@@ -47,7 +48,7 @@ public class SpringCacheTokenStore implements TokenStore {
         this.cache = found;
     }
 
-    static String key(String applicationName) {
+    static @NonNull String key(String applicationName) {
         return "access_token:" + applicationName;
     }
 

@@ -62,7 +62,7 @@ public final class SpringFileBridge {
         HttpHeaders headers = new HttpHeaders();
         for (Map.Entry<String, List<String>> header : download.getHeaders().entrySet()) {
             for (String value : header.getValue()) {
-                headers.add(header.getKey(), value);
+                headers.add(Objects.requireNonNull(header.getKey(), "header name"), value);
             }
         }
         return new ResponseEntity<>(download.getContent(), headers, HttpStatus.OK);

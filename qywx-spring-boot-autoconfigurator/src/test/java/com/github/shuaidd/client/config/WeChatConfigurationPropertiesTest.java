@@ -6,6 +6,7 @@ import org.springframework.boot.context.properties.bind.Bindable;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.StandardEnvironment;
+import org.springframework.lang.NonNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -111,7 +112,7 @@ public class WeChatConfigurationPropertiesTest {
     /**
      * 用与 Spring Boot 启动时相同的 Binder 绑定 qywx 前缀；去掉系统属性与环境变量两个来源，避免本机的 QYWX_* 变量干扰用例
      */
-    private static WeChatConfigurationProperties bind(Map<String, Object> source) {
+    private static WeChatConfigurationProperties bind(@NonNull Map<String, Object> source) {
         StandardEnvironment environment = new StandardEnvironment();
         environment.getPropertySources().remove(StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME);
         environment.getPropertySources().remove(StandardEnvironment.SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME);

@@ -6,13 +6,16 @@ import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.lang.NonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -44,7 +47,10 @@ public class SpringCacheTokenStoreTest {
         store.put(APP, entry);
 
         Cache cache = cacheManager.getCache(SpringCacheTokenStore.CACHE_NAME);
-        assertSame(entry, cache.get("access_token:" + APP).get());
+        assertNotNull(cache);
+        Cache.ValueWrapper wrapper = cache.get("access_token:" + APP);
+        assertNotNull(wrapper);
+        assertSame(entry, wrapper.get());
         assertSame(entry, store.get(APP));
 
         store.evict(APP);
@@ -60,6 +66,7 @@ public class SpringCacheTokenStoreTest {
     public void treatsForeignValuesAsMisses() {
         ConcurrentMapCacheManager cacheManager = new ConcurrentMapCacheManager(SpringCacheTokenStore.CACHE_NAME);
         Cache cache = cacheManager.getCache(SpringCacheTokenStore.CACHE_NAME);
+        assertNotNull(cache);
         String legacy = "qywx_access_token_legacy";
         LinkedHashMap<String, Object> jsonShape = new LinkedHashMap<String, Object>();
         cache.put("access_token:" + APP, legacy);
@@ -69,8 +76,12 @@ public class SpringCacheTokenStoreTest {
         assertNull(store.get(APP));
         assertNull(store.get("other"));
 
-        assertSame(legacy, cache.get("access_token:" + APP).get());
-        assertSame(jsonShape, cache.get("access_token:other").get());
+        Cache.ValueWrapper legacyWrapper = cache.get("access_token:" + APP);
+        Cache.ValueWrapper jsonShapeWrapper = cache.get("access_token:other");
+        assertNotNull(legacyWrapper);
+        assertNotNull(jsonShapeWrapper);
+        assertSame(legacy, legacyWrapper.get());
+        assertSame(jsonShape, jsonShapeWrapper.get());
     }
 
     /**
@@ -107,18 +118,18 @@ public class SpringCacheTokenStoreTest {
     public void propagatesCacheFailures() {
         CacheManager cacheManager = new CacheManager() {
             @Override
-            public Cache getCache(String name) {
+            public Cache getCache(@NonNull String name) {
                 return new ConcurrentMapCache(name) {
                     @Override
-                    public ValueWrapper get(Object key) {
+                    public ValueWrapper get(@NonNull Object key) {
                         throw new IllegalStateException("cache down");
                     }
                 };
             }
 
             @Override
-            public Collection<String> getCacheNames() {
-                return Collections.emptyList();
+            public @NonNull Collection<String> getCacheNames() {
+                return new ArrayList<>();
             }
         };
         SpringCacheTokenStore store = new SpringCacheTokenStore(cacheManager);

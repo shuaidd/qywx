@@ -37,6 +37,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -292,6 +293,7 @@ public class WeChatAutoConfigurationContextTest {
 
         Map<String, String> declared = new TreeMap<String, String>();
         for (String name : context.getBeanFactory().getBeanDefinitionNames()) {
+            Objects.requireNonNull(name);
             BeanDefinition definition = context.getBeanFactory().getBeanDefinition(name);
             if (configurationName.equals(definition.getFactoryBeanName())) {
                 MethodMetadata factoryMethod = definition instanceof AnnotatedBeanDefinition
@@ -319,7 +321,7 @@ public class WeChatAutoConfigurationContextTest {
         ClassLoader classLoader = WeChatAutoConfigurationContextTest.class.getClassLoader();
         for (Map.Entry<String, String> entry : declared.entrySet()) {
             Class<?> type = Class.forName(entry.getValue(), false, classLoader);
-            assertTrue(type.isInstance(context.getBean(entry.getKey())), entry.getKey() + " 不是 " + entry.getValue());
+            assertTrue(type.isInstance(context.getBean(Objects.requireNonNull(entry.getKey()))), entry.getKey() + " 不是 " + entry.getValue());
             assertEquals(1, context.getBeansOfType(type).size(), entry.getValue() + " 应恰好登记一个 bean");
         }
     }
