@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.shuaidd</groupId>
+    <artifactId>qywx-example</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>qywx-example</name>
+    <description>纯 Java 示例：不依赖 Spring，直接用 qywx-core 调用企业微信接口（与 qywx-spring-boot-example 对称，不进根 reactor）</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.release>17</maven.compiler.release>
+        <qywx.version>6.0.0</qywx.version>
+        <!-- 与 qywx-core 的 slf4j-api 版本保持一致 -->
+        <qywx.slf4j.version>2.0.9</qywx.slf4j.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.shuaidd</groupId>
+            <artifactId>qywx-core</artifactId>
+            <version>${qywx.version}</version>
+        </dependency>
+
+        <!-- core 只带 slf4j-api 门面，示例选最简实现；换成 logback / log4j2 等任意实现均可 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${qywx.slf4j.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>
+            <!-- 用 exec:exec 而不是 exec:java：示例缺凭据时 System.exit(1)，exec:java 在 Maven 进程内运行会直接杀掉 Maven -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>-Dfile.encoding=UTF-8</argument>
+                        <argument>-classpath</argument>
+                        <classpath/>
+                        <argument>com.github.shuaidd.example.StandaloneExample</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+            <!-- 示例不发布 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
