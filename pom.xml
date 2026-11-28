@@ -7,7 +7,7 @@
     <groupId>com.github.shuaidd</groupId>
     <artifactId>qywx</artifactId>
     <packaging>pom</packaging>
-    <version>5.2.0</version>
+    <version>6.0.0</version>
     <modules>
         <module>qywx-core</module>
         <module>qywx-spring-boot-starter</module>
