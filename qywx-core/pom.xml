@@ -24,10 +24,10 @@
     </properties>
 
     <dependencies>
-        <!-- 实体与异常类型（AccessTokenResponse/ParamCheckException/WeChatException）；该模块不依赖 Spring，P5.2 改名为 qywx-model -->
+        <!-- 实体与异常类型（AccessTokenResponse/ParamCheckException/WeChatException）；该模块不依赖 Spring -->
         <dependency>
             <groupId>com.github.shuaidd</groupId>
-            <artifactId>qywx-spring-boot-model</artifactId>
+            <artifactId>qywx-model</artifactId>
             <version>${project.version}</version>
         </dependency>
 

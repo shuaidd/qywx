@@ -12,7 +12,7 @@
         <module>qywx-core</module>
         <module>qywx-spring-boot-starter</module>
         <module>qywx-spring-boot-autoconfigurator</module>
-        <module>qywx-spring-boot-model</module>
+        <module>qywx-model</module>
     </modules>
 
     <name>qywx</name>
@@ -95,7 +95,7 @@
 
             <dependency>
                 <groupId>com.github.shuaidd</groupId>
-                <artifactId>qywx-spring-boot-model</artifactId>
+                <artifactId>qywx-model</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
