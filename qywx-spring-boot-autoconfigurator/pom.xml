@@ -23,6 +23,14 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Boot 4 起 CacheAutoConfiguration 搬进 spring-boot-cache；主代码只用 afterName 按名字排序、不引 class，
+             这里只在测试里需要它（ApplicationContextRunner 里真正加载 Boot 的 CacheAutoConfiguration），不传递给用户 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-cache</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- SpringFileBridge 用到的 MultipartFile / ResponseEntity 类型；用户项目里没有 spring-web 时不传递，版本由 Boot BOM 管 -->
         <dependency>
             <groupId>org.springframework</groupId>

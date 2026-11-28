@@ -14,7 +14,7 @@
 | 环境 | 坐标 | 说明 |
 |---|---|---|
 | 纯 Java（Java 17+） | `com.github.shuaidd:qywx-core:6.0.0` | 不依赖 Spring / Spring Cloud，不需要容器 |
-| Spring Boot 3.x | `com.github.shuaidd:qywx-spring-boot-starter:6.0.0` | 不再需要引入 `spring-cloud-starter-openfeign`；已在 Boot 3.2.0 上验证 |
+| Spring Boot 3.x / 4.x | `com.github.shuaidd:qywx-spring-boot-starter:6.0.0` | 不再需要引入 `spring-cloud-starter-openfeign`；已在 Boot 4.1.3 上验证；Boot 3.5.16 实测通过（自动配置排序按名字声明，两代包名都生效；Jackson 版本随用户自己的 Boot BOM） |
 | Spring Boot 2.7 起 | 同上 | 适配层经 `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports` 自动注册（Boot 2.7 起支持），未实测 |
 | Spring Boot 2.x 旧用法 | `qywx-spring-boot-starter:4.4.2` | 仍走 Spring Cloud OpenFeign，不升级时使用 |
 
@@ -132,6 +132,7 @@ public class WeChatTest {
 ### 更新记录
 ```
 2026-11-28 6.0.0 核心拆出不依赖 Spring 的 qywx-core（原生 OpenFeign），starter 降为薄适配层；Java 17 基线，升级见 MIGRATION-6.0.md
+2026-11-28 依赖安全升级：Spring Boot 3.2.0 → 4.1.3，Jackson → 2.21.8（annotations 2.21），commons-lang3 3.17.0 → 3.20.0，commons-io 2.18.0 → 2.22.0，commons-codec 1.17.1 → 1.21.0
 2025-01-03 文档管理，智能表格管理
 2023-07-28 支持多企业号
 2022-10-24 异步上传临时素材接口

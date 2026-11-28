@@ -62,7 +62,6 @@ import com.github.shuaidd.token.TokenStore;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
@@ -82,9 +81,10 @@ import java.util.Collections;
  * 57 个 {@code @Bean}：全部 {@code @ConditionalOnMissingBean(返回类型)}（用户自带同类型 bean 即让位），bean 方法互不调用、
  * 一律参数注入（{@code @AutoConfiguration} 的元注解是 {@code @Configuration(proxyBeanMethods = false)}）。
  * <p>
- * 作为自动配置时声明 {@code after = CacheAutoConfiguration.class}：用户项目里 Redis 等缓存 starter 提供的
- * {@link CacheManager} 先登记，适配层自带的本地 {@link ConcurrentMapCacheManager} 才会让位。经 {@code @EnableWeChat}
- * 的 {@code @Import} 进来时走普通 import 顺序，{@code after} 不生效。
+ * 作为自动配置时声明 {@code afterName = {CacheAutoConfigurationNames.BOOT_4, CacheAutoConfigurationNames.LEGACY}}：
+ * 用户项目里 Redis 等缓存 starter 提供的 {@link CacheManager} 先登记，适配层自带的本地 {@link ConcurrentMapCacheManager}
+ * 才会让位。按名字而不是 class 声明、两代包名都列上，原因见 {@link CacheAutoConfigurationNames}。经 {@code @EnableWeChat}
+ * 的 {@code @Import} 进来时走普通 import 顺序，{@code afterName} 不生效。
  * <p>
  * access_token 的三段接线：容器里有 {@link TokenStore} bean 直接用；没有则取 {@link CacheManager} 包成
  * {@link SpringCacheTokenStore}；两者都没有交给 core 自带的进程内 {@code InMemoryTokenStore}。
@@ -102,7 +102,7 @@ import java.util.Collections;
  * date 2019-04-03 15:46
  * @author shuaidongdong
  */
-@AutoConfiguration(after = CacheAutoConfiguration.class)
+@AutoConfiguration(afterName = {CacheAutoConfigurationNames.BOOT_4, CacheAutoConfigurationNames.LEGACY})
 @EnableConfigurationProperties(WeChatConfigurationProperties.class)
 public class WeChatAutoConfiguration implements InitializingBean {
 

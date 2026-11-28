@@ -8,7 +8,6 @@ import com.github.shuaidd.support.CallBackManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.annotation.ImportCandidates;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -123,12 +122,15 @@ public class WeChatAutoConfigurationTest {
     }
 
     /**
-     * 自动配置声明在 CacheAutoConfiguration 之后：Redis 等缓存 starter 先登记 CacheManager，本地兜底的 ConcurrentMapCacheManager 才会让位
+     * 自动配置按名字声明在 CacheAutoConfiguration 之后（Boot 4 新包名 + Boot 3 旧包名都列上）：Redis 等缓存 starter 先登记
+     * CacheManager，本地兜底的 ConcurrentMapCacheManager 才会让位；按名字而不是 class，对应模块缺失时也不会炸
      */
     @Test
     public void isAnAutoConfigurationOrderedAfterCacheAutoConfiguration() {
         AutoConfiguration annotation = WeChatAutoConfiguration.class.getAnnotation(AutoConfiguration.class);
         assertNotNull(annotation);
-        assertArrayEquals(new Class<?>[]{CacheAutoConfiguration.class}, annotation.after());
+        assertArrayEquals(new String[]{CacheAutoConfigurationNames.BOOT_4, CacheAutoConfigurationNames.LEGACY},
+                annotation.afterName());
+        assertEquals(0, annotation.after().length);
     }
 }

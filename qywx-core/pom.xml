@@ -16,9 +16,8 @@
     <description>企业微信api调用核心实现（不依赖 Spring，可在纯 Java 环境直接使用）</description>
 
     <properties>
-        <!-- 以下三项显式声明版本：core 不依赖 Spring，版本不能跟随 spring-boot-dependencies 漂移 -->
+        <!-- 以下三项显式声明版本：core 不依赖 Spring，版本不能跟随 spring-boot-dependencies 漂移；Jackson 版本在根 pom 的 qywx.jackson.version / qywx.jackson-annotations.version，与 model 共用 -->
         <qywx.feign.version>13.5</qywx.feign.version>
-        <qywx.jackson.version>2.15.4</qywx.jackson.version>
         <qywx.slf4j.version>2.0.9</qywx.slf4j.version>
         <qywx.junit-jupiter.version>5.10.1</qywx.junit-jupiter.version>
     </properties>
@@ -52,7 +51,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>${qywx.jackson.version}</version>
+            <version>${qywx.jackson-annotations.version}</version>
         </dependency>
 
         <!-- 日志门面 -->

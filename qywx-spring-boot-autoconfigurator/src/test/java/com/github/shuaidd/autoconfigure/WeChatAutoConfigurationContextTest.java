@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
-import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
+import org.springframework.boot.cache.autoconfigure.CacheAutoConfiguration;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
@@ -165,7 +165,7 @@ public class WeChatAutoConfigurationContextTest {
     }
 
     /**
-     * Boot 自带的 {@link CacheAutoConfiguration}（配合 {@code @EnableCaching}）排在适配层之前（{@code @AutoConfiguration(after = ...)}）：
+     * Boot 自带的 {@link CacheAutoConfiguration}（配合 {@code @EnableCaching}）排在适配层之前（{@code @AutoConfiguration(afterName = ...)}）：
      * 它登记的 {@code cacheManager} 让本地兜底让位，动态建出的 {@code qywx} 缓存同样能装 token
      */
     @Test

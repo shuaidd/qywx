@@ -43,13 +43,13 @@ Spring 侧 `qywx.*` 的键名与 `WeChatManager` 的调用方式与 5.x 完全�
 | 构件 | 5.x | 6.0 |
 |---|---|---|
 | Java | 8（名义上） | 17 |
-| Spring Boot（配合 starter） | 2.x → 4.4.2，3.x → 5.x | 3.2.0 实测；2.7 起应可用，未实测 |
+| Spring Boot（配合 starter） | 2.x → 4.4.2，3.x → 5.x | 4.1.3 实测（BOM 基线）；3.5.16 实测通过（自动配置排序按名字声明，两代包名都生效）；2.7 起应可用，未实测 |
 | Spring Cloud OpenFeign | 必须 | 不需要 |
 | `feign-core` | 13.5（经 Spring Cloud 2023.0.4） | 13.5（`qywx-core` 直接依赖） |
 | `feign-jackson` / `feign-form` / `commons-fileupload` | 11.9.1 / 13.5 / 1.5（经 starter 传递） | 已移除 |
-| Jackson | 2.15.3（Boot BOM 3.2.0） | `qywx-core` 直接依赖 2.15.4；Spring 下由 Boot BOM 管理（3.2.0 → 2.15.3） |
+| Jackson | 2.15.3（Boot BOM 3.2.0） | `qywx-core` / `qywx-model` 直接依赖 core / databind 2.21.8、annotations 2.21（根 pom `qywx.jackson.version` / `qywx.jackson-annotations.version`）；Spring 下由 Boot BOM 管理（4.1.3 → 同一套） |
 | SLF4J | 经 Spring Boot | `slf4j-api` 2.0.9；Spring Boot 用自带日志起步依赖，纯 Java 项目自选绑定 |
-| `commons-lang3` / `commons-collections4` / `commons-codec` / `commons-io` | 传递依赖 | 仍由 `qywx-core` 传递 |
+| `commons-lang3` / `commons-collections4` / `commons-codec` / `commons-io` | 传递依赖 | 仍由 `qywx-core` 传递：3.20.0 / 4.1 / 1.21.0 / 2.22.0（根 pom 管理） |
 
 ## 4. 文件类型桥接
 
@@ -107,7 +107,7 @@ String filename = download.getFileName();
 
 6.0 的 `@EnableWeChat` 只剩 `@Import(WeChatAutoConfiguration.class)`，不再自带 `@EnableCaching`、`@EnableAspectJAutoProxy`、`@EnableFeignClients`。Boot 2.7 起 starter 通过自动配置登记（`META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports`），不加注解也会装配。
 
-自动配置路径下 `WeChatAutoConfiguration` 标了 `@AutoConfiguration(after = CacheAutoConfiguration.class)`，一定排在 `CacheAutoConfiguration` 之后：项目自己的 `CacheManager`（Redis、Caffeine 等）先登记，适配层自带的 `ConcurrentMapCacheManager`（`@ConditionalOnMissingBean(CacheManager.class)`）让位。
+自动配置路径下 `WeChatAutoConfiguration` 标了 `@AutoConfiguration(afterName = {"org.springframework.boot.cache.autoconfigure.CacheAutoConfiguration", "org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration"})`（按名字而不是 class：Boot 4 把 `CacheAutoConfiguration` 搬进了 `spring-boot-cache` 模块、换了包名，两代包名都列上才对 Boot 3.x / 4.x 都生效），一定排在 `CacheAutoConfiguration` 之后：项目自己的 `CacheManager`（Redis、Caffeine 等）先登记，适配层自带的 `ConcurrentMapCacheManager`（`@ConditionalOnMissingBean(CacheManager.class)`）让位。
 
 经 `@EnableWeChat` 的 `@Import` 进来时 `after` 不生效，适配层的 `CacheManager` 可能先登记，于是两个 `CacheManager` 并存且都没有 `@Primary`：装配 `qywxClient` 时 `ObjectProvider#getIfAvailable()` 抛 `NoUniqueBeanDefinitionException`，启动失败（刻意不吞，5.x 用 `@EnableWeChat` + Redis 也会撞到同类问题）。
 
